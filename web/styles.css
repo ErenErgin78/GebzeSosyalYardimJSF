@@ -58,7 +58,7 @@ body {
 
 #content {
     overflow-x: auto;
-    padding: 200px;
+    padding: 20px;
 }
 
 .container {
@@ -125,9 +125,20 @@ button {
 
 /* Özel genişlik ayarları */
 .kayit-tarih {
-    width: 100px; /* Kayıt tarih hücresi için özel genişlik */
+    width: 150px; /* Kayıt tarih hücresi için özel genişlik */
 }
 
 .profil {
-    width: 400px; /* Profil hücresi için özel genişlik */
+    width: 230px; /* Profil hücresi için özel genişlik */
 }
+
+.form-background {
+    background-color: #f8f9fa; /* Arka plan rengini buradan ayarlayın */
+    padding: 20px; /* Formun iç boşluğunu artırır */
+}
+
+.card-background {
+    background-color: #e9ecef; /* Kartların arka plan rengini buradan ayarlayın */
+}
+
+

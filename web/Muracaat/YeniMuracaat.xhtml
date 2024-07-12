@@ -10,11 +10,26 @@
     <title>Gebze Belediyesi Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="styles.css" />
+    <style>
+        .form-background {
+            background-color: #f8f9fa; /* Arka plan rengi */
+        }
+        .no-border .form-check-input {
+            border: none;
+        }
+        .inline-radio {
+            display: inline-block;
+        }
+        .no-border-radio .form-check-input {
+            border: none;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 
 <body>
     <h:form>
-        <div class="container-fluid mt-5">
+        <div class="container-fluid mt-20">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <h1 class="text-center">Yeni Müracaat Girişi</h1>
@@ -32,12 +47,16 @@
                                 <div class="form-group col-md-6">
                                     <label for="tc_no">T.C. Kimlik No</label>
                                     <h:inputText id="tc_no" class="form-control" />
-                                    <h:commandButton value="Sorgula" action="#{userBean.sorgula}" class="btn btn-primary mt-2" />
+                                    <h:commandButton value="Sorgula" class="btn btn-primary mt-2" />
+                                    <h:selectBooleanCheckbox id="foreign_id" class="form-check-input" />
+                                    <label class="form-check-label" for="foreign_id">Yabancı Kimlik</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="foreign_tc">Kimlik Numarası</label>
                                 <h:inputText id="foreign_tc" class="form-control" />
+                                <h:selectBooleanCheckbox id="guest" class="form-check-input" />
+                                <label class="form-check-label" for="guest">Misafir</label>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
@@ -61,8 +80,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="gender">Cinsiyet</label>
-                                <div class="form-check form-check-inline no-border">
-                                    <h:selectOneRadio id="gender" layout="pageDirection" class="form-check-input no-border">
+                                <div class="form-check-inline no-border-radio">
+                                    <h:selectOneRadio id="gender" layout="lineDirection" class="form-check-input no-border-radio">
                                         <f:selectItem itemValue="Erkek" itemLabel="Erkek" />
                                         <f:selectItem itemValue="Kadın" itemLabel="Kadın" />
                                     </h:selectOneRadio>
@@ -112,10 +131,6 @@
                             <div class="form-group">
                                 <label for="spouse_surname">Eş Soyadı</label>
                                 <h:inputText id="spouse_surname" class="form-control" />
-                            </div>
-                            <div class="form-check">
-                                <h:selectBooleanCheckbox id="guest" class="form-check-input" />
-                                <label class="form-check-label" for="guest">Misafir</label>
                             </div>
                             <div class="form-group">
                                 <label for="address_no">Adres No</label>
@@ -204,6 +219,44 @@
                                 </h:inputText>
                             </div>
                         </div>
+                    </div>
+                    
+                    <div class="card mt-3">
+                        <div class="card-header">Müracaat Bilgileri</div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="archive_file_no">Arşiv Dosya No:</label>
+                                <h:inputText id="archive_file_no" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="application_date">Müracaat Tarihi:</label>
+                                <h:inputText id="application_date" class="form-control">
+                                    <f:passThroughAttribute name="type" value="date"/>
+                                </h:inputText>
+                            </div>
+                            <div class="form-group">
+                                <label for="application_type">Müracaat Tipi:</label>
+                                <h:selectOneMenu id="application_type" class="form-control">
+                                    <f:selectItem itemLabel="Kendi" itemValue="Kendi" />
+                                    <f:selectItem itemLabel="Diğer" itemValue="Diğer" />
+                                </h:selectOneMenu>
+                            </div>
+                            <div class="form-group">
+                                <label for="region">Bölge:</label>
+                                <h:selectOneMenu id="region" class="form-control">
+                                    <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
+                                    <!-- Add more options as needed -->
+                                </h:selectOneMenu>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Açıklama:</label>
+                                <h:inputTextarea id="description" class="form-control" rows="3" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <h:commandButton value="Kaydet" action="#{userBean.kaydet}" class="btn btn-success" />
                     </div>
                 </div>
             </div>
