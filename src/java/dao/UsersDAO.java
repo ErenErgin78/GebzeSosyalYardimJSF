@@ -41,7 +41,7 @@ public class UsersDAO extends DBConnection {
         this.sifre = sifre;
     }
 
-    public void CreateUser(User user) {
+    public void Create(User user) {
         try {
             Statement statement = this.getDb().createStatement();
 
@@ -55,7 +55,7 @@ public class UsersDAO extends DBConnection {
         }
     }
 
-    public List<User> GetUserList() {
+    public List<User> GetList() {
 
         List<User> UserList = new ArrayList<>();
 
@@ -90,7 +90,7 @@ public class UsersDAO extends DBConnection {
         return UserList;
     }
 
-    public void DeleteUser(int kullaniciId) {
+    public void Delete(int kullaniciId) {
         String deleteQuery = "DELETE FROM KULLANICI WHERE kullanici_id = ?";
 
         try {

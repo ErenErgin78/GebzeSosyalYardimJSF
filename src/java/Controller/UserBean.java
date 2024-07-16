@@ -19,13 +19,13 @@ public class UserBean implements Serializable {
     private List<User> list;
 
     public void create() {
-        this.getDao().CreateUser(entity);
+        this.getDao().Create(entity);
         this.entity = new User();
     }
 
     public void delete(int UserID) {
-        this.getDao().DeleteUser(UserID);
-        this.list = this.getDao().GetUserList();
+        this.getDao().Delete(UserID);
+        this.list = this.getDao().GetList();
     }
 
     public void giris() {
@@ -70,7 +70,7 @@ public class UserBean implements Serializable {
     }
 
     public List<User> getList() {
-        this.list = this.getDao().GetUserList();
+        this.list = this.getDao().GetList();
         return list;
     }
 

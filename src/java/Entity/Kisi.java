@@ -41,16 +41,16 @@ public class Kisi {
     private Integer kapi_no;
     private Integer daire_no;
     private Integer adres_no;
-    private Integer evdeki_kisi_sayısı;
+    private Integer evdeki_kisi_sayisi;
 
     private Integer kisi_yakinlar_id;
     private String anne_isim;
     private String baba_isim;
     private String es_isim;
     private String es_soyisim;
-    private String es_durum;
+    private Integer es_durum_id;
 
-    public Kisi(BigInteger kimlik_no, String isim, String soyisim, char cinsiyet, Integer medeni_durum_id, Integer egitim_durum_id, char yabanci_kimlik, char misafir, String cilt_no, Integer aile_sıra_no, Integer sıra_no, Date dogum_tarihi, Integer kisi_iletisim_id, BigInteger ev_telefon, BigInteger cep_telefon, String eposta, Integer kisi_adres_id, String ilce, String mahalle, String cadde_sokak, String tarif, String site, Integer kapi_no, Integer daire_no, Integer adres_no, Integer evdeki_kisi_sayısı, Integer kisi_yakinlar_id, String anne_isim, String baba_isim, String es_isim, String es_soyisim, String es_durum) {
+    public Kisi(BigInteger kimlik_no, String isim, String soyisim, char cinsiyet, Integer medeni_durum_id, Integer egitim_durum_id, char yabanci_kimlik, char misafir, String cilt_no, Integer aile_sıra_no, Integer sıra_no, Date dogum_tarihi, Integer kisi_iletisim_id, BigInteger ev_telefon, BigInteger cep_telefon, String eposta, Integer kisi_adres_id, String ilce, String mahalle, String cadde_sokak, String tarif, String site, Integer kapi_no, Integer daire_no, Integer adres_no, Integer evdeki_kisi_sayısı, Integer kisi_yakinlar_id, String anne_isim, String baba_isim, String es_isim, String es_soyisim, Integer es_durum_id) {
         this.kimlik_no = kimlik_no;
         this.isim = isim;
         this.soyisim = soyisim;
@@ -76,16 +76,16 @@ public class Kisi {
         this.kapi_no = kapi_no;
         this.daire_no = daire_no;
         this.adres_no = adres_no;
-        this.evdeki_kisi_sayısı = evdeki_kisi_sayısı;
+        this.evdeki_kisi_sayisi = evdeki_kisi_sayısı;
         this.kisi_yakinlar_id = kisi_yakinlar_id;
         this.anne_isim = anne_isim;
         this.baba_isim = baba_isim;
         this.es_isim = es_isim;
         this.es_soyisim = es_soyisim;
-        this.es_durum = es_durum;
+        this.es_durum_id = es_durum_id;
     }
 
-    public Kisi(Integer kisi_id, BigInteger kimlik_no, String isim, String soyisim, char cinsiyet, Integer medeni_durum_id, Integer egitim_durum_id, char yabanci_kimlik, char misafir, String cilt_no, Integer aile_sıra_no, Integer sıra_no, Date dogum_tarihi, Integer kisi_iletisim_id, BigInteger ev_telefon, BigInteger cep_telefon, String eposta, Integer kisi_adres_id, String ilce, String mahalle, String cadde_sokak, String tarif, String site, Integer kapi_no, Integer daire_no, Integer adres_no, Integer evdeki_kisi_sayısı, Integer kisi_yakinlar_id, String anne_isim, String baba_isim, String es_isim, String es_soyisim, String es_durum) {
+    public Kisi(Integer kisi_id, BigInteger kimlik_no, String isim, String soyisim, char cinsiyet, Integer medeni_durum_id, Integer egitim_durum_id, char yabanci_kimlik, char misafir, String cilt_no, Integer aile_sıra_no, Integer sıra_no, Date dogum_tarihi, Integer kisi_iletisim_id, BigInteger ev_telefon, BigInteger cep_telefon, String eposta, Integer kisi_adres_id, String ilce, String mahalle, String cadde_sokak, String tarif, String site, Integer kapi_no, Integer daire_no, Integer adres_no, Integer evdeki_kisi_sayısı, Integer kisi_yakinlar_id, String anne_isim, String baba_isim, String es_isim, String es_soyisim, Integer es_durum_id) {
         this.kisi_id = kisi_id;
         this.kimlik_no = kimlik_no;
         this.isim = isim;
@@ -112,13 +112,16 @@ public class Kisi {
         this.kapi_no = kapi_no;
         this.daire_no = daire_no;
         this.adres_no = adres_no;
-        this.evdeki_kisi_sayısı = evdeki_kisi_sayısı;
+        this.evdeki_kisi_sayisi = evdeki_kisi_sayısı;
         this.kisi_yakinlar_id = kisi_yakinlar_id;
         this.anne_isim = anne_isim;
         this.baba_isim = baba_isim;
         this.es_isim = es_isim;
         this.es_soyisim = es_soyisim;
-        this.es_durum = es_durum;
+        this.es_durum_id = es_durum_id;
+    }
+
+    public Kisi() {
     }
 
     public Integer getKisi_id() {
@@ -329,12 +332,12 @@ public class Kisi {
         this.adres_no = adres_no;
     }
 
-    public Integer getEvdeki_kisi_sayısı() {
-        return evdeki_kisi_sayısı;
+    public Integer getEvdeki_kisi_sayisi() {
+        return evdeki_kisi_sayisi;
     }
 
-    public void setEvdeki_kisi_sayısı(Integer evdeki_kisi_sayısı) {
-        this.evdeki_kisi_sayısı = evdeki_kisi_sayısı;
+    public void setEvdeki_kisi_sayisi(Integer evdeki_kisi_sayısı) {
+        this.evdeki_kisi_sayisi = evdeki_kisi_sayısı;
     }
 
     public Integer getKisi_yakinlar_id() {
@@ -377,12 +380,12 @@ public class Kisi {
         this.es_soyisim = es_soyisim;
     }
 
-    public String getEs_durum() {
-        return es_durum;
+    public Integer getEs_durum_id() {
+        return es_durum_id;
     }
 
-    public void setEs_durum(String es_durum) {
-        this.es_durum = es_durum;
+    public void setEs_durum(Integer es_durum_id) {
+        this.es_durum_id = es_durum_id;
     }
 
 }
