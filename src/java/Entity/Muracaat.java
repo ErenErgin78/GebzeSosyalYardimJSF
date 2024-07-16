@@ -18,6 +18,10 @@ public class Muracaat {
     private String aciklama;
     private Date muracaat_tarihi;
 
+    public Muracaat() {
+    }
+
+    
     public Muracaat(Integer muracaat_id, Integer kisi_temel_id, Integer muracaat_bilgi_id, Integer arsiv_dosya_no, Integer muracaat_tip_id, Integer bolge, String aciklama, Date muracaat_tarihi) {
         this.muracaat_id = muracaat_id;
         this.kisi_temel_id = kisi_temel_id;
