@@ -27,7 +27,8 @@ public class MuracaatDAO extends DBConnection {
         try {
             Statement statement = this.getDb().createStatement();
 
-            String Insertquery = "INSERT INTO MURACAAT";
+            //Muracaat bilgi tablosu
+            String Insertquery = "INSERT INTO MURACAAT ()";
             int r = statement.executeUpdate(Insertquery);
 
         } catch (SQLException ex) {

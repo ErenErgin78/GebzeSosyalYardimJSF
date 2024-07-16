@@ -18,7 +18,7 @@ import java.util.List;
 @Dependent
 public class MuracaatBean {
 
- private Muracaat entity;
+    private Muracaat entity;
     private MuracaatDAO dao;
     private List<Muracaat> list;
 
@@ -66,5 +66,5 @@ public class MuracaatBean {
     public void setList(List<Muracaat> list) {
         this.list = list;
     }
-    
+
 }

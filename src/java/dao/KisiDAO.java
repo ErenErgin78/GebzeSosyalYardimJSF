@@ -4,6 +4,7 @@
  */
 package dao;
 
+import dao.MuracaatDAO;
 import Entity.Kisi;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,65 +26,108 @@ public class KisiDAO {
     private boolean misafir_mi;
 
     public void Create(Kisi kisi) {
-        try {
-            Statement statement = this.getDb().createStatement();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet generatedKeys = null;
 
-            //misafir ve yabancı kimlik ataması:
+        try {
+            // misafir ve yabancı kimlik ataması
             char ayarlama;
-            
             ayarlama = yabancı_kimlik_mi ? 'E' : 'H';
             kisi.setYabanci_kimlik(ayarlama);
 
             ayarlama = misafir_mi ? 'E' : 'H';
             kisi.setMisafir(ayarlama);
 
-            
-            // KISI_YAKINLAR:
-            String insertQueryYakınlar = "INSERT INTO KISI_YAKINLAR (ANNE_ISIM, BABA_ISIM, ES_ISIM, ES_SOYISIM, ES_DURUM_ID) VALUES ('"
-                    + kisi.getAnne_isim() + "', '"
-                    + kisi.getBaba_isim() + "', '"
-                    + kisi.getEs_isim() + "', '"
-                    + kisi.getEs_soyisim() + "', "
-                    + kisi.getEs_durum_id() + ")";
-            int rYakınlar = statement.executeUpdate(insertQueryYakınlar);
+            // ID'LER
+            Integer adresId = null;
+            Integer iletisimId = null;
+            Integer yakinlarId = null;
 
-            // KISI_ADRES:
-            String insertQueryAdres = "INSERT INTO KISI_ADRES ( ILCE, MAHALLE, CADDE_SOKAK, TARIF, SITE, KAPI_NO, DAIRE_NO, ADRES_NO, EVDEKI_KISI_SAYISI) VALUES ("
-                    + kisi.getIlce() + "', '"
-                    + kisi.getMahalle_id() + "', '"
-                    + kisi.getCadde_sokak() + "', '"
-                    + kisi.getTarif() + "', '"
-                    + kisi.getSite() + "', "
-                    + kisi.getKapi_no() + ", "
-                    + kisi.getDaire_no() + ", "
-                    + kisi.getAdres_no() + ", "
-                    + kisi.getEvdeki_kisi_sayisi() + ")";
-            int rAdres = statement.executeUpdate(insertQueryAdres);
+            // KISI_YAKINLAR
+            String insertQueryYakınlar = "INSERT INTO KISI_YAKINLAR (ANNE_ISIM, BABA_ISIM, ES_ISIM, ES_SOYISIM, ES_DURUM_ID) VALUES (?, ?, ?, ?, ?)";
+            preparedStatement = db.prepareStatement(insertQueryYakınlar, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, kisi.getAnne_isim());
+            preparedStatement.setString(2, kisi.getBaba_isim());
+            preparedStatement.setString(3, kisi.getEs_isim());
+            preparedStatement.setString(4, kisi.getEs_soyisim());
+            preparedStatement.setInt(5, kisi.getEs_durum_id());
+            preparedStatement.executeUpdate();
+            generatedKeys = preparedStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                yakinlarId = generatedKeys.getInt(1);
+            }
+            preparedStatement.close();
 
-            String insertQueryIletisim = "INSERT INTO KISI_ILETISIM (EV_TELEFON, CEP_TELEFON, EPOSTA) VALUES ('"
-                    + kisi.getEv_telefon() + "', '"
-                    + kisi.getCep_telefon() + "', '"
-                    + kisi.getEposta() + "')";
-            int rIletisim = statement.executeUpdate(insertQueryIletisim);
+            // KISI_ADRES
+            String insertQueryAdres = "INSERT INTO KISI_ADRES (ILCE, KISI_ADRES_MAHALLE_ID, CADDE_SOKAK, TARIF, SITE, KAPI_NO, DAIRE_NO, ADRES_NO, EVDEKI_KISI_SAYISI) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(insertQueryAdres, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, kisi.getIlce());
+            preparedStatement.setInt(2, kisi.getMahalle_id());
+            preparedStatement.setString(3, kisi.getCadde_sokak());
+            preparedStatement.setString(4, kisi.getTarif());
+            preparedStatement.setString(5, kisi.getSite());
+            preparedStatement.setInt(6, kisi.getKapi_no());
+            preparedStatement.setInt(7, kisi.getDaire_no());
+            preparedStatement.setInt(8, kisi.getAdres_no());
+            preparedStatement.setInt(9, kisi.getEvdeki_kisi_sayisi());
+            preparedStatement.executeUpdate();
+            generatedKeys = preparedStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                adresId = generatedKeys.getInt(1);
+            }
+            preparedStatement.close();
 
-            // KISI:
-            String insertQueryKisi = "INSERT INTO KISI (KIMLIK_NO, ISIM, SOYISIM, CINSIYET, MEDENI_DURUM_ID, EGITIM_DURUM_ID, YABANCI_KIMLIK, MISAFIR, CILT_NO, AILE_SIRA_NO, SIRA_NO, DOGUM_TARIHI) VALUES ('"
-                    + kisi.getKimlik_no().toString() + "', '"
-                    + kisi.getIsim() + "', '"
-                    + kisi.getSoyisim() + "', '"
-                    + kisi.getCinsiyet() + "', "
-                    + kisi.getMedeni_durum_id() + ", "
-                    + kisi.getEgitim_durum_id() + ", '"
-                    + kisi.getYabanci_kimlik() + "', '"
-                    + kisi.getMisafir() + "', '"
-                    + kisi.getCilt_no() + "', "
-                    + kisi.getAile_sıra_no() + ", "
-                    + kisi.getSıra_no() + ", '"
-                    + new java.sql.Date(kisi.getDogum_tarihi().getTime()) + "')";
-            int rKisi = statement.executeUpdate(insertQueryKisi);
+            // KISI_ILETISIM
+            String insertQueryIletisim = "INSERT INTO KISI_ILETISIM (EV_TELEFON, CEP_TELEFON, EPOSTA) VALUES (?, ?, ?)";
+            preparedStatement = connection.prepareStatement(insertQueryIletisim, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setBigDecimal(1, new java.math.BigDecimal(kisi.getEv_telefon()));
+            preparedStatement.setBigDecimal(2, new java.math.BigDecimal(kisi.getCep_telefon()));
+            preparedStatement.setString(3, kisi.getEposta());
+            preparedStatement.executeUpdate();
+            generatedKeys = preparedStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                iletisimId = generatedKeys.getInt(1);
+            }
+            preparedStatement.close();
+
+            // KISI
+            String insertQueryKisi = "INSERT INTO KISI (KIMLIK_NO, ISIM, SOYISIM, CINSIYET, MEDENI_DURUM_ID, YABANCI_KIMLIK, MISAFIR, CILT_NO, AILE_SIRA_NO, SIRA_NO, DOGUM_TARIHI, KISI_ILETISIM_ID, KISI_ADRES_ID, KISI_YAKINLAR_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(insertQueryKisi);
+            preparedStatement.setString(1, kisi.getKimlik_no().toString());
+            preparedStatement.setString(2, kisi.getIsim());
+            preparedStatement.setString(3, kisi.getSoyisim());
+            preparedStatement.setString(4, String.valueOf(kisi.getCinsiyet()));
+            preparedStatement.setInt(5, kisi.getMedeni_durum_id());
+            preparedStatement.setString(6, String.valueOf(kisi.getYabanci_kimlik()));
+            preparedStatement.setString(7, String.valueOf(kisi.getMisafir()));
+            preparedStatement.setString(8, kisi.getCilt_no());
+            preparedStatement.setInt(9, kisi.getAile_sıra_no());
+            preparedStatement.setInt(10, kisi.getSıra_no());
+            preparedStatement.setDate(11, new java.sql.Date(kisi.getDogum_tarihi().getTime()));
+            preparedStatement.setInt(12, iletisimId);
+            preparedStatement.setInt(13, adresId);
+            preparedStatement.setInt(14, yakinlarId);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
+        } finally {
+            // Kaynakları kapat
+            try {
+                if (generatedKeys != null) {
+                    generatedKeys.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -148,7 +192,5 @@ public class KisiDAO {
     public void setMisafir_mi(boolean misafir_mi) {
         this.misafir_mi = misafir_mi;
     }
-    
-    
 
 }
