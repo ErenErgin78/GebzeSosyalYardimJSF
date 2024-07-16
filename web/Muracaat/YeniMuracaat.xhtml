@@ -230,26 +230,26 @@
                                         <label for="apartment">Apartman/Site</label>
                                         <h:inputText id="apartment" class="form-control" />
                                     </div>
-                                    <div class="form-group col-md-4"  "#{kisiBean.entity.kapi_no}">
+                                    <div class="form-group col-md-4"  value ="#{kisiBean.entity.kapi_no}">
                                         <label for="block_no">Blok/Kapı No</label>
                                         <h:inputText id="block_no" class="form-control" />
                                     </div>
-                                    <div class="form-group col-md-4" "#{kisiBean.entity.daire_no}">
+                                    <div class="form-group col-md-4" value ="#{kisiBean.entity.daire_no}">
                                         <label for="flat_no">Daire No</label>
                                         <h:inputText id="flat_no" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="form-group col-md-4"  "#{kisiBean.entity.ev_telefon}">
+                                    <div class="form-group col-md-4" value= "#{kisiBean.entity.ev_telefon}">
                                         <label for="home_phone">Ev Tel</label>
                                         <h:inputText id="home_phone" class="form-control" />
                                     </div>
-                                    <div class="form-group col-md-4"  "#{kisiBean.entity.cep_telefon}">
+                                    <div class="form-group col-md-4" value = "#{kisiBean.entity.cep_telefon}">
                                         <label for="mobile_phone">Cep Tel</label>
                                         <h:inputText id="mobile_phone" class="form-control" />
                                     </div>
                                 </div>
-                                <div class="form-group"  "#{kisiBean.entity.eposta}">
+                                <div class="form-group"  value ="#{kisiBean.entity.eposta}">
                                     <label for="email">E-Posta</label>
                                     <h:inputText id="email" class="form-control">
                                         <f:passThroughAttribute name="type" value="email" />
@@ -261,11 +261,11 @@
                         <div class="card mt-3" >
                             <div class="card-header">Müracaat Bilgileri</div>
                             <div class="card-body">
-                                <div class="form-group" >
+                                <div class="form-group" value = "#{muracaatBean.entity.arsiv_dosya_no}">
                                     <label for="archive_file_no">Arşiv Dosya No:</label>
                                     <h:inputText id="archive_file_no" class="form-control" />
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" value = "#{muracaatBean.entity.muracaat_tarihi}">
                                     <label for="application_date">Müracaat Tarihi:</label>
                                     <h:inputText id="application_date" class="form-control">
                                         <f:passThroughAttribute name="type" value="date" />
@@ -273,25 +273,28 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="application_type">Müracaat Tipi:</label>
-                                    <h:selectOneMenu id="application_type" class="form-control">
-                                        <f:selectItem itemLabel="Kendi" itemValue="Kendi" />
-                                        <f:selectItem itemLabel="Diğer" itemValue="Diğer" />
+                                    <h:selectOneMenu id="application_type" class="form-control" value = "#{muracaatBean.entity.muracaat_tip_id}">
+                                        <f:selectItem itemLabel="Kendi" itemValue="4" />
+                                        <f:selectItem itemLabel="Dilekçe" itemValue="1" />
+                                        <f:selectItem itemLabel="Yakını" itemValue="3" />
+                                        <f:selectItem itemLabel="Email" itemValue="2" />
+                                        
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="form-group">
                                     <label for="region">Bölge:</label>
-                                    <h:selectOneMenu id="region" class="form-control">
+                                    <h:selectOneMenu id="region"   class="form-control" value = "#{muracaatBean.entity.bolge}">
                                         <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
-                                        <f:selectItem itemLabel="1.Bölge" itemValue=1 />
-                                        <f:selectItem itemLabel="2.Bölge" itemValue=2 />
-                                        <f:selectItem itemLabel="3.Bölge" itemValue=3 />
-                                        <f:selectItem itemLabel="4.Bölge" itemValue=4/>
-                                        <f:selectItem itemLabel="5.Bögle" itemValue=5 />                                          
+                                        <f:selectItem itemLabel="1.Bölge" itemValue="1"/>
+                                        <f:selectItem itemLabel="2.Bölge" itemValue="2" />
+                                        <f:selectItem itemLabel="3.Bölge" itemValue="3" />
+                                        <f:selectItem itemLabel="4.Bölge" itemValue="4"/>
+                                        <f:selectItem itemLabel="5.Bögle" itemValue="5" />                                          
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Açıklama:</label>
-                                    <h:inputTextarea id="description" class="form-control" rows="3" />
+                                    <h:inputTextarea id="description" class="form-control" value = "#{muracaatBean.entity.aciklama}" rows="3" />
                                 </div>
                             </div>
                         </div>
