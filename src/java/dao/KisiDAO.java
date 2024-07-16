@@ -50,7 +50,7 @@ public class KisiDAO {
             // KISI_ADRES:
             String insertQueryAdres = "INSERT INTO KISI_ADRES ( ILCE, MAHALLE, CADDE_SOKAK, TARIF, SITE, KAPI_NO, DAIRE_NO, ADRES_NO, EVDEKI_KISI_SAYISI) VALUES ("
                     + kisi.getIlce() + "', '"
-                    + kisi.getMahalle() + "', '"
+                    + kisi.getMahalle_id() + "', '"
                     + kisi.getCadde_sokak() + "', '"
                     + kisi.getTarif() + "', '"
                     + kisi.getSite() + "', "

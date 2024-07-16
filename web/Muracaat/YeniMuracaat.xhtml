@@ -68,29 +68,29 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="name">Adı</label>
-                                        <h:inputText id="name" class="form-control readonly-input" readonly="true"/>
+                                        <h:inputText id="name" value ="#{kisiBean.entity.isim}" class="form-control readonly-input" />
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="surname">Soyadı</label>
-                                        <h:inputText id="surname" class="form-control readonly-input" readonly="true" />
+                                        <h:inputText id="surname" value ="#{kisiBean.entity.soyisim}" class="form-control readonly-input"/>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="father_name">Baba Adı</label>
-                                        <h:inputText id="father_name" class="form-control" readonly="true"/>
+                                        <h:inputText id="father_name" value ="#{kisiBean.entity.baba_isim}" class="form-control"/>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="mother_name">Anne Adı</label>
-                                        <h:inputText id="mother_name" class="form-control" readonly="true"/>
+                                        <h:inputText id="mother_name" value ="#{kisiBean.entity.anne_isim}" class="form-control"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="gender">Cinsiyet</label>
                                     <div class="form-check-inline no-border-radio" readonly="true">
-                                        <h:selectOneRadio id="gender" layout="lineDirection" class="form-check-input no-border-radio" readonly="true">
-                                            <f:selectItem itemValue="Erkek" itemLabel="Erkek" />
-                                            <f:selectItem itemValue="Kadın" itemLabel="Kadın" />
+                                        <h:selectOneRadio id="gender" value = "#{kisiBean.entity.cinsiyet}" layout="lineDirection" class="form-check-input no-border-radio">
+                                            <f:selectItem  itemLabel="Erkek" itemValue ="E" />
+                                            <f:selectItem  itemLabel="Kadın"  itemValue ="K"/>
                                         </h:selectOneRadio>
                                     </div>
                                 </div>
@@ -106,14 +106,14 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="registration_city">N. Kayıtlı Olduğu İl</label>
-                                        <h:selectOneMenu id="registration_city" class="form-control" readonly="true">
+                                        <h:selectOneMenu id="registration_city" class="form-control" >
                                             <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
                                             <!-- Add more options as needed -->
                                         </h:selectOneMenu>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="registration_district">N. Kayıtlı Olduğu İlçe</label>
-                                        <h:selectOneMenu id="registration_district" class="form-control" readonly="true">
+                                        <h:selectOneMenu id="registration_district" class="form-control" >
                                             <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
                                             <!-- Add more options as needed -->
                                         </h:selectOneMenu>
@@ -123,24 +123,24 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label for="family_order_no">Aile Sıra No</label>
-                                        <h:inputText id="family_order_no" class="form-control" readonly="true"/>
+                                        <h:inputText id="family_order_no" value ="#{kisiBean.entity.aile_sıra_no}" class="form-control" />
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="order_no">Sıra No</label>
-                                        <h:inputText id="order_no" class="form-control" readonly="true" />
+                                        <h:inputText id="order_no" value ="#{kisiBean.entity.sıra_no}" class="form-control"  />
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="spouse_name">Cilt No</label>
-                                        <h:inputText id="spouse_name" class="form-control" readonly="true"/>
+                                        <h:inputText id="spouse_name" value ="#{kisiBean.entity.cilt_no}" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="cilt_no">Eş Adı</label>
-                                    <h:inputText id="cilt_no" class="form-control" />
+                                    <h:inputText id="cilt_no" value ="#{kisiBean.entity.es_isim}" class="form-control" />
                                 </div>
                                 <div class="form-group">
                                     <label for="spouse_surname">Eş Soyadı</label>
-                                    <h:inputText id="spouse_surname" class="form-control" />
+                                    <h:inputText id="spouse_surname" value ="#{kisiBean.entity.es_soyisim}" class="form-control" />
                                 </div>
                             </div>
                         </div>
@@ -151,11 +151,11 @@
                                 <h:commandButton value="Adres Getir" action="#{userBean.adresGetir}" class="btn btn-secondary mb-2" />
                                 <div class="form-group">
                                     <label for="full_address">Açık Adres</label>
-                                    <h:inputText id="full_address" class="form-control"  readonly="true" />
+                                    <h:inputText id="full_address" class="form-control" />
                                 </div>
                                 <div class="form-group">
                                     <label for="address_no">Adres No</label>
-                                    <h:inputText id="address_no" class="form-control" readonly="true" />
+                                    <h:inputText id="address_no" class="form-control" />
                                 </div>
                             </div>
                         </div>
@@ -173,47 +173,47 @@
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="neighborhood">Mahalle</label>
-                                        <h:selectOneMenu id="neighborhood" value = "#{kisiBean.entity.mahalle}" class="form-control">
+                                        <h:selectOneMenu id="neighborhood" value = "#{kisiBean.entity.mahalle_id}" class="form-control">
                                             <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
-                                            <f:selectItem itemLabel="Adem Yavuz Mahallesi" itemValue="adem_yavuz_mahallesi" />
-                                            <f:selectItem itemLabel="Yavuz Selim Mahallesi" itemValue="yavuz_selim_mahallesi" />
-                                            <f:selectItem itemLabel="Beylikbağı Mahallesi" itemValue="beylikbagi_mahallesi" />
-                                            <f:selectItem itemLabel="İnönü Mahallesi" itemValue="inonu_mahallesi" />
-                                            <f:selectItem itemLabel="Hacıhalil Mahallesi" itemValue="hacihalil_mahallesi" />
-                                            <f:selectItem itemLabel="Kirazpınar Mahallesi" itemValue="kirazpinar_mahallesi" />
-                                            <f:selectItem itemLabel="Cumhuriyet Mahallesi" itemValue="cumhuriyet_mahallesi" />
-                                            <f:selectItem itemLabel="Pelitli Mahallesi" itemValue="pelitli_mahallesi" />
-                                            <f:selectItem itemLabel="Cumaköy Mahallesi" itemValue="cumakoy_mahallesi" />
-                                            <f:selectItem itemLabel="Balçık Mahallesi" itemValue="balcik_mahallesi" />
-                                            <f:selectItem itemLabel="Denizli Mahallesi" itemValue="denizli_mahallesi" />
-                                            <f:selectItem itemLabel="Ovacık Mahallesi" itemValue="ovacik_mahallesi" />
-                                            <f:selectItem itemLabel="Eskihisar Mahallesi" itemValue="eskihisar_mahallesi" />
-                                            <f:selectItem itemLabel="Kadıllı Mahallesi" itemValue="kadilli_mahallesi" />
-                                            <f:selectItem itemLabel="Kargalı Mahallesi" itemValue="kargali_mahallesi" />
-                                            <f:selectItem itemLabel="Mudarlı Mahallesi" itemValue="mudarlı_mahallesi" />
-                                            <f:selectItem itemLabel="Hatipler Mahallesi" itemValue="hatipler_mahallesi" />
-                                            <f:selectItem itemLabel="Duraklı Mahallesi" itemValue="durakli_mahallesi" />
-                                            <f:selectItem itemLabel="Yağcılar Mahallesi" itemValue="yagcilar_mahallesi" />
-                                            <f:selectItem itemLabel="Ahatlı Mahallesi" itemValue="ahatli_mahallesi" />
-                                            <f:selectItem itemLabel="Elbizli Mahallesi" itemValue="elbizli_mahallesi" />
-                                            <f:selectItem itemLabel="Tepepanayır Mahallesi" itemValue="tepepanayir_mahallesi" />
-                                            <f:selectItem itemLabel="Muallimköy Mahallesi" itemValue="muallimkoy_mahallesi" />
-                                            <f:selectItem itemLabel="Mollafenari Mahallesi" itemValue="mollafenari_mahallesi" />
-                                            <f:selectItem itemLabel="Arapçeşme Mahallesi" itemValue="arapcesme_mahallesi" />
-                                            <f:selectItem itemLabel="Osman Yılmaz Mahallesi" itemValue="osman_yilmaz_mahallesi" />
-                                            <f:selectItem itemLabel="Köşklü Çeşme Mahallesi" itemValue="kosklu_cesme_mahallesi" />
-                                            <f:selectItem itemLabel="Gaziler Mahallesi" itemValue="gaziler_mahallesi" />
-                                            <f:selectItem itemLabel="Güzeller Mahallesi" itemValue="guzeller_mahallesi" />
-                                            <f:selectItem itemLabel="Mustafapaşa Mahallesi" itemValue="mustafapasa_mahallesi" />
-                                            <f:selectItem itemLabel="Mevlana Mahallesi" itemValue="mevlana_mahallesi" />
-                                            <f:selectItem itemLabel="Yenikent Mahallesi" itemValue="yenikent_mahallesi" />
-                                            <f:selectItem itemLabel="İstasyon Mahallesi" itemValue="istasyon_mahallesi" />
-                                            <f:selectItem itemLabel="Tatlıkuyu Mahallesi" itemValue="tatlikuyu_mahallesi" />
-                                            <f:selectItem itemLabel="Barış Mahallesi" itemValue="baris_mahallesi" />
-                                            <f:selectItem itemLabel="Mimar Sinan Mahallesi" itemValue="mimar_sinan_mahallesi" />
-                                            <f:selectItem itemLabel="Ulus Mahallesi" itemValue="ulus_mahallesi" />
-                                            <f:selectItem itemLabel="Sultan Orhan Mahallesi" itemValue="sultan_orhan_mahallesi" />
-                                            <f:selectItem itemLabel="Hürriyet Mahallesi" itemValue="hurriyet_mahallesi" />
+                                            <f:selectItem itemLabel="Adem Yavuz Mahallesi" itemValue="1" />
+                                            <f:selectItem itemLabel="Yavuz Selim Mahallesi" itemValue="2" />
+                                            <f:selectItem itemLabel="Beylikbağı Mahallesi" itemValue="3" />
+                                            <f:selectItem itemLabel="İnönü Mahallesi" itemValue="4" />
+                                            <f:selectItem itemLabel="Hacıhalil Mahallesi" itemValue="5" />
+                                            <f:selectItem itemLabel="Kirazpınar Mahallesi" itemValue="6" />
+                                            <f:selectItem itemLabel="Cumhuriyet Mahallesi" itemValue="7" />
+                                            <f:selectItem itemLabel="Pelitli Mahallesi" itemValue="8" />
+                                            <f:selectItem itemLabel="Cumaköy Mahallesi" itemValue="9" />
+                                            <f:selectItem itemLabel="Balçık Mahallesi" itemValue="10" />
+                                            <f:selectItem itemLabel="Denizli Mahallesi" itemValue="11" />
+                                            <f:selectItem itemLabel="Ovacık Mahallesi" itemValue="12" />
+                                            <f:selectItem itemLabel="Eskihisar Mahallesi" itemValue="13" />
+                                            <f:selectItem itemLabel="Kadıllı Mahallesi" itemValue="14" />
+                                            <f:selectItem itemLabel="Kargalı Mahallesi" itemValue="15" />
+                                            <f:selectItem itemLabel="Mudarlı Mahallesi" itemValue="16" />
+                                            <f:selectItem itemLabel="Hatipler Mahallesi" itemValue="17" />
+                                            <f:selectItem itemLabel="Duraklı Mahallesi" itemValue="18" />
+                                            <f:selectItem itemLabel="Yağcılar Mahallesi" itemValue="19" />
+                                            <f:selectItem itemLabel="Ahatlı Mahallesi" itemValue="20" />
+                                            <f:selectItem itemLabel="Elbizli Mahallesi" itemValue="21" />
+                                            <f:selectItem itemLabel="Tepepanayır Mahallesi" itemValue="22" />
+                                            <f:selectItem itemLabel="Muallimköy Mahallesi" itemValue="23" />
+                                            <f:selectItem itemLabel="Mollafenari Mahallesi" itemValue="24" />
+                                            <f:selectItem itemLabel="Arapçeşme Mahallesi" itemValue="25" />
+                                            <f:selectItem itemLabel="Osman Yılmaz Mahallesi" itemValue="26" />
+                                            <f:selectItem itemLabel="Köşklü Çeşme Mahallesi" itemValue="27" />
+                                            <f:selectItem itemLabel="Gaziler Mahallesi" itemValue="28" />
+                                            <f:selectItem itemLabel="Güzeller Mahallesi" itemValue="29" />
+                                            <f:selectItem itemLabel="Mustafapaşa Mahallesi" itemValue="30" />
+                                            <f:selectItem itemLabel="Mevlana Mahallesi" itemValue="31" />
+                                            <f:selectItem itemLabel="Yenikent Mahallesi" itemValue="32" />
+                                            <f:selectItem itemLabel="İstasyon Mahallesi" itemValue="33" />
+                                            <f:selectItem itemLabel="Tatlıkuyu Mahallesi" itemValue="34" />
+                                            <f:selectItem itemLabel="Barış Mahallesi" itemValue="35" />
+                                            <f:selectItem itemLabel="Mimar Sinan Mahallesi" itemValue="36" />
+                                            <f:selectItem itemLabel="Ulus Mahallesi" itemValue="37" />
+                                            <f:selectItem itemLabel="Sultan Orhan Mahallesi" itemValue="38" />
+                                            <f:selectItem itemLabel="Hürriyet Mahallesi" itemValue="39" />
                                         </h:selectOneMenu>
                                     </div>
                                     <div class="form-group col-md-4">
@@ -278,7 +278,7 @@
                                         <f:selectItem itemLabel="Dilekçe" itemValue="1" />
                                         <f:selectItem itemLabel="Yakını" itemValue="3" />
                                         <f:selectItem itemLabel="Email" itemValue="2" />
-                                        
+
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="form-group">

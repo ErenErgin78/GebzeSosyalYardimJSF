@@ -35,6 +35,7 @@ public class MuracaatDAO extends DBConnection {
         }
 
     }
+
     public List<Muracaat> GetList() {
 
         List<Muracaat> KisiList = new ArrayList<>();

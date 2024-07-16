@@ -34,7 +34,7 @@ public class Kisi {
 
     private Integer kisi_adres_id;
     private String ilce;
-    private String mahalle;
+    private Integer mahalle_id;
     private String cadde_sokak;
     private String tarif;
     private String site;
@@ -50,7 +50,7 @@ public class Kisi {
     private String es_soyisim;
     private Integer es_durum_id;
 
-    public Kisi(BigInteger kimlik_no, String isim, String soyisim, char cinsiyet, Integer medeni_durum_id, Integer egitim_durum_id, char yabanci_kimlik, char misafir, String cilt_no, Integer aile_sıra_no, Integer sıra_no, Date dogum_tarihi, Integer kisi_iletisim_id, BigInteger ev_telefon, BigInteger cep_telefon, String eposta, Integer kisi_adres_id, String ilce, String mahalle, String cadde_sokak, String tarif, String site, Integer kapi_no, Integer daire_no, Integer adres_no, Integer evdeki_kisi_sayısı, Integer kisi_yakinlar_id, String anne_isim, String baba_isim, String es_isim, String es_soyisim, Integer es_durum_id) {
+    public Kisi(BigInteger kimlik_no, String isim, String soyisim, char cinsiyet, Integer medeni_durum_id, Integer egitim_durum_id, char yabanci_kimlik, char misafir, String cilt_no, Integer aile_sıra_no, Integer sıra_no, Date dogum_tarihi, Integer kisi_iletisim_id, BigInteger ev_telefon, BigInteger cep_telefon, String eposta, Integer kisi_adres_id, String ilce, Integer mahalle, String cadde_sokak, String tarif, String site, Integer kapi_no, Integer daire_no, Integer adres_no, Integer evdeki_kisi_sayısı, Integer kisi_yakinlar_id, String anne_isim, String baba_isim, String es_isim, String es_soyisim, Integer es_durum_id) {
         this.kimlik_no = kimlik_no;
         this.isim = isim;
         this.soyisim = soyisim;
@@ -69,7 +69,7 @@ public class Kisi {
         this.eposta = eposta;
         this.kisi_adres_id = kisi_adres_id;
         this.ilce = ilce;
-        this.mahalle = mahalle;
+        this.mahalle_id = mahalle;
         this.cadde_sokak = cadde_sokak;
         this.tarif = tarif;
         this.site = site;
@@ -85,7 +85,7 @@ public class Kisi {
         this.es_durum_id = es_durum_id;
     }
 
-    public Kisi(Integer kisi_id, BigInteger kimlik_no, String isim, String soyisim, char cinsiyet, Integer medeni_durum_id, Integer egitim_durum_id, char yabanci_kimlik, char misafir, String cilt_no, Integer aile_sıra_no, Integer sıra_no, Date dogum_tarihi, Integer kisi_iletisim_id, BigInteger ev_telefon, BigInteger cep_telefon, String eposta, Integer kisi_adres_id, String ilce, String mahalle, String cadde_sokak, String tarif, String site, Integer kapi_no, Integer daire_no, Integer adres_no, Integer evdeki_kisi_sayısı, Integer kisi_yakinlar_id, String anne_isim, String baba_isim, String es_isim, String es_soyisim, Integer es_durum_id) {
+    public Kisi(Integer kisi_id, BigInteger kimlik_no, String isim, String soyisim, char cinsiyet, Integer medeni_durum_id, Integer egitim_durum_id, char yabanci_kimlik, char misafir, String cilt_no, Integer aile_sıra_no, Integer sıra_no, Date dogum_tarihi, Integer kisi_iletisim_id, BigInteger ev_telefon, BigInteger cep_telefon, String eposta, Integer kisi_adres_id, String ilce, Integer mahalle, String cadde_sokak, String tarif, String site, Integer kapi_no, Integer daire_no, Integer adres_no, Integer evdeki_kisi_sayısı, Integer kisi_yakinlar_id, String anne_isim, String baba_isim, String es_isim, String es_soyisim, Integer es_durum_id) {
         this.kisi_id = kisi_id;
         this.kimlik_no = kimlik_no;
         this.isim = isim;
@@ -105,7 +105,7 @@ public class Kisi {
         this.eposta = eposta;
         this.kisi_adres_id = kisi_adres_id;
         this.ilce = ilce;
-        this.mahalle = mahalle;
+        this.mahalle_id = mahalle;
         this.cadde_sokak = cadde_sokak;
         this.tarif = tarif;
         this.site = site;
@@ -276,12 +276,12 @@ public class Kisi {
         this.ilce = ilce;
     }
 
-    public String getMahalle() {
-        return mahalle;
+    public Integer getMahalle_id() {
+        return mahalle_id;
     }
 
-    public void setMahalle(String mahalle) {
-        this.mahalle = mahalle;
+    public void setMahalle_id(Integer mahalle_id) {
+        this.mahalle_id = mahalle_id;
     }
 
     public String getCadde_sokak() {
