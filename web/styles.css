@@ -141,4 +141,11 @@ button {
     background-color: #e9ecef; /* Kartların arka plan rengini buradan ayarlayın */
 }
 
+/*Yazı yazılamayan alanlar */
+.readonly-input {
+    background-color: #e9ecef; /* Light gray background */
+    cursor: not-allowed; /* Not-allowed cursor icon */
+    color: #6c757d; /* Gray text color */
+}
+
 

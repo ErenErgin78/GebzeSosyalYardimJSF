@@ -4,72 +4,67 @@
  */
 package Controller;
 
-import Entity.Kisi;
-import dao.KisiDAO;;
+import Entity.Muracaat;
+import dao.MuracaatDAO;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.Dependent;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
-import java.io.IOException;
 import java.util.List;
 
 /**
  *
  * @author Eren
  */
-@Named(value = "kisiBean")
+@Named(value = "muracaatBean")
 @Dependent
-public class KisiBean {
+public class MuracaatBean {
 
-    private Kisi entity;
-    private KisiDAO dao;
-    private List<Kisi> list;
+ private Muracaat entity;
+    private MuracaatDAO dao;
+    private List<Muracaat> list;
 
     public void create() {
         this.getDao().Create(entity);
-        this.entity = new Kisi();
+        this.entity = new Muracaat();
     }
 
-    public void delete(int KisiID) {
-        this.getDao().Delete(KisiID);
+    public void delete(int MuracaatID) {
+        this.getDao().Delete(MuracaatID);
         this.list = this.getDao().GetList(); //listeyi yenile
     }
 
-    public void edit(Kisi kisi) {
-        this.entity = kisi;
+    public void edit(Muracaat muracaat) {
+        this.entity = muracaat;
     }
 
-    public Kisi getEntity() {
+    public Muracaat getEntity() {
         if (this.entity == null) {
-            this.entity = new Kisi();
+            this.entity = new Muracaat();
         }
         return entity;
     }
 
-    public void setEntity(Kisi entity) {
+    public void setEntity(Muracaat entity) {
         this.entity = entity;
     }
 
-    public KisiDAO getDao() {
+    public MuracaatDAO getDao() {
         if (this.dao == null) {
-            this.dao = new KisiDAO();
+            this.dao = new MuracaatDAO();
         }
         return dao;
     }
 
-    public void setDao(KisiDAO dao) {
+    public void setDao(MuracaatDAO dao) {
         this.dao = dao;
     }
 
-    public List<Kisi> getList() {
+    public List<Muracaat> getList() {
         this.list = this.getDao().GetList();
         return list;
     }
 
-    public void setList(List<Kisi> list) {
+    public void setList(List<Muracaat> list) {
         this.list = list;
-    }
-    public KisiBean() {
     }
     
 }

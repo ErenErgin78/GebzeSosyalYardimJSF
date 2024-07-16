@@ -14,18 +14,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
  * @author Eren
  */
-public class MuracaatDAO extends DBConnection{
-    
+public class MuracaatDAO extends DBConnection {
+
     private Connection db;
-    
-    public void CreateMuracaat(){
-    
-      try {
+
+    public void Create(Muracaat muracaat) {
+
+        try {
             Statement statement = this.getDb().createStatement();
 
             String Insertquery = "INSERT INTO MURACAAT";
@@ -34,8 +33,44 @@ public class MuracaatDAO extends DBConnection{
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-      
-    
+
+    }
+    public List<Muracaat> GetList() {
+
+        List<Muracaat> KisiList = new ArrayList<>();
+
+        try {
+
+            Statement statement = getDb().createStatement();
+
+            String Selectquery = "SELECT * FROM MURACAAT";
+
+            ResultSet rs = statement.executeQuery(Selectquery);
+
+            while (rs.next()) {
+                KisiList.add(new Muracaat());
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return KisiList;
+    }
+
+    public void Delete(int kullaniciId) {
+        String deleteQuery = "DELETE FROM KULLANICI WHERE kullanici_id = ?";
+
+        try {
+            Connection connection = this.getDb();
+            PreparedStatement statement = connection.prepareStatement(deleteQuery);
+            statement.setInt(1, kullaniciId);
+
+            int rowsDeleted = statement.executeUpdate();
+            System.out.println(rowsDeleted + " kisi silindi.");
+
+        } catch (SQLException ex) {
+            System.out.println("Veritabanı hatası: " + ex.getMessage());
+        }
     }
 
     public Connection getDb() {
@@ -45,5 +80,5 @@ public class MuracaatDAO extends DBConnection{
     public void setDb(Connection db) {
         this.db = db;
     }
-    
+
 }

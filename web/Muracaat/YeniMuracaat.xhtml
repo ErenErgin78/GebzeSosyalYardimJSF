@@ -4,267 +4,309 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xml:lang="en" lang="en">
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gebze Belediyesi Dashboard</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="styles.css" />
-    <style>
-        .form-background {
-            background-color: #f8f9fa; /* Arka plan rengi */
-        }
-        .no-border .form-check-input {
-            border: none;
-        }
-        .inline-radio {
-            display: inline-block;
-        }
-        .no-border-radio .form-check-input {
-            border: none;
-            margin-right: 10px;
-        }
-    </style>
-</head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gebze Belediyesi Dashboard</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="styles.css" />
+        <style>
+            .form-background {
+                background-color: #f8f9fa; /* Arka plan rengi */
+            }
+            .no-border .form-check-input {
+                border: none;
+            }
+            .inline-radio {
+                display: inline-block;
+            }
+            .no-border-radio .form-check-input {
+                border: none;
+                margin-right: 10px;
+            }
+            .no-border-radio .form-check {
+                padding: 0;
+                margin: 0 10px 0 0;
+            }
+            .no-border-radio .form-check-label {
+                margin: 0;
+            }
+        </style>
+    </head>
 
-<body>
-    <h:form>
-        <div class="container-fluid mt-20">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <h1 class="text-center">Yeni Müracaat Girişi</h1>
-                    <div class="card">
-                        <div class="card-header">Kimlik Bilgileri</div>
-                        <div class="card-body">
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="dob">Doğum Tarihi</label>
-                                    <h:inputText id="dob" class="form-control">
-                                        <f:passThroughAttribute name="type" value="date"/>
+    <body>
+        <h:form>
+            <div class="container-fluid mt-20">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <h1 class="text-center">Yeni Müracaat Girişi</h1>
+                        <div class="card">
+                            <div class="card-header">Kimlik Bilgileri</div>
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="dob">Doğum Tarihi</label>
+                                        <h:inputText id="dob" value="#{kisiBean.entity.dogum_tarihi}" class="form-control">
+                                            <f:passThroughAttribute name="type" value="date" />
+                                        </h:inputText>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="tc_no">T.C. Kimlik No</label>
+                                        <h:inputText id="tc_no" class="form-control" value="#{kisiBean.entity.kimlik_no}" />
+                                        <h:commandButton value="Sorgula" class="btn btn-primary mt-2" />
+                                        <h:selectBooleanCheckbox id="foreign_id" class="form-check-input" value="#{kisiBean.dao.yabancı_kimlik_mi}">
+                                        </h:selectBooleanCheckbox>
+                                        <label class="form-check-label" for="foreign_id">Yabancı Kimlik</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="foreign_tc">Kimlik Numarası</label>
+                                    <h:inputText id="foreign_tc" class="form-control" />
+                                    <h:selectBooleanCheckbox id="guest" class="form-check-input" value="#{kisiBean.dao.misafir_mi}"/>
+                                    <label class="form-check-label" for="guest">Misafir</label>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="name">Adı</label>
+                                        <h:inputText id="name" class="form-control readonly-input" readonly="true"/>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="surname">Soyadı</label>
+                                        <h:inputText id="surname" class="form-control readonly-input" readonly="true" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="father_name">Baba Adı</label>
+                                        <h:inputText id="father_name" class="form-control" readonly="true"/>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="mother_name">Anne Adı</label>
+                                        <h:inputText id="mother_name" class="form-control" readonly="true"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gender">Cinsiyet</label>
+                                    <div class="form-check-inline no-border-radio" readonly="true">
+                                        <h:selectOneRadio id="gender" layout="lineDirection" class="form-check-input no-border-radio" readonly="true">
+                                            <f:selectItem itemValue="Erkek" itemLabel="Erkek" />
+                                            <f:selectItem itemValue="Kadın" itemLabel="Kadın" />
+                                        </h:selectOneRadio>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="registration_status">Kayıt Durumu</label>
+                                    <h:selectOneMenu id="registration_status" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
+                                        <f:selectItem itemLabel="Durum Değişikliği" itemValue="DurumDegişikligi" />
+                                        <f:selectItem itemLabel="Eski Kayıt" itemValue="EskiKayit" />
+                                        <f:selectItem itemLabel="Yeni Kayıt" itemValue="YeniKayit" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="registration_city">N. Kayıtlı Olduğu İl</label>
+                                        <h:selectOneMenu id="registration_city" class="form-control" readonly="true">
+                                            <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
+                                            <!-- Add more options as needed -->
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="registration_district">N. Kayıtlı Olduğu İlçe</label>
+                                        <h:selectOneMenu id="registration_district" class="form-control" readonly="true">
+                                            <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
+                                            <!-- Add more options as needed -->
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="family_order_no">Aile Sıra No</label>
+                                        <h:inputText id="family_order_no" class="form-control" readonly="true"/>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="order_no">Sıra No</label>
+                                        <h:inputText id="order_no" class="form-control" readonly="true" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="spouse_name">Cilt No</label>
+                                        <h:inputText id="spouse_name" class="form-control" readonly="true"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cilt_no">Eş Adı</label>
+                                    <h:inputText id="cilt_no" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="spouse_surname">Eş Soyadı</label>
+                                    <h:inputText id="spouse_surname" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mt-3">
+                            <div class="card-header">Adres Bilgileri</div>
+                            <div class="card-body">
+                                <h:commandButton value="Adres Getir" action="#{userBean.adresGetir}" class="btn btn-secondary mb-2" />
+                                <div class="form-group">
+                                    <label for="full_address">Açık Adres</label>
+                                    <h:inputText id="full_address" class="form-control"  readonly="true" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="address_no">Adres No</label>
+                                    <h:inputText id="address_no" class="form-control" readonly="true" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mt-3">
+                            <div class="card-header">İletişim Bilgileri</div>
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="city">İlçe</label>
+                                        <h:selectOneMenu id="city" class="form-control">
+                                            <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
+                                            <f:selectItem itemLabel="GEBZE" itemValue="gebze" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="neighborhood">Mahalle</label>
+                                        <h:selectOneMenu id="neighborhood" value = "#{kisiBean.entity.mahalle}" class="form-control">
+                                            <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                            <f:selectItem itemLabel="Adem Yavuz Mahallesi" itemValue="adem_yavuz_mahallesi" />
+                                            <f:selectItem itemLabel="Yavuz Selim Mahallesi" itemValue="yavuz_selim_mahallesi" />
+                                            <f:selectItem itemLabel="Beylikbağı Mahallesi" itemValue="beylikbagi_mahallesi" />
+                                            <f:selectItem itemLabel="İnönü Mahallesi" itemValue="inonu_mahallesi" />
+                                            <f:selectItem itemLabel="Hacıhalil Mahallesi" itemValue="hacihalil_mahallesi" />
+                                            <f:selectItem itemLabel="Kirazpınar Mahallesi" itemValue="kirazpinar_mahallesi" />
+                                            <f:selectItem itemLabel="Cumhuriyet Mahallesi" itemValue="cumhuriyet_mahallesi" />
+                                            <f:selectItem itemLabel="Pelitli Mahallesi" itemValue="pelitli_mahallesi" />
+                                            <f:selectItem itemLabel="Cumaköy Mahallesi" itemValue="cumakoy_mahallesi" />
+                                            <f:selectItem itemLabel="Balçık Mahallesi" itemValue="balcik_mahallesi" />
+                                            <f:selectItem itemLabel="Denizli Mahallesi" itemValue="denizli_mahallesi" />
+                                            <f:selectItem itemLabel="Ovacık Mahallesi" itemValue="ovacik_mahallesi" />
+                                            <f:selectItem itemLabel="Eskihisar Mahallesi" itemValue="eskihisar_mahallesi" />
+                                            <f:selectItem itemLabel="Kadıllı Mahallesi" itemValue="kadilli_mahallesi" />
+                                            <f:selectItem itemLabel="Kargalı Mahallesi" itemValue="kargali_mahallesi" />
+                                            <f:selectItem itemLabel="Mudarlı Mahallesi" itemValue="mudarlı_mahallesi" />
+                                            <f:selectItem itemLabel="Hatipler Mahallesi" itemValue="hatipler_mahallesi" />
+                                            <f:selectItem itemLabel="Duraklı Mahallesi" itemValue="durakli_mahallesi" />
+                                            <f:selectItem itemLabel="Yağcılar Mahallesi" itemValue="yagcilar_mahallesi" />
+                                            <f:selectItem itemLabel="Ahatlı Mahallesi" itemValue="ahatli_mahallesi" />
+                                            <f:selectItem itemLabel="Elbizli Mahallesi" itemValue="elbizli_mahallesi" />
+                                            <f:selectItem itemLabel="Tepepanayır Mahallesi" itemValue="tepepanayir_mahallesi" />
+                                            <f:selectItem itemLabel="Muallimköy Mahallesi" itemValue="muallimkoy_mahallesi" />
+                                            <f:selectItem itemLabel="Mollafenari Mahallesi" itemValue="mollafenari_mahallesi" />
+                                            <f:selectItem itemLabel="Arapçeşme Mahallesi" itemValue="arapcesme_mahallesi" />
+                                            <f:selectItem itemLabel="Osman Yılmaz Mahallesi" itemValue="osman_yilmaz_mahallesi" />
+                                            <f:selectItem itemLabel="Köşklü Çeşme Mahallesi" itemValue="kosklu_cesme_mahallesi" />
+                                            <f:selectItem itemLabel="Gaziler Mahallesi" itemValue="gaziler_mahallesi" />
+                                            <f:selectItem itemLabel="Güzeller Mahallesi" itemValue="guzeller_mahallesi" />
+                                            <f:selectItem itemLabel="Mustafapaşa Mahallesi" itemValue="mustafapasa_mahallesi" />
+                                            <f:selectItem itemLabel="Mevlana Mahallesi" itemValue="mevlana_mahallesi" />
+                                            <f:selectItem itemLabel="Yenikent Mahallesi" itemValue="yenikent_mahallesi" />
+                                            <f:selectItem itemLabel="İstasyon Mahallesi" itemValue="istasyon_mahallesi" />
+                                            <f:selectItem itemLabel="Tatlıkuyu Mahallesi" itemValue="tatlikuyu_mahallesi" />
+                                            <f:selectItem itemLabel="Barış Mahallesi" itemValue="baris_mahallesi" />
+                                            <f:selectItem itemLabel="Mimar Sinan Mahallesi" itemValue="mimar_sinan_mahallesi" />
+                                            <f:selectItem itemLabel="Ulus Mahallesi" itemValue="ulus_mahallesi" />
+                                            <f:selectItem itemLabel="Sultan Orhan Mahallesi" itemValue="sultan_orhan_mahallesi" />
+                                            <f:selectItem itemLabel="Hürriyet Mahallesi" itemValue="hurriyet_mahallesi" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="street">Cadde/Sokak</label>
+                                        <h:inputText id="street" class="form-control" value="#{kisiBean.entity.cadde_sokak}" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address_desc">Adres Tarifi</label>
+                                    <h:inputTextarea id="address_desc" class="form-control" rows="3" />
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4" value = "#{kisiBean.entity.site}">
+                                        <label for="apartment">Apartman/Site</label>
+                                        <h:inputText id="apartment" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4"  "#{kisiBean.entity.kapi_no}">
+                                        <label for="block_no">Blok/Kapı No</label>
+                                        <h:inputText id="block_no" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4" "#{kisiBean.entity.daire_no}">
+                                        <label for="flat_no">Daire No</label>
+                                        <h:inputText id="flat_no" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4"  "#{kisiBean.entity.ev_telefon}">
+                                        <label for="home_phone">Ev Tel</label>
+                                        <h:inputText id="home_phone" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4"  "#{kisiBean.entity.cep_telefon}">
+                                        <label for="mobile_phone">Cep Tel</label>
+                                        <h:inputText id="mobile_phone" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group"  "#{kisiBean.entity.eposta}">
+                                    <label for="email">E-Posta</label>
+                                    <h:inputText id="email" class="form-control">
+                                        <f:passThroughAttribute name="type" value="email" />
                                     </h:inputText>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label for="tc_no">T.C. Kimlik No</label>
-                                    <h:inputText id="tc_no" class="form-control" />
-                                    <h:commandButton value="Sorgula" class="btn btn-primary mt-2" />
-                                    <h:selectBooleanCheckbox id="foreign_id" class="form-check-input" />
-                                    <label class="form-check-label" for="foreign_id">Yabancı Kimlik</label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="foreign_tc">Kimlik Numarası</label>
-                                <h:inputText id="foreign_tc" class="form-control" />
-                                <h:selectBooleanCheckbox id="guest" class="form-check-input" />
-                                <label class="form-check-label" for="guest">Misafir</label>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="surname">Soyadı</label>
-                                    <h:inputText id="surname" class="form-control" />
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="name">Adı</label>
-                                    <h:inputText id="name" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="father_name">Baba Adı</label>
-                                    <h:inputText id="father_name" class="form-control" />
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="mother_name">Anne Adı</label>
-                                    <h:inputText id="mother_name" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="gender">Cinsiyet</label>
-                                <div class="form-check-inline no-border-radio">
-                                    <h:selectOneRadio id="gender" layout="lineDirection" class="form-check-input no-border-radio">
-                                        <f:selectItem itemValue="Erkek" itemLabel="Erkek" />
-                                        <f:selectItem itemValue="Kadın" itemLabel="Kadın" />
-                                    </h:selectOneRadio>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="registration_status">Kayıt Durumu</label>
-                                <h:selectOneMenu id="registration_status" class="form-control">
-                                    <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
-                                    <!-- Add more options as needed -->
-                                </h:selectOneMenu>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="registration_city">N. Kayıtlı Olduğu İl</label>
-                                    <h:selectOneMenu id="registration_city" class="form-control">
-                                        <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
-                                        <!-- Add more options as needed -->
-                                    </h:selectOneMenu>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="registration_district">N. Kayıtlı Olduğu İlçe</label>
-                                    <h:selectOneMenu id="registration_district" class="form-control">
-                                        <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
-                                        <!-- Add more options as needed -->
-                                    </h:selectOneMenu>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="cilt_no">Cilt No</label>
-                                <h:inputText id="cilt_no" class="form-control" />
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="family_order_no">Aile Sıra No</label>
-                                    <h:inputText id="family_order_no" class="form-control" />
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="order_no">Sıra No</label>
-                                    <h:inputText id="order_no" class="form-control" />
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="spouse_name">Eş Adı</label>
-                                    <h:inputText id="spouse_name" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="spouse_surname">Eş Soyadı</label>
-                                <h:inputText id="spouse_surname" class="form-control" />
-                            </div>
-                            <div class="form-group">
-                                <label for="address_no">Adres No</label>
-                                <h:inputText id="address_no" class="form-control" />
                             </div>
                         </div>
-                    </div>
 
-                    <div class="card mt-3">
-                        <div class="card-header">Adres Bilgileri</div>
-                        <div class="card-body">
-                            <h:commandButton value="Adres Getir" action="#{userBean.adresGetir}" class="btn btn-secondary mb-2" />
-                            <div class="form-group">
-                                <label for="full_address">Açık Adres</label>
-                                <h:inputText id="full_address" class="form-control" />
-                            </div>
-                            <div class="form-group">
-                                <label for="address_no">Adres No</label>
-                                <h:inputText id="address_no" class="form-control" />
+                        <div class="card mt-3" >
+                            <div class="card-header">Müracaat Bilgileri</div>
+                            <div class="card-body">
+                                <div class="form-group" >
+                                    <label for="archive_file_no">Arşiv Dosya No:</label>
+                                    <h:inputText id="archive_file_no" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="application_date">Müracaat Tarihi:</label>
+                                    <h:inputText id="application_date" class="form-control">
+                                        <f:passThroughAttribute name="type" value="date" />
+                                    </h:inputText>
+                                </div>
+                                <div class="form-group">
+                                    <label for="application_type">Müracaat Tipi:</label>
+                                    <h:selectOneMenu id="application_type" class="form-control">
+                                        <f:selectItem itemLabel="Kendi" itemValue="Kendi" />
+                                        <f:selectItem itemLabel="Diğer" itemValue="Diğer" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group">
+                                    <label for="region">Bölge:</label>
+                                    <h:selectOneMenu id="region" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
+                                        <f:selectItem itemLabel="1.Bölge" itemValue=1 />
+                                        <f:selectItem itemLabel="2.Bölge" itemValue=2 />
+                                        <f:selectItem itemLabel="3.Bölge" itemValue=3 />
+                                        <f:selectItem itemLabel="4.Bölge" itemValue=4/>
+                                        <f:selectItem itemLabel="5.Bögle" itemValue=5 />                                          
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Açıklama:</label>
+                                    <h:inputTextarea id="description" class="form-control" rows="3" />
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="card mt-3">
-                        <div class="card-header">İletişim Bilgileri</div>
-                        <div class="card-body">
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="city">İlçe</label>
-                                    <h:selectOneMenu id="city" class="form-control">
-                                        <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
-                                        <!-- Add more options as needed -->
-                                    </h:selectOneMenu>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="neighborhood">Mahalle</label>
-                                    <h:selectOneMenu id="neighborhood" class="form-control">
-                                        <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
-                                        <!-- Add more options as needed -->
-                                    </h:selectOneMenu>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="street">Cadde/Sokak</label>
-                                    <h:selectOneMenu id="street" class="form-control">
-                                        <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
-                                        <!-- Add more options as needed -->
-                                    </h:selectOneMenu>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="address_desc">Adres Tarifi</label>
-                                <h:inputTextarea id="address_desc" class="form-control" rows="3" />
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="apartment">Apartman/Site</label>
-                                    <h:inputText id="apartment" class="form-control" />
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="block_no">Blok/Kapı No</label>
-                                    <h:inputText id="block_no" class="form-control" />
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="flat_no">Daire No</label>
-                                    <h:inputText id="flat_no" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="home_phone">Ev Tel</label>
-                                    <h:inputText id="home_phone" class="form-control" />
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="mobile_phone">Cep Tel</label>
-                                    <h:inputText id="mobile_phone" class="form-control" />
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="other_phone">Diğer Tel</label>
-                                    <h:inputText id="other_phone" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">E-Posta</label>
-                                <h:inputText id="email" class="form-control">
-                                    <f:passThroughAttribute name="type" value="email"/>
-                                </h:inputText>
-                            </div>
+                        <div class="text-center mt-3">
+                            <h:commandButton value="Kaydet" action="#{userBean.kaydet}" class="btn btn-success" />
                         </div>
-                    </div>
-                    
-                    <div class="card mt-3">
-                        <div class="card-header">Müracaat Bilgileri</div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="archive_file_no">Arşiv Dosya No:</label>
-                                <h:inputText id="archive_file_no" class="form-control" />
-                            </div>
-                            <div class="form-group">
-                                <label for="application_date">Müracaat Tarihi:</label>
-                                <h:inputText id="application_date" class="form-control">
-                                    <f:passThroughAttribute name="type" value="date"/>
-                                </h:inputText>
-                            </div>
-                            <div class="form-group">
-                                <label for="application_type">Müracaat Tipi:</label>
-                                <h:selectOneMenu id="application_type" class="form-control">
-                                    <f:selectItem itemLabel="Kendi" itemValue="Kendi" />
-                                    <f:selectItem itemLabel="Diğer" itemValue="Diğer" />
-                                </h:selectOneMenu>
-                            </div>
-                            <div class="form-group">
-                                <label for="region">Bölge:</label>
-                                <h:selectOneMenu id="region" class="form-control">
-                                    <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
-                                    <!-- Add more options as needed -->
-                                </h:selectOneMenu>
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Açıklama:</label>
-                                <h:inputTextarea id="description" class="form-control" rows="3" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="text-center mt-3">
-                        <h:commandButton value="Kaydet" action="#{userBean.kaydet}" class="btn btn-success" />
                     </div>
                 </div>
             </div>
-        </div>
-    </h:form>
+        </h:form>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
 
 </html>

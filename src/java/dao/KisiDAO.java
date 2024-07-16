@@ -21,10 +21,23 @@ public class KisiDAO {
 
     private Connection db;
 
+    private boolean yabancı_kimlik_mi;
+    private boolean misafir_mi;
+
     public void Create(Kisi kisi) {
         try {
             Statement statement = this.getDb().createStatement();
 
+            //misafir ve yabancı kimlik ataması:
+            char ayarlama;
+            
+            ayarlama = yabancı_kimlik_mi ? 'E' : 'H';
+            kisi.setYabanci_kimlik(ayarlama);
+
+            ayarlama = misafir_mi ? 'E' : 'H';
+            kisi.setMisafir(ayarlama);
+
+            
             // KISI_YAKINLAR:
             String insertQueryYakınlar = "INSERT INTO KISI_YAKINLAR (ANNE_ISIM, BABA_ISIM, ES_ISIM, ES_SOYISIM, ES_DURUM_ID) VALUES ('"
                     + kisi.getAnne_isim() + "', '"
@@ -69,7 +82,6 @@ public class KisiDAO {
                     + new java.sql.Date(kisi.getDogum_tarihi().getTime()) + "')";
             int rKisi = statement.executeUpdate(insertQueryKisi);
 
-            
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -120,5 +132,23 @@ public class KisiDAO {
     public void setDb(Connection db) {
         this.db = db;
     }
+
+    public boolean isYabancı_kimlik_mi() {
+        return yabancı_kimlik_mi;
+    }
+
+    public void setYabancı_kimlik_mi(boolean yabancı_kimlik_mi) {
+        this.yabancı_kimlik_mi = yabancı_kimlik_mi;
+    }
+
+    public boolean isMisafir_mi() {
+        return misafir_mi;
+    }
+
+    public void setMisafir_mi(boolean misafir_mi) {
+        this.misafir_mi = misafir_mi;
+    }
+    
+    
 
 }

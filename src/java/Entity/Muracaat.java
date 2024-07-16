@@ -7,11 +7,39 @@ package Entity;
 public class Muracaat {
     private Integer muracaat_id;
     private Integer kisi_temel_id;
+    
+    private Integer muracaat_bilgi_id;
+    private Integer arsiv_dosya_no;
+    private Integer muracaat_tip_id;
+    private Integer bolge;
+    private String aciklama;
 
-    public Muracaat(Integer muracaat_id, Integer kisi_temel_id) {
+    public Muracaat(Integer muracaat_id, Integer kisi_temel_id, Integer muracaat_bilgi_id, Integer arsiv_dosya_no, Integer muracaat_tip_id, Integer bolge, String aciklama) {
         this.muracaat_id = muracaat_id;
         this.kisi_temel_id = kisi_temel_id;
+        this.muracaat_bilgi_id = muracaat_bilgi_id;
+        this.arsiv_dosya_no = arsiv_dosya_no;
+        this.muracaat_tip_id = muracaat_tip_id;
+        this.bolge = bolge;
+        this.aciklama = aciklama;
     }
+
+    public Muracaat(Integer kisi_temel_id, Integer arsiv_dosya_no, Integer muracaat_tip_id, Integer bolge, String aciklama) {
+        this.kisi_temel_id = kisi_temel_id;
+        this.arsiv_dosya_no = arsiv_dosya_no;
+        this.muracaat_tip_id = muracaat_tip_id;
+        this.bolge = bolge;
+        this.aciklama = aciklama;
+    }
+
+    public Muracaat(Integer kisi_temel_id, Integer muracaat_bilgi_id) {
+        this.kisi_temel_id = kisi_temel_id;
+        this.muracaat_bilgi_id = muracaat_bilgi_id;
+    }
+
+    public Muracaat() {
+    }
+   
 
     public Muracaat(Integer kisi_temel_id) {
         this.kisi_temel_id = kisi_temel_id;
@@ -33,5 +61,47 @@ public class Muracaat {
     public void setKisi_temel_id(Integer kisi_temel_id) {
         this.kisi_temel_id = kisi_temel_id;
     }
+
+    public Integer getMuracaat_bilgi_id() {
+        return muracaat_bilgi_id;
+    }
+
+    public void setMuracaat_bilgi_id(Integer muracaat_bilgi_id) {
+        this.muracaat_bilgi_id = muracaat_bilgi_id;
+    }
+
+    public Integer getArsiv_dosya_no() {
+        return arsiv_dosya_no;
+    }
+
+    public void setArsiv_dosya_no(Integer arsiv_dosya_no) {
+        this.arsiv_dosya_no = arsiv_dosya_no;
+    }
+
+    public Integer getMuracaat_tip_id() {
+        return muracaat_tip_id;
+    }
+
+    public void setMuracaat_tip_id(Integer muracaat_tip_id) {
+        this.muracaat_tip_id = muracaat_tip_id;
+    }
+
+    public Integer getBolge() {
+        return bolge;
+    }
+
+    public void setBolge(Integer bolge) {
+        this.bolge = bolge;
+    }
+
+    public String getAciklama() {
+        return aciklama;
+    }
+
+    public void setAciklama(String aciklama) {
+        this.aciklama = aciklama;
+    }
+    
+    
     
 }
