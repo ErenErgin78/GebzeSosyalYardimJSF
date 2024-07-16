@@ -26,7 +26,6 @@ public class KisiDAO {
     private boolean misafir_mi;
 
     public void Create(Kisi kisi) {
-        Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet generatedKeys = null;
 
@@ -61,7 +60,7 @@ public class KisiDAO {
 
             // KISI_ADRES
             String insertQueryAdres = "INSERT INTO KISI_ADRES (ILCE, KISI_ADRES_MAHALLE_ID, CADDE_SOKAK, TARIF, SITE, KAPI_NO, DAIRE_NO, ADRES_NO, EVDEKI_KISI_SAYISI) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            preparedStatement = connection.prepareStatement(insertQueryAdres, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement = db.prepareStatement(insertQueryAdres, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, kisi.getIlce());
             preparedStatement.setInt(2, kisi.getMahalle_id());
             preparedStatement.setString(3, kisi.getCadde_sokak());
@@ -80,7 +79,7 @@ public class KisiDAO {
 
             // KISI_ILETISIM
             String insertQueryIletisim = "INSERT INTO KISI_ILETISIM (EV_TELEFON, CEP_TELEFON, EPOSTA) VALUES (?, ?, ?)";
-            preparedStatement = connection.prepareStatement(insertQueryIletisim, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement = db.prepareStatement(insertQueryIletisim, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setBigDecimal(1, new java.math.BigDecimal(kisi.getEv_telefon()));
             preparedStatement.setBigDecimal(2, new java.math.BigDecimal(kisi.getCep_telefon()));
             preparedStatement.setString(3, kisi.getEposta());
@@ -93,7 +92,7 @@ public class KisiDAO {
 
             // KISI
             String insertQueryKisi = "INSERT INTO KISI (KIMLIK_NO, ISIM, SOYISIM, CINSIYET, MEDENI_DURUM_ID, YABANCI_KIMLIK, MISAFIR, CILT_NO, AILE_SIRA_NO, SIRA_NO, DOGUM_TARIHI, KISI_ILETISIM_ID, KISI_ADRES_ID, KISI_YAKINLAR_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            preparedStatement = connection.prepareStatement(insertQueryKisi);
+            preparedStatement = db.prepareStatement(insertQueryKisi);
             preparedStatement.setString(1, kisi.getKimlik_no().toString());
             preparedStatement.setString(2, kisi.getIsim());
             preparedStatement.setString(3, kisi.getSoyisim());
@@ -121,9 +120,6 @@ public class KisiDAO {
                 }
                 if (preparedStatement != null) {
                     preparedStatement.close();
-                }
-                if (connection != null) {
-                    connection.close();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
