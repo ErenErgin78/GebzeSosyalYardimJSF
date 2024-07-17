@@ -25,22 +25,6 @@ public class UsersDAO extends DBConnection {
     private String kullanici_adi;
     private String sifre;
 
-    public String getKullanici_adi() {
-        return kullanici_adi;
-    }
-
-    public void setKullanici_adi(String kullanici_adi) {
-        this.kullanici_adi = kullanici_adi;
-    }
-
-    public String getSifre() {
-        return sifre;
-    }
-
-    public void setSifre(String sifre) {
-        this.sifre = sifre;
-    }
-
     public void Create(User user) {
         try {
             Statement statement = this.getDb().createStatement();
@@ -144,5 +128,22 @@ public class UsersDAO extends DBConnection {
     public void setDb(Connection db) {
         this.db = db;
     }
+    
+    public String getKullanici_adi() {
+        return kullanici_adi;
+    }
+
+    public void setKullanici_adi(String kullanici_adi) {
+        this.kullanici_adi = kullanici_adi;
+    }
+
+    public String getSifre() {
+        return sifre;
+    }
+
+    public void setSifre(String sifre) {
+        this.sifre = sifre;
+    }
+
 
 }
