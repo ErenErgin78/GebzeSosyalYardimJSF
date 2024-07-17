@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
- */
 package Controller;
 
 import Entity.Muracaat;
@@ -10,10 +6,6 @@ import jakarta.inject.Named;
 import jakarta.enterprise.context.Dependent;
 import java.util.List;
 
-/**
- *
- * @author Eren
- */
 @Named(value = "muracaatBean")
 @Dependent
 public class MuracaatBean {
@@ -23,13 +15,19 @@ public class MuracaatBean {
     private List<Muracaat> list;
 
     public void create() {
-        this.getDao().Create(entity);
+        // Ensure entity is initialized before passing it to the DAO
+        if (this.entity == null) {
+            this.entity = new Muracaat();
+        }
+        this.getDao().Create(this.entity);
         this.entity = new Muracaat();
+        // Refresh the list to include the newly created entity
+        this.list = this.getDao().GetList();
     }
 
     public void delete(int MuracaatID) {
         this.getDao().Delete(MuracaatID);
-        this.list = this.getDao().GetList(); //listeyi yenile
+        this.list = this.getDao().GetList(); // Refresh the list after deletion
     }
 
     public void edit(Muracaat muracaat) {
@@ -40,7 +38,7 @@ public class MuracaatBean {
         if (this.entity == null) {
             this.entity = new Muracaat();
         }
-        return entity;
+        return this.entity;
     }
 
     public void setEntity(Muracaat entity) {
@@ -51,7 +49,7 @@ public class MuracaatBean {
         if (this.dao == null) {
             this.dao = new MuracaatDAO();
         }
-        return dao;
+        return this.dao;
     }
 
     public void setDao(MuracaatDAO dao) {
@@ -59,12 +57,13 @@ public class MuracaatBean {
     }
 
     public List<Muracaat> getList() {
-        this.list = this.getDao().GetList();
-        return list;
+        if (this.list == null) {
+            this.list = this.getDao().GetList();
+        }
+        return this.list;
     }
 
     public void setList(List<Muracaat> list) {
         this.list = list;
     }
-
 }

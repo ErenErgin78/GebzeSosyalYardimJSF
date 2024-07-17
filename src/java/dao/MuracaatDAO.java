@@ -4,7 +4,6 @@
  */
 package dao;
 
-import dao.KisiDAO;
 import Entity.Muracaat;
 import util.DBConnection;
 import java.sql.Connection;
@@ -26,31 +25,32 @@ public class MuracaatDAO extends DBConnection {
 
     public void Create(Muracaat muracaat) {
 
-        ResultSet generatedKeys = null;
         try {
+
+            Statement statement = this.getDb().createStatement();
+            ResultSet generatedKeys = null;
+
             // MURACAAT_BILGI:
-            String insertQueryMuracaatBilgi = "INSERT INTO MURACAAT_BILGI (ARSIV_DOSYA_NO, MURACAAT_TIP_ID, BOLGE, ACIKLAMA, MURACAAT_TARIHI) VALUES (" +
-                    muracaat.getArsiv_dosya_no() + ", " + muracaat.getMuracaat_tip_id() + ", " + muracaat.getBolge() + ", '" + muracaat.getAciklama() + "', '" + new java.sql.Date(muracaat.getMuracaat_tarihi().getTime()) + "')";
-            Statement statement = getDb().createStatement();
-            statement.executeUpdate(insertQueryMuracaatBilgi, Statement.RETURN_GENERATED_KEYS);
+            String insertQueryMuracaatBilgi = "INSERT INTO MURACAAT_BILGI (ARSIV_DOSYA_NO, MURACAAT_TIP_ID, BOLGE, ACIKLAMA, MURACAAT_TARIHI) VALUES ("
+                    + muracaat.getArsiv_dosya_no() + ", " + muracaat.getMuracaat_tip_id() + ", " + muracaat.getBolge() + ", '" + muracaat.getAciklama() + "', '" + muracaat.getMuracaat_tarihi() + "')";
+
+            int r = statement.executeUpdate(insertQueryMuracaatBilgi, Statement.RETURN_GENERATED_KEYS);
             generatedKeys = statement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 muracaat_bilgi_id = generatedKeys.getInt(1);
             }
 
             // MURACAAT:
-
             // KISI_TEMEL'den id almak ve atamak
             String Selectquery = "SELECT KISI_ID FROM KISI_TEMEL";
             ResultSet rs = statement.executeQuery(Selectquery);
             if (rs.next()) {
                 muracaat.setKisi_temel_id(rs.getInt("KISI_ID"));
-            }
 
-            String insertQueryMuracaat = "INSERT INTO MURACAAT (KISI_TEMEL_ID, MURACAAT_BILGI_ID) VALUES ("
-                    + muracaat.getKisi_temel_id() +"," + muracaat_bilgi_id + ")";
-            statement.executeUpdate(insertQueryMuracaat);
-            statement.close();
+                String insertQueryMuracaat = "INSERT INTO MURACAAT (KISI_TEMEL_ID, MURACAAT_BILGI_ID) VALUES ("
+                        + muracaat.getKisi_temel_id() + "," + muracaat_bilgi_id + ")";
+                statement.executeUpdate(insertQueryMuracaat);
+            }
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -95,6 +95,9 @@ public class MuracaatDAO extends DBConnection {
     }
 
     public Connection getDb() {
+        if (this.db == null) {
+            this.db = this.connect();
+        }
         return db;
     }
 

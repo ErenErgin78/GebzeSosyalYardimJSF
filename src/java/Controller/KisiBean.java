@@ -1,22 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
- */
 package Controller;
 
 import Entity.Kisi;
 import dao.KisiDAO;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.Dependent;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
-import java.io.IOException;
 import java.util.List;
 
-/**
- *
- * @author Eren
- */
 @Named(value = "kisiBean")
 @Dependent
 public class KisiBean {
@@ -26,13 +15,19 @@ public class KisiBean {
     private List<Kisi> list;
 
     public void create() {
-        this.getDao().Create(entity);
-        this.entity = new Kisi();
+        // Ensure entity is initialized before passing it to the DAO
+        if (this.entity == null) {
+            this.entity = new Kisi();
+        }
+        this.getDao().Create(this.entity);
+        this.entity = new Kisi(); // Yeni bir Kisi nesnesi oluştur
+        // Listeyi güncelle, yeni oluşturulan varlık dahil edilsin
+        this.list = this.getDao().GetList();
     }
 
     public void delete(int KisiID) {
         this.getDao().Delete(KisiID);
-        this.list = this.getDao().GetList(); //listeyi yenile
+        this.list = this.getDao().GetList(); // Silme işleminden sonra listeyi güncelle
     }
 
     public void edit(Kisi kisi) {
@@ -43,7 +38,7 @@ public class KisiBean {
         if (this.entity == null) {
             this.entity = new Kisi();
         }
-        return entity;
+        return this.entity;
     }
 
     public void setEntity(Kisi entity) {
@@ -54,7 +49,7 @@ public class KisiBean {
         if (this.dao == null) {
             this.dao = new KisiDAO();
         }
-        return dao;
+        return this.dao;
     }
 
     public void setDao(KisiDAO dao) {
@@ -62,14 +57,13 @@ public class KisiBean {
     }
 
     public List<Kisi> getList() {
-        this.list = this.getDao().GetList();
-        return list;
+        if (this.list == null) {
+            this.list = this.getDao().GetList();
+        }
+        return this.list;
     }
 
     public void setList(List<Kisi> list) {
         this.list = list;
     }
-    public KisiBean() {
-    }
-    
 }
