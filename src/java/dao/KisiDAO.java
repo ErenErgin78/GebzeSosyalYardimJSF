@@ -37,7 +37,7 @@ public class KisiDAO extends DBConnection {
             kisi.setMisafir(ayarlama);
 
             // KISI_YAKINLAR
-            String insertQueryYakınlar = "INSERT INTO KISI_YAKINLAR (BABA_ISIM, ANNE_ISIM,  ES_ISIM, ES_SOYISIM) VALUES ( ?, ?, ?, ?)";
+            String insertQueryYakınlar = "INSERT INTO KISI_YAKINLAR (BABA_ISIM, anne_isim,  ES_ISIM, ES_SOYISIM) VALUES ( ?, ?, ?, ?)";
             PreparedStatement psYakınlar = conn.prepareStatement(insertQueryYakınlar, Statement.RETURN_GENERATED_KEYS);
             psYakınlar.setString(2, kisi.getBaba_isim());
             psYakınlar.setString(1, kisi.getAnne_isim());
@@ -48,6 +48,8 @@ public class KisiDAO extends DBConnection {
             if (generatedKeys.next()) {
                 yakinlarId = generatedKeys.getInt(1);
             }
+             FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "AAAAAAAAAA", null));
 
             // KISI_ADRES
             String insertQueryAdres = "INSERT INTO KISI_ADRES (ILCE, KISI_ADRES_MAHALLE_ID, CADDE_SOKAK, TARIF, SITE, KAPI_NO, DAIRE_NO, ADRES_NO) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";

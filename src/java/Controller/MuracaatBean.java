@@ -2,13 +2,14 @@ package Controller;
 
 import Entity.Muracaat;
 import dao.MuracaatDAO;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
-import jakarta.enterprise.context.Dependent;
+import java.io.Serializable;
 import java.util.List;
 
 @Named(value = "muracaatBean")
-@Dependent
-public class MuracaatBean {
+@SessionScoped
+public class MuracaatBean implements Serializable {
 
     private Muracaat entity;
     private MuracaatDAO dao;

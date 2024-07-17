@@ -3,12 +3,13 @@ package Controller;
 import Entity.Kisi;
 import dao.KisiDAO;
 import jakarta.inject.Named;
-import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.context.SessionScoped;
+import java.io.Serializable;
 import java.util.List;
 
 @Named(value = "kisiBean")
-@Dependent
-public class KisiBean {
+@SessionScoped
+public class KisiBean implements Serializable {
 
     private Kisi entity;
     private KisiDAO dao;
@@ -19,10 +20,6 @@ public class KisiBean {
         if (this.entity == null) {
             this.entity = new Kisi();
         }
-        this.getDao().Create(this.entity);
-        this.entity = new Kisi(); // Yeni bir Kisi nesnesi oluştur
-        // Listeyi güncelle, yeni oluşturulan varlık dahil edilsin
-        this.list = this.getDao().GetList();
     }
 
     public void delete(int KisiID) {
