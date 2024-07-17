@@ -47,6 +47,7 @@
                                     <div class="form-group col-md-6">
                                         <label for="dob">Doğum Tarihi</label>
                                         <h:inputText id="dob" value="#{kisiBean.entity.dogum_tarihi}" class="form-control">
+                                            <f:convertDateTime pattern="yyyy-MM-dd" />
                                             <f:passThroughAttribute name="type" value="date" />
                                         </h:inputText>
                                     </div>
@@ -60,19 +61,17 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="foreign_tc">Kimlik Numarası</label>
-                                    <h:inputText id="foreign_tc" class="form-control" />
                                     <h:selectBooleanCheckbox id="guest" class="form-check-input" value="#{kisiBean.dao.misafir_mi}"/>
                                     <label class="form-check-label" for="guest">Misafir</label>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="name">Adı</label>
-                                        <h:inputText id="name" value ="#{kisiBean.entity.isim}" class="form-control readonly-input" />
+                                        <h:inputText id="name" value ="#{kisiBean.entity.isim}" class="form-control" />
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="surname">Soyadı</label>
-                                        <h:inputText id="surname" value ="#{kisiBean.entity.soyisim}" class="form-control readonly-input"/>
+                                        <h:inputText id="surname" value ="#{kisiBean.entity.soyisim}" class="form-control"/>
                                     </div>
                                 </div>
                                 <div class="form-row">

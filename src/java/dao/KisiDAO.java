@@ -4,8 +4,8 @@
  */
 package dao;
 
-import dao.MuracaatDAO;
 import Entity.Kisi;
+import util.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,6 +25,12 @@ public class KisiDAO {
     private boolean yabancı_kimlik_mi;
     private boolean misafir_mi;
 
+    // ID'LER
+    private Integer adresId = null;
+    private Integer iletisimId = null;
+    private Integer yakinlarId = null;
+    private static Integer kisi_temel_id = null;
+
     public void Create(Kisi kisi) {
         PreparedStatement preparedStatement = null;
         ResultSet generatedKeys = null;
@@ -37,11 +43,6 @@ public class KisiDAO {
 
             ayarlama = misafir_mi ? 'E' : 'H';
             kisi.setMisafir(ayarlama);
-
-            // ID'LER
-            Integer adresId = null;
-            Integer iletisimId = null;
-            Integer yakinlarId = null;
 
             // KISI_YAKINLAR
             String insertQueryYakınlar = "INSERT INTO KISI_YAKINLAR (ANNE_ISIM, BABA_ISIM, ES_ISIM, ES_SOYISIM, ES_DURUM_ID) VALUES (?, ?, ?, ?, ?)";
@@ -92,7 +93,7 @@ public class KisiDAO {
 
             // KISI
             String insertQueryKisi = "INSERT INTO KISI (KIMLIK_NO, ISIM, SOYISIM, CINSIYET, MEDENI_DURUM_ID, YABANCI_KIMLIK, MISAFIR, CILT_NO, AILE_SIRA_NO, SIRA_NO, DOGUM_TARIHI, KISI_ILETISIM_ID, KISI_ADRES_ID, KISI_YAKINLAR_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            preparedStatement = db.prepareStatement(insertQueryKisi);
+            preparedStatement = db.prepareStatement(insertQueryKisi, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, kisi.getKimlik_no().toString());
             preparedStatement.setString(2, kisi.getIsim());
             preparedStatement.setString(3, kisi.getSoyisim());
@@ -108,6 +109,10 @@ public class KisiDAO {
             preparedStatement.setInt(13, adresId);
             preparedStatement.setInt(14, yakinlarId);
             preparedStatement.executeUpdate();
+            generatedKeys = preparedStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                kisi_temel_id = generatedKeys.getInt(1);
+            }
             preparedStatement.close();
 
         } catch (Exception ex) {
@@ -187,6 +192,38 @@ public class KisiDAO {
 
     public void setMisafir_mi(boolean misafir_mi) {
         this.misafir_mi = misafir_mi;
+    }
+
+    public Integer getAdresId() {
+        return adresId;
+    }
+
+    public void setAdresId(Integer adresId) {
+        this.adresId = adresId;
+    }
+
+    public Integer getIletisimId() {
+        return iletisimId;
+    }
+
+    public void setIletisimId(Integer iletisimId) {
+        this.iletisimId = iletisimId;
+    }
+
+    public Integer getYakinlarId() {
+        return yakinlarId;
+    }
+
+    public void setYakinlarId(Integer yakinlarId) {
+        this.yakinlarId = yakinlarId;
+    }
+
+    public Integer getKisi_temel_id() {
+        return kisi_temel_id;
+    }
+
+    public void setKisi_temel_id(Integer kisi_temel_id) {
+        this.kisi_temel_id = kisi_temel_id;
     }
 
 }

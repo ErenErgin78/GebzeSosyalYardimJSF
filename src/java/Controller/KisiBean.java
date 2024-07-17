@@ -5,7 +5,7 @@
 package Controller;
 
 import Entity.Kisi;
-import dao.KisiDAO;;
+import dao.KisiDAO;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.Dependent;
 import jakarta.faces.application.FacesMessage;
