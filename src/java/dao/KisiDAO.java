@@ -93,10 +93,12 @@ public class KisiDAO extends DBConnection {
             csKisi.executeUpdate();
 
         } catch (Exception ex) {
+            //Hatayı yakalamak için
             FacesContext context = FacesContext.getCurrentInstance();
             StringBuilder errorMessage = new StringBuilder(ex.getMessage());
             StackTraceElement[] stackTrace = ex.getStackTrace();
 
+            //Hatanın hangi satırda olduğunu görmek için
             for (StackTraceElement element : stackTrace) {
                 if (element.getClassName().startsWith("dao")) {
                     errorMessage.append(" (at ").append(element.getFileName())
