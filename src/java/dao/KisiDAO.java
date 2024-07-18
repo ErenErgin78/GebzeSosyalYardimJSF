@@ -6,6 +6,7 @@ import jakarta.faces.context.FacesContext;
 import util.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,15 +20,15 @@ public class KisiDAO extends DBConnection {
     private boolean yabancı_kimlik_mi;
     private boolean misafir_mi;
 
-    private Integer adresId = null;
-    private Integer iletisimId = null;
-    private Integer yakinlarId = null;
-    private static Integer kisi_temel_id = null;
+    private String adresId = null;
+    private String iletisimId = null;
+    private String yakinlarId = null;
+    private Integer kisi_temel_id = null;
 
     public void Create(Kisi kisi) {
         try {
             Connection conn = this.getDb();
-            
+
             // misafir ve yabancı kimlik ataması
             char ayarlama;
             ayarlama = yabancı_kimlik_mi ? 'E' : 'H';
@@ -36,54 +37,46 @@ public class KisiDAO extends DBConnection {
             ayarlama = misafir_mi ? 'E' : 'H';
             kisi.setMisafir(ayarlama);
 
-            // KISI_YAKINLAR
-            String insertQueryYakınlar = "INSERT INTO KISI_YAKINLAR (BABA_ISIM, anne_isim,  ES_ISIM, ES_SOYISIM) VALUES ( ?, ?, ?, ?)";
-            PreparedStatement psYakınlar = conn.prepareStatement(insertQueryYakınlar, Statement.RETURN_GENERATED_KEYS);
-            psYakınlar.setString(2, kisi.getBaba_isim());
-            psYakınlar.setString(1, kisi.getAnne_isim());
-            psYakınlar.setString(3, kisi.getEs_isim());
-            psYakınlar.setString(4, kisi.getEs_soyisim());
-            psYakınlar.executeUpdate();
-            ResultSet generatedKeys = psYakınlar.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                yakinlarId = generatedKeys.getInt(1);
-            }
-             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "AAAAAAAAAA", null));
+            // KISI_YAKINLAR saklı yordamı çağırma
+            String callQuery = "{call INSERT_KISI_YAKINLAR(?, ?, ?, ?, ?)}";
+            CallableStatement csYakınlar = conn.prepareCall(callQuery);
+            csYakınlar.setString(1, kisi.getBaba_isim());
+            csYakınlar.setString(2, kisi.getAnne_isim());
+            csYakınlar.setString(3, kisi.getEs_isim());
+            csYakınlar.setString(4, kisi.getEs_soyisim());
+            csYakınlar.registerOutParameter(5, java.sql.Types.VARCHAR);
+            csYakınlar.execute();
+            yakinlarId = csYakınlar.getString(5);
+            
+            // KISI_ADRES stored procedure çağırma
+            String callQueryAdres = "{call INSERT_KISI_ADRES(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            CallableStatement csAdres = conn.prepareCall(callQueryAdres);
+            csAdres.setString(1, kisi.getIlce());
+            csAdres.setInt(2, kisi.getMahalle_id());
+            csAdres.setString(3, kisi.getCadde_sokak());
+            csAdres.setString(4, kisi.getTarif());
+            csAdres.setString(5, kisi.getSite());
+            csAdres.setInt(6, kisi.getKapi_no());
+            csAdres.setInt(7, kisi.getDaire_no());
+            csAdres.setInt(8, kisi.getAdres_no());
+            csAdres.registerOutParameter(9, java.sql.Types.INTEGER);
+            csAdres.execute();
+            adresId = csAdres.getString(9);
 
-            // KISI_ADRES
-            String insertQueryAdres = "INSERT INTO KISI_ADRES (ILCE, KISI_ADRES_MAHALLE_ID, CADDE_SOKAK, TARIF, SITE, KAPI_NO, DAIRE_NO, ADRES_NO) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement psAdres = conn.prepareStatement(insertQueryAdres, Statement.RETURN_GENERATED_KEYS);
-            psAdres.setString(1, kisi.getIlce());
-            psAdres.setInt(2, kisi.getMahalle_id());
-            psAdres.setString(3, kisi.getCadde_sokak());
-            psAdres.setString(4, kisi.getTarif());
-            psAdres.setString(5, kisi.getSite());
-            psAdres.setInt(6, kisi.getKapi_no());
-            psAdres.setInt(7, kisi.getDaire_no());
-            psAdres.setInt(8, kisi.getAdres_no());
-            psAdres.executeUpdate();
-            generatedKeys = psAdres.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                adresId = generatedKeys.getInt(1);
-            }
-
-            // KISI_ILETISIM
-            String insertQueryIletisim = "INSERT INTO KISI_ILETISIM (EV_TELEFON, CEP_TELEFON, EPOSTA) VALUES (?, ?, ?)";
-            PreparedStatement psIletisim = conn.prepareStatement(insertQueryIletisim, Statement.RETURN_GENERATED_KEYS);
-            psIletisim.setObject(1, kisi.getEv_telefon());  // Assuming ev_telefon is of type BigInteger
-            psIletisim.setObject(2, kisi.getCep_telefon()); // Assuming cep_telefon is of type BigInteger
-            psIletisim.setString(3, kisi.getEposta());
-            psIletisim.executeUpdate();
-            generatedKeys = psIletisim.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                iletisimId = generatedKeys.getInt(1);
-            }
+            // KISI_ILETISIM saklı yordamı çağırma
+            String callQueryIletisim = "{call INSERT_KISI_ILETISIM(?, ?, ?, ?)}";
+            CallableStatement csIletisim = conn.prepareCall(callQueryIletisim);
+            csIletisim.setObject(1, kisi.getEv_telefon());
+            csIletisim.setObject(2, kisi.getCep_telefon());
+            csIletisim.setString(3, kisi.getEposta());
+            csIletisim.registerOutParameter(4, java.sql.Types.INTEGER);
+            csIletisim.execute();
+            iletisimId = csIletisim.getString(4);
 
             // KISI
-            String insertQueryKisi = "INSERT INTO KISI (KIMLIK_NO, ISIM, SOYISIM, CINSIYET, MEDENI_DURUM_ID, YABANCI_KIMLIK, MISAFIR, CILT_NO, AILE_SIRA_NO, SIRA_NO, DOGUM_TARIHI, KISI_ILETISIM_ID, KISI_ADRES_ID, KISI_YAKINLAR_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement psKisi = conn.prepareStatement(insertQueryKisi, Statement.RETURN_GENERATED_KEYS);
-            psKisi.setObject(1, kisi.getKimlik_no());  // Assuming kimlik_no is of type BigInteger
+            String insertQueryKisi = "INSERT INTO KISI_TEMEL(KIMLIK_NO, ISIM, SOYISIM, CINSIYET, MEDENI_DURUM_ID, YABANCI_KIMLIK, MISAFIR, CILT_NO, AILE_SIRA_NO, SIRA_NO, DOGUM_TARIHI, KISI_ILETISIM_ID, KISI_ADRES_ID, KISI_YAKINLAR_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement psKisi = conn.prepareStatement(insertQueryKisi);
+            psKisi.setObject(1, kisi.getKimlik_no());
             psKisi.setString(2, kisi.getIsim());
             psKisi.setString(3, kisi.getSoyisim());
             psKisi.setString(4, String.valueOf(kisi.getCinsiyet()));
@@ -94,18 +87,26 @@ public class KisiDAO extends DBConnection {
             psKisi.setInt(9, kisi.getAile_sıra_no());
             psKisi.setInt(10, kisi.getSıra_no());
             psKisi.setDate(11, new java.sql.Date(kisi.getDogum_tarihi().getTime()));
-            psKisi.setInt(12, iletisimId);
-            psKisi.setInt(13, adresId);
-            psKisi.setInt(14, yakinlarId);
+            psKisi.setInt(12, Integer.parseInt(iletisimId));
+            psKisi.setInt(13, Integer.parseInt(adresId));
+            psKisi.setInt(14, Integer.parseInt(yakinlarId));
             psKisi.executeUpdate();
-            generatedKeys = psKisi.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                kisi_temel_id = generatedKeys.getInt(1);
-            }
 
         } catch (Exception ex) {
             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), null));
+            StringBuilder errorMessage = new StringBuilder(ex.getMessage());
+            StackTraceElement[] stackTrace = ex.getStackTrace();
+
+            for (StackTraceElement element : stackTrace) {
+                // Paket adınız "dao" ile başlıyorsa
+                if (element.getClassName().startsWith("dao")) {
+                    errorMessage.append(" (at ").append(element.getFileName())
+                            .append(":").append(element.getLineNumber()).append(")");
+                    break;
+                }
+            }
+
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage.toString() + "     ----" + yakinlarId, null));
         }
     }
 
@@ -168,27 +169,27 @@ public class KisiDAO extends DBConnection {
         this.misafir_mi = misafir_mi;
     }
 
-    public Integer getAdresId() {
+    public String getAdresId() {
         return adresId;
     }
 
-    public void setAdresId(Integer adresId) {
+    public void setAdresId(String adresId) {
         this.adresId = adresId;
     }
 
-    public Integer getIletisimId() {
+    public String getIletisimId() {
         return iletisimId;
     }
 
-    public void setIletisimId(Integer iletisimId) {
+    public void setIletisimId(String iletisimId) {
         this.iletisimId = iletisimId;
     }
 
-    public Integer getYakinlarId() {
+    public String getYakinlarId() {
         return yakinlarId;
     }
 
-    public void setYakinlarId(Integer yakinlarId) {
+    public void setYakinlarId(String yakinlarId) {
         this.yakinlarId = yakinlarId;
     }
 
@@ -199,4 +200,5 @@ public class KisiDAO extends DBConnection {
     public void setKisi_temel_id(Integer kisi_temel_id) {
         this.kisi_temel_id = kisi_temel_id;
     }
+
 }

@@ -16,11 +16,9 @@ public class KisiBean implements Serializable {
     private List<Kisi> list;
 
     public void create() {
-        // Ensure entity is initialized before passing it to the DAO
-        if (this.entity == null) {
-            this.entity = new Kisi();
+        
+       this.dao.Create(entity);
         }
-    }
 
     public void delete(int KisiID) {
         this.getDao().Delete(KisiID);

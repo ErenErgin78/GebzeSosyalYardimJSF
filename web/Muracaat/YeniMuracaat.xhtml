@@ -36,6 +36,7 @@
 
     <body>
         <h:form>
+            <h:messages globalOnly="true" layout="table"/>
             <div class="container-fluid mt-20">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
@@ -45,19 +46,19 @@
                             <div class="card-body">
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label for="dob">Doğum Tarihi</label>
+                                        <label for="dob">Doğum Tarihi"</label>
                                         <h:inputText id="dob" value="#{kisiBean.entity.dogum_tarihi}" class="form-control">
                                             <f:convertDateTime pattern="yyyy-mm-dd" />
                                             <f:passThroughAttribute name="type" value="date" />
                                         </h:inputText>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="tc_no">T.C. Kimlik No</label>
+                                        <label for="tc_no">Kimlik Numarası</label>
                                         <h:inputText id="tc_no" class="form-control" value="#{kisiBean.entity.kimlik_no}" />
                                         <h:commandButton value="Sorgula" class="btn btn-primary mt-2" />
                                         <h:selectBooleanCheckbox id="foreign_id" class="form-check-input" value="#{kisiBean.dao.yabancı_kimlik_mi}">
                                         </h:selectBooleanCheckbox>
-                                        <label class="form-check-label" for="foreign_id">Yabancı Kimlik</label>
+                                        <label class="form-check-label" for="foreign_id">Yabancı kimlik</label>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -66,11 +67,11 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label for="name">Adı</label>
+                                        <label for="name">İsim</label>
                                         <h:inputText id="name" value ="#{kisiBean.entity.isim}" class="form-control" />
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="surname">Soyadı</label>
+                                        <label for="surname">Soyisim</label>
                                         <h:inputText id="surname" value ="#{kisiBean.entity.soyisim}" class="form-control"/>
                                     </div>
                                 </div>
@@ -105,14 +106,14 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="registration_city">N. Kayıtlı Olduğu İl</label>
-                                        <h:selectOneMenu id="registration_city" class="form-control" >
+                                        <h:selectOneMenu id="registration_city" class="form-control" readonly = "true">
                                             <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
                                             <!-- Add more options as needed -->
                                         </h:selectOneMenu>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="registration_district">N. Kayıtlı Olduğu İlçe</label>
-                                        <h:selectOneMenu id="registration_district" class="form-control" >
+                                        <h:selectOneMenu id="registration_district" class="form-control" readonly = "true">
                                             <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
                                             <!-- Add more options as needed -->
                                         </h:selectOneMenu>
@@ -155,14 +156,10 @@
                         <div class="card mt-3">
                             <div class="card-header">Adres Bilgileri</div>
                             <div class="card-body">
-                                <h:commandButton value="Adres Getir" action="#{userBean.adresGetir}" class="btn btn-secondary mb-2" />
-                                <div class="form-group">
-                                    <label for="full_address">Açık Adres</label>
-                                    <h:inputText id="full_address" class="form-control" />
-                                </div>
+                                <h:commandButton value="Adres Getir"  class="btn btn-secondary mb-2" />
                                 <div class="form-group">
                                     <label for="address_no">Adres No</label>
-                                    <h:inputText id="address_no" class="form-control" />
+                                    <h:inputText id="address_no" value="#{kisiBean.entity.adres_no}" class="form-control" />
                                 </div>
                             </div>
                         </div>
@@ -173,7 +170,7 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label for="city">İlçe</label>
-                                        <h:selectOneMenu id="city" class="form-control">
+                                        <h:selectOneMenu id="city" value = "#{kisiBean.entity.ilce}" class="form-control">
                                             <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
                                             <f:selectItem itemLabel="GEBZE" itemValue="gebze" />
                                         </h:selectOneMenu>
@@ -229,48 +226,49 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="address_desc">Adres Tarifi</label>
-                                    <h:inputTextarea id="address_desc" class="form-control" rows="3" />
+                                    <label for="address_desc">Adres Tarif</label>
+                                    <h:inputTextarea id="address_desc" class="form-control" rows="3" value="#{kisiBean.entity.tarif}" />
                                 </div>
                                 <div class="form-row">
-                                    <div class="form-group col-md-4" value = "#{kisiBean.entity.site}">
-                                        <label for="apartment">Apartman/Site</label>
-                                        <h:inputText id="apartment" class="form-control" />
+                                    <div class="form-group col-md-4">
+                                        <label for="apartment">Site</label>
+                                        <h:inputText id="apartment" class="form-control" value="#{kisiBean.entity.site}" />
                                     </div>
-                                    <div class="form-group col-md-4"  value ="#{kisiBean.entity.kapi_no}">
-                                        <label for="block_no">Blok/Kapı No</label>
-                                        <h:inputText id="block_no" class="form-control" />
+                                    <div class="form-group col-md-4">
+                                        <label for="block_no">Kapı No</label>
+                                        <h:inputText id="block_no" class="form-control" value="#{kisiBean.entity.kapi_no}" />
                                     </div>
-                                    <div class="form-group col-md-4" value ="#{kisiBean.entity.daire_no}">
+                                    <div class="form-group col-md-4">
                                         <label for="flat_no">Daire No</label>
-                                        <h:inputText id="flat_no" class="form-control" />
+                                        <h:inputText id="flat_no" class="form-control" value="#{kisiBean.entity.daire_no}" />
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="form-group col-md-4" value= "#{kisiBean.entity.ev_telefon}">
-                                        <label for="home_phone">Ev Tel</label>
-                                        <h:inputText id="home_phone" class="form-control" />
+                                    <div class="form-group col-md-4">
+                                        <label for="home_phone">Ev Telefon</label>
+                                        <h:inputText id="home_phone" class="form-control" value="#{kisiBean.entity.ev_telefon}" />
                                     </div>
-                                    <div class="form-group col-md-4" value = "#{kisiBean.entity.cep_telefon}">
-                                        <label for="mobile_phone">Cep Tel</label>
-                                        <h:inputText id="mobile_phone" class="form-control" />
+                                    <div class="form-group col-md-4">
+                                        <label for="mobile_phone">Cep Telefon</label>
+                                        <h:inputText id="mobile_phone" class="form-control" value="#{kisiBean.entity.cep_telefon}" />
                                     </div>
                                 </div>
-                                <div class="form-group"  value ="#{kisiBean.entity.eposta}">
-                                    <label for="email">E-Posta</label>
-                                    <h:inputText id="email" class="form-control">
+                                <div class="form-group">
+                                    <label for="email">Eposta Adresi</label>
+                                    <h:inputText id="email" class="form-control" value="#{kisiBean.entity.eposta}">
                                         <f:passThroughAttribute name="type" value="email" />
                                     </h:inputText>
                                 </div>
+
                             </div>
                         </div>
 
                         <div class="card mt-3" >
                             <div class="card-header">Müracaat Bilgileri</div>
                             <div class="card-body">
+                                <label for="archive_file_no">Arşiv Dosya No</label>
+                                <h:inputText id="archive_file_no" class="form-control" value="#{muracaatBean.entity.arsiv_dosya_no}" />
                                 <div class="form-group" value = "#{muracaatBean.entity.arsiv_dosya_no}">
-                                    <label for="archive_file_no">Arşiv Dosya No:</label>
-                                    <h:inputText id="archive_file_no" class="form-control" />
                                 </div>
                                 <div class="form-group" value = "#{muracaatBean.entity.muracaat_tarihi}">
                                     <label for="application_date">Müracaat Tarihi:</label>
@@ -279,7 +277,7 @@
                                     </h:inputText>
                                 </div>
                                 <div class="form-group">
-                                    <label for="application_type">Müracaat Tipi:</label>
+                                    <label for="application_type">Müracaat Tipi</label>
                                     <h:selectOneMenu id="application_type" class="form-control" value = "#{muracaatBean.entity.muracaat_tip_id}">
                                         <f:selectItem itemLabel="Kendi" itemValue="4" />
                                         <f:selectItem itemLabel="Dilekçe" itemValue="1" />
@@ -289,7 +287,7 @@
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="form-group">
-                                    <label for="region">Bölge:</label>
+                                    <label for="region">Bölge</label>
                                     <h:selectOneMenu id="region"   class="form-control" value = "#{muracaatBean.entity.bolge}">
                                         <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
                                         <f:selectItem itemLabel="1.Bölge" itemValue="1"/>
@@ -300,7 +298,7 @@
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="form-group">
-                                    <label for="description">Açıklama:</label>
+                                    <label for="description">Açıklama</label>
                                     <h:inputTextarea id="description" class="form-control" value = "#{muracaatBean.entity.aciklama}" rows="3" />
                                 </div>
                             </div>
