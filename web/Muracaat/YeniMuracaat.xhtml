@@ -33,7 +33,6 @@
             }
         </style>
     </head>
-
     <body>
         <h:form>
             <h:messages globalOnly="true" layout="table"/>
@@ -46,7 +45,7 @@
                             <div class="card-body">
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label for="dob">Doğum Tarihi"</label>
+                                        <label for="dob">Doğum Tarihi</label>
                                         <h:inputText id="dob" value="#{kisiBean.entity.dogum_tarihi}" class="form-control">
                                             <f:convertDateTime pattern="yyyy-mm-dd" />
                                             <f:passThroughAttribute name="type" value="date" />
@@ -56,14 +55,22 @@
                                         <label for="tc_no">Kimlik Numarası</label>
                                         <h:inputText id="tc_no" class="form-control" value="#{kisiBean.entity.kimlik_no}" />
                                         <h:commandButton value="Sorgula" class="btn btn-primary mt-2" />
-                                        <h:selectBooleanCheckbox id="foreign_id" class="form-check-input" value="#{kisiBean.dao.yabancı_kimlik_mi}">
-                                        </h:selectBooleanCheckbox>
-                                        <label class="form-check-label" for="foreign_id">Yabancı kimlik</label>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <h:selectBooleanCheckbox id="guest" class="form-check-input" value="#{kisiBean.dao.misafir_mi}"/>
-                                    <label class="form-check-label" for="guest">Misafir</label>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <div class="form-check">
+                                            <h:selectBooleanCheckbox id="foreign_id" class="form-check-input" value="#{kisiBean.dao.yabancı_kimlik_mi}">
+                                            </h:selectBooleanCheckbox>
+                                            <label class="form-check-label" for="foreign_id">Yabancı kimlik</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <div class="form-check">
+                                            <h:selectBooleanCheckbox id="guest" class="form-check-input" value="#{kisiBean.dao.misafir_mi}"/>
+                                            <label class="form-check-label" for="guest">Misafir</label>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
@@ -86,12 +93,16 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="gender">Cinsiyet</label>
-                                    <div class="form-check-inline no-border-radio" readonly="true">
-                                        <h:selectOneRadio id="gender" value = "#{kisiBean.entity.cinsiyet}" layout="lineDirection" class="form-check-input no-border-radio">
-                                            <f:selectItem  itemLabel="Erkek" itemValue ="E" />
-                                            <f:selectItem  itemLabel="Kadın"  itemValue ="K"/>
-                                        </h:selectOneRadio>
+                                    <label>Cinsiyet:</label><br />
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gender" id="male" value="E" 
+                                               onclick="setCinsiyet('E')" />
+                                        <label class="form-check-label" for="male">Erkek</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gender" id="female" value="K" 
+                                               onclick="setCinsiyet('K')" />
+                                        <label class="form-check-label" for="female">Kadın</label>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -311,9 +322,20 @@
                 </div>
             </div>
         </h:form>
+        <script>
+            function setCinsiyet(value) {
+                document.querySelector(`input[name="gender"][value="${value}"]`).checked = true;
+            }
 
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+            window.onload = function () {
+                const cinsiyet = "#{kisiBean.entity.cinsiyet}";
+                if (cinsiyet) {
+                    setCinsiyet(cinsiyet);
+                }
+            };
+        </script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </body>
 

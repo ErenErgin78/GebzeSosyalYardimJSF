@@ -128,7 +128,7 @@ public class UsersDAO extends DBConnection {
     public void setDb(Connection db) {
         this.db = db;
     }
-    
+
     public String getKullanici_adi() {
         return kullanici_adi;
     }
@@ -144,6 +144,5 @@ public class UsersDAO extends DBConnection {
     public void setSifre(String sifre) {
         this.sifre = sifre;
     }
-
 
 }

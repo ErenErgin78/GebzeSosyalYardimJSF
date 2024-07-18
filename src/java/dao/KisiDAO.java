@@ -37,7 +37,7 @@ public class KisiDAO extends DBConnection {
             ayarlama = misafir_mi ? 'E' : 'H';
             kisi.setMisafir(ayarlama);
 
-            // KISI_YAKINLAR saklı yordamı çağırma
+            // KISI_YAKINLAR stored procedure çağırma
             String callQuery = "{call INSERT_KISI_YAKINLAR(?, ?, ?, ?, ?)}";
             CallableStatement csYakınlar = conn.prepareCall(callQuery);
             csYakınlar.setString(1, kisi.getBaba_isim());
@@ -47,7 +47,7 @@ public class KisiDAO extends DBConnection {
             csYakınlar.registerOutParameter(5, java.sql.Types.VARCHAR);
             csYakınlar.execute();
             yakinlarId = csYakınlar.getString(5);
-            
+
             // KISI_ADRES stored procedure çağırma
             String callQueryAdres = "{call INSERT_KISI_ADRES(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement csAdres = conn.prepareCall(callQueryAdres);
@@ -73,24 +73,24 @@ public class KisiDAO extends DBConnection {
             csIletisim.execute();
             iletisimId = csIletisim.getString(4);
 
-            // KISI
-            String insertQueryKisi = "INSERT INTO KISI_TEMEL(KIMLIK_NO, ISIM, SOYISIM, CINSIYET, MEDENI_DURUM_ID, YABANCI_KIMLIK, MISAFIR, CILT_NO, AILE_SIRA_NO, SIRA_NO, DOGUM_TARIHI, KISI_ILETISIM_ID, KISI_ADRES_ID, KISI_YAKINLAR_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement psKisi = conn.prepareStatement(insertQueryKisi);
-            psKisi.setObject(1, kisi.getKimlik_no());
-            psKisi.setString(2, kisi.getIsim());
-            psKisi.setString(3, kisi.getSoyisim());
-            psKisi.setString(4, String.valueOf(kisi.getCinsiyet()));
-            psKisi.setInt(5, kisi.getMedeni_durum_id());
-            psKisi.setString(6, String.valueOf(kisi.getYabanci_kimlik()));
-            psKisi.setString(7, String.valueOf(kisi.getMisafir()));
-            psKisi.setString(8, kisi.getCilt_no());
-            psKisi.setInt(9, kisi.getAile_sıra_no());
-            psKisi.setInt(10, kisi.getSıra_no());
-            psKisi.setDate(11, new java.sql.Date(kisi.getDogum_tarihi().getTime()));
-            psKisi.setInt(12, Integer.parseInt(iletisimId));
-            psKisi.setInt(13, Integer.parseInt(adresId));
-            psKisi.setInt(14, Integer.parseInt(yakinlarId));
-            psKisi.executeUpdate();
+            // KISI_TEMEL
+            String callableQueryKisi = "{call INSERT_KISI_TEMEL(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            CallableStatement csKisi = conn.prepareCall(callableQueryKisi);
+            csKisi.setObject(1, kisi.getKimlik_no());
+            csKisi.setString(2, kisi.getIsim());
+            csKisi.setString(3, kisi.getSoyisim());
+            csKisi.setString(4, String.valueOf(kisi.getCinsiyet()));
+            csKisi.setInt(5, kisi.getMedeni_durum_id());
+            csKisi.setString(6, String.valueOf(kisi.getYabanci_kimlik()));
+            csKisi.setString(7, String.valueOf(kisi.getMisafir()));
+            csKisi.setString(8, kisi.getCilt_no());
+            csKisi.setInt(9, kisi.getAile_sıra_no());
+            csKisi.setInt(10, kisi.getSıra_no());
+            csKisi.setDate(11, new java.sql.Date(kisi.getDogum_tarihi().getTime()));
+            csKisi.setInt(12, Integer.parseInt(iletisimId));
+            csKisi.setInt(13, Integer.parseInt(adresId));
+            csKisi.setInt(14, Integer.parseInt(yakinlarId));
+            csKisi.executeUpdate();
 
         } catch (Exception ex) {
             FacesContext context = FacesContext.getCurrentInstance();
@@ -98,15 +98,13 @@ public class KisiDAO extends DBConnection {
             StackTraceElement[] stackTrace = ex.getStackTrace();
 
             for (StackTraceElement element : stackTrace) {
-                // Paket adınız "dao" ile başlıyorsa
                 if (element.getClassName().startsWith("dao")) {
                     errorMessage.append(" (at ").append(element.getFileName())
                             .append(":").append(element.getLineNumber()).append(")");
                     break;
                 }
             }
-
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage.toString() + "     ----" + yakinlarId, null));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage.toString(), null));
         }
     }
 

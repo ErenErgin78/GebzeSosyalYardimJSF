@@ -16,13 +16,11 @@ public class MuracaatBean implements Serializable {
     private List<Muracaat> list;
 
     public void create() {
-        // Ensure entity is initialized before passing it to the DAO
         if (this.entity == null) {
             this.entity = new Muracaat();
         }
         this.getDao().Create(this.entity);
         this.entity = new Muracaat();
-        // Refresh the list to include the newly created entity
         this.list = this.getDao().GetList();
     }
 
