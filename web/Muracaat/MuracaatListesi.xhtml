@@ -4,52 +4,139 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <title>Müracaat Listesi</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <style>
+        /* Include your styles.css content here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding-left: 0;
+            background-color: #f0f0f0; /* Hafif gri arkaplan */
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </h:head>
 <h:body>
-    <h:form id="filterForm">
-        <h:panelGrid columns="2" cellpadding="5">
-            <h:outputLabel for="filterId" value="ID:" />
-            <h:inputText id="filterId" value="#{muracaatBean.filterId}" />
-
-            <h:outputLabel for="filterName" value="Ad:" />
-            <h:inputText id="filterName" value="#{muracaatBean.filterName}" />
-
-            <h:outputLabel for="filterSurname" value="Soyad:" />
-            <h:inputText id="filterSurname" value="#{muracaatBean.filterSurname}" />
-
-            <h:outputLabel for="filterDate" value="Tarih:" />
-            <h:inputText id="filterDate" value="#{muracaatBean.filterDate}" />
-
-            <h:outputLabel for="filterStatus" value="Durum:" />
-            <h:inputText id="filterStatus" value="#{muracaatBean.filterStatus}" />
-        </h:panelGrid>
+    <div class="container">
+        <h:form id="filterForm">
+            <div class="row">
+                <div class="col-md-3">
+                    <h:outputLabel for="filterId" value="ID:" />
+                    <h:inputText id="filterId" styleClass="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <h:outputLabel for="filterName" value="Ad:" />
+                    <h:inputText id="filterName" styleClass="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <h:outputLabel for="filterSurname" value="Soyad:" />
+                    <h:inputText id="filterSurname" styleClass="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <h:outputLabel for="filterDate" value="Tarih:" />
+                    <h:inputText id="filterDate" styleClass="form-control" />
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-3">
+                    <h:outputLabel for="filterStatus" value="Durum:" />
+                    <h:inputText id="filterStatus" styleClass="form-control" />
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <h:commandButton value="Filtrele" styleClass="btn btn-primary btn-block" />
+                </div>
+            </div>
+        </h:form>
         
-        <h:commandButton value="Filtrele" action="#{muracaatBean.filterMuracaatlar}" />
-    </h:form>
-    
-    <h:form id="resultForm">
-        <h:dataTable value="#{muracaatBean.filteredMuracaatlar}" var="muracaat" border="1">
-            <h:column>
-                <f:facet name="header">ID</f:facet>
-                <h:outputText value="#{muracaat.id}" />
-            </h:column>
-            <h:column>
-                <f:facet name="header">Ad</f:facet>
-                <h:outputText value="#{muracaat.ad}" />
-            </h:column>
-            <h:column>
-                <f:facet name="header">Soyad</f:facet>
-                <h:outputText value="#{muracaat.soyad}" />
-            </h:column>
-            <h:column>
-                <f:facet name="header">Tarih</f:facet>
-                <h:outputText value="#{muracaat.tarih}" />
-            </h:column>
-            <h:column>
-                <f:facet name="header">Durum</f:facet>
-                <h:outputText value="#{muracaat.durum}" />
-            </h:column>
-        </h:dataTable>
-    </h:form>
+        <h:form id="resultForm" class="mt-4">
+            <div class="table-container">
+                <h:dataTable var="muracaat" styleClass="table table-striped table-bordered">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                        <h:outputText value="#{muracaat.KISI_ID}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Bilgi ID</f:facet>
+                        <h:outputText value="#{muracaat.BILGI_ID}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Ad</f:facet>
+                        <h:outputText value="#{muracaat.ISIM}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Soyad</f:facet>
+                        <h:outputText value="#{muracaat.SOYISIM}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Doğum Tarihi</f:facet>
+                        <h:outputText value="#{muracaat.DOGUM_TARIHI}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Yabancı TC</f:facet>
+                        <h:outputText value="#{muracaat.YABANCI_TC}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Misafir</f:facet>
+                        <h:outputText value="#{muracaat.MISAFIR}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Arşiv Dosya No</f:facet>
+                        <h:outputText value="#{muracaat.ARSIV_DOSYA_NO}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Bölge</f:facet>
+                        <h:outputText value="#{muracaat.BOLGE}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Müracaat Tarihi</f:facet>
+                        <h:outputText value="#{muracaat.MURACAAT_TARIHI}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Müracaat Tip</f:facet>
+                        <h:outputText value="#{muracaat.MURACAAT_TIP}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Mahalle</f:facet>
+                        <h:outputText value="#{muracaat.MAHALLE}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Cadde/Sokak</f:facet>
+                        <h:outputText value="#{muracaat.CADDE_SOKAK}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Adres No</f:facet>
+                        <h:outputText value="#{muracaat.ADRES_NO}" />
+                    </h:column>
+                </h:dataTable>
+            </div>
+        </h:form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </h:body>
 </html>

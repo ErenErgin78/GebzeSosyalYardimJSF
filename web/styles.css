@@ -77,6 +77,17 @@ body {
     margin: 0 auto;
 }
 
+.text-center {
+    text-align: center;
+}
+
+.sidebar .nav-item .btn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
 table {
     width: 100%;
     font-size: 14px;
@@ -122,6 +133,12 @@ button {
 
 .delete-button {
     margin-right: 10px; /* Sil butonu ile Düzenle butonu arasına boşluk ekler */
+}
+
+.small-button {
+    width: auto;
+    max-width: 100px;
+    padding: 5px 10px;
 }
 
 /* Özel genişlik ayarları */

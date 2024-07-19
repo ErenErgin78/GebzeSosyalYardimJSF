@@ -42,6 +42,11 @@ public class UserBean implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Kullanıcı adı veya şifre hatalıdır", null));
         }
     }
+    
+     public String cikis() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "login?faces-redirect=true"; 
+    }
 
     public void edit(User user) {
         this.entity = user;
