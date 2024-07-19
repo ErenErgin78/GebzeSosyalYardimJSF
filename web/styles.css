@@ -1,3 +1,4 @@
+/* Custom styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -141,11 +142,93 @@ button {
     background-color: #e9ecef; /* Kartların arka plan rengini buradan ayarlayın */
 }
 
-/*Yazı yazılamayan alanlar */
+/* Yazı yazılamayan alanlar */
 .readonly-input {
     background-color: #e9ecef; /* Light gray background */
     cursor: not-allowed; /* Not-allowed cursor icon */
     color: #6c757d; /* Gray text color */
 }
 
+/* Add margin and padding adjustments */
+.form-group {
+    margin-bottom: 1rem;
+}
 
+.small-input {
+    padding: 0.5rem; /* Adjust padding as needed */
+}
+
+.form-row .form-group {
+    padding-right: 15px; /* Space between columns */
+}
+
+#email, #username {
+    margin-bottom: 10px; /* Adjust spacing as needed */
+}
+
+/* Remove border and padding around fieldset and legend */
+h3 selectOneRadio {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+h3 selectOneRadio::before {
+    content: none;
+}
+
+/* Remove default fieldset and table styles */
+.custom-radio table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: none;
+}
+
+.custom-radio tr,
+.custom-radio td,
+.custom-radio tbody {
+    border: none;
+}
+
+/* Custom Radio Button Styles */
+.custom-radio {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.custom-radio input[type="radio"] {
+    display: none;
+}
+
+.custom-radio label {
+    position: relative;
+    padding-left: 25px;
+    margin-right: 15px;
+    cursor: pointer;
+    font-size: 14px;
+    user-select: none;
+}
+
+.custom-radio label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #303f9f;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+}
+
+.custom-radio input[type="radio"]:checked + label::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #303f9f;
+}

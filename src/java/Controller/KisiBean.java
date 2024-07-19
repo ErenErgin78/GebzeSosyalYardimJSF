@@ -17,7 +17,7 @@ public class KisiBean implements Serializable {
 
     public void create() {
         
-       this.dao.Create(entity);
+       this.getDao().Create(getEntity());
         }
 
     public void delete(int KisiID) {

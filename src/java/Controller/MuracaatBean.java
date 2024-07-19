@@ -16,12 +16,7 @@ public class MuracaatBean implements Serializable {
     private List<Muracaat> list;
 
     public void create() {
-        if (this.entity == null) {
-            this.entity = new Muracaat();
-        }
-        this.getDao().Create(this.entity);
-        this.entity = new Muracaat();
-        this.list = this.getDao().GetList();
+        this.getDao().Create(getEntity());
     }
 
     public void delete(int MuracaatID) {
