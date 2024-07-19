@@ -9,6 +9,7 @@ import jakarta.faces.context.FacesContext;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import jakarta.servlet.http.HttpSession;
 
 @Named("userBean")
 @SessionScoped
@@ -29,10 +30,13 @@ public class UserBean implements Serializable {
     }
 
     public void giris() {
-        boolean basarili = this.getDao().KullaniciGiris();
+        boolean basarili = this.getDao().KullaniciGiris(this.getDao().getKullanici_adi(), this.getDao().getSifre());
 
         FacesContext context = FacesContext.getCurrentInstance();
         if (basarili) {
+            HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
+            session.setAttribute("user", this.getDao().getKullanici_adi()); // Kullanıcı bilgisini oturumda sakla
+
             try {
                 context.getExternalContext().redirect("index.xhtml");
             } catch (IOException e) {
@@ -42,10 +46,10 @@ public class UserBean implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Kullanıcı adı veya şifre hatalıdır", null));
         }
     }
-    
-     public String cikis() {
+
+    public String cikis() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "login?faces-redirect=true"; 
+        return "login?faces-redirect=true";
     }
 
     public void edit(User user) {
