@@ -52,8 +52,8 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="tc_no">Kimlik Numarası</label>
-                                        <h:inputText id="tc_no" class="form-control" value="#{kisiBean.entity.kimlik_no}" />
-                                        <h:commandButton value="Sorgula" class="btn btn-primary mt-2" />
+                                        <h:inputText id="tc_no" class="form-control" value="#{kisiBean.entity.kimlik_no}"/>
+                                        <h:commandButton value="Sorgula" action="#{kisiBean.sorgula()}" class="btn btn-primary mt-2" />
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -77,7 +77,7 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <label>#{kisiBean.entity.cinsiyet}</label><br />
+                                    <label>Cinsiyet</label><br />
                                     <div class="custom-radio">
                                         <h:selectOneRadio value="#{kisiBean.entity.cinsiyet}">
                                             <f:selectItem itemLabel="Erkek" itemValue="E" />
@@ -113,11 +113,11 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label for="family_order_no">Aile Sıra No</label>
-                                        <h:inputText id="family_order_no" value ="#{kisiBean.entity.aile_sıra_no}" class="form-control" />
+                                        <h:inputText id="family_order_no" value ="#{kisiBean.entity.aile_sira_no}" class="form-control" />
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="order_no">Sıra No</label>
-                                        <h:inputText id="order_no" value ="#{kisiBean.entity.sıra_no}" class="form-control"  />
+                                        <h:inputText id="order_no" value ="#{kisiBean.entity.sira_no}" class="form-control"  />
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="spouse_name">Cilt No</label>

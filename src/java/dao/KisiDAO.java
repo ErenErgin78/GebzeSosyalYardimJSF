@@ -22,6 +22,55 @@ public class KisiDAO extends DBConnection {
     private String yakinlarId = null;
     private Integer kisi_temel_id = null;
 
+    public void Sorgula(Kisi kisi) {
+
+        try {
+            Statement statement = getDb().createStatement();
+            String Selectquery = "SELECT KT.DOGUM_TARIHI, KT.ISIM, KT.SOYISIM, KT.CINSIYET, KT.AILE_SIRA_NO, KT.CILT_NO, KT.MEDENI_DURUM_ID,\n"
+                    + "KT.SIRA_NO, KY.ANNE_ISIM, KY.BABA_ISIM, KY.ES_ISIM, KY.ES_SOYISIM,\n"
+                    + "KA.ILCE, KA.CADDE_SOKAK, KA.TARIF, KA.SITE, KA.KAPI_NO, KA.DAIRE_NO, ADRES_NO, KISI_ADRES_MAHALLE_ID,\n"
+                    + "KI.EV_TELEFON, KI.CEP_TELEFON, KI.EPOSTA\n"
+                    + "FROM KISI_TEMEL KT \n"
+                    + "\n"
+                    + "JOIN KISI_ILETISIM KI ON KT.KISI_ILETISIM_ID = KT.KISI_ILETISIM_ID\n"
+                    + "JOIN KISI_YAKINLAR KY ON KT.KISI_YAKINLAR_ID = KY.KISI_YAKINLAR_ID\n"
+                    + "JOIN KISI_ADRES KA ON KT.KISI_ADRES_ID = KA.KISI_ADRES_ID\n"
+                    + "WHERE KIMLIK_NO =" + kisi.getKimlik_no();
+            ResultSet rs = statement.executeQuery(Selectquery);
+
+           if (rs.next()) {
+            kisi.setDogum_tarihi(rs.getDate("DOGUM_TARIHI"));
+            kisi.setIsim(rs.getString("ISIM"));
+            kisi.setSoyisim(rs.getString("SOYISIM"));
+            kisi.setCinsiyet(rs.getString("CINSIYET").charAt(0)); // Assuming CINSIYET is a single character
+            kisi.setAile_sira_no(rs.getInt("AILE_SIRA_NO"));
+            kisi.setCilt_no(rs.getString("CILT_NO"));
+            kisi.setMedeni_durum_id(rs.getInt("MEDENI_DURUM_ID"));
+            kisi.setSira_no(rs.getInt("SIRA_NO"));
+            kisi.setAnne_isim(rs.getString("ANNE_ISIM"));
+            kisi.setBaba_isim(rs.getString("BABA_ISIM"));
+            kisi.setEs_isim(rs.getString("ES_ISIM"));
+            kisi.setEs_soyisim(rs.getString("ES_SOYISIM"));
+            kisi.setIlce(rs.getString("ILCE"));
+            kisi.setCadde_sokak(rs.getString("CADDE_SOKAK"));
+            kisi.setTarif(rs.getString("TARIF"));
+            kisi.setSite(rs.getString("SITE"));
+            kisi.setKapi_no(rs.getInt("KAPI_NO"));
+            kisi.setDaire_no(rs.getInt("DAIRE_NO"));
+            kisi.setAdres_no(rs.getInt("ADRES_NO"));
+            kisi.setMahalle_id(rs.getInt("KISI_ADRES_MAHALLE_ID"));
+            kisi.setEv_telefon(rs.getBigDecimal("EV_TELEFON").toBigInteger());
+            kisi.setCep_telefon(rs.getBigDecimal("CEP_TELEFON").toBigInteger());
+            kisi.setEposta(rs.getString("EPOSTA"));
+        }
+
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+    }
+
     public void Create(Kisi kisi) {
         try {
             Connection conn = this.getDb();
@@ -71,8 +120,8 @@ public class KisiDAO extends DBConnection {
             csKisi.setString(4, String.valueOf(kisi.getCinsiyet()));
             csKisi.setInt(5, kisi.getMedeni_durum_id());
             csKisi.setString(6, kisi.getCilt_no());
-            csKisi.setInt(7, kisi.getAile_sıra_no());
-            csKisi.setInt(8, kisi.getSıra_no());
+            csKisi.setInt(7, kisi.getAile_sira_no());
+            csKisi.setInt(8, kisi.getSira_no());
             csKisi.setDate(9, new java.sql.Date(kisi.getDogum_tarihi().getTime()));
             csKisi.setInt(10, Integer.parseInt(iletisimId));
             csKisi.setInt(11, Integer.parseInt(adresId));

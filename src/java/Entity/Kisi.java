@@ -17,8 +17,8 @@ public class Kisi {
     private Integer medeni_durum_id;
     private Integer egitim_durum_id;
     private String cilt_no;
-    private Integer aile_sıra_no;
-    private Integer sıra_no;
+    private Integer aile_sira_no;
+    private Integer sira_no;
     private Date dogum_tarihi;
 
     private Integer kisi_iletisim_id;
@@ -52,8 +52,8 @@ public class Kisi {
         this.medeni_durum_id = medeni_durum_id;
         this.egitim_durum_id = egitim_durum_id;
         this.cilt_no = cilt_no;
-        this.aile_sıra_no = aile_sıra_no;
-        this.sıra_no = sıra_no;
+        this.aile_sira_no = aile_sıra_no;
+        this.sira_no = sıra_no;
         this.dogum_tarihi = dogum_tarihi;
         this.kisi_iletisim_id = kisi_iletisim_id;
         this.ev_telefon = ev_telefon;
@@ -86,8 +86,8 @@ public class Kisi {
         this.medeni_durum_id = medeni_durum_id;
         this.egitim_durum_id = egitim_durum_id;
         this.cilt_no = cilt_no;
-        this.aile_sıra_no = aile_sıra_no;
-        this.sıra_no = sıra_no;
+        this.aile_sira_no = aile_sıra_no;
+        this.sira_no = sıra_no;
         this.dogum_tarihi = dogum_tarihi;
         this.kisi_iletisim_id = kisi_iletisim_id;
         this.ev_telefon = ev_telefon;
@@ -178,20 +178,20 @@ public class Kisi {
         this.cilt_no = cilt_no;
     }
 
-    public Integer getAile_sıra_no() {
-        return aile_sıra_no;
+    public Integer getAile_sira_no() {
+        return aile_sira_no;
     }
 
-    public void setAile_sıra_no(Integer aile_sıra_no) {
-        this.aile_sıra_no = aile_sıra_no;
+    public void setAile_sira_no(Integer aile_sıra_no) {
+        this.aile_sira_no = aile_sıra_no;
     }
 
-    public Integer getSıra_no() {
-        return sıra_no;
+    public Integer getSira_no() {
+        return sira_no;
     }
 
-    public void setSıra_no(Integer sıra_no) {
-        this.sıra_no = sıra_no;
+    public void setSira_no(Integer sıra_no) {
+        this.sira_no = sıra_no;
     }
 
     public Date getDogum_tarihi() {
