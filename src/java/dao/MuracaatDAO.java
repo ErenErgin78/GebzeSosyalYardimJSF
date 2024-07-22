@@ -21,21 +21,20 @@ import java.util.List;
  * @author Eren
  */
 public class MuracaatDAO extends DBConnection {
-    
+
     private Connection db;
-    
+
     private Integer muracaat_bilgi_id;
-    
+
     public void Create(Muracaat muracaat) {
         try {
             Connection conn = this.getDb();
 
             // MURACAAT_BILGI stored procedure çağırma
-            String callQueryMuracaatBilgi = "{call INSERT_MURACAAT_BILGI(?, ?, ?, ?, ?, ?)}";
+            String callQueryMuracaatBilgi = "{call INSERT_MURACAAT_BILGI(?, ?, ?, ?, ?)}";
             CallableStatement csMuracaatBilgi = conn.prepareCall(callQueryMuracaatBilgi);
             csMuracaatBilgi.setInt(1, muracaat.getArsiv_dosya_no());
             csMuracaatBilgi.setInt(2, muracaat.getMuracaat_tip_id());
-            csMuracaatBilgi.setInt(3, muracaat.getBolge());
             csMuracaatBilgi.setString(4, muracaat.getAciklama());
             csMuracaatBilgi.setDate(5, new java.sql.Date(muracaat.getMuracaat_tarihi().getTime()));
             csMuracaatBilgi.registerOutParameter(6, java.sql.Types.INTEGER);
@@ -56,50 +55,50 @@ public class MuracaatDAO extends DBConnection {
                 csMuracaat.setInt(2, muracaatBilgiId);
                 csMuracaat.executeUpdate();
             }
-            
+
         } catch (SQLException ex) {
             DetectError(ex);
         }
     }
-    
+
     public List<Muracaat> GetList() {
-        
+
         List<Muracaat> UserList = new ArrayList<>();
-        
+
         try {
-            
+
             Statement statement = getDb().createStatement();
-            
+
             String Selectquery = "SELECT \n"
                     + "JOIN KULLANICI_DURUM D ON K.kullanici_durum_id = D.kullanici_durum_id\n"
                     + "JOIN KULLANICI_UNVAN U ON K.kullanici_unvan_id = U.kullanici_unvan_id";
-            
+
             ResultSet rs = statement.executeQuery(Selectquery);
-            
+
             while (rs.next()) {
-             
+
             }
-            
+
         } catch (Exception ex) {
             DetectError(ex);
         }
         return UserList;
     }
-    
+
     public void Delete(int kullaniciId) {
         String deleteQuery = "DELETE FROM MURACAAT WHERE kullanici_id = " + kullaniciId;
-        
+
         try {
             Statement statement = getDb().createStatement();
-            
+
             int rowsDeleted = statement.executeUpdate(deleteQuery);
             System.out.println(rowsDeleted + " kisi silindi.");
-            
+
         } catch (SQLException ex) {
             System.out.println("Veritabanı hatası: " + ex.getMessage());
         }
     }
-    
+
     private void DetectError(Exception ex) {
         //Hatayı yakalamak için
         FacesContext context = FacesContext.getCurrentInstance();
@@ -115,26 +114,26 @@ public class MuracaatDAO extends DBConnection {
             }
         }
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage.toString(), null));
-        
+
     }
-    
+
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();
         }
         return db;
     }
-    
+
     public void setDb(Connection db) {
         this.db = db;
     }
-    
+
     public Integer getMuracaat_bilgi_id() {
         return muracaat_bilgi_id;
     }
-    
+
     public void setMuracaat_bilgi_id(Integer muracaat_bilgi_id) {
         this.muracaat_bilgi_id = muracaat_bilgi_id;
     }
-    
+
 }

@@ -14,53 +14,47 @@ public class Muracaat {
     private Integer muracaat_bilgi_id;
     private Integer arsiv_dosya_no;
     private Integer muracaat_tip_id;
-    private Integer bolge;
     private String aciklama;
     private Date muracaat_tarihi;
 
     private String muracaat_tip_isim;
-    
+
     public Muracaat() {
     }
 
-    public Muracaat(Integer muracaat_id, Integer kisi_temel_id, Integer muracaat_bilgi_id, Integer arsiv_dosya_no, Integer bolge, String aciklama, Date muracaat_tarihi, String muracaat_tip_isim) {
+    public Muracaat(Integer muracaat_id, Integer kisi_temel_id, Integer muracaat_bilgi_id, Integer arsiv_dosya_no, String aciklama, Date muracaat_tarihi, String muracaat_tip_isim) {
         this.muracaat_id = muracaat_id;
         this.kisi_temel_id = kisi_temel_id;
         this.muracaat_bilgi_id = muracaat_bilgi_id;
         this.arsiv_dosya_no = arsiv_dosya_no;
-        this.bolge = bolge;
         this.aciklama = aciklama;
         this.muracaat_tarihi = muracaat_tarihi;
         this.muracaat_tip_isim = muracaat_tip_isim;
     }
-    
-    
-    public Muracaat(Integer muracaat_id, Integer kisi_temel_id, Integer muracaat_bilgi_id, Integer arsiv_dosya_no, Integer muracaat_tip_id, Integer bolge, String aciklama, Date muracaat_tarihi) {
+
+    public Muracaat(Integer muracaat_id, Integer kisi_temel_id, Integer muracaat_bilgi_id, Integer arsiv_dosya_no, Integer muracaat_tip_id, String aciklama, Date muracaat_tarihi) {
         this.muracaat_id = muracaat_id;
         this.kisi_temel_id = kisi_temel_id;
         this.muracaat_bilgi_id = muracaat_bilgi_id;
         this.arsiv_dosya_no = arsiv_dosya_no;
         this.muracaat_tip_id = muracaat_tip_id;
-        this.bolge = bolge;
         this.aciklama = aciklama;
         this.muracaat_tarihi = muracaat_tarihi;
     }
 
-    public Muracaat(Integer kisi_temel_id, Integer muracaat_bilgi_id, Integer arsiv_dosya_no, Integer muracaat_tip_id, Integer bolge, String aciklama, Date muracaat_tarihi) {
+    public Muracaat(Integer kisi_temel_id, Integer muracaat_bilgi_id, Integer arsiv_dosya_no, Integer muracaat_tip_id, String aciklama, Date muracaat_tarihi) {
         this.kisi_temel_id = kisi_temel_id;
         this.muracaat_bilgi_id = muracaat_bilgi_id;
         this.arsiv_dosya_no = arsiv_dosya_no;
         this.muracaat_tip_id = muracaat_tip_id;
-        this.bolge = bolge;
         this.aciklama = aciklama;
         this.muracaat_tarihi = muracaat_tarihi;
     }
 
-    public Muracaat(Integer kisi_temel_id, Integer arsiv_dosya_no, Integer muracaat_tip_id, Integer bolge, String aciklama, Date muracaat_tarihi) {
+    public Muracaat(Integer kisi_temel_id, Integer arsiv_dosya_no, Integer muracaat_tip_id, String aciklama, Date muracaat_tarihi) {
         this.kisi_temel_id = kisi_temel_id;
         this.arsiv_dosya_no = arsiv_dosya_no;
         this.muracaat_tip_id = muracaat_tip_id;
-        this.bolge = bolge;
         this.aciklama = aciklama;
         this.muracaat_tarihi = muracaat_tarihi;
     }
@@ -103,14 +97,6 @@ public class Muracaat {
 
     public void setMuracaat_tip_id(Integer muracaat_tip_id) {
         this.muracaat_tip_id = muracaat_tip_id;
-    }
-
-    public Integer getBolge() {
-        return bolge;
-    }
-
-    public void setBolge(Integer bolge) {
-        this.bolge = bolge;
     }
 
     public String getAciklama() {
