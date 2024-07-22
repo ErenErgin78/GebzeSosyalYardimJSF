@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Entity;
 
 import java.math.BigInteger;
@@ -20,8 +16,6 @@ public class Kisi {
     private char cinsiyet;
     private Integer medeni_durum_id;
     private Integer egitim_durum_id;
-    private char yabanci_kimlik;
-    private char misafir;
     private String cilt_no;
     private Integer aile_sıra_no;
     private Integer sıra_no;
@@ -57,8 +51,6 @@ public class Kisi {
         this.cinsiyet = cinsiyet;
         this.medeni_durum_id = medeni_durum_id;
         this.egitim_durum_id = egitim_durum_id;
-        this.yabanci_kimlik = yabanci_kimlik;
-        this.misafir = misafir;
         this.cilt_no = cilt_no;
         this.aile_sıra_no = aile_sıra_no;
         this.sıra_no = sıra_no;
@@ -93,8 +85,6 @@ public class Kisi {
         this.cinsiyet = cinsiyet;
         this.medeni_durum_id = medeni_durum_id;
         this.egitim_durum_id = egitim_durum_id;
-        this.yabanci_kimlik = yabanci_kimlik;
-        this.misafir = misafir;
         this.cilt_no = cilt_no;
         this.aile_sıra_no = aile_sıra_no;
         this.sıra_no = sıra_no;
@@ -178,22 +168,6 @@ public class Kisi {
 
     public void setEgitim_durum_id(Integer egitim_durum_id) {
         this.egitim_durum_id = egitim_durum_id;
-    }
-
-    public char getYabanci_kimlik() {
-        return yabanci_kimlik;
-    }
-
-    public void setYabanci_kimlik(char yabanci_kimlik) {
-        this.yabanci_kimlik = yabanci_kimlik;
-    }
-
-    public char getMisafir() {
-        return misafir;
-    }
-
-    public void setMisafir(char misafir) {
-        this.misafir = misafir;
     }
 
     public String getCilt_no() {

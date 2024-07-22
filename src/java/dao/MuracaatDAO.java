@@ -35,11 +35,11 @@ public class MuracaatDAO extends DBConnection {
             CallableStatement csMuracaatBilgi = conn.prepareCall(callQueryMuracaatBilgi);
             csMuracaatBilgi.setInt(1, muracaat.getArsiv_dosya_no());
             csMuracaatBilgi.setInt(2, muracaat.getMuracaat_tip_id());
-            csMuracaatBilgi.setString(4, muracaat.getAciklama());
-            csMuracaatBilgi.setDate(5, new java.sql.Date(muracaat.getMuracaat_tarihi().getTime()));
-            csMuracaatBilgi.registerOutParameter(6, java.sql.Types.INTEGER);
+            csMuracaatBilgi.setString(3, muracaat.getAciklama());
+            csMuracaatBilgi.setDate(4, new java.sql.Date(muracaat.getMuracaat_tarihi().getTime()));
+            csMuracaatBilgi.registerOutParameter(5, java.sql.Types.INTEGER);
             csMuracaatBilgi.execute();
-            int muracaatBilgiId = csMuracaatBilgi.getInt(6);
+            int muracaatBilgiId = csMuracaatBilgi.getInt(5);
 
             // KISI_TEMEL'den id almak
             String selectQuery = "SELECT MAX(KISI_ID) ID FROM KISI_TEMEL";

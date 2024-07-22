@@ -17,9 +17,6 @@ public class KisiDAO extends DBConnection {
 
     private Connection db;
 
-    private boolean yabancı_kimlik_mi;
-    private boolean misafir_mi;
-
     private String adresId = null;
     private String iletisimId = null;
     private String yakinlarId = null;
@@ -28,14 +25,6 @@ public class KisiDAO extends DBConnection {
     public void Create(Kisi kisi) {
         try {
             Connection conn = this.getDb();
-
-            // misafir ve yabancı kimlik ataması
-            char ayarlama;
-            ayarlama = yabancı_kimlik_mi ? 'E' : 'H';
-            kisi.setYabanci_kimlik(ayarlama);
-
-            ayarlama = misafir_mi ? 'E' : 'H';
-            kisi.setMisafir(ayarlama);
 
             // KISI_YAKINLAR stored procedure çağırma
             String callQuery = "{call INSERT_KISI_YAKINLAR(?, ?, ?, ?, ?)}";
@@ -74,22 +63,20 @@ public class KisiDAO extends DBConnection {
             iletisimId = csIletisim.getString(4);
 
             // KISI_TEMEL
-            String callableQueryKisi = "{call INSERT_KISI_TEMEL(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            String callableQueryKisi = "{call INSERT_KISI_TEMEL(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement csKisi = conn.prepareCall(callableQueryKisi);
             csKisi.setObject(1, kisi.getKimlik_no());
             csKisi.setString(2, kisi.getIsim());
             csKisi.setString(3, kisi.getSoyisim());
             csKisi.setString(4, String.valueOf(kisi.getCinsiyet()));
             csKisi.setInt(5, kisi.getMedeni_durum_id());
-            csKisi.setString(6, String.valueOf(kisi.getYabanci_kimlik()));
-            csKisi.setString(7, String.valueOf(kisi.getMisafir()));
-            csKisi.setString(8, kisi.getCilt_no());
-            csKisi.setInt(9, kisi.getAile_sıra_no());
-            csKisi.setInt(10, kisi.getSıra_no());
-            csKisi.setDate(11, new java.sql.Date(kisi.getDogum_tarihi().getTime()));
-            csKisi.setInt(12, Integer.parseInt(iletisimId));
-            csKisi.setInt(13, Integer.parseInt(adresId));
-            csKisi.setInt(14, Integer.parseInt(yakinlarId));
+            csKisi.setString(6, kisi.getCilt_no());
+            csKisi.setInt(7, kisi.getAile_sıra_no());
+            csKisi.setInt(8, kisi.getSıra_no());
+            csKisi.setDate(9, new java.sql.Date(kisi.getDogum_tarihi().getTime()));
+            csKisi.setInt(10, Integer.parseInt(iletisimId));
+            csKisi.setInt(11, Integer.parseInt(adresId));
+            csKisi.setInt(12, Integer.parseInt(yakinlarId));
             csKisi.executeUpdate();
 
         } catch (Exception ex) {
@@ -151,22 +138,6 @@ public class KisiDAO extends DBConnection {
 
     public void setDb(Connection db) {
         this.db = db;
-    }
-
-    public boolean isYabancı_kimlik_mi() {
-        return yabancı_kimlik_mi;
-    }
-
-    public void setYabancı_kimlik_mi(boolean yabancı_kimlik_mi) {
-        this.yabancı_kimlik_mi = yabancı_kimlik_mi;
-    }
-
-    public boolean isMisafir_mi() {
-        return misafir_mi;
-    }
-
-    public void setMisafir_mi(boolean misafir_mi) {
-        this.misafir_mi = misafir_mi;
     }
 
     public String getAdresId() {

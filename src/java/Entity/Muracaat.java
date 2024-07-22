@@ -18,11 +18,11 @@ public class Muracaat {
     private Date muracaat_tarihi;
 
     private String muracaat_tip_isim;
-
+    
     public Muracaat() {
     }
 
-    public Muracaat(Integer muracaat_id, Integer kisi_temel_id, Integer muracaat_bilgi_id, Integer arsiv_dosya_no, String aciklama, Date muracaat_tarihi, String muracaat_tip_isim) {
+    public Muracaat(Integer muracaat_id, Integer kisi_temel_id, Integer muracaat_bilgi_id, Integer arsiv_dosya_no, Integer bolge, String aciklama, Date muracaat_tarihi, String muracaat_tip_isim) {
         this.muracaat_id = muracaat_id;
         this.kisi_temel_id = kisi_temel_id;
         this.muracaat_bilgi_id = muracaat_bilgi_id;
@@ -31,18 +31,18 @@ public class Muracaat {
         this.muracaat_tarihi = muracaat_tarihi;
         this.muracaat_tip_isim = muracaat_tip_isim;
     }
-
-    public Muracaat(Integer muracaat_id, Integer kisi_temel_id, Integer muracaat_bilgi_id, Integer arsiv_dosya_no, Integer muracaat_tip_id, String aciklama, Date muracaat_tarihi) {
+    
+    
+    public Muracaat(Integer muracaat_id, Integer kisi_temel_id, Integer muracaat_bilgi_id, Integer arsiv_dosya_no, Integer muracaat_tip_id, Integer bolge, String aciklama, Date muracaat_tarihi) {
         this.muracaat_id = muracaat_id;
         this.kisi_temel_id = kisi_temel_id;
         this.muracaat_bilgi_id = muracaat_bilgi_id;
         this.arsiv_dosya_no = arsiv_dosya_no;
-        this.muracaat_tip_id = muracaat_tip_id;
         this.aciklama = aciklama;
         this.muracaat_tarihi = muracaat_tarihi;
     }
 
-    public Muracaat(Integer kisi_temel_id, Integer muracaat_bilgi_id, Integer arsiv_dosya_no, Integer muracaat_tip_id, String aciklama, Date muracaat_tarihi) {
+    public Muracaat(Integer kisi_temel_id, Integer muracaat_bilgi_id, Integer arsiv_dosya_no, Integer muracaat_tip_id, Integer bolge, String aciklama, Date muracaat_tarihi) {
         this.kisi_temel_id = kisi_temel_id;
         this.muracaat_bilgi_id = muracaat_bilgi_id;
         this.arsiv_dosya_no = arsiv_dosya_no;
@@ -51,7 +51,7 @@ public class Muracaat {
         this.muracaat_tarihi = muracaat_tarihi;
     }
 
-    public Muracaat(Integer kisi_temel_id, Integer arsiv_dosya_no, Integer muracaat_tip_id, String aciklama, Date muracaat_tarihi) {
+    public Muracaat(Integer kisi_temel_id, Integer arsiv_dosya_no, Integer muracaat_tip_id, Integer bolge, String aciklama, Date muracaat_tarihi) {
         this.kisi_temel_id = kisi_temel_id;
         this.arsiv_dosya_no = arsiv_dosya_no;
         this.muracaat_tip_id = muracaat_tip_id;

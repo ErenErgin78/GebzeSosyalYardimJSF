@@ -255,35 +255,24 @@
                             <div class="card mt-3" >
                                 <div class="card-header">Müracaat Bilgileri</div>
                                 <div class="card-body">
-                                    <div class="form-row">
-                                        <div class="form-row col-md-4">
-                                            <label for="apartment">Arşiv Dosya No</label>
-                                            <h:inputText id="apartment" class="form-control" />
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="application_date">Müracaat Tarihi:</label>
-                                            <h:inputText id="application_date" class="form-control"  value = "#{muracaatBean.entity.muracaat_tarihi}">
-                                                <f:convertDateTime pattern="yyyy-MM-dd" />
-                                                <f:passThroughAttribute name="type" value="date" />
-                                            </h:inputText>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="application_type">Müracaat Tipi</label>
-                                            <h:selectOneMenu id="application_type" class="form-control" value="#{muracaatBean.entity.muracaat_tip_id}">
-                                                <f:selectItem itemLabel="Kendi" itemValue="4" />
-                                                <f:selectItem itemLabel="Yakını" itemValue="3" />
-                                            </h:selectOneMenu>
-                                        </div>
-                                        <p></p>
-                                        <div class="form-group col-md-4">
-                                            <label for="apartment">Yakının ismi</label>
-                                            <h:inputText id="apartment" class="form-control" />
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="apartment">Yakının TC</label>
-                                            <h:inputText id="apartment" class="form-control" />
-                                        </div>
+                                    <label for="archive_file_no">Arşiv Dosya No</label>
+                                    <h:inputText id="archive_file_no" class="form-control" value="#{muracaatBean.entity.arsiv_dosya_no}" />
+                                    <div class="form-group" value = "#{muracaatBean.entity.arsiv_dosya_no}">
                                     </div>
+                                    <div class="form-group">
+                                        <label for="application_date">Müracaat Tarihi:</label>
+                                        <h:inputText id="application_date" class="form-control"  value = "#{muracaatBean.entity.muracaat_tarihi}">
+                                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                                            <f:passThroughAttribute name="type" value="date" />
+                                        </h:inputText>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="application_type">Müracaat Tipi</label>
+                                        <h:selectOneMenu id="application_type" class="form-control" value = "#{muracaatBean.entity.muracaat_tip_id}">
+                                            <f:selectItem itemLabel="Kendi" itemValue="4" />
+                                            <f:selectItem itemLabel="Yakını" itemValue="3" />
+                                        </h:selectOneMenu>
+                                    </div>      
                                     <div class="form-group">
                                         <label for="description">Açıklama</label>
                                         <h:inputTextarea id="description" class="form-control" value = "#{muracaatBean.entity.aciklama}" rows="3" />
@@ -298,10 +287,8 @@
                 </div>
             </div>
         </h:form>
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     </body>
-
 </html>
