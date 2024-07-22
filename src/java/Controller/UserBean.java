@@ -9,6 +9,7 @@ import jakarta.faces.context.FacesContext;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import jakarta.servlet.http.HttpSession;
 
 @Named("userBean")
 @SessionScoped
@@ -19,20 +20,23 @@ public class UserBean implements Serializable {
     private List<User> list;
 
     public void create() {
-        this.getDao().CreateUser(entity);
+        this.getDao().Create(entity);
         this.entity = new User();
     }
 
     public void delete(int UserID) {
-        this.getDao().DeleteUser(UserID);
-        this.list = this.getDao().GetUserList();
+        this.getDao().Delete(UserID);
+        this.list = this.getDao().GetList();
     }
 
     public void giris() {
-        boolean basarili = this.getDao().KullaniciGiris();
+        boolean basarili = this.getDao().KullaniciGiris(this.getDao().getKullanici_adi(), this.getDao().getSifre());
 
         FacesContext context = FacesContext.getCurrentInstance();
         if (basarili) {
+            HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
+            session.setAttribute("user", this.getDao().getKullanici_adi()); // Kullanıcı bilgisini oturumda sakla
+
             try {
                 context.getExternalContext().redirect("index.xhtml");
             } catch (IOException e) {
@@ -41,6 +45,11 @@ public class UserBean implements Serializable {
             context.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Kullanıcı adı veya şifre hatalıdır", null));
         }
+    }
+
+    public String cikis() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "login?faces-redirect=true";
     }
 
     public void edit(User user) {
@@ -70,7 +79,7 @@ public class UserBean implements Serializable {
     }
 
     public List<User> getList() {
-        this.list = this.getDao().GetUserList();
+        this.list = this.getDao().GetList();
         return list;
     }
 
