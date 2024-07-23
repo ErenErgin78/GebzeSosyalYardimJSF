@@ -249,3 +249,80 @@ h3 selectOneRadio::before {
     border-radius: 50%;
     background-color: #303f9f;
 }
+
+
+.container {
+    width: 60%;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+h2 {
+    color: #333;
+    text-align: center;
+}
+
+.card {
+    background-color: white;
+    border: none;
+    margin-top: 20px;
+}
+
+.card-header {
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-footer {
+    background-color: #f1f1f1;
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    text-align: right;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.btn-success {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-success:hover {
+    background-color: #4cae4c;
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}
