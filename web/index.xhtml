@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,13 +16,13 @@
             <div class="sidebar-sticky text-white">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active text-white" href="#">
-                            <h:form> 
-                            <h:commandLink action="#{userBean.giris}">
-                                <img src="Assets/GebzeLogo.png" alt="Gebze Belediyesi Logo" class="img-fluid" />
-                            </h:commandLink>
-                            </h:form>
-                        </a>
+                        <h:form>
+                            <a class="nav-link active text-white" href="#">
+                                <h:commandLink action="#{userBean.giris}">
+                                    <img src="Assets/GebzeLogo.png" alt="Gebze Belediyesi Logo" class="img-fluid" />
+                                </h:commandLink>
+                            </a>
+                        </h:form>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link main-menu text-white font-weight-bold" href="#">
@@ -120,59 +121,67 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-    $(document).ready(function () {
-        function loadPage(page) {
-            var fullUrl = page;
+  $(document).ready(function () {
+    function loadPage(page) {
+        var fullUrl = page;
 
-            $.ajax({
-                url: fullUrl,
-                dataType: "html",
-                success: function (response) {
-                    $('#content').html(response);
-                    reapplyStylesAndHandlers();
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.error("Error loading page:", textStatus, errorThrown);
-                    console.error("Response:", jqXHR.responseText);
-                    $('#content').html('<p>Sayfa yüklenemedi. Hata: ' + errorThrown + '</p>');
-                }
-            });
-        }
-
-        function reapplyStylesAndHandlers() {
-            $('#content .nav-link').removeClass('text-dark').addClass('text-white');
-            $('#content .submenu a').removeClass('text-dark').addClass('text-white');
-        }
-
-        function handleSubMenuClick(e) {
-            e.preventDefault();
-            var page = $(this).data('page');
-            if (page) {
-                loadPage(page);
-            } else {
-                var submenu = $(this).next('.submenu');
-                if (submenu.is(':visible')) {
-                    submenu.hide();
-                } else {
-                    $(this).parent().siblings().find('.submenu').hide();
-                    submenu.show();
-                }
+        $.ajax({
+            url: fullUrl,
+            dataType: "html",
+            success: function (response) {
+                $('#content').html(response);
+                reapplyStylesAndHandlers();
+                reinitializeJSFComponents(); // JSF bileşenlerini yeniden başlatın
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error("Error loading page:", textStatus, errorThrown);
+                console.error("Response:", jqXHR.responseText);
+                $('#content').html('<p>Sayfa yüklenemedi. Hata: ' + errorThrown + '</p>');
             }
-        }
+        });
+    }
 
-        $('.main-menu').click(function (e) {
-            e.preventDefault();
+    function reapplyStylesAndHandlers() {
+        $('#content .nav-link').removeClass('text-dark').addClass('text-white');
+        $('#content .submenu a').removeClass('text-dark').addClass('text-white');
+    }
+
+    function reinitializeJSFComponents() {
+        if (typeof jsf !== 'undefined') {
+            jsf.ajax.request(null, null, { execute: '@all', render: '@all' });
+        }
+    }
+
+    function handleSubMenuClick(e) {
+        e.preventDefault();
+        var page = $(this).data('page');
+        if (page) {
+            loadPage(page);
+        } else {
             var submenu = $(this).next('.submenu');
             if (submenu.is(':visible')) {
                 submenu.hide();
             } else {
-                $('.submenu').hide();
+                $(this).parent().siblings().find('.submenu').hide();
                 submenu.show();
             }
-        });
+        }
+    }
 
-        $('.submenu a').click(handleSubMenuClick);
+    $('.main-menu').click(function (e) {
+        e.preventDefault();
+        var submenu = $(this).next('.submenu');
+        if (submenu.is(':visible')) {
+            submenu.hide();
+        } else {
+            $('.submenu').hide();
+            submenu.show();
+        }
     });
+
+    $('.submenu a').click(handleSubMenuClick);
+});
+
 </script>
 </body>
 </html>
