@@ -155,93 +155,9 @@
                            
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="password">Şifre:</label>
-                        <input type="password" class="form-control" id="password" />
-                        <input type="password" class="form-control small-input" id="password" />
-                    </div>
-                    <div class="form-group">
-                        <label for="department">Bölüm:</label>
-                        <select class="form-control" id="department">
-                            <select class="form-control small-input" id="department"/>
-                            <option>Lütfen seçiniz</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Ad:</label>
-                        <input type="text" class="form-control" id="name" />
-                        <input type="text" class="form-control small-input" id="name" />
-                    </div>
-                    <div class="form-group">
-                        <label for="title">Ünvan:</label>
-                        <input type="text" class="form-control" id="title" />
-                        <input type="text" class="form-control small-input" id="title" />
-                    </div>
-                    <div class="form-group">
-                        <label for="idNumber">Sicil No:</label>
-                        <input type="text" class="form-control" id="idNumber" />
-                        <input type="text" class="form-control small-input" id="idNumber" />
-                    </div>
-                    <div class="form-group">
-                        <label>Cinsiyet:</label><br />
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="gender" id="male" value="E" 
-                                   onclick="setCinsiyet('E')" />
-                            <input class="form-check-input" type="radio" name="gender" id="male" value="E" onclick="setCinsiyet('E')" />
-                            <label class="form-check-label" for="male">Erkek</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="gender" id="female" value="K" 
-                                   onclick="setCinsiyet('K')" />
-                            <input class="form-check-input" type="radio" name="gender" id="female" value="K" onclick="setCinsiyet('K')" />
-                            <label class="form-check-label" for="female">Kadın</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Telefon:</label>
-                        <input type="tel" class="form-control" id="phone" />
-                        <input type="tel" class="form-control small-input" id="phone" />
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Adres:</label>
-                        <textarea class="form-control" id="address" rows="3"></textarea>
-                        <textarea class="form-control small-input" id="address" rows="3"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Durum:</label><br />
-                    </div>
-                </form>
+                </div>
             </div>
-        </div>
-
-        <!-- Bootstrap JS, Popper.js, and jQuery -->
-        <script>
-            function setCinsiyet(value) {
-                document.querySelector(`input[name="gender"][value="${value}"]`).checked = true;
-            }
-            ;
-
-            function setCinsiyet(value) {
-                document.querySelector(`input[name="gender"][value="${value}"]`).checked = true;
-            }
-
-            window.onload = function () {
-                const cinsiyet = "#{kisiBean.entity.cinsiyet}";
-                if (cinsiyet) {
-                    setCinsiyet(cinsiyet);
-                }
-            };
-        </script>
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        window.onload = function () {
-        const cinsiyet = "#{kisiBean.entity.cinsiyet}";
-        if (cinsiyet) {
-        setCinsiyet(cinsiyet);
-        }
-        };
-        </script>
+        </h:form>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
