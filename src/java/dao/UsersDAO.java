@@ -33,7 +33,7 @@ public class UsersDAO extends DBConnection {
             String insertQuery = "INSERT INTO KULLANICI (kullanici_unvan, kullanici_durum_id, kullanici_kullanici_adi, kullanici_isim, kullanici_adres, kullanici_sicil_no, kullanici_telefon, kullanici_cinsiyet, sifre) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             user.setKullanici_durum_id(Integer.parseInt(user.getKullanici_durum()));
-            
+
             PreparedStatement preparedStatement = this.getDb().prepareStatement(insertQuery);
             preparedStatement.setString(1, user.getKullanici_unvan());
             preparedStatement.setInt(2, user.getKullanici_durum_id());
@@ -47,6 +47,7 @@ public class UsersDAO extends DBConnection {
 
             int r = preparedStatement.executeUpdate();
 
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "İşlemler başarıyla gerçekleşmiştir.", null));
         } catch (Exception ex) {
             DetectError(ex);
 
@@ -82,6 +83,7 @@ public class UsersDAO extends DBConnection {
                 );
             }
 
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "İşlemler başarıyla gerçekleşmiştir.", null));
         } catch (Exception ex) {
             DetectError(ex);
         }
@@ -99,6 +101,7 @@ public class UsersDAO extends DBConnection {
             int rowsDeleted = statement.executeUpdate();
             System.out.println(rowsDeleted + " kullanıcı silindi.");
 
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "İşlemler başarıyla gerçekleşmiştir.", null));
         } catch (SQLException ex) {
             DetectError(ex);
         }
@@ -120,6 +123,7 @@ public class UsersDAO extends DBConnection {
             resultSet.close();
             preparedStatement.close();
 
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "İşlemler başarıyla gerçekleşmiştir.", null));
         } catch (SQLException ex) {
             DetectError(ex);
         }

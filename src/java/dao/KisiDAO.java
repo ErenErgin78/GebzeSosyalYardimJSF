@@ -24,6 +24,8 @@ public class KisiDAO extends DBConnection {
     private String yakinlarId = null;
     private Integer kisi_temel_id = null;
 
+    private String islemBasariliMesaj;
+
     public void Sorgula(Kisi kisi) {
 
         String callQuery = "{call get_kisi_info(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
@@ -80,6 +82,7 @@ public class KisiDAO extends DBConnection {
             kisi.setEv_telefon(csSorgula.getBigDecimal(21).toBigInteger());
             kisi.setCep_telefon(csSorgula.getBigDecimal(22).toBigInteger());
             kisi.setEposta(csSorgula.getString(23));
+
         } catch (Exception ex) {
             DetectError(ex);
         }
@@ -142,6 +145,8 @@ public class KisiDAO extends DBConnection {
             csKisi.setInt(12, Integer.parseInt(yakinlarId));
             csKisi.executeUpdate();
 
+             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+             
         } catch (Exception ex) {
             DetectError(ex);
         }
@@ -158,7 +163,8 @@ public class KisiDAO extends DBConnection {
             while (rs.next()) {
                 KisiList.add(new Kisi());
             }
-
+             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+             
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -172,8 +178,8 @@ public class KisiDAO extends DBConnection {
             PreparedStatement ps = getDb().prepareStatement(deleteQuery);
             ps.setInt(1, kullaniciId);
             int rowsDeleted = ps.executeUpdate();
-            System.out.println(rowsDeleted + " kisi silindi.");
-
+            
+             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
             System.out.println("Veritabanı hatası: " + ex.getMessage());
         }
@@ -190,7 +196,7 @@ public class KisiDAO extends DBConnection {
             while (rs.next()) {
                 MahalleList.add(new SelectItem(rs.getInt("KISI_ADRES_MAHALLE_ID"), rs.getString("MAHALLE")));
             }
-
+             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -209,6 +215,7 @@ public class KisiDAO extends DBConnection {
 
                 MahalleList.add(new SelectItem(rs.getInt("SOKAK_ID"), rs.getString("SOKAK_ISIM")));
             }
+             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (Exception ex) {
             DetectError(ex);
@@ -225,6 +232,9 @@ public class KisiDAO extends DBConnection {
             CallableStatement csAdres = conn.prepareCall(callQueryAdres);
             csAdres.setString(1, kisi.getMahalle());
             csAdres.execute();
+            
+             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+
         } catch (Exception ex) {
             DetectError(ex);
         }
@@ -240,6 +250,9 @@ public class KisiDAO extends DBConnection {
             csAdres.setInt(1, kisi.getMahalle_id());
             csAdres.setString(2, kisi.getSokak());
             csAdres.execute();
+
+          this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+
         } catch (Exception ex) {
             DetectError(ex);
         }
@@ -258,10 +271,8 @@ public class KisiDAO extends DBConnection {
                         .append(":").append(element.getLineNumber()).append(")");
                 break;
             }
-
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage.toString(), null));
         }
-
     }
 
     public Connection getDb() {
@@ -305,6 +316,14 @@ public class KisiDAO extends DBConnection {
 
     public void setKisi_temel_id(Integer kisi_temel_id) {
         this.kisi_temel_id = kisi_temel_id;
+    }
+
+    public String getIslemBasariliMesaj() {
+        return islemBasariliMesaj;
+    }
+
+    public void setIslemBasariliMesaj(String islemBasariliMesaj) {
+        this.islemBasariliMesaj = islemBasariliMesaj;
     }
 
 }

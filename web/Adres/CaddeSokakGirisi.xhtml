@@ -33,7 +33,8 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:messages globalOnly="true" layout="table"/>
+            <h:messages for="sokakekle" globalOnly="true" layout="table"/>
+            <h:outputText id="mesaj" value="#{kisiBean.dao.islemBasariliMesaj}" />
             <div class="container-fluid mt-20">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
@@ -47,17 +48,18 @@
                                     <h:selectOneMenu id="neighborhood" value = "#{kisiBean.selectedMahalleId}" class="form-control">
                                         <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
                                         <f:selectItems value="#{kisiBean.mahalleList}" />
-                                        <f:ajax event="change" listener="#{kisiBean.sokakyukle}" render="street" />
                                     </h:selectOneMenu>
                                 </div> 
                                 <div class="form-group">
                                     <label for="description">Cadde/Sokak Adı:</label>
-                                    <h:inputTextarea id="description" class="form-control" value = "#{muracaatBean.entity.aciklama}" rows="3" />
+                                    <h:inputTextarea id="description" class="form-control" value = "#{kisiBean.entity.sokak}" rows="3" />
                                 </div>
                             </div>
                         </div>
                         <div class="text-center mt-3">
-                            <h:commandLink value="Kaydet" action="#{kisimuracaatBean.create()}" class="btn btn-success" />
+                            <h:commandButton id = "sokakekle" value="Kaydet" action="#{kisiBean.sokakekle()}" class="btn btn-success">
+                                <f:ajax execute="@form" render="@form, mesaj" />
+                            </h:commandButton>
                         </div>                      
                     </div>
                 </div>

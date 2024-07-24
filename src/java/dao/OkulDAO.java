@@ -1,21 +1,12 @@
 package dao;
 
-import Entity.Kisi;
 import Entity.Okul;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
-import jakarta.faces.model.SelectItem;
 import util.DBConnection;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.CallableStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class OkulDAO extends DBConnection {
 
@@ -36,6 +27,7 @@ public class OkulDAO extends DBConnection {
 
             csOkul.execute();
 
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "İşlemler başarıyla gerçekleşmiştir.", null));
         } catch (SQLException ex) {
             DetectError(ex);
         }

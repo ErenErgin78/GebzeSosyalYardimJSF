@@ -54,6 +54,8 @@ public class MuracaatDAO extends DBConnection {
                 csMuracaat.setInt(1, muracaat.getKisi_temel_id());
                 csMuracaat.setInt(2, muracaatBilgiId);
                 csMuracaat.executeUpdate();
+
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "İşlemler başarıyla gerçekleşmiştir.", null));
             }
 
         } catch (SQLException ex) {
@@ -78,6 +80,7 @@ public class MuracaatDAO extends DBConnection {
             while (rs.next()) {
 
             }
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "İşlemler başarıyla gerçekleşmiştir.", null));
 
         } catch (Exception ex) {
             DetectError(ex);
@@ -93,6 +96,8 @@ public class MuracaatDAO extends DBConnection {
 
             int rowsDeleted = statement.executeUpdate(deleteQuery);
             System.out.println(rowsDeleted + " kisi silindi.");
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "İşlemler başarıyla gerçekleşmiştir.", null));
 
         } catch (SQLException ex) {
             System.out.println("Veritabanı hatası: " + ex.getMessage());
