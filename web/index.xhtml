@@ -8,11 +8,18 @@
         <title>Gebze Belediyesi Dashboard</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
         <link rel="stylesheet" href="styles.css" />
+        <style>
+            /* Kaydırma çubuğu stili ekleniyor */
+            .sidebar-scrollable {
+                max-height: 100vh; /* Tam ekran yüksekliği */
+                overflow-y: auto;  /* Dikey kaydırma */
+            }
+        </style>
     </head>
     <body>
         <div class="container-fluid">
             <div class="row">
-                <nav id="sidebar" class="sidebar">
+                <nav id="sidebar" class="sidebar sidebar-scrollable"> <!-- sidebar-scrollable sınıfı eklendi -->
                     <div class="sidebar-sticky text-white">
                         <ul class="nav flex-column">
                             <li class="nav-item">
