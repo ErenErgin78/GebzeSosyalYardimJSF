@@ -37,25 +37,28 @@
             <div class="container-fluid mt-20">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
-                        <h1 class="text-center">Yeni Mahalle Girişi</h1>
-                        <div class="card">                           
+                        <h1 class="text-center">Yeni Cadde/Sokak Girişi</h1>
+                        <div class="card">   
+                            
+                                <div class="card-header">Cadde/Sokak Giriş Bilgileri <br/>
 
-                                <div class="card-header">Mahalle Giriş Bilgileri</div>
+                                </div>
+                               
                                 <div class="card-body">
-                                    <label for="archive_file_no">Mahalle Kodu:</label>
+                                    <label for="archive_file_no">Cadde/Sokak Kodu:</label>
                                     <h:inputText id="archive_file_no" class="form-control" value="#{muracaatBean.entity.arsiv_dosya_no}" />
                                     <div class="form-group" value = "#{muracaatBean.entity.arsiv_dosya_no}">
                                     </div>
                                     
                                     <div class="form-group">
-                                        <label for="application_type">İlçe:</label>
+                                        <label for="application_type">Mahalle:</label>
                                         <h:selectOneMenu id="application_type" class="form-control" value = "#{muracaatBean.entity.muracaat_tip_id}">
-                                            <f:selectItem itemLabel="Gebze" itemValue="4" />   
+                                            <f:selectItem itemLabel="Adem Yavuz" itemValue="4" />   
                                         </h:selectOneMenu>
                                     </div> 
 
                                     <div class="form-group">
-                                        <label for="description">Mahalle Adı:</label>
+                                        <label for="description">Cadde/Sokak Adı:</label>
                                         <h:inputTextarea id="description" class="form-control" value = "#{muracaatBean.entity.aciklama}" rows="3" />
                                     </div>
                                 </div>
