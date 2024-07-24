@@ -27,6 +27,8 @@ public class UsersDAO extends DBConnection {
 
     private String kullanici_adi;
     private String sifre;
+    
+    private String message;
 
     public void Create(User user) {
         try {
@@ -47,7 +49,8 @@ public class UsersDAO extends DBConnection {
 
             int r = preparedStatement.executeUpdate();
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "İşlemler başarıyla gerçekleşmiştir.", null));
+            this.message = "İşlemler başarıyla gerçekleşmiştir.";
+            
         } catch (Exception ex) {
             DetectError(ex);
 
@@ -83,7 +86,6 @@ public class UsersDAO extends DBConnection {
                 );
             }
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "İşlemler başarıyla gerçekleşmiştir.", null));
         } catch (Exception ex) {
             DetectError(ex);
         }
@@ -101,7 +103,7 @@ public class UsersDAO extends DBConnection {
             int rowsDeleted = statement.executeUpdate();
             System.out.println(rowsDeleted + " kullanıcı silindi.");
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "İşlemler başarıyla gerçekleşmiştir.", null));
+             this.message = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
             DetectError(ex);
         }
@@ -123,7 +125,6 @@ public class UsersDAO extends DBConnection {
             resultSet.close();
             preparedStatement.close();
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "İşlemler başarıyla gerçekleşmiştir.", null));
         } catch (SQLException ex) {
             DetectError(ex);
         }
@@ -173,6 +174,14 @@ public class UsersDAO extends DBConnection {
 
     public void setSifre(String sifre) {
         this.sifre = sifre;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
 }
