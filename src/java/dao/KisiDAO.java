@@ -215,6 +215,20 @@ public class KisiDAO extends DBConnection {
         }
         catch(Exception ex){ DetectError(ex);}
     }
+    
+        public void SokakEkle(Kisi kisi) {
+      
+        try{Connection conn = this.getDb();
+
+        String callQueryAdres = "{call INSERT_ADRES_MAHALLE_SOKAK(?, ?)}";
+        CallableStatement csAdres = conn.prepareCall(callQueryAdres);
+        csAdres.setInt(1, kisi.getMahalle_id());
+        csAdres.setString(2, kisi.getSokak());
+        csAdres.execute();
+        }
+        catch(Exception ex){ DetectError(ex);}
+    }
+
 
     public void DetectError(Exception ex) {
         //Hatayı yakalamak için

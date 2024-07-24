@@ -47,7 +47,11 @@ public class KisiBean implements Serializable {
     }
     
     public void mahalleekle(){
-    this.getDao().MahalleEkle(entity);
+    this.getDao().MahalleEkle(getEntity());
+    }
+    
+    public void sokakekle(){
+    this.getDao().SokakEkle(getEntity());
     }
 
     public List<SelectItem> mahallegetir() {
