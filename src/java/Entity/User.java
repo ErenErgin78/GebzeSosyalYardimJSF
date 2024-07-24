@@ -10,7 +10,6 @@ import java.util.Date;
 public class User {
 
     private int kullanici_id;
-    private Integer kullanici_unvan_id;
     private Integer kullanici_durum_id;
     private String kullanici_isim;
     private String kullanici_adres;
@@ -28,6 +27,7 @@ public class User {
 
     private String kullanici_kullanici_adi;
 
+    
     public User(int kullanici_id, String kullanici_isim, String kullanici_adres, BigInteger kullanici_sicil_no, BigInteger kullanici_telefon, char kullanici_cinsiyet, Date kullanici_kayit_tarih, String kullanici_unvan, String kullanici_durum, String kullanici_kullanici_adi) {
         this.kullanici_id = kullanici_id;
         this.kullanici_isim = kullanici_isim;
@@ -40,8 +40,6 @@ public class User {
         this.kullanici_durum = kullanici_durum;
         this.kullanici_kullanici_adi = kullanici_kullanici_adi;
     }
-
-
 
     public User(int kullanici_id, String kullanici_isim, String kullanici_adres, BigInteger kullanici_sicil_no, BigInteger kullanici_telefon, char kullanici_cinsiyet, Date kullanici_kayit_tarih, String kullanici_profil, String kullanici_unvan, String kullanici_durum, String kullanici_kullanici_adi) {
         this.kullanici_id = kullanici_id;
@@ -57,9 +55,7 @@ public class User {
         this.kullanici_kullanici_adi = kullanici_kullanici_adi;
     }
 
-    
-    public User(Integer kullanici_unvan_id, Integer kullanici_durum_id, String kullanici_isim, String kullanici_adres, BigInteger kullanici_sicil_no, BigInteger kullanici_telefon, char kullanici_cinsiyet, String kullannici_eposta, String sifre, String kullanici_kullanici_adi) {
-        this.kullanici_unvan_id = kullanici_unvan_id;
+    public User(Integer kullanici_durum_id, String kullanici_isim, String kullanici_adres, BigInteger kullanici_sicil_no, BigInteger kullanici_telefon, char kullanici_cinsiyet, String kullannici_eposta, String sifre, String kullanici_kullanici_adi) {
         this.kullanici_durum_id = kullanici_durum_id;
         this.kullanici_isim = kullanici_isim;
         this.kullanici_adres = kullanici_adres;
@@ -138,17 +134,6 @@ public class User {
         this.kullanici_id = kullanici_id;
     }
 
-    public int getKullanici_unvan_id() {
-        if (kullanici_unvan_id == null) {
-            kullanici_unvan_id = 0;
-        }
-        return kullanici_unvan_id;
-    }
-
-    public void setKullanici_unvan_id(int kullanici_unvan_id) {
-        this.kullanici_unvan_id = kullanici_unvan_id;
-    }
-
     public int getKullanici_durum_id() {
         return kullanici_durum_id;
     }
@@ -213,6 +198,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "kullanici_id=" + kullanici_id + ", kullanici_unvan_id=" + kullanici_unvan_id + ", kullanici_durum_id=" + kullanici_durum_id + ", kullanici_isim=" + kullanici_isim + ", kullanici_adres=" + kullanici_adres + ", kullanici_sicil_no=" + kullanici_sicil_no + ", kullanici_telefon=" + kullanici_telefon + ", kullanici_cinsiyet=" + kullanici_cinsiyet + ", kullanici_kayit_tarih=" + kullanici_kayit_tarih + ", kullanici_profil_id=" + kullanici_profil_id + '}';
+        return "User{" + "kullanici_id=" + kullanici_id + ", kullanici_durum_id=" + kullanici_durum_id + ", kullanici_isim=" + kullanici_isim + ", kullanici_adres=" + kullanici_adres + ", kullanici_sicil_no=" + kullanici_sicil_no + ", kullanici_telefon=" + kullanici_telefon + ", kullanici_cinsiyet=" + kullanici_cinsiyet + ", kullanici_kayit_tarih=" + kullanici_kayit_tarih + ", kullanici_profil_id=" + kullanici_profil_id + ", kullannici_eposta=" + kullannici_eposta + ", sifre=" + sifre + ", kullanici_profil=" + kullanici_profil + ", kullanici_unvan=" + kullanici_unvan + ", kullanici_durum=" + kullanici_durum + ", kullanici_kullanici_adi=" + kullanici_kullanici_adi + '}';
     }
+
 }

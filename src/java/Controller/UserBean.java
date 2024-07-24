@@ -20,8 +20,7 @@ public class UserBean implements Serializable {
     private List<User> list;
 
     public void create() {
-        this.getDao().Create(entity);
-        this.entity = new User();
+        this.getDao().Create(getEntity());
     }
 
     public void delete(int UserID) {

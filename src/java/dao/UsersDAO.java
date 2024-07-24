@@ -31,13 +31,15 @@ public class UsersDAO extends DBConnection {
         try {
             Statement statement = this.getDb().createStatement();
             
-            String Insertquery = "INSERT INTO KULLANICI (kullanici_unvan_id, kullanici_durum_id, kullanici_kullanici_adi  kullanici_isim, kullanici_adres, kullanici_sicil_no, kullanici_telefon, kullanici_cinsiyet, kullanici_profil_id) VALUES"
-                    + "('" + user.getKullanici_unvan_id() + "','" + user.getKullanici_durum_id() + "','" + user.getKullanici_kullanici_adi() + "','" + user.getKullanici_isim() + "','" + user.getKullanici_adres() + "','" + user.getKullanici_sicil_no() + "','" + user.getKullanici_telefon() + "','" + user.getKullanici_cinsiyet() + "','" + user.getKullanici_profil_id() + "')";
+            user.setKullanici_durum_id(Integer.parseInt(user.getKullanici_durum()));
+            
+            String Insertquery = "INSERT INTO KULLANICI (kullanici_unvan, kullanici_durum_id, kullanici_kullanici_adi  kullanici_isim, kullanici_adres, kullanici_sicil_no, kullanici_telefon, kullanici_cinsiyet, kullanici_profil_id) VALUES"
+                    + "('" + user.getKullanici_unvan()+ "','" + user.getKullanici_durum_id() + "','" + user.getKullanici_kullanici_adi() + "','" + user.getKullanici_isim() + "','" + user.getKullanici_adres() + "','" + user.getKullanici_sicil_no() + "','" + user.getKullanici_telefon() + "','" + user.getKullanici_cinsiyet() + "','" + user.getKullanici_profil_id() + "')";
             
             int r = statement.executeUpdate(Insertquery);
             
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            DetectError(ex);
         }
     }
     
@@ -49,9 +51,8 @@ public class UsersDAO extends DBConnection {
             
             Statement statement = getDb().createStatement();
             
-            String Selectquery = "SELECT kullanici_id, kullanici_kullanici_adi, U.kullanici_unvan, D.kullanici_durum, kullanici_isim, kullanici_adres, kullanici_sicil_no,kullanici_telefon,kullanici_cinsiyet,kullanici_kayit_tarih FROM KULLANICI K\n"
-                    + "JOIN KULLANICI_DURUM D ON K.kullanici_durum_id = D.kullanici_durum_id\n"
-                    + "JOIN KULLANICI_UNVAN U ON K.kullanici_unvan_id = U.kullanici_unvan_id";
+            String Selectquery = "SELECT kullanici_id, kullanici_kullanici_adi, kullanici_unvan, D.kullanici_durum, kullanici_isim, kullanici_adres, kullanici_sicil_no,kullanici_telefon,kullanici_cinsiyet,kullanici_kayit_tarih FROM KULLANICI K\n"
+                    + "JOIN KULLANICI_DURUM D ON K.kullanici_durum_id = D.kullanici_durum_id\n";
             
             ResultSet rs = statement.executeQuery(Selectquery);
             
@@ -71,7 +72,7 @@ public class UsersDAO extends DBConnection {
             }
             
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            DetectError(ex);
         }
         return UserList;
     }
@@ -88,7 +89,7 @@ public class UsersDAO extends DBConnection {
             System.out.println(rowsDeleted + " kullanıcı silindi.");
             
         } catch (SQLException ex) {
-            System.out.println("Veritabanı hatası: " + ex.getMessage());
+            DetectError(ex);
         }
     }
     
