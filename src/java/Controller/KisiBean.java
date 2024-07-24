@@ -42,10 +42,12 @@ public class KisiBean implements Serializable {
     public void sorgula() {
         Kisi kisi = new Kisi();
         kisi.setKimlik_no(this.entity.getKimlik_no());
-
         this.getDao().Sorgula(kisi);
-
         this.entity = kisi;
+    }
+    
+    public void mahalleekle(){
+    this.getDao().MahalleEkle(entity);
     }
 
     public List<SelectItem> mahallegetir() {

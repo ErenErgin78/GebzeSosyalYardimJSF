@@ -204,6 +204,18 @@ public class KisiDAO extends DBConnection {
         return MahalleList;
     }
 
+    public void MahalleEkle(Kisi kisi) {
+      
+        try{Connection conn = this.getDb();
+
+        String callQueryAdres = "{call INSERT_KISI_ADRES_MAHALLE(?)}";
+        CallableStatement csAdres = conn.prepareCall(callQueryAdres);
+        csAdres.setString(1, kisi.getMahalle());
+        csAdres.execute();
+        }
+        catch(Exception ex){ DetectError(ex);}
+    }
+
     public void DetectError(Exception ex) {
         //Hatayı yakalamak için
         FacesContext context = FacesContext.getCurrentInstance();
