@@ -47,22 +47,30 @@
                                     </div>
                                     
                                     <div class="form-group">
-                                        <label for="application_type">İlçe:</label>
-                                        <h:selectOneMenu id="application_type" class="form-control" value = "#{muracaatBean.entity.muracaat_tip_id}">
+                                        <label for="application_type">İlçe</label>
+                                        <h:selectOneMenu id="application_type" class="form-control">
                                             <f:selectItem itemLabel="Gebze" itemValue="4" />   
                                         </h:selectOneMenu>
                                     </div> 
-
+                                    
                                     <div class="form-group">
-                                        <label for="description">Mahalle Adı:</label>
-                                        <h:inputTextarea id="description" class="form-control" value = "#{muracaatBean.entity.aciklama}" rows="3" />
+                                        <label for="registration_status">Bölge</label>
+                                    <h:selectOneMenu id="registration_status" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
+                                    </h:selectOneMenu>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="description">Mahalle Adı</label>
+                                        <h:inputTextarea id="description" class="form-control" value="#{kisiBean.entity.mahalle}" />
                                     </div>
                                 </div>
                             </div>
                             <div class="text-center mt-3">
-                                <h:commandLink value="Kaydet" action="#{kisimuracaatBean.create()}" class="btn btn-success" />
+                                <h:commandButton value="Kaydet" action="#{kisiBean.mahalleekle()}" class="btn btn-success">
+                                <f:ajax execute="@form" render="@form" />
+                                </h:commandButton>
                             </div>
-                        
                     </div>
                 </div>
             </div>

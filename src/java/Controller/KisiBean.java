@@ -42,12 +42,19 @@ public class KisiBean implements Serializable {
     public void sorgula() {
         Kisi kisi = new Kisi();
         kisi.setKimlik_no(this.entity.getKimlik_no());
-
         this.getDao().Sorgula(kisi);
-
         this.entity = kisi;
     }
+    
+    public void mahalleekle(){
+    this.getDao().MahalleEkle(getEntity());
+    }
+    
+    public void sokakekle(){
+    this.getDao().SokakEkle(getEntity());
+    }
 
+    //Muracaat Girişte dinamik mahalle ve sokak değişimi için
     public List<SelectItem> mahallegetir() {
         return this.getDao().MahalleGetir();
     }

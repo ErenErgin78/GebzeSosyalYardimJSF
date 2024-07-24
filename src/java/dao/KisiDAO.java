@@ -9,67 +9,82 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
+import java.sql.Types;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class KisiDAO extends DBConnection {
-    
+
     private Connection db;
-    
+
     private String adresId = null;
     private String iletisimId = null;
     private String yakinlarId = null;
     private Integer kisi_temel_id = null;
-    
+
     public void Sorgula(Kisi kisi) {
-        
+
+        String callQuery = "{call get_kisi_info(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         try {
-            Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT KT.DOGUM_TARIHI, KT.ISIM, KT.SOYISIM, KT.CINSIYET, KT.AILE_SIRA_NO, KT.CILT_NO, KT.MEDENI_DURUM_ID,\n"
-                    + "KT.SIRA_NO, KY.ANNE_ISIM, KY.BABA_ISIM, KY.ES_ISIM, KY.ES_SOYISIM,\n"
-                    + "KA.ILCE, KA.TARIF, KA.SITE, KA.KAPI_NO, KA.DAIRE_NO, ADRES_NO, KISI_ADRES_MAHALLE_ID,\n"
-                    + "KI.EV_TELEFON, KI.CEP_TELEFON, KI.EPOSTA\n"
-                    + "FROM KISI_TEMEL KT \n"
-                    + "\n"
-                    + "JOIN KISI_ILETISIM KI ON KT.KISI_ILETISIM_ID = KT.KISI_ILETISIM_ID\n"
-                    + "JOIN KISI_YAKINLAR KY ON KT.KISI_YAKINLAR_ID = KY.KISI_YAKINLAR_ID\n"
-                    + "JOIN KISI_ADRES KA ON KT.KISI_ADRES_ID = KA.KISI_ADRES_ID\n"
-                    + "WHERE KIMLIK_NO =" + kisi.getKimlik_no();
-            ResultSet rs = statement.executeQuery(Selectquery);
-            
-            if (rs.next()) {
-                kisi.setDogum_tarihi(rs.getDate("DOGUM_TARIHI"));
-                kisi.setIsim(rs.getString("ISIM"));
-                kisi.setSoyisim(rs.getString("SOYISIM"));
-                kisi.setCinsiyet(rs.getString("CINSIYET").charAt(0)); // Assuming CINSIYET is a single character
-                kisi.setAile_sira_no(rs.getInt("AILE_SIRA_NO"));
-                kisi.setCilt_no(rs.getString("CILT_NO"));
-                kisi.setMedeni_durum_id(rs.getInt("MEDENI_DURUM_ID"));
-                kisi.setSira_no(rs.getInt("SIRA_NO"));
-                kisi.setAnne_isim(rs.getString("ANNE_ISIM"));
-                kisi.setBaba_isim(rs.getString("BABA_ISIM"));
-                kisi.setEs_isim(rs.getString("ES_ISIM"));
-                kisi.setEs_soyisim(rs.getString("ES_SOYISIM"));
-                kisi.setIlce(rs.getString("ILCE"));
-                kisi.setTarif(rs.getString("TARIF"));
-                kisi.setSite(rs.getString("SITE"));
-                kisi.setKapi_no(rs.getInt("KAPI_NO"));
-                kisi.setDaire_no(rs.getInt("DAIRE_NO"));
-                kisi.setAdres_no(rs.getInt("ADRES_NO"));
-                kisi.setMahalle_id(rs.getInt("KISI_ADRES_MAHALLE_ID"));
-                kisi.setEv_telefon(rs.getBigDecimal("EV_TELEFON").toBigInteger());
-                kisi.setCep_telefon(rs.getBigDecimal("CEP_TELEFON").toBigInteger());
-                kisi.setEposta(rs.getString("EPOSTA"));
+            Connection conn = this.getDb();
+            CallableStatement csSorgula = conn.prepareCall(callQuery);
+            csSorgula.setObject(1, kisi.getKimlik_no());
+
+            int[] dateIndexes = {2};
+            int[] varcharIndexes = {3, 4, 7, 10, 11, 12, 13, 14, 15, 16, 23};
+            int[] charIndexes = {5};
+            int[] integerIndexes = {6, 8, 9, 17, 18, 19, 20};
+            int[] numericIndexes = {21, 22};
+
+            // Tiplere göre atamalar
+            for (int index : dateIndexes) {
+                csSorgula.registerOutParameter(index, Types.DATE);
             }
-            
+            for (int index : varcharIndexes) {
+                csSorgula.registerOutParameter(index, Types.VARCHAR);
+            }
+            for (int index : charIndexes) {
+                csSorgula.registerOutParameter(index, Types.CHAR);
+            }
+            for (int index : integerIndexes) {
+                csSorgula.registerOutParameter(index, Types.INTEGER);
+            }
+            for (int index : numericIndexes) {
+                csSorgula.registerOutParameter(index, Types.NUMERIC);
+            }
+
+            csSorgula.execute();
+
+            // Otomatik doldurulacak alanlar
+            kisi.setDogum_tarihi(csSorgula.getDate(2));
+            kisi.setIsim(csSorgula.getString(3));
+            kisi.setSoyisim(csSorgula.getString(4));
+            kisi.setCinsiyet(csSorgula.getString(5).charAt(0));
+            kisi.setAile_sira_no(csSorgula.getInt(6));
+            kisi.setCilt_no(csSorgula.getString(7));
+            kisi.setMedeni_durum_id(csSorgula.getInt(8));
+            kisi.setSira_no(csSorgula.getInt(9));
+            kisi.setAnne_isim(csSorgula.getString(10));
+            kisi.setBaba_isim(csSorgula.getString(11));
+            kisi.setEs_isim(csSorgula.getString(12));
+            kisi.setEs_soyisim(csSorgula.getString(13));
+            kisi.setIlce(csSorgula.getString(14));
+            kisi.setTarif(csSorgula.getString(15));
+            kisi.setSite(csSorgula.getString(16));
+            kisi.setKapi_no(csSorgula.getInt(17));
+            kisi.setDaire_no(csSorgula.getInt(18));
+            kisi.setAdres_no(csSorgula.getInt(19));
+            kisi.setMahalle_id(csSorgula.getInt(20));
+            kisi.setEv_telefon(csSorgula.getBigDecimal(21).toBigInteger());
+            kisi.setCep_telefon(csSorgula.getBigDecimal(22).toBigInteger());
+            kisi.setEposta(csSorgula.getString(23));
         } catch (Exception ex) {
             DetectError(ex);
         }
-        
     }
-    
+
     public void Create(Kisi kisi) {
         try {
             Connection conn = this.getDb();
@@ -126,83 +141,110 @@ public class KisiDAO extends DBConnection {
             csKisi.setInt(11, Integer.parseInt(adresId));
             csKisi.setInt(12, Integer.parseInt(yakinlarId));
             csKisi.executeUpdate();
-            
+
         } catch (Exception ex) {
             DetectError(ex);
         }
     }
-    
+
     public List<Kisi> GetList() {
         List<Kisi> KisiList = new ArrayList<>();
-        
+
         try {
             Statement statement = getDb().createStatement();
             String Selectquery = "SELECT * FROM KISI_TEMEL";
             ResultSet rs = statement.executeQuery(Selectquery);
-            
+
             while (rs.next()) {
                 KisiList.add(new Kisi());
             }
-            
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
         return KisiList;
     }
-    
+
     public void Delete(int kullaniciId) {
         String deleteQuery = "DELETE FROM KULLANICI WHERE kullanici_id = ?";
-        
+
         try {
             PreparedStatement ps = getDb().prepareStatement(deleteQuery);
             ps.setInt(1, kullaniciId);
             int rowsDeleted = ps.executeUpdate();
             System.out.println(rowsDeleted + " kisi silindi.");
-            
+
         } catch (SQLException ex) {
             System.out.println("Veritabanı hatası: " + ex.getMessage());
         }
     }
-    
+
     public List<SelectItem> MahalleGetir() {
         List<SelectItem> MahalleList = new ArrayList<>();
-        
+
         try {
             Statement statement = getDb().createStatement();
             String Selectquery = "SELECT KISI_ADRES_MAHALLE_ID, MAHALLE FROM KISI_ADRES_MAHALLE";
             ResultSet rs = statement.executeQuery(Selectquery);
-            
-            int x = 1;
+
             while (rs.next()) {
-                
                 MahalleList.add(new SelectItem(rs.getInt("KISI_ADRES_MAHALLE_ID"), rs.getString("MAHALLE")));
             }
-            
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
         return MahalleList;
     }
-    
+
     public List<SelectItem> SokakGetir(int selectedmahalleid) {
         List<SelectItem> MahalleList = new ArrayList<>();
-        
+
         try {
             Statement statement = getDb().createStatement();
             String Selectquery = "SELECT SOKAK_ID, SOKAK_ISIM FROM KISI_MAHALLE_SOKAK WHERE MAHALLE_ID = " + selectedmahalleid;
             ResultSet rs = statement.executeQuery(Selectquery);
-            
+
             while (rs.next()) {
-                
+
                 MahalleList.add(new SelectItem(rs.getInt("SOKAK_ID"), rs.getString("SOKAK_ISIM")));
             }
-            
+
         } catch (Exception ex) {
             DetectError(ex);
         }
         return MahalleList;
     }
-    
+
+    public void MahalleEkle(Kisi kisi) {
+
+        try {
+            Connection conn = this.getDb();
+
+            String callQueryAdres = "{call INSERT_KISI_ADRES_MAHALLE(?)}";
+            CallableStatement csAdres = conn.prepareCall(callQueryAdres);
+            csAdres.setString(1, kisi.getMahalle());
+            csAdres.execute();
+        } catch (Exception ex) {
+            DetectError(ex);
+        }
+    }
+
+    public void SokakEkle(Kisi kisi) {
+
+        try {
+            Connection conn = this.getDb();
+
+            String callQueryAdres = "{call INSERT_ADRES_MAHALLE_SOKAK(?, ?)}";
+            CallableStatement csAdres = conn.prepareCall(callQueryAdres);
+            csAdres.setInt(1, kisi.getMahalle_id());
+            csAdres.setString(2, kisi.getSokak());
+            csAdres.execute();
+        } catch (Exception ex) {
+            DetectError(ex);
+        }
+    }
+
     public void DetectError(Exception ex) {
         //Hatayı yakalamak için
         FacesContext context = FacesContext.getCurrentInstance();
@@ -216,53 +258,53 @@ public class KisiDAO extends DBConnection {
                         .append(":").append(element.getLineNumber()).append(")");
                 break;
             }
-            
+
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage.toString(), null));
         }
-        
+
     }
-    
+
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();
         }
         return db;
     }
-    
+
     public void setDb(Connection db) {
         this.db = db;
     }
-    
+
     public String getAdresId() {
         return adresId;
     }
-    
+
     public void setAdresId(String adresId) {
         this.adresId = adresId;
     }
-    
+
     public String getIletisimId() {
         return iletisimId;
     }
-    
+
     public void setIletisimId(String iletisimId) {
         this.iletisimId = iletisimId;
     }
-    
+
     public String getYakinlarId() {
         return yakinlarId;
     }
-    
+
     public void setYakinlarId(String yakinlarId) {
         this.yakinlarId = yakinlarId;
     }
-    
+
     public Integer getKisi_temel_id() {
         return kisi_temel_id;
     }
-    
+
     public void setKisi_temel_id(Integer kisi_temel_id) {
         this.kisi_temel_id = kisi_temel_id;
     }
-    
+
 }
