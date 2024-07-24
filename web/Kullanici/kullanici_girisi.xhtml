@@ -38,10 +38,11 @@
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <h1 class="text-center">Kullanıcı Girişi</h1>
+                        <div class="info-message">Lütfen iletişim bilgilerini eksiksiz giriniz</div>
                         <div class="card">
                             
                             <div class="card mt-3">
-                                <div class="info-message">Lütfen iletişim bilgilerini eksiksiz giriniz</div>
+                                
                                 <div class="card-body">
                                     <div class="form-row">
                                         <div class="form-group">
@@ -58,63 +59,80 @@
                                         </h:inputText>
                                         </div>
                                     </div>
+                                        <div class="form-group">
+                                        <label for="email">Şifre:</label>
+                                        <h:inputText id="email" class="form-control" value="#{kisiBean.entity.eposta}">
+                                            <f:passThroughAttribute name="type" value="email" />
+                                        </h:inputText>
+                                        </div>
                                                                    
                                         <div class="form-group col-md-4">
-                                            <label for="neighborhood">Mahalle</label>
+                                            <label for="neighborhood">Bölüm:</label>
                                             <h:selectOneMenu id="neighborhood" value = "#{kisiBean.selectedMahalleId}" class="form-control">
                                                 <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
                                                 <f:selectItems value="#{kisiBean.mahalleList}" />
                                                 <f:ajax event="change" listener="#{kisiBean.sokakyukle}" render="street" />
                                             </h:selectOneMenu>
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="street">Cadde/Sokak</label>
-                                            <h:selectOneMenu id="street" value="#{kisiBean.entity.mahalle_sokak_id}" class="form-control">
-                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
-                                                <f:selectItems value="#{kisiBean.sokakList}" />
-                                            </h:selectOneMenu>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="address_desc">Adres Tarif</label>
-                                        <h:inputTextarea id="address_desc" class="form-control" rows="3" value="#{kisiBean.entity.tarif}" />
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-4">
-                                            <label for="apartment">Site</label>
-                                            <h:inputText id="apartment" class="form-control" value="#{kisiBean.entity.site}" />
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="block_no">Kapı No</label>
-                                            <h:inputText id="block_no" class="form-control" value="#{kisiBean.entity.kapi_no}" />
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="flat_no">Daire No</label>
-                                            <h:inputText id="flat_no" class="form-control" value="#{kisiBean.entity.daire_no}" />
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-4">
-                                            <label for="home_phone">Ev Telefon</label>
-                                            <h:inputText id="home_phone" class="form-control" value="#{kisiBean.entity.ev_telefon}" />
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="mobile_phone">Cep Telefon</label>
-                                            <h:inputText id="mobile_phone" class="form-control" value="#{kisiBean.entity.cep_telefon}" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">Eposta Adresi</label>
+                                        
+                                         <div class="form-group">
+                                        <label for="email">Ad:</label>
                                         <h:inputText id="email" class="form-control" value="#{kisiBean.entity.eposta}">
                                             <f:passThroughAttribute name="type" value="email" />
                                         </h:inputText>
+                                        </div>
+                                        
+                                         <div class="form-group">
+                                        <label for="email">Ünvan:</label>
+                                        <h:inputText id="email" class="form-control" value="#{kisiBean.entity.eposta}">
+                                            <f:passThroughAttribute name="type" value="email" />
+                                        </h:inputText>
+                                        </div>
+                                        
+                                         <div class="form-group">
+                                        <label for="email">Sicil No:</label>
+                                        <h:inputText id="email" class="form-control" value="#{kisiBean.entity.eposta}">
+                                            <f:passThroughAttribute name="type" value="email" />
+                                        </h:inputText>
+                                        </div>
+                                        
+                                       
+                                        
+                                        
+                                        
+                                        
+                                        
                                     </div>
+                                    <div class="form-group">
+                                        <label for="address_desc">Adres</label>
+                                        <h:inputTextarea id="address_desc" class="form-control" rows="3" value="#{kisiBean.entity.tarif}" />
+                                    </div>
+                                    
+                                    
+                                    
+                                    <div class="text-center mt-3">
+                                <h:commandLink value="Kaydet" action="#{kisimuracaatBean.create()}" class="btn btn-success" />
+                            </div>
+                                    
+                                    
+                                    
                                 </div>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="username">Kullanıcı Adı:</label>
-                                <input type="text" class="form-control small-input" id="username" value="user20" />
+                            <div class="card mt-3" >
+                                
+                                <div class="card-body">
+                                    <label for="archive_file_no">Arşiv Dosya No</label>
+                                    <h:inputText id="archive_file_no" class="form-control" value="#{muracaatBean.entity.arsiv_dosya_no}" />
+                                    <div class="form-group" value = "#{muracaatBean.entity.arsiv_dosya_no}">
+                                    </div>
+                                    <div class="form-group">
+                                        
+                                    </div>
+                                          
+                                    
+                                </div>
                             </div>
+                           
                         </div>
                     </div>
                     <div class="form-group">

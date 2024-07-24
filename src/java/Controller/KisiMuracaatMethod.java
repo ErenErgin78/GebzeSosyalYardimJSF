@@ -34,9 +34,4 @@ public class KisiMuracaatMethod {
         kisiBean.create();
         muracaatBean.create();
     }
-    
-    public void sorgula(){
-    
-    
-    }
 }
