@@ -54,6 +54,7 @@ public class KisiBean implements Serializable {
     this.getDao().SokakEkle(getEntity());
     }
 
+    //Muracaat Girişte dinamik mahalle ve sokak değişimi için
     public List<SelectItem> mahallegetir() {
         return this.getDao().MahalleGetir();
     }
