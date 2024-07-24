@@ -38,34 +38,27 @@
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <h1 class="text-center">Yeni Cadde/Sokak Girişi</h1>
-                        <div class="card">   
-                            
-                                <div class="card-header">Cadde/Sokak Giriş Bilgileri <br/>
-
-                                </div>
-                               
-                                <div class="card-body">
-                                    
-                                    <div class="form-group" value = "#{muracaatBean.entity.arsiv_dosya_no}">
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="application_type">Mahalle:</label>
-                                        <h:selectOneMenu id="application_type" class="form-control" value = "#{muracaatBean.entity.muracaat_tip_id}">
-                                            <f:selectItem itemLabel="Adem Yavuz" itemValue="4" />   
-                                        </h:selectOneMenu>
-                                    </div> 
-
-                                    <div class="form-group">
-                                        <label for="description">Cadde/Sokak Adı:</label>
-                                        <h:inputTextarea id="description" class="form-control" value = "#{muracaatBean.entity.aciklama}" rows="3" />
-                                    </div>
+                        <div class="card">     
+                            <div class="card-header">Cadde/Sokak Giriş Bilgileri <br/>
+                            </div>  
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="application_type">Mahalle:</label>
+                                    <h:selectOneMenu id="neighborhood" value = "#{kisiBean.selectedMahalleId}" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                        <f:selectItems value="#{kisiBean.mahalleList}" />
+                                        <f:ajax event="change" listener="#{kisiBean.sokakyukle}" render="street" />
+                                    </h:selectOneMenu>
+                                </div> 
+                                <div class="form-group">
+                                    <label for="description">Cadde/Sokak Adı:</label>
+                                    <h:inputTextarea id="description" class="form-control" value = "#{muracaatBean.entity.aciklama}" rows="3" />
                                 </div>
                             </div>
-                            <div class="text-center mt-3">
-                                <h:commandLink value="Kaydet" action="#{kisimuracaatBean.create()}" class="btn btn-success" />
-                            </div>
-                        
+                        </div>
+                        <div class="text-center mt-3">
+                            <h:commandLink value="Kaydet" action="#{kisimuracaatBean.create()}" class="btn btn-success" />
+                        </div>                      
                     </div>
                 </div>
             </div>
