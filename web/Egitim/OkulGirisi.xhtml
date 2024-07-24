@@ -82,25 +82,21 @@
                                         <h:inputText id="name" value ="#{kisiBean.entity.isim}" class="form-control" />
                                     </div>
                                 </div>
-                                <div class="text-center mt-3">
-    <h:panelGroup>
-        <h:commandButton value="Kaydet" action="#{kisimuracaatBean.create()}" class="btn btn-success" style="margin-right: 10px;">
-            <f:ajax execute="@form" render="@form" />
-        </h:commandButton>
-
-        <h:commandButton value="Temizle" action="#{kisiBean.sorgula()}" class="btn btn-success" style="margin-left: 10px; background-color: #f8f9fa; color: black;">
-            <f:ajax execute="@form" render="@form" />
-        </h:commandButton>
-    </h:panelGroup>
-</div>
-
-
 
                             </div>
                         </div>
+                        <div class="text-center mt-3">
+                            <h:panelGroup>
+                                <h:commandButton value="Kaydet" action="#{kisimuracaatBean.create()}" class="btn btn-success" style="margin-right: 10px;">
+                                    <f:ajax execute="@form" render="@form" />
+                                </h:commandButton>
 
+                                <h:commandButton value="Temizle" action="#{kisiBean.sorgula()}" class="btn btn-success" style="margin-left: 10px; background-color: #f8f9fa; color: black;">
+                                    <f:ajax execute="@form" render="@form" />
+                                </h:commandButton>
+                            </h:panelGroup>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </h:form>
