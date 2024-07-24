@@ -278,6 +278,13 @@ h2 {
     font-weight: bold;
 }
 
+.info-message {
+    color: #bbb; /* Daha soluk bir metin rengi */
+    font-size: 14px; /* Metin boyutunu belirleyin */
+    margin-top: 5px; /* Üst marjin ekleyin */
+    display: block; /* Blok görüntüsü */
+}
+
 .card-body {
     padding: 20px;
 }

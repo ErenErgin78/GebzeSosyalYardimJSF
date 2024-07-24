@@ -2,27 +2,114 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <title>Modern Form</title>
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="styles.css" rel="stylesheet" />
-    </head>
-    <body>
-        <div class="container form-background mt-5">
-            <div class="col-md-6">
-                <form>
-                    <div class="form-group">
-                        <label for="email">E-Posta:</label>
-                        <input type="email" class="form-control" id="email" />
-                    </div>
-                    <div class="form-group">
-                        <label for="username">Kullanıcı Adı:</label>
-                        <input type="text" class="form-control" id="username" />
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="email">E-Posta:</label>
-                                <input type="email" class="form-control small-input" id="email" />
+
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gebze Belediyesi Dashboard</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="styles.css" />
+        <style>
+            .form-background {
+                background-color: #f8f9fa; /* Arka plan rengi */
+            }
+            .no-border .form-check-input {
+                border: none;
+            }
+            .inline-radio {
+                display: inline-block;
+            }
+            .no-border-radio .form-check-input {
+                border: none;
+                margin-right: 10px;
+            }
+            .no-border-radio .form-check {
+                padding: 0;
+                margin: 0 10px 0 0;
+            }
+            .no-border-radio .form-check-label {
+                margin: 0;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:messages globalOnly="true" layout="table"/>
+            <div class="container-fluid mt-20">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <h1 class="text-center">Kullanıcı Girişi</h1>
+                        <div class="card">
+                            
+                            <div class="card mt-3">
+                                <div class="info-message">Lütfen iletişim bilgilerini eksiksiz giriniz</div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                        <label for="email">E-Posta:</label>
+                                        <h:inputText id="email" class="form-control" value="#{kisiBean.entity.eposta}">
+                                            <f:passThroughAttribute name="type" value="email" />
+                                        </h:inputText>
+                                    </div>
+                                        <div class="form-group col-md-4">
+                                        <div class="form-group">
+                                        <label for="email">Kullanıcı Adı:</label>
+                                        <h:inputText id="email" class="form-control" value="#{kisiBean.entity.eposta}">
+                                            <f:passThroughAttribute name="type" value="email" />
+                                        </h:inputText>
+                                        </div>
+                                    </div>
+                                                                   
+                                        <div class="form-group col-md-4">
+                                            <label for="neighborhood">Mahalle</label>
+                                            <h:selectOneMenu id="neighborhood" value = "#{kisiBean.selectedMahalleId}" class="form-control">
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                                <f:selectItems value="#{kisiBean.mahalleList}" />
+                                                <f:ajax event="change" listener="#{kisiBean.sokakyukle}" render="street" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="street">Cadde/Sokak</label>
+                                            <h:selectOneMenu id="street" value="#{kisiBean.entity.mahalle_sokak_id}" class="form-control">
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                                <f:selectItems value="#{kisiBean.sokakList}" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address_desc">Adres Tarif</label>
+                                        <h:inputTextarea id="address_desc" class="form-control" rows="3" value="#{kisiBean.entity.tarif}" />
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="apartment">Site</label>
+                                            <h:inputText id="apartment" class="form-control" value="#{kisiBean.entity.site}" />
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="block_no">Kapı No</label>
+                                            <h:inputText id="block_no" class="form-control" value="#{kisiBean.entity.kapi_no}" />
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="flat_no">Daire No</label>
+                                            <h:inputText id="flat_no" class="form-control" value="#{kisiBean.entity.daire_no}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="home_phone">Ev Telefon</label>
+                                            <h:inputText id="home_phone" class="form-control" value="#{kisiBean.entity.ev_telefon}" />
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="mobile_phone">Cep Telefon</label>
+                                            <h:inputText id="mobile_phone" class="form-control" value="#{kisiBean.entity.cep_telefon}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Eposta Adresi</label>
+                                        <h:inputText id="email" class="form-control" value="#{kisiBean.entity.eposta}">
+                                            <f:passThroughAttribute name="type" value="email" />
+                                        </h:inputText>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="username">Kullanıcı Adı:</label>
