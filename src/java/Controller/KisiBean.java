@@ -89,12 +89,6 @@ public class KisiBean implements Serializable {
         this.dao = dao;
     }
 
-    public List<Kisi> MahalleListesi() {
-
-        this.list = this.getDao().MahalleListesi();
-        return this.list;
-    }
-
     public List<Kisi> getList() {
         if (this.list == null) {
             this.list = this.getDao().GetList();

@@ -150,23 +150,6 @@ public class KisiDAO extends DBConnection {
         }
     }
 
-    public List<Kisi> MahalleListesi() {
-        List<Kisi> MahalleList = new ArrayList<>();
-        try {
-            Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT KISI_ADRES_MAHALLE_ID ,MAHALLE, AKTIF FROM KISI_ADRES_MAHALLE";
-            ResultSet rs = statement.executeQuery(Selectquery);
-
-            while (rs.next()) {
-                MahalleList.add(new Kisi());
-            }
-            
-        } catch (Exception ex) {
-            DetectError(ex);
-        }
-        return MahalleList;
-    }
-
     public List<Kisi> GetList() {
         List<Kisi> KisiList = new ArrayList<>();
 
@@ -234,25 +217,7 @@ public class KisiDAO extends DBConnection {
         }
         return MahalleList;
     }
-/*
-    public void SokakEkle(Kisi kisi) {
 
-        try {
-            Connection conn = this.getDb();
-
-            String callQueryAdres = "{call INSERT_ADRES_MAHALLE_SOKAK(?, ?)}";
-            CallableStatement csAdres = conn.prepareCall(callQueryAdres);
-            csAdres.setInt(1, kisi.getMahalle_id());
-            csAdres.setString(2, kisi.getSokak());
-            csAdres.execute();
-
-            this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
-
-        } catch (Exception ex) {
-            DetectError(ex);
-        }
-    }
-*/
     public void DetectError(Exception ex) {
         //Hatayı yakalamak için
         FacesContext context = FacesContext.getCurrentInstance();

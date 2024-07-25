@@ -16,12 +16,22 @@ public class Okul {
     private Integer okul_tur_id;
     private Integer okul_aktif;
 
+    public Okul(String okul_isim, Integer okul_tip_id, Integer okul_tur_id, Integer okul_aktif) {
+        this.okul_isim = okul_isim;
+        this.okul_tip_id = okul_tip_id;
+        this.okul_tur_id = okul_tur_id;
+        this.okul_aktif = okul_aktif;
+    }
+
     public Okul(Integer okul_id, String okul_isim, Integer okul_tip_id, Integer okul_tur_id, Integer okul_aktif) {
         this.okul_id = okul_id;
         this.okul_isim = okul_isim;
         this.okul_tip_id = okul_tip_id;
         this.okul_tur_id = okul_tur_id;
         this.okul_aktif = okul_aktif;
+    }
+
+    public Okul() {
     }
 
     public Integer getOkul_id() {
