@@ -6,6 +6,7 @@ import jakarta.faces.context.FacesContext;
 import util.DBConnection;
 import java.sql.Connection;
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -51,18 +52,31 @@ public class OkulDAO extends DBConnection {
                 OkulList.add(new Okul(
                         rs.getInt("OKUL_ID"),
                         rs.getString("OKUL_ISIM"),
-                        rs.getInt("OKUL_TIP_ID"),
-                        rs.getInt("OKUL_TUR_ID"),
-                        rs.getInt("OKUL_AKTIF")
+                        rs.getInt("OKUL_AKTIF"),
+                        rs.getString("OKUL_TIP_ISIM"),
+                        rs.getString("OKUL_TUR_ISIM")
                 ));
             }
-
             mesaj = "işlem başarılı";
 
         } catch (Exception ex) {
             DetectError(ex);
         }
         return OkulList;
+    }
+
+    public void OkulSil(int sokakid) {
+        String deleteQuery = "DELETE FROM OKUL WHERE OKUL_ID = ?";
+
+        try {
+            PreparedStatement ps = getDb().prepareStatement(deleteQuery);
+            ps.setInt(1, sokakid);
+            int rowsDeleted = ps.executeUpdate();
+
+            mesaj = "İşlemler başarıyla gerçekleşmiştir.";
+        } catch (SQLException ex) {
+            DetectError(ex);
+        }
     }
 
     public void DetectError(Exception ex) {

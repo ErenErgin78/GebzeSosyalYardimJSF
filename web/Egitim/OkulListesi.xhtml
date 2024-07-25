@@ -8,90 +8,90 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Okul Listesi</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="styles.css" />
-    <h:outputStylesheet name="styles.css"/>
-</h:head>
-<h:body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Okul Listesi</h2>
-                <div class="card">
-                    <div class="card-header">Okul Giriş Bilgileri</div>
-                    <div class="card-body">
-                        <h:form id="mahalleForm">
-                            <div class="form-group">
-                                <label for="bolge">Okul Tipi:</label>
-                                <h:selectOneMenu id="okul" value="#{okulBean.selectedOkul}" class="form-control">
-                                    <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
-                                    <f:selectItems value="#{okulBean.okulListesi}" var="bolge" itemLabel="#{okul.mahalleAdi}" itemValue="#{okul.okulId}" />
-                                </h:selectOneMenu>
-                            </div>
-                             <div class="form-group">
-                                <label for="devletOzel">Devlet/Özel:</label>
-                                <h:selectOneMenu id="devletOzel" value="#{okulBean.devletOzel}" class="form-control">
-                                    <f:selectItem itemLabel="Devlet" itemValue="devlet" />
-                                    <f:selectItem itemLabel="Özel" itemValue="ozel" />
-                                </h:selectOneMenu>
-                            </div>
-                            <div class="form-group">
-                                <label for="aktifMi">Aktif:</label>
-                                <h:selectOneMenu id="aktifMi" value="#{okulBean.aktifMi}" class="form-control">
-                                    <f:selectItem itemLabel="Evet" itemValue="true" />
-                                    <f:selectItem itemLabel="Hayır" itemValue="false" />
-                                </h:selectOneMenu>
-                                
-                            </div>
-                           
-              
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Okul Adı</th>
-                                        <th>Okul Tipi Adı</th>
-                                        <th>Devlet/Özel</th>
-                                        <th>Eylem</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <ui:repeat value="#{mahalleBean.mahalleList}" var="mahalle" varStatus="loop">
-                                        <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                            <td>#{mahalle.mahalleKodu}</td>
-                                            <td>#{mahalle.mahalleAdi}</td>
-                                            <td>#{mahalle.aktifMi ? 'Evet' : 'Hayır'}</td>
-                                            <td>
-                                                <div class="action-buttons">
-                                                    <h:commandButton value="Düzenle" action="#{mahalleBean.edit(mahalle)}" styleClass="btn btn-warning ml-20">
-                                                        <f:ajax execute="@this" render="@form"/>
-                                                    </h:commandButton>
-                                                    <h:commandButton value="Sil" action="#{mahalleBean.delete(mahalle.mahalleKodu)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
-                                                        <f:ajax execute="@this" render="@form"/>
-                                                    </h:commandButton>
-                                                </div>
-                                            </td>
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Okul Listesi</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="styles.css" />
+        <h:outputStylesheet name="styles.css"/>
+    </h:head>
+    <h:body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Okul Listesi</h2>
+                    <div class="card">
+                        <div class="card-header">Okul Giriş Bilgileri</div>
+                        <div class="card-body">
+                            <h:form id="mahalleForm">
+                                <div class="form-group">
+                                    <label for="bolge">Okul Tipi:</label>
+                                    <h:selectOneMenu id="okul" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
+                                        <f:selectItems value="#{okulBean.okulListesi}" var="bolge" itemLabel="#{okul.mahalleAdi}" itemValue="#{okul.okulId}" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group">
+                                    <label for="devletOzel">Devlet/Özel:</label>
+                                    <h:selectOneMenu id="devletOzel" class="form-control">
+                                        <f:selectItem itemLabel="Devlet" itemValue="devlet" />
+                                        <f:selectItem itemLabel="Özel" itemValue="ozel" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group">
+                                    <label for="aktifMi">Aktif:</label>
+                                    <h:selectOneMenu id="aktifMi"  class="form-control">
+                                        <f:selectItem itemLabel="Evet" itemValue="true" />
+                                        <f:selectItem itemLabel="Hayır" itemValue="false" />
+                                    </h:selectOneMenu>
+
+                                </div>
+
+
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Okul Adı</th>
+                                            <th>Okul Tipi</th>
+                                            <th>Okul Türü</th>
+                                            <th>Eylem</th>
                                         </tr>
-                                    </ui:repeat>
-                                </tbody>
-                            </table>
-                        </h:form>
+                                    </thead>
+                                    <tbody>
+                                        <ui:repeat value="#{okulBean.list}" var="okul" varStatus="loop">
+                                            <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                                <td>#{okul.okul_isim}</td>
+                                                <td>#{okul.okul_tip}</td>
+                                                <td>#{okul.okul_aktif == 1 ? 'Evet' : 'Hayır'}</td>
+                                                <td>
+                                                    <div class="action-buttons">
+                                                        <h:commandButton value="Düzenle" styleClass="btn btn-warning ml-20">
+                                                            <f:ajax execute="@this" render="@form"/>
+                                                        </h:commandButton>
+                                                        <h:commandButton value="Sil" action="#{okulBean.okulsil(okul.okul_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                            <f:ajax execute="@this" render="@form"/>
+                                                        </h:commandButton>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </ui:repeat>
+                                    </tbody>
+                                </table>
+                            </h:form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
-    <script>
-        function confirmDelete(button) {
-            return confirm("Bu mahalleyi gerçekten silmek istiyor musunuz?");
-        }
-    </script>
-</h:body>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+        <script>
+                                                            function confirmDelete(button) {
+                                                                return confirm("Bu mahalleyi gerçekten silmek istiyor musunuz?");
+                                                            }
+        </script>
+    </h:body>
 </html>
 
