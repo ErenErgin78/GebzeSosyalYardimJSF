@@ -29,9 +29,9 @@ public class OkulDAO extends DBConnection {
             csOkul.setInt(4, okul.getOkul_aktif());
 
             csOkul.execute();
-            mesaj = "işlem başarılı";
+            mesaj = "işlem başarıyla gerçekleşmiştir";
             
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             DetectError(ex);
         }
 
@@ -84,6 +84,9 @@ public class OkulDAO extends DBConnection {
     }
 
     public Connection getDb() {
+        if (this.db == null) {
+            this.db = this.connect();
+        }
         return db;
     }
 

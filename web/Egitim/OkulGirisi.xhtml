@@ -40,7 +40,7 @@
                     <div class="col-md-8 ">
                         <h1 class="text-center">Okul Girişi</h1>
                         <div class="card mt-3 " >
-                            <div class="card-header">Okul Giriş Bilgileri</div>
+                            <div class="card-header">Okul Giriş Bilgileri  #{okulBean.entity.okul_tur_id}</div>
                             <div class="card-body">
                                 <div class="form-row">
                                     <div class="custom-radio">
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-8">
-                                        <label for="application_type">Aktif:</label>
+                                        <label for="application_type">Aktif: #{okulBean.entity.okul_aktif}</label>
                                         <h:selectOneMenu id="application_type" class="form-control" value = "#{okulBean.entity.okul_aktif}">
                                             <f:selectItem itemLabel="Evet" itemValue="1" />
                                             <f:selectItem itemLabel="Hayır" itemValue="0" />
@@ -61,12 +61,12 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-8">
-                                        <label for="neighborhood">Okul Tipi:</label>
+                                        <label for="neighborhood">Okul Tipi: #{okulBean.entity.okul_tip_id}</label>
                                         <h:selectOneMenu id="medenidurum" value="#{okulBean.entity.okul_tip_id}" class="form-control">
                                             <f:selectItem itemLabel="Anaokulu" itemValue="1" />
                                             <f:selectItem itemLabel="İlkokul" itemValue="2" />
                                             <f:selectItem itemLabel="Ortaokul" itemValue="3" />
-                                            <f:selectItem itemLabel="Lise" itemValue="aaa" />
+                                            <f:selectItem itemLabel="Lise" itemValue="4" />
                                             <f:selectItem itemLabel="Ön Lisans" itemValue="6" />
                                             <f:selectItem itemLabel="Lisans" itemValue="7" />
                                             <f:selectItem itemLabel="Diğer" itemValue="8" />
@@ -76,22 +76,19 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-8">
-                                        <label for="name">Okul Adı:</label>
+                                        <label for="name">Okul Adı:  #{okulBean.entity.okul_isim}</label>
                                         <h:inputText id="name" value ="#{okulBean.entity.okul_isim}" class="form-control" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="text-center mt-3">
-                             <h:commandButton value="Kaydet" action="#{okulBean.create}" class="btn btn-success" style="margin-right: 10px;">
-                                    <f:ajax execute="@form" render="@form, mesaj" />
-                                </h:commandButton>
-                            <h:panelGroup>
-                               
-                                <h:commandButton value="Temizle" action="#{okulBean.temizle()}" class="btn btn-success" style="margin-left: 10px; background-color: #f8f9fa; color: black;">
-                                    <f:ajax execute="@form" render="@form, mesaj" />
-                                </h:commandButton>
-                            </h:panelGroup>
+                            <h:commandButton value="Kaydet" action="#{okulBean.create()}" class="btn btn-success">
+                                <f:ajax execute="@form" render="@form, mesaj" />
+                            </h:commandButton>
+                            <h:commandButton value="Temizle" action="#{okulBean.temizle()}" class="btn btn-success" style="margin-left: 10px; background-color: #f8f9fa; color: black;">
+                                <f:ajax execute="@form" render="@form" />
+                            </h:commandButton>
                         </div>
                     </div>
                 </div>
