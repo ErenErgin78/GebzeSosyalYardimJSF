@@ -25,6 +25,7 @@ public class MahalleBean implements Serializable {
 
     public void mahallekle() {
         this.getDao().MahalleEkle(getEntity());
+        this.list = this.getDao().MahalleListesi();
     }
 
     public void mahallesil(int MahalleID) {
