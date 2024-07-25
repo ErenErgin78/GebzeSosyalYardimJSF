@@ -30,7 +30,7 @@ public class OkulDAO extends DBConnection {
 
             csOkul.execute();
             mesaj = "işlem başarıyla gerçekleşmiştir";
-            
+
         } catch (SQLException ex) {
             DetectError(ex);
         }
