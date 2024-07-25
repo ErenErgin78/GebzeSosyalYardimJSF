@@ -34,6 +34,7 @@
     <h:body>
         <h:form>
             <h:messages globalOnly="true" layout="table"/>
+            <h:outputText id="mesaj" value="#{mahalleBean.dao.islemBasariliMesaj}" />
             <div class="container-fluid mt-20">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
@@ -42,10 +43,7 @@
 
                                 <div class="card-header">Mahalle Giriş Bilgileri</div>
                                 <div class="card-body">
-                                  
-                                    <div class="form-group" value = "#{muracaatBean.entity.arsiv_dosya_no}">
-                                    </div>
-                                    
+                                                      
                                     <div class="form-group">
                                         <label for="application_type">İlçe</label>
                                         <h:selectOneMenu id="application_type" class="form-control">
@@ -63,13 +61,13 @@
                                     
                                     <div class="form-group">
                                         <label for="description">Mahalle Adı</label>
-                                        <h:inputTextarea id="description" class="form-control" value="#{kisiBean.entity.mahalle}" />
+                                        <h:inputTextarea id="description" class="form-control" value="#{mahalleBean.entity.mahalle}" />
                                     </div>
                                 </div>
                             </div>
                             <div class="text-center mt-3">
-                                <h:commandButton value="Kaydet" action="#{kisiBean.mahalleekle()}" class="btn btn-success">
-                                <f:ajax execute="@form" render="@form" />
+                                <h:commandButton value="Kaydet" action="#{mahalleBean.mahallekle()}" class="btn btn-success">
+                                <f:ajax execute="@form" render="@form, mesaj" />
                                 </h:commandButton>
                             </div>
                     </div>

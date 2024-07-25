@@ -45,19 +45,20 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="application_type">Mahalle:</label>
-                                    <h:selectOneMenu id="neighborhood" value = "#{kisiBean.selectedMahalleId}" class="form-control">
+                                    <h:selectOneMenu id="neighborhood" value = "#{sokakBean.entity.mahalle_id}" class="form-control">
                                         <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
                                         <f:selectItems value="#{kisiBean.mahalleList}" />
+                                        <f:ajax event="change" listener="#{kisiBean.sokakyukle}" render="street" />
                                     </h:selectOneMenu>
                                 </div> 
                                 <div class="form-group">
                                     <label for="description">Cadde/Sokak Adı:</label>
-                                    <h:inputTextarea id="description" class="form-control" value = "#{kisiBean.entity.sokak}" rows="3" />
+                                    <h:inputTextarea id="description" class="form-control" value = "#{sokakBean.entity.sokak}" rows="3" />
                                 </div>
                             </div>
                         </div>
                         <div class="text-center mt-3">
-                            <h:commandButton id = "sokakekle" value="Kaydet" action="#{kisiBean.sokakekle()}" class="btn btn-success">
+                            <h:commandButton id = "sokakekle" value="Kaydet" action="#{sokakBean.sokakekle()}" class="btn btn-success">
                                 <f:ajax execute="@form" render="@form, mesaj" />
                             </h:commandButton>
                         </div>                      

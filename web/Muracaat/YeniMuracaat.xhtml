@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
     <h:head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Gebze Belediyesi Dashboard</title>
@@ -34,6 +33,7 @@
     <h:body>
         <h:form>
             <h:messages globalOnly="true" layout="table"/>
+            <h:outputText id="mesaj" value="İşlem başarılı" />
             <div class="container-fluid mt-20">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
@@ -247,7 +247,7 @@
                             </div>
                             <div class="text-center mt-3">
                                 <h:commandButton value="Kaydet" action="#{kisimuracaatBean.create()}" class="btn btn-success">
-                                    <f:ajax execute="@form" render="@form" />
+                                    <f:ajax execute="@form" render="@form, mesaj" />
                                 </h:commandButton>
                             </div>
                         </div>

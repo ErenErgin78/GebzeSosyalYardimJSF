@@ -35,7 +35,7 @@ public class KisiBean implements Serializable {
     }
 
     public void delete(int KisiID) {
-        this.getDao().Delete(KisiID);
+        this.getDao().DeleteKisi(KisiID);
         this.list = this.getDao().GetList(); // Silme işleminden sonra listeyi güncelle
     }
 
@@ -44,14 +44,6 @@ public class KisiBean implements Serializable {
         kisi.setKimlik_no(this.entity.getKimlik_no());
         this.getDao().Sorgula(kisi);
         this.entity = kisi;
-    }
-    
-    public void mahalleekle(){
-    this.getDao().MahalleEkle(getEntity());
-    }
-    
-    public void sokakekle(){
-    this.getDao().SokakEkle(getEntity());
     }
 
     //Muracaat Girişte dinamik mahalle ve sokak değişimi için
@@ -62,11 +54,11 @@ public class KisiBean implements Serializable {
     public List<SelectItem> sokakgetir() {
         return this.getDao().SokakGetir(selectedMahalleId);
     }
-    
+
     public void sokakyukle(AjaxBehaviorEvent event) {
         sokakList = new ArrayList<>();
         if (selectedMahalleId != 0) {
-            sokakList =  this.getDao().SokakGetir(selectedMahalleId);;
+            sokakList = this.getDao().SokakGetir(selectedMahalleId);;
         }
     }
 

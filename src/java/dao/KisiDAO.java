@@ -145,8 +145,6 @@ public class KisiDAO extends DBConnection {
             csKisi.setInt(12, Integer.parseInt(yakinlarId));
             csKisi.executeUpdate();
 
-             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
-             
         } catch (Exception ex) {
             DetectError(ex);
         }
@@ -163,23 +161,22 @@ public class KisiDAO extends DBConnection {
             while (rs.next()) {
                 KisiList.add(new Kisi());
             }
-             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
-             
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
         return KisiList;
     }
 
-    public void Delete(int kullaniciId) {
-        String deleteQuery = "DELETE FROM KULLANICI WHERE kullanici_id = ?";
+    public void DeleteKisi(int KisiId) {
+        String deleteQuery = "DELETE FROM KISI_TEMEL WHERE kullanici_id = ?";
 
         try {
             PreparedStatement ps = getDb().prepareStatement(deleteQuery);
-            ps.setInt(1, kullaniciId);
+            ps.setInt(1, KisiId);
             int rowsDeleted = ps.executeUpdate();
-            
-             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+
+            this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
             System.out.println("Veritabanı hatası: " + ex.getMessage());
         }
@@ -196,7 +193,6 @@ public class KisiDAO extends DBConnection {
             while (rs.next()) {
                 MahalleList.add(new SelectItem(rs.getInt("KISI_ADRES_MAHALLE_ID"), rs.getString("MAHALLE")));
             }
-             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -215,47 +211,11 @@ public class KisiDAO extends DBConnection {
 
                 MahalleList.add(new SelectItem(rs.getInt("SOKAK_ID"), rs.getString("SOKAK_ISIM")));
             }
-             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (Exception ex) {
             DetectError(ex);
         }
         return MahalleList;
-    }
-
-    public void MahalleEkle(Kisi kisi) {
-
-        try {
-            Connection conn = this.getDb();
-
-            String callQueryAdres = "{call INSERT_KISI_ADRES_MAHALLE(?)}";
-            CallableStatement csAdres = conn.prepareCall(callQueryAdres);
-            csAdres.setString(1, kisi.getMahalle());
-            csAdres.execute();
-            
-             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
-
-        } catch (Exception ex) {
-            DetectError(ex);
-        }
-    }
-
-    public void SokakEkle(Kisi kisi) {
-
-        try {
-            Connection conn = this.getDb();
-
-            String callQueryAdres = "{call INSERT_ADRES_MAHALLE_SOKAK(?, ?)}";
-            CallableStatement csAdres = conn.prepareCall(callQueryAdres);
-            csAdres.setInt(1, kisi.getMahalle_id());
-            csAdres.setString(2, kisi.getSokak());
-            csAdres.execute();
-
-          this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
-
-        } catch (Exception ex) {
-            DetectError(ex);
-        }
     }
 
     public void DetectError(Exception ex) {
