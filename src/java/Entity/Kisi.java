@@ -114,7 +114,14 @@ public class Kisi {
         this.es_durum_id = es_durum_id;
     }
 
-    public Kisi(String mahalle) {
+    public Kisi(Integer mahalle_sokak_id, String mahalle, String sokak) {
+        this.mahalle_sokak_id = mahalle_sokak_id;
+        this.mahalle = mahalle;
+        this.sokak = sokak;
+    }
+
+    public Kisi(Integer mahalle_id, String mahalle) {
+        this.mahalle_id = mahalle_id;
         this.mahalle = mahalle;
     }
 
