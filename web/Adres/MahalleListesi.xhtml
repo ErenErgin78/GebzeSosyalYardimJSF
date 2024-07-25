@@ -8,66 +8,66 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mahalle Listesi</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="styles.css" />
-    <h:outputStylesheet name="styles.css"/>
-</h:head>
-<h:body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Mahalle Listesi</h2>
-                <div class="card">
-                    <div class="card-header">Mahalle Girişi Bilgileri</div>
-                    <div class="card-body">
-                        <h:form id="mahalleForm">
-                           
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Mahalle Kodu</th>
-                                        <th>Mahalle Adı</th>
-                                        <th>Aktif Mi?</th>
-                                        <th>Eylem</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <ui:repeat value="#{mahalleBean.mahalleList}" var="mahalle" varStatus="loop">
-                                        <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                            <td>#{mahalle.mahalleKodu}</td>
-                                            <td>#{mahalle.mahalleAdi}</td>
-                                            <td>#{mahalle.aktifMi ? 'Evet' : 'Hayır'}</td>
-                                            <td>
-                                                <div class="action-buttons">
-                                                    <h:commandButton value="Düzenle" action="#{mahalleBean.edit(mahalle)}" styleClass="btn btn-warning ml-20">
-                                                        <f:ajax execute="@this" render="@form"/>
-                                                    </h:commandButton>
-                                                    <h:commandButton value="Sil" action="#{mahalleBean.delete(mahalle.mahalleKodu)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
-                                                        <f:ajax execute="@this" render="@form"/>
-                                                    </h:commandButton>
-                                                </div>
-                                            </td>
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mahalle Listesi</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="styles.css" />
+        <h:outputStylesheet name="styles.css"/>
+    </h:head>
+    <h:body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Mahalle Listesi</h2>
+                    <div class="card">
+                        <div class="card-header">Mahalle Girişi Bilgileri</div>
+                        <div class="card-body">
+                            <h:form id="mahalleForm">
+
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Mahalle Kodu</th>
+                                            <th>Mahalle Adı</th>
+                                            <th>Aktif Mi?</th>
+                                            <th>Eylem</th>
                                         </tr>
-                                    </ui:repeat>
-                                </tbody>
-                            </table>
-                        </h:form>
+                                    </thead>
+                                    <tbody>
+                                        <ui:repeat value="#{mahalleBean.list}" var="mahalle" varStatus="loop">
+                                            <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                                <td>#{mahalle.mahalle_id}</td>
+                                                <td>#{mahalle.mahalle}</td>
+                                                <td>#{mahalle.mahalle_aktif == 1 ? 'Evet' : 'Hayır'}</td>
+                                                <td>
+                                                    <div class="action-buttons">
+                                                        <h:commandButton value="Düzenle" styleClass="btn btn-warning ml-20">
+                                                            <f:ajax execute="@this" render="@form"/>
+                                                        </h:commandButton>
+                                                        <h:commandButton value="Sil" action="#{mahalleBean.deletemahalle(mahalle.mahalle_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                            <f:ajax execute="@this" render="@form"/>
+                                                        </h:commandButton>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </ui:repeat>
+                                    </tbody>
+                                </table>
+                            </h:form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
-    <script>
-        function confirmDelete(button) {
-            return confirm("Bu mahalleyi gerçekten silmek istiyor musunuz?");
-        }
-    </script>
-</h:body>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+        <script>
+                                                            function confirmDelete(button) {
+                                                                return confirm("Bu mahalleyi gerçekten silmek istiyor musunuz?");
+                                                            }
+        </script>
+    </h:body>
 </html>
