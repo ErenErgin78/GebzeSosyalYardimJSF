@@ -45,21 +45,21 @@ public class MahalleDAO extends DBConnection {
     }
     
     public void MahalleSil(int mahalleid) {
-        String deleteSokakQuery = "DELETE FROM ADRES KISI_MAHALLE_SOKAK WHERE MAHALLE_ID = ?";
+        String deleteSokakQuery = "DELETE FROM KISI_MAHALLE_SOKAK WHERE MAHALLE_ID = ?";
         String deleteQuery = "DELETE FROM KISI_ADRES_MAHALLE  WHERE KISI_ADRES_MAHALLE_ID = ?";
         
         try {
-            PreparedStatement ps = getDb().prepareStatement(deleteSokakQuery);
-            ps.setInt(1, mahalleid);
-            int rowsDeleted = ps.executeUpdate();
+            PreparedStatement ps1 = getDb().prepareStatement(deleteSokakQuery);
+            ps1.setInt(1, mahalleid);
+            int rowsDeleted = ps1.executeUpdate();
             
-            ps = getDb().prepareStatement(deleteQuery);
-            ps.setInt(1, mahalleid);
-            rowsDeleted = ps.executeUpdate();
+            PreparedStatement ps2 = getDb().prepareStatement(deleteQuery);
+            ps2.setInt(1, mahalleid);
+            rowsDeleted = ps2.executeUpdate();
             
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
-            System.out.println("Veritabanı hatası: " + ex.getMessage());
+            DetectError(ex);
         }
     }
     
