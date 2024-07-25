@@ -34,6 +34,7 @@
     <h:body>
         <h:form>
             <h:messages globalOnly="true" layout="table"/>
+            <h:outputText id="mesaj" value="#{mahalleBean.dao.islemBasariliMesaj}" />
             <div class="container-fluid mt-20">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
@@ -65,7 +66,7 @@
                             </div>
                             <div class="text-center mt-3">
                                 <h:commandButton value="Kaydet" action="#{mahalleBean.mahallekle()}" class="btn btn-success">
-                                <f:ajax execute="@form" render="@form" />
+                                <f:ajax execute="@form" render="@form, mesaj" />
                                 </h:commandButton>
                             </div>
                     </div>

@@ -22,14 +22,16 @@ public class MahalleBean implements Serializable {
     private Mahalle entity;
     private MahalleDAO dao;
     private List<Mahalle> list;
-   
-    public void mahallekle(){
-    this.getDao().MahalleEkle(getEntity());
+
+    public void mahallekle() {
+        this.getDao().MahalleEkle(getEntity());
     }
-        public void deletemahalle(int MahalleID) {
+
+    public void mahallesil(int MahalleID) {
         this.getDao().MahalleSil(MahalleID);
         this.list = this.getDao().MahalleListesi(); // Silme işleminden sonra listeyi güncelle
     }
+
     public Mahalle getEntity() {
         if (this.entity == null) {
             this.entity = new Mahalle();

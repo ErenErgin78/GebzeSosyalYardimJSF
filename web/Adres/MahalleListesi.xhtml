@@ -46,7 +46,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                                         <h:commandButton value="Düzenle" styleClass="btn btn-warning ml-20">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
-                                                        <h:commandButton value="Sil" action="#{mahalleBean.deletemahalle(mahalle.mahalle_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                        <h:commandButton value="Sil" action="#{mahalleBean.mahallesil(mahalle.mahalle_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
                                                     </div>
