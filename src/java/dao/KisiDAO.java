@@ -196,7 +196,6 @@ public class KisiDAO extends DBConnection {
             while (rs.next()) {
                 MahalleList.add(new SelectItem(rs.getInt("KISI_ADRES_MAHALLE_ID"), rs.getString("MAHALLE")));
             }
-             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
