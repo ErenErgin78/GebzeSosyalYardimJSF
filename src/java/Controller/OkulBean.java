@@ -53,7 +53,7 @@ public class OkulBean implements Serializable {
         this.dao = dao;
     }
 
-    public List<Okul> OkulListesi() {
+    public List<Okul> getList() {
 
         this.list = this.getDao().OkulListesi();
         return this.list;
