@@ -34,7 +34,7 @@ public class MahalleDAO extends DBConnection {
             String callQueryAdres = "{call INSERT_KISI_ADRES_MAHALLE(?, ?)}";
             CallableStatement csAdres = conn.prepareCall(callQueryAdres);
             csAdres.setString(1, mahalle.getMahalle());
-            csAdres.setInt(1, mahalle.getMahalle_aktif());
+            csAdres.setInt(2, mahalle.getMahalle_aktif());
             csAdres.execute();
             
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
