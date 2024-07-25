@@ -42,7 +42,7 @@ public class SokakDAO extends DBConnection {
     }
 
     public void SokakSil(int sokakid) {
-        String deleteQuery = "DELETE FROM ADRESI_MAHALLE_SOKAK WHERE SOKAK_ID = ?";
+        String deleteQuery = "DELETE FROM KISI_MAHALLE_SOKAK WHERE SOKAK_ID = ?";
 
         try {
             PreparedStatement ps = getDb().prepareStatement(deleteQuery);
@@ -59,14 +59,14 @@ public class SokakDAO extends DBConnection {
         List<Sokak> SokakList = new ArrayList<>();
         try {
             Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT SOKAK_ID, MAHALLE_ID, SOKAK_ISIM, AKTIF FROM ADRES_MAHALLE_SOKAK";
+            String Selectquery = "SELECT SOKAK_ID, MAHALLE_ID, SOKAK_ISIM, AKTIF FROM KISI_MAHALLE_SOKAK";
             ResultSet rs = statement.executeQuery(Selectquery);
 
             while (rs.next()) {
                 SokakList.add(new Sokak(
                         rs.getInt("SOKAK_ID"),
                         rs.getInt("MAHALLE_ID"),
-                        rs.getString("SOKAK_ISIN"),
+                        rs.getString("SOKAK_ISIM"),
                         rs.getInt("AKTIF")
                 ));
             }

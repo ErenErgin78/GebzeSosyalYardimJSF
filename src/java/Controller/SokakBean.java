@@ -26,10 +26,10 @@ public class SokakBean implements Serializable {
     public void sokakekle() {
         this.getDao().SokakEkle(getEntity());
     }
-    
+
     public void sokaksil(int SokakId) {
         this.getDao().SokakSil(SokakId);
-         this.list = this.getDao().SokakListesi();
+        this.list = this.getDao().SokakListesi();
     }
 
     public Sokak getEntity() {
@@ -55,9 +55,8 @@ public class SokakBean implements Serializable {
     }
 
     public List<Sokak> getList() {
-        if (this.list == null) {
-            this.list = this.getDao().SokakListesi();
-        }
+
+        this.list = this.getDao().SokakListesi();
         return this.list;
     }
 
