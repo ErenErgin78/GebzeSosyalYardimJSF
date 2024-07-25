@@ -37,9 +37,6 @@ public class Kisi {
     private Integer evdeki_kisi_sayisi;
     private Integer mahalle_sokak_id;
 
-    private String mahalle;
-    private String sokak;
-
     private Integer kisi_yakinlar_id;
     private String anne_isim;
     private String baba_isim;
@@ -112,17 +109,6 @@ public class Kisi {
         this.es_isim = es_isim;
         this.es_soyisim = es_soyisim;
         this.es_durum_id = es_durum_id;
-    }
-
-    public Kisi(Integer mahalle_sokak_id, String mahalle, String sokak) {
-        this.mahalle_sokak_id = mahalle_sokak_id;
-        this.mahalle = mahalle;
-        this.sokak = sokak;
-    }
-
-    public Kisi(Integer mahalle_id, String mahalle) {
-        this.mahalle_id = mahalle_id;
-        this.mahalle = mahalle;
     }
 
     public Kisi() {
@@ -374,22 +360,6 @@ public class Kisi {
 
     public void setEs_durum(Integer es_durum_id) {
         this.es_durum_id = es_durum_id;
-    }
-
-    public String getMahalle() {
-        return mahalle;
-    }
-
-    public void setMahalle(String mahalle) {
-        this.mahalle = mahalle;
-    }
-
-    public String getSokak() {
-        return sokak;
-    }
-
-    public void setSokak(String sokak) {
-        this.sokak = sokak;
     }
 
 }
