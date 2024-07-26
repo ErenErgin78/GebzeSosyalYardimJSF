@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -36,40 +33,51 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                 align-items: center;
                 gap: 1rem;
             }
+            .card-container {
+                display: flex;
+                justify-content: center;
+            }
+            .card-wrapper {
+                width: 100%;
+                max-width: 800px;
+            }
+            .card-header {
+                font-size: 1.25rem;
+                font-weight: 600;
+            }
         </style>
     </h:head>
     <h:body>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Yakınlık Tanımlama</h2>
+        <div class="container-fluid mt-4">
+            <div class="card-container">
+                <div class="card-wrapper">
+                    <h2 style="font-weight: bold;">Yakınlık Tanımlama</h2>
                     <div class="card">
                         <div class="card-header">Yakınlık Tanımlama Bilgileri</div>
                         <div class="card-body">
-                            <h:form id="mahalleForm">
+                            <h:form id="yakınlıkForm">
                                 <div class="row mb-3">
-                                    <!-- Çekmece Adı -->
+                                    <!-- Yakınlık Adı -->
                                     <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
-                                        <label for="cekmeceAdi" class="col-form-label me-2">Yakınlık Adı:</label>
-                                        <h:inputText id="cekmeceAdi" value="#{cekmeceBean.cekmeceAdi}" class="form-control" style="width: 550px;" />
+                                        <label for="yakınlıkAdi" class="form-label">Yakınlık Adı:</label>
+                                        <h:inputText id="yakınlıkAdi" value="#{yakınlıkBean.yakınlıkAdi}" class="form-control" style="width: 300px;" />
                                     </div>
                                     <!-- Aktif Seçim Kutusu ve Ekle Butonu -->
                                     <div class="col-md-4 d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center gap-2 me-3">
-                                            <label for="aktifMi" class="col-form-label me-2">Aktif:</label>
-                                            <h:selectOneMenu id="aktifMi" value="#{cekmeceBean.aktifMi}" class="form-control col-md-10">
+                                            <label for="aktifMi" class="form-label">Aktif:</label>
+                                            <h:selectOneMenu id="aktifMi" value="#{yakınlıkBean.aktifMi}" class="form-control col-md-10">
                                                 <f:selectItem itemLabel="Evet" itemValue="true" />
                                                 <f:selectItem itemLabel="Hayır" itemValue="false" />
                                             </h:selectOneMenu>
                                         </div>
-                                        <h:commandButton value="Ekle" action="#{cekmeceBean.add}" class="btn btn-success" />
+                                        <h:commandButton value="Ekle" action="#{yakınlıkBean.add}" class="btn btn-success" />
                                     </div>
                                 </div>
 
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                           
                                             <th>Yakınlık Kodu</th>
                                             <th>Yakınlık Adı</th>
                                             <th>Aktif</th>
@@ -77,17 +85,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <ui:repeat value="#{cekmeceBean.mahalleList}" var="mahalle" varStatus="loop">
+                                        <ui:repeat value="#{yakınlıkBean.yakınlıkList}" var="yakınlık" varStatus="loop">
                                             <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                <td>#{cekmece.mahalleKodu}</td>
-                                                <td>#{ccekmece.mahalleAdi}</td>
-                                                <td>#{cekmece.aktifMi ? 'Evet' : 'Hayır'}</td>
+                                                <td>#{yakınlık.yakınlıkKodu}</td>
+                                                <td>#{yakınlık.yakınlıkAdi}</td>
+                                                <td>#{yakınlık.aktifMi ? 'Evet' : 'Hayır'}</td>
                                                 <td>
                                                     <div class="action-buttons">
-                                                        <h:commandButton value="Düzenle" action="#{cekmeceBean.edit(cekmece)}" styleClass="btn btn-warning ml-20">
+                                                        <h:commandButton value="Düzenle" action="#{yakınlıkBean.edit(yakınlık)}" styleClass="btn btn-warning ml-2">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
-                                                        <h:commandButton value="Sil" action="#{cekmeceBean.delete(cekmece.mahalleKodu)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                        <h:commandButton value="Sil" action="#{yakınlıkBean.delete(yakınlık.yakınlıkKodu)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
                                                     </div>
@@ -106,10 +114,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                            function confirmDelete(button) {
-                                                                return confirm("Bu mahalleyi gerçekten silmek istiyor musunuz?");
-                                                            }
+            function confirmDelete(button) {
+                return confirm("Bu yakınlığı gerçekten silmek istiyor musunuz?");
+            }
         </script>
     </h:body>
 </html>
-
