@@ -22,6 +22,9 @@ public class SokakDAO extends DBConnection {
     private Connection db;
     private String islemBasariliMesaj;
 
+    private Integer mahalleid = 0;
+    private Integer aktif = 2;
+
     public void SokakEkle(Sokak sokak) {
 
         try {
@@ -33,7 +36,7 @@ public class SokakDAO extends DBConnection {
             csAdres.setString(2, sokak.getSokak());
             csAdres.setInt(3, sokak.getAktif());
             csAdres.execute();
-
+            
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (Exception ex) {
@@ -58,9 +61,18 @@ public class SokakDAO extends DBConnection {
     public List<Sokak> SokakListesi() {
         List<Sokak> SokakList = new ArrayList<>();
         try {
+            StringBuilder queryBuilder = new StringBuilder();
+            queryBuilder.append("SELECT SOKAK_ID, MAHALLE_ID, SOKAK_ISIM, AKTIF FROM KISI_MAHALLE_SOKAK WHERE 1=1 ");
+
+            if (mahalleid != 0) {
+                queryBuilder.append("AND MAHALLE_ID = ").append(mahalleid).append(" ");
+            }
+            if (aktif != 2) {
+                queryBuilder.append("AND AKTIF = ").append(aktif).append(" ");
+            }
+
             Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT SOKAK_ID, MAHALLE_ID, SOKAK_ISIM, AKTIF FROM KISI_MAHALLE_SOKAK";
-            ResultSet rs = statement.executeQuery(Selectquery);
+            ResultSet rs = statement.executeQuery(queryBuilder.toString());
 
             while (rs.next()) {
                 SokakList.add(new Sokak(
@@ -70,7 +82,6 @@ public class SokakDAO extends DBConnection {
                         rs.getInt("AKTIF")
                 ));
             }
-
         } catch (Exception ex) {
             DetectError(ex);
         }
@@ -112,6 +123,22 @@ public class SokakDAO extends DBConnection {
 
     public void setIslemBasariliMesaj(String islemBasariliMesaj) {
         this.islemBasariliMesaj = islemBasariliMesaj;
+    }
+
+    public Integer getMahalleid() {
+        return mahalleid;
+    }
+
+    public void setMahalleid(Integer mahalleid) {
+        this.mahalleid = mahalleid;
+    }
+
+    public Integer getAktif() {
+        return aktif;
+    }
+
+    public void setAktif(Integer aktif) {
+        this.aktif = aktif;
     }
 
 }
