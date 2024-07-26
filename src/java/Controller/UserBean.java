@@ -2,6 +2,7 @@ package Controller;
 
 import Entity.User;
 import dao.UsersDAO;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
@@ -12,7 +13,7 @@ import java.util.List;
 import jakarta.servlet.http.HttpSession;
 
 @Named("userBean")
-@SessionScoped
+@RequestScoped
 public class UserBean implements Serializable {
 
     private User entity;

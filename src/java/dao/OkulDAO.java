@@ -18,6 +18,10 @@ public class OkulDAO extends DBConnection {
     private Connection db;
     private String mesaj;
 
+    private Integer tip;
+    private Integer tur;
+    private Integer aktif;
+
     public void Create(Okul okul) {
         try {
             Connection conn = this.getDb();
@@ -46,6 +50,9 @@ public class OkulDAO extends DBConnection {
             String Selectquery = "SELECT O.OKUL_ID, O.OKUL_ISIM, O.OKUL_TIP_ID, OTI.OKUL_TIP_ISIM, O.OKUL_TUR_ID, OTU.OKUL_TUR_ISIM, O.OKUL_AKTIF FROM OKUL O\n"
                     + "JOIN OKUL_TIP OTI ON O.OKUL_TIP_ID = OTI.OKUL_TIP_ID\n"
                     + "JOIN OKUL_TUR OTU ON O.OKUL_TUR_ID = OTU.OKUL_TUR_ID";
+
+         //   if (tur != 0 && tip ) {
+         //  }
             ResultSet rs = statement.executeQuery(Selectquery);
 
             while (rs.next()) {
@@ -114,6 +121,30 @@ public class OkulDAO extends DBConnection {
 
     public void setMesaj(String mesaj) {
         this.mesaj = mesaj;
+    }
+
+    public Integer getTip() {
+        return tip;
+    }
+
+    public void setTip(Integer tip) {
+        this.tip = tip;
+    }
+
+    public Integer getTur() {
+        return tur;
+    }
+
+    public void setTur(Integer tur) {
+        this.tur = tur;
+    }
+
+    public Integer getAktif() {
+        return aktif;
+    }
+
+    public void setAktif(Integer aktif) {
+        this.aktif = aktif;
     }
 
 }

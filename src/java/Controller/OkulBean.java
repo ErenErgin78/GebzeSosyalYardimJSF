@@ -6,6 +6,7 @@ package Controller;
 
 import Entity.Okul;
 import dao.OkulDAO;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -16,7 +17,7 @@ import java.util.List;
  * @author Eren
  */
 @Named(value = "okulBean")
-@SessionScoped
+@RequestScoped
 public class OkulBean implements Serializable {
 
     private Okul entity;

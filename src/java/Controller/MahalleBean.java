@@ -6,6 +6,7 @@ package Controller;
 
 import Entity.Mahalle;
 import dao.MahalleDAO;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -16,7 +17,7 @@ import java.util.List;
  * @author Eren
  */
 @Named(value = "mahalleBean")
-@SessionScoped
+@RequestScoped
 public class MahalleBean implements Serializable {
 
     private Mahalle entity;

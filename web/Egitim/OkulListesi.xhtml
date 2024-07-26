@@ -20,15 +20,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Okul Listesi</h2>
+                    <h2 style="font-weight: bold;">Okul Listesi</h2>
                     <div class="card">
                         <div class="card-header">Okul Giriş Bilgileri</div>
                         <div class="card-body">
                             <h:form id="mahalleForm">
                                 <div class="form-group">
                                     <label for="okul">Okul Tipi:</label>
-                                    <h:selectOneMenu id="okul" class="form-control">
+                                    <h:selectOneMenu id="okul" value ="#{okulBean.dao.tip}" class="form-control">
                                         <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
+                                        <f:selectItem itemValue="0" itemLabel="Hepsi" />
                                         <f:selectItem itemValue="1" itemLabel="Anaokulu" />
                                         <f:selectItem itemValue="2" itemLabel="İlkokul" />
                                         <f:selectItem itemValue="3" itemLabel="Ortaokul" />
@@ -40,15 +41,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="form-group">
-                                    <label for="devletOzel">Devlet/Özel:</label>
-                                    <h:selectOneMenu id="devletOzel" class="form-control">
+                                    <label for="devletOzel">Okul Türü:</label>
+                                    <h:selectOneMenu id="devletOzel" value = ""#{okulBean.dao.tur} class="form-control">
+                                        <f:selectItem itemLabel="Hepsi" itemValue="0" />
                                         <f:selectItem itemLabel="Devlet" itemValue="1" />
                                         <f:selectItem itemLabel="Özel" itemValue="2" />
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="form-group">
                                     <label for="aktifMi">Aktif:</label>
-                                    <h:selectOneMenu id="aktifMi"  class="form-control">
+                                    <h:selectOneMenu id="aktifMi" #{okulBean.dao.aktif}  class="form-control">
+                                        <f:selectItem itemLabel="Hepsi" itemValue="2" />
                                         <f:selectItem itemLabel="Evet" itemValue="1" />
                                         <f:selectItem itemLabel="Hayır" itemValue="0" />
                                     </h:selectOneMenu>
