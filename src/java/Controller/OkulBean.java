@@ -17,7 +17,7 @@ import java.util.List;
  * @author Eren
  */
 @Named(value = "okulBean")
-@RequestScoped
+@SessionScoped
 public class OkulBean implements Serializable {
 
     private Okul entity;
@@ -27,8 +27,8 @@ public class OkulBean implements Serializable {
     public void create() {
         this.getDao().Create(getEntity());
     }
-    
-    public void okulsil(int okulid){
+
+    public void okulsil(int okulid) {
         this.getDao().OkulSil(okulid);
     }
 
@@ -58,6 +58,10 @@ public class OkulBean implements Serializable {
 
         this.list = this.getDao().OkulListesi();
         return this.list;
+    }
+
+    public void listeyenile() {
+        this.list = this.getDao().OkulListesi();
     }
 
     public void setList(List<Okul> list) {

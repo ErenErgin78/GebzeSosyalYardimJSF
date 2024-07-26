@@ -18,9 +18,9 @@ public class OkulDAO extends DBConnection {
     private Connection db;
     private String mesaj;
 
-    private Integer tip;
-    private Integer tur;
-    private Integer aktif;
+    private Integer tip = 0;
+    private Integer tur = 0;
+    private Integer aktif = 2;
 
     public void Create(Okul okul) {
         try {
@@ -46,54 +46,38 @@ public class OkulDAO extends DBConnection {
         List<Okul> OkulList = new ArrayList<>();
 
         try {
-            Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT O.OKUL_ID, O.OKUL_ISIM, O.OKUL_TIP_ID, OTI.OKUL_TIP_ISIM, O.OKUL_TUR_ID, OTU.OKUL_TUR_ISIM, O.OKUL_AKTIF "
-                    + "FROM OKUL O "
-                    + "JOIN OKUL_TIP OTI ON O.OKUL_TIP_ID = OTI.OKUL_TIP_ID "
-                    + "JOIN OKUL_TUR OTU ON O.OKUL_TUR_ID = OTU.OKUL_TUR_ID";
-
-            StringBuilder queryBuilder = new StringBuilder(Selectquery);
-            boolean whereAdded = false;
-
-            if (tur != 0) {
-                queryBuilder.append(" WHERE O.OKUL_TUR_ID = ").append(tur);
-                whereAdded = true;
-            }
+            StringBuilder queryBuilder = new StringBuilder();
+            queryBuilder.append("SELECT O.OKUL_ID, O.OKUL_ISIM, O.OKUL_TIP_ID, OTI.OKUL_TIP_ISIM, O.OKUL_TUR_ID, OTU.OKUL_TUR_ISIM, O.OKUL_AKTIF ")
+                    .append("FROM OKUL O ")
+                    .append("JOIN OKUL_TIP OTI ON O.OKUL_TIP_ID = OTI.OKUL_TIP_ID ")
+                    .append("JOIN OKUL_TUR OTU ON O.OKUL_TUR_ID = OTU.OKUL_TUR_ID ")
+                    .append("WHERE 1=1 ");
 
             if (tip != 0) {
-                if (whereAdded) {
-                    queryBuilder.append(" AND");
-                } else {
-                    queryBuilder.append(" WHERE");
-                    whereAdded = true;
-                }
-                queryBuilder.append(" O.OKUL_TIP_ID = ").append(tip);
+                queryBuilder.append("AND O.OKUL_TIP_ID = ").append(tip).append(" ");
             }
-
+            if (tur != 0) {
+                queryBuilder.append("AND O.OKUL_TUR_ID = ").append(tur).append(" ");
+            }
             if (aktif != 2) {
-                if (whereAdded) {
-                    queryBuilder.append(" AND");
-                } else {
-                    queryBuilder.append(" WHERE");
-                    whereAdded = true;
-                }
-                queryBuilder.append(" O.OKUL_AKTIF = ").append(aktif);
+                queryBuilder.append("AND O.OKUL_AKTIF = ").append(aktif).append(" ");
             }
 
-            String SelectqueryFinal = queryBuilder.toString();
-            System.out.println(SelectqueryFinal); // Sorguyu kontrol amaçlı yazdırma
-
-            ResultSet rs = statement.executeQuery(SelectqueryFinal);
+            Statement statement = getDb().createStatement();
+            ResultSet rs = statement.executeQuery(queryBuilder.toString());
 
             while (rs.next()) {
                 OkulList.add(new Okul(
                         rs.getInt("OKUL_ID"),
                         rs.getString("OKUL_ISIM"),
+                        rs.getInt("OKUL_TIP_ID"),
+                        rs.getInt("OKUL_TUR_ID"),
                         rs.getInt("OKUL_AKTIF"),
                         rs.getString("OKUL_TIP_ISIM"),
                         rs.getString("OKUL_TUR_ISIM")
                 ));
             }
+
             mesaj = "işlem başarılı";
 
         } catch (Exception ex) {
