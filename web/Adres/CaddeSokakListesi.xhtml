@@ -11,19 +11,59 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
         <link rel="stylesheet" href="styles.css" />
         <h:outputStylesheet name="styles.css"/>
+        <style>
+            .form-group {
+                margin-bottom: 1rem;
+            }
+            .form-row {
+                margin-bottom: 1rem;
+            }
+            .form-label {
+                margin-bottom: .5rem;
+                font-weight: 600;
+            }
+            .form-control {
+                display: inline-block;
+                width: auto;
+                vertical-align: middle;
+            }
+            .btn-container {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+            .card-container {
+                display: flex;
+                justify-content: center;
+            }
+            .card-wrapper {
+                width: 100%;
+                max-width: 900px;
+            }
+            .card-header {
+                font-size: 1.25rem;
+                font-weight: 600;
+            }
+            .table-row-even {
+                background-color: #f9f9f9;
+            }
+            .table-row-odd {
+                background-color: #ffffff;
+            }
+        </style>
     </h:head>
     <h:body>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Cadde/Sokak Listesi</h2>
+        <div class="container-fluid mt-4">
+            <div class="card-container">
+                <div class="card-wrapper">
+                    <h2 style="font-weight: bold;">Cadde/Sokak Listesi</h2>
                     <div class="card">
                         <div class="card-header">Mahalle Giriş Bilgileri</div>
                         <div class="card-body">
                             <h:form id="mahalleForm">
                                 <div class="form-group">
                                     <label for="bolge">Mahalle Adı:</label>
-                                    <h:selectOneMenu id="neighborhood" value = "#{sokakBean.entity.mahalle_id}" class="form-control">
+                                    <h:selectOneMenu id="neighborhood" value="#{sokakBean.entity.mahalle_id}" class="form-control">
                                         <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
                                         <f:selectItems value="#{kisiBean.mahalleList}" />
                                     </h:selectOneMenu>
@@ -40,7 +80,7 @@
                                         <tr>
                                             <th>Cadde/Sokak Kodu</th>
                                             <th>Cadde/Sokak Adı</th>
-                                            <th>Mahalle Adı</th>
+                                            <th>Aktif</th>
                                             <th>Eylem</th>
                                         </tr>
                                     </thead>
@@ -71,10 +111,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                            function confirmDelete(button) {
-                                                                return confirm("Bu mahalleyi gerçekten silmek istiyor musunuz?");
-                                                            }
+            function confirmDelete(button) {
+                return confirm("Bu cadde/sokağı gerçekten silmek istiyor musunuz?");
+            }
         </script>
     </h:body>
 </html>
-

@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -36,58 +32,73 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                 align-items: center;
                 gap: 1rem;
             }
+            .card-container {
+                display: flex;
+                justify-content: center;
+            }
+            .card-wrapper {
+                width: 100%;
+                max-width: 900px;
+            }
+            .card-header {
+                font-size: 1.25rem;
+                font-weight: 600;
+            }
+            .table-row-even {
+                background-color: #f9f9f9;
+            }
+            .table-row-odd {
+                background-color: #ffffff;
+            }
         </style>
     </h:head>
     <h:body>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Yönlendirilen Alt Kurum Tanımlama</h2>
+        <div class="container-fluid mt-4">
+            <div class="card-container">
+                <div class="card-wrapper">
+                    <h2 style="font-weight: bold;">Yönlendirilen Alt Kurum</h2>
                     <div class="card">
                         <div class="card-header">Yönlendirilen Alt Kurum Bilgileri</div>
                         <div class="card-body">
-                            <h:form id="mahalleForm">
+                            <h:form id="altKurumForm">
                                 <div class="form-group">
-                                    <label for="bolge">Yönlendirilen Kurum Adı:</label>
-                                    <h:selectOneMenu id="neighborhood" value="#{sokakBean.entity.mahalle_id}" class="form-control" style="width: 500px; border: 1px solid #ccc; padding: 5px;">
+                                    <label for="kurumSecim">Yönlendirilen Kurum Adı:</label>
+                                    <h:selectOneMenu id="kurumSecim" value="#{altKurumBean.selectedKurumId}" class="form-control" style="width: 500px; border: 1px solid #ccc; padding: 5px;">
                                         <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
-                                        <f:selectItems value="#{kisiBean.mahalleList}" />
+                                        <f:selectItems value="#{altKurumBean.kurumList}" />
                                     </h:selectOneMenu>
-
                                 </div>
                                 <div class="row mb-3">
-                                    <!-- Çekmece Adı -->
-                                    <div class="col-md-8 d-flex flex-column  mb-2 mb-md-0">
-                                        <label for="cekmeceAdi" class="col-form-label me-2">Yönlendirilen Alt Kurum Adı:</label>
-                                        <h:inputText id="cekmeceAdi" value="#{cekmeceBean.cekmeceAdi}" class="form-control" style="width: 500px;" />
+                                    <!-- Yönlendirilen Alt Kurum Adı -->
+                                    <div class="col-md-8 d-flex flex-column mb-2 mb-md-0">
+                                        <label for="altKurumAdi" class="col-form-label me-2">Yönlendirilen Alt Kurum Adı:</label>
+                                        <h:inputText id="altKurumAdi" value="#{altKurumBean.altKurumAdi}" class="form-control" style="width: 500px;" />
                                     </div>
                                     <!-- Ekle Butonu -->
                                     <div class="col-md-4 d-flex align-items-end justify-content-end">
-                                        <h:commandButton value="Ekle" action="#{cekmeceBean.add}" class="btn btn-success" />
+                                        <h:commandButton value="Ekle" action="#{altKurumBean.add}" class="btn btn-success" />
                                     </div>
                                 </div>
-
 
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th>Kurum Kodu</th>
-                                            <th>Yönlendirilen Kurum Adı</th>
+                                            <th>Yönlendirilen Alt Kurum Adı</th>
                                             <th>Eylem</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <ui:repeat value="#{cekmeceBean.mahalleList}" var="mahalle" varStatus="loop">
+                                        <ui:repeat value="#{altKurumBean.altKurumList}" var="altKurum" varStatus="loop">
                                             <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                <td>#{cekmece.mahalleKodu}</td>
-                                                <td>#{ccekmece.mahalleAdi}</td>
-                                                <td>#{cekmece.aktifMi ? 'Evet' : 'Hayır'}</td>
+                                                <td>#{altKurum.kurumKodu}</td>
+                                                <td>#{altKurum.altKurumAdi}</td>
                                                 <td>
                                                     <div class="action-buttons">
-                                                        <h:commandButton value="Düzenle" action="#{cekmeceBean.edit(cekmece)}" styleClass="btn btn-warning ml-20">
+                                                        <h:commandButton value="Düzenle" action="#{altKurumBean.edit(altKurum)}" styleClass="btn btn-warning ml-2">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
-                                                        <h:commandButton value="Sil" action="#{cekmeceBean.delete(cekmece.mahalleKodu)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                        <h:commandButton value="Sil" action="#{altKurumBean.delete(altKurum.kurumKodu)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
                                                     </div>
@@ -106,10 +117,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                            function confirmDelete(button) {
-                                                                return confirm("Bu mahalleyi gerçekten silmek istiyor musunuz?");
-                                                            }
+            function confirmDelete(button) {
+                return confirm("Bu alt kurumu gerçekten silmek istiyor musunuz?");
+            }
         </script>
     </h:body>
 </html>
-
