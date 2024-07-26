@@ -89,12 +89,12 @@
                                                 <td></td>
                                                 <td>
                                                     <div class="action-buttons">
-                                                        <h:commandButton value="Düzenle"  styleClass="btn btn-warning ml-2">
+                                                         <h:commandButton value="Sil"  styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
-                                                        <h:commandButton value="Sil"  styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
+                                                        <h:commandButton value="Düzenle"  styleClass="btn btn-primary ml-20">
                                                             <f:ajax execute="@this" render="@form"/>
-                                                        </h:commandButton>
+                                                        </h:commandButton>                                        
                                                     </div>
                                                 </td>
                                             </tr>
