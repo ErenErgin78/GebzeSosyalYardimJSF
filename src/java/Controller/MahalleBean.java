@@ -17,7 +17,7 @@ import java.util.List;
  * @author Eren
  */
 @Named(value = "mahalleBean")
-@RequestScoped
+@SessionScoped
 public class MahalleBean implements Serializable {
 
     private Mahalle entity;

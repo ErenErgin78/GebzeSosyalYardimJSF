@@ -80,17 +80,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <ui:repeat  var="mahalle"  value =""varStatus="loop">
+                                    <ui:repeat  var="mahalle"  value ="" varStatus="loop">
                                         <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
                                             <td></td>
                                             <td></td>
                                             <td></td>
                                             <td>
                                                 <div class="action-buttons">
-                                                    <h:commandButton value="Düzenle"  styleClass="btn btn-warning ml-20">
+                                                    <h:commandButton value="Düzenle"  styleClass="btn btn-primary ml-20">
                                                         <f:ajax execute="@this" render="@form"/>
                                                     </h:commandButton>
-                                                    <h:commandButton value="Sil" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                    <h:commandButton value="Sil" styleClass="btn btn-danger delete-button ml-20" onclick="return confirmDelete(this)">
                                                         <f:ajax execute="@this" render="@form"/>
                                                     </h:commandButton>
                                                 </div>
