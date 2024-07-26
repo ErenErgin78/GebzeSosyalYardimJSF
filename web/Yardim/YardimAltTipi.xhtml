@@ -86,7 +86,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <ui:repeat  var="altTipi" varStatus="loop">
+                                        <ui:repeat  var="altTipi"  value ="" varStatus="loop">
                                             <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
                                                 <td>#{altTipi.altTipiKodu}</td>
                                                 <td>#{altTipi.altTipiAdi}</td>
