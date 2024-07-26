@@ -47,13 +47,43 @@ public class OkulDAO extends DBConnection {
 
         try {
             Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT O.OKUL_ID, O.OKUL_ISIM, O.OKUL_TIP_ID, OTI.OKUL_TIP_ISIM, O.OKUL_TUR_ID, OTU.OKUL_TUR_ISIM, O.OKUL_AKTIF FROM OKUL O\n"
-                    + "JOIN OKUL_TIP OTI ON O.OKUL_TIP_ID = OTI.OKUL_TIP_ID\n"
+            String Selectquery = "SELECT O.OKUL_ID, O.OKUL_ISIM, O.OKUL_TIP_ID, OTI.OKUL_TIP_ISIM, O.OKUL_TUR_ID, OTU.OKUL_TUR_ISIM, O.OKUL_AKTIF "
+                    + "FROM OKUL O "
+                    + "JOIN OKUL_TIP OTI ON O.OKUL_TIP_ID = OTI.OKUL_TIP_ID "
                     + "JOIN OKUL_TUR OTU ON O.OKUL_TUR_ID = OTU.OKUL_TUR_ID";
 
-         //   if (tur != 0 && tip ) {
-         //  }
-            ResultSet rs = statement.executeQuery(Selectquery);
+            StringBuilder queryBuilder = new StringBuilder(Selectquery);
+            boolean whereAdded = false;
+
+            if (tur != 0) {
+                queryBuilder.append(" WHERE O.OKUL_TUR_ID = ").append(tur);
+                whereAdded = true;
+            }
+
+            if (tip != 0) {
+                if (whereAdded) {
+                    queryBuilder.append(" AND");
+                } else {
+                    queryBuilder.append(" WHERE");
+                    whereAdded = true;
+                }
+                queryBuilder.append(" O.OKUL_TIP_ID = ").append(tip);
+            }
+
+            if (aktif != 2) {
+                if (whereAdded) {
+                    queryBuilder.append(" AND");
+                } else {
+                    queryBuilder.append(" WHERE");
+                    whereAdded = true;
+                }
+                queryBuilder.append(" O.OKUL_AKTIF = ").append(aktif);
+            }
+
+            String SelectqueryFinal = queryBuilder.toString();
+            System.out.println(SelectqueryFinal); // Sorguyu kontrol amaçlı yazdırma
+
+            ResultSet rs = statement.executeQuery(SelectqueryFinal);
 
             while (rs.next()) {
                 OkulList.add(new Okul(

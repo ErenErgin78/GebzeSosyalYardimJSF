@@ -38,6 +38,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                         <f:selectItem itemValue="7" itemLabel="Lisans" />
                                         <f:selectItem itemValue="8" itemLabel="Diğer" />
                                         <f:selectItem itemValue="5" itemLabel="Yüksek Lisans" />
+                                        <f:ajax event="change" listener="#{okulBean.list}" render="street" />
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="form-group">
