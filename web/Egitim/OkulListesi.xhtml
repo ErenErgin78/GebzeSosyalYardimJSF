@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -27,8 +23,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                             <h:form id="mahalleForm">
                                 <div class="form-group">
                                     <label for="okul">Okul Tipi:</label>
-                                    <h:selectOneMenu id="okul" value ="#{okulBean.dao.tip}" class="form-control">
-                                        <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
+                                    <h:selectOneMenu id="okul" value="#{okulBean.dao.tip}" class="form-control">
                                         <f:selectItem itemValue="0" itemLabel="Hepsi" />
                                         <f:selectItem itemValue="1" itemLabel="Anaokulu" />
                                         <f:selectItem itemValue="2" itemLabel="İlkokul" />
@@ -38,54 +33,60 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                         <f:selectItem itemValue="7" itemLabel="Lisans" />
                                         <f:selectItem itemValue="8" itemLabel="Diğer" />
                                         <f:selectItem itemValue="5" itemLabel="Yüksek Lisans" />
-                                        <f:ajax event="change" listener="#{okulBean.list}" render="street" />
+                                        <f:ajax event="change" render="okulListPanel"/>
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="form-group">
                                     <label for="devletOzel">Okul Türü:</label>
-                                    <h:selectOneMenu id="devletOzel" value = ""#{okulBean.dao.tur} class="form-control">
+                                    <h:selectOneMenu id="devletOzel" value="#{okulBean.dao.tur}" class="form-control">
                                         <f:selectItem itemLabel="Hepsi" itemValue="0" />
                                         <f:selectItem itemLabel="Devlet" itemValue="1" />
                                         <f:selectItem itemLabel="Özel" itemValue="2" />
+                                        <f:ajax event="change" render="okulListPanel"/>
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="form-group">
                                     <label for="aktifMi">Aktif:</label>
-                                    <h:selectOneMenu id="aktifMi" #{okulBean.dao.aktif}  class="form-control">
+                                    <h:selectOneMenu id="aktifMi" value="#{okulBean.dao.aktif}" class="form-control">
                                         <f:selectItem itemLabel="Hepsi" itemValue="2" />
                                         <f:selectItem itemLabel="Evet" itemValue="1" />
                                         <f:selectItem itemLabel="Hayır" itemValue="0" />
+                                        <f:ajax event="change" render="okulListPanel"/>
                                     </h:selectOneMenu>
                                 </div>
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Okul Adı</th>
-                                            <th>Okul Tipi</th>
-                                            <th>Okul Türü</th>
-                                            <th>Eylem</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <ui:repeat value="#{okulBean.list}" var="okul" varStatus="loop">
-                                            <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                <td>#{okul.okul_isim}</td>
-                                                <td>#{okul.okul_tip}</td>
-                                                <td>#{okul.okul_aktif == 1 ? 'Evet' : 'Hayır'}</td>
-                                                <td>
-                                                    <div class="action-buttons">
-                                                        <h:commandButton value="Düzenle" styleClass="btn btn-warning ml-20">
-                                                            <f:ajax execute="@this" render="@form"/>
-                                                        </h:commandButton>
-                                                        <h:commandButton value="Sil" action="#{okulBean.okulsil(okul.okul_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
-                                                            <f:ajax execute="@this" render="@form"/>
-                                                        </h:commandButton>
-                                                    </div>
-                                                </td>
+                                <h:panelGroup id="okulListPanel">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Okul Adı</th>
+                                                <th>Okul Tipi</th>
+                                                <th>Okul Türü</th>
+                                                <th>Aktiflik</th>
+                                                <th>Eylem</th>
                                             </tr>
-                                        </ui:repeat>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            <ui:repeat value="#{okulBean.list}" var="okul" varStatus="loop">
+                                                <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                                    <td>#{okul.okul_isim}</td>
+                                                    <td>#{okul.okul_tip}</td>
+                                                    <td>#{okul.okul_tur}</td>
+                                                    <td>#{okul.okul_aktif == 1 ? 'Evet' : 'Hayır'}</td>
+                                                    <td>
+                                                        <div class="action-buttons">
+                                                            <h:commandButton value="Düzenle" styleClass="btn btn-warning ml-20">
+                                                                <f:ajax execute="@this" render="@form"/>
+                                                            </h:commandButton>
+                                                            <h:commandButton value="Sil" action="#{okulBean.okulsil(okul.okul_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                                <f:ajax execute="@this" render="@form"/>
+                                                            </h:commandButton>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </ui:repeat>
+                                        </tbody>
+                                    </table>
+                                </h:panelGroup>
                             </h:form>
                         </div>
                     </div>
@@ -96,10 +97,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                            function confirmDelete(button) {
-                                                                return confirm("Bu mahalleyi gerçekten silmek istiyor musunuz?");
-                                                            }
+                                                                function confirmDelete(button) {
+                                                                    return confirm("Bu mahalleyi gerçekten silmek istiyor musunuz?");
+                                                                }
         </script>
     </h:body>
 </html>
-

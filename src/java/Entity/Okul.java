@@ -19,6 +19,16 @@ public class Okul {
     private String okul_tip;
     private String okul_tur;
 
+    public Okul(Integer okul_id, String okul_isim, Integer okul_tip_id, Integer okul_tur_id, Integer okul_aktif, String okul_tip, String okul_tur) {
+        this.okul_id = okul_id;
+        this.okul_isim = okul_isim;
+        this.okul_tip_id = okul_tip_id;
+        this.okul_tur_id = okul_tur_id;
+        this.okul_aktif = okul_aktif;
+        this.okul_tip = okul_tip;
+        this.okul_tur = okul_tur;
+    }
+
     public Okul(Integer okul_id, String okul_isim, Integer okul_aktif, String okul_tip, String okul_tur) {
         this.okul_id = okul_id;
         this.okul_isim = okul_isim;
@@ -27,7 +37,6 @@ public class Okul {
         this.okul_tur = okul_tur;
     }
 
-    
     public Okul(String okul_isim, Integer okul_tip_id, Integer okul_tur_id, Integer okul_aktif) {
         this.okul_isim = okul_isim;
         this.okul_tip_id = okul_tip_id;
