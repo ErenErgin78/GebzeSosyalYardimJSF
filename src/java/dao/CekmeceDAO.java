@@ -13,6 +13,7 @@ import util.DBConnection;
  * @author casper
  */
 public class CekmeceDAO extends DBConnection{
+    
     private Connection db;
     
     public void Create(Cekmece cekmece){
