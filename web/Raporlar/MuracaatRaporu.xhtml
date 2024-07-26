@@ -101,20 +101,41 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                             <f:selectItem itemLabel="Yeni Kayıt" itemValue="YeniKayit" />
                                         </h:selectOneMenu>
                                     </div>
-                                                                        <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6">
                                         <label for="archive_file_no">Arşiv Dosya No</label>
                                         <h:inputText id="archive_file_no" class="form-control" value="#{muracaatBean.entity.arsiv_dosya_no}" />
                                     </div>  
                                 </div>
-                              
+
                                 <div class="form-row">
-                                   
                                     <div class="form-group col-md-6">
-                                        <label for="archive_file_no">Arşiv Dosya No</label>
-                                        <h:inputText id="archive_file_no" class="form-control" value="#{muracaatBean.entity.arsiv_dosya_no}" />
-                                    </div>                               
+                                        <label for="dob-start">Doğum Tarih Aralığı:</label>
+                                        <input type="date" id="dob-start" name="dob-start" class="form-control" />
+                                        <input type="date" id="dob-end" name="dob-end" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="dob-start">Müracaat Tarih Aralığı:</label>
+                                        <input type="date" id="dob-start" name="dob-start" class="form-control" />
+                                        <input type="date" id="dob-end" name="dob-end" class="form-control" />
+                                    </div>
                                 </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="dob-start">Talep Edilen Yardımlar:</label>
+                                    
+                                    </div>
+                                   
+                                </div>
+                                
+
                             </div>
+
+
+
+
+
+
 
 
                             <div class="card-body">
