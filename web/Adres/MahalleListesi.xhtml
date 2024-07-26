@@ -43,10 +43,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                                 <td>#{mahalle.mahalle_aktif == 1 ? 'Evet' : 'Hayır'}</td>
                                                 <td>
                                                     <div class="action-buttons">
-                                                        <h:commandButton value="Düzenle" styleClass="btn btn-warning ml-20">
+                                                        <h:commandButton value="Düzenle" styleClass="btn btn-primary">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
-                                                        <h:commandButton value="Sil" action="#{mahalleBean.mahallesil(mahalle.mahalle_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                        <h:commandButton value="Sil" action="#{mahalleBean.mahallesil(mahalle.mahalle_id)}" styleClass="btn btn-danger delete-button ml-20" onclick="return confirmDelete(this)">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
                                                     </div>

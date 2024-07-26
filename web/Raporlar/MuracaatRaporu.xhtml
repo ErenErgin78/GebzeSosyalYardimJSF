@@ -119,35 +119,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                         <input type="date" id="dob-end" name="dob-end" class="form-control" />
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="dob-start">Talep Edilen Yardımlar:</label>
-                                    
+               
+                                        
+                                        
+
                                     </div>
-                                   
                                 </div>
-                                
-
                             </div>
-
-
-
-
-
-
-
-
-                            <div class="card-body">
-
-
-
-                            </div>
-
-
                         </div>
                         <div class="text-center mt-3">
-                            <h:commandButton value="Kaydet" action="#{kisimuracaatBean.create()}" class="btn btn-success">
+                            <h:commandButton value="Sorgula" action="#{kisimuracaatBean.create()}" class="btn btn-success">
+                                <f:ajax execute="@form" render="@form" />
+                            </h:commandButton>
+                            <h:commandButton value="Temizle" action="#{okulBean.temizle()}" class="btn btn-success" style="margin-left: 10px; background-color: #f8f9fa; color: black;">
                                 <f:ajax execute="@form" render="@form" />
                             </h:commandButton>
                         </div>
