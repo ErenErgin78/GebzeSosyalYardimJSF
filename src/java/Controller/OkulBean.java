@@ -24,8 +24,8 @@ public class OkulBean implements Serializable {
     private OkulDAO dao;
     private List<Okul> list;
 
-    public void create() {
-        this.getDao().Create(getEntity());
+    public void okulekle() {
+        this.getDao().OkulEkle(getEntity());
     }
 
     public void okulsil(int okulid) {

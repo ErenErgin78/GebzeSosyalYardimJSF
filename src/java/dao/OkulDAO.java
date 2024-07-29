@@ -21,7 +21,7 @@ public class OkulDAO extends DBConnection {
     private Integer tur = 0;
     private Integer aktif = 2;
 
-    public void Create(Okul okul) {
+    public void OkulEkle(Okul okul) {
         try {
             Connection conn = this.getDb();
             String callQuery = "{call INSERT_OKUL(?, ?, ?, ?)}";

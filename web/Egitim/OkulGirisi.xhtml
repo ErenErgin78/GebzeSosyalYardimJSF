@@ -79,7 +79,7 @@
                             </div>
                         </div>
                         <div class="text-center mt-3">
-                            <h:commandButton value="Kaydet" action="#{okulBean.create()}" class="btn btn-success">
+                            <h:commandButton value="Kaydet" action="#{okulBean.okulekle()}" class="btn btn-success">
                                 <f:ajax execute="@form" render="@form, mesaj" />
                             </h:commandButton>
                             <h:commandButton value="Temizle" action="#{okulBean.temizle()}" class="btn btn-success" style="margin-left: 10px; background-color: #f8f9fa; color: black;">
