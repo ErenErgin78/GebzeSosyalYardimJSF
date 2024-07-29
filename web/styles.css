@@ -7,7 +7,7 @@ body {
 }
 
 #sidebar {
-    background-color: #1680FF !important;
+    background-color: #1680FF ;
     color: white;
     height: 100vh;
     position: fixed;
@@ -15,7 +15,7 @@ body {
 }
 
 .nav-link {
-    color: #ffffff !important;
+    color: #ffffff ;
     font-weight: bold;
     background-color: #303f9f;
     border: 2px solid #303f9f;
@@ -33,7 +33,7 @@ body {
 }
 
 .submenu a {
-    color: white !important;
+    color: white ;
 }
 
 .submenu a:hover {
