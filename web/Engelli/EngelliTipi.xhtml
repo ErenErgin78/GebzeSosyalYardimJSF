@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Engelli Tipi Tanımlama</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="styles.css" />
+        <h:outputStylesheet name="styles.css"/>
+        <style>
+            .form-group {
+                margin-bottom: 1rem;
+            }
+            .form-row {
+                margin-bottom: 1rem;
+            }
+            .form-label {
+                margin-bottom: .5rem;
+                font-weight: 600;
+            }
+            .form-control {
+                display: inline-block;
+                width: auto;
+                vertical-align: middle;
+            }
+            .btn-container {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+            .card-container {
+                display: flex;
+                justify-content: center;
+            }
+            .card-wrapper {
+                width: 100%;
+                max-width: 900px;
+            }
+            .card-header {
+                font-size: 1.25rem;
+                font-weight: 600;
+            }
+            .table-row-even {
+                background-color: #f9f9f9;
+            }
+            .table-row-odd {
+                background-color: #ffffff;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <div class="container-fluid mt-4">
+            <div class="card-container">
+                <div class="card-wrapper">
+                    <h2 style="font-weight: bold;">Engelli Tipi Tanımlama</h2>
+                    <div class="card">
+                        <div class="card-header">Engelli Tipi Bilgileri</div>
+                        <div class="card-body">
+                            <h:form id="engelliTipiForm">
+                                <div class="row mb-3">
+                                    <!-- Engelli Tipi Adı -->
+                                    <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
+                                        <label for="engelliTipiAdi" class="col-form-label me-2">Engelli Tipi Adı:</label>
+                                        <h:inputText id="engelliTipiAdi" value="#{engelliBean.engelliTipiAdi}" class="form-control" style="width: 400px;" />
+                                    </div>
+                                    <!-- Ekle Butonu -->
+                                    <div class="col-md-4 d-flex align-items-center justify-content-between">
+                                        <h:commandButton value="Ekle" action="#{engelliBean.add}" class="btn btn-success" />
+                                    </div>
+                                </div>
+
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Engelli Tipi Kodu</th>
+                                            <th>Engelli Tipi Adı</th>
+                                            <th>Eylem</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <ui:repeat value="#{engelliBean.engelliTipiList}" var="engelliTipi" varStatus="loop">
+                                            <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                                <td>#{engelliTipi.kodu}</td>
+                                                <td>#{engelliTipi.adi}</td>
+                                                <td>
+                                                    <div class="action-buttons">
+                                                        <h:commandButton value="Düzenle" action="#{engelliBean.edit(engelliTipi)}" styleClass="btn btn-warning ml-2">
+                                                            <f:ajax execute="@this" render="@form"/>
+                                                        </h:commandButton>
+                                                        <h:commandButton value="Sil" action="#{engelliBean.delete(engelliTipi.kodu)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
+                                                            <f:ajax execute="@this" render="@form"/>
+                                                        </h:commandButton>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </ui:repeat>
+                                    </tbody>
+                                </table>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+        <script>
+            function confirmDelete(button) {
+                return confirm("Bu engelli tipini gerçekten silmek istiyor musunuz?");
+            }
+        </script>
+    </h:body>
+</html>
