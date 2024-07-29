@@ -28,7 +28,7 @@ public class UsersDAO extends DBConnection {
     private String kullanici_adi;
     private String sifre;
     
-    private String message;
+    private String mesaj;
 
     public void Create(User user) {
         try {
@@ -49,7 +49,7 @@ public class UsersDAO extends DBConnection {
 
             int r = preparedStatement.executeUpdate();
 
-            this.message = "İşlemler başarıyla gerçekleşmiştir.";
+            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
             
         } catch (Exception ex) {
             DetectError(ex);
@@ -103,7 +103,7 @@ public class UsersDAO extends DBConnection {
             int rowsDeleted = statement.executeUpdate();
             System.out.println(rowsDeleted + " kullanıcı silindi.");
 
-             this.message = "İşlemler başarıyla gerçekleşmiştir.";
+             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
             DetectError(ex);
         }
@@ -177,11 +177,11 @@ public class UsersDAO extends DBConnection {
     }
 
     public String getMessage() {
-        return message;
+        return mesaj;
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        this.mesaj = message;
     }
 
 }

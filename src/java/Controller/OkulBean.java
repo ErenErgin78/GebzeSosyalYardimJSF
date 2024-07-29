@@ -6,9 +6,9 @@ package Controller;
 
 import Entity.Okul;
 import dao.OkulDAO;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.annotation.PostConstruct;
 import jakarta.inject.Named;
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
  * @author Eren
  */
 @Named(value = "okulBean")
-@SessionScoped
+@ViewScoped
 public class OkulBean implements Serializable {
 
     private Okul entity;
@@ -47,6 +47,7 @@ public class OkulBean implements Serializable {
         if (this.dao == null) {
             this.dao = new OkulDAO();
         }
+        dao.setMesaj(null);
         return this.dao;
     }
 
@@ -66,6 +67,11 @@ public class OkulBean implements Serializable {
 
     public void setList(List<Okul> list) {
         this.list = list;
+    }
+
+    @PostConstruct
+    public void init() {
+        getDao().setMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
     }
 
     public OkulBean() {

@@ -6,7 +6,8 @@ package Controller;
 
 import Entity.Yardim;
 import dao.YardimDAO;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.annotation.PostConstruct;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
  * @author Eren
  */
 @Named(value = "yardimBean")
-@RequestScoped
+@ViewScoped
 public class YardimBean implements Serializable {
 
     private Yardim entity;
@@ -59,6 +60,7 @@ public class YardimBean implements Serializable {
         if (this.list == null) {
             this.list = this.getDao().YardimListesi();
         }
+        dao.setMesaj(null);
         return this.list;
     }
 
@@ -66,6 +68,10 @@ public class YardimBean implements Serializable {
         this.list = list;
     }
 
+    @PostConstruct
+    public void init() {
+        getDao().setMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
+    }
     public YardimBean() {
 
     }

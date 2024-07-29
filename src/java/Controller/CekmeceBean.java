@@ -5,15 +5,16 @@
 package Controller;
 
 import jakarta.inject.Named;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.view.ViewScoped;
+import java.io.Serializable;
 
 /**
  *
  * @author casper
  */
 @Named(value = "cekmeceBean")
-@RequestScoped
-public class CekmeceBean {
+@ViewScoped
+public class CekmeceBean implements Serializable {
 
     /**
      * Creates a new instance of CekmeceBean

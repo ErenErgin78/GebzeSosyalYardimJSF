@@ -6,8 +6,9 @@ package Controller;
 
 import Entity.Sokak;
 import dao.SokakDAO;
+import jakarta.annotation.PostConstruct;
 import jakarta.inject.Named;
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
  * @author Eren
  */
 @Named(value = "sokakBean")
-@SessionScoped
+@ViewScoped
 public class SokakBean implements Serializable {
 
     private Sokak entity;
@@ -46,6 +47,7 @@ public class SokakBean implements Serializable {
     public SokakDAO getDao() {
         if (this.dao == null) {
             this.dao = new SokakDAO();
+            this.dao.setIslemBasariliMesaj(null);
         }
         return this.dao;
     }
@@ -62,6 +64,11 @@ public class SokakBean implements Serializable {
 
     public void setList(List<Sokak> list) {
         this.list = list;
+    }
+
+    @PostConstruct
+    public void init() {
+        getDao().setIslemBasariliMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
     }
 
     public SokakBean() {
