@@ -61,7 +61,7 @@
                                 <div class="col-md-4 d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center gap-2 me-3">
                                         <label for="aktifMi" class="col-form-label me-2">Aktif:</label>
-                                        <h:selectOneMenu id="aktifMi" class="form-control col-md-10">
+                                        <h:selectOneMenu id="aktifMi" value="#{cekmeceBean.entity.aktif}" class="form-control col-md-10">
                                             <f:selectItem itemLabel="Evet" itemValue="1" />
                                             <f:selectItem itemLabel="Hayır" itemValue="0" />
                                         </h:selectOneMenu>

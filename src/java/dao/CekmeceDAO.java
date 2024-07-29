@@ -43,7 +43,7 @@ public class CekmeceDAO extends DBConnection {
     }
 
     public void CekmeceSil(int cekmeceId) {
-        String deleteQuery = "DELETE FROM TUTANAK_CEKMECE WHERE CEKMECE_ID = ?";
+        String deleteQuery = "DELETE FROM TUTANAK_CEKMECE WHERE TUTANAK_CEKMECE_ID = ?";
 
         try {
             PreparedStatement ps = getDb().prepareStatement(deleteQuery);
@@ -59,17 +59,16 @@ public class CekmeceDAO extends DBConnection {
       public List<Cekmece> CekmeceListesi() {
         List<Cekmece> CekmeceList = new ArrayList<>();
         try {
-            StringBuilder queryBuilder = new StringBuilder();
-            queryBuilder.append("SELECT TUTANAK_CEKMECE_ID, TUTANAK_CEKMECE_DURUM, CEKMECE_ AKTIF FROM TUTANAK_CEKMECE");
+            String SelectQuery=("SELECT TUTANAK_CEKMECE_ID, TUTANAK_CEKMECE_DURUM, CEKMECE_AKTIF FROM TUTANAK_CEKMECE");
 
             Statement statement = getDb().createStatement();
-            ResultSet rs = statement.executeQuery(queryBuilder.toString());
+            ResultSet rs = statement.executeQuery(SelectQuery);
 
             while (rs.next()) {
                 CekmeceList.add(new Cekmece(
                         rs.getInt("TUTANAK_CEKMECE_ID"),
                         rs.getString("TUTANAK_CEKMECE_DURUM"),
-                        rs.getInt("CEKMECE_SAKTIF")
+                        rs.getInt("CEKMECE_AKTIF")
                 ));
             }
         } catch (Exception ex) {
