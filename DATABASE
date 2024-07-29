@@ -1957,3 +1957,12 @@ Insert into GEBZEADMIN.YARDIM_TIP (YARDIM_TIP_ID,YARDIM_TIP) values ('24','S cak
 Insert into GEBZEADMIN.YARDIM_TIP (YARDIM_TIP_ID,YARDIM_TIP) values ('25','S t Yard m ');
 Insert into GEBZEADMIN.YARDIM_TIP (YARDIM_TIP_ID,YARDIM_TIP) values ('26','Yakacak Yard m ');
 Insert into GEBZEADMIN.YARDIM_TIP (YARDIM_TIP_ID,YARDIM_TIP) values ('27','Yang n Yard m ');
+
+create or replace PROCEDURE INSERT_CEKMECE (
+    p_cekmece_durum IN TUTANAK_CEKMECE.TUTANAK_CEKMECE_ID%TYPE,
+    p_cekmece_aktif IN TUTANAK_CEKMECE.CEKMECE_AKTIF%TYPE
+) AS
+BEGIN
+    INSERT INTO TUTANAK_CEKMECE(TUTANAK_CEKMECE_DURUM, CEKMECE_AKTIF)
+    VALUES (p_cekmece_durum, p_cekmece_aktif);
+END;
