@@ -44,6 +44,15 @@
         .dropdown-item .dropdown-toggle::after {
             display: none;
         }
+        .dropdown-submenu .dropdown-menu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background-color: #444;
+    min-width: 160px;
+}
+
     </style>
 </head>
 <body>
@@ -59,7 +68,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         İşlemlerim
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -140,11 +149,20 @@
                         </div>
                         <a class="dropdown-item dropdown-toggle" href="#">Diğer Tanımlar</a>
                         <div class="dropdown-submenu">
-                            <a class="dropdown-item" href="#" data-page="Tanımlar/Diğer.xhtml">Diğer Tanımlar</a>
+                            <a class="dropdown-item" href="#" data-page="Diger/CekmeceTanimlama.xhtml">Çekmece Tanımlama</a>
+                            <a class="dropdown-item" href="#" data-page="Diger/MeslekTanimlama.xhtml">Meslek Tanımlama</a>
+                            <a class="dropdown-item" href="#" data-page="Diger/TutanakTanimlama.xhtml">Yakınlık Tanımlama</a>
+                            <a class="dropdown-item" href="#" data-page="Diger/YakinlikTanimlama.xhtml">Tutanak Durum Tanımlama</a>
                         </div>
                         <a class="dropdown-item dropdown-toggle" href="#">Yardım Parametreleri</a>
                         <div class="dropdown-submenu">
                             <a class="dropdown-item" href="#" data-page="YardimParametreleri/YardimParametreleri.xhtml">Yardım Parametreleri</a>
+                            <div class="dropdown-submenu">
+                            <a class="dropdown-item" href="#" data-page="Yardim/YardimTipi.xhtml">Yardım Tipi Tanımlama</a>
+                            <a class="dropdown-item" href="#" data-page="Yardim/YardimALtTipi.xhtml">Yardım Alt Tipi Tanımlama</a>
+                            <a class="dropdown-item" href="#" data-page="Yardim/TalepYardimAltTipi.xhtml">Talep Yardım Tipi Tanımlama</a>
+                         
+                        </div>
                         </div>
                         <a class="dropdown-item dropdown-toggle" href="#">Engelli Tipleri Girişi</a>
                         <div class="dropdown-submenu">
@@ -158,7 +176,7 @@
                 <h:commandButton value="Çıkış" action="#{userBean.cikis}" class="btn btn-danger" />
             </h:form>
         </div>
-    </nav>
+    </nav> 
     <main role="main" class="container mt-3">
         <div id="content">
             <!-- İçerik burada yüklenecek -->
@@ -189,17 +207,14 @@ $(document).ready(function () {
         });
     }
 
-
     function reapplyStylesAndHandlers() {
-    $('#content').find('.nav-link').removeClass('text-dark').addClass('text-white');
-    $('#content').find('.submenu a').removeClass('text-dark').addClass('text-white');
+        $('#content').find('.nav-link').removeClass('text-dark').addClass('text-white');
+        $('#content').find('.submenu a').removeClass('text-dark').addClass('text-white');
 
-    // Apply additional CSS styles if needed
-    $('#content').css({
-        'background-color': '#f8f9fa' // Set the background color if needed
-    });
-}
-
+        $('#content').css({
+            'background-color': '#f8f9fa'
+        });
+    }
 
     function reinitializeJSFComponents() {
         if (typeof jsf !== 'undefined') {
@@ -230,14 +245,16 @@ $(document).ready(function () {
     });
 
     // Handle submenus for non-hover devices
-    $('.dropdown-submenu a.dropdown-toggle').click(function (e) {
-        var $el = $(this).next('.dropdown-menu');
-        if ($el.length) {
+    $('.dropdown-submenu > a').click(function (e) {
+        var $submenu = $(this).next('.dropdown-menu');
+        if ($submenu.length) {
             e.preventDefault();
-            var isVisible = $el.is(':visible');
-            $el.parent().siblings().find('.dropdown-menu').hide(); // Hide other submenus
+            var isVisible = $submenu.is(':visible');
+            $('.dropdown-submenu .dropdown-menu').not($submenu).hide(); // Hide other submenus
             if (!isVisible) {
-                $el.show(); // Show the clicked submenu
+                $submenu.show(); // Show the clicked submenu
+            } else {
+                $submenu.hide(); // Hide if it's already visible
             }
         }
     });
