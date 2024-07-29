@@ -1,8 +1,7 @@
 package dao;
 
 import Entity.Kisi;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
+import static Filters.ErrorFinder.DetectError;
 import jakarta.faces.model.SelectItem;
 import util.DBConnection;
 import java.sql.Connection;
@@ -194,7 +193,7 @@ public class KisiDAO extends DBConnection {
                 MahalleList.add(new SelectItem(rs.getInt("KISI_ADRES_MAHALLE_ID"), rs.getString("MAHALLE")));
             }
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            DetectError(ex);
         }
         return MahalleList;
     }
@@ -216,23 +215,6 @@ public class KisiDAO extends DBConnection {
             DetectError(ex);
         }
         return MahalleList;
-    }
-
-    public void DetectError(Exception ex) {
-        //Hatayı yakalamak için
-        FacesContext context = FacesContext.getCurrentInstance();
-        StringBuilder errorMessage = new StringBuilder(ex.getMessage());
-        StackTraceElement[] stackTrace = ex.getStackTrace();
-
-        //Hatanın hangi satırda olduğunu görmek için
-        for (StackTraceElement element : stackTrace) {
-            if (element.getClassName().startsWith("dao")) {
-                errorMessage.append(" (at ").append(element.getFileName())
-                        .append(":").append(element.getLineNumber()).append(")");
-                break;
-            }
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage.toString(), null));
-        }
     }
 
     public Connection getDb() {
