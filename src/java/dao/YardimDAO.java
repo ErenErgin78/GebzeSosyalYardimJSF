@@ -5,13 +5,15 @@
 package dao;
 
 import Entity.Yardim;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
+import static Filters.ErrorFinder.DetectError;
+import java.sql.Statement;
 import java.sql.Connection;
 import util.DBConnection;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -20,6 +22,7 @@ import java.sql.ResultSet;
 public class YardimDAO extends DBConnection {
 
     private Connection db;
+    private String mesaj;
 
     public void YardimEkle(Yardim yardim) {
         try {
@@ -38,25 +41,42 @@ public class YardimDAO extends DBConnection {
 
     }
 
-    private void DetectError(Exception ex) {
-        //Hatayı yakalamak için
-        FacesContext context = FacesContext.getCurrentInstance();
-        StringBuilder errorMessage = new StringBuilder(ex.getMessage());
-        StackTraceElement[] stackTrace = ex.getStackTrace();
+    public void YardimSil(int yardimTipId) {
+        String deleteQuery = "DELETE FROM YARDIM_TIP WHERE YARDIM_TIP_ID = ?";
 
-        //Hatanın hangi satırda olduğunu görmek için
-        for (StackTraceElement element : stackTrace) {
-            if (element.getClassName().startsWith("dao")) {
-                errorMessage.append(" (at ").append(element.getFileName())
-                        .append(":").append(element.getLineNumber()).append(")");
-                break;
-            }
+        try {
+            PreparedStatement ps = getDb().prepareStatement(deleteQuery);
+            ps.setInt(1, yardimTipId);
+            int rowsDeleted = ps.executeUpdate();
+
+            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
+        } catch (Exception ex) {
+            DetectError(ex);
         }
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage.toString(), null));
-
     }
 
-    public java.sql.Connection getDb() {
+    public List<Yardim> YardimListesi() {
+        List<Yardim> yardimList = new ArrayList<>();
+        try {
+            StringBuilder queryBuilder = new StringBuilder();
+            queryBuilder.append("SELECT YARDIM_TIP_ID, YARDIM_TIP FROM YARDIM_TIP");
+
+            Statement statement = getDb().createStatement();
+            ResultSet rs = statement.executeQuery(queryBuilder.toString());
+
+            while (rs.next()) {
+                yardimList.add(new Yardim(
+                        rs.getInt("YARDIM_TIP_ID"),
+                        rs.getString("YARDIM_TIP")
+                ));
+            }
+        } catch (Exception ex) {
+            DetectError(ex);
+        }
+        return yardimList;
+    }
+
+    public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();
         }
@@ -66,4 +86,13 @@ public class YardimDAO extends DBConnection {
     public void setDb(Connection db) {
         this.db = db;
     }
+
+    public String getMesaj() {
+        return mesaj;
+    }
+
+    public void setMesaj(String mesaj) {
+        this.mesaj = mesaj;
+    }
+
 }

@@ -5,8 +5,7 @@
 package dao;
 
 import Entity.Sokak;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
+import static Filters.ErrorFinder.DetectError;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,7 +35,7 @@ public class SokakDAO extends DBConnection {
             csAdres.setString(2, sokak.getSokak());
             csAdres.setInt(3, sokak.getAktif());
             csAdres.execute();
-            
+
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (Exception ex) {
@@ -86,24 +85,6 @@ public class SokakDAO extends DBConnection {
             DetectError(ex);
         }
         return SokakList;
-    }
-
-    private void DetectError(Exception ex) {
-        //Hatayı yakalamak için
-        FacesContext context = FacesContext.getCurrentInstance();
-        StringBuilder errorMessage = new StringBuilder(ex.getMessage());
-        StackTraceElement[] stackTrace = ex.getStackTrace();
-
-        //Hatanın hangi satırda olduğunu görmek için
-        for (StackTraceElement element : stackTrace) {
-            if (element.getClassName().startsWith("dao")) {
-                errorMessage.append(" (at ").append(element.getFileName())
-                        .append(":").append(element.getLineNumber()).append(")");
-                break;
-            }
-        }
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage.toString(), null));
-
     }
 
     public void setDb(Connection db) {
