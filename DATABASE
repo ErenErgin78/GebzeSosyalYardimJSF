@@ -949,51 +949,43 @@ END insert_yardim_tip;
 -----------------------
 CREATE OR REPLACE PROCEDURE INSERT_MESLEK (
     p_meslek_isim IN VARCHAR2,
-    p_aktiflik IN NUMBER,
-    p_meslek_id OUT NUMBER
+    p_aktiflik IN NUMBER
 ) AS
 BEGIN
     INSERT INTO MESLEK (MESLEK_ISIM, AKTIFLIK)
-    VALUES (p_meslek_isim, p_aktiflik)
-    RETURNING MESLEK_ID INTO p_meslek_id;
+    VALUES (p_meslek_isim, p_aktiflik);
 END;
 /
 --------------------------
 
 CREATE OR REPLACE PROCEDURE INSERT_YAKINLIK (
     p_yakinlik_isim IN VARCHAR2,
-    p_aktiflik IN NUMBER,
-    p_yakinlik_id OUT NUMBER
+    p_aktiflik IN NUMBER
 ) AS
 BEGIN
     INSERT INTO YAKINLIK (YAKINLIK_ISIM, AKTIFLIK)
-    VALUES (p_yakinlik_isim, p_aktiflik)
-    RETURNING YAKINLIK_ID INTO p_yakinlik_id;
+    VALUES (p_yakinlik_isim, p_aktiflik);
 END;
 /
 --------------------------
 
 CREATE OR REPLACE PROCEDURE INSERT_YARDIM_TIP (
-    p_yardim_tip IN VARCHAR2,
-    p_yardim_tip_id OUT NUMBER
-) AS
+    p_yardim_tip IN VARCHAR2)
+AS
 BEGIN
     INSERT INTO YARDIM_TIP (YARDIM_TIP)
-    VALUES (p_yardim_tip)
-    RETURNING YARDIM_TIP_ID INTO p_yardim_tip_id;
+    VALUES (p_yardim_tip);
 END;
 /
 ------------------------------
 
 CREATE OR REPLACE PROCEDURE INSERT_YARDIM_ALT_TIP (
     p_yardim_tip_id IN NUMBER,
-    p_yardim_alt_tip IN VARCHAR2,
-    p_yardim_alt_tip_id OUT NUMBER
+    p_yardim_alt_tip IN VARCHAR2
 ) AS
 BEGIN
     INSERT INTO YARDIM_ALT_TIP (YARDIM_TIP_ID, YARDIM_ALT_TIP)
-    VALUES (p_yardim_tip_id, p_yardim_alt_tip)
-    RETURNING YARDIM_ALT_TIP_ID INTO p_yardim_alt_tip_id;
+    VALUES (p_yardim_tip_id, p_yardim_alt_tip);
 END;
 /
 ------------------------------
@@ -1004,12 +996,10 @@ CREATE OR REPLACE PROCEDURE INSERT_STOK (
     p_stok_tanim IN CLOB,
     p_guncel_miktar IN NUMBER,
     p_guncel_fiyat IN NUMBER,
-    p_stok_id OUT NUMBER
 ) AS
 BEGIN
     INSERT INTO STOK (YARDIM_TIP_ID, YARDIM_ALT_TIP_ID, STOK_TANIM, GUNCEL_MIKTAR, GUNCEL_FIYAT)
-    VALUES (p_yardim_tip_id, p_yardim_alt_tip_id, p_stok_tanim, p_guncel_miktar, p_guncel_fiyat)
-    RETURNING STOK_ID INTO p_stok_id;
+    VALUES (p_yardim_tip_id, p_yardim_alt_tip_id, p_stok_tanim, p_guncel_miktar, p_guncel_fiyat);
 END;
 /
 
