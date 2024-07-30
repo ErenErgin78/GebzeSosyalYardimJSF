@@ -2,6 +2,7 @@ package dao;
 
 import Entity.YardimAlt;
 import static Filters.ErrorFinder.DetectError;
+import jakarta.faces.model.SelectItem;
 import java.sql.Statement;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -67,6 +68,23 @@ public class YardimAltDAO extends DBConnection {
             DetectError(ex);
         }
         return yardimAltList;
+    }
+    
+     public List<SelectItem> YardimTipGetir() {
+        List<SelectItem> TipList = new ArrayList<>();
+
+        try {
+            Statement statement = getDb().createStatement();
+            String Selectquery = "SELECT YARDIM_TIP_ID, YARDIM_TIP FROM YARDIM_TIP";
+            ResultSet rs = statement.executeQuery(Selectquery);
+
+            while (rs.next()) {
+                TipList.add(new SelectItem(rs.getInt("YARDIM_TIP_ID"), rs.getString("YARDIM_TIP")));
+            }
+        } catch (Exception ex) {
+            DetectError(ex);
+        }
+        return TipList;
     }
 
     public void setDb(Connection db) {

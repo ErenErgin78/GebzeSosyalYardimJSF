@@ -3,6 +3,7 @@ package Controller;
 import Entity.YardimAlt;
 import dao.YardimAltDAO;
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.model.SelectItem;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
@@ -15,6 +16,14 @@ public class YardimAltBean implements Serializable {
     private YardimAlt entity;
     private YardimAltDAO dao;
     private List<YardimAlt> list;
+    private List<SelectItem> TipList;
+
+    @PostConstruct
+    public void init() {
+        getDao().setIslemBasariliMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
+        TipList = yardimTipGetir();
+         entity = new YardimAlt();
+    }
 
     public void yardimAltEkle() {
         this.getDao().YardimAltEkle(getEntity());
@@ -22,6 +31,10 @@ public class YardimAltBean implements Serializable {
 
     public void yardimAltSil(int yardimAltId) {
         this.getDao().YardimAltSil(yardimAltId);
+    }
+
+    public List<SelectItem> yardimTipGetir() {
+        return this.getDao().YardimTipGetir();
     }
 
     public YardimAlt getEntity() {
@@ -60,9 +73,12 @@ public class YardimAltBean implements Serializable {
         this.list = list;
     }
 
-    @PostConstruct
-    public void init() {
-        getDao().setIslemBasariliMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
+    public List<SelectItem> getTipList() {
+        return TipList;
+    }
+
+    public void setTipList(List<SelectItem> TipList) {
+        this.TipList = TipList;
     }
 
     public YardimAltBean() {

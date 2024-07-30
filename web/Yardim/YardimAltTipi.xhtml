@@ -56,23 +56,22 @@
                         <div class="card-header">Genel Yardım Alt Tipi Bilgileri</div>
                         <div class="card-body">
                             <h:form id="altTipiForm">
-                                <div class="form-group mb-3">
-                                    <!-- Yardım Tipi Seçim Kutusu -->
-                                    <label for="yardimTipi" class="form-label">Yardım Tipi:</label>
-                                    <h:selectOneMenu id="yardimTipi"  class="form-control">
+                                 <div class="form-group">
+                                    <label for="application_type">Yardim Tip:</label>
+                                    <h:selectOneMenu id="neighborhood" value = "#{yardimAltBean.entity.tip_id}" class="form-control">
                                         <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
-                                        <f:selectItems  var="yardimTipi" itemLabel="#{yardimTipi.yardimTipiAdi}" itemValue="#{yardimTipi.yardimTipiId}" />
+                                        <f:selectItems value="#{yardimAltBean.tipList}" />
                                     </h:selectOneMenu>
-                                </div>
+                                </div> 
                                 <div class="row mb-3">
                                     <!-- Alt Tipi Adı -->
                                     <div class="col-md-8 d-flex flex-column mb-2 mb-md-0">
                                         <label for="altTipiAdi" class="form-label">Alt Tipi Adı:</label>
-                                        <h:inputText id="altTipiAdi" class="form-control" />
+                                        <h:inputText id="altTipiAdi" value ="#{yardimAltBean.entity.alt_tip}" class="form-control" />
                                     </div>
                                     <!-- Ekle Butonu -->
                                     <div class="col-md-4 d-flex align-items-end justify-content-end">
-                                        <h:commandButton value="Ekle"  class="btn btn-success" />
+                                        <h:commandButton value="Ekle" value ="#{yardimAltBean.yardimAltEkle()}"  class="btn btn-success" />
                                     </div>
                                 </div>
 
@@ -86,10 +85,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <ui:repeat  var="altTipi"  value ="" varStatus="loop">
+                                        <ui:repeat  var="alt"  value ="#{yardimAltBean.list}" varStatus="loop">
                                             <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                <td>#{altTipi.altTipiKodu}</td>
-                                                <td>#{altTipi.altTipiAdi}</td>
+                                                <td>#{alt.alt_tip_id}</td>
+                                                <td>#{alt.alt_tip}</td>
                                                 <td>#{altTipi.yardimTipiAdi}</td>
                                                 <td>
                                                     <div class="action-buttons">
