@@ -74,6 +74,7 @@ public class YardimAltBean implements Serializable {
     }
 
     public List<SelectItem> getTipList() {
+        TipList = yardimTipGetir();
         return TipList;
     }
 

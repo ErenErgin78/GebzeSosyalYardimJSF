@@ -13,6 +13,13 @@ public class YardimAlt {
     private Integer alt_tip_id;
     private Integer tip_id;
     private String alt_tip;
+    private String tip_isim;
+
+    public YardimAlt(Integer alt_tip_id, String alt_tip, String tip_isim) {
+        this.alt_tip_id = alt_tip_id;
+        this.alt_tip = alt_tip;
+        this.tip_isim = tip_isim;
+    }
 
     public YardimAlt(Integer alt_tip_id, Integer tip_id, String alt_tip) {
         this.alt_tip_id = alt_tip_id;
@@ -50,6 +57,14 @@ public class YardimAlt {
 
     public void setAlt_tip(String alt_tip) {
         this.alt_tip = alt_tip;
+    }
+
+    public String getTip_isim() {
+        return tip_isim;
+    }
+
+    public void setTip_isim(String tip_isim) {
+        this.tip_isim = tip_isim;
     }
 
 }

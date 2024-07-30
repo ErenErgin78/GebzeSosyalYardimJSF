@@ -54,14 +54,15 @@ public class YardimAltDAO extends DBConnection {
         List<YardimAlt> yardimAltList = new ArrayList<>();
         try {
             Statement statement = getDb().createStatement();
-            String selectQuery = "SELECT YARDIM_ALT_TIP_ID, YARDIM_TIP_ID,  YARDIM_ALT_ISIM FROM YARDIM_ALT_TIP";
+            String selectQuery = "SELECT YA.YARDIM_ALT_TIP_ID, YA.YARDIM_TIP_ID,  YA.YARDIM_ALT_TIP, Y.YARDIM_TIP FROM YARDIM_ALT_TIP YA"
+                    + " JOIN YARDIM_TIP Y ON YA.YARDIM_TIP_ID = Y.YARDIM_TIP_ID";
             ResultSet rs = statement.executeQuery(selectQuery);
 
             while (rs.next()) {
                 yardimAltList.add(new YardimAlt(
                         rs.getInt("YARDIM_ALT_TIP_ID"),
-                        rs.getInt("YARDIM_TIP_ID"),
-                        rs.getString("YARDIM_ALT_ISIM")
+                        rs.getString("YARDIM_ALT_TIP"),
+                        rs.getString("YARDIM_TIP")
                 ));
             }
         } catch (Exception ex) {
