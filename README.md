@@ -57,8 +57,8 @@ Attıktan sonra NetBeans içinde Libraries klasörüne sağ tıklayın ve Add JA
 <hr>
 
 ## 6- Projenin genel yapısı:
-1- Öncelikle Source Packages kısmına 4 adet klasör oluşturun:
---
+Öncelikle Source Packages kısmına 4 adet klasör oluşturun:
+
 util --> içinde sadece DBConnection isimli bir sınıf bulunan ve veritabanı bağlantımızı sağlayan klasörümüzdür.
 Bu bir abstract sınıf olacak ve içinde sadece connect isimli bir method yazılacak(Connection return etmeli)
 java.sql.Connection,  java.sql.DriverManager;  --> Bu iki kütüphaneyi import etmeyi unutmayın
