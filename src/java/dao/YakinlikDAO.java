@@ -4,7 +4,7 @@
  */
 package dao;
 
-import Entity.Cekmece;
+import Entity.Yakinlik;
 import static Filters.ErrorFinder.DetectError;
 import util.DBConnection;
 import java.sql.Connection;
@@ -16,25 +16,21 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author casper
- */
-public class CekmeceDAO extends DBConnection {
+public class YakinlikDAO extends DBConnection {
 
     private Connection db;
     private String mesaj;
 
-    public void CekmeceEkle(Cekmece cekmece) {
+    public void YakinlikEkle(Yakinlik yakinlik) {
         try {
             Connection conn = this.getDb();
-            String callQuery = "{call INSERT_CEKMECE(?, ?)}";
-            CallableStatement csCekmece = conn.prepareCall(callQuery);
+            String callQuery = "{call INSERT_YAKINLIK(?, ?)}";
+            CallableStatement csYakinlik = conn.prepareCall(callQuery);
 
-            csCekmece.setString(1, cekmece.getCekmece());
-            csCekmece.setInt(2, cekmece.getAktif());
+            csYakinlik.setString(1, yakinlik.getYakinlik_isim());
+            csYakinlik.setInt(2, yakinlik.getAktiflik());
 
-            csCekmece.execute();
+            csYakinlik.execute();
             String mesaj = "İşlem başarıyla gerçekleşmiştir";
 
         } catch (SQLException ex) {
@@ -42,12 +38,12 @@ public class CekmeceDAO extends DBConnection {
         }
     }
 
-    public void CekmeceSil(int cekmeceId) {
-        String deleteQuery = "DELETE FROM TUTANAK_CEKMECE WHERE TUTANAK_CEKMECE_ID = ?";
+    public void YakinlikSil(int yakinlikId) {
+        String deleteQuery = "DELETE FROM YAKINLIK WHERE YAKINLIK_ID = ?";
 
         try {
             PreparedStatement ps = getDb().prepareStatement(deleteQuery);
-            ps.setInt(1, cekmeceId);
+            ps.setInt(1, yakinlikId);
             int rowsDeleted = ps.executeUpdate();
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
@@ -55,26 +51,26 @@ public class CekmeceDAO extends DBConnection {
             DetectError(ex);
         }
     }
-    
-      public List<Cekmece> CekmeceListesi() {
-        List<Cekmece> CekmeceList = new ArrayList<>();
+
+    public List<Yakinlik> YakinlikListesi() {
+        List<Yakinlik> YakinlikList = new ArrayList<>();
         try {
-            String SelectQuery=("SELECT TUTANAK_CEKMECE_ID, TUTANAK_CEKMECE_DURUM, CEKMECE_AKTIF FROM TUTANAK_CEKMECE");
+            String selectQuery = "SELECT YAKINLIK_ID, YAKINLIK_ISIM, AKTIFLIK FROM YAKINLIK";
 
             Statement statement = getDb().createStatement();
-            ResultSet rs = statement.executeQuery(SelectQuery);
+            ResultSet rs = statement.executeQuery(selectQuery);
 
             while (rs.next()) {
-                CekmeceList.add(new Cekmece(
-                        rs.getInt("TUTANAK_CEKMECE_ID"),
-                        rs.getString("TUTANAK_CEKMECE_DURUM"),
-                        rs.getInt("CEKMECE_AKTIF")
+                YakinlikList.add(new Yakinlik(
+                        rs.getInt("YAKINLIK_ID"),
+                        rs.getString("YAKINLIK_ISIM"),
+                        rs.getInt("AKTIFLIK")
                 ));
             }
         } catch (Exception ex) {
             DetectError(ex);
         }
-        return CekmeceList;
+        return YakinlikList;
     }
 
     public Connection getDb() {
@@ -95,5 +91,4 @@ public class CekmeceDAO extends DBConnection {
     public void setMesaj(String mesaj) {
         this.mesaj = mesaj;
     }
-
 }

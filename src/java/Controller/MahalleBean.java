@@ -6,9 +6,9 @@ package Controller;
 
 import Entity.Mahalle;
 import dao.MahalleDAO;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.annotation.PostConstruct;
 import jakarta.inject.Named;
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
  * @author Eren
  */
 @Named(value = "mahalleBean")
-@SessionScoped
+@ViewScoped
 public class MahalleBean implements Serializable {
 
     private Mahalle entity;
@@ -65,6 +65,11 @@ public class MahalleBean implements Serializable {
 
     public void setList(List<Mahalle> list) {
         this.list = list;
+    }
+
+    @PostConstruct
+    public void init() {
+        getDao().setIslemBasariliMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
     }
 
     public MahalleBean() {

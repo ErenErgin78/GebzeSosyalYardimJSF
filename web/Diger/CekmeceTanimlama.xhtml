@@ -44,66 +44,65 @@
         </style>
     </h:head>
     <h:body>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <h:form id="mahalleForm">
-                        <h2 style="font-weight: bold;">Çekmece Tanımlama</h2>
-                        <div class="card">
-                            <div class="card-header">Çekmece Bilgileri</div>
-                            <div class="card-body">
-                                <div class="row mb-3">
-                                    <!-- Çekmece Adı -->
-                                    <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
-                                        <label for="cekmeceAdi" class="col-form-label me-2">Çekmece Adı:</label>
-                                        <h:inputText id="cekmeceAdi"  class="form-control" style="width: 300px;" />
-                                    </div>
-                                    <!-- Aktif Seçim Kutusu ve Ekle Butonu -->
-                                    <div class="col-md-4 d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center gap-2 me-3">
-                                            <label for="aktifMi" class="col-form-label me-2">Aktif:</label>
-                                            <h:selectOneMenu id="aktifMi" class="form-control col-md-10">
-                                                <f:selectItem itemLabel="Evet" itemValue="true" />
-                                                <f:selectItem itemLabel="Hayır" itemValue="false" />
-                                            </h:selectOneMenu>
-                                        </div>
-                                        <h:commandButton value="Ekle"  class="btn btn-success" />
-                                    </div>
+        <div class="card-container mt-4">
+            <div class="card-wrapper">
+                <h:form id="mahalleForm">
+                    <h2 style="font-weight: bold;">Çekmece Tanımlama</h2>
+                    <div class="card">
+                        <div class="card-header">Çekmece Bilgileri</div>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <!-- Çekmece Adı -->
+                                <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
+                                    <label for="cekmeceAdi" class="col-form-label me-2">Çekmece Adı:</label>
+                                    <h:inputText id="cekmeceAdi" value="#{cekmeceBean.entity.cekmece}" class="form-control" style="width: 300px;" />
                                 </div>
-
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Çekmece No</th>
-                                            <th>Çekmece Adı</th>
-                                            <th>Aktif</th>
-                                            <th>Eylem</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <ui:repeat  var="mahalle"  value ="" varStatus="loop">
-                                            <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>
-                                                    <div class="action-buttons">
-                                                        <h:commandButton value="Düzenle"  styleClass="btn btn-primary ml-20">
-                                                            <f:ajax execute="@this" render="@form"/>
-                                                        </h:commandButton>
-                                                        <h:commandButton value="Sil" styleClass="btn btn-danger delete-button ml-20" onclick="return confirmDelete(this)">
-                                                            <f:ajax execute="@this" render="@form"/>
-                                                        </h:commandButton>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </ui:repeat>
-                                    </tbody>
-                                </table>
+                                <!-- Aktif Seçim Kutusu ve Ekle Butonu -->
+                                <div class="col-md-4 d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center gap-2 me-3">
+                                        <label for="aktifMi" class="col-form-label me-2">Aktif:</label>
+                                        <h:selectOneMenu id="aktifMi" value="#{cekmeceBean.entity.aktif}" class="form-control col-md-10">
+                                            <f:selectItem itemLabel="Evet" itemValue="1" />
+                                            <f:selectItem itemLabel="Hayır" itemValue="0" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <h:commandButton value="Ekle" action="#{cekmeceBean.cekmeceEkle()}" class="btn btn-success">
+                                        <f:ajax execute="@form" render="@form"/>
+                                    </h:commandButton>
+                                </div>
                             </div>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Çekmece No</th>
+                                        <th>Çekmece Adı</th>
+                                        <th>Aktif</th>
+                                        <th>Eylem</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ui:repeat var="cekmece" value="#{cekmeceBean.list}" varStatus="loop">
+                                        <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                            <td>#{cekmece.cekmece_id}</td>
+                                            <td>#{cekmece.cekmece}</td>
+                                            <td>#{cekmece.aktif}</td>
+                                            <td>
+                                                <div class="action-buttons">
+                                                    <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-20">
+                                                        <f:ajax execute="@this" render="@form"/>
+                                                    </h:commandButton>
+                                                    <h:commandButton value="Sil" action="#{cekmeceBean.cekmeceSil(cekmece.cekmece_id)}" styleClass="btn btn-danger delete-button ml-20" onclick="return confirmDelete(this)">
+                                                        <f:ajax execute="@this" render="@form"/>
+                                                    </h:commandButton>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </ui:repeat>
+                                </tbody>
+                            </table>
                         </div>
-                    </h:form>
-                </div>
+                    </div>
+                </h:form>
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -111,7 +110,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
                                                         function confirmDelete(button) {
-                                                            return confirm("Bu mahalleyi gerçekten silmek istiyor musunuz?");
+                                                            return confirm("Bu çekmeceyi gerçekten silmek istiyor musunuz?");
                                                         }
         </script>
     </h:body>

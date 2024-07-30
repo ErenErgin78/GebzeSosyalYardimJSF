@@ -2,18 +2,18 @@ package Controller;
 
 import Entity.User;
 import dao.UsersDAO;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.annotation.PostConstruct;
 import jakarta.inject.Named;
-import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
+import jakarta.faces.view.ViewScoped;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import jakarta.servlet.http.HttpSession;
 
 @Named("userBean")
-@RequestScoped
+@ViewScoped
 public class UserBean implements Serializable {
 
     private User entity;
@@ -85,5 +85,10 @@ public class UserBean implements Serializable {
 
     public void setList(List<User> list) {
         this.list = list;
+    }
+    
+        @PostConstruct
+    public void init() {
+        getDao().setMessage(null); // sayfa yüklendiğinde mesajı sıfırlar
     }
 }
