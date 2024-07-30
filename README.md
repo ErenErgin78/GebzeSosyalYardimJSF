@@ -42,7 +42,7 @@ Eğer projeyi başlatmaya çalıştığınızda undeployed hatası alıyorsanız
 
 <hr>
 
-5- Gerekli Kütüphaneeleri Kurmak:
+## 5- Gerekli Kütüphaneeleri Kurmak:
 1-Gerekli kütüphaneler:
 orai18n-19.3.0.0, 
 ucp11, 
