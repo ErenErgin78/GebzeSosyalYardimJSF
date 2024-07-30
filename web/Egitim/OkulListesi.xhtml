@@ -56,10 +56,12 @@
         </style>
     </h:head>
     <h:body>
-        <div class="container-fluid mt-4">
-            <div class="card-container">
-                <div class="card-wrapper">
-                    <h2 style="font-weight: bold;">Okul Listesi</h2>
+        <div class="container-fluid">               
+            <div class="row">                   
+                <div class="col-md-12">
+                    <div class="card-header">
+                        <h1 style="font-weight: bold; text-align: center;">Okul Listesi</h1>
+                    </div>
                     <div class="card">
                         <div class="card-header">Okul Giriş Bilgileri</div>
                         <div class="card-body">
@@ -153,9 +155,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                                    function confirmDelete(button) {
-                                                                        return confirm("Bu okulu gerçekten silmek istiyor musunuz?");
-                                                                    }
+                                                                function confirmDelete(button) {
+                                                                    return confirm("Bu okulu gerçekten silmek istiyor musunuz?");
+                                                                }
         </script>
     </h:body>
 </html>
