@@ -1,9 +1,8 @@
 /* Custom styles */
 body {
-    font-family: Arial, sans-serif;
+    padding: 0;
     margin: 0;
-    padding-left: 0;
-    background-color: #f0f0f0; /* Hafif gri arkaplan */
+    overflow-x: hidden;/* Hafif gri arkaplan */
 }
 
 #sidebar {
@@ -53,8 +52,7 @@ body {
 }
 
 .container-fluid {
-    margin-left: 0px;
-    padding-left: 12px;
+     padding: 20px;
 }
 
 #content {
@@ -89,18 +87,13 @@ body {
 
 
 table {
-    width: 100%;
-    font-size: 14px;
-    border-collapse: collapse;
-    table-layout: auto; /* Otomatik tablo düzeni */
+   width: 100%;
+    table-layout: fixed;
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    font-size: 16px;
-    white-space: normal; /* Normal satır sonu */
-    word-wrap: break-word; /* Uzun kelimeleri kır */
+   text-align: center;
+    vertical-align: middle;
 }
 
 th {
@@ -127,8 +120,7 @@ button {
 }
 
 .action-buttons {
-    display: flex;
-    flex-wrap: wrap; /* Butonların satır içinde taşmasını önler */
+    margin-right: 10px;/* Butonların satır içinde taşmasını önler */
 }
 
 .delete-button {
