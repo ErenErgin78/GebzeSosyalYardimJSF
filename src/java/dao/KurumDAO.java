@@ -33,7 +33,7 @@ public class KurumDAO extends DBConnection {
         try {
             Connection conn = this.getDb();
 
-            String callQueryAdres = "{call INSERT_KISI_ADRES_KURUM(?,)}";
+            String callQueryAdres = "{call INSERT_KURUM(?)}";
             CallableStatement csAdres = conn.prepareCall(callQueryAdres);
             csAdres.setString(1, kurum.getKurum());
             csAdres.execute();
@@ -55,7 +55,7 @@ public class KurumDAO extends DBConnection {
             while (rs.next()) {
                 KurumList.add(new Kurum(
                         rs.getInt("KURUM_ID"),
-                        rs.getString("KURUM")
+                        rs.getString("KURUM_ISIM")
                 ));
             }
 
