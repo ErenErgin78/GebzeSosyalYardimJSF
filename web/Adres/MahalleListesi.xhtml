@@ -18,12 +18,11 @@
                 overflow: auto; /* Kaydırma özelliklerini etkinleştirir */
             }
             .container-fluid {
-                padding-left: 12px;
+                padding: 0 12px;
                 width: 100%; /* Genişliği %100 yapın */
                 overflow: auto; /* Kaydırma özelliklerini etkinleştirir */
             }
             .card {
-                flex: 1;
                 display: flex;
                 flex-direction: column;
                 margin: 0;
@@ -32,6 +31,12 @@
                 border: none;
                 width: 100%; /* Genişliği %100 yapın */
             }
+            .card-header {
+                font-size: 1.25rem; /* Başlık font boyutu */
+                font-weight: 600; /* Başlık font ağırlığı */
+                text-align: center;
+                margin-bottom: 1rem;
+            }
             .card-body {
                 flex: 1;
                 overflow: auto; /* Kaydırma özelliklerini etkinleştirir */
@@ -39,6 +44,13 @@
             .table {
                 width: 100%;
                 margin-bottom: 0;
+                table-layout: auto;
+            }
+            .table-row-even {
+                background-color: #f9f9f9;
+            }
+            .table-row-odd {
+                background-color: #ffffff;
             }
             .action-buttons {
                 display: flex;
@@ -47,46 +59,64 @@
             .delete-button {
                 margin-right: 10px;
             }
+            .btn-primary, .btn-danger {
+                font-size: 0.875rem; /* Buton yazı boyutu */
+            }
+            .form-group {
+                margin-bottom: 1rem;
+            }
+            .form-label {
+                font-weight: 600;
+            }
+            .form-control {
+                display: inline-block;
+                width: 100%;
+                font-size: 0.875rem; /* Form kontrol yazı boyutu */
+            }
         </style>
     </h:head>
     <h:body>
-         <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                    <h2 style="font-weight: bold;">Mahalle Listesi</h2>
-                </div>
-                <div class="card-body">
-                    <h:form id="mahalleForm">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Mahalle Kodu</th>
-                                    <th>Mahalle Adı</th>
-                                    <th>Aktif</th>
-                                    <th>Eylem</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <ui:repeat value="#{mahalleBean.list}" var="mahalle" varStatus="loop">
-                                    <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                        <td>#{mahalle.mahalle_id}</td>
-                                        <td>#{mahalle.mahalle}</td>
-                                        <td>#{mahalle.mahalle_aktif == 1 ? 'Evet' : 'Hayır'}</td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <h:commandButton value="Sil" action="#{mahalleBean.mahallesil(mahalle.mahalle_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
-                                                    <f:ajax execute="@this" render="@form"/>
-                                                </h:commandButton>
-                                                <h:commandButton value="Düzenle" styleClass="btn btn-primary">
-                                                    <f:ajax execute="@this" render="@form"/>
-                                                </h:commandButton>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </ui:repeat>
-                            </tbody>
-                        </table>
-                    </h:form>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-header">
+                        <h1 style="font-weight: bold;">Mahalle Listesi</h1>
+                    </div>
+                    <div class="card">
+                        <h:form id="mahalleForm">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Mahalle Kodu</th>
+                                            <th>Mahalle Adı</th>
+                                            <th>Aktif</th>
+                                            <th>Eylem</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <ui:repeat value="#{mahalleBean.list}" var="mahalle" varStatus="loop">
+                                            <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                                <td>#{mahalle.mahalle_id}</td>
+                                                <td>#{mahalle.mahalle}</td>
+                                                <td>#{mahalle.mahalle_aktif == 1 ? 'Evet' : 'Hayır'}</td>
+                                                <td>
+                                                    <div class="action-buttons">
+                                                        <h:commandButton value="Sil" action="#{mahalleBean.mahallesil(mahalle.mahalle_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                            <f:ajax execute="@this" render="@form"/>
+                                                        </h:commandButton>
+                                                        <h:commandButton value="Düzenle" styleClass="btn btn-primary">
+                                                            <f:ajax execute="@this" render="@form"/>
+                                                        </h:commandButton>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </ui:repeat>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </h:form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -94,9 +124,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-            function confirmDelete(button) {
-                return confirm("Bu mahalleyi gerçekten silmek istiyor musunuz?");
-            }
+                                                                function confirmDelete(button) {
+                                                                    return confirm("Bu mahalleyi gerçekten silmek istiyor musunuz?");
+                                                                }
         </script>
     </h:body>
 </html>

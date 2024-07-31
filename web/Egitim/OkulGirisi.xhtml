@@ -31,10 +31,12 @@
         <h:form>
             <h:messages for="okulekle" globalOnly="true" layout="table"/>
             <h:outputText id="mesaj" value="#{okulBean.dao.mesaj}" />
-            <div class="container-fluid mt-20">
-                <div class="row justify-content-center">
-                    <div class="col-md-8 ">
-                        <h2 style="font-weight: bold">Okul Girişi</h2>
+            <div class="container-fluid">               
+                <div class="row">                   
+                    <div class="col-md-12">
+                        <div class="card-header">
+                        <h1 style="font-weight: bold; text-align: center;">Okul Girişi</h1>
+                        </div>
                         <div class="card mt-3 " >
                             <div class="card-header">Okul Giriş Bilgileri  #{okulBean.entity.okul_tur_id}</div>
                             <div class="card-body">
