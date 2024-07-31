@@ -25,6 +25,30 @@
             .dropdown-menu .dropdown-item:hover {
                 background-color: #575757;
             }
+
+            .full-width {
+                width: 100%;
+            }
+            .form-control {
+                width: 100%;
+                box-sizing: border-box; /* Ensure padding and border are included in the width */
+            }
+            .form-group {
+                width: 100%;
+            }
+            .form-row {
+                margin: 0; /* Remove margin to fit full width */
+            }
+            .text-center {
+                text-align: center;
+            }
+            .custom-radio {
+                display: flex;
+                gap: 0px; /* Adjust spacing between radio buttons */
+            }
+            .custom-radio input {
+                margin-right: 5px; /* Space between radio button and label */
+            }
         </style>
     </h:head>
     <h:body>
@@ -35,30 +59,33 @@
                 <div class="row">                   
                     <div class="col-md-12">
                         <div class="card-header">
-                        <h1 style="font-weight: bold; text-align: center;">Okul Girişi</h1>
+                            <h1 style="font-weight: bold; text-align: center;">Okul Girişi</h1>
                         </div>
-                        <div class="card mt-3 " >
+                        <div class="card mt-3 full-width">
                             <div class="card-header">Okul Giriş Bilgileri  #{okulBean.entity.okul_tur_id}</div>
                             <div class="card-body">
                                 <div class="form-row">
-                                    <div class="custom-radio">
-                                        <h:selectOneRadio value="#{okulBean.entity.okul_tur_id}">
-                                            <f:selectItem itemLabel="Devlet" itemValue="1" />
-                                            <f:selectItem itemLabel="Özel" itemValue="2" />
-                                        </h:selectOneRadio>
+                                    <div class="form-group full-width">
+                                        <label>Okul Türü:</label>
+                                        <div class="custom-radio">
+                                            <h:selectOneRadio value="#{okulBean.entity.okul_tur_id}">
+                                                <f:selectItem itemLabel="Devlet" itemValue="1" />
+                                                <f:selectItem itemLabel="Özel" itemValue="2" />
+                                            </h:selectOneRadio>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="form-group col-md-8">
+                                    <div class="form-group">
                                         <label for="application_type">Aktif: #{okulBean.entity.okul_aktif}</label>
-                                        <h:selectOneMenu id="application_type" class="form-control" value = "#{okulBean.entity.okul_aktif}">
+                                        <h:selectOneMenu id="application_type" value="#{okulBean.entity.okul_aktif}" class="form-control">
                                             <f:selectItem itemLabel="Evet" itemValue="1" />
                                             <f:selectItem itemLabel="Hayır" itemValue="0" />
                                         </h:selectOneMenu>
                                     </div> 
                                 </div>
                                 <div class="form-row">
-                                    <div class="form-group col-md-8">
+                                    <div class="form-group">
                                         <label for="neighborhood">Okul Tipi: #{okulBean.entity.okul_tip_id}</label>
                                         <h:selectOneMenu id="medenidurum" value="#{okulBean.entity.okul_tip_id}" class="form-control">
                                             <f:selectItem itemLabel="Anaokulu" itemValue="1" />
@@ -73,9 +100,9 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="form-group col-md-8">
+                                    <div class="form-group">
                                         <label for="name">Okul Adı:  #{okulBean.entity.okul_isim}</label>
-                                        <h:inputText id="name" value ="#{okulBean.entity.okul_isim}" class="form-control" />
+                                        <h:inputText id="name" value="#{okulBean.entity.okul_isim}" class="form-control" />
                                     </div>
                                 </div>
                             </div>
