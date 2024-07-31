@@ -28,6 +28,7 @@
             .col-md-12 {
                 padding: 0; /* Remove padding */
                 width: 100%; /* Set width to 100% */
+                
             }
             .card-body {
                 padding: 0; /* Remove padding */
@@ -38,11 +39,14 @@
                 margin-bottom: 0;
                 table-layout: auto; /* Let the table decide column widths based on content */
             }
-            .table th,
-            .table td {
+              .table td {
                 white-space: nowrap; /* Prevent text wrapping */
                 padding: 10px; /* Add padding for readability */
                 text-align: left; /* Align text to the left */
+            }
+            .table th {
+                font-size: 1.25rem; /* Tablo başlık font boyutu */
+                font-weight: 600; /* Tablo başlık font ağırlığı */
             }
             .action-buttons {
                 display: flex;
@@ -71,15 +75,15 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>ISIM</th>
-                                                <th>KULLANICI ADI</th>
-                                                <th>UNVAN</th>
-                                                <th>CINSIYET</th>
-                                                <th>TELEFON</th>
-                                                <th class="kayit-tarih">KAYIT TARIH</th>
-                                                <th>DURUM ID</th>
-                                                <th>SICIL NO</th>
-                                                <th>EYLEM</th>
+                                                <th>İsim</th>
+                                                <th>Kullanıcı Adı</th>
+                                                <th>Ünvan</th>
+                                                <th>Cinsiyet</th>
+                                                <th>Telefon</th>
+                                                <th class="kayit-tarih">Kayıt Tarihi</th>
+                                                <th>Durum ID</th>
+                                                <th>Sicil NO</th>
+                                                <th>Eylem</th>
                                             </tr>
                                         </thead>
                                         <tbody>

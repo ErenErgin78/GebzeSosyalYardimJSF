@@ -65,11 +65,13 @@
                                     <!-- Yönlendirilen Kurum Adı -->
                                     <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
                                         <label for="yonlendirilenKurumAdi" class="col-form-label me-2">Yönlendirilen Kurum Adı:</label>
-                                        <h:inputText id="yonlendirilenKurumAdi" value="#{yonlendirilenKurumBean.yonlendirilenKurumAdi}" class="form-control" style="width: 350px;" />
+                                        <h:inputText id="yonlendirilenKurumAdi" value="#{kurumBean.entity.kurum}" class="form-control" style="width: 350px;" />
                                     </div>
                                     <!-- Ekle Butonu -->
                                     <div class="col-md-4 d-flex align-items-center justify-content-between">
-                                        <h:commandButton value="Ekle" action="#{yonlendirilenKurumBean.add}" class="btn btn-success" />
+                                        <h:commandButton value="Ekle" action="#{kurumBean.kurumekle()}" class="btn btn-success" >
+                                            <f:ajax execute="@form" render="@form"/>
+                                        </h:commandButton>
                                     </div>
                                 </div>
                                 <table class="table table-bordered">
@@ -81,16 +83,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <ui:repeat value="#{yonlendirilenKurumBean.yonlendirilenKurumList}" var="yonlendirilenKurum" varStatus="loop">
+                                        <ui:repeat value="#{kurumBean.list}" var="kurum" varStatus="loop">
                                             <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                <td>#{yonlendirilenKurum.kurumKodu}</td>
-                                                <td>#{yonlendirilenKurum.yonlendirilenKurumAdi}</td>
+                                                <td>#{kurum.kurum_id}</td>
+                                                <td>#{kurum.kurum}</td>
                                                 <td>
                                                     <div class="action-buttons">
-                                                        <h:commandButton value="Düzenle" action="#{yonlendirilenKurumBean.edit(yonlendirilenKurum)}" styleClass="btn btn-warning ml-2">
+                                                        <h:commandButton value="Düzenle"  styleClass="btn btn-warning ml-2">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
-                                                        <h:commandButton value="Sil" action="#{yonlendirilenKurumBean.delete(yonlendirilenKurum.kurumKodu)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
+                                                        <h:commandButton value="Sil" action="#{kurumBean.kurumsil(kurum.kurum_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
                                                     </div>
@@ -109,9 +111,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-            function confirmDelete(button) {
-                return confirm("Bu kurumu gerçekten silmek istiyor musunuz?");
-            }
+                                                            function confirmDelete(button) {
+                                                                return confirm("Bu kurumu gerçekten silmek istiyor musunuz?");
+                                                            }
         </script>
     </h:body>
 </html>
