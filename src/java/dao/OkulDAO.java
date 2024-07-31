@@ -1,8 +1,7 @@
 package dao;
 
 import Entity.Okul;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
+import static Filters.ErrorFinder.DetectError;
 import util.DBConnection;
 import java.sql.Connection;
 import java.sql.CallableStatement;
@@ -22,7 +21,7 @@ public class OkulDAO extends DBConnection {
     private Integer tur = 0;
     private Integer aktif = 2;
 
-    public void Create(Okul okul) {
+    public void OkulEkle(Okul okul) {
         try {
             Connection conn = this.getDb();
             String callQuery = "{call INSERT_OKUL(?, ?, ?, ?)}";
@@ -98,24 +97,6 @@ public class OkulDAO extends DBConnection {
         } catch (SQLException ex) {
             DetectError(ex);
         }
-    }
-
-    public void DetectError(Exception ex) {
-        //Hatayı yakalamak için
-        FacesContext context = FacesContext.getCurrentInstance();
-        StringBuilder errorMessage = new StringBuilder(ex.getMessage());
-        StackTraceElement[] stackTrace = ex.getStackTrace();
-
-        //Hatanın hangi satırda olduğunu görmek için
-        for (StackTraceElement element : stackTrace) {
-            if (element.getClassName().startsWith("dao")) {
-                errorMessage.append(" (at ").append(element.getFileName())
-                        .append(":").append(element.getLineNumber()).append(")");
-                break;
-            }
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage.toString(), null));
-        }
-
     }
 
     public Connection getDb() {

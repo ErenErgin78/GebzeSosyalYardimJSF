@@ -2,13 +2,14 @@ package Controller;
 
 import Entity.Meslek;
 import dao.MeslekDAO;
+import jakarta.annotation.PostConstruct;
 import jakarta.inject.Named;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
 
 @Named(value = "meslekBean")
-@RequestScoped
+@ViewScoped
 public class MeslekBean implements Serializable {
 
     private Meslek entity;
@@ -37,7 +38,7 @@ public class MeslekBean implements Serializable {
     public MeslekDAO getDao() {
         if (this.dao == null) {
             this.dao = new MeslekDAO();
-           dao.setMesaj(null);
+            dao.setMesaj(null);
         }
         return this.dao;
     }
@@ -57,6 +58,11 @@ public class MeslekBean implements Serializable {
 
     public void setList(List<Meslek> list) {
         this.list = list;
+    }
+
+    @PostConstruct
+    public void init() {
+        getDao().setMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
     }
 
     public MeslekBean() {

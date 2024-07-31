@@ -9,42 +9,39 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
         <link rel="stylesheet" href="styles.css" />
         <style>
-            .form-background {
-                background-color: #f8f9fa; /* Arka plan rengi */
+            .navbar-nav .nav-link {
+                color: #f2f2f2;
             }
-            .no-border .form-check-input {
-                border: none;
+            .navbar-nav .nav-link:hover {
+                background-color: #575757;
+                color: #fff;
             }
-            .inline-radio {
-                display: inline-block;
+            .dropdown-menu {
+                background-color: #333;
             }
-            .no-border-radio .form-check-input {
-                border: none;
-                margin-right: 10px;
+            .dropdown-menu .dropdown-item {
+                color: #f2f2f2;
             }
-            .no-border-radio .form-check {
-                padding: 0;
-                margin: 0 10px 0 0;
+            .dropdown-menu .dropdown-item:hover {
+                background-color: #575757;
             }
-            .no-border-radio .form-check-label {
-                margin: 0;
-            }
+
         </style>
     </h:head>
     <h:body>
         <h:form>
             <h:messages for="sokakekle" globalOnly="true" layout="table"/>
             <h:outputText id="mesaj" value="#{sokakBean.dao.islemBasariliMesaj}" />
-            <div class="container-fluid mt-20">
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
                         <h2 style="font-weight: bold;">Yeni Cadde/Sokak Girişi</h2>
                         <div class="card">     
                             <div class="card-header">Cadde/Sokak Giriş Bilgileri <br/>
                             </div>  
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="application_type">Mahalle:#{sokakBean.entity.mahalle_id}</label>
+                                    <label for="application_type">Mahalle:</label>
                                     <h:selectOneMenu id="neighborhood" value = "#{sokakBean.entity.mahalle_id}" class="form-control">
                                         <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
                                         <f:selectItems value="#{kisiBean.mahalleList}" />

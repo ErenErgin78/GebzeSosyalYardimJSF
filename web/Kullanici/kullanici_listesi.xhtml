@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -11,62 +10,110 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
     <link rel="stylesheet" href="styles.css" />
     <h:outputStylesheet name="styles.css"/>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: auto; /* Enable scrolling */
+        }
+        .container-fluid {
+            padding: 0 12px; /* Add some padding */
+            width: 100%; /* Set width to 100% */
+            overflow: auto; /* Enable scrolling */
+        }
+        .row {
+            margin: 0; /* Remove margin */
+            width: 100%; /* Set width to 100% */
+        }
+        .col-md-12 {
+            padding: 0; /* Remove padding */
+            width: 100%; /* Set width to 100% */
+        }
+        .card-body {
+            padding: 0; /* Remove padding */
+            overflow: auto; /* Enable scrolling */
+        }
+        .table {
+            width: 100%;
+            margin-bottom: 0;
+            table-layout: auto; /* Let the table decide column widths based on content */
+        }
+        .table th,
+        .table td {
+            white-space: nowrap; /* Prevent text wrapping */
+            padding: 10px; /* Add padding for readability */
+            text-align: left; /* Align text to the left */
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .delete-button {
+            margin-right: 10px;
+        }
+        .table-container {
+            margin-top: 20px; /* Add space between header and table */
+        }
+    </style>
 </h:head>
 <h:body>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <h2 style="font-weight: bold;">Kullanıcı Listesi</h2>
-                <h:form id="userForm">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>ISIM</th>
-                                <th>KULLANICI ADI</th>
-                                <th>UNVAN</th>
-                                <th>CINSIYET</th>
-                                <th>TELEFON</th>
-                                <th class="kayit-tarih">KAYIT TARIH</th>
-                                <th>DURUM ID</th>
-                                <th>SICIL NO</th>
-                                <th>EYLEM</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <ui:repeat value="#{userBean.list}" var="user" varStatus="loop">
-                                <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                    <td>#{user.kullanici_id}</td>
-                                    <td>#{user.kullanici_isim}</td>
-                                     <td>#{user.kullanici_kullanici_adi}</td>
-                                    <td>#{user.kullanici_unvan}</td>
-                                    <td>#{user.kullanici_cinsiyet}</td>
-                                    <td>#{user.kullanici_telefon}</td>
-                                    <td class="kayit-tarih">#{user.kullanici_kayit_tarih}</td>
-                                    <td>#{user.kullanici_durum}</td>
-                                    <td class="sicil">#{user.kullanici_sicil_no}</td>
-
-                                    <td class="profil">
-                                        <div class="action-buttons">
-                                            <h:commandButton value="SIL" action="#{userBean.delete(user.kullanici_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
-                                                <f:ajax execute="@this" render="@form"/>
-                                            </h:commandButton>
-                                            <h:commandButton value="DUZENLE" action="#{userBean.edit(user)}" styleClass="btn btn-primary ml-20">
-                                                <f:ajax execute="@this" render="@form"/>
-                                            </h:commandButton>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </ui:repeat>
-                        </tbody>
-                    </table>
-                </h:form>
+                <div class="card-body">
+                    <div class="table-container">
+                        <h:form id="userForm">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>ISIM</th>
+                                        <th>KULLANICI ADI</th>
+                                        <th>UNVAN</th>
+                                        <th>CINSIYET</th>
+                                        <th>TELEFON</th>
+                                        <th class="kayit-tarih">KAYIT TARIH</th>
+                                        <th>DURUM ID</th>
+                                        <th>SICIL NO</th>
+                                        <th>EYLEM</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ui:repeat value="#{userBean.list}" var="user" varStatus="loop">
+                                        <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                            <td>#{user.kullanici_id}</td>
+                                            <td>#{user.kullanici_isim}</td>
+                                            <td>#{user.kullanici_kullanici_adi}</td>
+                                            <td>#{user.kullanici_unvan}</td>
+                                            <td>#{user.kullanici_cinsiyet}</td>
+                                            <td>#{user.kullanici_telefon}</td>
+                                            <td class="kayit-tarih">#{user.kullanici_kayit_tarih}</td>
+                                            <td>#{user.kullanici_durum}</td>
+                                            <td class="sicil">#{user.kullanici_sicil_no}</td>
+                                            <td class="profil">
+                                                <div class="action-buttons">
+                                                    <h:commandButton value="SIL" action="#{userBean.delete(user.kullanici_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                        <f:ajax execute="@this" render="@form"/>
+                                                    </h:commandButton>
+                                                    <h:commandButton value="DUZENLE" action="#{userBean.edit(user)}" styleClass="btn btn-primary ml-20">
+                                                        <f:ajax execute="@this" render="@form"/>
+                                                    </h:commandButton>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </ui:repeat>
+                                </tbody>
+                            </table>
+                        </h:form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
     <script>
         function confirmDelete(button) {
             return confirm("Bu kullanıcıyı gerçekten silmek istiyor musunuz?");

@@ -4,76 +4,73 @@
  */
 package dao;
 
-import Entity.Yardim;
+import Entity.Yakinlik;
 import static Filters.ErrorFinder.DetectError;
-import java.sql.Statement;
-import java.sql.Connection;
 import util.DBConnection;
+import java.sql.Connection;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Eren
- */
-public class YardimDAO extends DBConnection {
+public class YakinlikDAO extends DBConnection {
 
     private Connection db;
     private String mesaj;
 
-    public void YardimEkle(Yardim yardim) {
+    public void YakinlikEkle(Yakinlik yakinlik) {
         try {
             Connection conn = this.getDb();
+            String callQuery = "{call INSERT_YAKINLIK(?, ?)}";
+            CallableStatement csYakinlik = conn.prepareCall(callQuery);
 
-            String callQuery = "{call insert_yardim_tip(?)}";
-            CallableStatement cs = conn.prepareCall(callQuery);
+            csYakinlik.setString(1, yakinlik.getYakinlik_isim());
+            csYakinlik.setInt(2, yakinlik.getAktiflik());
 
-            cs.setString(1, yardim.getYardim_tip());
+            csYakinlik.execute();
+            String mesaj = "İşlem başarıyla gerçekleşmiştir";
 
-            cs.execute();
-
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             DetectError(ex);
         }
-
     }
 
-    public void YardimSil(int yardimTipId) {
-        String deleteQuery = "DELETE FROM YARDIM_TIP WHERE YARDIM_TIP_ID = ?";
+    public void YakinlikSil(int yakinlikId) {
+        String deleteQuery = "DELETE FROM YAKINLIK WHERE YAKINLIK_ID = ?";
 
         try {
             PreparedStatement ps = getDb().prepareStatement(deleteQuery);
-            ps.setInt(1, yardimTipId);
+            ps.setInt(1, yakinlikId);
             int rowsDeleted = ps.executeUpdate();
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             DetectError(ex);
         }
     }
 
-    public List<Yardim> YardimListesi() {
-        List<Yardim> yardimList = new ArrayList<>();
+    public List<Yakinlik> YakinlikListesi() {
+        List<Yakinlik> YakinlikList = new ArrayList<>();
         try {
-            StringBuilder queryBuilder = new StringBuilder();
-            queryBuilder.append("SELECT YARDIM_TIP_ID, YARDIM_TIP FROM YARDIM_TIP");
+            String selectQuery = "SELECT YAKINLIK_ID, YAKINLIK_ISIM, AKTIFLIK FROM YAKINLIK";
 
             Statement statement = getDb().createStatement();
-            ResultSet rs = statement.executeQuery(queryBuilder.toString());
+            ResultSet rs = statement.executeQuery(selectQuery);
 
             while (rs.next()) {
-                yardimList.add(new Yardim(
-                        rs.getInt("YARDIM_TIP_ID"),
-                        rs.getString("YARDIM_TIP")
+                YakinlikList.add(new Yakinlik(
+                        rs.getInt("YAKINLIK_ID"),
+                        rs.getString("YAKINLIK_ISIM"),
+                        rs.getInt("AKTIFLIK")
                 ));
             }
         } catch (Exception ex) {
             DetectError(ex);
         }
-        return yardimList;
+        return YakinlikList;
     }
 
     public Connection getDb() {
@@ -83,7 +80,7 @@ public class YardimDAO extends DBConnection {
         return db;
     }
 
-    public void setDb(Connection db) {
+    public void setDb(java.sql.Connection db) {
         this.db = db;
     }
 
@@ -94,5 +91,4 @@ public class YardimDAO extends DBConnection {
     public void setMesaj(String mesaj) {
         this.mesaj = mesaj;
     }
-
 }

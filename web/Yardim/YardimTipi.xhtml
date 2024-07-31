@@ -66,11 +66,13 @@
                                     <!-- Yardım Tipi Adı -->
                                     <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
                                         <label for="yardimTipiAdi" class="form-label me-2">Yardım Tipi Adı:</label>
-                                        <h:inputText id="yardimTipiAdi"  class="form-control" style="width: 400px;" />
+                                        <h:inputText id="yardimTipiAdi" value ="#{yardimBean.entity.yardim_tip}"  class="form-control" style="width: 400px;" />
                                     </div>
                                     <!-- Ekle Butonu -->
                                     <div class="col-md-4 d-flex align-items-center justify-content-end">
-                                        <h:commandButton value="Ekle"  class="btn btn-success" />
+                                        <h:commandButton value="Ekle" action ="#{yardimBean.yardimEkle()}"  class="btn btn-success">
+                                            <f:ajax execute="@form" render="@form"/>
+                                        </h:commandButton>
                                     </div>
                                 </div>
 
@@ -83,13 +85,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <ui:repeat  var="yardimTipi" value ="" varStatus="loop">
+                                        <ui:repeat value ="#{yardimBean.list}"  var="yardim"  varStatus="loop">
                                             <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                <td></td>
-                                                <td></td>
+                                                <td>#{yardim.yardim_tip_id}</td>
+                                                <td>#{yardim.yardim_tip}</td>
                                                 <td>
                                                     <div class="action-buttons">
-                                                         <h:commandButton value="Sil"  styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                        <h:commandButton value="Sil" action ="#{yardimBean.yardimSil(yardim.yardim_tip_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
                                                         <h:commandButton value="Düzenle"  styleClass="btn btn-primary ml-20">
@@ -111,9 +113,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-            function confirmDelete(button) {
-                return confirm("Bu yardım tipini gerçekten silmek istiyor musunuz?");
-            }
+                                                            function confirmDelete(button) {
+                                                                return confirm("Bu yardım tipini gerçekten silmek istiyor musunuz?");
+                                                            }
         </script>
     </h:body>
 </html>

@@ -4,7 +4,7 @@
  */
 package dao;
 
-import Entity.Yardim;
+import Entity.Engel;
 import static Filters.ErrorFinder.DetectError;
 import java.sql.Statement;
 import java.sql.Connection;
@@ -19,19 +19,19 @@ import java.util.List;
  *
  * @author Eren
  */
-public class YardimDAO extends DBConnection {
+public class EngelDAO extends DBConnection {
 
     private Connection db;
     private String mesaj;
 
-    public void YardimEkle(Yardim yardim) {
+    public void EngelEkle(Engel engel) {
         try {
             Connection conn = this.getDb();
 
-            String callQuery = "{call insert_yardim_tip(?)}";
+            String callQuery = "{call INSERT_ENGELLI_TIP(?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
 
-            cs.setString(1, yardim.getYardim_tip());
+            cs.setString(1, engel.getEngel_tip());
 
             cs.execute();
 
@@ -41,12 +41,12 @@ public class YardimDAO extends DBConnection {
 
     }
 
-    public void YardimSil(int yardimTipId) {
-        String deleteQuery = "DELETE FROM YARDIM_TIP WHERE YARDIM_TIP_ID = ?";
+    public void EngelSil(int engelTipId) {
+        String deleteQuery = "DELETE FROM ENGEL_TIP WHERE ENGEL_TIP_ID = ?";
 
         try {
             PreparedStatement ps = getDb().prepareStatement(deleteQuery);
-            ps.setInt(1, yardimTipId);
+            ps.setInt(1, engelTipId);
             int rowsDeleted = ps.executeUpdate();
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
@@ -55,25 +55,25 @@ public class YardimDAO extends DBConnection {
         }
     }
 
-    public List<Yardim> YardimListesi() {
-        List<Yardim> yardimList = new ArrayList<>();
+    public List<Engel> EngelListesi() {
+        List<Engel> engelList = new ArrayList<>();
         try {
             StringBuilder queryBuilder = new StringBuilder();
-            queryBuilder.append("SELECT YARDIM_TIP_ID, YARDIM_TIP FROM YARDIM_TIP");
+            queryBuilder.append("SELECT ENGEL_TIP_ID, ENGEL_TIP FROM ENGEL_TIP");
 
             Statement statement = getDb().createStatement();
             ResultSet rs = statement.executeQuery(queryBuilder.toString());
 
             while (rs.next()) {
-                yardimList.add(new Yardim(
-                        rs.getInt("YARDIM_TIP_ID"),
-                        rs.getString("YARDIM_TIP")
+                engelList.add(new Engel(
+                        rs.getInt("ENGEL_TIP_ID"),
+                        rs.getString("ENGEL_TIP")
                 ));
             }
         } catch (Exception ex) {
             DetectError(ex);
         }
-        return yardimList;
+        return engelList;
     }
 
     public Connection getDb() {
