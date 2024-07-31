@@ -23,8 +23,8 @@
                 font-weight: 600;
             }
             .form-control {
-                display: inline-block;
-                width: auto;
+                display: block;
+                width: 100%; /* Tam genişlikte olacak şekilde ayarlıyoruz */
                 vertical-align: middle;
             }
             .btn-container {
@@ -52,6 +52,9 @@
             }
             .action-buttons .btn {
                 margin-right: 0.5rem; /* Butonlar arasına sağ boşluk ekler */
+            }
+            .full-width {
+                width: 100%;
             }
         </style>
     </h:head>
@@ -155,9 +158,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                                function confirmDelete(button) {
-                                                                    return confirm("Bu okulu gerçekten silmek istiyor musunuz?");
-                                                                }
+            function confirmDelete(button) {
+                return confirm("Bu okulu gerçekten silmek istiyor musunuz?");
+            }
         </script>
     </h:body>
 </html>

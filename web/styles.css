@@ -52,7 +52,7 @@ body {
 }
 
 .container-fluid {
-     padding: 20px;
+    padding: 20px;
 }
 
 #content {
@@ -87,18 +87,19 @@ body {
 
 
 table {
-   width: 100%;
+    width: 100%;
     table-layout: fixed;
 }
 
 th, td {
-   text-align: center;
-    vertical-align: middle;
+    white-space: nowrap; /* Prevent text wrapping */
+    padding: 10px; /* Add padding for readability */
+    text-align: left;
 }
 
 th {
-    background-color: #f2f2f2;
-    text-align: left;
+    font-size: 1.25rem; /* Tablo başlık font boyutu */
+    font-weight: 600;
 }
 
 button {
