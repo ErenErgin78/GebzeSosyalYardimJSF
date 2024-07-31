@@ -13,7 +13,6 @@ public class Mahalle {
     private Integer mahalle_id;
     private String mahalle;
     private Integer mahalle_aktif;
-
     public Mahalle() {
     }
 
