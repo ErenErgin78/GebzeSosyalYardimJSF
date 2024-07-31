@@ -42,7 +42,7 @@ public class EngelDAO extends DBConnection {
     }
 
     public void EngelSil(int engelTipId) {
-        String deleteQuery = "DELETE FROM ENGEL_TIP WHERE ENGEL_TIP_ID = ?";
+        String deleteQuery = "DELETE FROM ENGELLI_TIP WHERE TIP_ID = ?";
 
         try {
             PreparedStatement ps = getDb().prepareStatement(deleteQuery);
@@ -59,15 +59,15 @@ public class EngelDAO extends DBConnection {
         List<Engel> engelList = new ArrayList<>();
         try {
             StringBuilder queryBuilder = new StringBuilder();
-            queryBuilder.append("SELECT ENGEL_TIP_ID, ENGEL_TIP FROM ENGEL_TIP");
+            queryBuilder.append("SELECT TIP_ID, TIP_ISIM FROM ENGELLI_TIP");
 
             Statement statement = getDb().createStatement();
             ResultSet rs = statement.executeQuery(queryBuilder.toString());
 
             while (rs.next()) {
                 engelList.add(new Engel(
-                        rs.getInt("ENGEL_TIP_ID"),
-                        rs.getString("ENGEL_TIP")
+                        rs.getInt("TIP_ID"),
+                        rs.getString("TIP_ISIM")
                 ));
             }
         } catch (Exception ex) {
