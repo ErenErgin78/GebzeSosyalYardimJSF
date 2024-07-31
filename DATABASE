@@ -1998,3 +1998,13 @@ INSERT INTO KURUM (KURUM_ISIM) VALUES ('Diğer');
 INSERT INTO KURUM (KURUM_ISIM) VALUES ('Kamu Kurumu');
 INSERT INTO KURUM (KURUM_ISIM) VALUES ('Fizik Tedavi Merkezi');
 INSERT INTO KURUM (KURUM_ISIM) VALUES ('Kaymakamlık');
+
+
+create or replace PROCEDURE INSERT_ENGEL_ALT_TIP (
+    p_engel_tip_id IN NUMBER,
+    p_engel_alt_tip IN VARCHAR2
+) AS
+BEGIN
+    INSERT INTO ENGELLI_ALT_TIP (ALT_TIP_ID, ALT_TIP_ISIM)
+    VALUES (p_engel_tip_id, p_engel_alt_tip);
+END;
