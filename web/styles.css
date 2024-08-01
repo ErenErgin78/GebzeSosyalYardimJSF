@@ -189,7 +189,7 @@ button {
     display: none;
 }
 
-.custom-radio label { /* Okul girişindeki radio buttonların css'i */
+.custom-radio label { 
     position: relative;
     padding-left: 25px;
     margin-right: 15px;
@@ -198,7 +198,7 @@ button {
     user-select: none;
 }
 
-.custom-radio label::before { /* Okul girişindeki radio buttonların css'i */
+.custom-radio label::before { 
     content: "";
     position: absolute;
     left: 0;
