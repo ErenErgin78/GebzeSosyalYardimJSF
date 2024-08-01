@@ -13,56 +13,75 @@
         <link rel="stylesheet" href="styles.css" />
         <h:outputStylesheet name="styles.css"/>
         <style>
-            .form-group {
-                margin-bottom: 1rem;
+             /* Navbar */
+            .navbar-nav .nav-link {
+                color: #f2f2f2;
             }
-            .form-row {
-                margin-bottom: 1rem;
+
+            .navbar-nav .nav-link:hover {
+                background-color: #575757;
+                color: #fff;
             }
-            .form-label {
-                margin-bottom: .5rem;
-                font-weight: 600;
+
+            .dropdown-menu {
+                background-color: #333;
             }
+
+            .dropdown-menu .dropdown-item {
+                color: #f2f2f2;
+            }
+
+            .dropdown-menu .dropdown-item:hover {
+                background-color: #575757;
+            }
+
+            /* Form Düzenlemeleri */
             .form-control {
-                display: inline-block;
-                width: auto;
-                vertical-align: middle;
-            }
-            .btn-container {
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-            }
-            .card-container {
-                display: flex;
-                justify-content: center;
-            }
-            .card-wrapper {
                 width: 100%;
-                max-width: 800px;
+                box-sizing: border-box; /* Ensure padding and border are included in the width */
             }
-            .card-header {
-                font-size: 1.25rem;
-                font-weight: 600;
-                margin-bottom: 0.5rem; /* Başlık ile form arasındaki boşluğu azaltır */
+
+            .form-group {
+                margin-bottom: 15px;
+                padding-right: 15px;
+                padding-left: 15px;
+                flex: 0 0 50%;
+                max-width: 20%;
             }
-            .card-body {
-                padding-top: 0; /* Üst boşluğu kaldırır */
+
+            .form-row {
+                display: flex;
+                flex-wrap: wrap;
+                margin-right: -15px;
+                margin-left: -15px;
             }
-            .table-row-even {
-                background-color: #f9f9f9;
+
+            .text-center {
+                text-align: center;
             }
-            .table-row-odd {
-                background-color: #ffffff;
+
+            .custom-radio {
+                display: flex;
+                gap: 0px; /* Adjust spacing between radio buttons */
             }
-            .action-buttons .btn {
-                margin-right: 0.5rem; /* Butonlar arasına sağ boşluk ekler */
+
+            .custom-radio input {
+                margin-right: 5px; /* Space between radio button and label */
             }
-            .col-form-label {
-                margin-right: 0.5rem; /* Etiket ile giriş kutusu arasına boşluk ekler */
+            .form-label{
+                margin-top: 5px;
             }
-            .form-control-custom-width {
-                max-width: 300px; /* Genişliği sınırlamak için */
+
+            .radio-inline {
+                display: flex;
+                flex-direction: row;
+            }
+
+            /* Container Düzenlemeleri */
+            .container-fluid {
+                padding: 0 12px;
+                width: 100%;
+                overflow: auto;
             }
         </style>
     </h:head>
@@ -71,7 +90,7 @@
             <div class="row">                   
                 <div class="col-md-12">
                     <div class="card-header">
-                        <h1 style="font-weight: bold; text-align: center;">Meslek Tanımlama</h1>
+                        <h1>Meslek Tanımlama</h1>
                     </div>
                     <div class="card">
                         <div class="card-header">Meslek Bilgileri</div>

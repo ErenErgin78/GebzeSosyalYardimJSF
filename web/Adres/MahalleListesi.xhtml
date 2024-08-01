@@ -9,10 +9,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Mahalle Listesi</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="styles.css" />
         <h:outputStylesheet name="styles.css"/>
         <style>
-            html, body {
+            body {
                 height: 100%;
                 margin: 0;
                 overflow: auto; /* Kaydırma özelliklerini etkinleştirir */
@@ -30,13 +29,7 @@
                 box-shadow: none;
                 border: none;
                 width: 100%; /* Genişliği %100 yapın */
-            }
-            .card-header {
-                font-size: 1.25rem; /* Başlık font boyutu */
-                font-weight: 600; /* Başlık font ağırlığı */
-                text-align: center;
-                margin-bottom: 1rem;
-            }
+            }                 
             .card-body {
                 flex: 1;
                 overflow: auto; /* Kaydırma özelliklerini etkinleştirir */
@@ -46,7 +39,6 @@
                 margin-bottom: 0;
                 table-layout: auto;
             }
-            .table th,
             .table td {
                 white-space: nowrap; /* Prevent text wrapping */
                 padding: 10px; /* Add padding for readability */
@@ -90,8 +82,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card-header">
-                        <h1 style="font-weight: bold;">Mahalle Listesi</h1>
-                    </div>
+                            <h1>Mahalle Listesi</h1>
+                        </div>
                     <div class="card">
                         <h:form id="mahalleForm">
                             <div class="table-responsive">

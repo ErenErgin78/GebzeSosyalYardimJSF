@@ -9,22 +9,24 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
         <link rel="stylesheet" href="styles.css" />
         <style>
-            /* Navbar link renkleri ve geçiş efektleri */
+            /* Navbar */
             .navbar-nav .nav-link {
                 color: #f2f2f2; /* Linklerin rengi */
             }
+
             .navbar-nav .nav-link:hover {
                 background-color: #575757; /* Üzerine gelindiğinde arka plan rengi */
                 color: #fff; /* Üzerine gelindiğinde yazı rengi */
             }
 
-            /* Dropdown menü ve item stilleri */
             .dropdown-menu {
                 background-color: #333; /* Dropdown menünün arka plan rengi */
             }
+
             .dropdown-menu .dropdown-item {
                 color: #f2f2f2; /* Dropdown item'ların yazı rengi */
             }
+
             .dropdown-menu .dropdown-item:hover {
                 background-color: #575757; /* Üzerine gelindiğinde arka plan rengi */
             }
@@ -104,6 +106,71 @@
             .custom-radio input {
                 margin-right: 5px; /* Space between radio button and label */
             }
+
+            /* Form Düzenlemeleri */
+            .form-control {
+                width: 100%;
+                box-sizing: border-box; /* Ensure padding and border are included in the width */
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+                padding-right: 15px;
+                padding-left: 15px;
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+
+            .form-row {
+                display: flex;
+                flex-wrap: wrap;
+                margin-right: -15px;
+                margin-left: -15px;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+            .custom-radio {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .custom-radio div {
+                display: flex;
+                align-items: center;
+                margin-bottom: 8px; /* Radyo düğmeleri arasına boşluk ekler */
+            }
+
+            .custom-radio input[type="radio"] {
+                margin-right: 10px; /* Radyo düğmesi ile etiket arasında boşluk bırakır */
+            }
+
+            .custom-radio label {
+                font-size: 14px; /* Etiket font boyutu */
+                cursor: pointer; /* Tıklanabilir imleç */
+                user-select: none; /* Seçimi engeller */
+                margin-right: 350px;
+                margin-top: 10px;
+            }
+
+
+            .radio-inline {
+                display: flex;
+                flex-direction: row;
+            }
+
+            /* Container Düzenlemeleri */
+            .container-fluid {
+                padding: 0 12px;
+                width: 100%;
+                overflow: auto;
+            }
+            .table td, .table th {
+                text-align: left;
+            }
+
         </style>
     </h:head>
     <h:body>
@@ -114,12 +181,12 @@
                 <div class="row">                   
                     <div class="col-md-12">
                         <div class="card-header">
-                            <h1 style="font-weight: bold; text-align: center;">Okul Girişi</h1>
+                            <h1>Okul Girişi</h1>
                         </div>
-                        <div class="card mt-3 full-width">
+                        <div class="card">
                             <div class="card-header">Okul Giriş Bilgileri  #{okulBean.entity.okul_tur_id}</div>
                             <div class="card-body">
-                                <div class="row">
+                                <div class="form-row">
                                     <div class="form-group full-width">
                                         <label>Okul Türü:</label>
                                         <div class="custom-radio">
@@ -128,10 +195,11 @@
                                                 <f:selectItem itemLabel="Özel" itemValue="2" />
                                             </h:selectOneRadio>
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="form-group full-width">
+                                    <div class="form-group">
                                         <label for="application_type">Aktif: #{okulBean.entity.okul_aktif}</label>
                                         <h:selectOneMenu id="application_type" value="#{okulBean.entity.okul_aktif}" class="form-control">
                                             <f:selectItem itemLabel="Evet" itemValue="1" />
@@ -140,7 +208,7 @@
                                     </div> 
                                 </div>
                                 <div class="form-row">
-                                    <div class="form-group full-width">
+                                    <div class="form-group">
                                         <label for="neighborhood">Okul Tipi: #{okulBean.entity.okul_tip_id}</label>
                                         <h:selectOneMenu id="medenidurum" value="#{okulBean.entity.okul_tip_id}" class="form-control">
                                             <f:selectItem itemLabel="Anaokulu" itemValue="1" />
@@ -155,7 +223,7 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="form-group full-width">
+                                    <div class="form-group">
                                         <label for="name">Okul Adı:  #{okulBean.entity.okul_isim}</label>
                                         <h:inputText id="name" value="#{okulBean.entity.okul_isim}" class="form-control" />
                                     </div>
