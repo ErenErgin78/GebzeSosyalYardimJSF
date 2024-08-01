@@ -4,8 +4,10 @@ body {
     margin: 0;
     overflow-x: hidden; /* yatay scroll bar hidden */
     font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
 }
-@media (max-width: 768px) {
+@media (max-width: 768px) { /* responsive özelliği eklendi */
     #sidebar {
         background-color: #1680FF;
         color: white;
@@ -32,6 +34,16 @@ body {
     margin: 5px 0;
     padding: 10px;
 }
+.breadcrumb {
+    background-color: #f8f9fa;
+    margin-bottom: 1rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+    color: #6c757d;
+}
+
 
 .nav-link:hover {
     background-color: #3f51b5;
@@ -101,6 +113,7 @@ th, td {
     vertical-align: middle;
     padding: 8px;
     border-bottom: 1px solid #ddd;
+    text-align: left;
 }
 
 th {
