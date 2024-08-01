@@ -9,41 +9,31 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
         <link rel="stylesheet" href="styles.css" />
         <style>
-            body {
-                font-family: Arial, sans-serif;
-            }
             .navbar-nav .nav-link {
                 color: #f2f2f2;
             }
+
             .navbar-nav .nav-link:hover {
                 background-color: #575757;
                 color: #fff;
             }
+
             .dropdown-menu {
                 background-color: #333;
             }
+
             .dropdown-menu .dropdown-item {
                 color: #f2f2f2;
             }
+
             .dropdown-menu .dropdown-item:hover {
                 background-color: #575757;
             }
+
             .dropdown-submenu {
                 position: relative;
             }
-            .dropdown-submenu .dropdown-menu {
-                display: none;
-                position: absolute;
-                left: 100%;
-                top: 0;
-                background-color: #444;
-            }
-            .dropdown-submenu:hover .dropdown-menu {
-                display: block;
-            }
-            .dropdown-item .dropdown-toggle::after {
-                display: none;
-            }
+
             .dropdown-submenu .dropdown-menu {
                 display: none;
                 position: absolute;
@@ -52,6 +42,15 @@
                 background-color: #444;
                 min-width: 160px;
             }
+
+            .dropdown-submenu:hover .dropdown-menu {
+                display: block;
+            }
+
+            .dropdown-item .dropdown-toggle::after {
+                display: none; /* Ok simgelerini gizler, gerekirse kaldırabilirsiniz */
+            }
+
 
         </style>
     </head>
@@ -184,6 +183,11 @@
         </nav> 
         <main role="main" class="col-md-16">
             <div id="content">
+                <div class="welcome-container">
+                    <div class="welcome-message">
+                        Hoş Geldiniz!
+                    </div>
+                </div>
                 <!-- İçerik burada yüklenecek -->
             </div>
         </main>
