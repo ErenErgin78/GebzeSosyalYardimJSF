@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,144 +13,113 @@
         <link rel="stylesheet" href="styles.css" />
         <h:outputStylesheet name="styles.css"/>
         <style>
-            /* Navbar */
-            .navbar-nav .nav-link {
-                color: #f2f2f2;
-            }
-
-            .navbar-nav .nav-link:hover {
-                background-color: #575757;
-                color: #fff;
-            }
-
-            .dropdown-menu {
-                background-color: #333;
-            }
-
-            .dropdown-menu .dropdown-item {
-                color: #f2f2f2;
-            }
-
-            .dropdown-menu .dropdown-item:hover {
-                background-color: #575757;
-            }
-
-            /* Form Düzenlemeleri */
-            .form-control {
-                width: 100%;
-                box-sizing: border-box; /* Ensure padding and border are included in the width */
-            }
-
             .form-group {
-                margin-bottom: 15px;
-                padding-right: 15px;
-                padding-left: 15px;
-                flex: 0 0 50%;
-                max-width: 20%;
+                margin-bottom: 1rem;
             }
-
             .form-row {
+                margin-bottom: 1rem;
+            }
+            .form-label {
+                margin-bottom: .5rem;
+                font-weight: 600;
+            }
+            .form-control {
+                display: inline-block;
+                width: auto;
+                vertical-align: middle;
+            }
+            .btn-container {
                 display: flex;
-                flex-wrap: wrap;
-                margin-right: -15px;
-                margin-left: -15px;
+                align-items: center;
+                gap: 1rem;
             }
-            .form-label{
-                margin-top: 5px;
-            }
-
-            .text-center {
-                text-align: center;
-            }
-
-            .custom-radio {
+            .card-container {
                 display: flex;
-                gap: 0px; /* Adjust spacing between radio buttons */
+                justify-content: center;
             }
-
-            .custom-radio input {
-                margin-right: 5px; /* Space between radio button and label */
-            }
-
-            .radio-inline {
-                display: flex;
-                flex-direction: row;
-            }
-
-            /* Container Düzenlemeleri */
-            .container-fluid {
-                padding: 0 12px;
+            .card-wrapper {
                 width: 100%;
-                overflow: auto;
+                max-width: 900px;
+            }
+            .card-header {
+                font-size: 1.25rem;
+                font-weight: 600;
+            }
+            .table-row-even {
+                background-color: #f9f9f9;
+            }
+            .table-row-odd {
+                background-color: #ffffff;
+            }
+            .table {
+                width: 100%; /* Sabit genişlik */
+                min-width: 1000px; /* Minimum genişlik */
             }
         </style>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Ana Sayfa</a></li>
-            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Tutanak Tanımlama</li>
-        </ol>
     </h:head>
     <h:body>
-        <div class="container-fluid">               
-            <div class="row">                   
-                <div class="col-md-12">
-                    <div class="card-header">
-                        <h1>Tutanak Durumu Tanımlama</h1>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">Tutanak Durumu Tanımlama Bilgileri</div>
-                        <div class="card-body">
-                            <h:form id="tutanakForm">
-                                <div class="row mb-3">
-                                    <!-- Durum Adı -->
-                                    <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
-                                        <label for="durumAdi" class="form-label">Durum Adı:</label>
-                                        <h:inputText id="durumAdi" value="#{tutanakBean.entity.tutanak_isim}" class="form-control" style="width: 300px;" />
-                                    </div>
-                                    <!-- Aktif Seçim Kutusu ve Ekle Butonu -->
-                                    <div class="col-md-4 d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center gap-2 me-3">
-                                            <label for="aktifMi" class="form-label">Aktif:</label>
-                                            <h:selectOneMenu id="aktifMi" value="#{tutanakBean.entity.aktiflik}" class="form-control col-md-10">
-                                                <f:selectItem itemLabel="Evet" itemValue="1" />
-                                                <f:selectItem itemLabel="Hayır" itemValue="0" />
-                                            </h:selectOneMenu>
+        <div class="container-fluid">
+            <div class="table-responsive">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 style="font-weight: bold;">Tutanak Durumu Tanımlama</h2>
+                        <div class="card">
+                            <div class="card-header">Tutanak Durumu Tanımlama Bilgileri</div>
+                            <div class="card-body">
+                                <div class="table-container">
+                                    <h:form id="tutanakForm">
+                                        <div class="row mb-3">
+                                            <!-- Durum Adı -->
+                                            <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
+                                                <label for="durumAdi" class="col-form-label me-2">Durum Adı:</label>
+                                                <h:inputText id="durumAdi" value="#{tutanakBean.entity.tutanak_isim}" class="form-control" style="width: 400px;" />
+                                            </div>
+                                            <!-- Aktif Seçim Kutusu ve Ekle Butonu -->
+                                            <div class="col-md-4 d-flex align-items-center justify-content-between">
+                                                <div class="d-flex align-items-center gap-2 me-3">
+                                                    <label for="aktifMi" class="form-label">Aktif:</label>
+                                                    <h:selectOneMenu id="aktifMi" value="#{tutanakBean.entity.aktiflik}" class="form-control col-md-10">
+                                                        <f:selectItem itemLabel="Evet" itemValue="1" />
+                                                        <f:selectItem itemLabel="Hayır" itemValue="0" />
+                                                    </h:selectOneMenu>
+                                                </div>
+                                                <h:commandButton value="Ekle" action="#{tutanakBean.tutanakEkle()}" class="btn btn-success" >
+                                                    <f:ajax execute="@form" render="@form"/>
+                                                </h:commandButton>
+                                            </div>
                                         </div>
-                                        <h:commandButton value="Ekle" action="#{tutanakBean.tutanakEkle()}" class="btn btn-success" >
-                                            <f:ajax execute="@form" render="@form"/>
-                                        </h:commandButton>
-                                    </div>
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Durum Kodu</th>
+                                                    <th>Durum Adı</th>
+                                                    <th>Aktif</th>
+                                                    <th>Eylem</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach var="durum" items="#{tutanakBean.list}" varStatus="loop">
+                                                    <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                                        <td>#{durum.tutanak_id}</td>
+                                                        <td>#{durum.tutanak_isim}</td>
+                                                        <td>#{durum.aktiflik == 1 ? 'Evet' : 'Hayır'}</td>
+                                                        <td>
+                                                            <div class="action-buttons">
+                                                                <h:commandButton value="Düzenle" styleClass="btn btn-warning ml-2">
+                                                                    <f:ajax execute="@this" render="@form"/>
+                                                                </h:commandButton>
+                                                                <h:commandButton value="Sil" action="#{tutanakBean.tutanakSil(durum.tutanak_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
+                                                                    <f:ajax execute="@this" render="@form"/>
+                                                                </h:commandButton>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </h:form>
                                 </div>
-                                <table class="table table-bordered" style = "text-align: left">
-                                    <thead>
-                                        <tr>
-                                            <th>Durum Kodu</th>
-                                            <th>Durum Adı</th>
-                                            <th>Aktif</th>
-                                            <th>Eylem</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <ui:repeat value="#{tutanakBean.list}" var="durum" varStatus="loop">
-                                            <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                <td>#{durum.tutanak_id}</td>
-                                                <td>#{durum.tutanak_isim}</td>
-                                                <td>#{durum.aktiflik == 1 ? 'Evet' : 'Hayır'}</td>
-                                                <td>
-                                                    <div class="action-buttons">
-                                                        <h:commandButton value="Düzenle" styleClass="btn btn-warning ml-2">
-                                                            <f:ajax execute="@this" render="@form"/>
-                                                        </h:commandButton>
-                                                        <h:commandButton value="Sil" action="#{tutanakBean.tutanakSil(durum.tutanak_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
-                                                            <f:ajax execute="@this" render="@form"/>
-                                                        </h:commandButton>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </ui:repeat>
-                                    </tbody>
-                                </table>
-                            </h:form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -160,9 +129,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                            function confirmDelete(button) {
-                                                                return confirm("Bu durumu gerçekten silmek istiyor musunuz?");
-                                                            }
+            function confirmDelete(button) {
+                return confirm("Bu durumu gerçekten silmek istiyor musunuz?");
+            }
         </script>
     </h:body>
 </html>
