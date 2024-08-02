@@ -4,11 +4,13 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Çekmece Tanımlama</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="styles.css" />
         <h:outputStylesheet name="styles.css"/>
         <style>
             /* Navbar */
@@ -36,19 +38,22 @@
             /* Form Düzenlemeleri */
             .form-control {
                 width: 100%;
-                box-sizing: border-box;
+                box-sizing: border-box; /* Ensure padding and border are included in the width */
             }
 
             .form-group {
                 margin-bottom: 15px;
-                padding: 0 15px;
-                flex: 1 1 100%;
+                padding-right: 15px;
+                padding-left: 15px;
+                flex: 0 0 50%;
+                max-width: 20%;
             }
 
             .form-row {
                 display: flex;
                 flex-wrap: wrap;
-                margin: 0 -15px;
+                margin-right: -15px;
+                margin-left: -15px;
             }
 
             .text-center {
@@ -57,11 +62,11 @@
 
             .custom-radio {
                 display: flex;
-                gap: 0;
+                gap: 0px; /* Adjust spacing between radio buttons */
             }
 
             .custom-radio input {
-                margin-right: 5px;
+                margin-right: 5px; /* Space between radio button and label */
             }
 
             .radio-inline {
@@ -78,11 +83,11 @@
             .card-header {
                 font-size: 1.25rem;
                 font-weight: 600;
-                margin-bottom: 0.5rem;
+                margin-bottom: 0.5rem; /* Başlık ile form arasındaki boşluğu azaltır */
             }
 
             .card-body {
-                padding-top: 0;
+                padding-top: 0; /* Üst boşluğu kaldırır */
             }
 
             .table-row-even {
@@ -94,41 +99,30 @@
             }
 
             .action-buttons .btn {
-                margin-right: 0.5rem;
+                margin-right: 0.5rem; /* Butonlar arasına sağ boşluk ekler */
             }
 
             .col-form-label {
-                margin-right: 0.5rem;
+                margin-right: 0.5rem; /* Etiket ile giriş kutusu arasına boşluk ekler */
             }
 
             .form-control-custom-width {
-                max-width: 100%; /* Ensure responsiveness */
+                max-width: 300px; /* Genişliği sınırlamak için */
             }
 
-            /* Responsive adjustments */
-            @media (max-width: 768px) {
-                .form-group {
-                    flex: 1 1 100%; /* Full width for smaller screens */
-                }
-
-                .card-header h1 {
-                    font-size: 1.5rem; /* Smaller heading size for small screens */
-                }
-
-                .form-control {
-                    max-width: 100%; /* Full width for inputs */
-                }
-
-                .col-md-8, .col-md-4 {
-                    flex: 1 1 100%; /* Full width for columns */
-                    margin-bottom: 1rem;
-                }
+            .form-control {
+                margin-left: 10px; /* Add some space to the left of the input */
             }
         </style>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Çekmece Tanımlama</li>
+        </ol>
     </h:head>
     <h:body>
-        <div class="container-fluid">
-            <div class="row">
+        <div class="container-fluid">               
+            <div class="row">                   
                 <div class="col-md-12">
                     <h:form id="mahalleForm">
                         <div class="card-header">
@@ -141,13 +135,13 @@
                                     <!-- Çekmece Adı -->
                                     <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
                                         <label for="cekmeceAdi" class="col-form-label me-2">Çekmece Adı:</label>
-                                        <h:inputText id="cekmeceAdi" value="#{cekmeceBean.entity.cekmece}" class="form-control form-control-custom-width"/>
+                                        <h:inputText id="cekmeceAdi" value="#{cekmeceBean.entity.cekmece}" class="form-control form-control-custom-width" />
                                     </div>
                                     <!-- Aktif Seçim Kutusu ve Ekle Butonu -->
                                     <div class="col-md-4 d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center gap-2 me-3">
                                             <label for="aktifMi" class="col-form-label me-2">Aktif:</label>
-                                            <h:selectOneMenu id="aktifMi" value="#{cekmeceBean.entity.aktif}" class="form-control">
+                                            <h:selectOneMenu id="aktifMi" value="#{cekmeceBean.entity.aktif}" class="form-control col-md-10">
                                                 <f:selectItem itemLabel="Evet" itemValue="1" />
                                                 <f:selectItem itemLabel="Hayır" itemValue="0" />
                                             </h:selectOneMenu>
@@ -173,8 +167,8 @@
                                                 <td>#{cekmece.cekmece}</td>
                                                 <td>#{cekmece.aktif}</td>
                                                 <td>
-                                                    <div class="action-buttons">
-                                                        <h:commandButton value="Sil" action="#{cekmeceBean.cekmeceSil(cekmece.cekmece_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                    <div class="action-buttons">                                                  
+                                                        <h:commandButton value="Sil" action="#{cekmeceBean.cekmeceSil(cekmece.cekmece_id)}" styleClass="btn btn-danger delete-button ml-20" onclick="return confirmDelete(this)">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
                                                         <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
