@@ -138,11 +138,11 @@
                                                 <td>#{meslek.meslek_isim}</td>
                                                 <td>#{meslek.aktiflik == 1 ? 'Evet' : 'Hayır' }</td>
                                                 <td>
-                                                    <div class="action-buttons">
-                                                        <h:commandButton value="Düzenle" styleClass="btn btn-warning ml-2">
+                                                    <div class="action-buttons">               
+                                                        <h:commandButton value="Sil" action="#{meslekBean.mesleksil(meslek.meslek_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
-                                                        <h:commandButton value="Sil" action="#{meslekBean.mesleksil(meslek.meslek_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
+                                                        <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
                                                     </div>

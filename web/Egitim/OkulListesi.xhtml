@@ -78,6 +78,9 @@
                 width: 100%;
                 overflow: auto;
             }
+            .full-width {
+                width: 100%;
+            }
         </style>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
@@ -165,7 +168,7 @@
                                                             <h:commandButton value="Sil" action="#{okulBean.okulsil(okul.okul_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
                                                                 <f:ajax execute="@this" render="@form"/>
                                                             </h:commandButton>                                            
-                                                            <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-20">
+                                                            <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
                                                                 <f:ajax execute="@this" render="@form"/>
                                                             </h:commandButton>     
                                                         </div>
@@ -185,9 +188,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                                function confirmDelete(button) {
-                                                                    return confirm("Bu okulu gerçekten silmek istiyor musunuz?");
-                                                                }
+            function confirmDelete(button) {
+                return confirm("Bu okulu gerçekten silmek istiyor musunuz?");
+            }
         </script>
     </h:body>
 </html>

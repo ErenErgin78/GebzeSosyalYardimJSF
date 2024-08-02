@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="styles.css" />
         <h:outputStylesheet name="styles.css"/>
         <style>
-           /* Navbar */
+            /* Navbar */
             .navbar-nav .nav-link {
                 color: #f2f2f2;
             }
@@ -100,23 +100,24 @@
                             <h:form id="engelliAltTipiForm">
                                 <div class="form-group mb-3">
                                     <label for="engelliTipi" class="form-label">Engelli Tipi Adı:</label>
-                                    <h:selectOneMenu id="engelliTipi" value="#{engelliBean.selectedEngelliTipi}" class="form-control" style="width: 500px;">
+                                    <h:selectOneMenu id="engelliTipi" value="#{engelAltBean.entity.engelli_tip_id}" class="form-control" style="width: 500px;">
                                         <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
-                                        <f:selectItems value="#{engelliBean.engelliTipiList}" />
+                                        <f:selectItems value="#{engelAltBean.engelliTipGetir()}" />
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="row mb-3">
                                     <!-- Engelli Alt Tipi Adı -->
                                     <div class="col-md-8 d-flex flex-column mb-2 mb-md-0">
                                         <label for="engelliAltTipiAdi" class="form-label">Engelli Alt Tipi Adı:</label>
-                                        <h:inputText id="engelliAltTipiAdi" value="#{engelliBean.engelliAltTipiAdi}" class="form-control" style="width: 500px;" />
+                                        <h:inputText id="engelliAltTipiAdi" value="#{engelAltBean.entity.alt_tip_isim}" class="form-control" style="width: 500px;" />
                                     </div>
                                     <!-- Ekle Butonu -->
                                     <div class="col-md-4 d-flex align-items-end justify-content-end">
-                                        <h:commandButton value="Ekle" action="#{engelliBean.add}" class="btn btn-success" />
+                                        <h:commandButton value="Ekle" action="#{engelAltBean.engelAltEkle()}" class="btn btn-success" >
+                                            <f:ajax execute="@form" render="@form"/>
+                                        </h:commandButton>
                                     </div>
                                 </div>
-
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -127,17 +128,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <ui:repeat value="#{engelliBean.engelliAltTipiList}" var="engelliAltTipi" varStatus="loop">
+                                        <ui:repeat value="#{engelAltBean.list}" var="alt" varStatus="loop">
                                             <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                <td>#{engelliAltTipi.kodu}</td>
-                                                <td>#{engelliAltTipi.adi}</td>
-                                                <td>#{engelliAltTipi.engelliTipiAdi}</td>
+                                                <td>#{alt.alt_tip_id}</td>
+                                                <td>#{alt.alt_tip_isim}</td>
+                                                <td>#{alt.engelli_tip_isim}</td>
                                                 <td>
-                                                    <div class="action-buttons">
-                                                        <h:commandButton value="Düzenle" action="#{engelliBean.edit(engelliAltTipi)}" styleClass="btn btn-warning ml-2">
+                                                    <div class="action-buttons">                                                  
+                                                        <h:commandButton value="Sil" action="#{engelAltBean.engelAltSil(alt.alt_tip_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
-                                                        <h:commandButton value="Sil" action="#{engelliBean.delete(engelliAltTipi.kodu)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
+                                                        <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
                                                     </div>
@@ -156,9 +157,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-            function confirmDelete(button) {
-                return confirm("Bu engelli alt tipini gerçekten silmek istiyor musunuz?");
-            }
+                                                            function confirmDelete(button) {
+                                                                return confirm("Bu engelli alt tipini gerçekten silmek istiyor musunuz?");
+                                                            }
         </script>
     </h:body>
 </html>
