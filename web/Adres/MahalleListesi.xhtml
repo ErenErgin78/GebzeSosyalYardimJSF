@@ -11,33 +11,29 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
         <h:outputStylesheet name="styles.css"/>
         <style>
-            body {
+             html, body {
                 height: 100%;
                 margin: 0;
-                overflow: auto; /* Kaydırma özelliklerini etkinleştirir */
+                overflow: auto; /* Enable scrolling */
             }
             .container-fluid {
-                padding: 0 12px;
-                width: 100%; /* Genişliği %100 yapın */
-                overflow: auto; /* Kaydırma özelliklerini etkinleştirir */
+                padding: 0 12px; /* Add some padding */
+                width: 100%; /* Set width to 100% */
+                overflow: auto; /* Enable scrolling */
             }
-            .card {
-                display: flex;
-                flex-direction: column;
-                margin: 0;
-                border-radius: 0;
-                box-shadow: none;
-                border: none;
-                width: 100%; /* Genişliği %100 yapın */
-            }                 
-            .card-body {
-                flex: 1;
-                overflow: auto; /* Kaydırma özelliklerini etkinleştirir */
+            .row {
+                margin: 0; /* Remove margin */
+                width: 100%; /* Set width to 100% */
+            }
+            .col-md-12 {
+                padding: 0; /* Remove padding */
+                width: 100%; /* Set width to 100% */
+
             }
             .table {
                 width: 100%;
                 margin-bottom: 0;
-                table-layout: auto;
+                table-layout: auto; /* Let the table decide column widths based on content */
             }
             .table td {
                 white-space: nowrap; /* Prevent text wrapping */
@@ -48,12 +44,6 @@
                 font-size: 1.25rem; /* Tablo başlık font boyutu */
                 font-weight: 600; /* Tablo başlık font ağırlığı */
             }
-            .table-row-even {
-                background-color: #f9f9f9;
-            }
-            .table-row-odd {
-                background-color: #ffffff;
-            }
             .action-buttons {
                 display: flex;
                 gap: 10px;
@@ -61,23 +51,12 @@
             .delete-button {
                 margin-right: 10px;
             }
-            .btn-primary, .btn-danger {
-                font-size: 0.875rem; /* Buton yazı boyutu */
-            }
-            .form-group {
-                margin-bottom: 1rem;
-            }
-            .form-label {
-                font-weight: 600;
-            }
-            .form-control {
-                display: inline-block;
-                width: 100%;
-                font-size: 0.875rem; /* Form kontrol yazı boyutu */
+            .table-container {
+                margin-top: 20px; /* Add space between header and table */
             }
         </style>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Ana Sayfa</a></li>
+            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
             <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
             <li class="breadcrumb-item active" aria-current="page">Mahalle Listesi</li>
         </ol>
