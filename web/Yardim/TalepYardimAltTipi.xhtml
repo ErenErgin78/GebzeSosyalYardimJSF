@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Talep Edilen Yardım Tipi Tanımlama</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="styles.css" />
+        <h:outputStylesheet name="styles.css"/>
+        <style>
+            /* Navbar */
+            .navbar-nav .nav-link {
+                color: #f2f2f2;
+            }
+
+            .navbar-nav .nav-link:hover {
+                background-color: #575757;
+                color: #fff;
+            }
+
+            .dropdown-menu {
+                background-color: #333;
+            }
+
+            .dropdown-menu .dropdown-item {
+                color: #f2f2f2;
+            }
+
+            .dropdown-menu .dropdown-item:hover {
+                background-color: #575757;
+            }
+
+            /* Form Düzenlemeleri */
+            .form-control {
+                width: 100%;
+                box-sizing: border-box; /* Ensure padding and border are included in the width */
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+                padding-right: 15px;
+                padding-left: 15px;
+                flex: 0 0 50%;
+                max-width: 20%;
+            }
+
+            .form-row {
+                display: flex;
+                flex-wrap: wrap;
+                margin-right: -15px;
+                margin-left: -15px;
+            }
+            .form-label{
+                margin-top: 5px;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+            .custom-radio {
+                display: flex;
+                gap: 0px; /* Adjust spacing between radio buttons */
+            }
+
+            .custom-radio input {
+                margin-right: 5px; /* Space between radio button and label */
+            }
+
+            .radio-inline {
+                display: flex;
+                flex-direction: row;
+            }
+
+            /* Container Düzenlemeleri */
+            .container-fluid {
+                padding: 0 12px;
+                width: 100%;
+                overflow: auto;
+            }
+        </style>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Ana Sayfa</a></li>
+            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Talep Yardım Alt Tipi</li>
+        </ol>
+    </h:head>
+    <h:body>
+        <div class="container-fluid">               
+            <div class="row">                   
+                <div class="col-md-12">
+                    <div class="card-header">
+                        <h1 style="font-weight: bold; text-align: center;">Talep Yardım Tipi Tanımlama</h1>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">Talep Yardım Tipi Bilgileri</div>
+                        <div class="card-body">
+                            <h:form id="yardimTalepForm">
+                                <div class="row mb-3">
+                                    <!-- Yardım Tipi Adı -->
+                                    <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
+                                        <label for="yardimTipiAdi" class="form-label">Yardım Tipi Adı:</label>
+                                        <h:inputText id="yardimTipiAdi" value="#{yardimTalepBean.entity.yardim_talep}" class="form-control" style="width: 300px;" />
+                                    </div>
+                                    <!-- Aktif Seçim Kutusu ve Ekle Butonu -->
+                                    <div class="col-md-4 d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center gap-2 me-3">
+                                            <label for="aktifMi" class="form-label">Aktif:</label>
+                                            <h:selectOneMenu id="aktifMi" value="#{yardimTalepBean.entity.aktiflik}" class="form-control col-md-10">
+                                                <f:selectItem itemLabel="Evet" itemValue="1" />
+                                                <f:selectItem itemLabel="Hayır" itemValue="0" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <h:commandButton value="Ekle" action="#{yardimTalepBean.yardimTalepEkle}" class="btn btn-success" >
+                                            <f:ajax execute="@form" render="@form"/>
+                                        </h:commandButton>
+                                    </div>
+                                </div>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Yardım Talep Kodu</th>
+                                            <th>Yardım Talep Adı</th>
+                                            <th>Aktif</th>
+                                            <th>Eylem</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <ui:repeat value="#{yardimTalepBean.list}" var="yardimTalep" varStatus="loop">
+                                            <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                                <td>#{yardimTalep.yardim_talep_id}</td>
+                                                <td>#{yardimTalep.yardim_talep}</td>
+                                                <td>#{yardimTalep.aktiflik == 1 ? 'Evet' : 'Hayır'}</td>
+                                                <td>
+                                                    <div class="action-buttons">
+                                                        <h:commandButton value="Sil" action="#{yardimTalepBean.yardimTalepSil(yardimTalep.yardim_talep_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
+                                                            <f:ajax execute="@this" render="@form"/>
+                                                        </h:commandButton>
+                                                        <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
+                                                            <f:ajax execute="@this" render="@form"/>
+                                                        </h:commandButton>                                                    
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </ui:repeat>
+                                    </tbody>
+                                </table>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+        <script>
+                                                             function confirmDelete(button) {
+                                                                 return confirm("Bu yardımı gerçekten silmek istiyor musunuz?");
+                                                             }
+        </script>
+    </h:body>
+</html>
