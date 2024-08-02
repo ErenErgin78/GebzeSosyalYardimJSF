@@ -61,55 +61,57 @@
     <h:body>
         <div class="container-fluid">
             <div class="row">
-                <div class="card-header">
-                    <h1>Engelli Tipi Tanımlama</h1>
-                    <div class="card">
-                        <div class="card-header">Engelli Tipi Bilgileri</div>
-                        <div class="card-body">
-                            <div class="table-container">
-                                <div class="table-responsive">
-                                    <h:form id="engelliTipiForm">
-                                        <div class="row mb-3">
-                                            <!-- Engelli Tipi Adı -->
-                                            <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
-                                                <label for="engelliTipiAdi" class="col-form-label me-2">Engelli Tipi Adı:</label>
-                                                <h:inputText id="engelliTipiAdi" value="#{engelBean.entity.engel_tip}" class="form-control" style="width: 400px;" />
+                <div class="col-md-12">
+                    <div class="card-header">
+                        <h1>Engelli Tipi Tanımlama</h1>
+                        <div class="card">
+                            <div class="card-header">Engelli Tipi Bilgileri</div>
+                            <div class="card-body">
+                                <div class="table-container">
+                                    <div class="table-responsive">
+                                        <h:form id="engelliTipiForm">
+                                            <div class="row mb-3">
+                                                <!-- Engelli Tipi Adı -->
+                                                <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
+                                                    <label for="engelliTipiAdi" class="col-form-label me-2">Engelli Tipi Adı:</label>
+                                                    <h:inputText id="engelliTipiAdi" value="#{engelBean.entity.engel_tip}" class="form-control" style="width: 400px;" />
+                                                </div>
+                                                <!-- Ekle Butonu -->
+                                                <div class="col-md-4 d-flex align-items-center justify-content-between">
+                                                    <h:commandButton value="Ekle" action="#{engelBean.engelEkle()}" class="btn btn-success" >
+                                                        <f:ajax execute="@form" render="@form"/>
+                                                    </h:commandButton>
+                                                </div>
                                             </div>
-                                            <!-- Ekle Butonu -->
-                                            <div class="col-md-4 d-flex align-items-center justify-content-between">
-                                                <h:commandButton value="Ekle" action="#{engelBean.engelEkle()}" class="btn btn-success" >
-                                                    <f:ajax execute="@form" render="@form"/>
-                                                </h:commandButton>
-                                            </div>
-                                        </div>
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Engelli Tipi Kodu</th>
-                                                    <th>Engelli Tipi Adı</th>
-                                                    <th>Eylem</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach var="engel" items="#{engelBean.list}" varStatus="loop">
-                                                    <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                        <td>#{engel.engel_tip_id}</td>
-                                                        <td>#{engel.engel_tip}</td>
-                                                        <td>
-                                                            <div class="action-buttons">
-                                                                <h:commandButton value="Sil" action="#{engelBean.engelSil(engel.engel_tip_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
-                                                                    <f:ajax execute="@this" render="@form"/>
-                                                                </h:commandButton>
-                                                                <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
-                                                                    <f:ajax execute="@this" render="@form"/>
-                                                                </h:commandButton>
-                                                            </div>
-                                                        </td>
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Engelli Tipi Kodu</th>
+                                                        <th>Engelli Tipi Adı</th>
+                                                        <th>Eylem</th>
                                                     </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
-                                    </h:form>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach var="engel" items="#{engelBean.list}" varStatus="loop">
+                                                        <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                                            <td>#{engel.engel_tip_id}</td>
+                                                            <td>#{engel.engel_tip}</td>
+                                                            <td>
+                                                                <div class="action-buttons">
+                                                                    <h:commandButton value="Sil" action="#{engelBean.engelSil(engel.engel_tip_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
+                                                                        <f:ajax execute="@this" render="@form"/>
+                                                                    </h:commandButton>
+                                                                    <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
+                                                                        <f:ajax execute="@this" render="@form"/>
+                                                                    </h:commandButton>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </h:form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
