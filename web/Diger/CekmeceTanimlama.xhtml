@@ -157,11 +157,11 @@
                                             <td>#{cekmece.cekmece}</td>
                                             <td>#{cekmece.aktif}</td>
                                             <td>
-                                                <div class="action-buttons">
-                                                    <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-20">
+                                                <div class="action-buttons">                                                  
+                                                    <h:commandButton value="Sil" action="#{cekmeceBean.cekmeceSil(cekmece.cekmece_id)}" styleClass="btn btn-danger delete-button ml-20" onclick="return confirmDelete(this)">
                                                         <f:ajax execute="@this" render="@form"/>
                                                     </h:commandButton>
-                                                    <h:commandButton value="Sil" action="#{cekmeceBean.cekmeceSil(cekmece.cekmece_id)}" styleClass="btn btn-danger delete-button ml-20" onclick="return confirmDelete(this)">
+                                                     <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
                                                         <f:ajax execute="@this" render="@form"/>
                                                     </h:commandButton>
                                                 </div>

@@ -121,7 +121,6 @@
                                         </h:commandButton>
                                     </div>
                                 </div>
-
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -138,11 +137,11 @@
                                                 <td>#{yakınlık.yakinlik_isim}</td>
                                                 <td>#{yakınlık.aktiflik == 1 ? 'Evet' : 'Hayır'}</td>
                                                 <td>
-                                                    <div class="action-buttons">
-                                                        <h:commandButton value="Düzenle" styleClass="btn btn-warning ml-2">
+                                                    <div class="action-buttons">                                                       
+                                                        <h:commandButton value="Sil" action="#{yakinlikBean.yakinlikSil(yakınlık.yakinlik_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
-                                                        <h:commandButton value="Sil" action="#{yakinlikBean.yakinlikSil(yakınlık.yakinlik_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
+                                                        <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
                                                     </div>

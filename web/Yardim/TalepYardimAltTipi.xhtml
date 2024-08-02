@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="styles.css" />
         <h:outputStylesheet name="styles.css"/>
         <style>
-         /* Navbar */
+            /* Navbar */
             .navbar-nav .nav-link {
                 color: #f2f2f2;
             }
@@ -138,12 +138,12 @@
                                                 <td>#{yardimTalep.aktiflik == 1 ? 'Evet' : 'Hayır'}</td>
                                                 <td>
                                                     <div class="action-buttons">
-                                                        <h:commandButton value="Düzenle" styleClass="btn btn-warning ml-2">
-                                                            <f:ajax execute="@this" render="@form"/>
-                                                        </h:commandButton>
                                                         <h:commandButton value="Sil" action="#{yardimTalepBean.yardimTalepSil(yardimTalep.yardim_talep_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
+                                                        <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
+                                                            <f:ajax execute="@this" render="@form"/>
+                                                        </h:commandButton>                                                    
                                                     </div>
                                                 </td>
                                             </tr>
@@ -160,9 +160,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                            function confirmDelete(button) {
-                                                                return confirm("Bu yardımı gerçekten silmek istiyor musunuz?");
-                                                            }
+                                                             function confirmDelete(button) {
+                                                                 return confirm("Bu yardımı gerçekten silmek istiyor musunuz?");
+                                                             }
         </script>
     </h:body>
 </html>
