@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="styles.css" />
         <h:outputStylesheet name="styles.css"/>
         <style>
-             /* Navbar */
+            /* Navbar */
             .navbar-nav .nav-link {
                 color: #f2f2f2;
             }
@@ -68,8 +68,14 @@
             .custom-radio input {
                 margin-right: 5px; /* Space between radio button and label */
             }
-            .form-label{
+
+            .form-label {
                 margin-top: 5px;
+                margin-right: 10px; /* Add some space to the right of the label */
+            }
+
+            .form-control {
+                margin-left: 10px; /* Add some space to the left of the input */
             }
 
             .radio-inline {
@@ -81,7 +87,6 @@
             .container-fluid {
                 padding: 0 12px;
                 width: 100%;
-          
             }
         </style>
         <ol class="breadcrumb">
@@ -91,8 +96,8 @@
         </ol>
     </h:head>
     <h:body>
-         <div class="container-fluid">               
-            <div class="row">                   
+        <div class="container-fluid">
+            <div class="row">
                 <div class="col-md-12">
                     <div class="card-header">
                         <h1>Meslek Tanımlama</h1>
@@ -138,7 +143,7 @@
                                                 <td>#{meslek.meslek_isim}</td>
                                                 <td>#{meslek.aktiflik == 1 ? 'Evet' : 'Hayır' }</td>
                                                 <td>
-                                                    <div class="action-buttons">               
+                                                    <div class="action-buttons">
                                                         <h:commandButton value="Sil" action="#{meslekBean.mesleksil(meslek.meslek_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
@@ -161,9 +166,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                            function confirmDelete(button) {
-                                                                return confirm("Bu mesleği gerçekten silmek istiyor musunuz?");
-                                                            }
+            function confirmDelete(button) {
+                return confirm("Bu mesleği gerçekten silmek istiyor musunuz?");
+            }
         </script>
     </h:body>
 </html>
