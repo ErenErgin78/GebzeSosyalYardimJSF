@@ -7,8 +7,16 @@ package util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/**
+ *
+ * @author Eren
+ */
 public abstract  class DBConnection {
 
+    /**
+     *
+     * @return
+     */
     public Connection connect() {
         Connection connection = null;
         try {
