@@ -55,7 +55,8 @@
                 margin-right: -15px;
                 margin-left: -15px;
             }
-            .form-label{
+
+            .form-label {
                 margin-top: 5px;
             }
 
@@ -83,22 +84,45 @@
                 width: 100%;
                 overflow: auto;
             }
+
+            /* Table Styles */
+            .table thead th {
+                position: sticky;
+                top: 0;
+                background-color: #f8f9fa; /* Adjust based on your design */
+                z-index: 10;
+            }
+
+            .table td, .table th {
+                white-space: nowrap; /* Prevent text wrapping */
+                overflow: hidden; /* Hide overflow text */
+                text-overflow: ellipsis; /* Add ellipsis for overflow text */
+            }
+
+            .table .action-buttons {
+                display: flex;
+                gap: 0.5rem; /* Space between buttons */
+            }
+
+            .table .action-buttons button {
+                margin: 0; /* Reset margin */
+                white-space: nowrap; /* Prevent button text wrapping */
+            }
+
+            /* Responsive Table Container */
+            .table-responsive {
+                overflow-x: auto;
+            }
         </style>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
-            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Talep Yardım Alt Tipi</li>
-        </ol>
     </h:head>
     <h:body>
         <div class="container-fluid">               
             <div class="row">                   
                 <div class="col-md-12">
-                    <div class="card-header">
-                        <h1 style="font-weight: bold; text-align: center;">Talep Yardım Tipi Tanımlama</h1>
-                    </div>
                     <div class="card">
-                        <div class="card-header">Talep Yardım Tipi Bilgileri</div>
+                        <div class="card-header text-center">
+                            <h1 class="font-weight-bold">Talep Yardım Tipi Tanımlama</h1>
+                        </div>
                         <div class="card-body">
                             <h:form id="yardimTalepForm">
                                 <div class="row mb-3">
@@ -116,40 +140,42 @@
                                                 <f:selectItem itemLabel="Hayır" itemValue="0" />
                                             </h:selectOneMenu>
                                         </div>
-                                        <h:commandButton value="Ekle" action="#{yardimTalepBean.yardimTalepEkle}" class="btn btn-success" >
+                                        <h:commandButton value="Ekle" action="#{yardimTalepBean.yardimTalepEkle}" class="btn btn-success">
                                             <f:ajax execute="@form" render="@form"/>
                                         </h:commandButton>
                                     </div>
                                 </div>
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Yardım Talep Kodu</th>
-                                            <th>Yardım Talep Adı</th>
-                                            <th>Aktif</th>
-                                            <th>Eylem</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <ui:repeat value="#{yardimTalepBean.list}" var="yardimTalep" varStatus="loop">
-                                            <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                <td>#{yardimTalep.yardim_talep_id}</td>
-                                                <td>#{yardimTalep.yardim_talep}</td>
-                                                <td>#{yardimTalep.aktiflik == 1 ? 'Evet' : 'Hayır'}</td>
-                                                <td>
-                                                    <div class="action-buttons">
-                                                        <h:commandButton value="Sil" action="#{yardimTalepBean.yardimTalepSil(yardimTalep.yardim_talep_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
-                                                            <f:ajax execute="@this" render="@form"/>
-                                                        </h:commandButton>
-                                                        <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
-                                                            <f:ajax execute="@this" render="@form"/>
-                                                        </h:commandButton>                                                    
-                                                    </div>
-                                                </td>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 150px;">Yardım Talep Kodu</th>
+                                                <th style="width: 200px;">Yardım Talep Adı</th>
+                                                <th style="width: 150px;">Aktif</th>
+                                                <th style="width: 200px;">Eylem</th>
                                             </tr>
-                                        </ui:repeat>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            <ui:repeat value="#{yardimTalepBean.list}" var="yardimTalep" varStatus="loop">
+                                                <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                                    <td>#{yardimTalep.yardim_talep_id}</td>
+                                                    <td>#{yardimTalep.yardim_talep}</td>
+                                                    <td>#{yardimTalep.aktiflik == 1 ? 'Evet' : 'Hayır'}</td>
+                                                    <td>
+                                                        <div class="action-buttons">
+                                                            <h:commandButton value="Sil" action="#{yardimTalepBean.yardimTalepSil(yardimTalep.yardim_talep_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                                <f:ajax execute="@this" render="@form"/>
+                                                            </h:commandButton>
+                                                            <h:commandButton value="Düzenle" styleClass="btn btn-primary">
+                                                                <f:ajax execute="@this" render="@form"/>
+                                                            </h:commandButton>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </ui:repeat>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </h:form>
                         </div>
                     </div>
@@ -160,9 +186,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                             function confirmDelete(button) {
-                                                                 return confirm("Bu yardımı gerçekten silmek istiyor musunuz?");
-                                                             }
+            function confirmDelete(button) {
+                return confirm("Bu yardımı gerçekten silmek istiyor musunuz?");
+            }
         </script>
     </h:body>
 </html>
