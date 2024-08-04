@@ -10,107 +10,13 @@
         <title>Okul Listesi</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
         <h:outputStylesheet name="styles.css"/>
-        <style>
-            /* Navbar */
-            .navbar-nav .nav-link {
-                color: #f2f2f2;
-            }
-
-            .navbar-nav .nav-link:hover {
-                background-color: #575757;
-                color: #fff;
-            }
-
-            .dropdown-menu {
-                background-color: #333;
-            }
-
-            .dropdown-menu .dropdown-item {
-                color: #f2f2f2;
-            }
-
-            .dropdown-menu .dropdown-item:hover {
-                background-color: #575757;
-            }
-
-            /* Form Düzenlemeleri */
-            .form-control {
-                width: 100%;
-                box-sizing: border-box; /* Ensure padding and border are included in the width */
-            }
-
-            .form-group {
-                margin-bottom: 15px;
-                padding-right: 15px;
-                padding-left: 15px;
-                flex: 1 1 100%; /* Make form groups responsive */
-            }
-
-            .form-row {
-                display: flex;
-                flex-wrap: wrap;
-                margin-right: -15px;
-                margin-left: -15px;
-            }
-
-            .text-center {
-                text-align: center;
-            }
-
-            .custom-radio {
-                display: flex;
-                gap: 0px; /* Adjust spacing between radio buttons */
-            }
-
-            .custom-radio input {
-                margin-right: 5px; /* Space between radio button and label */
-            }
-
-            .radio-inline {
-                display: flex;
-                flex-direction: row;
-            }
-
-            /* Container Düzenlemeleri */
-            .container-fluid {
-                padding: 0 12px;
-                width: 100%;
-            }
-
-            /* Table Adjustments for Responsiveness */
-            .table {
-                width: 100%;
-                margin-bottom: 1rem; /* Space between table and other elements */
-                overflow-x: auto; /* Enable horizontal scrolling for small screens */
-                table-layout: auto; /* Let the table decide column widths based on content */
-            }
-
-            .table th, .table td {
-                white-space: nowrap; /* Prevent text wrapping */
-                padding: 0.75rem; /* Add padding for readability */
-                text-align: left; /* Align text to the left */
-            }
-
-            .table th {
-                font-size: 1rem; /* Adjust font size */
-                font-weight: 600; /* Tablo başlık font ağırlığı */
-            }
-
-            /* Add responsiveness to card elements */
-            .card {
-                margin-bottom: 1rem; /* Add margin to bottom */
-                border: 1px solid #ddd; /* Card border */
-            }
-
-            /* Breadcrumb Adjustments */
-            .breadcrumb {
-                margin-bottom: 1rem; /* Space below breadcrumb */
-            }
-
-            .breadcrumb-item + .breadcrumb-item::before {
-                content: ">";
-            }
-        </style>
+        <link rel="stylesheet" href="list.css" />
+        
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Okul</li>
+        </ol>
     </h:head>
     <h:body>
         <div class="container-fluid">               
@@ -212,9 +118,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-            function confirmDelete(button) {
-                return confirm("Bu okulu gerçekten silmek istiyor musunuz?");
-            }
+                                                                function confirmDelete(button) {
+                                                                    return confirm("Bu okulu gerçekten silmek istiyor musunuz?");
+                                                                }
         </script>
     </h:body>
 </html>

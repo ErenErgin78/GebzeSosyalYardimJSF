@@ -11,47 +11,9 @@
         <title>Yakınlık Tanımlama</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
         <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="list.css" />
         <h:outputStylesheet name="styles.css"/>
-        <style>
-            .form-group {
-                margin-bottom: 1rem;
-            }
-            .form-row {
-                margin-bottom: 1rem;
-            }
-            .form-label {
-                margin-bottom: .5rem;
-                font-weight: 600;
-            }
-            .form-control {
-                display: inline-block;
-                width: auto;
-                vertical-align: middle;
-            }
-            .btn-container {
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-            }
-            .card-container {
-                display: flex;
-                justify-content: center;
-            }
-            .card-wrapper {
-                width: 100%;
-                max-width: 900px;
-            }
-            .table-row-even {
-                background-color: #f9f9f9;
-            }
-            .table-row-odd {
-                background-color: #ffffff;
-            }
-            .table {
-                width: 100%; /* Sabit genişlik */
-                min-width: 1000px; /* Minimum genişlik */
-            }
-        </style>
+
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
             <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
@@ -132,9 +94,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                            function confirmDelete(button) {
-                                                                return confirm("Bu yakınlığı gerçekten silmek istiyor musunuz?");
-                                                            }
+                                                                        function confirmDelete(button) {
+                                                                            return confirm("Bu yakınlığı gerçekten silmek istiyor musunuz?");
+                                                                        }
         </script>
     </h:body>
 </html>
