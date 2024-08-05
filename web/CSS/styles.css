@@ -58,7 +58,6 @@ body {
     }
 }
 .welcome-container {
-    background-color: #3f51b5;
     padding: 10px; /* İç kenar boşluğu */
     border: 3px solid #3f51b5; /* Kenarlık */
     font-family: "Poppins" , sans-serif;

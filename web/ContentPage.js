@@ -22,12 +22,9 @@ $(document).ready(function () {
         $('#content').find('.nav-link').removeClass('text-dark').addClass('text-white');
         $('#content').find('.submenu a').removeClass('text-dark').addClass('text-white');
 
-        $('#content').css({
-            'background-color': '#f8f9fa'
-        });
+        $('#content').css('background-color', '#f8f9fa');
 
-        // Add click event handlers to buttons inside loaded pages
-        $('#content').find('.load-page-button').click(function (e) {
+        $('#content').find('.load-page-button').off('click').on('click', function (e) {
             e.preventDefault();
             var page = $(this).data('page');
             if (page) {
@@ -35,14 +32,21 @@ $(document).ready(function () {
             }
         });
     }
-
     function reinitializeJSFComponents() {
         if (typeof jsf !== 'undefined') {
-            jsf.ajax.request(null, null, {execute: '@all', render: '@all'});
+            var source = document.getElementById('mainForm'); // Burada doğru form ID'sini kullanın
+            console.log('Source element:', source); // Hata ayıklama
+            if (source) {
+                jsf.ajax.request(source, null, {execute: '@all', render: '@all'});
+            } else {
+                console.error('Source element not found.');
+            }
         }
     }
 
-    // Handle button click to load pages
+
+
+
     $('.load-page-button').click(function (e) {
         e.preventDefault();
         var page = $(this).data('page');
@@ -51,46 +55,29 @@ $(document).ready(function () {
         }
     });
 
-    // Handle dropdown item clicks to load pages
     $('.dropdown-item').click(function (e) {
         e.preventDefault();
         var page = $(this).data('page');
         if (page) {
             loadPage(page);
-            // Close dropdowns after click
             $('.dropdown-menu').hide();
         }
     });
 
-    // Handle dropdown menu toggles
     $('.dropdown-toggle').click(function (e) {
+        e.preventDefault();
         var $el = $(this).next('.dropdown-menu');
-        if ($el.length) {
-            e.preventDefault();
-            var isVisible = $el.is(':visible');
-            $('.dropdown-menu').hide(); // Hide all dropdown menus
-            if (!isVisible) {
-                $el.show(); // Show the clicked dropdown menu
-            }
-        }
+        $('.dropdown-menu').not($el).hide();
+        $el.toggle();
     });
 
-    // Handle submenus for non-hover devices
     $('.dropdown-submenu > a').click(function (e) {
+        e.preventDefault();
         var $submenu = $(this).next('.dropdown-menu');
-        if ($submenu.length) {
-            e.preventDefault();
-            var isVisible = $submenu.is(':visible');
-            $('.dropdown-submenu .dropdown-menu').not($submenu).hide(); // Hide other submenus
-            if (!isVisible) {
-                $submenu.show(); // Show the clicked submenu
-            } else {
-                $submenu.hide(); // Hide if it's already visible
-            }
-        }
+        $('.dropdown-submenu .dropdown-menu').not($submenu).hide();
+        $submenu.toggle();
     });
 
-    // Close dropdowns when clicking outside
     $(document).click(function (e) {
         if (!$(e.target).closest('.dropdown-menu, .dropdown-toggle').length) {
             $('.dropdown-menu').hide();
