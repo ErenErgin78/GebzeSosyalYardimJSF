@@ -3,7 +3,7 @@ body {
     padding: 0;
     margin: 0;
     overflow-x: hidden; /* yatay scroll bar hidden */
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Arial', sans-serif;
     background-color: #f4f4f9;
     color: #333;
 }
@@ -34,13 +34,70 @@ body {
         padding: 20px;
     }
 }
-.welcome-container {
-    background-color: #f1f1f1; /* Arka plan rengi */
-    border-bottom: 1px solid #ddd; /* Alt kenarlık */
-    padding: 10px; /* İç kenar boşluğu */
-    font-weight: bold; /* Yazı tipi kalın */
-    margin-bottom: 20px; /* Alt kenar boşluğu */
+@keyframes backgroundAnimation {
+    0% {
+        background-color: #3f51b5;
+    }
+    50% {
+        background-color: #1e88e5;
+    }
+    100% {
+        background-color: #3f51b5;
+    }
 }
+
+@keyframes textAnimation {
+    0% {
+        color: #ffffff;
+    }
+    50% {
+        color: #ffeb3b;
+    }
+    100% {
+        color: #ffffff;
+    }
+}
+.welcome-container {
+    background-color: #3f51b5;
+    padding: 10px; /* İç kenar boşluğu */
+    border: 3px solid #3f51b5; /* Kenarlık */
+    font-family: "Poppins" , sans-serif;
+    font-weight: bold; /* Yazı tipi kalın */
+    color: #ffffff;
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 10px; /* Alt kenar boşluğu */
+    margin-top: 120px;
+    background-color: #d4d4d4;
+    text-transform: capitalize;
+    border-radius: 15px; /* Kenarlık yumuşatma */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Kutu gölgesi */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Metin gölgesi */
+    background: linear-gradient(to right, #3f51b5, #1e88e5); /* Arka plan geçişi */
+    animation: backgroundAnimation 5s infinite;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Arka plan geçiş süresi */
+
+
+}
+.welcome-container:hover {
+    transform: scale(1.05); /* Hover sırasında boyut artırma */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Hover sırasında daha belirgin gölge */
+}
+.welcome-container::before {
+    content: '';
+    display: block;
+    height: 10px;
+    width: 100%;
+    background: linear-gradient(to right, #3f51b5, #1e88e5); /* Üst kenarlık geçişi */
+    border-radius: 15px 15px 0 0; /* Üst kenar yumuşatma */
+    margin-bottom: 15px; /* Alt kenar boşluğu */
+}
+.welcome-container p {
+    letter-spacing: 1.2px; /* Harf aralığı */
+    line-height: 1.5; /* Satır yüksekliği */
+    animation: textAnimation 5s infinite;
+}
+
 
 .nav-link {
     color: #ffffff;
