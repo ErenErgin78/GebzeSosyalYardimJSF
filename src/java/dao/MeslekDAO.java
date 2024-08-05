@@ -25,8 +25,8 @@ public class MeslekDAO extends DBConnection {
     private Connection db;
     private String mesaj;
 
-    private Integer aktif = 0;
-    private String isim = null;
+    private Integer aktif = 2;
+    private String isim = "";
 
     public void MeslekEkle(Meslek meslek) {
         try {
@@ -70,11 +70,9 @@ public class MeslekDAO extends DBConnection {
                 queryBuilder.append("AND AKTIFLIK = ").append(aktif).append(" ");
             }
 
-                if (isim != null || isim.equals("")) {
-                queryBuilder.append("AND ISIM = ").append(aktif).append(" ");
-
+            if (!isim.isEmpty()) {
+                queryBuilder.append("AND MESLEK_ISIM LIKE '%").append(isim.toUpperCase()).append("%' ");
             }
-
             Statement statement = getDb().createStatement();
             ResultSet rs = statement.executeQuery(queryBuilder.toString());
 
@@ -111,6 +109,22 @@ public class MeslekDAO extends DBConnection {
 
     public void setMesaj(String mesaj) {
         this.mesaj = mesaj;
+    }
+
+    public Integer getAktif() {
+        return aktif;
+    }
+
+    public void setAktif(Integer aktif) {
+        this.aktif = aktif;
+    }
+
+    public String getIsim() {
+        return isim;
+    }
+
+    public void setIsim(String isim) {
+        this.isim = isim;
     }
 
 }

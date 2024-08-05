@@ -13,14 +13,21 @@
         <link rel="stylesheet" href="CSS/styles.css" />
         <link rel="stylesheet" href="CSS/list.css" />
         <h:outputStylesheet name="styles.css"/>
-       
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
-            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Engelli Tipi</li>
-        </ol>
+
     </h:head>
     <h:body>
+        <div class="row align-items-center mb-3">
+            <div class="col-10">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+                    <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Engelli Tipi</li>
+                </ol>
+            </div>
+            <div class="col-2 text-end">
+                <button type="button" class="btn btn-outline-success load-page-button" data-page="Engelli/EngelliTipiGiris.xhtml">Engelli Tipi Ekle</button>
+            </div>
+        </div>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -37,12 +44,6 @@
                                                 <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
                                                     <label for="engelliTipiAdi" class="col-form-label me-2">Engelli Tipi Adı:</label>
                                                     <h:inputText id="engelliTipiAdi" value="#{engelBean.entity.engel_tip}" class="form-control" style="width: 400px;" />
-                                                </div>
-                                                <!-- Ekle Butonu -->
-                                                <div class="col-md-4 d-flex align-items-center justify-content-between">
-                                                    <h:commandButton value="Ekle" action="#{engelBean.engelEkle()}" class="btn btn-success" >
-                                                        <f:ajax execute="@form" render="@form"/>
-                                                    </h:commandButton>
                                                 </div>
                                             </div>
                                             <table class="table table-bordered">

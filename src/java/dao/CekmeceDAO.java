@@ -25,6 +25,9 @@ public class CekmeceDAO extends DBConnection {
     private Connection db;
     private String mesaj;
 
+    private Integer aktif = 2;
+    private String isim = "";
+
     public void CekmeceEkle(Cekmece cekmece) {
         try {
             Connection conn = this.getDb();
@@ -55,14 +58,23 @@ public class CekmeceDAO extends DBConnection {
             DetectError(ex);
         }
     }
-    
-      public List<Cekmece> CekmeceListesi() {
+
+    public List<Cekmece> CekmeceListesi() {
         List<Cekmece> CekmeceList = new ArrayList<>();
         try {
-            String SelectQuery=("SELECT TUTANAK_CEKMECE_ID, TUTANAK_CEKMECE_DURUM, CEKMECE_AKTIF FROM TUTANAK_CEKMECE");
+            StringBuilder queryBuilder = new StringBuilder();
+            queryBuilder.append("SELECT TUTANAK_CEKMECE_ID, TUTANAK_CEKMECE_DURUM, CEKMECE_AKTIF ")
+                    .append("FROM TUTANAK_CEKMECE ")
+                    .append("WHERE 1=1 ");
 
+            if (aktif != 2) {
+                queryBuilder.append("AND CEKMECE_AKTIF = ").append(aktif).append(" ");
+            }
+            if (!isim.isEmpty()) {
+                queryBuilder.append("AND TUTANAK_CEKMECE_DURUM LIKE '%").append(isim).append("%' ");
+            }
             Statement statement = getDb().createStatement();
-            ResultSet rs = statement.executeQuery(SelectQuery);
+            ResultSet rs = statement.executeQuery(queryBuilder.toString());
 
             while (rs.next()) {
                 CekmeceList.add(new Cekmece(
@@ -71,6 +83,9 @@ public class CekmeceDAO extends DBConnection {
                         rs.getInt("CEKMECE_AKTIF")
                 ));
             }
+
+            mesaj = "işlem başarılı";
+
         } catch (Exception ex) {
             DetectError(ex);
         }
@@ -94,6 +109,22 @@ public class CekmeceDAO extends DBConnection {
 
     public void setMesaj(String mesaj) {
         this.mesaj = mesaj;
+    }
+
+    public Integer getAktif() {
+        return aktif;
+    }
+
+    public void setAktif(Integer aktif) {
+        this.aktif = aktif;
+    }
+
+    public String getIsim() {
+        return isim;
+    }
+
+    public void setIsim(String isim) {
+        this.isim = isim;
     }
 
 }

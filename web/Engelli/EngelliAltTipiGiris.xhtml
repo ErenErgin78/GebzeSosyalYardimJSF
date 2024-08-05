@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gebze Belediyesi Dashboard</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/styles.css" />
+        <link rel="stylesheet" href="CSS/log.css" />
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Engelli Alt Tipi Tanımlama</li>
+            <li class="breadcrumb-item active" aria-current="page">Engelli Alt Tipi Giriş</li>
+        </ol>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:messages globalOnly="true" layout="table"/>
+            <h:outputText id="mesaj" value="#{mahalleBean.dao.islemBasariliMesaj}" />
+            <div class="container-fluid">               
+                <div class="row">                   
+                    <div class="col-md-12">
+                        <div class="card-header">
+                            <h1>Engelli Alt Tipi Girişi</h1>
+                        </div>
+                        <div class="card">                           
+                            <div class="card-header" style="font-weight: bold;" >Engelli Alt Tipi Giriş Bilgileri</div>
+                            <div class="card-body">
+                                <div class="row mb-3">                               
+                                    <label for="engelliTipi" class="form-label">Engelli Tipi Adı:</label>
+                                    <h:selectOneMenu id="engelliTipi" value="#{engelAltBean.entity.engelli_tip_id}" class="form-control" style="width: 500px;">
+                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                        <f:selectItems value="#{engelAltBean.engelliTipGetir()}" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="row mb-3">
+                                    <!-- Engelli Alt Tipi Adı -->
+                                    <div class="col-md-8 d-flex flex-column mb-2 mb-md-0">
+                                        <label for="engelliAltTipiAdi" class="form-label">Engelli Alt Tipi Adı:</label>
+                                        <h:inputText id="engelliAltTipiAdi" value="#{engelAltBean.entity.alt_tip_isim}" class="form-control" style="width: 500px;" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <h:commandButton value="Kaydet" action="#{mahalleBean.mahallekle()}" class="btn btn-success">
+                                <f:ajax execute="@form" render="@form, mesaj" />
+                            </h:commandButton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </h:body>
+</html>

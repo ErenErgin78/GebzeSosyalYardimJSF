@@ -11,21 +11,28 @@
         <link rel="stylesheet" href="CSS/styles.css" />
         <link rel="stylesheet" href="CSS/list.css" />
         <h:outputStylesheet name="styles.css"/>
-        
-        <ol class="breadcrumb">
+       
+    </h:head>
+    <h:body>
+        <div class="row align-items-center mb-3">
+            <div class="col-10">
+                <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
             <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
             <li class="breadcrumb-item active" aria-current="page">Yönlendirilen Alt Kurum</li>
         </ol>
-    </h:head>
-    <h:body>
+            </div>
+            <div class="col-2 text-end">
+                <button type="button" class="btn btn-outline-success load-page-button" data-page="Engelli/YonlendirilenAltKurumGiris.xhtml">Yönlendirilen Alt Kurum Ekle</button>
+            </div>
+        </div>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card-header">
-                        <h1>Engelli Tipi Tanımlama</h1>
+                        <h1>Yönlendirilen Alt Kurum Tanımlama</h1>
                         <div class="card">
-                            <div class="card-header">Engelli Tipi Bilgileri</div>
+                            <div class="card-header">Yönlendirilen Alt Kurum Bilgileri</div>
                             <div class="card-body">
                                 <div class="table-container">
                                     <div class="table-responsive">
