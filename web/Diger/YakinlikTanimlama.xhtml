@@ -12,84 +12,90 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
         <link rel="stylesheet" href="CSS/styles.css" />
         <link rel="stylesheet" href="CSS/list.css" />
-        <h:outputStylesheet name="styles.css"/>
+        <h:outputStylesheet name="CSS/styles.css"/>
 
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
-            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Yakınlık Tanımlama</li>
-        </ol>
+
     </h:head>
     <h:body>
+        <div class="row align-items-center mb-3">
+            <div class="col-10">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+                    <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Yakınlık Tanımlama</li>
+                </ol>
+            </div>
+            <div class="col-2 text-end">
+                <button type="button" class="btn btn-outline-success load-page-button" data-page="Diger/YakinlikGiris.xhtml">Yakınlık Ekle</button>
+            </div>
+        </div> 
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card-header">
-                        <h1>Engelli Tipi Tanımlama</h1>
-                        <div class="card">
-                            <div class="card-header">Engelli Tipi Bilgileri</div>
-                            <div class="card-body">
-                                <div class="table-container">
-                                    <div class="table-responsive">
-                                        <h:form id="engelliTipiForm">
-                                            <div class="row mb-3">
-                                                <!-- Yakınlık Adı -->
-                                                <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
-                                                    <label for="yakınlıkAdi" class="form-label">Yakınlık Adı:</label>
-                                                    <h:inputText id="yakınlıkAdi" value="#{yakinlikBean.entity.yakinlik_isim}" class="form-control" style="width: 300px;" />
-                                                </div>
-                                                <!-- Aktif Seçim Kutusu ve Ekle Butonu -->
-                                                <div class="col-md-4 d-flex align-items-center justify-content-between">
-                                                    <div class="d-flex align-items-center gap-2 me-3">
-                                                        <label for="aktifMi" class="form-label">Aktif:</label>
-                                                        <h:selectOneMenu id="aktifMi" value="#{yakinlikBean.entity.aktiflik}" class="form-control col-md-10">
-                                                            <f:selectItem itemLabel="Evet" itemValue="1" />
-                                                            <f:selectItem itemLabel="Hayır" itemValue="0" />
-                                                        </h:selectOneMenu>
-                                                    </div>
-                                                    <h:commandButton value="Ekle" action="#{yakinlikBean.yakinlikEkle()}" class="btn btn-success" >
-                                                        <f:ajax execute="@form" render="@form"/>
-                                                    </h:commandButton>
-                                                </div>
-                                            </div>
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Yakınlık Kodu</th>
-                                                        <th>Yakınlık Adı</th>
-                                                        <th>Aktif</th>
-                                                        <th>Eylem</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <ui:repeat value="#{yakinlikBean.list}" var="yakınlık" varStatus="loop">
-                                                        <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                            <td>#{yakınlık.yakinlik_id}</td>
-                                                            <td>#{yakınlık.yakinlik_isim}</td>
-                                                            <td>#{yakınlık.aktiflik == 1 ? 'Evet' : 'Hayır'}</td>
-                                                            <td>
-                                                                <div class="action-buttons">                                                       
-                                                                    <h:commandButton value="Sil" action="#{yakinlikBean.yakinlikSil(yakınlık.yakinlik_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
-                                                                        <f:ajax execute="@this" render="@form"/>
-                                                                    </h:commandButton>
-                                                                    <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
-                                                                        <f:ajax execute="@this" render="@form"/>
-                                                                    </h:commandButton>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </ui:repeat>
-                                                </tbody>
-                                            </table>
-                                        </h:form>
+                        <h1>Yakınlık Tipi Tanımlama</h1>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">Yakınlık Bilgileri</div>
+                        <div class="card-body">
+                            <h:form id="meslekForm">
+                                <div class="row mb-3">
+                                    <!-- Meslek Adı -->
+                                    <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
+                                        <label for="meslekAdi" class="form-label">Yakınlık Adı:</label>
+                                        <h:inputText id="meslekAdi" value="#{meslekBean.entity.meslek_isim}" class="form-control" style="width: 350px;" />
+                                    </div>
+                                    <!-- Aktif Seçim Kutusu ve Ekle Butonu -->
+                                    <div class="col-md-4 d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center gap-2 me-3">
+                                            <label for="aktifMi" class="form-label">Aktif:</label>
+                                            <h:selectOneMenu id="aktifMi" value="#{meslekBean.entity.aktiflik}" class="form-control col-md-10">
+                                                <f:selectItem itemLabel="Evet" itemValue="1" />
+                                                <f:selectItem itemLabel="Hayır" itemValue="0" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <h:commandButton value="Ekle" action="#{meslekBean.meslekekle()}" class="btn btn-success">
+                                            <f:ajax execute="@form" render="@form"/>
+                                        </h:commandButton>
                                     </div>
                                 </div>
-                            </div>
+
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Yakınlık Kodu</th>
+                                            <th>Yakınlık Adı</th>
+                                            <th>Aktif</th>
+                                            <th>Eylem</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <ui:repeat value="#{meslekBean.list}" var="meslek" varStatus="loop">
+                                            <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                                <td>#{meslek.meslek_id}</td>
+                                                <td>#{meslek.meslek_isim}</td>
+                                                <td>#{meslek.aktiflik == 1 ? 'Evet' : 'Hayır' }</td>
+                                                <td>
+                                                    <div class="action-buttons">
+                                                        <h:commandButton value="Sil" action="#{meslekBean.mesleksil(meslek.meslek_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                            <f:ajax execute="@this" render="@form"/>
+                                                        </h:commandButton>
+                                                        <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
+                                                            <f:ajax execute="@this" render="@form"/>
+                                                        </h:commandButton>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </ui:repeat>
+                                    </tbody>
+                                </table>
+                            </h:form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
