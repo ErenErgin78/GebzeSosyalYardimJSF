@@ -10,9 +10,9 @@
         <title>Cadde/Sokak Listesi</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
         <link rel="stylesheet" href="styles.css" />
-        <link rel="stylesheet" href="list.css" />
+        <link rel="stylesheet" href="CSS/list.css" />
         <h:outputStylesheet name="styles.css"/>
-        <h:outputStylesheet name="list.css"/>
+        <h:outputStylesheet name="CSS/list.css"/>
     </h:head>
     <h:body>
         <h:form id="mahalleForm">
@@ -25,7 +25,8 @@
                     </ol>
                 </div>
                 <div class="col-2 text-end">
-                    <h:commandButton value="Giriş Yap" action="#{sokakBean.redirectToLogin}" styleClass="btn btn-outline-success"/>
+                    <!-- Button with data-page attribute -->
+                    <button type="button" class="btn btn-outline-success load-page-button" data-page="Adres/CaddeSokakGirisi.xhtml">Giriş</button>
                 </div>
             </div>        
             <div class="container-fluid">           
@@ -99,10 +100,6 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
-        <script>
-                                                                        function confirmDelete(button) {
-                                                                            return confirm("Bu cadde/sokağı gerçekten silmek istiyor musunuz?");
-                                                                        }
-        </script>
+      
     </h:body>
 </html>

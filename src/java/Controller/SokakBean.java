@@ -65,8 +65,4 @@ public class SokakBean implements Serializable {
     public SokakBean() {
     }
 
-        // Yönlendirme metodu
-    public String redirectToLogin() {
-        return "kullanici_listesi.xhtml";
-    }
 }
