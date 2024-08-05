@@ -25,7 +25,7 @@
                     </ol>
                 </div>
                 <div class="col-2 text-end">
-                    <button type="button" class="btn btn-outline-success load-page-button" data-page="Diger/CekmeceEkle.xhtml">Çekmece Ekle</button>
+                    <button type="button" class="btn btn-outline-success load-page-button" data-page="Diger/CekmeceGiris.xhtml">Çekmece Ekle</button>
                 </div>
             </div> 
             <div class="container-fluid">               
@@ -52,7 +52,7 @@
                                                 <f:selectItem itemLabel="Hayır" itemValue="0" />
                                             </h:selectOneMenu>
                                         </div>
-                                        <h:commandButton value="Ekle" action="#{cekmeceBean.cekmeceEkle()}" class="btn btn-success">
+                                        <h:commandButton value="Ekle" action="#{cekmeceBean.cekmeceGiris()}" class="btn btn-success">
                                             <f:ajax execute="@form" render="@form"/>
                                         </h:commandButton>
                                     </div>

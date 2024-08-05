@@ -12,7 +12,8 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
             <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Çekmece Ekle</li>
+            <li class="breadcrumb-item active" aria-current="page">Meslek Tanımlama</li>
+            <li class="breadcrumb-item active" aria-current="page">Meslek Giriş</li>
         </ol>
     </h:head>
     <h:body>
@@ -23,13 +24,13 @@
                 <div class="row">                   
                     <div class="col-md-12">
                         <div class="card-header">
-                            <h1>Çekmece Girişi</h1>
+                            <h1>Meslek Girişi</h1>
                         </div>
                         <div class="card">                           
-                            <div class="card-header" style="font-weight: bold;" >Çekmece Giriş Bilgileri</div>
+                            <div class="card-header" style="font-weight: bold;" >Meslek Giriş Bilgileri</div>
                             <div class="card-body">
                                     <div class="form-group">
-                                        <label for="email">Çekmece Adı:</label>
+                                        <label for="email">Meslek Adı:</label>
                                         <h:inputText class="form-control" value="#{cekmeceBean.entity.aktif}">
                                             <f:passThroughAttribute name="type" value="email" />
                                         </h:inputText>
