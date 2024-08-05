@@ -12,22 +12,29 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
         <link rel="stylesheet" href="CSS/styles.css" />
         <link rel="stylesheet" href="CSS/list.css" />
-        <h:outputStylesheet name="styles.css"/>
+        <h:outputStylesheet name="CSS/styles.css"/>
 
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
-            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Tutanak Tanımlama</li>
-        </ol>
     </h:head>
     <h:body>
+         <div class="row align-items-center mb-3">
+            <div class="col-10">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+                    <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Tutanak Durum Tanımlama</li>
+                </ol>
+            </div>
+            <div class="col-2 text-end">
+                <button type="button" class="btn btn-outline-success load-page-button" data-page="Diger/TutanakGiris.xhtml">Tutanak Durum Ekle</button>
+            </div>
+        </div> 
         <div class="container-fluid">
             <div class="table-responsive">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 style="font-weight: bold;">Tutanak Durumu Tanımlama</h2>
+                        <h2 style="font-weight: bold;">Tutanak Durum Tanımlama</h2>
                         <div class="card">
-                            <div class="card-header">Tutanak Durumu Tanımlama Bilgileri</div>
+                            <div class="card-header">Tutanak Durum Tanımlama Bilgileri</div>
                             <div class="card-body">
                                 <div class="form-container">
                                     <h:form id="tutanakForm">
