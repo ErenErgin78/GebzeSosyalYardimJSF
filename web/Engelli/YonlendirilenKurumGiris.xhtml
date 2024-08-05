@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gebze Belediyesi Dashboard</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/styles.css" />
+        <link rel="stylesheet" href="CSS/log.css" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:messages globalOnly="true" layout="table"/>
+            <h:outputText id="mesaj" value="#{mahalleBean.dao.islemBasariliMesaj}" />
+            <div class="container-fluid">               
+                <div class="row">                   
+                    <div class="col-md-12">
+                        <div class="card-header">
+                            <h1>Yönlendirilen Kurum Girişi</h1>
+                        </div>
+                        <div class="row mb-3">
+                            <!-- Yönlendirilen Kurum Adı -->
+                            <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
+                                <label for="yonlendirilenKurumAdi" class="col-form-label me-2">Yönlendirilen Kurum Adı:</label>
+                                <h:inputText id="yonlendirilenKurumAdi" value="#{kurumBean.entity.kurum}" class="form-control" style="width: 350px;" />
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-12 text-center mt-3">
+                        <h:commandButton value="Kaydet" action="#{mahalleBean.mahallekle()}" class="btn btn-success">
+                            <f:ajax execute="@form" render="@form, mesaj" />
+                        </h:commandButton>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </h:body>
+</html>
