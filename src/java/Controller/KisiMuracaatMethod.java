@@ -31,6 +31,7 @@ public class KisiMuracaatMethod {
     }
 
     public void create() {
+        Integer adresid = kisiBean.getEntity().getKisi_adres_id();
         kisiBean.create();
         muracaatBean.create();
     }
