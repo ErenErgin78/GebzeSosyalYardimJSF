@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gebze Belediyesi Dashboard</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/styles.css" />
+        <link rel="stylesheet" href="CSS/log.css" />
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Engelli Tipi Tanımlama</li>
+            <li class="breadcrumb-item active" aria-current="page">Engelli Tipi Giriş</li>
+        </ol>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:messages globalOnly="true" layout="table"/>
+            <h:outputText id="mesaj" value="#{mahalleBean.dao.islemBasariliMesaj}" />
+            <div class="container-fluid">               
+                <div class="row">                   
+                    <div class="col-md-12">
+                        <div class="card-header">
+                            <h1>Engelli Tipi Girişi</h1>
+                        </div>
+                        <div class="card">                           
+                            <div class="card-header" style="font-weight: bold;" >Engelli Tipi Giriş Bilgileri</div>
+                            <div class="card-body">
+                                <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
+                                    <label for="engelliTipiAdi" class="col-form-label me-2">Engelli Tipi Adı:</label>
+                                    <h:inputText id="engelliTipiAdi" value="#{engelBean.entity.engel_tip}" class="form-control" style="width: 400px;" />
+                                </div>                                             
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <h:commandButton value="Kaydet" action="#{mahalleBean.mahallekle()}" class="btn btn-success">
+                                <f:ajax execute="@form" render="@form, mesaj" />
+                            </h:commandButton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </h:body>
+</html>
