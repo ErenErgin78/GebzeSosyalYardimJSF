@@ -21,6 +21,9 @@ public class TutanakDAO extends DBConnection {
     private Connection db;
     private String mesaj;
 
+    private String isim = "";
+    private Integer aktif = 2;
+
     public void TutanakEkle(Tutanak tutanak) {
         try {
             Connection conn = this.getDb();
@@ -53,10 +56,23 @@ public class TutanakDAO extends DBConnection {
 
     public List<Tutanak> TutanakListesi() {
         List<Tutanak> tutanakList = new ArrayList<>();
+
         try {
+            StringBuilder queryBuilder = new StringBuilder();
+            queryBuilder.append("SELECT DURUM_ID, DURUM_ISIM, AKTIFLIK ")
+                    .append("FROM TUTANAK_DURUM ")
+                    .append("WHERE 1=1 ");
+
+            if (!isim.isEmpty()) {
+                queryBuilder.append("AND DURUM_ISIM LIKE '%").append(isim).append("%' ");
+            }
+
+            if (aktif != 2) {
+                queryBuilder.append("AND AKTIFLIK = ").append(aktif).append(" ");
+            }
+
             Statement statement = getDb().createStatement();
-            String selectQuery = "SELECT DURUM_ID, DURUM_ISIM, AKTIFLIK FROM TUTANAK_DURUM";
-            ResultSet rs = statement.executeQuery(selectQuery);
+            ResultSet rs = statement.executeQuery(queryBuilder.toString());
 
             while (rs.next()) {
                 tutanakList.add(new Tutanak(
@@ -65,6 +81,9 @@ public class TutanakDAO extends DBConnection {
                         rs.getInt("AKTIFLIK")
                 ));
             }
+
+            mesaj = "işlem başarılı";
+
         } catch (Exception ex) {
             DetectError(ex);
         }
@@ -89,4 +108,21 @@ public class TutanakDAO extends DBConnection {
     public void setMesaj(String mesaj) {
         this.mesaj = mesaj;
     }
+
+    public String getIsim() {
+        return isim;
+    }
+
+    public void setIsim(String isim) {
+        this.isim = isim;
+    }
+
+    public Integer getAktif() {
+        return aktif;
+    }
+
+    public void setAktif(Integer aktif) {
+        this.aktif = aktif;
+    }
+
 }
