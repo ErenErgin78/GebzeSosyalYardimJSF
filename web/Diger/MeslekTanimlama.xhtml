@@ -11,79 +11,9 @@
         <title>Meslek Tanımlama</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
         <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="list.css" />
         <h:outputStylesheet name="styles.css"/>
-        <style>
-             /* Navbar */
-            .navbar-nav .nav-link {
-                color: #f2f2f2;
-            }
 
-            .navbar-nav .nav-link:hover {
-                background-color: #575757;
-                color: #fff;
-            }
-
-            .dropdown-menu {
-                background-color: #333;
-            }
-
-            .dropdown-menu .dropdown-item {
-                color: #f2f2f2;
-            }
-
-            .dropdown-menu .dropdown-item:hover {
-                background-color: #575757;
-            }
-
-            /* Form Düzenlemeleri */
-            .form-control {
-                width: 100%;
-                box-sizing: border-box; /* Ensure padding and border are included in the width */
-            }
-
-            .form-group {
-                margin-bottom: 15px;
-                padding-right: 15px;
-                padding-left: 15px;
-                flex: 0 0 50%;
-                max-width: 20%;
-            }
-
-            .form-row {
-                display: flex;
-                flex-wrap: wrap;
-                margin-right: -15px;
-                margin-left: -15px;
-            }
-
-            .text-center {
-                text-align: center;
-            }
-
-            .custom-radio {
-                display: flex;
-                gap: 0px; /* Adjust spacing between radio buttons */
-            }
-
-            .custom-radio input {
-                margin-right: 5px; /* Space between radio button and label */
-            }
-            .form-label{
-                margin-top: 5px;
-            }
-
-            .radio-inline {
-                display: flex;
-                flex-direction: row;
-            }
-
-            /* Container Düzenlemeleri */
-            .container-fluid {
-                padding: 0 12px;
-                width: 100%;
-          
-            }
-        </style>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
             <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
@@ -91,8 +21,8 @@
         </ol>
     </h:head>
     <h:body>
-         <div class="container-fluid">               
-            <div class="row">                   
+        <div class="container-fluid">
+            <div class="row">
                 <div class="col-md-12">
                     <div class="card-header">
                         <h1>Meslek Tanımlama</h1>
@@ -138,7 +68,7 @@
                                                 <td>#{meslek.meslek_isim}</td>
                                                 <td>#{meslek.aktiflik == 1 ? 'Evet' : 'Hayır' }</td>
                                                 <td>
-                                                    <div class="action-buttons">               
+                                                    <div class="action-buttons">
                                                         <h:commandButton value="Sil" action="#{meslekBean.mesleksil(meslek.meslek_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>

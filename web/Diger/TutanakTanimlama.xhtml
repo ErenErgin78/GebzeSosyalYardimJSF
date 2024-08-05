@@ -11,51 +11,9 @@
         <title>Tutanak Durumu Tanımlama</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
         <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="list.css" />
         <h:outputStylesheet name="styles.css"/>
-        <style>
-            .form-group {
-                margin-bottom: 1rem;
-            }
-            .form-row {
-                margin-bottom: 1rem;
-            }
-            .form-label {
-                margin-bottom: .5rem;
-                font-weight: 600;
-            }
-            .form-control {
-                display: inline-block;
-                width: auto;
-                vertical-align: middle;
-            }
-            .btn-container {
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-            }
-            .card-container {
-                display: flex;
-                justify-content: center;
-            }
-            .card-wrapper {
-                width: 100%;
-                max-width: 900px;
-            }
-            .card-header {
-                font-size: 1.25rem;
-                font-weight: 600;
-            }
-            .table-row-even {
-                background-color: #f9f9f9;
-            }
-            .table-row-odd {
-                background-color: #ffffff;
-            }
-            .table {
-                width: 100%; /* Sabit genişlik */
-                min-width: 1000px; /* Minimum genişlik */
-            }
-        </style>
+
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
             <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
@@ -71,24 +29,26 @@
                         <div class="card">
                             <div class="card-header">Tutanak Durumu Tanımlama Bilgileri</div>
                             <div class="card-body">
-                                <div class="table-container">
+                                <div class="form-container">
                                     <h:form id="tutanakForm">
                                         <div class="row mb-3">
                                             <!-- Durum Adı -->
-                                            <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
-                                                <label for="durumAdi" class="col-form-label me-2">Durum Adı:</label>
-                                                <h:inputText id="durumAdi" value="#{tutanakBean.entity.tutanak_isim}" class="form-control" style="width: 400px;" />
+                                            <div class="col-md-8 mb-2 mb-md-0">
+                                                <div class="label-container">
+                                                    <label for="durumAdi" class="col-form-label me-2">Durum Adı:</label>
+                                                    <h:inputText id="durumAdi" value="#{tutanakBean.entity.tutanak_isim}" class="form-control" style="width: 400px;" />
+                                                </div>
                                             </div>
                                             <!-- Aktif Seçim Kutusu ve Ekle Butonu -->
                                             <div class="col-md-4 d-flex align-items-center justify-content-between">
-                                                <div class="d-flex align-items-center gap-2 me-3">
+                                                <div class="input-group">
                                                     <label for="aktifMi" class="form-label">Aktif:</label>
                                                     <h:selectOneMenu id="aktifMi" value="#{tutanakBean.entity.aktiflik}" class="form-control col-md-10">
                                                         <f:selectItem itemLabel="Evet" itemValue="1" />
                                                         <f:selectItem itemLabel="Hayır" itemValue="0" />
                                                     </h:selectOneMenu>
                                                 </div>
-                                                <h:commandButton value="Ekle" action="#{tutanakBean.tutanakEkle()}" class="btn btn-success" >
+                                                <h:commandButton value="Ekle" action="#{tutanakBean.tutanakEkle()}" class="btn btn-success">
                                                     <f:ajax execute="@form" render="@form"/>
                                                 </h:commandButton>
                                             </div>
@@ -109,7 +69,7 @@
                                                         <td>#{durum.tutanak_isim}</td>
                                                         <td>#{durum.aktiflik == 1 ? 'Evet' : 'Hayır'}</td>
                                                         <td>
-                                                            <div class="action-buttons">                                                            
+                                                            <div class="action-buttons">
                                                                 <h:commandButton value="Sil" action="#{tutanakBean.tutanakSil(durum.tutanak_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
                                                                     <f:ajax execute="@this" render="@form"/>
                                                                 </h:commandButton>

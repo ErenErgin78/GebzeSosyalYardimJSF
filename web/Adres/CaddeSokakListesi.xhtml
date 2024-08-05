@@ -10,51 +10,9 @@
         <title>Cadde/Sokak Listesi</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
         <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="list.css" />
         <h:outputStylesheet name="styles.css"/>
-        <style>
-            html, body {
-                height: 100%;
-                margin: 0;
-                overflow: auto;
-            }
-            .container-fluid {
-                padding: 0 12px;
-                width: 100%; /* Genişliği %100 yapın */
-                 /* Kaydırma özelliklerini etkinleştirir */
-            }
-            .row {
-                margin: 0;
-                width: 100%;
-            }
-            .col-md-12 {
-                padding: 0;
-                width: 100%;
-            }
-            .table {
-                width: 100%;
-                margin-bottom: 0;
-                table-layout: auto;
-            }
-            .table td, .table th {
-                white-space: nowrap;
-                padding: 10px;
-                text-align: left;
-            }
-            .table th {
-                font-size: 1.25rem;
-                font-weight: 600;
-            }
-            .action-buttons {
-                display: flex;
-                gap: 10px;
-            }
-            .delete-button {
-                margin-right: 10px;
-            }
-            .table-container {
-                margin-top: 20px;
-            }
-        </style>
+
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
             <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
@@ -135,9 +93,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-            function confirmDelete(button) {
-                return confirm("Bu cadde/sokağı gerçekten silmek istiyor musunuz?");
-            }
+                                                                        function confirmDelete(button) {
+                                                                            return confirm("Bu cadde/sokağı gerçekten silmek istiyor musunuz?");
+                                                                        }
         </script>
     </h:body>
 </html>
