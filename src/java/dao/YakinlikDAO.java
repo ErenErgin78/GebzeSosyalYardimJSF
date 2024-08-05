@@ -21,6 +21,9 @@ public class YakinlikDAO extends DBConnection {
     private Connection db;
     private String mesaj;
 
+    private String isim = "";
+    private Integer aktif = 2;
+
     public void YakinlikEkle(Yakinlik yakinlik) {
         try {
             Connection conn = this.getDb();
@@ -54,11 +57,24 @@ public class YakinlikDAO extends DBConnection {
 
     public List<Yakinlik> YakinlikListesi() {
         List<Yakinlik> YakinlikList = new ArrayList<>();
+
         try {
-            String selectQuery = "SELECT YAKINLIK_ID, YAKINLIK_ISIM, AKTIFLIK FROM YAKINLIK";
+            StringBuilder queryBuilder = new StringBuilder();
+            queryBuilder.append("SELECT YAKINLIK_ID, YAKINLIK_ISIM, AKTIFLIK ")
+                    .append("FROM YAKINLIK ")
+                    .append("WHERE 1=1 ");
+
+            // Add condition for AKTIFLIK field
+            if (aktif != 2) {
+                queryBuilder.append("AND AKTIFLIK = ").append(aktif).append(" ");
+            }
+
+            if (!isim.isEmpty()) {
+                queryBuilder.append("AND YAKINLIK_ISIM LIKE '%").append(isim).append("%' ");
+            }
 
             Statement statement = getDb().createStatement();
-            ResultSet rs = statement.executeQuery(selectQuery);
+            ResultSet rs = statement.executeQuery(queryBuilder.toString());
 
             while (rs.next()) {
                 YakinlikList.add(new Yakinlik(
@@ -67,6 +83,9 @@ public class YakinlikDAO extends DBConnection {
                         rs.getInt("AKTIFLIK")
                 ));
             }
+
+            mesaj = "işlem başarılı";
+
         } catch (Exception ex) {
             DetectError(ex);
         }
@@ -91,4 +110,21 @@ public class YakinlikDAO extends DBConnection {
     public void setMesaj(String mesaj) {
         this.mesaj = mesaj;
     }
+
+    public String getIsim() {
+        return isim;
+    }
+
+    public void setIsim(String isim) {
+        this.isim = isim;
+    }
+
+    public Integer getAktif() {
+        return aktif;
+    }
+
+    public void setAktif(Integer aktif) {
+        this.aktif = aktif;
+    }
+
 }
