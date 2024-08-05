@@ -25,6 +25,15 @@ $(document).ready(function () {
         $('#content').css({
             'background-color': '#f8f9fa'
         });
+
+        // Add click event handlers to buttons inside loaded pages
+        $('#content').find('.load-page-button').click(function (e) {
+            e.preventDefault();
+            var page = $(this).data('page');
+            if (page) {
+                loadPage(page);
+            }
+        });
     }
 
     function reinitializeJSFComponents() {
@@ -32,6 +41,15 @@ $(document).ready(function () {
             jsf.ajax.request(null, null, {execute: '@all', render: '@all'});
         }
     }
+
+    // Handle button click to load pages
+    $('.load-page-button').click(function (e) {
+        e.preventDefault();
+        var page = $(this).data('page');
+        if (page) {
+            loadPage(page);
+        }
+    });
 
     // Handle dropdown item clicks to load pages
     $('.dropdown-item').click(function (e) {
