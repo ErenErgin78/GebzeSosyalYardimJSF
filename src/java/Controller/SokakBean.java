@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
- */
 package Controller;
 
 import Entity.Sokak;
@@ -12,10 +8,6 @@ import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- *
- * @author Eren
- */
 @Named(value = "sokakBean")
 @ViewScoped
 public class SokakBean implements Serializable {
@@ -57,7 +49,6 @@ public class SokakBean implements Serializable {
     }
 
     public List<Sokak> getList() {
-
         this.list = this.getDao().SokakListesi();
         return this.list;
     }
@@ -74,4 +65,8 @@ public class SokakBean implements Serializable {
     public SokakBean() {
     }
 
+        // Yönlendirme metodu
+    public String redirectToLogin() {
+        return "kullanici_listesi.xhtml";
+    }
 }
