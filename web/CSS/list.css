@@ -12,11 +12,6 @@ html, body {
     margin: 0;
     overflow: auto; /* Enable scrolling */
 }
-.container-fluid {
-    padding: 0 12px; /* Add some padding */
-    width: 100%; /* Set width to 100% */
-    overflow: auto; /* Enable scrolling */
-}
 .row {
     margin: 0; /* Remove margin */
     width: 100%; /* Set width to 100% */
