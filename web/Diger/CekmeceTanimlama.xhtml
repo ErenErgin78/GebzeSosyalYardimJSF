@@ -13,18 +13,24 @@
         <link rel="stylesheet" href="CSS/styles.css" />
         <link rel="stylesheet" href="CSS/list.css" />
         <h:outputStylesheet name="CSS/styles.css"/>
-
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
-            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Çekmece Tanımlama</li>
-        </ol>
     </h:head>
     <h:body>
-        <div class="container-fluid">               
-            <div class="row">                   
-                <div class="col-md-12">
-                    <h:form id="mahalleForm">
+        <h:form id="mahalleForm">
+            <div class="row align-items-center mb-3">
+                <div class="col-10">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Çekmece Tanımlama</li>
+                    </ol>
+                </div>
+                <div class="col-2 text-end">
+                    <button type="button" class="btn btn-outline-success load-page-button" data-page="Diger/CekmeceGiris.xhtml">Çekmece Ekle</button>
+                </div>
+            </div> 
+            <div class="container-fluid">               
+                <div class="row">                   
+                    <div class="col-md-12">                   
                         <div class="card-header">
                             <h1>Çekmece Tanımlama</h1>
                         </div>
@@ -46,7 +52,7 @@
                                                 <f:selectItem itemLabel="Hayır" itemValue="0" />
                                             </h:selectOneMenu>
                                         </div>
-                                        <h:commandButton value="Ekle" action="#{cekmeceBean.cekmeceEkle()}" class="btn btn-success">
+                                        <h:commandButton value="Ekle" action="#{cekmeceBean.cekmeceGiris()}" class="btn btn-success">
                                             <f:ajax execute="@form" render="@form"/>
                                         </h:commandButton>
                                     </div>
@@ -81,11 +87,11 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
-                    </h:form>
+                        </div>                    
+                    </div>
                 </div>
             </div>
-        </div>
+        </h:form>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
