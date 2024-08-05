@@ -13,8 +13,6 @@
         <link rel="stylesheet" href="CSS/styles.css" />
         <link rel="stylesheet" href="CSS/list.css" />
         <h:outputStylesheet name="CSS/styles.css"/>
-
-
     </h:head>
     <h:body>
         <div class="row align-items-center mb-3">
@@ -43,53 +41,55 @@
                                     <!-- Meslek Adı -->
                                     <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
                                         <label for="meslekAdi" class="form-label">Meslek Adı:</label>
-                                        <h:inputText id="meslekAdi" value="#{meslekBean.entity.meslek_isim}" class="form-control" style="width: 350px;" />
+                                        <h:inputText id="meslekAdi" value="#{meslekBean.dao.isim}" class="form-control" style="width: 350px;">
+                                            <f:ajax event="keyup" render="MeslekPanel"/>
+                                        </h:inputText>
                                     </div>
+
                                     <!-- Aktif Seçim Kutusu ve Ekle Butonu -->
                                     <div class="col-md-4 d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center gap-2 me-3">
                                             <label for="aktifMi" class="form-label">Aktif:</label>
-                                            <h:selectOneMenu id="aktifMi" value="#{meslekBean.entity.aktiflik}" class="form-control col-md-10">
+                                            <h:selectOneMenu id="aktifMi" value="#{meslekBean.dao.aktif}" class="form-control col-md-10">
                                                 <f:selectItem itemLabel ="Hepsi" itemValue="2"/> 
                                                 <f:selectItem itemLabel="Evet" itemValue="1" />
                                                 <f:selectItem itemLabel="Hayır" itemValue="0" />
+                                                <f:ajax event="change" render="MeslekPanel"/>
                                             </h:selectOneMenu>
-                                        </div>
-                                        <h:commandButton value="Ekle" action="#{meslekBean.meslekekle()}" class="btn btn-success">
-                                            <f:ajax execute="@form" render="@form"/>
-                                        </h:commandButton>
+                                        </div>         
                                     </div>
                                 </div>
-
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Meslek Kodu</th>
-                                            <th>Meslek Adı</th>
-                                            <th>Aktif</th>
-                                            <th>Eylem</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <ui:repeat value="#{meslekBean.list}" var="meslek" varStatus="loop">
-                                            <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                <td>#{meslek.meslek_id}</td>
-                                                <td>#{meslek.meslek_isim}</td>
-                                                <td>#{meslek.aktiflik == 1 ? 'Evet' : 'Hayır' }</td>
-                                                <td>
-                                                    <div class="action-buttons">
-                                                        <h:commandButton value="Sil" action="#{meslekBean.mesleksil(meslek.meslek_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
-                                                            <f:ajax execute="@this" render="@form"/>
-                                                        </h:commandButton>
-                                                        <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
-                                                            <f:ajax execute="@this" render="@form"/>
-                                                        </h:commandButton>
-                                                    </div>
-                                                </td>
+                                <h:panelGroup id="MeslekPanel">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Meslek Kodu</th>
+                                                <th>Meslek Adı</th>
+                                                <th>Aktif</th>
+                                                <th>Eylem</th>
                                             </tr>
-                                        </ui:repeat>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            <ui:repeat value="#{meslekBean.list}" var="meslek" varStatus="loop">
+                                                <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                                    <td>#{meslek.meslek_id}</td>
+                                                    <td>#{meslek.meslek_isim}</td>
+                                                    <td>#{meslek.aktiflik == 1 ? 'Evet' : 'Hayır' }</td>
+                                                    <td>
+                                                        <div class="action-buttons">
+                                                            <h:commandButton value="Sil" action="#{meslekBean.mesleksil(meslek.meslek_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                                <f:ajax execute="@this" render="@form"/>
+                                                            </h:commandButton>
+                                                            <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
+                                                                <f:ajax execute="@this" render="@form"/>
+                                                            </h:commandButton>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </ui:repeat>
+                                        </tbody>
+                                    </table>
+                                </h:panelGroup>
                             </h:form>
                         </div>
                     </div>
@@ -100,9 +100,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                            function confirmDelete(button) {
-                                                                return confirm("Bu mesleği gerçekten silmek istiyor musunuz?");
-                                                            }
+                                                                function confirmDelete(button) {
+                                                                    return confirm("Bu mesleği gerçekten silmek istiyor musunuz?");
+                                                                }
         </script>
     </h:body>
 </html>
