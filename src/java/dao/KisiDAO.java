@@ -267,5 +267,7 @@ public class KisiDAO extends DBConnection {
     public void setIslemBasariliMesaj(String islemBasariliMesaj) {
         this.islemBasariliMesaj = islemBasariliMesaj;
     }
+    
+    
 
 }
