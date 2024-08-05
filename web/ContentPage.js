@@ -57,6 +57,8 @@ $(document).ready(function () {
         var page = $(this).data('page');
         if (page) {
             loadPage(page);
+            // Close dropdowns after click
+            $('.dropdown-menu').hide();
         }
     });
 
