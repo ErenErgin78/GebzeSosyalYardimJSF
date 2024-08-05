@@ -8,52 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Kullanıcı Listesi</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="list.css" />
         <h:outputStylesheet name="styles.css"/>
-        <style>
-            html, body {
-                height: 100%;
-                margin: 0;
-                overflow: auto; /* Enable scrolling */
-            }
-            .container-fluid {
-                padding: 0 12px; /* Add some padding */
-                width: 100%; /* Set width to 100% */
-                overflow: auto; /* Enable scrolling */
-            }
-            .row {
-                margin: 0; /* Remove margin */
-                width: 100%; /* Set width to 100% */
-            }
-            .col-md-12 {
-                padding: 0; /* Remove padding */
-                width: 100%; /* Set width to 100% */
-
-            }
-            .table {
-                width: 100%;
-                margin-bottom: 0;
-                table-layout: auto; /* Let the table decide column widths based on content */
-            }
-            .table td {
-                white-space: nowrap; /* Prevent text wrapping */
-                padding: 10px; /* Add padding for readability */
-                text-align: left; /* Align text to the left */
-            }
-            .table th {
-                font-size: 1.25rem; /* Tablo başlık font boyutu */
-                font-weight: 600; /* Tablo başlık font ağırlığı */
-            }
-            .action-buttons {
-                display: flex;
-                gap: 10px;
-            }
-            .delete-button {
-                margin-right: 10px;
-            }
-            .table-container {
-                margin-top: 20px; /* Add space between header and table */
-            }
-        </style>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
             <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
@@ -115,7 +71,6 @@
                                 </div>
                             </h:form>
                         </div>
-
                     </div>
                 </div>
             </div>
