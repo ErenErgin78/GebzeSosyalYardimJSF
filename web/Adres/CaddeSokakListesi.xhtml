@@ -13,14 +13,34 @@
         <link rel="stylesheet" href="list.css" />
         <h:outputStylesheet name="styles.css"/>
 
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
-            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Cadde/Sokak Listesi</li>
-        </ol>
+       
+        
     </h:head>
     <h:body>
+        
         <div class="container-fluid">
+            
+            <div class="row align-items-center mb-3">
+                <div class="col-10">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Cadde/Sokak Listesi</li>
+                    </ol>
+                </div>
+                <div class="col-2 text-end">
+                    <h:commandButton value="Giriş Yap" action="#{bean.redirectToLogin}" styleClass="btn btn-primary"/>
+                </div>
+            </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">

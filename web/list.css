@@ -50,3 +50,10 @@ html, body {
 .table-container {
     margin-top: 20px; /* Add space between header and table */
 }
+
+.table-row-even {
+    background-color: #f2f2f2;
+}
+.table-row-odd {
+    background-color: #ffffff;
+}
