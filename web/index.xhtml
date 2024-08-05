@@ -22,18 +22,19 @@
         </style>
     </head>
     <body>
-        <h:form id="mainForm">
-            <nav class="navbar navbar-expand-lg" style="background-color: #08215c;">  <!-- Navbar rengi -->
-                <a class="navbar-brand" href="#">
+        <nav class="navbar navbar-expand-lg" style="background-color: #08215c;">  <!-- Navbar rengi -->
+            <a class="navbar-brand" href="#">
+                <h:form>
                     <h:commandLink action="index.xhtml">
                         <img src="Assets/GebzeLogo123.jpeg" alt="Gebze Belediyesi Logo" class="img-fluid"/>
                     </h:commandLink>
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleDemo01">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarToggleDemo01">
-                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                </h:form>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleDemo01">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggleDemo01">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item dropdown">
 
                     </li>
@@ -116,16 +117,16 @@
                         </div>
                     </li>
                 </ul>
+                <h:form>
                     <h:commandButton value="Çıkış" action="#{userBean.cikis}" class="btn btn-danger" />
-                </div>
-            </nav>
-        </h:form>
-        <main role="main" class="contai">
-            <div id="cont">
+                </h:form>
+            </div>
+        </nav> 
+        <main role="main" class="container-fluid">
+            <div id="content">
                 <div class="welcome-container">
                     <div class="welcome-message">
-                        <h1>Hoş Geldiniz!</h1>
-                        <p>"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was or one who avoids a pain that produces no resultant pleasure?"</p>
+                        <h3>Hoş Geldiniz!</h3>
                     </div>
                 </div>
                 <!-- İçerik burada yüklenecek -->
@@ -136,7 +137,6 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        <script src="ContentPage.js"></script>
+        <script src="ContentPage.js"> </script>
     </body>
-
 </html>
