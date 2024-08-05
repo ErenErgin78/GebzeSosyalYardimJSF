@@ -10,84 +10,8 @@
         <title>Cadde/Sokak Listesi</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
         <h:outputStylesheet name="styles.css"/>
-        <style>
-            /* Navbar link renkleri ve geçiş efektleri */
-            .navbar-nav .nav-link {
-                color: #f2f2f2; /* Linklerin rengi */
-            }
-            .navbar-nav .nav-link:hover {
-                background-color: #575757; /* Üzerine gelindiğinde arka plan rengi */
-                color: #fff; /* Üzerine gelindiğinde yazı rengi */
-            }
+        <link rel="stylesheet" href="CSS/log.css" />
 
-            /* Dropdown menü ve item stilleri */
-            .dropdown-menu {
-                background-color: #333; /* Dropdown menünün arka plan rengi */
-            }
-            .dropdown-menu .dropdown-item {
-                color: #f2f2f2; /* Dropdown item'ların yazı rengi */
-            }
-            .dropdown-menu .dropdown-item:hover {
-                background-color: #575757; /* Üzerine gelindiğinde arka plan rengi */
-            }
-
-            /* Form alanlarının ve etiketlerinin stilleri */
-            .form-group {
-                margin-bottom: 1rem; /* Form gruplarının altındaki boşluk */
-            }
-            .form-row {
-                margin-bottom: 1rem; /* Form satırlarının altındaki boşluk */
-            }
-            .form-label {
-                margin-bottom: .5rem; /* Form etiketlerinin altındaki boşluk */
-                font-weight: 600; /* Form etiketlerinin font ağırlığı */
-            }
-            .form-control {
-                display: inline-block;
-                width: 100%; /* Form kontrollerinin genişliği */
-                vertical-align: middle; /* Dikey hizalama */
-            }
-
-            /* Buton kapsayıcı stilleri */
-            .btn-container {
-                display: flex; /* Flexbox düzeni */
-                align-items: center; /* Dikey ortalama */
-                gap: 1rem; /* Butonlar arasındaki boşluk */
-            }
-
-            /* Kart düzenleme stilleri */
-            .card-container {
-                display: flex; /* Flexbox düzeni */
-                justify-content: center; /* Ortalamak için */
-            }
-            .card-wrapper {
-                width: 100%;
-                max-width: 900px; /* Kartın maksimum genişliği */
-            }
-            .container-fluid {
-                padding: 0 12px;
-                width: 100%; /* Genişliği %100 yapın */
-                /* Kaydırma özelliklerini etkinleştirir */
-            }
-
-            /* Tablo satır renkleri */
-            .table-row-even {
-                background-color: #f9f9f9; /* Çift satır arka plan rengi */
-            }
-            .table-row-odd {
-                background-color: #ffffff; /* Tek satır arka plan rengi */
-            }
-
-            /* Tablo ortalama */
-            .center-table {
-                margin: auto; /* Tabloyu ortalamak için */
-            }
-
-            /* Daha geniş sütun stilleri */
-            .wider-column {
-                width: 200px; /* Genişletilmiş sütun genişliği */
-            }
-        </style>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
             <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
