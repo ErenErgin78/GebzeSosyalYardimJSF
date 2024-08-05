@@ -2,12 +2,20 @@
 body {
     padding: 0;
     margin: 0;
-    /* background-image: */
     overflow-x: hidden; /* yatay scroll bar hidden */
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
     color: #333;
 }
+#content {
+    overflow-x: auto;
+    padding: 20px;
+    margin-left: 0;
+    margin-right: auto;
+    
+}
+
+
 @media (max-width: 768px) { /* responsive özelliği eklendi */
     #sidebar {
         background-color: #1680FF;
@@ -75,13 +83,6 @@ body {
 
 .container-fluid {
     padding: 20px;
-}
-
-#content {
-    overflow-x: auto;
-    padding: 20px;
-    margin-left: 0;
-    margin-right: auto;
 }
 
 
