@@ -26,6 +26,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .dropdown-menu .dropdown-item:hover {
     background-color: #575757; /* Üzerine gelindiğinde arka plan rengi */
 }
+.container-fluid{
+    width: 100%;
+    padding: 0;
+}
 
 /* Form alanlarının ve etiketlerinin stilleri */
 .form-group {

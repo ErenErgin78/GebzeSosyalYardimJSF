@@ -11,7 +11,9 @@ body {
 #content {
     overflow-x: auto;
     padding: 10px;
-    margin: 0; /* Sağ ve sol kenar boşluklarını kaldır */
+    margin-left: 0;
+    margin-right: auto;
+
 }
 
 @media (max-width: 768px) { /* responsive özelliği eklendi */
