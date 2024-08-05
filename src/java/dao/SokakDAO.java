@@ -6,6 +6,9 @@ package dao;
 
 import Entity.Sokak;
 import static Filters.ErrorFinder.DetectError;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
+import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -120,6 +123,18 @@ public class SokakDAO extends DBConnection {
 
     public void setAktif(Integer aktif) {
         this.aktif = aktif;
+    }
+
+    public void redirectToLogin() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        try {
+            String path = externalContext.getRequestContextPath() + "/Adres/CaddeSokakGirisi.xhtml";
+            externalContext.redirect(path);
+        } catch (IOException e) {
+            // Hata mesajını konsola yazdır
+
+        }
     }
 
 }

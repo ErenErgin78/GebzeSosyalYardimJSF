@@ -12,35 +12,22 @@
         <link rel="stylesheet" href="styles.css" />
         <link rel="stylesheet" href="list.css" />
         <h:outputStylesheet name="styles.css"/>
-
-       
-        
+        <h:outputStylesheet name="list.css"/>
     </h:head>
     <h:body>
-        
-        <div class="container-fluid">
-            
-            <div class="row align-items-center mb-3">
-                <div class="col-10">
-                    <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
-                        <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Cadde/Sokak Listesi</li>
-                    </ol>
-                </div>
-                <div class="col-2 text-end">
-                    <h:commandButton value="Giriş Yap" action="#{bean.redirectToLogin}" styleClass="btn btn-primary"/>
-                </div>
+        <div class="row align-items-center mb-3">
+            <div class="col-10">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+                    <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Cadde/Sokak Listesi</li>
+                </ol>
             </div>
-            
-            
-            
-            
-            
-            
-            
-            
-            
+            <div class="col-2 text-end">
+                <h:commandButton value="Giriş Yap" action="#{bean.redirectToLogin}" styleClass="btn btn-outline-success"/>
+            </div>
+        </div>        
+        <div class="container-fluid">           
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
