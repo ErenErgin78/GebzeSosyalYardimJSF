@@ -10,34 +10,33 @@
         <title>Cadde/Sokak Listesi</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
         <link rel="stylesheet" href="styles.css" />
-        <link rel="stylesheet" href="CSS/list.css" />
+        <link rel="stylesheet" href="list.css" />
         <h:outputStylesheet name="styles.css"/>
-        <h:outputStylesheet name="CSS/list.css"/>
-        
+        <h:outputStylesheet name="list.css"/>
     </h:head>
     <h:body>
-        <div class="row align-items-center mb-3">
-            <div class="col-10">
-                <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
-                    <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Cadde/Sokak Listesi</li>
-                </ol>
-            </div>
-            <div class="col-2 text-end">
-                <h:commandButton value="Giriş Yap" action="#{bean.redirectToLogin}" styleClass="btn btn-outline-success"/>
-            </div>
-        </div>        
-        <div class="container-fluid">           
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h1>Cadde/Sokak Listesi</h1>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-container">
-                                <h:form id="mahalleForm">
+        <h:form id="mahalleForm">
+            <div class="row align-items-center mb-3">
+                <div class="col-10">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Cadde/Sokak Listesi</li>
+                    </ol>
+                </div>
+                <div class="col-2 text-end">
+                    <h:commandButton value="Giriş Yap" action="#{sokakBean.redirectToLogin}" styleClass="btn btn-outline-success"/>
+                </div>
+            </div>        
+            <div class="container-fluid">           
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h1>Cadde/Sokak Listesi</h1>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-container">                                
                                     <div class="form-row">
                                         <div class="form-group">
                                             <label for="neighborhood" class="form-label">Mahalle Adı:</label>
@@ -89,14 +88,14 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                    </h:panelGroup>
-                                </h:form>
+                                    </h:panelGroup> 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </h:form>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
