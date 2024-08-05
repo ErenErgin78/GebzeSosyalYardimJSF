@@ -26,10 +26,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .dropdown-menu .dropdown-item:hover {
     background-color: #575757; /* Üzerine gelindiğinde arka plan rengi */
 }
-.container-fluid{
-    width: 100%;
-    padding: 0;
-}
 
 /* Form alanlarının ve etiketlerinin stilleri */
 .form-group {
@@ -88,6 +84,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     box-sizing: border-box; /* Ensure padding and border are included in the width */
 }
 
+.container-fluid {
+    padding: 0 12px;
+    width: 100%; /* Genişliği %100 yapın */
+    /* Kaydırma özelliklerini etkinleştirir */
+}
+
 /* Tablo satır renkleri */
 .table-row-even {
     background-color: #f9f9f9; /* Çift satır arka plan rengi */
@@ -127,6 +129,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     font-size: 14px; /* Etiket font boyutu */
     cursor: pointer; /* Tıklanabilir imleç */
     user-select: none; /* Seçimi engeller */
+    margin-right: 350px; /* Butona yaklaşması için yazıya margin verildi */
     margin-top: 10px;
 }
 

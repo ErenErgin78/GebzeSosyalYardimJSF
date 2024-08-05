@@ -3,18 +3,17 @@ body {
     padding: 0;
     margin: 0;
     overflow-x: hidden; /* yatay scroll bar hidden */
-    font-family: Arial, sans-serif;
+    font-family: 'Times New Roman', Times, serif;
     background-color: #f4f4f9;
     color: #333;
 }
-
 #content {
     overflow-x: auto;
-    padding: 10px;
-    margin-left: 0;
-    margin-right: auto;
+    padding: 0;
+    margin: 0;
 
 }
+
 
 @media (max-width: 768px) { /* responsive özelliği eklendi */
     #sidebar {
@@ -35,7 +34,6 @@ body {
         padding: 20px;
     }
 }
-
 .welcome-container {
     background-color: #f1f1f1; /* Arka plan rengi */
     border-bottom: 1px solid #ddd; /* Alt kenarlık */
@@ -50,7 +48,6 @@ body {
     margin: 5px 0;
     padding: 10px;
 }
-
 .breadcrumb {
     background-color: #f8f9fa;
     margin-bottom: 1rem;
@@ -60,6 +57,7 @@ body {
     content: ">";
     color: #6c757d;
 }
+
 
 .nav-link:hover {
     background-color: #3f51b5;
@@ -91,9 +89,10 @@ body {
 }
 
 .container-fluid {
-    padding: 0; /* Kenar boşluklarını kaldır */
-    margin: 0; /* Dış boşlukları kaldır */
+    padding: 20px;
 }
+
+
 
 .table-container {
     width: 100%;

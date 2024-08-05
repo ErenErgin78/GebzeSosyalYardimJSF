@@ -25,6 +25,9 @@ public class MeslekDAO extends DBConnection {
     private Connection db;
     private String mesaj;
 
+    private Integer aktif = 0;
+    private String isim = null;
+
     public void MeslekEkle(Meslek meslek) {
         try {
             Connection conn = this.getDb();
@@ -57,10 +60,23 @@ public class MeslekDAO extends DBConnection {
 
     public List<Meslek> MeslekListesi() {
         List<Meslek> meslekList = new ArrayList<>();
+
         try {
+            StringBuilder queryBuilder = new StringBuilder();
+            queryBuilder.append("SELECT MESLEK_ID, MESLEK_ISIM, AKTIFLIK FROM MESLEK WHERE 1=1 ");
+
+            // Eğer filtreleme koşulları varsa ekleyin
+            if (aktif != 2) {
+                queryBuilder.append("AND AKTIFLIK = ").append(aktif).append(" ");
+            }
+
+                if (isim != null || isim.equals("")) {
+                queryBuilder.append("AND ISIM = ").append(aktif).append(" ");
+
+            }
+
             Statement statement = getDb().createStatement();
-            String selectQuery = "SELECT MESLEK_ID, MESLEK_ISIM, AKTIFLIK FROM MESLEK";
-            ResultSet rs = statement.executeQuery(selectQuery);
+            ResultSet rs = statement.executeQuery(queryBuilder.toString());
 
             while (rs.next()) {
                 meslekList.add(new Meslek(
@@ -69,6 +85,9 @@ public class MeslekDAO extends DBConnection {
                         rs.getInt("AKTIFLIK")
                 ));
             }
+
+            mesaj = "işlem başarılı";
+
         } catch (Exception ex) {
             DetectError(ex);
         }
@@ -94,5 +113,4 @@ public class MeslekDAO extends DBConnection {
         this.mesaj = mesaj;
     }
 
-    
 }
