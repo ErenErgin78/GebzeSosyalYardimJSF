@@ -85,10 +85,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 .container-fluid {
-    padding: 0 12px;
-    width: 100%; /* Genişliği %100 yapın */
-    /* Kaydırma özelliklerini etkinleştirir */
+    width: 100%; /* Set width to 100% */
+    overflow: auto; /* Enable scrolling */
+    margin-bottom: 0; /* Reset bottom margin */
 }
+
 
 /* Tablo satır renkleri */
 .table-row-even {
