@@ -74,7 +74,7 @@
                                                         <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
                                                             <td>#{cekmece.cekmece_id}</td>
                                                             <td>#{cekmece.cekmece}</td>
-                                                            <td>#{cekmece.aktif}</td>
+                                                            <td>#{cekmece.aktif == 1 ? 'Evet' : 'Hayır' }</td>
                                                             <td>
                                                                 <div class="action-buttons">
                                                                     <h:commandButton value="Sil" action="#{cekmeceBean.cekmeceSil(cekmece.cekmece_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">

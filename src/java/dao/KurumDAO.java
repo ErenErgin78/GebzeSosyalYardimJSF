@@ -89,4 +89,13 @@ public class KurumDAO extends DBConnection {
         }
         return db;
     }
+
+    public String getIslemBasariliMesaj() {
+        return islemBasariliMesaj;
+    }
+
+    public void setIslemBasariliMesaj(String islemBasariliMesaj) {
+        this.islemBasariliMesaj = islemBasariliMesaj;
+    }
+
 }
