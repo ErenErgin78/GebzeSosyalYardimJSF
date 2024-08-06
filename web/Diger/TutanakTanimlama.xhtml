@@ -13,7 +13,6 @@
         <link rel="stylesheet" href="CSS/styles.css" />
         <link rel="stylesheet" href="CSS/list.css" />
         <h:outputStylesheet name="CSS/styles.css"/>
-
     </h:head>
     <h:body>
         <div class="row align-items-center mb-3">
@@ -34,7 +33,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card-header">
-                        <h1 style="font-weight: bold;">Tutanak Durum Tanımlama</h1>
+                            <h1 style="font-weight: bold;">Tutanak Durum Tanımlama</h1>
                         </div>
                         <div class="card">
                             <div class="card-header">Tutanak Durum Tanımlama Bilgileri</div>
@@ -42,25 +41,19 @@
                                 <div class="form-container">
                                     <h:form id="tutanakForm">
                                         <div class="row mb-3">
-                                            <!-- Durum Adı -->
-                                            <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
-                                                <label for="meslekAdi" class="form-label">Meslek Adı:</label>
-                                                <h:inputText id="meslekAdi" value="#{tutanakBean.dao.isim}" class="form-control" style="width: 350px;">
-                                                    <f:ajax event="keyup" render="tutanakPanel"/>
-                                                </h:inputText>
+                                            <!-- Durum Adı ve Aktif Seçim Kutusu -->
+                                            <div class="form-group col-md-6">
+                                                <label for="tutanakAdi" class="form-label">Tutanak Durum Adı:</label>
+                                                <h:inputText id="tutanakAdi" value="#{tutanakBean.dao.isim}" class="form-control" />
                                             </div>
-                                            <!-- Aktif Seçim Kutusu ve Ekle Butonu -->
-                                            <div class="col-md-4 d-flex align-items-center justify-content-between">
-                                                <div class="input-group">
-                                                    <label for="aktifMi" class="form-label">Aktif:</label>
-                                                    <h:selectOneMenu id="aktifMi" value="#{tutanakBean.dao.aktif}" class="form-control col-md-10">
-                                                        <f:selectItem itemLabel="Hepsi" itemValue="2" />
-                                                        <f:selectItem itemLabel="Evet" itemValue="1" />
-                                                        <f:selectItem itemLabel="Hayır" itemValue="0" />
-                                                        <f:ajax event="change" render="tutanakPanel"/>
-                                                    </h:selectOneMenu>
-                                                </div>
-                                            
+                                            <div class="form-group col-md-6">
+                                                <label for="aktifMi" class="form-label">Aktif:</label>
+                                                <h:selectOneMenu id="aktifMi" value="#{tutanakBean.dao.aktif}" class="form-control">
+                                                    <f:selectItem itemLabel="Hepsi" itemValue="2" />
+                                                    <f:selectItem itemLabel="Evet" itemValue="1" />
+                                                    <f:selectItem itemLabel="Hayır" itemValue="0" />
+                                                    <f:ajax event="change" render="tutanakPanel"/>
+                                                </h:selectOneMenu>
                                             </div>
                                         </div>
                                         <h:panelGroup id="tutanakPanel">
@@ -81,10 +74,10 @@
                                                             <td>#{durum.aktiflik == 1 ? 'Evet' : 'Hayır'}</td>
                                                             <td>
                                                                 <div class="action-buttons">
-                                                                    <h:commandButton value="Sil" action="#{tutanakBean.tutanakSil(durum.tutanak_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
+                                                                    <h:commandButton value="Sil" action="#{tutanakBean.tutanakSil(durum.tutanak_id)}" styleClass="btn btn-danger delete-button me-2" onclick="return confirmDelete(this)">
                                                                         <f:ajax execute="@this" render="@form"/>
                                                                     </h:commandButton>
-                                                                    <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
+                                                                    <h:commandButton value="Düzenle" styleClass="btn btn-primary ms-2">
                                                                         <f:ajax execute="@this" render="@form"/>
                                                                     </h:commandButton>
                                                                 </div>
@@ -106,9 +99,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                                    function confirmDelete(button) {
-                                                                        return confirm("Bu durumu gerçekten silmek istiyor musunuz?");
-                                                                    }
+            function confirmDelete(button) {
+                return confirm("Bu durumu gerçekten silmek istiyor musunuz?");
+            }
         </script>
     </h:body>
 </html>

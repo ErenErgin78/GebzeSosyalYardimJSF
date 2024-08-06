@@ -13,8 +13,6 @@
         <link rel="stylesheet" href="CSS/styles.css" />
         <link rel="stylesheet" href="CSS/list.css" />
         <h:outputStylesheet name="CSS/styles.css"/>
-
-
     </h:head>
     <h:body>
         <div class="row align-items-center mb-3">
@@ -39,21 +37,20 @@
                         </div>
                         <div class="card-body">
                             <h:form id="altTipiForm">
-                                <div class="form-group">
-                                    <label for="application_type">Yardim Tip: #{yardimAltBean.entity.tip_id} </label>
-                                    <h:selectOneMenu id="neighborhood" value="#{yardimAltBean.entity.tip_id}" class="form-control">
-                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
-                                        <f:selectItems value="#{yardimAltBean.tipList}" />
-                                    </h:selectOneMenu>
-                                </div> 
-                                <div class="row mb-3">
+                                <div class="form-row mb-3">
+                                    <!-- Yardım Tipi -->
+                                    <div class="form-group col-md-6">
+                                        <label for="application_type" class="form-label">Yardım Tipi:</label>
+                                        <h:selectOneMenu id="application_type" value="#{yardimAltBean.entity.tip_id}" class="form-control">
+                                            <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                            <f:selectItems value="#{yardimAltBean.tipList}" />
+                                        </h:selectOneMenu>
+                                    </div> 
                                     <!-- Alt Tipi Adı -->
-                                    <div class="col-md-8 d-flex flex-column mb-2 mb-md-0">
-                                        <label for="altTipiAdi" class="form-label">Alt Tipi Adı: #{yardimAltBean.entity.alt_tip}</label>
+                                    <div class="form-group col-md-6">
+                                        <label for="altTipiAdi" class="form-label">Alt Tipi Adı:</label>
                                         <h:inputText id="altTipiAdi" value="#{yardimAltBean.entity.alt_tip}" class="form-control" />
                                     </div>
-                                    <!-- Ekle Butonu -->
-                                   
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
@@ -73,10 +70,10 @@
                                                     <td>#{alt.tip_isim}</td>
                                                     <td>
                                                         <div class="action-buttons">
-                                                            <h:commandButton value="Sil" action="#{yardimAltBean.yardimAltSil(alt.alt_tip_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                            <h:commandButton value="Sil" action="#{yardimAltBean.yardimAltSil(alt.alt_tip_id)}" styleClass="btn btn-danger delete-button me-2" onclick="return confirmDelete(this)">
                                                                 <f:ajax execute="@this" render="@form"/>
                                                             </h:commandButton>
-                                                            <h:commandButton value="Düzenle" styleClass="btn btn-primary">
+                                                            <h:commandButton value="Düzenle" styleClass="btn btn-primary ms-2">
                                                                 <f:ajax execute="@this" render="@form"/>
                                                             </h:commandButton>                                             
                                                         </div>
@@ -96,9 +93,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                                function confirmDelete(button) {
-                                                                    return confirm("Bu alt tipiyi gerçekten silmek istiyor musunuz?");
-                                                                }
+            function confirmDelete(button) {
+                return confirm("Bu alt tipiyi gerçekten silmek istiyor musunuz?");
+            }
         </script>
     </h:body>
 </html>

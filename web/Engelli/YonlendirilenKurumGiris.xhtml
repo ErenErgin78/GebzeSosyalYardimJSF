@@ -24,22 +24,22 @@
             <div class="container-fluid">               
                 <div class="row">                   
                     <div class="col-md-12">
-                        <div class="card-header">
-                            <h1>Yönlendirilen Kurum Girişi</h1>
-                        </div>
-                        <div class="row mb-3">
-                            <!-- Yönlendirilen Kurum Adı -->
-                            <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
-                                <label for="yonlendirilenKurumAdi" class="col-form-label me-2">Yönlendirilen Kurum Adı:</label>
-                                <h:inputText id="yonlendirilenKurumAdi" value="#{kurumBean.entity.kurum}" class="form-control" style="width: 350px;" />
+                        <div class="card">
+                            <div class="card-header">
+                                <h1>Yönlendirilen Kurum Girişi</h1>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group mb-3">
+                                    <label for="yonlendirilenKurumAdi" class="form-label">Yönlendirilen Kurum Adı:</label>
+                                    <h:inputText id="yonlendirilenKurumAdi" value="#{kurumBean.entity.kurum}" class="form-control" style="width: 350px;" />
+                                </div>
+                                <div class="text-center mt-3">
+                                    <h:commandButton value="Kaydet" action="#{mahalleBean.mahallekle()}" class="btn btn-success">
+                                        <f:ajax execute="@form" render="@form, mesaj" />
+                                    </h:commandButton>
+                                </div>
                             </div>
                         </div>
-                        
-                    </div>
-                    <div class="col-md-12 text-center mt-3">
-                        <h:commandButton value="Kaydet" action="#{mahalleBean.mahallekle()}" class="btn btn-success">
-                            <f:ajax execute="@form" render="@form, mesaj" />
-                        </h:commandButton>
                     </div>
                 </div>
             </div>

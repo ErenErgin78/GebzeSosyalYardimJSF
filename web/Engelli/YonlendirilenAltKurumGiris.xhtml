@@ -8,50 +8,55 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
         <link rel="stylesheet" href="CSS/styles.css" />
         <link rel="stylesheet" href="CSS/log.css" />
-
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Yönetici İşlemleri</li>
-            <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="">Engelli Tipleri</a></li>
-            <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="Engelli/YonlendirilenAltKurum.xhtml">Yönlendirilen Alt Kurum</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Yönlendirilen Alt Kurum Giriş</li>
-        </ol>
-        
     </h:head>
     <h:body>
-        <h:form>
-            <h:messages globalOnly="true" layout="table"/>
-            <h:outputText id="mesaj" value="#{mahalleBean.dao.islemBasariliMesaj}" />
-            <div class="container-fluid">               
-                <div class="row">                   
-                    <div class="col-md-12">
-                        <div class="card-header">
-                            <h1>Yönlendirilen Alt Kurum Girişi</h1>
-                        </div>
-                        <div class="form-group">
-                            <label for="kurumSecim">Yönlendirilen Alt Kurum Adı:</label>
-                            <h:selectOneMenu id="kurumSecim" value="#{kurumAltBean.entity.tip_id}" class="form-control" style="width: 500px; border: 1px solid #ccc; padding: 5px;">
-                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
-                                <f:selectItems value="#{kurumAltBean.tipList}" />
-                            </h:selectOneMenu>
-                        </div>
-                        <div class="row mb-3">
-                            <!-- Yönlendirilen Alt Kurum Adı -->
-                            <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
-                                <label for="altKurumAdi" class="col-form-label me-2">Yönlendirilen Alt Kurum Adı:</label>
-                                <h:inputText id="altKurumAdi" value="#{kurumAltBean.entity.alt_tip}" class="form-control" style="width: 500px;" />
-                            </div>
-                            
-                        </div>
-                         <div class="text-center mt-3">
-                            <h:commandButton value="Kaydet" action="#{mahalleBean.mahallekle()}" class="btn btn-success">
-                                <f:ajax execute="@form" render="@form, mesaj" />
-                            </h:commandButton>
-                        </div>
-                    </div>
+        <div class="container-fluid">
+            <div class="row align-items-center mb-3">
+                <div class="col-10">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Yönetici İşlemleri</li>
+                        <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="">Engelli Tipleri</a></li>
+                        <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="Engelli/YonlendirilenAltKurum.xhtml">Yönlendirilen Alt Kurum</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Yönlendirilen Alt Kurum Giriş</li>
+                    </ol>
+                </div>
+                <div class="col-2 text-end">
+                    <button type="button" class="btn btn-outline-success load-page-button" data-page="Engelli/YonlendirilenAltKurumGiris.xhtml">Yönlendirilen Alt Kurum Ekle</button>
                 </div>
             </div>
-        </h:form>
+            <div class="row">
+                <div class="col-md-12">
+                    <h:form>
+                        <h:messages globalOnly="true" layout="table"/>
+                        <h:outputText id="mesaj" value="#{mahalleBean.dao.islemBasariliMesaj}" />
+                        <div class="card">
+                            <div class="card-header">
+                                <h1>Yönlendirilen Alt Kurum Girişi</h1>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="kurumSecim" class="form-label">Yönlendirilen Kurum Adı:</label>
+                                    <h:selectOneMenu id="kurumSecim" value="#{kurumAltBean.entity.tip_id}" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                        <f:selectItems value="#{kurumAltBean.tipList}" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group">
+                                    <label for="altKurumAdi" class="form-label">Yönlendirilen Alt Kurum Adı:</label>
+                                    <h:inputText id="altKurumAdi" value="#{kurumAltBean.entity.alt_tip}" class="form-control" />
+                                </div>
+                                <div class="text-center mt-3">
+                                    <h:commandButton value="Kaydet" action="#{mahalleBean.mahallekle()}" class="btn btn-success">
+                                        <f:ajax execute="@form" render="@form, mesaj" />
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

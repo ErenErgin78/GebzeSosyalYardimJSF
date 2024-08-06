@@ -13,7 +13,6 @@
         <link rel="stylesheet" href="CSS/styles.css" />
         <link rel="stylesheet" href="CSS/list.css" />
         <h:outputStylesheet name="CSS/styles.css"/>
-
     </h:head>
     <h:body>
         <div class="row align-items-center mb-3">
@@ -21,7 +20,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Yönetici İşlemleri</li>
-                    <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="">Engelli Tipleri</a></li>                  
+                    <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="">Engelli Tipleri</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Engelli Tipi</li>
                 </ol>
             </div>
@@ -43,7 +42,7 @@
                                             <div class="row mb-3">
                                                 <!-- Engelli Tipi Adı -->
                                                 <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
-                                                    <label for="engelliTipiAdi" class="col-form-label me-2">Engelli Tipi Adı:</label>
+                                                    <label for="engelliTipiAdi" class="col-form-label me-2" style="margin-right: 10px;">Engelli Tipi Adı:</label>
                                                     <h:inputText id="engelliTipiAdi" value="#{engelBean.entity.engel_tip}" class="form-control" style="width: 400px;" />
                                                 </div>
                                             </div>
@@ -62,7 +61,7 @@
                                                             <td>#{engel.engel_tip}</td>
                                                             <td>
                                                                 <div class="action-buttons">
-                                                                    <h:commandButton value="Sil" action="#{engelBean.engelSil(engel.engel_tip_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
+                                                                    <h:commandButton value="Sil" action="#{engelBean.engelSil(engel.engel_tip_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
                                                                         <f:ajax execute="@this" render="@form"/>
                                                                     </h:commandButton>
                                                                     <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
@@ -87,9 +86,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                                        function confirmDelete(button) {
-                                                                            return confirm("Bu engelli tipini gerçekten silmek istiyor musunuz?");
-                                                                        }
+            function confirmDelete(button) {
+                return confirm("Bu engelli tipini gerçekten silmek istiyor musunuz?");
+            }
         </script>
     </h:body>
 </html>
