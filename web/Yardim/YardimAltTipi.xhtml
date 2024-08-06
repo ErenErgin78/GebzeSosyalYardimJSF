@@ -4,7 +4,6 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,25 +14,31 @@
         <h:outputStylesheet name="CSS/styles.css"/>
     </h:head>
     <h:body>
-        <div class="row align-items-center mb-3">
-            <div class="col-10">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Yönetici İşlemleri</li>
-                    <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="">Yardım Parametreleri</a></li>                  
-                    <li class="breadcrumb-item active" aria-current="page">Yardım Alt Tipi</li>
-                </ol>
+        <div class="container-fluid">
+            <div class="row align-items-center mb-3">
+                <div class="col-10">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Yönetici İşlemleri</li>
+                        <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="">Yardım Parametreleri</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Yardım Alt Tipi</li>
+                    </ol>
+                </div>
+                <div class="col-2 text-end">
+                    <button type="button" class="btn btn-outline-success load-page-button" data-page="Yardim/YardimAltTipiGiris.xhtml">Yardım Alt Tipi Giriş</button>
+                </div>
             </div>
-            <div class="col-2 text-end">
-                <button type="button" class="btn btn-outline-success load-page-button" data-page="Yardim/YardimAltTipiGiris.xhtml">Yardım Alt Tipi Giriş</button>
-            </div>
-        </div> 
-        <div class="container-fluid">               
-            <div class="row">                   
+            <div class="row">
                 <div class="col-md-12">
-                    <div class="card">
+                    <!-- Yardım Alt Tipi Tanımlama Kartı -->
+                    <div class="card mb-4">
                         <div class="card-header text-center">
                             <h1 class="font-weight-bold">Yardım Alt Tipi Tanımlama</h1>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                Yardım Alt Tipi Bilgileri
+                            </div>
                         </div>
                         <div class="card-body">
                             <h:form id="altTipiForm">
@@ -45,7 +50,7 @@
                                             <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
                                             <f:selectItems value="#{yardimAltBean.tipList}" />
                                         </h:selectOneMenu>
-                                    </div> 
+                                    </div>
                                     <!-- Alt Tipi Adı -->
                                     <div class="form-group col-md-6">
                                         <label for="altTipiAdi" class="form-label">Alt Tipi Adı:</label>
@@ -86,6 +91,7 @@
                             </h:form>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -93,9 +99,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-            function confirmDelete(button) {
-                return confirm("Bu alt tipiyi gerçekten silmek istiyor musunuz?");
-            }
+                                                                function confirmDelete(button) {
+                                                                    return confirm("Bu alt tipiyi gerçekten silmek istiyor musunuz?");
+                                                                }
         </script>
     </h:body>
 </html>
