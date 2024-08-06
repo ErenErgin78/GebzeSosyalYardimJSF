@@ -54,7 +54,7 @@ public class KurumAltDAO extends DBConnection {
         List<KurumAlt> kurumAltList = new ArrayList<>();
         try {
             Statement statement = getDb().createStatement();
-            String selectQuery = "SELECT YA.ALT_KURUM_ID, YA.KURUM_ID, YA.ALT_KURUM_ISIM, Y.KURUM_ISIM FROM KURUM_ALT YA"
+            String selectQuery = "SELECT YA.ALT_KURUM_ID, YA.ALT_KURUM_ID, YA.ALT_KURUM_ISIM, Y.KURUM_ISIM FROM KURUM_ALT YA"
                     + " JOIN KURUM Y ON YA.KURUM_ID = Y.KURUM_ID";
             ResultSet rs = statement.executeQuery(selectQuery);
 
