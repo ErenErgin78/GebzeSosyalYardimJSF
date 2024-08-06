@@ -18,6 +18,8 @@ public class YardimAltDAO extends DBConnection {
     private Connection db;
     private String islemBasariliMesaj;
 
+    private Integer id = 0;
+
     public void YardimAltEkle(YardimAlt yardimAlt) {
 
         try {
@@ -53,10 +55,16 @@ public class YardimAltDAO extends DBConnection {
     public List<YardimAlt> YardimAltListesi() {
         List<YardimAlt> yardimAltList = new ArrayList<>();
         try {
+            StringBuilder queryBuilder = new StringBuilder();
+            queryBuilder.append("SELECT YA.YARDIM_ALT_TIP_ID, YA.YARDIM_TIP_ID, YA.YARDIM_ALT_TIP, Y.YARDIM_TIP ")
+                    .append("FROM YARDIM_ALT_TIP YA ")
+                    .append("JOIN YARDIM_TIP Y ON YA.YARDIM_TIP_ID = Y.YARDIM_TIP_ID ");
+
+            if (id != 0) {
+                queryBuilder.append("AND YA.YARDIM_TIP_ID = ").append(id).append(" ");
+            }
             Statement statement = getDb().createStatement();
-            String selectQuery = "SELECT YA.YARDIM_ALT_TIP_ID, YA.YARDIM_TIP_ID,  YA.YARDIM_ALT_TIP, Y.YARDIM_TIP FROM YARDIM_ALT_TIP YA"
-                    + " JOIN YARDIM_TIP Y ON YA.YARDIM_TIP_ID = Y.YARDIM_TIP_ID";
-            ResultSet rs = statement.executeQuery(selectQuery);
+            ResultSet rs = statement.executeQuery(queryBuilder.toString());
 
             while (rs.next()) {
                 yardimAltList.add(new YardimAlt(
@@ -70,8 +78,8 @@ public class YardimAltDAO extends DBConnection {
         }
         return yardimAltList;
     }
-    
-     public List<SelectItem> YardimTipGetir() {
+
+    public List<SelectItem> YardimTipGetir() {
         List<SelectItem> TipList = new ArrayList<>();
 
         try {
@@ -105,6 +113,14 @@ public class YardimAltDAO extends DBConnection {
 
     public void setIslemBasariliMesaj(String islemBasariliMesaj) {
         this.islemBasariliMesaj = islemBasariliMesaj;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
 }
