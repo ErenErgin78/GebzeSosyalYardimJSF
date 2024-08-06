@@ -40,17 +40,21 @@
                             <div class="card-body">
                                 <div class="row mb-3">
                                     <!-- Çekmece Adı -->
-                                    <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
-                                        <label for="cekmeceAdi" class="col-form-label me-2">Çekmece Adı:</label>
-                                        <h:inputText id="cekmeceAdi" value="#{cekmeceBean.entity.cekmece}" class="form-control form-control-custom-width" />
+                                   <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
+                                        <label for="meslekAdi" class="form-label">Meslek Adı:</label>
+                                        <h:inputText id="meslekAdi" value="#{cekmeceBean.dao.isim}" class="form-control" style="width: 350px;">
+                                            <f:ajax event="keyup" render="cekmecePanel"/>
+                                        </h:inputText>
                                     </div>
                                     <!-- Aktif Seçim Kutusu ve Ekle Butonu -->
                                     <div class="col-md-4 d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center gap-2 me-3">
                                             <label for="aktifMi" class="col-form-label me-2">Aktif:</label>
-                                            <h:selectOneMenu id="aktifMi" value="#{cekmeceBean.entity.aktif}" class="form-control col-md-10">
+                                            <h:selectOneMenu id="aktifMi" value="#{cekmeceBean.dao.aktif}" class="form-control col-md-10">
+                                                <f:selectItem itemLabel="Hepsi" itemValue="2" />
                                                 <f:selectItem itemLabel="Evet" itemValue="1" />
                                                 <f:selectItem itemLabel="Hayır" itemValue="0" />
+                                                <f:ajax event="change" render="cekmecePanel"/>
                                             </h:selectOneMenu>
                                         </div>
                                         <h:commandButton value="Ekle" action="#{cekmeceBean.cekmeceEkle()}" class="btn btn-success">
@@ -58,6 +62,7 @@
                                         </h:commandButton>
                                     </div>
                                 </div>
+                                <h:panelGroup id="cekmecePanel">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -87,6 +92,7 @@
                                         </ui:repeat>
                                     </tbody>
                                 </table>
+                                </h:panelGroup>
                             </div>
                         </div>                    
                     </div>
