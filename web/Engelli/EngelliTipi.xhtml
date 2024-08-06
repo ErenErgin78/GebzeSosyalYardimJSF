@@ -10,73 +10,75 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Engelli Tipi Tanımlama</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="CSS/styles.css" />
-        <link rel="stylesheet" href="CSS/list.css" />
         <h:outputStylesheet name="CSS/styles.css"/>
     </h:head>
     <h:body>
-        <div class="row align-items-center mb-3">
-            <div class="col-10">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Yönetici İşlemleri</li>
-                    <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="">Engelli Tipleri</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Engelli Tipi</li>
-                </ol>
-            </div>
-            <div class="col-2 text-end">
-                <button type="button" class="btn btn-outline-success load-page-button" data-page="Engelli/EngelliTipiGiris.xhtml">Engelli Tipi Ekle</button>
-            </div>
-        </div>
         <div class="container-fluid">
+            <div class="row align-items-center mb-3">
+                <div class="col-10">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Yönetici İşlemleri</li>
+                        <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="">Engelli Tipleri</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Engelli Tipi</li>
+                    </ol>
+                </div>
+                <div class="col-2 text-end">
+                    <button type="button" class="btn btn-outline-success load-page-button" data-page="Engelli/EngelliTipiGiris.xhtml">Engelli Tipi Ekle</button>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card-header">
-                        <h1>Engelli Tipi Tanımlama</h1>
-                        <div class="card">
-                            <div class="card-header">Engelli Tipi Bilgileri</div>
-                            <div class="card-body">
-                                <div class="table-container">
-                                    <div class="table-responsive">
-                                        <h:form id="engelliTipiForm">
-                                            <div class="row mb-3">
-                                                <!-- Engelli Tipi Adı -->
-                                                <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
-                                                    <label for="engelliTipiAdi" class="col-form-label me-2" style="margin-right: 10px;">Engelli Tipi Adı:</label>
-                                                    <h:inputText id="engelliTipiAdi" value="#{engelBean.entity.engel_tip}" class="form-control" style="width: 400px;" />
-                                                </div>
-                                            </div>
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Engelli Tipi Kodu</th>
-                                                        <th>Engelli Tipi Adı</th>
-                                                        <th>Eylem</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <c:forEach var="engel" items="#{engelBean.list}" varStatus="loop">
-                                                        <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                            <td>#{engel.engel_tip_id}</td>
-                                                            <td>#{engel.engel_tip}</td>
-                                                            <td>
-                                                                <div class="action-buttons">
-                                                                    <h:commandButton value="Sil" action="#{engelBean.engelSil(engel.engel_tip_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
-                                                                        <f:ajax execute="@this" render="@form"/>
-                                                                    </h:commandButton>
-                                                                    <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
-                                                                        <f:ajax execute="@this" render="@form"/>
-                                                                    </h:commandButton>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </c:forEach>
-                                                </tbody>
-                                            </table>
-                                        </h:form>
+                    <!-- Ana Başlık Kartı -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h1>Engelli Tipi Tanımlama</h1>
+                        </div>
+                    </div>
+                    <!-- Engelli Tipi Bilgileri Kartı -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            Engelli Tipi Giriş Bilgileri
+                        </div>
+                        <div class="card-body">
+                            <h:form id="engelliTipiForm">
+                                <div class="row mb-3">
+                                    <!-- Engelli Tipi Adı -->
+                                    <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
+                                        <label for="engelliTipiAdi" class="col-form-label me-2">Engelli Tipi Adı:</label>
+                                        <h:inputText id="engelliTipiAdi" value="#{engelBean.entity.engel_tip}" class="form-control" style="width: 400px;" />
                                     </div>
                                 </div>
-                            </div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Engelli Tipi Kodu</th>
+                                                <th>Engelli Tipi Adı</th>
+                                                <th>Eylem</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <ui:repeat var="engel" value="#{engelBean.list}" varStatus="loop">
+                                                <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                                    <td>#{engel.engel_tip_id}</td>
+                                                    <td>#{engel.engel_tip}</td>
+                                                    <td>
+                                                        <div class="action-buttons">
+                                                            <h:commandButton value="Sil" action="#{engelBean.engelSil(engel.engel_tip_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                                <f:ajax execute="@this" render="@form"/>
+                                                            </h:commandButton>
+                                                            <h:commandButton value="Düzenle" styleClass="btn btn-primary ms-2">
+                                                                <f:ajax execute="@this" render="@form"/>
+                                                            </h:commandButton>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </ui:repeat>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </h:form>
                         </div>
                     </div>
                 </div>
