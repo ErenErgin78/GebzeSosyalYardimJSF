@@ -128,6 +128,7 @@ public class UsersDAO extends DBConnection {
         } catch (SQLException ex) {
             DetectError(ex);
         }
+        this.sifre = null;
         return Girisbasarili;
     }
 
