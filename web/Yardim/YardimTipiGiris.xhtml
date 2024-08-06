@@ -21,7 +21,7 @@
     <h:body>
         <h:form>
             <h:messages globalOnly="true" layout="table"/>
-            <h:outputText id="mesaj" value="#{mahalleBean.dao.islemBasariliMesaj}" />
+            <h:outputText id="mesaj" value="#{yardimBean.dao.mesaj}" />
             <div class="container-fluid">               
                 <div class="row">                   
                     <div class="col-md-12">
@@ -33,14 +33,14 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="email">Yardım Tipi Adı:</label>
-                                    <h:inputText class="form-control" value="#{cekmeceBean.entity.aktif}">
+                                    <h:inputText class="form-control" value="#{yardimBean.entity.yardim_tip}">
                                         <f:passThroughAttribute name="type" value="email" />
                                     </h:inputText>
                                 </div>                          
                             </div>
                         </div>
                         <div class="text-center mt-3">
-                            <h:commandButton value="Kaydet" action="#{mahalleBean.mahallekle()}" class="btn btn-success">
+                            <h:commandButton value="Kaydet" action="#{yardimBean.yardimEkle()}" class="btn btn-success">
                                 <f:ajax execute="@form" render="@form, mesaj" />
                             </h:commandButton>
                         </div>

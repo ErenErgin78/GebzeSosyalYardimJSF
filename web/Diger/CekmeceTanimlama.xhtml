@@ -46,6 +46,7 @@
                                         <div class="form-group col-md-6">
                                             <label for="meslekAdi" class="form-label">Meslek Adı:</label>
                                             <h:inputText id="meslekAdi" value="#{cekmeceBean.dao.isim}" class="form-control" />
+                                            <f:ajax event="keyup" render="cekmecePanel" />
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="aktifMi" class="form-label">Aktif:</label>
@@ -73,7 +74,7 @@
                                                         <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
                                                             <td>#{cekmece.cekmece_id}</td>
                                                             <td>#{cekmece.cekmece}</td>
-                                                            <td>#{cekmece.aktif}</td>
+                                                            <td>#{cekmece.aktif == 1 ? 'Evet' : 'Hayır' }</td>
                                                             <td>
                                                                 <div class="action-buttons">
                                                                     <h:commandButton value="Sil" action="#{cekmeceBean.cekmeceSil(cekmece.cekmece_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
@@ -101,9 +102,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-            function confirmDelete(button) {
-                return confirm("Bu çekmeceyi gerçekten silmek istiyor musunuz?");
-            }
+                                                                        function confirmDelete(button) {
+                                                                            return confirm("Bu çekmeceyi gerçekten silmek istiyor musunuz?");
+                                                                        }
         </script>
     </h:body>
 </html>

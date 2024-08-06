@@ -29,7 +29,7 @@
                 <div class="col-md-12">
                     <h:form>
                         <h:messages globalOnly="true" layout="table"/>
-                        <h:outputText id="mesaj" value="#{mahalleBean.dao.islemBasariliMesaj}" />
+                        <h:outputText id="mesaj" value="#{yardimAltBean.dao.islemBasariliMesaj}" />
                         <div class="card">
                             <div class="card-header">
                                 <h1>Yardım Alt Tipi Girişi</h1>
@@ -52,7 +52,7 @@
                                     <h:inputText id="altTipiAdi" value="#{yardimAltBean.entity.alt_tip}" class="form-control" />
                                 </div>
                                 <div class="text-center mt-3">
-                                    <h:commandButton value="Kaydet" action="#{mahalleBean.mahallekle()}" class="btn btn-success">
+                                    <h:commandButton value="Kaydet" action="#{yardimAltBean.yardimAltEkle()}" class="btn btn-success">
                                         <f:ajax execute="@form" render="@form, mesaj" />
                                     </h:commandButton>
                                 </div>

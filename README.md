@@ -100,6 +100,15 @@ Eğer bu değişkenlere atanan değerler ile bir insert veya silme işlemi yapma
  
 <hr>
 
+## 7- CSS değişiklikleri gözükmüyor:
+Uzun süre css veya js dosyalarıyla oynadıktan sonra yaptığınız değişikliklerin siteye eklenmemesini yaşayabilirsiniz. Bunun nedeni sürekli projenizi tarayıcınızda açtığınızda tarayıcının bu proje için bir önbellek oluşturmasıdır.
+Bu sorunla karşılaştığınız zaman tarayıcınızın 1 veya 24 saatlik geçmişini silin
+
+<hr>
+
+
+<hr>
+
 
 
 

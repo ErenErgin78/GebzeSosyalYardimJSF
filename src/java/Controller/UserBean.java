@@ -3,22 +3,25 @@ package Controller;
 import Entity.User;
 import dao.UsersDAO;
 import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
-import jakarta.faces.view.ViewScoped;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import jakarta.servlet.http.HttpSession;
+import java.util.Date;
 
 @Named("userBean")
-@ViewScoped
+@SessionScoped
 public class UserBean implements Serializable {
 
     private User entity;
     private UsersDAO dao;
     private List<User> list;
+
+    private Date tarih;
 
     public void create() {
         this.getDao().Create(getEntity());
@@ -86,9 +89,18 @@ public class UserBean implements Serializable {
     public void setList(List<User> list) {
         this.list = list;
     }
-    
-        @PostConstruct
+
+    public Date getTarih() {
+        return tarih;
+    }
+
+    public void setTarih(Date tarih) {
+        this.tarih = tarih;
+    }
+
+    @PostConstruct
     public void init() {
         getDao().setMessage(null); // sayfa yüklendiğinde mesajı sıfırlar
+        tarih = new Date();
     }
 }
