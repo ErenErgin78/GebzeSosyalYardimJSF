@@ -116,11 +116,11 @@
                     <h3>Hoş Geldiniz #{userBean.dao.kullanici_adi}!</h3>
                     <h:outputText value="Tarih: " />
                     <h:outputText value="#{userBean.tarih}">
-                        <f:convertDateTime pattern="dd-MM-yyyy" />
+                        <f:convertDateTime pattern="dd-MM-yyyy" timeZone="Europe/Istanbul"/>
                     </h:outputText>
                     <h:outputText value="   Saat:" />
                     <h:outputText value="#{userBean.tarih}">
-                        <f:convertDateTime pattern="HH:mm:ss"/>
+                        <f:convertDateTime pattern="HH:mm:ss" timeZone="Europe/Istanbul"/>
                     </h:outputText>
                 </div>
             </div>

@@ -43,6 +43,7 @@
                                     <div class="form-group col-md-6">
                                         <label for="meslekAdi" class="form-label">Meslek Adı:</label>
                                         <h:inputText id="meslekAdi" value="#{meslekBean.dao.isim}" class="form-control" />
+                                        <f:ajax event="keyup" render="MeslekPanel" />
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="aktifMi" class="form-label">Aktif:</label>

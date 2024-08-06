@@ -43,6 +43,7 @@
                                     <div class="form-group col-md-6">
                                         <label for="yakinlikAdi" class="form-label">Yakınlık Adı:</label>
                                         <h:inputText id="yakinlikAdi" value="#{yakinlikBean.dao.isim}" class="form-control" />
+                                        <f:ajax event="keyup" render="yakinlikPanel" />
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="aktifMi" class="form-label">Aktif:</label>
@@ -96,9 +97,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-            function confirmDelete(button) {
-                return confirm("Bu yakınlığı gerçekten silmek istiyor musunuz?");
-            }
+                                                                function confirmDelete(button) {
+                                                                    return confirm("Bu yakınlığı gerçekten silmek istiyor musunuz?");
+                                                                }
         </script>
     </h:body>
 </html>
