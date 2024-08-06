@@ -6,12 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Gebze Belediyesi Dashboard</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="CSS/styles.css" />
+        <h:outputStylesheet name="CSS/styles.css"/>
         <link rel="stylesheet" href="CSS/log.css" />
 
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
-            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>            
+            <li class="breadcrumb-item active" aria-current="page">Yönetici İşlemleri</li>
+            <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="Adres/MahalleListesi.xhtml">Mahalle Listesi</a></li>
             <li class="breadcrumb-item active" aria-current="page">Mahalle Giriş</li>
         </ol>
     </h:head>
