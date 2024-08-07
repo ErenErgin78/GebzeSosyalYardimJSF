@@ -36,16 +36,16 @@
                             <div class="card-header">
                                 <h1>Cadde/Sokak Listesi</h1>
                             </div>
-                             <div class="card">
-                            <div class="card-header">
-                                Cadde/Sokak Bilgileri
+                            <div class="card">
+                                <div class="card-header">
+                                    Cadde/Sokak Bilgileri
+                                </div>
                             </div>
-                        </div>
                             <div class="card-body">
                                 <div class="table-container">                                
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <label for="neighborhood" class="form-label">Mahalle Adı:</label>
+                                            <label for="neighborhood" class="form-label">Cadde Adı:</label>
                                             <h:selectOneMenu id="neighborhood" value="#{sokakBean.dao.mahalleid}" class="form-control">
                                                 <f:selectItem itemLabel="Hepsi" itemValue="0" />
                                                 <f:selectItems value="#{kisiBean.mahalleList}" />

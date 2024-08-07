@@ -8,10 +8,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Mahalle Listesi</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />    
-        <link rel="stylesheet" href="CSS/list.css" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
         <h:outputStylesheet name="CSS/styles.css"/>
-        
+        <link rel="stylesheet" href="CSS/list.css" />
+
+
     </h:head>
     <h:body>  
         <h:form id="mahalleForm">
@@ -37,9 +38,29 @@
                             <div class="card-header">
                                 Mahalle Bilgileri
                             </div>
+                            
                         </div>
                         <div class="card">
                             <div class="table-responsive">
+                                <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="neighborhood" class="form-label">Mahalle Adı:</label>
+                                            <h:selectOneMenu id="neighborhood" value="#{sokakBean.dao.mahalleid}" class="form-control">
+                                                <f:selectItem itemLabel="Hepsi" itemValue="0" />
+                                                <f:selectItems value="#{kisiBean.mahalleList}" />
+                                                <f:ajax event="valueChange" render="sokakListPanel" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="registration_status" class="form-label">Aktif:</label>
+                                            <h:selectOneMenu id="registration_status" value="#{sokakBean.dao.aktif}" class="form-control">
+                                                <f:selectItem itemLabel="Hepsi" itemValue="2" />
+                                                <f:selectItem itemLabel="Evet" itemValue="1" />
+                                                <f:selectItem itemLabel="Hayır" itemValue="0" />
+                                                <f:ajax event="valueChange" render="sokakListPanel" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
