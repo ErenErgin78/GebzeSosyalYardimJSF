@@ -18,10 +18,11 @@ import java.util.List;
 @Named(value = "kurumBean")
 @ViewScoped
 public class KurumBean implements Serializable {
-   private Kurum entity;
+
+    private Kurum entity;
     private KurumDAO dao;
     private List<Kurum> list;
-    
+
     public void kurumekle() {
         this.getDao().KurumEkle(getEntity());
         this.list = this.getDao().KurumListesi();
@@ -37,7 +38,8 @@ public class KurumBean implements Serializable {
      */
     public KurumBean() {
     }
-   public Kurum getEntity() {
+
+    public Kurum getEntity() {
         if (this.entity == null) {
             this.entity = new Kurum();
         }
@@ -60,13 +62,11 @@ public class KurumBean implements Serializable {
     }
 
     public List<Kurum> getList() {
-        if (this.list == null) {
-            this.list = this.getDao().KurumListesi();
-        }
+        this.list = this.getDao().KurumListesi();
         return this.list;
     }
 
     public void setList(List<Kurum> list) {
         this.list = list;
-    } 
+    }
 }

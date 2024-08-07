@@ -57,9 +57,8 @@ public class MahalleBean implements Serializable {
     }
 
     public List<Mahalle> getList() {
-        if (this.list == null) {
-            this.list = this.getDao().MahalleListesi();
-        }
+
+        this.list = this.getDao().MahalleListesi();
         return this.list;
     }
 
