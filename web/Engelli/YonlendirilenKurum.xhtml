@@ -41,38 +41,41 @@
                                             <div class="row mb-3">
                                                 <!-- Yönlendirilen Kurum Adı -->
                                                 <div class="col-md-8 d-flex align-items-center mb-2 mb-md-0">
-                                                    <label for="yonlendirilenKurumAdi" class="col-form-label me-2">Yönlendirilen Kurum Adı:</label>
-                                                    <h:inputText id="yonlendirilenKurumAdi" value="#{kurumBean.entity.kurum}" class="form-control" style="width: 350px; margin-left: 10px;" />
+                                                    <label for="yonlendirilenKurumAdi" class="col-form-label me-2">Yönlendirilen Kurum:</label>
+                                                    <h:inputText id="yonlendirilenKurumAdi" value="#{kurumBean.dao.isim}" class="form-control" style="width: 350px; margin-left: 10px;" />
+                                                    <f:ajax event="keyup" render="kurumPanel" />
                                                 </div>
                                                 <!-- Ekle Butonu -->
                                             </div>
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Kurum Kodu</th>
-                                                        <th>Yönlendirilen Kurum Adı</th>
-                                                        <th>Eylem</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <ui:repeat value="#{kurumBean.list}" var="kurum" varStatus="loop">
-                                                        <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                            <td>#{kurum.kurum_id}</td>
-                                                            <td>#{kurum.kurum}</td>
-                                                            <td>
-                                                                <div class="action-buttons">
-                                                                    <h:commandButton value="Sil" action="#{kurumBean.kurumsil(kurum.kurum_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
-                                                                        <f:ajax execute="@this" render="@form"/>
-                                                                    </h:commandButton>
-                                                                    <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-20">
-                                                                        <f:ajax execute="@this" render="@form"/>
-                                                                    </h:commandButton>
-                                                                </div>
-                                                            </td>
+                                            <h:panelGroup id="kurumPanel">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Kurum Kodu</th>
+                                                            <th>Yönlendirilen Kurum Adı</th>
+                                                            <th>Eylem</th>
                                                         </tr>
-                                                    </ui:repeat>
-                                                </tbody>
-                                            </table>
+                                                    </thead>
+                                                    <tbody>
+                                                        <ui:repeat value="#{kurumBean.list}" var="kurum" varStatus="loop">
+                                                            <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                                                <td>#{kurum.kurum_id}</td>
+                                                                <td>#{kurum.kurum}</td>
+                                                                <td>
+                                                                    <div class="action-buttons">
+                                                                        <h:commandButton value="Sil" action="#{kurumBean.kurumsil(kurum.kurum_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
+                                                                            <f:ajax execute="@this" render="@form"/>
+                                                                        </h:commandButton>
+                                                                        <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-20">
+                                                                            <f:ajax execute="@this" render="@form"/>
+                                                                        </h:commandButton>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </ui:repeat>
+                                                    </tbody>
+                                                </table>
+                                            </h:panelGroup>
                                         </h:form>
                                     </div>
                                 </div>
@@ -86,9 +89,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-            function confirmDelete(button) {
-                return confirm("Bu kurumu gerçekten silmek istiyor musunuz?");
-            }
+                                                                        function confirmDelete(button) {
+                                                                            return confirm("Bu kurumu gerçekten silmek istiyor musunuz?");
+                                                                        }
         </script>
     </h:body>
 </html>
