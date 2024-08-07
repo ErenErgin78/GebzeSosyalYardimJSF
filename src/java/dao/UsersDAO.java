@@ -27,8 +27,13 @@ public class UsersDAO extends DBConnection {
 
     private String kullanici_adi;
     private String sifre;
-    
+
     private String mesaj;
+    private Integer aktif = 0;
+    private String isim = "";
+    private String kullanici = "";
+    private String telefon = ""; // String olarak değiştirildi
+    private String sicil = "";
 
     public void Create(User user) {
         try {
@@ -50,7 +55,7 @@ public class UsersDAO extends DBConnection {
             int r = preparedStatement.executeUpdate();
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
-            
+
         } catch (Exception ex) {
             DetectError(ex);
 
@@ -59,20 +64,37 @@ public class UsersDAO extends DBConnection {
     }
 
     public List<User> GetList() {
-
-        List<User> UserList = new ArrayList<>();
-
+        List<User> userList = new ArrayList<>();
         try {
+            StringBuilder queryBuilder = new StringBuilder();
+            queryBuilder.append("SELECT kullanici_id, kullanici_kullanici_adi, kullanici_unvan, D.kullanici_durum_id,D.kullanici_durum, ")
+                    .append("kullanici_isim, kullanici_adres, kullanici_sicil_no, kullanici_telefon, ")
+                    .append("kullanici_cinsiyet, kullanici_kayit_tarih FROM KULLANICI K ")
+                    .append("JOIN KULLANICI_DURUM D ON K.kullanici_durum_id = D.kullanici_durum_id ")
+                    .append("WHERE 1=1 "); // Tüm kayıtları getirmek için
+
+            if (aktif != 0) {
+                queryBuilder.append("AND D.kullanici_durum_id= ").append(aktif).append(" ");
+            }
+
+            if (!isim.isEmpty()) {
+                queryBuilder.append("AND kullanici_isim LIKE '%").append(isim).append("%' ");
+            }
+            if (!kullanici.isEmpty()) {
+                queryBuilder.append("AND kullanici_kullanici_adi LIKE '%").append(kullanici).append("%' ");
+            }
+            if (!telefon.isEmpty()) {
+                queryBuilder.append("AND TO_CHAR(kullanici_telefon) LIKE '%").append(telefon).append("%' ");
+            }
+            if (!sicil.isEmpty()) {
+                queryBuilder.append("AND TO_CHAR(kullanici_sicil_no) LIKE '%").append(sicil).append("%' ");
+            }
 
             Statement statement = getDb().createStatement();
-
-            String Selectquery = "SELECT kullanici_id, kullanici_kullanici_adi, kullanici_unvan, D.kullanici_durum, kullanici_isim, kullanici_adres, kullanici_sicil_no,kullanici_telefon,kullanici_cinsiyet,kullanici_kayit_tarih FROM KULLANICI K\n"
-                    + "JOIN KULLANICI_DURUM D ON K.kullanici_durum_id = D.kullanici_durum_id\n";
-
-            ResultSet rs = statement.executeQuery(Selectquery);
+            ResultSet rs = statement.executeQuery(queryBuilder.toString());
 
             while (rs.next()) {
-                UserList.add(new User(
+                userList.add(new User(
                         rs.getInt("kullanici_id"),
                         rs.getString("kullanici_isim"),
                         rs.getString("kullanici_adres"),
@@ -86,10 +108,12 @@ public class UsersDAO extends DBConnection {
                 );
             }
 
+            this.mesaj = "işlem başarılı";
+
         } catch (Exception ex) {
             DetectError(ex);
         }
-        return UserList;
+        return userList;
     }
 
     public void Delete(int kullaniciId) {
@@ -103,7 +127,7 @@ public class UsersDAO extends DBConnection {
             int rowsDeleted = statement.executeUpdate();
             System.out.println(rowsDeleted + " kullanıcı silindi.");
 
-             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
+            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
             DetectError(ex);
         }
@@ -183,6 +207,54 @@ public class UsersDAO extends DBConnection {
 
     public void setMessage(String message) {
         this.mesaj = message;
+    }
+
+    public String getMesaj() {
+        return mesaj;
+    }
+
+    public void setMesaj(String mesaj) {
+        this.mesaj = mesaj;
+    }
+
+    public Integer getAktif() {
+        return aktif;
+    }
+
+    public void setAktif(Integer aktif) {
+        this.aktif = aktif;
+    }
+
+    public String getIsim() {
+        return isim;
+    }
+
+    public void setIsim(String isim) {
+        this.isim = isim;
+    }
+
+    public String getKullanici() {
+        return kullanici;
+    }
+
+    public void setKullanici(String kullanici) {
+        this.kullanici = kullanici;
+    }
+
+    public String getTelefon() {
+        return telefon;
+    }
+
+    public void setTelefon(String telefon) {
+        this.telefon = telefon;
+    }
+
+    public String getSicil() {
+        return sicil;
+    }
+
+    public void setSicil(String sicil) {
+        this.sicil = sicil;
     }
 
 }

@@ -42,7 +42,7 @@
                                             <div class="form-group col-md-6">
                                                 <label for="kurumSecim" class="form-label">Yönlendirilen Kurum Adı:</label>
                                                 <h:selectOneMenu id="kurumSecim" value="#{kurumAltBean.dao.id}" class="form-control">
-                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                                    <f:selectItem itemLabel="Hepsi" itemValue="0" />
                                                     <f:selectItems value="#{kurumAltBean.tipList}" />
                                                      <f:ajax event="change" render="kurumAltPanel"/>
                                                 </h:selectOneMenu>
