@@ -52,4 +52,5 @@ public class Mahalle {
         this.mahalle_aktif = mahalle_aktif;
     }
 
+
 }

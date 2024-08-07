@@ -34,14 +34,7 @@
                                 <div class="card-header">
                                     Mahalle Giriş Bilgileri<br/>
                                 </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="neighborhood">İlçe:</label>
-                                        <h:selectOneMenu id="neighborhood" value="#{mahalleBean.entity.mahalle_id}" class="form-control">
-                                            <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
-                                            <f:selectItems value="#{kisiBean.mahalleList}" />
-                                        </h:selectOneMenu>
-                                    </div>
+                                <div class="card-body">             
                                     <div class="form-group">
                                         <label for="description">Mahalle Adı:</label>
                                         <h:inputTextarea id="description" class="form-control" value="#{mahalleBean.entity.mahalle}" rows="3" />
