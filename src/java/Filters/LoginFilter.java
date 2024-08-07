@@ -30,6 +30,11 @@ public class LoginFilter implements Filter {
         if (session == null || session.getAttribute("user") == null) {
             res.sendRedirect(req.getContextPath() + "/login.xhtml");
         } else {
+            // Cache control headers to prevent browser from caching the protected pages
+            res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+            res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+            res.setDateHeader("Expires", 0); // Proxies.
+
             chain.doFilter(request, response);
         }
     }
