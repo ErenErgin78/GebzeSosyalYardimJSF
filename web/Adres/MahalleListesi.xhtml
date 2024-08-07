@@ -9,44 +9,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Mahalle Listesi</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="styles.css" />
         <h:outputStylesheet name="styles.css"/>
         <style>
-            html, body {
+             html, body {
                 height: 100%;
                 margin: 0;
-                overflow: auto; /* Kaydırma özelliklerini etkinleştirir */
+                overflow: auto; /* Enable scrolling */
             }
             .container-fluid {
                 padding: 0 12px;
                 width: 100%; /* Genişliği %100 yapın */
-                overflow: auto; /* Kaydırma özelliklerini etkinleştirir */
+                 /* Kaydırma özelliklerini etkinleştirir */
             }
-            .card {
-                display: flex;
-                flex-direction: column;
-                margin: 0;
-                border-radius: 0;
-                box-shadow: none;
-                border: none;
-                width: 100%; /* Genişliği %100 yapın */
+            .row {
+                margin: 0; /* Remove margin */
+                width: 100%; /* Set width to 100% */
             }
-            .card-header {
-                font-size: 1.25rem; /* Başlık font boyutu */
-                font-weight: 600; /* Başlık font ağırlığı */
-                text-align: center;
-                margin-bottom: 1rem;
-            }
-            .card-body {
-                flex: 1;
-                overflow: auto; /* Kaydırma özelliklerini etkinleştirir */
+            .col-md-12 {
+                padding: 0; /* Remove padding */
+                width: 100%; /* Set width to 100% */
+
             }
             .table {
                 width: 100%;
                 margin-bottom: 0;
-                table-layout: auto;
+                table-layout: auto; /* Let the table decide column widths based on content */
             }
-            .table th,
             .table td {
                 white-space: nowrap; /* Prevent text wrapping */
                 padding: 10px; /* Add padding for readability */
@@ -56,12 +44,6 @@
                 font-size: 1.25rem; /* Tablo başlık font boyutu */
                 font-weight: 600; /* Tablo başlık font ağırlığı */
             }
-            .table-row-even {
-                background-color: #f9f9f9;
-            }
-            .table-row-odd {
-                background-color: #ffffff;
-            }
             .action-buttons {
                 display: flex;
                 gap: 10px;
@@ -69,28 +51,22 @@
             .delete-button {
                 margin-right: 10px;
             }
-            .btn-primary, .btn-danger {
-                font-size: 0.875rem; /* Buton yazı boyutu */
-            }
-            .form-group {
-                margin-bottom: 1rem;
-            }
-            .form-label {
-                font-weight: 600;
-            }
-            .form-control {
-                display: inline-block;
-                width: 100%;
-                font-size: 0.875rem; /* Form kontrol yazı boyutu */
+            .table-container {
+                margin-top: 20px; /* Add space between header and table */
             }
         </style>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Mahalle Listesi</li>
+        </ol>
     </h:head>
     <h:body>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card-header">
-                        <h1 style="font-weight: bold;">Mahalle Listesi</h1>
+                        <h1>Mahalle Listesi</h1>
                     </div>
                     <div class="card">
                         <h:form id="mahalleForm">
@@ -115,7 +91,7 @@
                                                         <h:commandButton value="Sil" action="#{mahalleBean.mahallesil(mahalle.mahalle_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
-                                                        <h:commandButton value="Düzenle" styleClass="btn btn-primary">
+                                                        <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
                                                     </div>
@@ -134,9 +110,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-            function confirmDelete(button) {
-                return confirm("Bu mahalleyi gerçekten silmek istiyor musunuz?");
-            }
+                                                            function confirmDelete(button) {
+                                                                return confirm("Bu mahalleyi gerçekten silmek istiyor musunuz?");
+                                                            }
         </script>
     </h:body>
 </html>

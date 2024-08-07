@@ -2,25 +2,46 @@
 body {
     padding: 0;
     margin: 0;
-    overflow-x: hidden;/* Hafif gri arkaplan */
+    overflow-x: hidden; /* yatay scroll bar hidden */
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
 }
-
-#sidebar {
-    background-color: #1680FF ;
-    color: white;
-    height: 100vh;
-    position: fixed;
-    width: 300px;
+@media (max-width: 768px) { /* responsive özelliği eklendi */
+    #sidebar {
+        background-color: #1680FF;
+        color: white;
+        height: auto;
+        position: relative;
+        width: 100%;
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
 }
-
 .nav-link {
-    color: #ffffff ;
+    color: #ffffff;
     font-weight: bold;
-    background-color: #303f9f;
-    border: 2px solid #303f9f;
     margin: 5px 0;
     padding: 10px;
 }
+.breadcrumb {
+    background-color: #f8f9fa;
+    margin-bottom: 1rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+    color: #6c757d;
+}
+
 
 .nav-link:hover {
     background-color: #3f51b5;
@@ -32,7 +53,7 @@ body {
 }
 
 .submenu a {
-    color: white ;
+    color: white;
 }
 
 .submenu a:hover {
@@ -58,17 +79,11 @@ body {
 #content {
     overflow-x: auto;
     padding: 20px;
-}
-
-.container {
-    display: flex;
-    justify-content: center;
-}
-
-.content {
-    margin-left: 0px;
+    margin-left: 0;
     margin-right: auto;
 }
+
+
 
 .table-container {
     width: 100%;
@@ -85,21 +100,23 @@ body {
     margin-right: auto;
 }
 
-
 table {
     width: 100%;
     table-layout: fixed;
+    border-collapse: collapse; /* Hücre sınırlarını birleştirir */
 }
 
 th, td {
-    white-space: nowrap; /* Prevent text wrapping */
-    padding: 10px; /* Add padding for readability */
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
     text-align: left;
 }
 
 th {
-    font-size: 1.25rem; /* Tablo başlık font boyutu */
-    font-weight: 600;
+    background-color: #f4f4f4;
+    text-align: left;
 }
 
 button {
@@ -121,7 +138,7 @@ button {
 }
 
 .action-buttons {
-    margin-right: 10px;/* Butonların satır içinde taşmasını önler */
+    margin-right: 10px; /* Butonların satır içinde taşmasını önler */
 }
 
 .delete-button {
@@ -160,12 +177,12 @@ button {
 }
 
 /* Add margin and padding adjustments */
-.form-group {
-    margin-bottom: 1rem;
-}
-
 .small-input {
     padding: 0.5rem; /* Adjust padding as needed */
+}
+
+.form-group {
+    margin-bottom: 15px;
 }
 
 .form-row .form-group {
@@ -174,30 +191,6 @@ button {
 
 #email, #username {
     margin-bottom: 10px; /* Adjust spacing as needed */
-}
-
-/* Remove border and padding around fieldset and legend */
-h3 selectOneRadio {
-    border: none;
-    padding: 0;
-    margin: 0;
-}
-
-h3 selectOneRadio::before {
-    content: none;
-}
-
-/* Remove default fieldset and table styles */
-.custom-radio table {
-    border-collapse: separate;
-    border-spacing: 0;
-    border: none;
-}
-
-.custom-radio tr,
-.custom-radio td,
-.custom-radio tbody {
-    border: none;
 }
 
 /* Custom Radio Button Styles */
@@ -243,32 +236,35 @@ h3 selectOneRadio::before {
     background-color: #303f9f;
 }
 
-
-.container {
-    width: 60%;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-}
-
-h2 {
-    color: #333;
-    text-align: center;
-}
-
 .card {
-    background-color: white;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
     border: none;
-    margin-top: 20px;
+    width: 100%;
+    background-color: #f8f9fa;
+}
+
+.card-body {
+    flex: 1;
+    overflow: auto;
 }
 
 .card-header {
-    background-color: #f1f1f1;
-    border-bottom: 1px solid #ddd;
-    padding: 10px;
-    font-weight: bold;
+    background-color: #f1f1f1; /* Arka plan rengi */
+    border-bottom: 1px solid #ddd; /* Alt kenarlık */
+    padding: 10px; /* İç kenar boşluğu */
+    font-weight: bold; /* Yazı tipi kalın */
+    margin-bottom: 20px; /* Alt kenar boşluğu */
+}
+
+.card-header h1 {
+    margin-top: 20px; /* Üst kenar boşluğu (ihtiyacınıza göre ayarlayın) */
+    font-weight: bold; /* Yazı tipi kalın (HTML'den CSS'e taşıdık) */
+    text-align: center; /* Metni ortaladık (HTML'den CSS'e taşıdık) */
 }
 
 .info-message {
@@ -278,19 +274,11 @@ h2 {
     display: block; /* Blok görüntüsü */
 }
 
-.card-body {
-    padding: 20px;
-}
-
 .card-footer {
     background-color: #f1f1f1;
     border-top: 1px solid #ddd;
     padding: 10px;
     text-align: right;
-}
-
-.form-group {
-    margin-bottom: 15px;
 }
 
 label {

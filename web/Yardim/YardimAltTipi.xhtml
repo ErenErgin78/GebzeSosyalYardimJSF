@@ -13,54 +13,107 @@
         <link rel="stylesheet" href="styles.css" />
         <h:outputStylesheet name="styles.css"/>
         <style>
-            .form-group {
-                margin-bottom: 1rem;
+            /* Navbar */
+            .navbar-nav .nav-link {
+                color: #f2f2f2;
             }
-            .form-row {
-                margin-bottom: 1rem;
+
+            .navbar-nav .nav-link:hover {
+                background-color: #575757;
+                color: #fff;
             }
-            .form-label {
-                margin-bottom: .5rem;
-                font-weight: 600;
+
+            .dropdown-menu {
+                background-color: #333;
             }
+
+            .dropdown-menu .dropdown-item {
+                color: #f2f2f2;
+            }
+
+            .dropdown-menu .dropdown-item:hover {
+                background-color: #575757;
+            }
+
+            /* Form Düzenlemeleri */
             .form-control {
-                display: inline-block;
-                width: auto;
-                vertical-align: middle;
-            }
-            .btn-container {
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-            }
-            .card-container {
-                display: flex;
-                justify-content: center;
-            }
-            .card-wrapper {
                 width: 100%;
-                max-width: 800px;
+                box-sizing: border-box; /* Ensure padding and border are included in the width */
             }
-            .card-header {
-                font-size: 1.25rem;
-                font-weight: 600;
+
+            .form-group {
+                margin-bottom: 15px;
+                padding-right: 15px;
+                padding-left: 15px;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+            .custom-radio {
+                display: flex;
+                gap: 0px; /* Adjust spacing between radio buttons */
+            }
+
+            .custom-radio input {
+                margin-right: 5px; /* Space between radio button and label */
+            }
+
+            .radio-inline {
+                display: flex;
+                flex-direction: row;
+            }
+
+            /* Container Düzenlemeleri */
+            .container-fluid {
+                padding: 0 12px;
+                width: 100%;
+            }
+
+            /* Table Styles */
+            .table thead th {
+                position: sticky;
+                top: 0;
+                background-color: #f8f9fa; /* Adjust based on your design */
+                z-index: 10;
+            }
+
+            .table td, .table th {
+                white-space: nowrap; /* Prevent text wrapping */
+                overflow: hidden; /* Hide overflow text */
+                text-overflow: ellipsis; /* Add ellipsis for overflow text */
+            }
+
+            .table .action-buttons {
+                display: flex;
+                gap: 0.5rem; /* Space between buttons */
+            }
+
+            .table .action-buttons button {
+                margin: 0; /* Reset margin */
+                white-space: nowrap; /* Prevent button text wrapping */
             }
         </style>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Yardım Alt Tipi</li>
+        </ol>
     </h:head>
     <h:body>
         <div class="container-fluid">               
             <div class="row">                   
                 <div class="col-md-12">
-                    <div class="card-header">
-                        <h1 style="font-weight: bold; text-align: center;">Yardım Alt Tipi Tanımlama</h1>
-                    </div>
                     <div class="card">
-                        <div class="card-header">Genel Yardım Alt Tipi Bilgileri</div>
+                        <div class="card-header text-center">
+                            <h1 class="font-weight-bold">Yardım Alt Tipi Tanımlama</h1>
+                        </div>
                         <div class="card-body">
                             <h:form id="altTipiForm">
                                 <div class="form-group">
                                     <label for="application_type">Yardim Tip: #{yardimAltBean.entity.tip_id} </label>
-                                    <h:selectOneMenu id="neighborhood" value = "#{yardimAltBean.entity.tip_id}" class="form-control">
+                                    <h:selectOneMenu id="neighborhood" value="#{yardimAltBean.entity.tip_id}" class="form-control">
                                         <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
                                         <f:selectItems value="#{yardimAltBean.tipList}" />
                                     </h:selectOneMenu>
@@ -69,44 +122,46 @@
                                     <!-- Alt Tipi Adı -->
                                     <div class="col-md-8 d-flex flex-column mb-2 mb-md-0">
                                         <label for="altTipiAdi" class="form-label">Alt Tipi Adı: #{yardimAltBean.entity.alt_tip}</label>
-                                        <h:inputText id="altTipiAdi" value ="#{yardimAltBean.entity.alt_tip}" class="form-control" />
+                                        <h:inputText id="altTipiAdi" value="#{yardimAltBean.entity.alt_tip}" class="form-control" />
                                     </div>
                                     <!-- Ekle Butonu -->
                                     <div class="col-md-4 d-flex align-items-end justify-content-end">
-                                        <h:commandButton value="Ekle" action ="#{yardimAltBean.yardimAltEkle()}"  class="btn btn-success" >
+                                        <h:commandButton value="Ekle" action="#{yardimAltBean.yardimAltEkle()}" class="btn btn-success">
                                             <f:ajax execute="@form" render="@form"/>
                                         </h:commandButton>
                                     </div>
                                 </div>
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Alt Tipi Kodu</th>
-                                            <th>Alt Tipi Adı</th>
-                                            <th>Yardım Tipi Adı</th>
-                                            <th>Eylem</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <ui:repeat  var="alt"  value ="#{yardimAltBean.list}" varStatus="loop">
-                                            <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                <td>#{alt.alt_tip_id}</td>
-                                                <td>#{alt.alt_tip_id}</td>
-                                                <td>#{alt.tip_isim}</td>
-                                                <td>
-                                                    <div class="action-buttons">
-                                                        <h:commandButton value="Düzenle" styleClass="btn btn-warning ml-2">
-                                                            <f:ajax execute="@this" render="@form"/>
-                                                        </h:commandButton>
-                                                        <h:commandButton value="Sil" action="#{yardimAltBean.yardimAltSil(alt.alt_tip_id)}"  styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
-                                                            <f:ajax execute="@this" render="@form"/>
-                                                        </h:commandButton>
-                                                    </div>
-                                                </td>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 150px;">Alt Tipi Kodu</th>
+                                                <th style="width: 200px;">Alt Tipi Adı</th>
+                                                <th style="width: 200px;">Yardım Tipi Adı</th>
+                                                <th style="width: 150px;">Eylem</th>
                                             </tr>
-                                        </ui:repeat>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            <ui:repeat var="alt" value="#{yardimAltBean.list}" varStatus="loop">
+                                                <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                                    <td>#{alt.alt_tip_id}</td>
+                                                    <td>#{alt.alt_tip_id}</td>
+                                                    <td>#{alt.tip_isim}</td>
+                                                    <td>
+                                                        <div class="action-buttons">
+                                                            <h:commandButton value="Sil" action="#{yardimAltBean.yardimAltSil(alt.alt_tip_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                                <f:ajax execute="@this" render="@form"/>
+                                                            </h:commandButton>
+                                                            <h:commandButton value="Düzenle" styleClass="btn btn-primary">
+                                                                <f:ajax execute="@this" render="@form"/>
+                                                            </h:commandButton>                                             
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </ui:repeat>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </h:form>
                         </div>
                     </div>
@@ -117,9 +172,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                            function confirmDelete(button) {
-                                                                return confirm("Bu alt tipiyi gerçekten silmek istiyor musunuz?");
-                                                            }
+            function confirmDelete(button) {
+                return confirm("Bu alt tipiyi gerçekten silmek istiyor musunuz?");
+            }
         </script>
     </h:body>
 </html>

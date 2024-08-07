@@ -8,7 +8,7 @@ import java.util.Date;
  * @author Eren
  */
 public class Kisi {
-
+//kişi temel
     private Integer kisi_id;
     private BigInteger kimlik_no;
     private String isim;
@@ -20,12 +20,12 @@ public class Kisi {
     private Integer aile_sira_no;
     private Integer sira_no;
     private Date dogum_tarihi;
-
+//kişi iletişim
     private Integer kisi_iletisim_id;
     private BigInteger ev_telefon;
     private BigInteger cep_telefon;
     private String eposta;
-
+//kişi adres
     private Integer kisi_adres_id;
     private String ilce;
     private Integer mahalle_id;
@@ -36,7 +36,7 @@ public class Kisi {
     private Integer adres_no;
     private Integer evdeki_kisi_sayisi;
     private Integer mahalle_sokak_id;
-
+//kişi yakınlar
     private Integer kisi_yakinlar_id;
     private String anne_isim;
     private String baba_isim;

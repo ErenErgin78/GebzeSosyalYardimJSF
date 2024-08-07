@@ -52,10 +52,6 @@
                 width: 100%;
                 max-width: 900px;
             }
-            .card-header {
-                font-size: 1.25rem;
-                font-weight: 600;
-            }
             .table-row-even {
                 background-color: #f9f9f9;
             }
@@ -68,12 +64,17 @@
             .wider-column {
                 width: 200px;
             }
-             .container-fluid {
+            .container-fluid {
                 padding: 0 12px;
                 width: 100%; /* Genişliği %100 yapın */
-                overflow: auto; /* Kaydırma özelliklerini etkinleştirir */
+               /* Kaydırma özelliklerini etkinleştirir */
             }
         </style>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Mahalle Giriş</li>
+        </ol>
     </h:head>
     <h:body>
         <h:form>
@@ -83,7 +84,7 @@
                 <div class="row">                   
                     <div class="col-md-12">
                         <div class="card-header">
-                            <h1 style="font-weight: bold; text-align: center;">Yeni Mahalle Girişi</h1>
+                            <h1>Yeni Mahalle Girişi</h1>
                         </div>
                         <div class="card">                           
                             <div class="card-header" style="font-weight: bold;" >Mahalle Giriş Bilgileri</div>
@@ -117,7 +118,7 @@
             </div>
         </h:form>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </h:body>
 </html>

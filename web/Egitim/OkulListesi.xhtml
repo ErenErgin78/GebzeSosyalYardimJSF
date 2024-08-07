@@ -9,61 +9,93 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Okul Listesi</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="styles.css" />
         <h:outputStylesheet name="styles.css"/>
         <style>
-            .form-group {
-                margin-bottom: 1rem;
+            /* Navbar */
+            .navbar-nav .nav-link {
+                color: #f2f2f2;
             }
-            .form-row {
-                margin-bottom: 1rem;
+
+            .navbar-nav .nav-link:hover {
+                background-color: #575757;
+                color: #fff;
             }
-            .form-label {
-                margin-bottom: .5rem;
-                font-weight: 600;
+
+            .dropdown-menu {
+                background-color: #333;
             }
+
+            .dropdown-menu .dropdown-item {
+                color: #f2f2f2;
+            }
+
+            .dropdown-menu .dropdown-item:hover {
+                background-color: #575757;
+            }
+
+            /* Form Düzenlemeleri */
             .form-control {
-                display: block;
-                width: 100%; /* Tam genişlikte olacak şekilde ayarlıyoruz */
-                vertical-align: middle;
-            }
-            .btn-container {
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-            }
-            .card-container {
-                display: flex;
-                justify-content: center;
-            }
-            .card-wrapper {
                 width: 100%;
-                max-width: 900px;
+                box-sizing: border-box; /* Ensure padding and border are included in the width */
             }
-            .card-header {
-                font-size: 1.25rem;
-                font-weight: 600;
+
+            .form-group {
+                margin-bottom: 15px;
+                padding-right: 15px;
+                padding-left: 15px;
+                flex: 0 0 50%;
+                max-width: 20%;
             }
-            .table-row-even {
-                background-color: #f9f9f9;
+
+            .form-row {
+                display: flex;
+                flex-wrap: wrap;
+                margin-right: -15px;
+                margin-left: -15px;
             }
-            .table-row-odd {
-                background-color: #ffffff;
+
+            .text-center {
+                text-align: center;
             }
-            .action-buttons .btn {
-                margin-right: 0.5rem; /* Butonlar arasına sağ boşluk ekler */
+
+            .custom-radio {
+                display: flex;
+                gap: 0px; /* Adjust spacing between radio buttons */
+            }
+
+            .custom-radio input {
+                margin-right: 5px; /* Space between radio button and label */
+            }
+
+            .radio-inline {
+                display: flex;
+                flex-direction: row;
+            }
+
+            /* Container Düzenlemeleri */
+            .container-fluid {
+                padding: 0 12px;
+                width: 100%;
+            }
+            .full-width {
+                width: 100%;
             }
             .full-width {
                 width: 100%;
             }
         </style>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Okul Listesi</li>
+        </ol>
     </h:head>
     <h:body>
         <div class="container-fluid">               
             <div class="row">                   
                 <div class="col-md-12">
                     <div class="card-header">
-                        <h1 style="font-weight: bold; text-align: center;">Okul Listesi</h1>
+                        <h1>Okul Listesi</h1>
                     </div>
                     <div class="card">
                         <div class="card-header">Okul Giriş Bilgileri</div>
@@ -138,7 +170,7 @@
                                                             <h:commandButton value="Sil" action="#{okulBean.okulsil(okul.okul_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
                                                                 <f:ajax execute="@this" render="@form"/>
                                                             </h:commandButton>                                            
-                                                            <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-20">
+                                                            <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
                                                                 <f:ajax execute="@this" render="@form"/>
                                                             </h:commandButton>     
                                                         </div>

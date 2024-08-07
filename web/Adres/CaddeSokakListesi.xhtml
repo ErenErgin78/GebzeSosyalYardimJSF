@@ -12,59 +12,47 @@
         <link rel="stylesheet" href="styles.css" />
         <h:outputStylesheet name="styles.css"/>
         <style>
-            .form-group {
-                margin-bottom: 1rem;
+            html, body {
+                height: 100%;
+                margin: 0;
+                overflow: auto;
             }
-            .form-row {
-                display: flex;
-                justify-content: space-between;
-                flex-wrap: wrap;
-                margin-bottom: 1rem;
+            .container-fluid {
+                padding: 0 12px;
+                width: 100%; /* Genişliği %100 yapın */
+                 /* Kaydırma özelliklerini etkinleştirir */
             }
-            .form-row .form-group {
-                flex: 1;
-                margin-right: 1rem;
-            }
-            .form-group:last-child {
-                margin-right: 0;
-            }
-            .form-label {
-                margin-bottom: .5rem;
-                font-weight: 600;
-            }
-            .form-control {
-                display: inline-block;
+            .row {
+                margin: 0;
                 width: 100%;
-                vertical-align: middle;
             }
-            .btn-container {
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-            }
-            .card-container {
-                display: flex;
-                justify-content: center;
-            }
-            .card-wrapper {
+            .col-md-12 {
+                padding: 0;
                 width: 100%;
-                max-width: 900px;
             }
-            .card-header {
+            .table {
+                width: 100%;
+                margin-bottom: 0;
+                table-layout: auto;
+            }
+            .table td, .table th {
+                white-space: nowrap;
+                padding: 10px;
+                text-align: left;
+            }
+            .table th {
                 font-size: 1.25rem;
                 font-weight: 600;
             }
-            .table-row-even {
-                background-color: #f9f9f9;
+            .action-buttons {
+                display: flex;
+                gap: 10px;
             }
-            .table-row-odd {
-                background-color: #ffffff;
+            .delete-button {
+                margin-right: 10px;
             }
-            .center-table {
-                margin: auto;
-            }
-            .wider-column {
-                width: 200px;
+            .table-container {
+                margin-top: 20px;
             }
             .container-fluid {
                 padding: 0 12px;
@@ -76,72 +64,77 @@
                 text-align: left;
             }
         </style>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Cadde/Sokak Listesi</li>
+        </ol>
     </h:head>
     <h:body>
-         <div class="container-fluid">               
-            <div class="row">                   
+        <div class="container-fluid">
+            <div class="row">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h1 style="font-weight: bold; text-align: center;">Cadde/Sokak Listesi</h1>
+                            <h1>Cadde/Sokak Listesi</h1>
                         </div>
-                        <div class="card">
-                            <div class="card-header">Mahalle Giriş Bilgileri<br/></div>
                         <div class="card-body">
-                            <h:form id="mahalleForm">
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="neighborhood" class="form-label">Mahalle Adı:</label>
-                                        <h:selectOneMenu id="neighborhood" value="#{sokakBean.dao.mahalleid}" class="form-control">
-                                            <f:selectItem itemLabel="Hepsi" itemValue="0" />
-                                            <f:selectItems value="#{kisiBean.mahalleList}" />
-                                            <f:ajax event="valueChange" render="sokakListPanel" />
-                                        </h:selectOneMenu>
+                            <div class="table-container">
+                                <h:form id="mahalleForm">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="neighborhood" class="form-label">Mahalle Adı:</label>
+                                            <h:selectOneMenu id="neighborhood" value="#{sokakBean.dao.mahalleid}" class="form-control">
+                                                <f:selectItem itemLabel="Hepsi" itemValue="0" />
+                                                <f:selectItems value="#{kisiBean.mahalleList}" />
+                                                <f:ajax event="valueChange" render="sokakListPanel" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="registration_status" class="form-label">Aktif:</label>
+                                            <h:selectOneMenu id="registration_status" value="#{sokakBean.dao.aktif}" class="form-control">
+                                                <f:selectItem itemLabel="Hepsi" itemValue="2" />
+                                                <f:selectItem itemLabel="Evet" itemValue="1" />
+                                                <f:selectItem itemLabel="Hayır" itemValue="0" />
+                                                <f:ajax event="valueChange" render="sokakListPanel" />
+                                            </h:selectOneMenu>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="registration_status" class="form-label">Aktif:</label>
-                                        <h:selectOneMenu id="registration_status" value="#{sokakBean.dao.aktif}" class="form-control">
-                                            <f:selectItem itemLabel="Hepsi" itemValue="2" />
-                                            <f:selectItem itemLabel="Evet" itemValue="1" />
-                                            <f:selectItem itemLabel="Hayır" itemValue="0" />
-                                            <f:ajax event="valueChange" render="sokakListPanel" />
-                                        </h:selectOneMenu>
-                                    </div>
-                                </div>
-                                <h:panelGroup id="sokakListPanel">
-                                    <h:panelGrid columns="1" styleClass="table-responsive center-table">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Cadde/Sokak Kodu</th>
-                                                    <th>Cadde/Sokak Adı</th>
-                                                    <th class="wider-column">Aktif</th>
-                                                    <th>Eylem</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <ui:repeat value="#{sokakBean.list}" var="sokak" varStatus="loop">
-                                                    <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                        <td>#{sokak.sokak_id}</td>
-                                                        <td>#{sokak.sokak}</td>
-                                                        <td>#{sokak.aktif == 1 ? 'Evet' : 'Hayır'}</td>
-                                                        <td>
-                                                            <div class="btn-container">
-                                                                <h:commandButton value="Sil" action="#{sokakBean.sokaksil(sokak.sokak_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
-                                                                    <f:ajax execute="@this" render="@form"/>
-                                                                </h:commandButton>
-                                                                <h:commandButton value="Düzenle" styleClass="btn btn-primary">
-                                                                    <f:ajax execute="@this" render="@form"/>
-                                                                </h:commandButton>
-                                                            </div>
-                                                        </td>
+                                    <h:panelGroup id="sokakListPanel">
+                                        <div class="table-responsive center-table">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Cadde/Sokak Kodu</th>
+                                                        <th>Cadde/Sokak Adı</th>
+                                                        <th class="wider-column">Aktif</th>
+                                                        <th>Eylem</th>
                                                     </tr>
-                                                </ui:repeat>
-                                            </tbody>
-                                        </table>
-                                    </h:panelGrid>
-                                </h:panelGroup>
-                            </h:form>
+                                                </thead>
+                                                <tbody>
+                                                    <ui:repeat value="#{sokakBean.list}" var="sokak" varStatus="loop">
+                                                        <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                                            <td>#{sokak.sokak_id}</td>
+                                                            <td>#{sokak.sokak}</td>
+                                                            <td>#{sokak.aktif == 1 ? 'Evet' : 'Hayır'}</td>
+                                                            <td>
+                                                                <div class="action-buttons">
+                                                                    <h:commandButton value="Sil" action="#{sokakBean.sokaksil(sokak.sokak_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                                        <f:ajax execute="@this" render="@form"/>
+                                                                    </h:commandButton>
+                                                                    <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
+                                                                        <f:ajax execute="@this" render="@form"/>
+                                                                    </h:commandButton>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </ui:repeat>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </h:panelGroup>
+                                </h:form>
+                            </div>
                         </div>
                     </div>
                     </div>

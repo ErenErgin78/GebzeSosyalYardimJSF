@@ -4,49 +4,46 @@
  */
 package dao;
 
-import java.sql.Connection;
-import Entity.Meslek;
+import Entity.YardimTalep;
 import static Filters.ErrorFinder.DetectError;
+import util.DBConnection;
+import java.sql.Connection;
 import java.sql.CallableStatement;
-    import java.sql.PreparedStatement;
-    import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import util.DBConnection;
 
-/**
- *
- * @author Eren
- */
-public class MeslekDAO extends DBConnection {
+public class YardimTalepDAO extends DBConnection {
 
     private Connection db;
     private String mesaj;
 
-    public void MeslekEkle(Meslek meslek) {
+    public void YardimTalepEkle(YardimTalep yardimTalep) {
         try {
             Connection conn = this.getDb();
+            String callQuery = "{call INSERT_YARDIM_TALEP(?, ?)}";
+            CallableStatement csYardimTalep = conn.prepareCall(callQuery);
 
-            String callQuery = "{call INSERT_MESLEK(?, ?)}";
-            CallableStatement cs = conn.prepareCall(callQuery);
-            cs.setString(1, meslek.getMeslek_isim());
-            cs.setInt(2, meslek.getAktiflik());
+            csYardimTalep.setString(1, yardimTalep.getYardim_talep());
+            csYardimTalep.setInt(2, yardimTalep.getAktiflik());
 
-            cs.execute();
-            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
+            csYardimTalep.execute();
+            String mesaj = "İşlem başarıyla gerçekleşmiştirkok";
 
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             DetectError(ex);
         }
     }
 
-    public void MeslekSil(int meslekId) {
-        String deleteQuery = "DELETE FROM MESLEK WHERE MESLEK_ID = ?";
+    public void YardimTalepSil(int yardimTalepId) {
+        String deleteQuery = "DELETE FROM YARDIM_TALEP WHERE YARDIM_TALEP_ID = ?";
+
         try {
             PreparedStatement ps = getDb().prepareStatement(deleteQuery);
-            ps.setInt(1, meslekId);
+            ps.setInt(1, yardimTalepId);
             int rowsDeleted = ps.executeUpdate();
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
@@ -55,24 +52,25 @@ public class MeslekDAO extends DBConnection {
         }
     }
 
-    public List<Meslek> MeslekListesi() {
-        List<Meslek> meslekList = new ArrayList<>();
+    public List<YardimTalep> YardimTalepListesi() {
+        List<YardimTalep> YardimTalepList = new ArrayList<>();
         try {
+            String selectQuery = "SELECT YARDIM_TALEP_ID, YARDIM_TALEP, AKTIFLIK FROM YARDIM_TALEP";
+
             Statement statement = getDb().createStatement();
-            String selectQuery = "SELECT MESLEK_ID, MESLEK_ISIM, AKTIFLIK FROM MESLEK";
             ResultSet rs = statement.executeQuery(selectQuery);
 
             while (rs.next()) {
-                meslekList.add(new Meslek(
-                        rs.getInt("MESLEK_ID"),
-                        rs.getString("MESLEK_ISIM"),
+                YardimTalepList.add(new YardimTalep(
+                        rs.getInt("YARDIM_TALEP_ID"),
+                        rs.getString("YARDIM_TALEP"),
                         rs.getInt("AKTIFLIK")
                 ));
             }
         } catch (Exception ex) {
             DetectError(ex);
         }
-        return meslekList;
+        return YardimTalepList;
     }
 
     public Connection getDb() {
@@ -82,7 +80,7 @@ public class MeslekDAO extends DBConnection {
         return db;
     }
 
-    public void setDb(Connection db) {
+    public void setDb(java.sql.Connection db) {
         this.db = db;
     }
 
@@ -93,6 +91,4 @@ public class MeslekDAO extends DBConnection {
     public void setMesaj(String mesaj) {
         this.mesaj = mesaj;
     }
-
-    
 }

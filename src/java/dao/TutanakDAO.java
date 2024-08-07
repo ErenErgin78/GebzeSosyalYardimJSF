@@ -1,15 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import java.sql.Connection;
-import Entity.Meslek;
+import Entity.Tutanak;
 import static Filters.ErrorFinder.DetectError;
 import java.sql.CallableStatement;
-    import java.sql.PreparedStatement;
-    import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -20,19 +16,19 @@ import util.DBConnection;
  *
  * @author Eren
  */
-public class MeslekDAO extends DBConnection {
+public class TutanakDAO extends DBConnection {
 
     private Connection db;
     private String mesaj;
 
-    public void MeslekEkle(Meslek meslek) {
+    public void TutanakEkle(Tutanak tutanak) {
         try {
             Connection conn = this.getDb();
 
-            String callQuery = "{call INSERT_MESLEK(?, ?)}";
+            String callQuery = "{call INSERT_TUTANAK_DURUM(?, ?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
-            cs.setString(1, meslek.getMeslek_isim());
-            cs.setInt(2, meslek.getAktiflik());
+            cs.setString(1, tutanak.getTutanak_isim());
+            cs.setInt(2, tutanak.getAktiflik());
 
             cs.execute();
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
@@ -42,11 +38,11 @@ public class MeslekDAO extends DBConnection {
         }
     }
 
-    public void MeslekSil(int meslekId) {
-        String deleteQuery = "DELETE FROM MESLEK WHERE MESLEK_ID = ?";
+    public void TutanakSil(int tutanakId) {
+        String deleteQuery = "DELETE FROM TUTANAK_DURUM WHERE DURUM_ID = ?";
         try {
             PreparedStatement ps = getDb().prepareStatement(deleteQuery);
-            ps.setInt(1, meslekId);
+            ps.setInt(1, tutanakId);
             int rowsDeleted = ps.executeUpdate();
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
@@ -55,24 +51,24 @@ public class MeslekDAO extends DBConnection {
         }
     }
 
-    public List<Meslek> MeslekListesi() {
-        List<Meslek> meslekList = new ArrayList<>();
+    public List<Tutanak> TutanakListesi() {
+        List<Tutanak> tutanakList = new ArrayList<>();
         try {
             Statement statement = getDb().createStatement();
-            String selectQuery = "SELECT MESLEK_ID, MESLEK_ISIM, AKTIFLIK FROM MESLEK";
+            String selectQuery = "SELECT DURUM_ID, DURUM_ISIM, AKTIFLIK FROM TUTANAK_DURUM";
             ResultSet rs = statement.executeQuery(selectQuery);
 
             while (rs.next()) {
-                meslekList.add(new Meslek(
-                        rs.getInt("MESLEK_ID"),
-                        rs.getString("MESLEK_ISIM"),
+                tutanakList.add(new Tutanak(
+                        rs.getInt("DURUM_ID"),
+                        rs.getString("DURUM_ISIM"),
                         rs.getInt("AKTIFLIK")
                 ));
             }
         } catch (Exception ex) {
             DetectError(ex);
         }
-        return meslekList;
+        return tutanakList;
     }
 
     public Connection getDb() {
@@ -93,6 +89,4 @@ public class MeslekDAO extends DBConnection {
     public void setMesaj(String mesaj) {
         this.mesaj = mesaj;
     }
-
-    
 }

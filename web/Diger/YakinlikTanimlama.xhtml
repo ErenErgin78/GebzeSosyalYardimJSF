@@ -13,46 +13,89 @@
         <link rel="stylesheet" href="styles.css" />
         <h:outputStylesheet name="styles.css"/>
         <style>
-            .form-group {
-                margin-bottom: 1rem;
+            /* Navbar */
+            .navbar-nav .nav-link {
+                color: #f2f2f2;
             }
-            .form-row {
-                margin-bottom: 1rem;
+
+            .navbar-nav .nav-link:hover {
+                background-color: #575757;
+                color: #fff;
             }
-            .form-label {
-                margin-bottom: .5rem;
-                font-weight: 600;
+
+            .dropdown-menu {
+                background-color: #333;
             }
+
+            .dropdown-menu .dropdown-item {
+                color: #f2f2f2;
+            }
+
+            .dropdown-menu .dropdown-item:hover {
+                background-color: #575757;
+            }
+
+            /* Form Düzenlemeleri */
             .form-control {
-                display: inline-block;
-                width: auto;
-                vertical-align: middle;
-            }
-            .btn-container {
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-            }
-            .card-container {
-                display: flex;
-                justify-content: center;
-            }
-            .card-wrapper {
                 width: 100%;
-                max-width: 800px;
+                box-sizing: border-box; /* Ensure padding and border are included in the width */
             }
-            .card-header {
-                font-size: 1.25rem;
-                font-weight: 600;
+
+            .form-group {
+                margin-bottom: 15px;
+                padding-right: 15px;
+                padding-left: 15px;
+                flex: 0 0 50%;
+                max-width: 20%;
+            }
+
+            .form-row {
+                display: flex;
+                flex-wrap: wrap;
+                margin-right: -15px;
+                margin-left: -15px;
+            }
+            .form-label{
+                margin-top: 5px;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+            .custom-radio {
+                display: flex;
+                gap: 0px; /* Adjust spacing between radio buttons */
+            }
+
+            .custom-radio input {
+                margin-right: 5px; /* Space between radio button and label */
+            }
+
+            .radio-inline {
+                display: flex;
+                flex-direction: row;
+            }
+
+            /* Container Düzenlemeleri */
+            .container-fluid {
+                padding: 0 12px;
+                width: 100%;
+
             }
         </style>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Yakınlık Tanımlama</li>
+        </ol>
     </h:head>
     <h:body>
         <div class="container-fluid">               
             <div class="row">                   
                 <div class="col-md-12">
                     <div class="card-header">
-                        <h1 style="font-weight: bold; text-align: center;">Yakınlık Tanımlama</h1>
+                        <h1>Yakınlık Tanımlama</h1>
                     </div>
                     <div class="card">
                         <div class="card-header">Yakınlık Tanımlama Bilgileri</div>
@@ -78,7 +121,6 @@
                                         </h:commandButton>
                                     </div>
                                 </div>
-
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -95,11 +137,11 @@
                                                 <td>#{yakınlık.yakinlik_isim}</td>
                                                 <td>#{yakınlık.aktiflik == 1 ? 'Evet' : 'Hayır'}</td>
                                                 <td>
-                                                    <div class="action-buttons">
-                                                        <h:commandButton value="Düzenle" styleClass="btn btn-warning ml-2">
+                                                    <div class="action-buttons">                                                       
+                                                        <h:commandButton value="Sil" action="#{yakinlikBean.yakinlikSil(yakınlık.yakinlik_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
-                                                        <h:commandButton value="Sil" action="#{yakinlikBean.yakinlikSil(yakınlık.yakinlik_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
+                                                        <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
                                                             <f:ajax execute="@this" render="@form"/>
                                                         </h:commandButton>
                                                     </div>

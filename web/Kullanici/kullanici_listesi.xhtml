@@ -8,7 +8,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Kullanıcı Listesi</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="styles.css" />
         <h:outputStylesheet name="styles.css"/>
         <style>
             html, body {
@@ -28,18 +27,14 @@
             .col-md-12 {
                 padding: 0; /* Remove padding */
                 width: 100%; /* Set width to 100% */
-                
-            }
-            .card-body {
-                padding: 0; /* Remove padding */
-                overflow: auto; /* Enable scrolling */
+
             }
             .table {
                 width: 100%;
                 margin-bottom: 0;
                 table-layout: auto; /* Let the table decide column widths based on content */
             }
-              .table td {
+            .table td {
                 white-space: nowrap; /* Prevent text wrapping */
                 padding: 10px; /* Add padding for readability */
                 text-align: left; /* Align text to the left */
@@ -59,15 +54,20 @@
                 margin-top: 20px; /* Add space between header and table */
             }
         </style>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Kullanıcı Listesi</li>
+        </ol>
     </h:head>
     <h:body>
         <div class="container-fluid">               
             <div class="row">                   
                 <div class="col-md-12">
                     <div class="card-header">
-                        <h1 style="font-weight: bold; text-align: center;">Kullanıcı Listesi</h1>
+                        <h1>Kullanıcı Listesi</h1>
                     </div>
-                    <div class="card-body">
+                    <div class="card">
                         <div class="table-container">
                             <h:form id="userForm">
                                 <div class="table-responsive">
@@ -124,9 +124,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                                    function confirmDelete(button) {
-                                                                        return confirm("Bu kullanıcıyı gerçekten silmek istiyor musunuz?");
-                                                                    }
+                                                                function confirmDelete(button) {
+                                                                    return confirm("Bu kullanıcıyı gerçekten silmek istiyor musunuz?");
+                                                                }
         </script>
     </h:body>
 </html>

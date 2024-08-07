@@ -9,7 +9,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Cadde/Sokak Listesi</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="styles.css" />
         <h:outputStylesheet name="styles.css"/>
         <style>
             /* Navbar link renkleri ve geçiş efektleri */
@@ -65,14 +64,10 @@
                 width: 100%;
                 max-width: 900px; /* Kartın maksimum genişliği */
             }
-            .card-header {
-                font-size: 1.25rem; /* Kart başlık font boyutu */
-                font-weight: 600; /* Kart başlık font ağırlığı */
-            }
             .container-fluid {
                 padding: 0 12px;
                 width: 100%; /* Genişliği %100 yapın */
-                overflow: auto; /* Kaydırma özelliklerini etkinleştirir */
+                /* Kaydırma özelliklerini etkinleştirir */
             }
 
             /* Tablo satır renkleri */
@@ -93,6 +88,11 @@
                 width: 200px; /* Genişletilmiş sütun genişliği */
             }
         </style>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+            <li class="breadcrumb-item"><a href="#">Yönetici İşlemleri</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Cadde/Sokak Giriş</li>
+        </ol>
     </h:head>
     <h:body>
         <h:form>
