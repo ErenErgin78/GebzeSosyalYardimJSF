@@ -6,8 +6,6 @@ package dao;
 
 import Entity.Mahalle;
 import static Various.ErrorFinder.DetectError;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
