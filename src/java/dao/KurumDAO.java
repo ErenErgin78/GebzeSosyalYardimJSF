@@ -28,6 +28,8 @@ public class KurumDAO extends DBConnection {
     private Connection db;
     private String islemBasariliMesaj;
 
+    private String isim = "";
+
     public void KurumEkle(Kurum kurum) {
 
         try {
@@ -46,23 +48,33 @@ public class KurumDAO extends DBConnection {
     }
 
     public List<Kurum> KurumListesi() {
-        List<Kurum> KurumList = new ArrayList<>();
+        List<Kurum> kurumList = new ArrayList<>();
+
         try {
+            StringBuilder queryBuilder = new StringBuilder();
+            queryBuilder.append("SELECT KURUM_ID, KURUM_ISIM FROM KURUM WHERE 1=1 ");
+           
+
+            if (!isim.isEmpty()) {
+                queryBuilder.append("AND KURUM_ISIM LIKE '%").append(isim).append("%' ");
+            }
+
             Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT KURUM_ID, KURUM_ISIM FROM KURUM";
-            ResultSet rs = statement.executeQuery(Selectquery);
+            ResultSet rs = statement.executeQuery(queryBuilder.toString());
 
             while (rs.next()) {
-                KurumList.add(new Kurum(
+                kurumList.add(new Kurum(
                         rs.getInt("KURUM_ID"),
                         rs.getString("KURUM_ISIM")
                 ));
             }
 
+            this.islemBasariliMesaj = "İşlem başarılı";
+
         } catch (Exception ex) {
             DetectError(ex);
         }
-        return KurumList;
+        return kurumList;
     }
 
     public void KurumSil(int kurumid) {
@@ -97,5 +109,14 @@ public class KurumDAO extends DBConnection {
     public void setIslemBasariliMesaj(String islemBasariliMesaj) {
         this.islemBasariliMesaj = islemBasariliMesaj;
     }
+
+    public String getIsim() {
+        return isim;
+    }
+
+    public void setIsim(String isim) {
+        this.isim = isim;
+    }
+    
 
 }
