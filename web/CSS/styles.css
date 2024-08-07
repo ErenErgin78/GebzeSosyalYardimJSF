@@ -3,7 +3,7 @@ body {
     padding: 0;
     margin: 0;
     overflow-x: hidden; /* yatay scroll bar hidden */
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Arial' , sans-serif;
     background-color: #f4f4f9;
     color: #333;
 }
