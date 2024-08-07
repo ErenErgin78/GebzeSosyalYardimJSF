@@ -191,7 +191,7 @@ button {
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .form-row .form-group {
@@ -267,7 +267,7 @@ button {
     border-bottom: 1px solid #ddd; /* Alt kenarlık */
     padding: 10px; /* İç kenar boşluğu */
     font-weight: bold; /* Yazı tipi kalın */
-    margin-bottom: 20px; /* Alt kenar boşluğu */
+    margin-bottom: 5px; /* Alt kenar boşluğu */
 }
 
 .card-header h1 {
@@ -292,7 +292,7 @@ button {
 
 label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 1px;
     font-weight: bold;
 }
 
@@ -322,4 +322,8 @@ footer {
     text-align: center;
     font-size: 14px;
     color: #666;
+}
+
+.custom-margin {
+    margin-bottom: 1px !important; /* Boşluğu azaltmak için özel sınıf */
 }
