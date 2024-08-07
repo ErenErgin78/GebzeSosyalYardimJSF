@@ -34,6 +34,8 @@ public class EngelDAO extends DBConnection {
             cs.setString(1, engel.getEngel_tip());
 
             cs.execute();
+            
+            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (Exception ex) {
             DetectError(ex);

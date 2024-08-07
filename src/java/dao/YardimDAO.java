@@ -35,6 +35,7 @@ public class YardimDAO extends DBConnection {
 
             cs.execute();
 
+            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (Exception ex) {
             DetectError(ex);
         }

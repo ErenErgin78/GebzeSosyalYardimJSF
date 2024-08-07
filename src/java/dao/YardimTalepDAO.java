@@ -31,7 +31,7 @@ public class YardimTalepDAO extends DBConnection {
             csYardimTalep.setInt(2, yardimTalep.getAktiflik());
 
             csYardimTalep.execute();
-            String mesaj = "İşlem başarıyla gerçekleşmiştir";
+            this.mesaj = "İşlem başarıyla gerçekleşmiştir";
 
         } catch (SQLException ex) {
             DetectError(ex);

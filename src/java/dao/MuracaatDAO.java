@@ -23,9 +23,10 @@ import java.util.List;
 public class MuracaatDAO extends DBConnection {
 
     private Connection db;
-
     private Integer muracaat_bilgi_id;
 
+    private String mesaj;
+    
     public void Create(Muracaat muracaat) {
         try {
             Connection conn = this.getDb();
@@ -55,7 +56,7 @@ public class MuracaatDAO extends DBConnection {
                 csMuracaat.setInt(2, muracaatBilgiId);
                 csMuracaat.executeUpdate();
 
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "İşlemler başarıyla gerçekleşmiştir.", null));
+                this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
             }
 
         } catch (SQLException ex) {
@@ -80,7 +81,6 @@ public class MuracaatDAO extends DBConnection {
             while (rs.next()) {
 
             }
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "İşlemler başarıyla gerçekleşmiştir.", null));
 
         } catch (Exception ex) {
             DetectError(ex);
@@ -97,10 +97,10 @@ public class MuracaatDAO extends DBConnection {
             int rowsDeleted = statement.executeUpdate(deleteQuery);
             System.out.println(rowsDeleted + " kisi silindi.");
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "İşlemler başarıyla gerçekleşmiştir.", null));
+            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (SQLException ex) {
-            System.out.println("Veritabanı hatası: " + ex.getMessage());
+            DetectError(ex);
         }
     }
 

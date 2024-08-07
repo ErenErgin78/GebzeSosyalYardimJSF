@@ -38,7 +38,7 @@ public class CekmeceDAO extends DBConnection {
             csCekmece.setInt(2, cekmece.getAktif());
 
             csCekmece.execute();
-            String mesaj = "İşlem başarıyla gerçekleşmiştir";
+            this.mesaj = "İşlem başarıyla gerçekleşmiştir";
 
         } catch (SQLException ex) {
             DetectError(ex);

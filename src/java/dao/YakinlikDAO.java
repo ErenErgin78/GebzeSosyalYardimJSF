@@ -34,7 +34,7 @@ public class YakinlikDAO extends DBConnection {
             csYakinlik.setInt(2, yakinlik.getAktiflik());
 
             csYakinlik.execute();
-            String mesaj = "İşlem başarıyla gerçekleşmiştir";
+            this.mesaj = "İşlem başarıyla gerçekleşmiştir";
 
         } catch (SQLException ex) {
             DetectError(ex);
@@ -83,8 +83,6 @@ public class YakinlikDAO extends DBConnection {
                         rs.getInt("AKTIFLIK")
                 ));
             }
-
-            mesaj = "işlem başarılı";
 
         } catch (Exception ex) {
             DetectError(ex);
