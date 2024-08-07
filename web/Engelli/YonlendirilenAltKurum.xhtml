@@ -41,17 +41,20 @@
                                             <!-- Yönlendirilen Kurum Adı -->
                                             <div class="form-group col-md-6">
                                                 <label for="kurumSecim" class="form-label">Yönlendirilen Kurum Adı:</label>
-                                                <h:selectOneMenu id="kurumSecim" value="#{kurumAltBean.entity.tip_id}" class="form-control">
-                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                                <h:selectOneMenu id="kurumSecim" value="#{kurumAltBean.dao.id}" class="form-control">
+                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
                                                     <f:selectItems value="#{kurumAltBean.tipList}" />
+                                                     <f:ajax event="change" render="kurumAltPanel"/>
                                                 </h:selectOneMenu>
                                             </div>
                                             <!-- Yönlendirilen Alt Kurum Adı -->
                                             <div class="form-group col-md-6">
                                                 <label for="altKurumAdi" class="form-label">Yönlendirilen Alt Kurum Adı:</label>
-                                                <h:inputText id="altKurumAdi" value="#{kurumAltBean.entity.alt_tip}" class="form-control" />
+                                                <h:inputText id="altKurumAdi" value="#{kurumAltBean.dao.isim}" class="form-control" />
+                                                <f:ajax event="keyup" render="kurumAltPanel" />
                                             </div>
                                         </div>
+                                        <h:panelGroup id="kurumAltPanel">
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
@@ -81,6 +84,7 @@
                                                 </ui:repeat>
                                             </tbody>
                                         </table>
+                                        </h:panelGroup>
                                     </h:form>
                                 </div>
                             </div>

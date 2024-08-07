@@ -1,7 +1,6 @@
 package dao;
 
 import Entity.KurumAlt;
-import Entity.YardimAlt;
 import static Various.ErrorFinder.DetectError;
 import jakarta.faces.model.SelectItem;
 import java.sql.Statement;
@@ -18,6 +17,9 @@ public class KurumAltDAO extends DBConnection {
 
     private Connection db;
     private String islemBasariliMesaj;
+
+    private Integer id = 0;
+    private String isim = "";
 
     public void KurumAltEkle(KurumAlt yardimAlt) {
 
@@ -52,11 +54,23 @@ public class KurumAltDAO extends DBConnection {
 
     public List<KurumAlt> KurumAltListesi() {
         List<KurumAlt> kurumAltList = new ArrayList<>();
+
         try {
+            StringBuilder queryBuilder = new StringBuilder();
+            queryBuilder.append("SELECT YA.ALT_KURUM_ID, YA.ALT_KURUM_ISIM, YA.KURUM_ID , Y.KURUM_ISIM ")
+                    .append("FROM KURUM_ALT YA ")
+                    .append("JOIN KURUM Y ON YA.KURUM_ID = Y.KURUM_ID ");
+
+            if (id != 0) {
+                queryBuilder.append("AND YA.KURUM_ID  = ").append(id).append(" ");
+            }
+
+            if (!isim.isEmpty()) {
+                queryBuilder.append("AND YA.ALT_KURUM_ISIM LIKE '%").append(isim).append("%' ");
+            }
+
             Statement statement = getDb().createStatement();
-            String selectQuery = "SELECT YA.ALT_KURUM_ID, YA.ALT_KURUM_ID, YA.ALT_KURUM_ISIM, Y.KURUM_ISIM FROM KURUM_ALT YA"
-                    + " JOIN KURUM Y ON YA.KURUM_ID = Y.KURUM_ID";
-            ResultSet rs = statement.executeQuery(selectQuery);
+            ResultSet rs = statement.executeQuery(queryBuilder.toString());
 
             while (rs.next()) {
                 kurumAltList.add(new KurumAlt(
@@ -65,6 +79,9 @@ public class KurumAltDAO extends DBConnection {
                         rs.getString("KURUM_ISIM")
                 ));
             }
+
+            this.islemBasariliMesaj = "işlem başarılı";
+
         } catch (Exception ex) {
             DetectError(ex);
         }
@@ -107,8 +124,20 @@ public class KurumAltDAO extends DBConnection {
         this.islemBasariliMesaj = islemBasariliMesaj;
     }
 
-    public void KurumEkle(KurumAlt entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getIsim() {
+        return isim;
+    }
+
+    public void setIsim(String isim) {
+        this.isim = isim;
     }
 
 }
