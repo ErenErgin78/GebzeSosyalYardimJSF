@@ -6,7 +6,7 @@ package dao;
 
 import java.sql.Connection;
 import Entity.Meslek;
-import static Filters.ErrorFinder.DetectError;
+import static Various.ErrorFinder.DetectError;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

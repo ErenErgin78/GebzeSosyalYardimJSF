@@ -5,7 +5,7 @@
 package dao;
 
 import Entity.Engel;
-import static Filters.ErrorFinder.DetectError;
+import static Various.ErrorFinder.DetectError;
 import java.sql.Statement;
 import java.sql.Connection;
 import util.DBConnection;
