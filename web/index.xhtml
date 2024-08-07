@@ -75,33 +75,22 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
                             <a class="dropdown-item" href="#" data-page="Kullanici/kullanici_listesi.xhtml">Kullanıcılar</a>
-
                             <a class="dropdown-item" href="#" data-page="Adres/MahalleListesi.xhtml">Mahalleler</a>
-
                             <a class="dropdown-item" href="#" data-page="Adres/CaddeSokakListesi.xhtml">Cadde/Sokak</a>
-
                             <a class="dropdown-item" href="#" data-page="Egitim/OkulListesi.xhtml">Eğitim</a>
 
-                            
-                            <div class="dropdown-submenu">
-                                <a class="dropdown-item" href="#" data-page="Diger/CekmeceTanimlama.xhtml">Çekmece Tanımlama</a>                     
-                                <a class="dropdown-item" href="#" data-page="Diger/MeslekTanimlama.xhtml">Meslek Tanımlama</a>                       
-                                <a class="dropdown-item" href="#" data-page="Diger/YakinlikTanimlama.xhtml">Yakınlık Tanımlama</a>                          
-                                <a class="dropdown-item" href="#" data-page="Diger/TutanakTanimlama.xhtml">Tutanak Durum Tanımlama</a>
-                            </div>
-                           
-                            <div class="dropdown-submenu">
-                                <a class="dropdown-item" href="#" data-page="Yardim/YardimTipi.xhtml">Yardım Tipi Tanımlama</a>
+                            <a class="dropdown-item" href="#" data-page="Diger/CekmeceTanimlama.xhtml">Çekmece Tanımlama</a>                     
+                            <a class="dropdown-item" href="#" data-page="Diger/MeslekTanimlama.xhtml">Meslek Tanımlama</a>                       
+                            <a class="dropdown-item" href="#" data-page="Diger/YakinlikTanimlama.xhtml">Yakınlık Tanımlama</a>                          
+                            <a class="dropdown-item" href="#" data-page="Diger/TutanakTanimlama.xhtml">Tutanak Durum Tanımlama</a>
 
-                                <a class="dropdown-item" href="#" data-page="Yardim/YardimAltTipi.xhtml">Yardım Alt Tipi Tanımlama</a>
-                            </div>
-                            
-                            <div class="dropdown-submenu">
-                                <a class="dropdown-item" href="#" data-page="Engelli/EngelliTipi.xhtml">Engelli Tipi</a>
-                                <a class="dropdown-item" href="#" data-page="Engelli/EngelliAltTipi.xhtml">Engelli Alt Tipi Listesi</a>
-                                <a class="dropdown-item" href="#" data-page="Engelli/YonlendirilenKurum.xhtml">Yönlendirilen Kurum</a>
-                                <a class="dropdown-item" href="#" data-page="Engelli/YonlendirilenAltKurum.xhtml">Yönlendirilen Alt Kurum</a>
-                            </div>
+                            <a class="dropdown-item" href="#" data-page="Yardim/YardimTipi.xhtml">Yardım Tipi Tanımlama</a>
+                            <a class="dropdown-item" href="#" data-page="Yardim/YardimAltTipi.xhtml">Yardım Alt Tipi Tanımlama</a>
+
+                            <a class="dropdown-item" href="#" data-page="Engelli/EngelliTipi.xhtml">Engelli Tipi</a>
+                            <a class="dropdown-item" href="#" data-page="Engelli/EngelliAltTipi.xhtml">Engelli Alt Tipi Listesi</a>
+                            <a class="dropdown-item" href="#" data-page="Engelli/YonlendirilenKurum.xhtml">Yönlendirilen Kurum</a>
+                            <a class="dropdown-item" href="#" data-page="Engelli/YonlendirilenAltKurum.xhtml">Yönlendirilen Alt Kurum</a>
                         </div>
                     </li>
                 </ul>
@@ -110,15 +99,16 @@
                 </h:form>
             </div>
         </nav> 
-        <main role="main" class="container-fluid">
+        <main class="container-fluid">
             <div id="content">
                 <div class="welcome-message">
                     <h3>Hoş Geldiniz #{userBean.dao.kullanici_adi}!</h3>
-                    <h:outputText value="Tarih: " />
+                    <h:outputText value="Tarih:‎ " />
                     <h:outputText value="#{userBean.tarih}">
                         <f:convertDateTime pattern="dd-MM-yyyy" timeZone="Europe/Istanbul"/>
                     </h:outputText>
-                    <h:outputText value="   Saat:" />
+                    <h:outputText value="‎ ‎ ‎ ‎‎ ‎  "> </h:outputText>
+                    <h:outputText value="Saat:‎ " />
                     <h:outputText value="#{userBean.tarih}">
                         <f:convertDateTime pattern="HH:mm:ss" timeZone="Europe/Istanbul"/>
                     </h:outputText>

@@ -6,7 +6,7 @@ package dao;
 
 import Entity.Kurum;
 import Entity.Mahalle;
-import static Filters.ErrorFinder.DetectError;
+import static Various.ErrorFinder.DetectError;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import java.sql.CallableStatement;

@@ -1,7 +1,7 @@
 package dao;
 
 import Entity.Kisi;
-import static Filters.ErrorFinder.DetectError;
+import static Various.ErrorFinder.DetectError;
 import jakarta.faces.model.SelectItem;
 import util.DBConnection;
 import java.sql.Connection;

@@ -5,7 +5,7 @@
 package dao;
 
 import Entity.Sokak;
-import static Filters.ErrorFinder.DetectError;
+import static Various.ErrorFinder.DetectError;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import java.io.IOException;

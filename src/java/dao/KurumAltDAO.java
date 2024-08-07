@@ -2,7 +2,7 @@ package dao;
 
 import Entity.KurumAlt;
 import Entity.YardimAlt;
-import static Filters.ErrorFinder.DetectError;
+import static Various.ErrorFinder.DetectError;
 import jakarta.faces.model.SelectItem;
 import java.sql.Statement;
 import java.sql.CallableStatement;
