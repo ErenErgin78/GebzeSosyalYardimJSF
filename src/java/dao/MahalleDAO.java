@@ -68,12 +68,12 @@ public class MahalleDAO extends DBConnection {
         List<Mahalle> MahalleList = new ArrayList<>();
         try {
             Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT KISI_ADRES_MAHALLE_ID, MAHALLE, AKTIF FROM KISI_ADRES_MAHALLE";
+            String Selectquery = "SELECT KISI_ADRES_MAHALLE_ID ID, MAHALLE, AKTIF FROM KISI_ADRES_MAHALLE";
             ResultSet rs = statement.executeQuery(Selectquery);
             
             while (rs.next()) {
                 MahalleList.add(new Mahalle(
-                        rs.getInt("KISI_ADRES_MAHALLE_ID"),
+                        rs.getInt("ID"),
                         rs.getString("MAHALLE"),
                         rs.getInt("AKTIF")
                 ));
