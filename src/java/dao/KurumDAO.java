@@ -53,9 +53,8 @@ public class KurumDAO extends DBConnection {
         try {
             StringBuilder queryBuilder = new StringBuilder();
             queryBuilder.append("SELECT KURUM_ID, KURUM_ISIM FROM KURUM WHERE 1=1 ");
-           
 
-            if (!isim.isEmpty()) {
+            if (isim != null && !isim.isEmpty()) {
                 queryBuilder.append("AND KURUM_ISIM LIKE '%").append(isim).append("%' ");
             }
 
@@ -117,6 +116,5 @@ public class KurumDAO extends DBConnection {
     public void setIsim(String isim) {
         this.isim = isim;
     }
-    
 
 }

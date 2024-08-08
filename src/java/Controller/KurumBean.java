@@ -28,8 +28,8 @@ public class KurumBean implements Serializable {
         this.list = this.getDao().KurumListesi();
     }
 
-    public void kurumsil(int KurumID) {
-        this.getDao().KurumSil(KurumID);
+    public void kurumsil(int kurumID) {
+        this.getDao().KurumSil(kurumID);
         this.list = this.getDao().KurumListesi(); // Silme işleminden sonra listeyi güncelle
     }
 
