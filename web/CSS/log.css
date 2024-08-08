@@ -11,7 +11,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 .navbar-nav .nav-link:hover {
-    background-color: #575757; /* Üzerine gelindiğinde arka plan rengi */
+    background-color: #575757 !important; /* Üzerine gelindiğinde arka plan rengi */
     color: #fff; /* Üzerine gelindiğinde yazı rengi */
 }
 
