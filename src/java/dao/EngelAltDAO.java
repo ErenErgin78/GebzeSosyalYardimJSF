@@ -17,6 +17,7 @@ public class EngelAltDAO extends DBConnection {
     
     private Connection db;
     private String islemBasariliMesaj;
+    
     private Integer id = 0;
     private String isim = "";
     
