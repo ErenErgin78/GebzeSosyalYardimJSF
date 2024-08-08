@@ -16,7 +16,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 .dropdown-menu {
-    background-color: #333;
+    background-color: #333 !important;
 }
 
 .dropdown-menu .dropdown-item {
