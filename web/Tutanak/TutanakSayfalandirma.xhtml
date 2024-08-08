@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Kullanıcı Listesi</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <h:outputStylesheet name="CSS/styles.css"/>
+    </h:head>
+    <h:body>
+        <div class="container d-flex justify-content-center">
+            <div class="w-100">
+                <nav aria-label="Page navigation example" class="fixed-bottom mb-3">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item"><a class="page-link" href="#" data-toggle="tooltip" title="Başvuru Alanı">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#" data-toggle="tooltip" title="Yakınlık Bilgileri">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#" data-toggle="tooltip" title="Aile Nüfus Bilgileri">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#" data-toggle="tooltip" title="Sağlık ve Engel Bilgisi">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#" data-toggle="tooltip" title="Aile Gelir Bilgileri">5</a></li>
+                        <li class="page-item"><a class="page-link" href="#" data-toggle="tooltip" title="Mülkiyet Bilgileri">6</a></li>
+                        <li class="page-item"><a class="page-link" href="#" data-toggle="tooltip" title="Borç Bilgileri">7</a></li>
+                        <li class="page-item"><a class="page-link" href="#" data-toggle="tooltip" title="Sosyal Güvence Bilgisi">8</a></li>
+                        <li class="page-item"><a class="page-link" href="#" data-toggle="tooltip" title="Talep Edilen Yardımlar">9</a></li>
+                        <li class="page-item"><a class="page-link" href="#" data-toggle="tooltip" title="Tutanak İnceleme">10</a></li>
+                        <li class="page-item">
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.page-link').click(function (e) {
+                    e.preventDefault(); // Default click action'ı engelle
+
+                    // Önce tüm sayfa numaralarını aktiflikten çıkar
+                    $('.page-item').removeClass('active');
+
+                    // Aktif sayfa numarasını belirle
+                    $(this).parent().addClass('active');
+
+                    // Burada sayfa yükleme kodunuzu ekleyebilirsiniz
+                });
+            });
+        </script>
+    </h:body>
+</html>
