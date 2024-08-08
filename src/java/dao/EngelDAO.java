@@ -24,6 +24,8 @@ public class EngelDAO extends DBConnection {
     private Connection db;
     private String mesaj;
 
+    private String isim = "";
+
     public void EngelEkle(Engel engel) {
         try {
             Connection conn = this.getDb();
@@ -34,7 +36,7 @@ public class EngelDAO extends DBConnection {
             cs.setString(1, engel.getEngel_tip());
 
             cs.execute();
-            
+
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (Exception ex) {
@@ -61,7 +63,11 @@ public class EngelDAO extends DBConnection {
         List<Engel> engelList = new ArrayList<>();
         try {
             StringBuilder queryBuilder = new StringBuilder();
-            queryBuilder.append("SELECT TIP_ID, TIP_ISIM FROM ENGELLI_TIP");
+            queryBuilder.append("SELECT TIP_ID, TIP_ISIM FROM ENGELLI_TIP WHERE 1=1");
+            
+            if (isim != null && !isim.isEmpty()) {
+                queryBuilder.append("AND TIP_ISIM LIKE '%").append(isim).append("%' ");
+            }
 
             Statement statement = getDb().createStatement();
             ResultSet rs = statement.executeQuery(queryBuilder.toString());
@@ -95,6 +101,14 @@ public class EngelDAO extends DBConnection {
 
     public void setMesaj(String mesaj) {
         this.mesaj = mesaj;
+    }
+
+    public String getIsim() {
+        return isim;
+    }
+
+    public void setIsim(String isim) {
+        this.isim = isim;
     }
 
 }

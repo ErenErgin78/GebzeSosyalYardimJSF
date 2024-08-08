@@ -57,9 +57,8 @@ public class EngelBean implements Serializable {
     }
 
     public List<Engel> getList() {
-        if (this.list == null) {
-            this.list = this.getDao().EngelListesi();
-        }
+        this.list = this.getDao().EngelListesi();
+
         dao.setMesaj(null);
         return this.list;
     }
@@ -72,7 +71,7 @@ public class EngelBean implements Serializable {
     public void init() {
         getDao().setMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
     }
-    
+
     public EngelBean() {
 
     }
