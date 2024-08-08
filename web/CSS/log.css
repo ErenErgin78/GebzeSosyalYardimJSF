@@ -11,7 +11,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 .navbar-nav .nav-link:hover {
-    background-color: #575757; /* Üzerine gelindiğinde arka plan rengi */
+    background-color: #575757 !important; /* Üzerine gelindiğinde arka plan rengi */
     color: #fff; /* Üzerine gelindiğinde yazı rengi */
 }
 
@@ -44,7 +44,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 .form-label {
-    margin-bottom: .5rem; /* Form etiketlerinin altındaki boşluk */
+    margin-bottom: .3rem; /* Form etiketlerinin altındaki boşluk */
     font-weight: 600; /* Form etiketlerinin font ağırlığı */
 }
 
@@ -130,7 +130,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     font-size: 14px; /* Etiket font boyutu */
     cursor: pointer; /* Tıklanabilir imleç */
     user-select: none; /* Seçimi engeller */
-    margin-right: 350px; /* Butona yaklaşması için yazıya margin verildi */
+     /* Butona yaklaşması için yazıya margin verildi */
     margin-top: 10px;
 }
 
