@@ -14,7 +14,7 @@
             <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>            
             <li class="breadcrumb-item active" aria-current="page">İşlemler</li>
             <li class="breadcrumb-item active"><a href="#" class="load-page-button" data-page="Tutanak/tutanakgiris.xhtml">Tutanak Giriş</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Aile Nüfus Bilgileri</li>
+            <li class="breadcrumb-item active" aria-current="page">Sosyal Güvence Bilgileri</li>
         </ol>
     </h:head>
     <h:body>
@@ -26,7 +26,7 @@
                     <div class="col-md-12">                     
                         <div class="card">
                             <div class="card-header">
-                                Aile Nüfus Bilgileri
+                                Sosyal Güvence Bilgileri
                             </div>
                         </div>
                         <div class="card">
@@ -35,24 +35,35 @@
                                 <div class="form-row">                                    
                                     <div class="form-group">
 
-                                        <div class="form-group col-md-4">
-                                            <label for="cocukSayisi">Toplam Çocuk Sayısı:</label>
-                                            <h:inputText id="cocukSayisi" class="form-control" style="width: 100px;" />
-                                        </div>   
-
-                                        <div class="form-group col-md-4">
-                                            <label for="adi">Bakmakla Yükümlü Yetim Sayısı:</label>
-                                            <h:inputText id="adi" class="form-control" style="width: 100px;" />
+                                        <div class="form-group col-md-6">
+                                            <label for="aktif" class="form-label">Sosyal Güvencesi:</label>
+                                            <h:selectOneMenu id="aktif" value="#{userBean.dao.aktif}" class="form-control">
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                                <f:selectItem itemLabel="Sosyal Güvencesi Yok" itemValue="E" />
+                                                <f:selectItem itemLabel="Bağ-Kur" itemValue="E" />
+                                                <f:selectItem itemLabel="SGK" itemValue="K" />                                 
+                                                <f:ajax event="valueChange" render="KullaniciListesi" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="aktif" class="form-label">Yönlendiren Birim:</label>
+                                            <h:selectOneMenu id="aktis" value="#{userBean.dao.aktif}" class="form-control">
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                                <f:selectItem itemLabel="Sosyal Hizmetler" itemValue="E" />
+                                                <f:selectItem itemLabel="Bilgi İşlem" itemValue="E" />
+                                                <f:selectItem itemLabel="Basın Yayın ve İlişkiler" itemValue="K" />                                 
+                                                <f:ajax event="valueChange" render="KullaniciListesi" />
+                                            </h:selectOneMenu>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label for="kisiSayisi">Hanede Yaşayan Kişi Sayısı:</label>
-                                            <h:inputText id="kisiSayisi" class="form-control" style="width: 100px;" />
+                                            <label for="kisiSayisi">Yönlendiren Birim Açıklaması:</label>
+                                            <h:inputText id="kisiSayisi" class="form-control"/>
                                         </div>
 
 
                                     </div>
                                     <div class="form-group">
-                                        <label for="durus">Soybis İşlendi mi?:</label>
+                                        <label for="durus">Sosyal Güvencesi var mı?:</label>
                                         <div class="custom-radio">
                                             <h:selectOneRadio id="durus"  styleClass="radio-inline">
                                                 <f:selectItem itemLabel="Evet" itemValue="1" />
