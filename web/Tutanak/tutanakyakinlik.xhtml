@@ -124,6 +124,14 @@
                                                 <f:selectItem itemLabel="Boşanmış" itemValue="4" />
                                             </h:selectOneRadio>
                                         </div>
+                                        <div class="form-group col-md-3">
+                                        <label for="aktif" class="form-label">Özel Statü:</label>
+                                        <h:selectOneMenu id="ak" value="#{userBean.dao.aktif}" class="form-control">
+                                            <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                                                        
+                                            <f:ajax event="valueChange" render="KullaniciListesi" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                        
                                     </div>
                                 </div>
 

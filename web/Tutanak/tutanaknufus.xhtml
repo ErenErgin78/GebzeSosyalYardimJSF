@@ -34,20 +34,22 @@
                             <div class="card-body">
                                 <div class="form-row">                                    
                                     <div class="form-group">
-                                        <label for="dur">Asker var mı?:</label>
-                                        <div class="custom-radio">
-                                            <h:selectOneRadio id="dur" value="#{userBean.entity.kullanici_durum}"  styleClass="radio-inline">
-                                                <f:selectItem itemLabel="Evet" itemValue="1" />
-                                                <f:selectItem itemLabel="Hayır" itemValue="2" />                                           
-                                            </h:selectOneRadio>
+
+                                        <div class="form-group col-md-4">
+                                            <label for="cocukSayisi">Toplam Çocuk Sayısı:</label>
+                                            <h:inputText id="cocukSayisi" class="form-control" style="width: 100px;" />
+                                        </div>   
+
+                                        <div class="form-group col-md-4">
+                                            <label for="adi">Bakmakla Yükümlü Yetim Sayısı:</label>
+                                            <h:inputText id="adi" class="form-control" style="width: 100px;" />
                                         </div>
-                                        <label for="duru">Şehit var mı?:</label>
-                                        <div class="custom-radio">
-                                            <h:selectOneRadio id="duru" styleClass="radio-inline">
-                                                <f:selectItem itemLabel="Evet" itemValue="1" />
-                                                <f:selectItem itemLabel="Hayır" itemValue="2" />                                           
-                                            </h:selectOneRadio>
+                                        <div class="form-group col-md-4">
+                                            <label for="kisiSayisi">Hanede Yaşayan Kişi Sayısı:</label>
+                                            <h:inputText id="kisiSayisi" class="form-control" style="width: 100px;" />
                                         </div>
+
+
                                     </div>
                                     <div class="form-group">
                                         <label for="durus">Soybis İşlendi mi?:</label>
@@ -57,30 +59,10 @@
                                                 <f:selectItem itemLabel="Hayır" itemValue="2" />                                           
                                             </h:selectOneRadio>
                                         </div>
-                                        <label for="durum">Gazi var mı?:</label>
-                                        <div class="custom-radio">
-                                            <h:selectOneRadio id="durum"  styleClass="radio-inline">
-                                                <f:selectItem itemLabel="Evet" itemValue="1" />
-                                                <f:selectItem itemLabel="Hayır" itemValue="2" />                                           
-                                            </h:selectOneRadio>
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="cocukSayisi">Toplam Çocuk Sayısı:</label>
-                                            <h:inputText id="cocukSayisi" class="form-control" style="width: 100px;" />
-                                        </div>   
+
                                     </div>
-                                    
-                                    <div class="form-row">
-                                        <div class="form-group col-md-4">
-                                            <label for="adi">Bakmakla Yükümlü Yetim Sayısı:</label>
-                                            <h:inputText id="adi" class="form-control" style="width: 100px;" />
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="kisiSayisi">Hanede Yaşayan Kişi Sayısı:</label>
-                                            <h:inputText id="kisiSayisi" class="form-control" style="width: 100px;" />
-                                        </div>
-                                                                                                                                                                   
-                                    </div>
+
+
 
                                 </div>
                                 <div class="text-center mt-3">
