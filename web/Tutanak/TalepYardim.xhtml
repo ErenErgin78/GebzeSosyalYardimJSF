@@ -43,13 +43,13 @@
                                                     <label class="form-check-label" for="inlineCheckbox1">Çocuk Bezi Yardımı</label>
                                                 </div>
                                             </div>
-                                            <div class="form-group"> 
+                                            <div class="form-group" style="margin-left: 47px;"> 
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2"/>
                                                     <label class="form-check-label" for="inlineCheckbox2">Giyim Yardımı</label>
                                                 </div>
                                             </div>
-                                            <div class="form-group"> 
+                                            <div class="form-group" style="margin-left: 43px;"> 
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3"/>
                                                     <label class="form-check-label" for="inlineCheckbox3">Yangın Yardımı</label>
@@ -63,13 +63,13 @@
                                                     <label class="form-check-label" for="inlineCheckbox4">Doğal Afet Yardımı</label>
                                                 </div>
                                             </div>                                          
-                                            <div class="form-group">
+                                            <div class="form-group" style="margin-left: 54px;">
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option6"/>
                                                     <label class="form-check-label" for="inlineCheckbox6">İlaç Yardımı</label>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="margin-left: 62px;">
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5"/>
                                                     <label class="form-check-label" for="inlineCheckbox5">Tekerlekli Sandalye Yardımı</label>
@@ -83,13 +83,13 @@
                                                     <label class="form-check-label" for="inlineCheckbox7">Ev Eşyası Yardımı</label>
                                                 </div>
                                             </div>                                                                
-                                            <div class="form-group">
+                                            <div class="form-group" style="margin-left: 58px;">
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox9" value="option9"/>
                                                     <label class="form-check-label" for="inlineCheckbox9">Gıda Yardımı</label>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="margin-left: 54px;">
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="option8"/>
                                                     <label class="form-check-label" for="inlineCheckbox8">Yakacak Yardımı</label>
@@ -103,13 +103,13 @@
                                                     <label class="form-check-label" for="inlineCheckbox10">Okul Kıyafeti Yardımı</label>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="margin-left: 35px;">
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox11" value="option11"/>
                                                     <label class="form-check-label" for="inlineCheckbox11">Nakdi Yardım</label>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="margin-left: 50px;">
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox12" value="option12"/>
                                                     <label class="form-check-label" for="inlineCheckbox12">Süt Yardımı</label>
@@ -121,6 +121,11 @@
                             </div> <!-- card-body -->
                         </div> <!-- card -->
 
+                        <div class="text-center mt-3">
+                            <h:commandButton value="Kaydet" action="#{userBean.create()}" class="btn btn-success">
+                                <f:ajax execute="@form" render="@form, mesaj" />
+                            </h:commandButton>                                  
+                        </div>
                         <!-- Pagination Card -->
                         <div class="card mt-3">
                             <div class="card-body">
