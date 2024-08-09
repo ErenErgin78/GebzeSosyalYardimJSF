@@ -25,7 +25,6 @@ public class KisiBean implements Serializable {
     @PostConstruct
     public void init() {
         entity = new Kisi();
-        mahalleList = mahallegetir();
         sokakList = new ArrayList<>();
     }
 
@@ -40,21 +39,7 @@ public class KisiBean implements Serializable {
     }
 
     //Muracaat Girişte dinamik mahalle ve sokak değişimi için
-    public List<SelectItem> mahallegetir() {
-        return this.getDao().MahalleGetir();
-    }
-
-    public List<SelectItem> sokakgetir() {
-        return this.getDao().SokakGetir(selectedMahalleId);
-    }
-
-    public void sokakyukle(AjaxBehaviorEvent event) {
-        sokakList = new ArrayList<>();
-        if (selectedMahalleId != 0) {
-            sokakList = this.getDao().SokakGetir(selectedMahalleId);;
-        }
-    }
-
+    
     public void edit(Kisi kisi) {
         this.entity = kisi;
     }
