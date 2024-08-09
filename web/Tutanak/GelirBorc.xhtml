@@ -234,10 +234,17 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>                                  
                                 </div>
                                 <!-- Pagination Card -->
                                 <div class="card mt-3">
+                                    <div class="card-body">
+                                        <div class="text-center mt-3">
+                                            <h:commandButton value="Kaydet" action="#{userBean.create()}" class="btn btn-success">
+                                                <f:ajax execute="@form" render="@form, mesaj" />
+                                            </h:commandButton>                                  
+                                        </div>
+                                    </div>
                                     <div class="card-body">
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination justify-content-center mb-3">

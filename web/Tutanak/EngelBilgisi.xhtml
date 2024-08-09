@@ -95,6 +95,11 @@
                                                 <h:inputTextarea id="address_desc" class="form-control" rows="1" value="#{userBean.entity.kullanici_adres}" />
                                             </div>
                                         </div>
+                                        <div class="text-center mt-3">
+                                            <h:commandButton value="Kaydet" action="#{userBean.create()}" class="btn btn-success">
+                                                <f:ajax execute="@form" render="@form, mesaj" />
+                                            </h:commandButton>                                  
+                                        </div>
                                     </div>
                                 </div>
 
