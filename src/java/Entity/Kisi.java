@@ -3,7 +3,6 @@ package Entity;
 import java.math.BigInteger;
 import java.util.Date;
 
-
 public class Kisi {
 
     private Integer kisi_id;
@@ -114,6 +113,14 @@ public class Kisi {
 
     public void setAktif(Integer aktif) {
         this.aktif = aktif;
+    }
+
+    public String getMedeni_durum_isim() {
+        return medeni_durum_isim;
+    }
+
+    public void setMedeni_durum_isim(String medeni_durum_isim) {
+        this.medeni_durum_isim = medeni_durum_isim;
     }
 
     public Kisi(BigInteger kimlik_no, String isim, String soyisim, String cinsiyet, Integer cilt_no, Integer aile_sira_no, Integer sira_no, Integer doğum_tarihi, String medeni_durum_isim, Date kayit_tarihi, Integer aktif) {

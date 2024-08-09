@@ -5,8 +5,6 @@ import java.util.Date;
 public class KisiAdres {
 
     private Integer kisi_adres_id;
-    private String kisi_adres_isim;
-    private String ilce;
     private String tarif;
     private String site;
     private Integer kapi_no;
@@ -24,22 +22,6 @@ public class KisiAdres {
 
     public void setKisi_adres_id(Integer kisi_adres_id) {
         this.kisi_adres_id = kisi_adres_id;
-    }
-
-    public String getKisi_adres_isim() {
-        return kisi_adres_isim;
-    }
-
-    public void setKisi_adres_isim(String kisi_adres_isim) {
-        this.kisi_adres_isim = kisi_adres_isim;
-    }
-
-    public String getIlce() {
-        return ilce;
-    }
-
-    public void setIlce(String ilce) {
-        this.ilce = ilce;
     }
 
     public String getTarif() {
@@ -106,11 +88,27 @@ public class KisiAdres {
         this.aktif = aktif;
     }
 
-    public KisiAdres(String kisi_adres_isim, String ilce, String tarif, String site, String kisi_adres_mahalle_isim, String kisi_mahalle_sokak_isim, Date kayit_tarihi, Integer aktif) {
-        this.kisi_adres_isim = kisi_adres_isim;
-        this.ilce = ilce;
+    public Integer getKapi_no() {
+        return kapi_no;
+    }
+
+    public void setKapi_no(Integer kapi_no) {
+        this.kapi_no = kapi_no;
+    }
+
+    public Integer getDaire_no() {
+        return daire_no;
+    }
+
+    public void setDaire_no(Integer daire_no) {
+        this.daire_no = daire_no;
+    }
+
+    public KisiAdres(String tarif, String site, Integer kapi_no, Integer daire_no, String kisi_adres_mahalle_isim, String kisi_mahalle_sokak_isim, Date kayit_tarihi, Integer aktif) {
         this.tarif = tarif;
         this.site = site;
+        this.kapi_no = kapi_no;
+        this.daire_no = daire_no;
         this.kisi_adres_mahalle_isim = kisi_adres_mahalle_isim;
         this.kisi_mahalle_sokak_isim = kisi_mahalle_sokak_isim;
         this.kayit_tarihi = kayit_tarihi;

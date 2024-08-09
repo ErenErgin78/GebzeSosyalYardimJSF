@@ -2,7 +2,6 @@ package dao;
 
 import Entity.Kisi;
 import Entity.KisiAdres;
-import Entity.KurumAlt;
 import static Various.ErrorFinder.DetectError;
 import jakarta.faces.model.SelectItem;
 import java.sql.CallableStatement;
@@ -20,17 +19,14 @@ public class KisiAdresDAO extends DBConnection {
     private Connection db;
     private String mesaj; // Başarı mesajı için değişken
 
-    private Integer aktif = 2; // Varsayılan filtre değeri
-    private String isim = "";  // Varsayılan isim filtresi
-
-    public void KisiEkle(Kisi kisi) {
+    public void KisiEkle(KisiAdres kisiAdres) {
         try {
             Connection conn = this.getDb();
 
             String callQuery = "{call INSERT_KISI_ADRES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
-            cs.setInt(1, kisi.getKisi_adres_id());
-            cs.setString(2, kisi.getİlce());
+            cs.setString(1, kisiAdres.getTarif());
+            cs.setString(2, kisiAdres());
             cs.setString(3, kisi.getTarif());
             cs.setString(4, kisi.getSite());
             cs.setInt(5, kisi.getKapi_no());
@@ -69,33 +65,24 @@ public class KisiAdresDAO extends DBConnection {
             queryBuilder.append("SELECT KA.KISI_ADRES_ID, KA.ILCE, KA.TARIF, KA.SITE, KA.KAPI_NO, KA.KISI_ADRES_MAHALLE_ID, KMS.SOKAK_ISIM, KA.KAYIT_TARIHI, KA.AKTIF FROM");
             queryBuilder.append("KISI_ADRES KA JOIN KISI_ADRES_MAHALLE M ON M.KISI_ADRES_MAHALLE_ID = KA.KISI_ADRES_MAHALLE_ID");
             queryBuilder.append("JOIN KISI_MAHALLE_SOKAK KMS ON KMS.MAHALLE_ID = M.KISI_ADRES_MAHALLE_ID WHERE 1=1");
-            if (id != 0) {
-                queryBuilder.append("AND ").append(id).append(" ");
-            }
-
-            if (!isim.isEmpty()) {
-                queryBuilder.append("AND  '%").append(isim).append("%' ");
-            }
 
             Statement statement = getDb().createStatement();
             ResultSet rs = statement.executeQuery(queryBuilder.toString());
 
             while (rs.next()) {
                 kisiAdresList.add(new KisiAdres(
-                        rs.getInt("KISI_ADRES_ID"),
-                        rs.getString("ILCE"),
                         rs.getString("TARIF"),
                         rs.getString("SITE"),
+                        rs.getInt("DAIRE_NO"),
                         rs.getInt("KAPI_NO"),
-                        rs.getInt("ADRES_NO"),
-                        rs.getInt("KISI_ADRES_MAHALLE_ID"),
-                        rs.getInt("KISI_MAHALLE_SOKAK_ID"),
-                        rs.getDate("KAYIT_TARIHI"),
+                        rs.getString("KISI_ADRES_MAHALLE_ID"),
+                        rs.getString("KISI_MAHALLE_SOKAK_ID"),
+                        new java.util.Date(rs.getDate("KAYIT_TARIHI").getTime()),
                         rs.getInt("AKTIF")
                 ));
             }
 
-            this.islemBasariliMesaj = "işlem başarılı";
+            this.mesaj= "işlem başarılı";
 
         } catch (Exception ex) {
             DetectError(ex);
@@ -119,6 +106,8 @@ public class KisiAdresDAO extends DBConnection {
         }
         return TipList;
 
+    }
+    
 
     public Connection getDb() {
         if (this.db == null) {

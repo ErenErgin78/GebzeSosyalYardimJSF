@@ -13,13 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 public class KisiDAO extends DBConnection {
 
     private Connection db;
     private String mesaj; // Başarı mesajı için değişken
 
-    private Integer aktif = 2; // Varsayılan filtre değeri
-    private String isim = "";  // Varsayılan isim filtresi
 
     // Kisi ekleme metodu
     public void KisiEkle(Kisi kisi) {
@@ -37,7 +36,6 @@ public class KisiDAO extends DBConnection {
             cs.setInt(7, kisi.getSira_no());
             cs.setInt(8, kisi.getDoğum_tarihi());
             cs.setInt(9, kisi.getMedeni_durum_id());
-            cs.setDate(10, kisi.getKayit_tarihi());
             cs.setInt(11, kisi.getAktif());
 
             cs.execute();
@@ -68,16 +66,9 @@ public class KisiDAO extends DBConnection {
 
         try {
             StringBuilder queryBuilder = new StringBuilder();
-            queryBuilder.append("SELECT KISI_ID, KIMLIK_NO, ISIM, SOYISIM, CINSIYET, CILT_NO, AILE_SIRA_NO, SIRA_NO, DOGUM_TARIHI, MEDENI_DURUM_ID, KAYIT_TARIHI, AKTIF FROM KISI_TEMEL KT JOIN KISI_MEDENI_DURUM M ON M.MEDENI_DURUM_ID = KT.MEDENI_DURUM_ID WHERE 1=1 ");
-
-            // Eğer filtreleme koşulları varsa ekleyin
-            if (aktif != 2) {
-                queryBuilder.append("AND AKTIF = ").append(aktif).append(" ");
-            }
-
-            if (!isim.isEmpty()) {
-                queryBuilder.append("AND KISI_ISIM LIKE '%").append(isim.toUpperCase()).append("%' ");
-            }
+            queryBuilder.append("SELECT KISI_ID, KIMLIK_NO, ISIM, SOYISIM, CINSIYET, CILT_NO, AILE_SIRA_NO, SIRA_NO, DOGUM_TARIHI, MEDENI_DURUM_ID, KAYIT_TARIHI, AKTIF FROM KISI_TEMEL KT ");
+            queryBuilder.append("JOIN KISI_MEDENI_DURUM M ON M.MEDENI_DURUM_ID = KT.MEDENI_DURUM_ID WHERE 1=1");
+            
             Statement statement = getDb().createStatement();
             ResultSet rs = statement.executeQuery(queryBuilder.toString());
 
@@ -105,7 +96,6 @@ public class KisiDAO extends DBConnection {
         return kisiList;
     }
 
-    // Veritabanı bağlantısını döndüren metod
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();
@@ -113,7 +103,6 @@ public class KisiDAO extends DBConnection {
         return db;
     }
 
-    // Setter ve Getter metodları
     public void setDb(Connection db) {
         this.db = db;
     }
@@ -124,21 +113,5 @@ public class KisiDAO extends DBConnection {
 
     public void setMesaj(String mesaj) {
         this.mesaj = mesaj;
-    }
-
-    public Integer getAktif() {
-        return aktif;
-    }
-
-    public void setAktif(Integer aktif) {
-        this.aktif = aktif;
-    }
-
-    public String getIsim() {
-        return isim;
-    }
-
-    public void setIsim(String isim) {
-        this.isim = isim;
     }
 }
