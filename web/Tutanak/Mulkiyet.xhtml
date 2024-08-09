@@ -38,7 +38,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="aktif" class="form-label">Ev Durumu:</label>
-                                    <h:selectOneMenu id="aktif" value="#{userBean.dao.aktif}" class="form-control" style="width: 200px;">
+                                    <h:selectOneMenu id="aktif" value="#{userBean.dao.aktif}" class="form-control">
                                         <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
                                         <f:selectItem itemLabel="Kira" itemValue="E" />                                   
                                         <f:selectItem itemLabel="Ev Sahibi" itemValue="K" />                                 
@@ -47,18 +47,18 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="sicil" class="form-label">Ev Durumu Açıklama:</label>
-                                    <h:inputText id="sic" value="#{userBean.dao.sicil}" class="form-control" style="width: 200px;" />
+                                    <h:inputText id="sic" value="#{userBean.dao.sicil}" class="form-control" />
                                     <f:ajax event="keyup" render="KullaniciListesi" />
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label for="sicil" class="form-label">Kira Miktarı:</label>
-                                    <h:inputText id="sicil" value="#{userBean.dao.sicil}" class="form-control" style="width: 200px;" />
+                                    <h:inputText id="sicil" value="#{userBean.dao.sicil}" class="form-control" />
                                     <f:ajax event="keyup" render="KullaniciListesi" />
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="aktif" class="form-label">Ev Tipi:</label>
-                                    <h:selectOneMenu id="aktf" value="#{userBean.dao.aktif}" class="form-control" style="width: 200px;">
+                                    <h:selectOneMenu id="aktf" value="#{userBean.dao.aktif}" class="form-control">
                                         <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                                 
                                         <f:selectItem itemLabel="Müstakil Ev" itemValue="E" />
                                         <f:selectItem itemLabel="Daire" itemValue="K" />                                 
@@ -67,7 +67,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="aktif" class="form-label">Yakacak Tipi:</label>
-                                    <h:selectOneMenu id="akti" value="#{userBean.dao.aktif}" class="form-control" style="width: 200px;">
+                                    <h:selectOneMenu id="akti" value="#{userBean.dao.aktif}" class="form-control">
                                         <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
                                         <f:selectItem itemLabel="Soba" itemValue="E" />
                                         <f:selectItem itemLabel="Doğalgaz" itemValue="E" />
@@ -75,7 +75,7 @@
                                         <f:ajax event="valueChange" render="KullaniciListesi" />
                                     </h:selectOneMenu>
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-md-2" style="margin-top: 10px;">
                                     <label for="durum">Kirada evi var mı:</label>
                                     <div class="custom-radio">
                                         <h:selectOneRadio id="durum" value="#{userBean.entity.kullanici_durum}"  styleClass="radio-inline">
@@ -86,42 +86,49 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="sicil" class="form-label">Kaç evi var:</label>
-                                    <h:inputText id="icil" value="#{userBean.dao.sicil}" class="form-control" style="width: 200px;" />
+                                    <h:inputText id="icil" value="#{userBean.dao.sicil}" class="form-control" />
                                     <f:ajax event="keyup" render="KullaniciListesi" />
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="sicil" class="form-label">Kira Geliri:</label>
-                                    <h:inputText id="si" value="#{userBean.dao.sicil}" class="form-control" style="width: 200px;" />
+                                    <h:inputText id="si" value="#{userBean.dao.sicil}" class="form-control" />
                                     <f:ajax event="keyup" render="KullaniciListesi" />
-                                </div>
-                                
-                                <div class="form-group col-md-2">
-                                    <label for="durum">Arabası var mı:</label>
-                                    <div class="custom-radio">
-                                        <h:selectOneRadio id="durum" value="#{userBean.entity.kullanici_durum}"  styleClass="radio-inline">
-                                            <f:selectItem itemLabel="Evet" itemValue="1" />
-                                            <f:selectItem itemLabel="Hayır" itemValue="2" />                                     
-                                        </h:selectOneRadio>
-                                    </div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="address_desc">Araba Marka/Model:</label>
-                                    <h:inputTextarea id="address_des" class="form-control" rows="1" value="#{userBean.entity.kullanici_adres}" style="width: 250px;" />
+                                    <h:inputTextarea id="address_des" class="form-control" rows="1" value="#{userBean.entity.kullanici_adres}" />
                                 </div>
+                                <div class="form-group col-md-6" style="margin-bottom: 20px;">
+                                    <label for="addres_desc">Gayrimenkul Türü:</label>
+                                    <h:inputTextarea id="address_des" class="form-control" rows="1" value="#{userBean.entity.kullanici_adres}" />
+                                </div>
+                            </div>
+
+                            <div class="form-row">
                                 <div class="form-group col-md-2">
-                                    <label for="durum">Gayrimenkul var mı:</label>
+                                    <label for="durum">Arabası var mı:</label>
                                     <div class="custom-radio">
-                                        <h:selectOneRadio id="durum" value="#{userBean.entity.kullanici_durum}"  styleClass="radio-inline">
+                                        <h:selectOneRadio id="drum" value="#{userBean.entity.kullanici_durum}"  styleClass="radio-inline">
                                             <f:selectItem itemLabel="Evet" itemValue="1" />
                                             <f:selectItem itemLabel="Hayır" itemValue="2" />                                     
                                         </h:selectOneRadio>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label for="address_desc">Gayrimenkul Türü:</label>
-                                    <h:inputTextarea id="address_des" class="form-control" rows="1" value="#{userBean.entity.kullanici_adres}" style="width: 250px;" />
+                                <div class="form-group col-md-2" style="margin-left: 610px;">
+                                    <label for="durum">Gayrimenkul var mı: </label>
+                                    <div class="custom-radio">
+                                        <h:selectOneRadio id="duum" value="#{userBean.entity.kullanici_durum}"  styleClass="radio-inline">
+                                            <f:selectItem itemLabel="Evet" itemValue="1" />
+                                            <f:selectItem itemLabel="Hayır" itemValue="2" />                                     
+                                        </h:selectOneRadio>
+                                    </div>
                                 </div>
+
                             </div>
+
+
+
+
 
 
 
