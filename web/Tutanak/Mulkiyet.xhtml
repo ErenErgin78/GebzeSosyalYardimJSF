@@ -36,11 +36,10 @@
                                 <div class="card-header">
                                     Mülkiyet Bilgileri
                                 </div>
-                                <div class="info-message">Lütfen bilgilerinizi kontrol ediniz</div> 
                             </div>
                             <div class="card-body">
                                 <div class="form-row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6 mb-3 ">
                                         <label for="aktif" class="form-label">Ev Durumu:</label>
                                         <h:selectOneMenu id="aktif" value="#{userBean.dao.aktif}" class="form-control">
                                             <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
@@ -49,18 +48,20 @@
                                             <f:ajax event="valueChange" render="KullaniciListesi" />
                                         </h:selectOneMenu>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6 mb-3">
                                         <label for="sicil" class="form-label">Ev Durumu Açıklama:</label>
                                         <h:inputText id="sic" value="#{userBean.dao.sicil}" class="form-control" />
                                         <f:ajax event="keyup" render="KullaniciListesi" />
                                     </div>
+                                </div>
+                                <div class="form-row">
 
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6 mb-3">
                                         <label for="sicil" class="form-label">Kira Miktarı:</label>
                                         <h:inputText id="sicil" value="#{userBean.dao.sicil}" class="form-control" />
                                         <f:ajax event="keyup" render="KullaniciListesi" />
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6 mb-3">
                                         <label for="aktif" class="form-label">Ev Tipi:</label>
                                         <h:selectOneMenu id="aktf" value="#{userBean.dao.aktif}" class="form-control">
                                             <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                                 
@@ -69,7 +70,9 @@
                                             <f:ajax event="valueChange" render="KullaniciListesi" />
                                         </h:selectOneMenu>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6 mb-3">
                                         <label for="aktif" class="form-label">Yakacak Tipi:</label>
                                         <h:selectOneMenu id="akti" value="#{userBean.dao.aktif}" class="form-control">
                                             <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
@@ -79,7 +82,7 @@
                                             <f:ajax event="valueChange" render="KullaniciListesi" />
                                         </h:selectOneMenu>
                                     </div>
-                                    <div class="form-group col-md-2" style="margin-top: 10px;">
+                                    <div class="form-group col-md-2 mb-3">
                                         <label for="durum">Kirada evi var mı:</label>
                                         <div class="custom-radio">
                                             <h:selectOneRadio id="durum" value="#{userBean.entity.kullanici_durum}"  styleClass="radio-inline">
@@ -88,16 +91,20 @@
                                             </h:selectOneRadio>
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6 mb-3">
                                         <label for="sicil" class="form-label">Kaç evi var:</label>
                                         <h:inputText id="icil" value="#{userBean.dao.sicil}" class="form-control" />
                                         <f:ajax event="keyup" render="KullaniciListesi" />
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6 mb-3">
                                         <label for="sicil" class="form-label">Kira Geliri:</label>
                                         <h:inputText id="si" value="#{userBean.dao.sicil}" class="form-control" />
                                         <f:ajax event="keyup" render="KullaniciListesi" />
                                     </div>
+                                    </div>
+                                <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="address_desc">Araba Marka/Model:</label>
                                         <h:inputTextarea id="address_des" class="form-control" rows="1" value="#{userBean.entity.kullanici_adres}" />
@@ -107,7 +114,6 @@
                                         <h:inputTextarea id="address_des" class="form-control" rows="1" value="#{userBean.entity.kullanici_adres}" />
                                     </div>
                                 </div>
-
                                 <div class="form-row">
                                     <div class="form-group col-md-2">
                                         <label for="durum">Arabası var mı:</label>
@@ -118,7 +124,7 @@
                                             </h:selectOneRadio>
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-2" style="margin-left: 610px;">
+                                    <div class="form-group col-md-2" style="margin-left: 450px;">
                                         <label for="durum">Gayrimenkul var mı: </label>
                                         <div class="custom-radio">
                                             <h:selectOneRadio id="duum" value="#{userBean.entity.kullanici_durum}"  styleClass="radio-inline">
@@ -127,16 +133,15 @@
                                             </h:selectOneRadio>
                                         </div>
                                     </div>
-
                                 </div>
-
-
-
-
-
-
-
-                                <div class="card-header" style="margin-top: 10px;">
+                                <div class="card-body">
+                                        <div class="text-center mt-3">
+                                            <h:commandButton value="Kaydet" action="#{userBean.create()}" class="btn btn-success">
+                                                <f:ajax execute="@form" render="@form, mesaj" />
+                                            </h:commandButton>                                  
+                                        </div>
+                                    </div>
+                                <div class="card-header">
                                     <nav aria-label="Page navigation example">
                                         <ul class="pagination justify-content-center mb-3">
                                             <li class="page-item">
@@ -146,25 +151,22 @@
                                                 <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/YakinlikBilgileri.xhtml" data-toggle="tooltip" title="Yakınlık Bilgileri">2</button>
                                             </li>
                                             <li class="page-item">
-                                                <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/EngelBilgisi.xhtml" data-toggle="tooltip" title="Sağlık ve Engel Bilgisi">4</button>
+                                                <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/EngelBilgisi.xhtml" data-toggle="tooltip" title="Sağlık ve Engel Bilgisi">3</button>
                                             </li>
                                             <li class="page-item">
-                                                <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/AileGelir.xhtml" data-toggle="tooltip" title="Aile Gelir Bilgileri">5</button>
+                                                <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/GelirBorc.xhtml" data-toggle="tooltip" title="Aile Gelir ve Borç Bilgileri">4</button>
                                             </li>
                                             <li class="page-item">
-                                                <button type="button" class="btn btn-secondary" data-page="Tutanak/Mulkiyet.xhtml" data-toggle="tooltip" title="Mülkiyet Bilgileri">6</button>
+                                                <button type="button" class="btn btn-secondary" data-page="Tutanak/Mulkiyet.xhtml" data-toggle="tooltip" title="Mülkiyet Bilgileri">5</button>
                                             </li>
                                             <li class="page-item">
-                                                <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/Borc.xhtml" data-toggle="tooltip" title="Borç Bilgileri">7</button>
+                                                <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/SosyalGuvence.xhtml" data-toggle="tooltip" title="Sosyal Güvence Bilgisi">6</button>
                                             </li>
                                             <li class="page-item">
-                                                <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/SosyalGuvence.xhtml" data-toggle="tooltip" title="Sosyal Güvence Bilgisi">8</button>
+                                                <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/TalepYardim.xhtml" data-toggle="tooltip" title="Talep Edilen Yardımlar">7</button>
                                             </li>
                                             <li class="page-item">
-                                                <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/TalepYardim.xhtml" data-toggle="tooltip" title="Talep Edilen Yardımlar">9</button>
-                                            </li>
-                                            <li class="page-item">
-                                                <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/TutanakInceleme.xhtml" data-toggle="tooltip" title="Tutanak İnceleme">10</button>
+                                                <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/TutanakInceleme.xhtml" data-toggle="tooltip" title="Tutanak İnceleme">8</button>
                                             </li>
                                         </ul>
                                     </nav>
