@@ -3362,3 +3362,38 @@ create or replace TRIGGER TRG_KISI_DETAY_GUNCELLEME
                                END;
                                
 ALTER TABLE KISI_DETAY ADD ASKERLIK_ID NUMBER NULL
+
+create or replace PROCEDURE INSERT_KISI_ADRES (
+
+    p_tarif IN KISI_ADRES.TARIF%TYPE,
+    p_site IN KISI_ADRES.SITE%TYPE,
+    p_kapi_no IN KISI_ADRES.KAPI_NO%TYPE,
+    p_daire_no IN KISI_ADRES.DAIRE_NO%TYPE,
+    p_mahalle_id IN KISI_ADRES.KISI_ADRES_MAHALLE_ID%TYPE,
+    p_mahalle_sokak_id IN KISI_ADRES.KISI_MAHALLE_SOKAK_ID%TYPE,
+    p_aktif IN NUMBER,
+    p_kisi_adres_id OUT KISI_ADRES.KISI_ADRES_ID%TYPE
+    
+) AS
+BEGIN
+    INSERT INTO KISI_ADRES (
+        TARIF, 
+        SITE, 
+        KAPI_NO, 
+        DAIRE_NO,  
+        KISI_ADRES_MAHALLE_ID, 
+        KISI_MAHALLE_SOKAK_ID,
+        AKTIF
+        
+    ) 
+    VALUES (
+        p_mahalle_id, 
+        p_tarif, 
+        p_site, 
+        p_kapi_no, 
+        p_daire_no, 
+        p_mahalle_sokak_id,
+        p_aktif
+    )
+    RETURNING KISI_ADRES_ID INTO p_kisi_adres_id;
+END;
