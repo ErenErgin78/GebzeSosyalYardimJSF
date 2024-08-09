@@ -36,61 +36,61 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-6 mb-3">
                                                 <label for="isim2" class="form-label">Kim için:</label>
                                                 <h:inputText id="isim2" value="#{userBean.dao.isim}" class="form-control" />                                               
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-6 mb-3">
                                                 <label for="registration_status">Engelli Alt Tip/Grup:</label>
                                                 <h:selectOneMenu id="registration_status" value="#{mahalleBean.entity.mahalle_aktif}" class="form-control">
                                                     <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="1" />
                                                 </h:selectOneMenu>
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-6 mb-3">
                                                 <label for="other_info1">TC Kimlik No:</label>
                                                 <h:inputText id="other_info1" value="" class="form-control" />
                                             </div>                                                                                                                           
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-6 mb-3">
                                                 <label for="registration_status">Engelli Tip/Grup:</label>
                                                 <h:selectOneMenu id="registration_status" value="#{mahalleBean.entity.mahalle_aktif}" class="form-control">
                                                     <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="1" />
                                                 </h:selectOneMenu>
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-6 mb-3">
                                                 <label for="other_info2">Ad:</label>
                                                 <h:inputText id="other_info2" value="" class="form-control" />
                                             </div>
-                                            
-                                            
-                                            <div class="form-group col-md-6">
+
+
+                                            <div class="form-group col-md-6 mb-3">
                                                 <label for="registration_status">Engel Başlangıç Zamanı:</label>
                                                 <h:selectOneMenu id="registration_status" value="#{mahalleBean.entity.mahalle_aktif}" class="form-control">
-                                                    <f:selectItem itemLabel="Doğuştan" itemValue="1" />
+                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="1" />
                                                 </h:selectOneMenu>
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-6 mb-3">
                                                 <label for="other_info2">Soyad:</label>
                                                 <h:inputText id="other_info2" value="" class="form-control" />
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-6 mb-3">
                                                 <label for="other_info2">Engel Derece:</label>
                                                 <h:inputText id="other_info2" value="" class="form-control" />
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-6 mb-3">
                                                 <label for="other_info2">Cinsiyet:</label>
                                                 <h:inputText id="other_info2" value="" class="form-control" />
                                             </div>
-                                            
-                                             <div class="form-group col-md-6">
+
+                                            <div class="form-group col-md-6 mb-3">
                                                 <label for="sicil2" class="form-label">Varsa hastalık adı:</label>
                                                 <h:inputText id="sicil2" value="#{userBean.dao.sicil}" class="form-control" />
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-6 mb-3">
                                                 <label for="other_info2">Doğum Tarihi:</label>
                                                 <h:inputText id="other_info2" value="" class="form-control" />
                                             </div>
-                                           
-                                            <div class="form-group col-md-6">
+
+                                            <div class="form-group col-md-6 mb-3">
                                                 <label for="address_desc">Genel Açıklama:</label>
                                                 <h:inputTextarea id="address_desc" class="form-control" rows="1" value="#{userBean.entity.kullanici_adres}" />
                                             </div>
@@ -110,28 +110,22 @@
                                                     <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/YakinlikBilgileri.xhtml" data-toggle="tooltip" title="Yakınlık Bilgileri">2</button>
                                                 </li>
                                                 <li class="page-item">
-                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/AileNufus.xhtml" data-toggle="tooltip" title="Aile Nüfus Bilgileri">3</button>
+                                                    <button type="button" class="btn btn-secondary" data-page="Tutanak/EngelBilgisi.xhtml" data-toggle="tooltip" title="Sağlık ve Engel Bilgisi">3</button>
                                                 </li>
                                                 <li class="page-item">
-                                                    <button type="button" class="btn btn-secondary" data-page="Tutanak/EngelBilgisi.xhtml" data-toggle="tooltip" title="Sağlık ve Engel Bilgisi">4</button>
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/GelirBorc.xhtml" data-toggle="tooltip" title="Aile Gelir ve Borç Bilgileri">4</button>
                                                 </li>
                                                 <li class="page-item">
-                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/AileGelir.xhtml" data-toggle="tooltip" title="Aile Gelir Bilgileri">5</button>
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/Mulkiyet.xhtml" data-toggle="tooltip" title="Mülkiyet Bilgileri">5</button>
                                                 </li>
                                                 <li class="page-item">
-                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/Mulkiyet.xhtml" data-toggle="tooltip" title="Mülkiyet Bilgileri">6</button>
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/SosyalGuvence.xhtml" data-toggle="tooltip" title="Sosyal Güvence Bilgisi">6</button>
                                                 </li>
                                                 <li class="page-item">
-                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/Borc.xhtml" data-toggle="tooltip" title="Borç Bilgileri">7</button>
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/TalepYardim.xhtml" data-toggle="tooltip" title="Talep Edilen Yardımlar">7</button>
                                                 </li>
                                                 <li class="page-item">
-                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/SosyalGuvence.xhtml" data-toggle="tooltip" title="Sosyal Güvence Bilgisi">8</button>
-                                                </li>
-                                                <li class="page-item">
-                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/TalepYardim.xhtml" data-toggle="tooltip" title="Talep Edilen Yardımlar">9</button>
-                                                </li>
-                                                <li class="page-item">
-                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/TutanakInceleme.xhtml" data-toggle="tooltip" title="Tutanak İnceleme">10</button>
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/TutanakInceleme.xhtml" data-toggle="tooltip" title="Tutanak İnceleme">8</button>
                                                 </li>
                                             </ul>
                                         </nav>
