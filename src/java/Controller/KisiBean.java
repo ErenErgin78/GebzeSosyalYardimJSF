@@ -29,21 +29,14 @@ public class KisiBean implements Serializable {
         sokakList = new ArrayList<>();
     }
 
-    public void create() {
+    public void ekle() {
 
-        this.getDao().Create(getEntity());
+        this.getDao().KisiEkle(getEntity());
     }
 
-    public void delete(int KisiID) {
-        this.getDao().DeleteKisi(KisiID);
-        this.list = this.getDao().GetList(); // Silme işleminden sonra listeyi güncelle
-    }
-
-    public void sorgula() {
-        Kisi kisi = new Kisi();
-        kisi.setKimlik_no(this.entity.getKimlik_no());
-        this.getDao().Sorgula(kisi);
-        this.entity = kisi;
+    public void KisiSil(int kisiID) {
+        this.getDao().KisiSil(kisiID);
+        this.list = this.getDao().KisiListesi(); // Silme işleminden sonra listeyi güncelle
     }
 
     //Muracaat Girişte dinamik mahalle ve sokak değişimi için
@@ -70,7 +63,7 @@ public class KisiBean implements Serializable {
         if (this.entity == null) {
             this.entity = new Kisi();
         }
-        entity.setMahalle_id(selectedMahalleId);
+        entity.setKisi_id(selectedMahalleId);
         return this.entity;
     }
 
@@ -91,7 +84,7 @@ public class KisiBean implements Serializable {
 
     public List<Kisi> getList() {
         if (this.list == null) {
-            this.list = this.getDao().GetList();
+            this.list = this.getDao().KisiListesi();
         }
         return this.list;
     }

@@ -2,6 +2,7 @@ package dao;
 
 import Entity.Kisi;
 import static Various.ErrorFinder.DetectError;
+import jakarta.faces.model.SelectItem;
 import util.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,13 +13,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class KisiDAO extends DBConnection {
 
     private Connection db;
     private String mesaj; // Başarı mesajı için değişken
-
 
     // Kisi ekleme metodu
     public void KisiEkle(Kisi kisi) {
@@ -36,7 +34,7 @@ public class KisiDAO extends DBConnection {
             cs.setInt(7, kisi.getSira_no());
             cs.setInt(8, kisi.getDoğum_tarihi());
             cs.setInt(9, kisi.getMedeni_durum_id());
-            cs.setInt(11, kisi.getAktif());
+            cs.setInt(10, kisi.getAktif());
 
             cs.execute();
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
@@ -60,6 +58,42 @@ public class KisiDAO extends DBConnection {
         }
     }
 
+    public List<SelectItem> MahalleGetir() {
+        List<SelectItem> MahalleList = new ArrayList<>();
+
+        try {
+            Statement statement = getDb().createStatement();
+            String Selectquery = "SELECT KISI_ADRES_MAHALLE_ID, MAHALLE FROM KISI_ADRES_MAHALLE";
+            ResultSet rs = statement.executeQuery(Selectquery);
+
+            while (rs.next()) {
+                MahalleList.add(new SelectItem(rs.getInt("KISI_ADRES_MAHALLE_ID"), rs.getString("MAHALLE")));
+            }
+        } catch (Exception ex) {
+            DetectError(ex);
+        }
+        return MahalleList;
+    }
+
+    public List<SelectItem> SokakGetir(int selectedmahalleid) {
+        List<SelectItem> MahalleList = new ArrayList<>();
+
+        try {
+            Statement statement = getDb().createStatement();
+            String Selectquery = "SELECT SOKAK_ID, SOKAK_ISIM FROM KISI_MAHALLE_SOKAK WHERE MAHALLE_ID = " + selectedmahalleid;
+            ResultSet rs = statement.executeQuery(Selectquery);
+
+            while (rs.next()) {
+
+                MahalleList.add(new SelectItem(rs.getInt("SOKAK_ID"), rs.getString("SOKAK_ISIM")));
+            }
+
+        } catch (Exception ex) {
+            DetectError(ex);
+        }
+        return MahalleList;
+    }
+
     // Kisi listesini çekme metodu
     public List<Kisi> KisiListesi() {
         List<Kisi> kisiList = new ArrayList<>();
@@ -68,7 +102,7 @@ public class KisiDAO extends DBConnection {
             StringBuilder queryBuilder = new StringBuilder();
             queryBuilder.append("SELECT KISI_ID, KIMLIK_NO, ISIM, SOYISIM, CINSIYET, CILT_NO, AILE_SIRA_NO, SIRA_NO, DOGUM_TARIHI, MEDENI_DURUM_ID, KAYIT_TARIHI, AKTIF FROM KISI_TEMEL KT ");
             queryBuilder.append("JOIN KISI_MEDENI_DURUM M ON M.MEDENI_DURUM_ID = KT.MEDENI_DURUM_ID WHERE 1=1");
-            
+
             Statement statement = getDb().createStatement();
             ResultSet rs = statement.executeQuery(queryBuilder.toString());
 
@@ -80,7 +114,7 @@ public class KisiDAO extends DBConnection {
                         rs.getString("CINSIYET"),
                         rs.getInt("CILT_NO"),
                         rs.getInt("AILE_SIRA_NO"),
-                        rs.getInt("SIRA_NO"), 
+                        rs.getInt("SIRA_NO"),
                         rs.getInt("DOGUM_TARIHI"),
                         rs.getString("MEDENI_DURUM_ISIM"),
                         rs.getDate("KAYIT_TARIHI"),

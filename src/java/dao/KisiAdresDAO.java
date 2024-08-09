@@ -23,20 +23,20 @@ public class KisiAdresDAO extends DBConnection {
         try {
             Connection conn = this.getDb();
 
-            String callQuery = "{call INSERT_KISI_ADRES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            String callQuery = "{call INSERT_KISI_ADRES(?, ?, ?, ?, ?, ?, ?, ?,)}";
             CallableStatement cs = conn.prepareCall(callQuery);
             cs.setString(1, kisiAdres.getTarif());
-            cs.setString(2, kisiAdres());
-            cs.setString(3, kisi.getTarif());
-            cs.setString(4, kisi.getSite());
-            cs.setInt(5, kisi.getKapi_no());
-            cs.setInt(6, kisi.getDaire_no());
-            cs.setInt(7, kisi.getKisi_adres_mahalle_id());
-            cs.setInt(8, kisi.getKisi_mahalle_sokak_id());
-            cs.setDate(9, kisi.getKayit_tarihi());
-            cs.setInt(10, kisi.getAktif());
+            cs.setString(2, kisiAdres.getSite());
+            cs.setInt(3, kisiAdres.getKapi_no());
+            cs.setInt(4, kisiAdres.getDaire_no());
+            cs.setString(5, kisiAdres.getKisi_adres_mahalle_isim());
+            cs.setString(6, kisiAdres.getKisi_mahalle_sokak_isim());
+            java.util.Date kayitTarihiUtil = kisiAdres.getKayit_tarihi();
+            java.sql.Date kayitTarihiSql = new java.sql.Date(kayitTarihiUtil.getTime());
+            cs.setDate(7, kayitTarihiSql);
+            cs.setInt(8, kisiAdres.getAktif());
 
-            this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (Exception ex) {
             DetectError(ex);
         }
@@ -51,7 +51,7 @@ public class KisiAdresDAO extends DBConnection {
             ps.setInt(1, kisiAdresid);
             int rowsDeleted = ps.executeUpdate();
 
-            this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
             DetectError(ex);
         }
@@ -82,7 +82,7 @@ public class KisiAdresDAO extends DBConnection {
                 ));
             }
 
-            this.mesaj= "işlem başarılı";
+            this.mesaj = "işlem başarılı";
 
         } catch (Exception ex) {
             DetectError(ex);
@@ -107,7 +107,6 @@ public class KisiAdresDAO extends DBConnection {
         return TipList;
 
     }
-    
 
     public Connection getDb() {
         if (this.db == null) {
