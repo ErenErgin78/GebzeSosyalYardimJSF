@@ -42,12 +42,14 @@ public class UserBean implements Serializable {
 
             try {
                 context.getExternalContext().redirect("index.xhtml");
+                context.addMessage(null, null);
             } catch (IOException e) {
             }
         } else {
             context.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Kullanıcı adı veya şifre hatalıdır", null));
         }
+        
     }
 
     public String cikis() {

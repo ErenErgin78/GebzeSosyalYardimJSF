@@ -65,32 +65,7 @@
                                             <f:selectItem itemLabel="Kadın" itemValue="K" />
                                         </h:selectOneRadio>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="registration_status">Kayıt Durumu</label>
-                                    <h:selectOneMenu id="registration_status" class="form-control">
-                                        <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
-                                        <f:selectItem itemLabel="Durum Değişikliği" itemValue="DurumDegişikligi" />
-                                        <f:selectItem itemLabel="Eski Kayıt" itemValue="EskiKayit" />
-                                        <f:selectItem itemLabel="Yeni Kayıt" itemValue="YeniKayit" />
-                                    </h:selectOneMenu>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="registration_city">N. Kayıtlı Olduğu İl</label>
-                                        <h:selectOneMenu id="registration_city" class="form-control" readonly = "true">
-                                            <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
-                                            <!-- Add more options as needed -->
-                                        </h:selectOneMenu>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="registration_district">N. Kayıtlı Olduğu İlçe</label>
-                                        <h:selectOneMenu id="registration_district" class="form-control" readonly = "true">
-                                            <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
-                                            <!-- Add more options as needed -->
-                                        </h:selectOneMenu>
-                                    </div>
-                                </div>
+                                </div>             
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label for="family_order_no">Aile Sıra No</label>
@@ -124,28 +99,11 @@
                                         </h:selectOneMenu>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card mt-3">
-                                <div class="card-header">Adres Bilgileri</div>
-                                <div class="card-body">
-                                    <h:commandButton value="Adres Getir"  class="btn btn-secondary mb-2" />
-                                    <div class="form-group">
-                                        <label for="address_no">Adres No</label>
-                                        <h:inputText id="address_no" value="#{kisiBean.entity.adres_no}" class="form-control" />
-                                    </div>
-                                </div>
-                            </div>
+                            </div>             
                             <div class="card mt-3">
                                 <div class="card-header">İletişim Bilgileri</div>
                                 <div class="card-body">
-                                    <div class="form-row">
-                                        <div class="form-group col-md-4">
-                                            <label for="city">İlçe</label>
-                                            <h:selectOneMenu id="city" value = "#{kisiBean.entity.ilce}" class="form-control">
-                                                <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
-                                                <f:selectItem itemLabel="GEBZE" itemValue="gebze" />
-                                            </h:selectOneMenu>
-                                        </div>
+                                    <div class="form-row">         
                                         <div class="form-group col-md-4">
                                             <label for="neighborhood">Mahalle</label>
                                             <h:selectOneMenu id="neighborhood" value = "#{kisiBean.selectedMahalleId}" class="form-control">
