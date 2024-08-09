@@ -13,14 +13,14 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>            
             <li class="breadcrumb-item active" aria-current="page">İşlemler</li>
-            <li class="breadcrumb-item active"><a href="#" class="load-page-button" data-page="Tutanak/tutanakgiris.xhtml">Tutanak Giriş</a></li>
+            <li class="breadcrumb-item active"><a href="#" class="load-page-button" data-page="Tutanak/MuracaatSecim.xhtml">Müracaat Seçim</a></li>
             <li class="breadcrumb-item active" aria-current="page">Yakınlık Bilgileri</li>
         </ol>
     </h:head>
     <h:body>
         <h:form>
             <h:messages globalOnly="true" layout="table"/>
-            <h:outputText id="mesaj" />
+            <h:outputText id="mesaj" value="#{userBean.dao.message}" />
             <div class="container-fluid">               
                 <div class="row">                   
                     <div class="col-md-12">                     
@@ -124,7 +124,7 @@
                                                 <f:selectItem itemLabel="Boşanmış" itemValue="4" />
                                             </h:selectOneRadio>
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-3" style="margin-right: 10px;">
                                         <label for="aktif" class="form-label">Özel Statü:</label>
                                         <h:selectOneMenu id="ak" value="#{userBean.dao.aktif}" class="form-control">
                                             <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                                                        
@@ -138,11 +138,42 @@
                                 <div class="text-center mt-3">
                                     <h:commandButton value="Kaydet" action="#{userBean.create()}" class="btn btn-success">
                                         <f:ajax execute="@form" render="@form, mesaj" />
-                                    </h:commandButton>
-                                    <div class="text-center mt-3">
-                                        <button type="button" class="btn btn-outline-success load-page-button" data-page="Tutanak/tutanaknufus.xhtml">Devam Et</button>
-                                    </div>
+                                    </h:commandButton>                                  
                                 </div>
+                                
+                                <div class="card-header" style="margin-top: 10px;">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center mb-3">
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/MuracaatSecim.xhtml" data-toggle="tooltip" title="Müracaat Seçim">1</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-secondary" data-page="Tutanak/YakinlikBilgileri.xhtml" data-toggle="tooltip" title="Yakınlık Bilgileri">2</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/EngelBilgisi.xhtml" data-toggle="tooltip" title="Sağlık ve Engel Bilgisi">4</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/AileGelir.xhtml" data-toggle="tooltip" title="Aile Gelir Bilgileri">5</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/Mulkiyet.xhtml" data-toggle="tooltip" title="Mülkiyet Bilgileri">6</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/Borc.xhtml" data-toggle="tooltip" title="Borç Bilgileri">7</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/SosyalGuvence.xhtml" data-toggle="tooltip" title="Sosyal Güvence Bilgisi">8</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/TalepYardim.xhtml" data-toggle="tooltip" title="Talep Edilen Yardımlar">9</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/TutanakInceleme.xhtml" data-toggle="tooltip" title="Tutanak İnceleme">10</button>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
                             </div>
                         </div>
                     </div>

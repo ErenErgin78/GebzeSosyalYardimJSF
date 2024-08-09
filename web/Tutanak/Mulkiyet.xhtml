@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Müracaat Seçim</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/list.css" />
+        <h:outputStylesheet name="CSS/styles.css"/>
+    </h:head>
+    <h:body>
+        <h:form id="userForm">
+            <div class="row align-items-center mb-3">
+                <div class="col-10">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">İşlemlerim</li>
+                        <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="Tutanak/MuracaatSecim.xhtml">Müracaat Seçim</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Mülkiyet Bilgileri</li>
+                    </ol>
+                </div>
+
+            </div> 
+            <div class="container-fluid">               
+                <div class="row">                   
+                    <div class="col-md-12">
+                        <div class="card">
+
+                            <div class="card-header">
+                                Mülkiyet Bilgileri
+                            </div>
+                            <div class="info-message">Lütfen bilgilerinizi kontrol ediniz</div> 
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="aktif" class="form-label">Ev Durumu:</label>
+                                    <h:selectOneMenu id="aktif" value="#{userBean.dao.aktif}" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                        <f:selectItem itemLabel="Kira" itemValue="E" />                                   
+                                        <f:selectItem itemLabel="Ev Sahibi" itemValue="K" />                                 
+                                        <f:ajax event="valueChange" render="KullaniciListesi" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="sicil" class="form-label">Ev Durumu Açıklama:</label>
+                                    <h:inputText id="sic" value="#{userBean.dao.sicil}" class="form-control" />
+                                    <f:ajax event="keyup" render="KullaniciListesi" />
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="sicil" class="form-label">Kira Miktarı:</label>
+                                    <h:inputText id="sicil" value="#{userBean.dao.sicil}" class="form-control" />
+                                    <f:ajax event="keyup" render="KullaniciListesi" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="aktif" class="form-label">Ev Tipi:</label>
+                                    <h:selectOneMenu id="aktf" value="#{userBean.dao.aktif}" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                                 
+                                        <f:selectItem itemLabel="Müstakil Ev" itemValue="E" />
+                                        <f:selectItem itemLabel="Daire" itemValue="K" />                                 
+                                        <f:ajax event="valueChange" render="KullaniciListesi" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="aktif" class="form-label">Yakacak Tipi:</label>
+                                    <h:selectOneMenu id="akti" value="#{userBean.dao.aktif}" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                        <f:selectItem itemLabel="Soba" itemValue="E" />
+                                        <f:selectItem itemLabel="Doğalgaz" itemValue="E" />
+                                        <f:selectItem itemLabel="Merkezi Isıtma" itemValue="K" />                                 
+                                        <f:ajax event="valueChange" render="KullaniciListesi" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group col-md-2" style="margin-top: 10px;">
+                                    <label for="durum">Kirada evi var mı:</label>
+                                    <div class="custom-radio">
+                                        <h:selectOneRadio id="durum" value="#{userBean.entity.kullanici_durum}"  styleClass="radio-inline">
+                                            <f:selectItem itemLabel="Evet" itemValue="1" />
+                                            <f:selectItem itemLabel="Hayır" itemValue="2" />                                     
+                                        </h:selectOneRadio>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="sicil" class="form-label">Kaç evi var:</label>
+                                    <h:inputText id="icil" value="#{userBean.dao.sicil}" class="form-control" />
+                                    <f:ajax event="keyup" render="KullaniciListesi" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="sicil" class="form-label">Kira Geliri:</label>
+                                    <h:inputText id="si" value="#{userBean.dao.sicil}" class="form-control" />
+                                    <f:ajax event="keyup" render="KullaniciListesi" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="address_desc">Araba Marka/Model:</label>
+                                    <h:inputTextarea id="address_des" class="form-control" rows="1" value="#{userBean.entity.kullanici_adres}" />
+                                </div>
+                                <div class="form-group col-md-6" style="margin-bottom: 20px;">
+                                    <label for="addres_desc">Gayrimenkul Türü:</label>
+                                    <h:inputTextarea id="address_des" class="form-control" rows="1" value="#{userBean.entity.kullanici_adres}" />
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <label for="durum">Arabası var mı:</label>
+                                    <div class="custom-radio">
+                                        <h:selectOneRadio id="drum" value="#{userBean.entity.kullanici_durum}"  styleClass="radio-inline">
+                                            <f:selectItem itemLabel="Evet" itemValue="1" />
+                                            <f:selectItem itemLabel="Hayır" itemValue="2" />                                     
+                                        </h:selectOneRadio>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-2" style="margin-left: 610px;">
+                                    <label for="durum">Gayrimenkul var mı: </label>
+                                    <div class="custom-radio">
+                                        <h:selectOneRadio id="duum" value="#{userBean.entity.kullanici_durum}"  styleClass="radio-inline">
+                                            <f:selectItem itemLabel="Evet" itemValue="1" />
+                                            <f:selectItem itemLabel="Hayır" itemValue="2" />                                     
+                                        </h:selectOneRadio>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+
+
+
+                            <div class="card-header" style="margin-top: 10px;">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center mb-3">
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/MuracaatSecim.xhtml" data-toggle="tooltip" title="Müracaat Seçim">1</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/YakinlikBilgileri.xhtml" data-toggle="tooltip" title="Yakınlık Bilgileri">2</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/EngelBilgisi.xhtml" data-toggle="tooltip" title="Sağlık ve Engel Bilgisi">4</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/AileGelir.xhtml" data-toggle="tooltip" title="Aile Gelir Bilgileri">5</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-secondary" data-page="Tutanak/Mulkiyet.xhtml" data-toggle="tooltip" title="Mülkiyet Bilgileri">6</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/Borc.xhtml" data-toggle="tooltip" title="Borç Bilgileri">7</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/SosyalGuvence.xhtml" data-toggle="tooltip" title="Sosyal Güvence Bilgisi">8</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/TalepYardim.xhtml" data-toggle="tooltip" title="Talep Edilen Yardımlar">9</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/TutanakInceleme.xhtml" data-toggle="tooltip" title="Tutanak İnceleme">10</button>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+        <script>
+            function confirmDelete(button) {
+                return confirm("Bu kullanıcıyı gerçekten silmek istiyor musunuz?");
+            }
+        </script>
+    </h:body>
+</html>
