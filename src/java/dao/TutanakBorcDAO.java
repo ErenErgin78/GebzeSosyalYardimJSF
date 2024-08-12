@@ -31,7 +31,7 @@ public class TutanakBorcDAO extends DBConnection {
         try {
             Connection conn = this.getDb();
 
-            String callQueryBorc = "{call INSERT_TUTANAK_BORC(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            String callQueryBorc = "{call INSERT_TUTANAK_BORC(?, ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement csBorc = conn.prepareCall(callQueryBorc);
             csBorc.setFloat(1, borc.getElektrik());
             csBorc.setFloat(2, borc.getSu());
@@ -41,8 +41,8 @@ public class TutanakBorcDAO extends DBConnection {
             csBorc.setFloat(6, borc.getDiger());
             csBorc.setString(7, borc.getDiger_aciklama());
             csBorc.registerOutParameter(8, java.sql.Types.INTEGER);
-            borc.setBorc_id(csBorc.getInt(8));
             csBorc.execute();
+            borc.setBorc_id(csBorc.getInt(8));
 
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 

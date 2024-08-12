@@ -42,13 +42,13 @@ public class TutanakGelirDAO extends DBConnection {
             cs.setInt(17, tutanakGelir.getAktif());
             cs.registerOutParameter(18, java.sql.Types.INTEGER);
             cs.execute();
-            
             tutanakGelir.setGelir_id(cs.getInt(18));
+            
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (Exception ex) {
-            DetectError(ex);
-            mesaj = ex.getMessage();
+
+            mesaj =  DetectError(ex);
         }
     }
 
