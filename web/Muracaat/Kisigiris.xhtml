@@ -106,87 +106,87 @@
                                                 <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div>                                                         
-                                    </div>
-                                    <div class="card mt-3">
-                                        <div class="card-body">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    İletişim Bilgileri
-                                                </div>
-                                            </div>
-                                            <div class="card">                         
-                                                <div class="card-body">
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-6 mb-3">
-                                                            <label for="aktif" class="form-label">Mahalle:</label>
-                                                            <h:selectOneMenu id="atsi" value="#{userBean.dao.aktif}" class="form-control">
-                                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                                             
-                                                                <f:ajax event="valueChange" render="KullaniciListesi" />
-                                                            </h:selectOneMenu>
-                                                        </div> 
-                                                        <div class="form-group col-md-6 mb-3">
-                                                            <label for="aktif" class="form-label">Cadde/Sokak:</label>
-                                                            <h:selectOneMenu id="aktiaf" value="#{userBean.dao.aktif}" class="form-control">
-                                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                                                                    
-                                                                <f:ajax event="valueChange" render="KullaniciListesi" />
-                                                            </h:selectOneMenu>
-                                                        </div>                                                         
-                                                    </div>
-                                                    <div class="form-row"> 
-                                                        <div class="form-group col-md-6 mb-3">
-                                                            <label for="email">Bina No:</label>
-                                                            <h:inputText class="form-control" value="#{userBean.entity.sifre}">
-                                                                <f:passThroughAttribute name="type" value="email" />
-                                                            </h:inputText>
-                                                        </div>
-                                                        <div class="form-group col-md-6 mb-3">
-                                                            <label for="email">Daire No:</label>
-                                                            <h:inputText class="form-control" value="#{userBean.entity.kullannici_eposta}">
-                                                                <f:passThroughAttribute name="type" value="email" />
-                                                            </h:inputText>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-6 mb-3">
-                                                                <label for="address_desc">Adres Tarifi:</label>
-                                                                <h:inputTextarea id="address_desc" class="form-control" rows="1" value="#{userBean.entity.kullanici_adres}" />
-                                                            
-                                                        </div>
-                                                        <div class="form-group col-md-6 mb-3">
-                                                            <label for="email">E-posta Adresi:</label>
-                                                            <h:inputText class="form-control" value="#{userBean.entity.sifre}">
-                                                                <f:passThroughAttribute name="type" value="email" />
-                                                            </h:inputText>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-row"> 
-                                                        <div class="form-group col-md-6 mb-3">
-                                                            <label for="email">Ev Telefonu:</label>
-                                                            <h:inputText class="form-control" value="#{userBean.entity.sifre}">
-                                                                <f:passThroughAttribute name="type" value="email" />
-                                                            </h:inputText>
-                                                        </div>
-                                                        <div class="form-group col-md-6 mb-3">
-                                                            <label for="email">Cep Telefonu:</label>
-                                                            <h:inputText class="form-control" value="#{userBean.entity.kullannici_eposta}">
-                                                                <f:passThroughAttribute name="type" value="email" />
-                                                            </h:inputText>
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-                                            </div> 
-                                        </div>
-                                    </div>
-
-                                    <div class="text-center mt-3">
-                                        <h:commandButton value="Kaydet" action="#{userBean.create()}" class="btn btn-success">
-                                            <f:ajax execute="@form" render="@form, mesaj" />
-                                        </h:commandButton>                                  
                                     </div>                                                                       
                                 </div>
+                            </div>
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            İletişim Bilgileri
+                                        </div>
+                                    </div>
+                                    <div class="card">                         
+                                        <div class="card-body">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6 mb-3">
+                                                    <label for="aktif" class="form-label">Mahalle:</label>
+                                                    <h:selectOneMenu id="atsi" value="#{userBean.dao.aktif}" class="form-control">
+                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                                             
+                                                        <f:ajax event="valueChange" render="KullaniciListesi" />
+                                                    </h:selectOneMenu>
+                                                </div> 
+                                                <div class="form-group col-md-6 mb-3">
+                                                    <label for="aktif" class="form-label">Cadde/Sokak:</label>
+                                                    <h:selectOneMenu id="aktiaf" value="#{userBean.dao.aktif}" class="form-control">
+                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                                                                    
+                                                        <f:ajax event="valueChange" render="KullaniciListesi" />
+                                                    </h:selectOneMenu>
+                                                </div>                                                         
+                                            </div>
+                                            <div class="form-row"> 
+                                                <div class="form-group col-md-6 mb-3">
+                                                    <label for="email">Bina No:</label>
+                                                    <h:inputText class="form-control" value="#{userBean.entity.sifre}">
+                                                        <f:passThroughAttribute name="type" value="email" />
+                                                    </h:inputText>
+                                                </div>
+                                                <div class="form-group col-md-6 mb-3">
+                                                    <label for="email">Daire No:</label>
+                                                    <h:inputText class="form-control" value="#{userBean.entity.kullannici_eposta}">
+                                                        <f:passThroughAttribute name="type" value="email" />
+                                                    </h:inputText>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6 mb-3">
+                                                    <label for="address_desc">Adres Tarifi:</label>
+                                                    <h:inputTextarea id="address_desc" class="form-control" rows="1" value="#{userBean.entity.kullanici_adres}" />
+
+                                                </div>
+                                                <div class="form-group col-md-6 mb-3">
+                                                    <label for="email">E-posta Adresi:</label>
+                                                    <h:inputText class="form-control" value="#{userBean.entity.sifre}">
+                                                        <f:passThroughAttribute name="type" value="email" />
+                                                    </h:inputText>
+                                                </div>
+                                            </div>
+                                            <div class="form-row"> 
+                                                <div class="form-group col-md-6 mb-3">
+                                                    <label for="email">Ev Telefonu:</label>
+                                                    <h:inputText class="form-control" value="#{userBean.entity.sifre}">
+                                                        <f:passThroughAttribute name="type" value="email" />
+                                                    </h:inputText>
+                                                </div>
+                                                <div class="form-group col-md-6 mb-3">
+                                                    <label for="email">Cep Telefonu:</label>
+                                                    <h:inputText class="form-control" value="#{userBean.entity.kullannici_eposta}">
+                                                        <f:passThroughAttribute name="type" value="email" />
+                                                    </h:inputText>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+
+                            <div class="text-center mt-3">
+                                <h:commandButton value="Kaydet" action="#{userBean.create()}" class="btn btn-success">
+                                    <f:ajax execute="@form" render="@form, mesaj" />
+                                </h:commandButton>                                  
                             </div>
                         </div>
                     </div>
