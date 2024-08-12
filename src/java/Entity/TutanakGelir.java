@@ -51,7 +51,7 @@ public class TutanakGelir {
     public TutanakGelir() {
     }
 
-    public TutanakGelir(float yaslilik, float engelli, float engelli_yakini, float yetim_ayligi, float emekli_maasi, float evde_bakim_parasi, float dul_maasi, float issizlik_maasi, float asker_maasi, float kira_maasi, float kaymakamlik, float sosyal_hizmetler, float buyuksehir, float ozel_vakif, float diger, String diger_aciklama, Integer aktif) {
+    public TutanakGelir(float yaslilik, float engelli, float engelli_yakini, float yetim_ayligi, float emekli_maasi, float evde_bakim_parasi, float dul_maasi, float issizlik_maasi, float asker_maasi, float kira_maasi, float kaymakamlik, float sosyal_hizmetler, float buyuksehir, float ozel_vakif, float diger, String diger_aciklama, Integer aktif, Date kayit_tarihi, Date guncelleme_tarihi) {
         this.yaslilik = yaslilik;
         this.engelli = engelli;
         this.engelli_yakini = engelli_yakini;
@@ -69,6 +69,8 @@ public class TutanakGelir {
         this.diger = diger;
         this.diger_aciklama = diger_aciklama;
         this.aktif = aktif;
+        this.kayit_tarihi = kayit_tarihi;
+        this.guncelleme_tarihi = guncelleme_tarihi;
     }
 
     public Integer getGelir_id() {
