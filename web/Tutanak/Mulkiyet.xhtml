@@ -22,7 +22,6 @@
                         <li class="breadcrumb-item active" aria-current="page">Mülkiyet Bilgileri</li>
                     </ol>
                 </div>
-
             </div> 
             <div class="container-fluid">               
                 <div class="row">                   
@@ -32,7 +31,6 @@
                         </div>
                         <div class="card-body"> 
                             <div class="card">
-
                                 <div class="card-header">
                                     Mülkiyet Bilgileri
                                 </div>
@@ -44,35 +42,25 @@
                                         <h:selectOneMenu id="ev" value="#{tutanakMulkiyetBean.entity.ev_durum_id}" class="form-control">
                                             <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
                                             <f:selectItem itemLabel="Kira" itemValue="E" />                                   
-                                            <f:selectItem itemLabel="Ev Sahibi" itemValue="K" />                                 
-                                            <f:ajax event="valueChange" render="KullaniciListesi" />
+                                            <f:selectItem itemLabel="Ev Sahibi" itemValue="K" />   
                                         </h:selectOneMenu>
                                     </div>
                                     <div class="form-group col-md-6 mb-3">
                                         <label for="yakacak" class="form-label">Yakacak Tipi:</label>
                                         <h:selectOneMenu id="yakacak" value="#{tutanakMulkiyetBean.entity.yakacak_tip_id}" class="form-control">
-                                            <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
-                                            <f:selectItem itemLabel="Soba" itemValue="E" />
-                                            <f:selectItem itemLabel="Doğalgaz" itemValue="E" />
-                                            <f:selectItem itemLabel="Merkezi Isıtma" itemValue="K" />                                 
-                                            <f:ajax event="valueChange" render="KullaniciListesi" />
+                                            <f:selectItems value="#{tutanakYakacakBean.tutanakyakacaklist}" />  
                                         </h:selectOneMenu>
                                     </div>
                                 </div>
                                 <div class="form-row">
-
                                     <div class="form-group col-md-6 mb-3">
                                         <label for="kira" class="form-label">Kira Miktarı:</label>
                                         <h:inputText id="kira" value="#{tutanakMulkiyetBean.entity.kira_miktar}" class="form-control" />
-                                        <f:ajax event="keyup" render="KullaniciListesi" />
                                     </div>
                                     <div class="form-group col-md-6 mb-3">
                                         <label for="evTipi" class="form-label">Ev Tipi:</label>
                                         <h:selectOneMenu id="evTipi" value="#{tutanakMulkiyetBean.entity.ev_tip_id}" class="form-control">
-                                            <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                                 
-                                            <f:selectItem itemLabel="Müstakil Ev" itemValue="E" />
-                                            <f:selectItem itemLabel="Daire" itemValue="K" />                                 
-                                            <f:ajax event="valueChange" render="KullaniciListesi" />
+                                            <f:selectItems value="#{tutanakEvTipBean.tutanakEvTipList}" />     
                                         </h:selectOneMenu>
                                     </div>
                                 </div>
@@ -89,9 +77,7 @@
                                     <div class="form-group col-md-6 mb-3">
                                         <label for="evMiktarı" class="form-label">Kaç evi var:</label>
                                         <h:inputText id="evMiktarı" value="#{tutanakMulkiyetBean.entity.kirada_ev_sayisi}" class="form-control" />
-                                        <f:ajax event="keyup" render="KullaniciListesi" />
                                     </div>
-
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6 mb-3">
@@ -123,8 +109,6 @@
                                         <h:inputTextarea id="gayrimenkulTuru" class="form-control" rows="1" value="#{tutanakMulkiyetBean.entity.gayrimenkul_tur}" />
                                     </div>
                                 </div>
-
-
                                 <div class="card">
                                     <div class="card-header">
                                         Ev Eşyaları
@@ -183,7 +167,6 @@
                                                 </div>
                                             </div>
                                         </div> <!-- Bitiş row -->
-
                                         <div class="row"> <!-- Başlangıç row -->
                                             <div class="col-md-4"> <!-- Her checkbox için bir sütun oluştur -->
                                                 <div class="form-group">
@@ -210,7 +193,6 @@
                                                 </div>
                                             </div>
                                         </div> <!-- Bitiş row -->
-
                                         <div class="row"> <!-- Başlangıç row -->
                                             <div class="col-md-4"> <!-- Her checkbox için bir sütun oluştur -->
                                                 <div class="form-group">
