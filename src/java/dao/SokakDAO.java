@@ -42,7 +42,7 @@ public class SokakDAO extends DBConnection {
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (Exception ex) {
-            DetectError(ex);
+            this.islemBasariliMesaj = DetectError(ex);
         }
     }
 
@@ -56,7 +56,7 @@ public class SokakDAO extends DBConnection {
 
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
-            DetectError(ex);
+            this.islemBasariliMesaj = DetectError(ex);
         }
     }
 
