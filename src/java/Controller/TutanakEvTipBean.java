@@ -20,6 +20,7 @@ public class TutanakEvTipBean implements Serializable {
 
     @PostConstruct
     public void init() {
+        tutanakEvTipList = tutanakEvTipGetir();
     }
 
     public TutanakEvTipBean() {

@@ -1,6 +1,7 @@
 package dao;
 
 import static Various.ErrorFinder.DetectError;
+import jakarta.annotation.PostConstruct;
 import jakarta.faces.model.SelectItem;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,7 +13,7 @@ import util.DBConnection;
 public class TutanakEvTipDAO extends DBConnection {
 
     private Connection db;
-
+    
     public List<SelectItem> TutanakEvTipGetir() {
         List<SelectItem> TipList = new ArrayList<>();
 

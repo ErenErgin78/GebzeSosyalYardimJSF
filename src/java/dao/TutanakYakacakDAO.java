@@ -18,11 +18,11 @@ public class TutanakYakacakDAO extends DBConnection {
 
         try {
             Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT TUTANAK_YAKACAK_ID , TUTANAK_YAKACAK FROM TUTANAK_YAKACAK_TIP";
+            String Selectquery = "SELECT TUTANAK_YAKACAK_TIP_ID , YAKACAK_TIP_ISIM FROM TUTANAK_YAKACAK_TIP";
             ResultSet rs = statement.executeQuery(Selectquery);
 
             while (rs.next()) {
-                TipList.add(new SelectItem(rs.getInt("TUTANAK_YAKACAK_ID"), rs.getString("TUTANAK_YAKACAK")));
+                TipList.add(new SelectItem(rs.getInt("TUTANAK_YAKACAK_TIP_ID"), rs.getString("YAKACAK_TIP_ISIM")));
             }
         } catch (Exception ex) {
             DetectError(ex);
