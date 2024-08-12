@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Aile Gelir ve Borç Bilgisi</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
@@ -13,6 +11,8 @@
     </h:head>
     <h:body>
         <h:form id="userForm">
+            <h:messages globalOnly="true" layout="table"/>
+            <h:outputText id="mesaj" value="#{tutanakBorcBean.dao.islemBasariliMesaj}" />
             <div class="row align-items-center mb-3">
                 <div class="col-10">
                     <ol class="breadcrumb">
@@ -42,128 +42,128 @@
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
-                                                            <label for="isim2" class="form-label">Yaşlılık:</label>
-                                                            <h:inputText id="isim2" value="#{userBean.dao.isim}" class="form-control" />                                               
+                                                            <label for="yaslilik" class="form-label">Yaşlılık:</label>
+                                                            <h:inputText id="yaslilik" value="#{tutanakGelirBean.entity.yaslilik}" class="form-control" />                                               
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
-                                                            <label for="isim2" class="form-label">Engelli:</label>
-                                                            <h:inputText id="isim2" value="#{userBean.dao.isim}" class="form-control" />                                               
+                                                            <label for="engelli" class="form-label">Engelli:</label>
+                                                            <h:inputText id="engelli" value="#{tutanakGelirBean.entity.engelli}" class="form-control" />                                               
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
-                                                            <label for="isim2" class="form-label">Engelli Yakını:</label>
-                                                            <h:inputText id="isim2" value="#{userBean.dao.isim}" class="form-control" />                                               
+                                                            <label for="yakini" class="form-label">Engelli Yakını:</label>
+                                                            <h:inputText id="yakini" value="#{tutanakGelirBean.entity.engelli_yakini}" class="form-control" />                                               
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
-                                                            <label for="isim2" class="form-label">Yetim Aylığı:</label>
-                                                            <h:inputText id="isim2" value="#{userBean.dao.isim}" class="form-control" />                                               
+                                                            <label for="yetimAyligi" class="form-label">Yetim Aylığı:</label>
+                                                            <h:inputText id="yetimAyligi" value="#{tutanakGelirBean.entity.yetim_ayligi}" class="form-control" />                                               
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
-                                                            <label for="isim2" class="form-label">Emekli Maaşı:</label>
-                                                            <h:inputText id="isim2" value="#{userBean.dao.isim}" class="form-control" />                                               
+                                                            <label for="emekliMaasi" class="form-label">Emekli Maaşı:</label>
+                                                            <h:inputText id="emekliMaasi" value="#{tutanakGelirBean.entity.emekli_maasi}" class="form-control" />                                               
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
-                                                            <label for="isim2" class="form-label">Evde Bakım Parası:</label>
-                                                            <h:inputText id="isim2" value="#{userBean.dao.isim}" class="form-control" />                                               
+                                                            <label for="bakimParasi" class="form-label">Evde Bakım Parası:</label>
+                                                            <h:inputText id="bakimParasi" value="#{tutanakGelirBean.entity.evde_bakim_parasi}" class="form-control" />                                               
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
-                                                            <label for="isim2" class="form-label">Dul Maaşı:</label>
-                                                            <h:inputText id="isim2" value="#{userBean.dao.isim}" class="form-control" />                                               
+                                                            <label for="dulMaasi" class="form-label">Dul Maaşı:</label>
+                                                            <h:inputText id="dulMaasi" value="#{tutanakGelirBean.entity.dul_maasi}" class="form-control" />                                               
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
-                                                            <label for="isim2" class="form-label">İşsizlik Maaşı:</label>
-                                                            <h:inputText id="isim2" value="#{userBean.dao.isim}" class="form-control" />                                               
+                                                            <label for="issizlikMaasi" class="form-label">İşsizlik Maaşı:</label>
+                                                            <h:inputText id="issizlikMaasi" value="#{tutanakGelirBean.entity.issizlik_maasi}" class="form-control" />                                               
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
-                                                            <label for="isim2" class="form-label">Asker Maaşı:</label>
-                                                            <h:inputText id="isim2" value="#{userBean.dao.isim}" class="form-control" />                                               
+                                                            <label for="askerMaasi" class="form-label">Asker Maaşı:</label>
+                                                            <h:inputText id="askerMaasi" value="#{tutanakGelirBean.entity.asker_maasi}" class="form-control" />                                               
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
-                                                            <label for="isim2" class="form-label">Kira Geliri:</label>
-                                                            <h:inputText id="isim2" value="#{userBean.dao.isim}" class="form-control" />                                               
+                                                            <label for="kira" class="form-label">Kira Geliri:</label>
+                                                            <h:inputText id="kira" value="#{tutanakGelirBean.entity.kira_maasi}" class="form-control" />                                               
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
-                                                            <label for="isim2" class="form-label">Kaymakamlık:</label>
-                                                            <h:inputText id="isim2" value="#{userBean.dao.isim}" class="form-control" />                                               
+                                                            <label for="kaymakamlik" class="form-label">Kaymakamlık:</label>
+                                                            <h:inputText id="kaymakamlik" value="#{tutanakGelirBean.entity.kaymakamlik}" class="form-control" />                                               
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
-                                                            <label for="isim2" class="form-label">Sosyal Hizmetler:</label>
-                                                            <h:inputText id="isim2" value="#{userBean.dao.isim}" class="form-control" />                                               
+                                                            <label for="sosyalHizmet" class="form-label">Sosyal Hizmetler:</label>
+                                                            <h:inputText id="sosyalHizmet" value="#{tutanakGelirBean.entity.sosyal_hizmetler}" class="form-control" />                                               
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
-                                                            <label for="isim2" class="form-label">Büyükşehir Belediyesi:</label>
-                                                            <h:inputText id="isim2" value="#{userBean.dao.isim}" class="form-control" />                                               
+                                                            <label for="buyuksehir" class="form-label">Büyükşehir Belediyesi:</label>
+                                                            <h:inputText id="buyuksehir" value="#{tutanakGelirBean.entity.buyuksehir}" class="form-control" />                                               
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
-                                                            <label for="isim2" class="form-label">Özel Vakıflar:</label>
-                                                            <h:inputText id="isim2" value="#{userBean.dao.isim}" class="form-control" />                                               
+                                                            <label for="vakif" class="form-label">Özel Vakıflar:</label>
+                                                            <h:inputText id="vakif" value="#{tutanakGelirBean.entity.ozel_vakif}" class="form-control" />                                               
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
-                                                            <label for="isim2" class="form-label">Diğer:</label>
-                                                            <h:inputText id="isim2" value="#{userBean.dao.isim}" class="form-control" />                                               
+                                                            <label for="diger" class="form-label">Diğer:</label>
+                                                            <h:inputText id="diger" value="#{tutanakGelirBean.entity.diger}" class="form-control" />                                               
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
-                                                            <label for="address_desc">Diğer Açıklama:</label>
-                                                            <h:inputTextarea id="address_desc" class="form-control" rows="1" value="#{userBean.entity.kullanici_adres}" />
+                                                            <label for="aciklama">Diğer Açıklama:</label>
+                                                            <h:inputTextarea id="aciklama" class="form-control" rows="1" value="#{tutanakGelirBean.entity.diger_aciklama}" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -181,7 +181,7 @@
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
                                                             <label for="borcBilgisi" class="form-label">Elektrik:</label>
-                                                            <h:inputText id="borcBilgisi" value="" class="form-control" />
+                                                            <h:inputText id="borcBilgisi" value="#{tutanakBorcBean.entity.elektrik}" class="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -189,7 +189,7 @@
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
                                                             <label for="borcBilgisi" class="form-label">Su:</label>
-                                                            <h:inputText id="borcBilgisi" value="" class="form-control" />
+                                                            <h:inputText id="borcBilgisi" value="#{tutanakBorcBean.entity.su}" class="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -197,7 +197,7 @@
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
                                                             <label for="borcBilgisi" class="form-label">Doğal Gaz:</label>
-                                                            <h:inputText id="borcBilgisi" value="" class="form-control" />
+                                                            <h:inputText id="borcBilgisi" value="#{tutanakBorcBean.entity.dogalgaz}" class="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -205,7 +205,7 @@
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
                                                             <label for="borcBilgisi" class="form-label">Kira</label>
-                                                            <h:inputText id="borcBilgisi" value="" class="form-control" />
+                                                            <h:inputText id="borcBilgisi" value="#{tutanakBorcBean.entity.kira}" class="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -213,7 +213,7 @@
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
                                                             <label for="borcBilgisi" class="form-label">Kredi Kartı:</label>
-                                                            <h:inputText id="borcBilgisi" value="" class="form-control" />
+                                                            <h:inputText id="borcBilgisi" value="#{tutanakBorcBean.entity.kredi_karti}" class="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -221,7 +221,7 @@
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
                                                             <label for="borcBilgisi" class="form-label">Diğer:</label>
-                                                            <h:inputText id="borcBilgisi" value="" class="form-control" />
+                                                            <h:inputText id="borcBilgisi" value="#{tutanakBorcBean.entity.diger}" class="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -229,7 +229,7 @@
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
                                                             <label for="address_desc">Diğer Açıklama:</label>
-                                                            <h:inputTextarea id="address_desc" class="form-control" rows="1" value="#{userBean.entity.kullanici_adres}" />
+                                                            <h:inputTextarea id="address_desc" class="form-control" rows="1" value="#{tutanakBorcBean.entity.diger_aciklama}" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -241,7 +241,7 @@
                                 <div class="card mt-3">
                                     <div class="card-body">
                                         <div class="text-center mt-3">
-                                            <h:commandButton value="Kaydet" action="#{userBean.create()}" class="btn btn-success">
+                                            <h:commandButton value="Kaydet" action="#{tutanakBorcBean.create()}" class="btn btn-success">
                                                 <f:ajax execute="@form" render="@form, mesaj" />
                                             </h:commandButton>                                  
                                         </div>
