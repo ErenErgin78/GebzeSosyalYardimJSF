@@ -40,8 +40,8 @@
                             <div class="card-body">
                                 <div class="form-row">
                                     <div class="form-group col-md-6 mb-3 ">
-                                        <label for="aktif" class="form-label">Ev Durumu:</label>
-                                        <h:selectOneMenu id="aktif" value="#{tutanakMulkiyetBean.entity.ev_durum_id}" class="form-control">
+                                        <label for="ev" class="form-label">Ev Durumu:</label>
+                                        <h:selectOneMenu id="ev" value="#{tutanakMulkiyetBean.entity.ev_durum_id}" class="form-control">
                                             <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
                                             <f:selectItem itemLabel="Kira" itemValue="E" />                                   
                                             <f:selectItem itemLabel="Ev Sahibi" itemValue="K" />                                 
@@ -49,8 +49,8 @@
                                         </h:selectOneMenu>
                                     </div>
                                     <div class="form-group col-md-6 mb-3">
-                                        <label for="aktif" class="form-label">Yakacak Tipi:</label>
-                                        <h:selectOneMenu id="akti" value="#{tutanakMulkiyetBean.entity.yakacak_tip_id}" class="form-control">
+                                        <label for="yakacak" class="form-label">Yakacak Tipi:</label>
+                                        <h:selectOneMenu id="yakacak" value="#{tutanakMulkiyetBean.entity.yakacak_tip_id}" class="form-control">
                                             <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
                                             <f:selectItem itemLabel="Soba" itemValue="E" />
                                             <f:selectItem itemLabel="Doğalgaz" itemValue="E" />
@@ -62,13 +62,13 @@
                                 <div class="form-row">
 
                                     <div class="form-group col-md-6 mb-3">
-                                        <label for="sicil" class="form-label">Kira Miktarı:</label>
-                                        <h:inputText id="sicil" value="#{tutanakMulkiyetBean.entity.kira_miktar}" class="form-control" />
+                                        <label for="kira" class="form-label">Kira Miktarı:</label>
+                                        <h:inputText id="kira" value="#{tutanakMulkiyetBean.entity.kira_miktar}" class="form-control" />
                                         <f:ajax event="keyup" render="KullaniciListesi" />
                                     </div>
                                     <div class="form-group col-md-6 mb-3">
-                                        <label for="aktif" class="form-label">Ev Tipi:</label>
-                                        <h:selectOneMenu id="aktf" value="#{tutanakMulkiyetBean.entity.ev_tip_id}" class="form-control">
+                                        <label for="evTipi" class="form-label">Ev Tipi:</label>
+                                        <h:selectOneMenu id="evTipi" value="#{tutanakMulkiyetBean.entity.ev_tip_id}" class="form-control">
                                             <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                                 
                                             <f:selectItem itemLabel="Müstakil Ev" itemValue="E" />
                                             <f:selectItem itemLabel="Daire" itemValue="K" />                                 
@@ -78,49 +78,49 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6 mb-3">
-                                        <label for="durum">Kirada evi var mı:</label>
+                                        <label for="kiradaEv">Kirada evi var mı:</label>
                                         <div class="custom-radio">
-                                            <h:selectOneRadio id="durum" value=""  styleClass="radio-inline">
+                                            <h:selectOneRadio id="kiradaEv" value=""  styleClass="radio-inline">
                                                 <f:selectItem itemLabel="Evet" itemValue="1" />
                                                 <f:selectItem itemLabel="Hayır" itemValue="2" />                                     
                                             </h:selectOneRadio>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6 mb-3">
-                                        <label for="sicil" class="form-label">Kaç evi var:</label>
-                                        <h:inputText id="icil" value="#{tutanakMulkiyetBean.entity.kirada_ev_sayisi}" class="form-control" />
+                                        <label for="evMiktarı" class="form-label">Kaç evi var:</label>
+                                        <h:inputText id="evMiktarı" value="#{tutanakMulkiyetBean.entity.kirada_ev_sayisi}" class="form-control" />
                                         <f:ajax event="keyup" render="KullaniciListesi" />
                                     </div>
 
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6 mb-3">
-                                        <label for="durum">Arabası var mı:</label>
+                                        <label for="araba">Arabası var mı:</label>
                                         <div class="custom-radio">
-                                            <h:selectOneRadio id="drum" value="#{tutanakMulkiyetBean.entity.araba_var_mi}"  styleClass="radio-inline">
+                                            <h:selectOneRadio id="araba" value="#{tutanakMulkiyetBean.entity.araba_var_mi}"  styleClass="radio-inline">
                                                 <f:selectItem itemLabel="Evet" itemValue="1" />
                                                 <f:selectItem itemLabel="Hayır" itemValue="2" />                                     
                                             </h:selectOneRadio>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="address_desc">Araba Marka/Model:</label>
-                                        <h:inputTextarea id="addres_des" class="form-control" rows="1" value="#{tutanakMulkiyetBean.entity.araba_model}" />
+                                        <label for="model">Araba Marka/Model:</label>
+                                        <h:inputTextarea id="model" class="form-control" rows="1" value="#{tutanakMulkiyetBean.entity.araba_model}" />
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6 mb-3">
-                                        <label for="durum">Gayrimenkul var mı: </label>
+                                        <label for="garimenkul">Gayrimenkul var mı: </label>
                                         <div class="custom-radio">
-                                            <h:selectOneRadio id="duum" value="#{tutanakMulkiyetBean.entity.gayrimenkul_var_mi}"  styleClass="radio-inline">
+                                            <h:selectOneRadio id="gayrimenkul" value="#{tutanakMulkiyetBean.entity.gayrimenkul_var_mi}"  styleClass="radio-inline">
                                                 <f:selectItem itemLabel="Evet" itemValue="1" />
                                                 <f:selectItem itemLabel="Hayır" itemValue="2" />                                     
                                             </h:selectOneRadio>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="addres_desc">Gayrimenkul Türü:</label>
-                                        <h:inputTextarea id="address_des" class="form-control" rows="1" value="#{tutanakMulkiyetBean.entity.gayrimenkul_tur}" />
+                                        <label for="gayrimenkulTuru">Gayrimenkul Türü:</label>
+                                        <h:inputTextarea id="gayrimenkulTuru" class="form-control" rows="1" value="#{tutanakMulkiyetBean.entity.gayrimenkul_tur}" />
                                     </div>
                                 </div>
                                 <div class="card-body">
