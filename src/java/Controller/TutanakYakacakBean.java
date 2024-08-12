@@ -1,5 +1,6 @@
-package Entity;
+package Controller;
 
+import Entity.TutanakYakacak;
 import dao.EgitimDurumDAO;
 import dao.TutanakYakacakDAO;
 import jakarta.annotation.PostConstruct;
