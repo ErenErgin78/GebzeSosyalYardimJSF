@@ -33,7 +33,7 @@ public class TutanakBorcDAO extends DBConnection {
             Connection conn = this.getDb();
 
             // BORC stored procedure çağırma (Örnek, değiştirilebilir)
-            String callQueryBorc = "{call INSERT_BORC(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            String callQueryBorc = "{call INSERT_TUTANAK_BORC(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement csBorc = conn.prepareCall(callQueryBorc);
             csBorc.setFloat(1, borc.getElektrik());
             csBorc.setFloat(2, borc.getSu());
