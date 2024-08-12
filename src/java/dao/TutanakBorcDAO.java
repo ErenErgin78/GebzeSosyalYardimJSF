@@ -47,8 +47,8 @@ public class TutanakBorcDAO extends DBConnection {
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (SQLException ex) {
-            DetectError(ex);
-            this.islemBasariliMesaj = ex.getMessage();
+
+            this.islemBasariliMesaj = DetectError(ex);
 
         }
     }
