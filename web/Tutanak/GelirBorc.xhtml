@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Aile Gelir ve Borç Bilgisi</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
@@ -13,6 +11,8 @@
     </h:head>
     <h:body>
         <h:form id="userForm">
+            <h:messages globalOnly="true" layout="table"/>
+            <h:outputText id="mesaj" value="#{tutanakBorcBean.dao.islemBasariliMesaj}" />
             <div class="row align-items-center mb-3">
                 <div class="col-10">
                     <ol class="breadcrumb">
@@ -181,7 +181,7 @@
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
                                                             <label for="borcBilgisi" class="form-label">Elektrik:</label>
-                                                            <h:inputText id="borcBilgisi" value="#{}" class="form-control" />
+                                                            <h:inputText id="borcBilgisi" value="#{tutanakBorcBean.entity.elektrik}" class="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -189,7 +189,7 @@
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
                                                             <label for="borcBilgisi" class="form-label">Su:</label>
-                                                            <h:inputText id="borcBilgisi" value="" class="form-control" />
+                                                            <h:inputText id="borcBilgisi" value="#{tutanakBorcBean.entity.su}" class="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -197,7 +197,7 @@
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
                                                             <label for="borcBilgisi" class="form-label">Doğal Gaz:</label>
-                                                            <h:inputText id="borcBilgisi" value="" class="form-control" />
+                                                            <h:inputText id="borcBilgisi" value="#{tutanakBorcBean.entity.dogalgaz}" class="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -205,7 +205,7 @@
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
                                                             <label for="borcBilgisi" class="form-label">Kira</label>
-                                                            <h:inputText id="borcBilgisi" value="" class="form-control" />
+                                                            <h:inputText id="borcBilgisi" value="#{tutanakBorcBean.entity.kira}" class="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -213,7 +213,7 @@
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
                                                             <label for="borcBilgisi" class="form-label">Kredi Kartı:</label>
-                                                            <h:inputText id="borcBilgisi" value="" class="form-control" />
+                                                            <h:inputText id="borcBilgisi" value="#{tutanakBorcBean.entity.kredi_karti}" class="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -221,7 +221,7 @@
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
                                                             <label for="borcBilgisi" class="form-label">Diğer:</label>
-                                                            <h:inputText id="borcBilgisi" value="" class="form-control" />
+                                                            <h:inputText id="borcBilgisi" value="#{tutanakBorcBean.entity.diger}" class="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -229,7 +229,7 @@
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
                                                             <label for="address_desc">Diğer Açıklama:</label>
-                                                            <h:inputTextarea id="address_desc" class="form-control" rows="1" value="#{userBean.entity.kullanici_adres}" />
+                                                            <h:inputTextarea id="address_desc" class="form-control" rows="1" value="#{tutanakBorcBean.entity.diger_aciklama}" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -241,7 +241,7 @@
                                 <div class="card mt-3">
                                     <div class="card-body">
                                         <div class="text-center mt-3">
-                                            <h:commandButton value="Kaydet" action="#{userBean.create()}" class="btn btn-success">
+                                            <h:commandButton value="Kaydet" action="#{tutanakBorcBean.create()}" class="btn btn-success">
                                                 <f:ajax execute="@form" render="@form, mesaj" />
                                             </h:commandButton>                                  
                                         </div>

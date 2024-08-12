@@ -35,12 +35,13 @@ public class TutanakBorcDAO extends DBConnection {
             // BORC stored procedure çağırma (Örnek, değiştirilebilir)
             String callQueryBorc = "{call INSERT_BORC(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement csBorc = conn.prepareCall(callQueryBorc);
-            csBorc.setInt(1, borc.getElektrik());
-            csBorc.setInt(2, borc.getSu());
-            csBorc.setInt(3, borc.getDogalgaz());
-            csBorc.setInt(4, borc.getKira());
-            csBorc.setInt(5, borc.getKredi_karti());
-            csBorc.setInt(6, borc.getDiger());
+            csBorc.setFloat(1, borc.getElektrik());
+            csBorc.setFloat(2, borc.getSu());
+            csBorc.setFloat(3, borc.getDogalgaz());
+            csBorc.setFloat(4, borc.getKira());
+            csBorc.setFloat(5, borc.getKredi_karti());
+            csBorc.setFloat(6, borc.getDiger());
+
             csBorc.setString(7, borc.getDiger_aciklama());
             csBorc.setDate(8, new java.sql.Date(borc.getGuncelleme_tarihi().getTime()));
             csBorc.registerOutParameter(9, java.sql.Types.INTEGER);
@@ -53,6 +54,8 @@ public class TutanakBorcDAO extends DBConnection {
 
         } catch (SQLException ex) {
             DetectError(ex);
+              this.islemBasariliMesaj = ex.getMessage();
+            
         }
     }
 
@@ -70,12 +73,13 @@ public class TutanakBorcDAO extends DBConnection {
             while (rs.next()) {
                 TutanakBorc borc = new TutanakBorc();
                 borc.setBorc_id(rs.getInt("BORC_ID"));
-                borc.setElektrik(rs.getInt("ELEKTRIK"));
-                borc.setSu(rs.getInt("SU"));
-                borc.setDogalgaz(rs.getInt("DOGALGAZ"));
-                borc.setKira(rs.getInt("KIRA"));
-                borc.setKredi_karti(rs.getInt("KREDI_KARTI"));
-                borc.setDiger(rs.getInt("DIGER"));
+                borc.setElektrik(rs.getFloat("ELEKTRIK"));
+                borc.setSu(rs.getFloat("SU"));
+                borc.setDogalgaz(rs.getFloat("DOGALGAZ"));
+                borc.setKira(rs.getFloat("KIRA"));
+                borc.setKredi_karti(rs.getFloat("KREDI_KARTI"));
+                borc.setDiger(rs.getFloat("DIGER"));
+
                 borc.setDiger_aciklama(rs.getString("DIGER_ACIKLAMA"));
                 borc.setGuncelleme_tarihi(rs.getDate("GUNCELLEME_TARIHI"));
 

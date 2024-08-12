@@ -11,7 +11,7 @@ import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
-@Named(value = "borcBean")
+@Named(value = "tutanakBorcBean")
 @SessionScoped
 public class TutanakBorcBean implements Serializable {
 
