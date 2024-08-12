@@ -30,24 +30,23 @@ public class TutanakBorcDAO extends DBConnection {
 
     public void Create(TutanakBorc borc) {
         try {
-            Connection conn = this.getDb();
+        Connection conn = this.getDb();
+        String callQueryBorc = "{call INSERT_BORC(?, ?, ?, ?, ?, ?, ?, ?)}";
+        CallableStatement csBorc = conn.prepareCall(callQueryBorc);
+        
+        csBorc.setFloat(1, borc.getElektrik());
+        csBorc.setFloat(2, borc.getSu());
+        csBorc.setFloat(3, borc.getDogalgaz());
+        csBorc.setFloat(4, borc.getKira());
+        csBorc.setFloat(5, borc.getKredi_karti());
+        csBorc.setFloat(6, borc.getDiger());
+        csBorc.setString(7, borc.getDiger_aciklama());
+        csBorc.registerOutParameter(8, java.sql.Types.INTEGER);
 
-            // BORC stored procedure çağırma (Örnek, değiştirilebilir)
-            String callQueryBorc = "{call INSERT_BORC(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
-            CallableStatement csBorc = conn.prepareCall(callQueryBorc);
-            csBorc.setFloat(1, borc.getElektrik());
-            csBorc.setFloat(2, borc.getSu());
-            csBorc.setFloat(3, borc.getDogalgaz());
-            csBorc.setFloat(4, borc.getKira());
-            csBorc.setFloat(5, borc.getKredi_karti());
-            csBorc.setFloat(6, borc.getDiger());
-            csBorc.setString(7, borc.getDiger_aciklama());
-            csBorc.registerOutParameter(8, java.sql.Types.INTEGER);
-            csBorc.execute();
+        csBorc.execute();
+        borc.setBorc_id(csBorc.getInt(8));
 
-            borc.setBorc_id(csBorc.getInt(8));
-
-            this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+        this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (SQLException ex) {
             DetectError(ex);
