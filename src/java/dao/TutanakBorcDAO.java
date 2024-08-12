@@ -5,8 +5,7 @@
 package dao;
 
 import Entity.TutanakBorc;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
+import static Various.ErrorFinder.DetectError;
 import java.sql.CallableStatement;
 import util.DBConnection;
 import java.sql.Connection;
@@ -30,28 +29,27 @@ public class TutanakBorcDAO extends DBConnection {
 
     public void Create(TutanakBorc borc) {
         try {
-        Connection conn = this.getDb();
-        String callQueryBorc = "{call INSERT_BORC(?, ?, ?, ?, ?, ?, ?, ?)}";
-        CallableStatement csBorc = conn.prepareCall(callQueryBorc);
-        
-        csBorc.setFloat(1, borc.getElektrik());
-        csBorc.setFloat(2, borc.getSu());
-        csBorc.setFloat(3, borc.getDogalgaz());
-        csBorc.setFloat(4, borc.getKira());
-        csBorc.setFloat(5, borc.getKredi_karti());
-        csBorc.setFloat(6, borc.getDiger());
-        csBorc.setString(7, borc.getDiger_aciklama());
-        csBorc.registerOutParameter(8, java.sql.Types.INTEGER);
+            Connection conn = this.getDb();
 
-        csBorc.execute();
-        borc.setBorc_id(csBorc.getInt(8));
+            String callQueryBorc = "{call INSERT_TUTANAK_BORC(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            CallableStatement csBorc = conn.prepareCall(callQueryBorc);
+            csBorc.setFloat(1, borc.getElektrik());
+            csBorc.setFloat(2, borc.getSu());
+            csBorc.setFloat(3, borc.getDogalgaz());
+            csBorc.setFloat(4, borc.getKira());
+            csBorc.setFloat(5, borc.getKredi_karti());
+            csBorc.setFloat(6, borc.getDiger());
+            csBorc.setString(7, borc.getDiger_aciklama());
+            csBorc.registerOutParameter(8, java.sql.Types.INTEGER);
+            borc.setBorc_id(csBorc.getInt(8));
+            csBorc.execute();
 
-        this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+            this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (SQLException ex) {
             DetectError(ex);
-              this.islemBasariliMesaj = ex.getMessage();
-            
+            this.islemBasariliMesaj = ex.getMessage();
+
         }
     }
 
@@ -102,21 +100,6 @@ public class TutanakBorcDAO extends DBConnection {
         } catch (SQLException ex) {
             DetectError(ex);
         }
-    }
-
-    private void DetectError(Exception ex) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        StringBuilder errorMessage = new StringBuilder(ex.getMessage());
-        StackTraceElement[] stackTrace = ex.getStackTrace();
-
-        for (StackTraceElement element : stackTrace) {
-            if (element.getClassName().startsWith("dao")) {
-                errorMessage.append(" (at ").append(element.getFileName())
-                        .append(":").append(element.getLineNumber()).append(")");
-                break;
-            }
-        }
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage.toString(), null));
     }
 
     public Connection getDb() {

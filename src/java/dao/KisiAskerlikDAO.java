@@ -1,0 +1,133 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package dao;
+
+import Entity.KisiAskerlik;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import util.DBConnection;
+
+public class KisiAskerlikDAO extends DBConnection {
+
+    private Connection db;
+    private String islemBasariliMesaj;
+
+
+    public void Create(KisiAskerlik askerlik) {
+        try {
+            Connection conn = this.getDb();
+
+            // KISIASKERLIK stored procedure çağırma (Örnek, değiştirilebilir)
+            String callQueryAskerlik = "{call INSERT_KISI_ASKERLIK( ?, ?, ?, ?, ?, ?)}";
+            CallableStatement csAskerlik = conn.prepareCall(callQueryAskerlik);
+            csAskerlik.setInt(1, askerlik.getAsker_hukumlu());
+            csAskerlik.setInt(2, askerlik.getSure());
+            csAskerlik.setString(3, askerlik.getAciklama());
+            csAskerlik.setDate(4, new java.sql.Date(askerlik.getBaslangic_tarihi().getTime()));
+            csAskerlik.setDate(5, new java.sql.Date(askerlik.getBitis_tarihi().getTime()));
+            csAskerlik.setInt(6, askerlik.getAktif());
+            csAskerlik.registerOutParameter(9, java.sql.Types.INTEGER);
+            csAskerlik.execute();
+
+            int askerlikId = csAskerlik.getInt(9);
+            askerlik.setAskerlik_id(askerlikId);
+
+            this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+
+        } catch (SQLException ex) {
+            DetectError(ex);
+            this.islemBasariliMesaj = ex.getMessage();
+        }
+    }
+
+    public List<KisiAskerlik> GetList() {
+
+        List<KisiAskerlik> askerlikList = new ArrayList<>();
+
+        try {
+            Statement statement = getDb().createStatement();
+
+            String selectQuery = "SELECT * FROM KISIASKERLIK";
+
+            ResultSet rs = statement.executeQuery(selectQuery);
+
+            while (rs.next()) {
+                KisiAskerlik askerlik = new KisiAskerlik();
+                askerlik.setAskerlik_id(rs.getInt("ASKERLIK_ID"));
+                askerlik.setAsker_hukumlu(rs.getInt("ASKER_HUKUMLU"));
+                askerlik.setSure(rs.getInt("SURE"));
+                askerlik.setAciklama(rs.getString("ACIKLAMA"));
+                askerlik.setBaslangic_tarihi(rs.getDate("BASLANGIC_TARIHI"));
+                askerlik.setBitis_tarihi(rs.getDate("BITIS_TARIHI"));
+                askerlik.setAktif(rs.getInt("AKTIF"));
+                askerlik.setKayit_tarihi(rs.getDate("KAYIT_TARIHI"));
+                askerlik.setGuncelleme_tarihi(rs.getDate("GUNCELLEME_TARIHI"));
+
+                askerlikList.add(askerlik);
+            }
+            this.islemBasariliMesaj = "İşlem başarılı";
+
+        } catch (SQLException ex) {
+            DetectError(ex);
+        }
+        return askerlikList;
+    }
+
+    public void Delete(int askerlikId) {
+        String deleteQuery = "DELETE FROM KISIASKERLIK WHERE ASKERLIK_ID = " + askerlikId;
+
+        try {
+            Statement statement = getDb().createStatement();
+            int rowsDeleted = statement.executeUpdate(deleteQuery);
+            System.out.println(rowsDeleted + " askerlik kaydı silindi.");
+
+            this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+
+        } catch (SQLException ex) {
+            DetectError(ex);
+        }
+    }
+
+    private void DetectError(Exception ex) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        StringBuilder errorMessage = new StringBuilder(ex.getMessage());
+        StackTraceElement[] stackTrace = ex.getStackTrace();
+
+        for (StackTraceElement element : stackTrace) {
+            if (element.getClassName().startsWith("dao")) {
+                errorMessage.append(" (at ").append(element.getFileName())
+                        .append(":").append(element.getLineNumber()).append(")");
+                break;
+            }
+        }
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage.toString(), null));
+    }
+
+    public Connection getDb() {
+        if (this.db == null) {
+            this.db = this.connect();
+        }
+        return db;
+    }
+
+    public void setDb(Connection db) {
+        this.db = db;
+    }
+
+    public String getIslemBasariliMesaj() {
+        return islemBasariliMesaj;
+    }
+
+    public void setIslemBasariliMesaj(String islemBasariliMesaj) {
+        this.islemBasariliMesaj = islemBasariliMesaj;
+    }
+}
