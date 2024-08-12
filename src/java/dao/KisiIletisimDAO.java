@@ -35,7 +35,7 @@ public class KisiIletisimDAO extends DBConnection {
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (Exception ex) {
-            DetectError(ex);
+            this.mesaj = DetectError(ex);
         }
 
     }
@@ -50,7 +50,7 @@ public class KisiIletisimDAO extends DBConnection {
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (Exception ex) {
-            DetectError(ex);
+            this.mesaj = DetectError(ex);
         }
     }
 

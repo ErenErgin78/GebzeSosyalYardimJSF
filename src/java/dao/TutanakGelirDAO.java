@@ -48,7 +48,7 @@ public class TutanakGelirDAO extends DBConnection {
 
         } catch (Exception ex) {
 
-            mesaj =  DetectError(ex);
+            this.mesaj =  DetectError(ex);
         }
     }
 
@@ -62,7 +62,7 @@ public class TutanakGelirDAO extends DBConnection {
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
             DetectError(ex);
-            mesaj = ex.getMessage();
+            this.mesaj = ex.getMessage();
         }
     }
 

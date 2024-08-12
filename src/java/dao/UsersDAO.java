@@ -7,7 +7,6 @@ package dao;
 import Entity.User;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
-import java.math.BigInteger;
 import util.DBConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
