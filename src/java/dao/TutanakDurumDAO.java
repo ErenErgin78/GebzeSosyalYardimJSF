@@ -1,7 +1,7 @@
 package dao;
 
 import java.sql.Connection;
-import Entity.Tutanak;
+import Entity.TutanakDurum;
 import static Various.ErrorFinder.DetectError;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -16,7 +16,7 @@ import util.DBConnection;
  *
  * @author Eren
  */
-public class TutanakDAO extends DBConnection {
+public class TutanakDurumDAO extends DBConnection {
 
     private Connection db;
     private String mesaj;
@@ -24,7 +24,7 @@ public class TutanakDAO extends DBConnection {
     private String isim = "";
     private Integer aktif = 2;
 
-    public void TutanakEkle(Tutanak tutanak) {
+    public void TutanakEkle(TutanakDurum tutanak) {
         try {
             Connection conn = this.getDb();
 
@@ -54,8 +54,8 @@ public class TutanakDAO extends DBConnection {
         }
     }
 
-    public List<Tutanak> TutanakListesi() {
-        List<Tutanak> tutanakList = new ArrayList<>();
+    public List<TutanakDurum> TutanakListesi() {
+        List<TutanakDurum> tutanakList = new ArrayList<>();
 
         try {
             StringBuilder queryBuilder = new StringBuilder();
@@ -75,7 +75,7 @@ public class TutanakDAO extends DBConnection {
             ResultSet rs = statement.executeQuery(queryBuilder.toString());
 
             while (rs.next()) {
-                tutanakList.add(new Tutanak(
+                tutanakList.add(new TutanakDurum(
                         rs.getInt("DURUM_ID"),
                         rs.getString("DURUM_ISIM"),
                         rs.getInt("AKTIFLIK")
