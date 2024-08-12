@@ -20,11 +20,12 @@ public class TutanakGelir {
     private Float buyuksehir;
     private Float ozel_vakif;
     private Float diger;
+    private Float diger_aciklama;
     private Integer aktif;
     private Date kayit_tarihi;
     private Date guncelleme_tarihi;
 
-    public TutanakGelir(Integer gelir_id, Float yaslilik, Float engelli, Float engelli_yakini, Float yetim_ayligi, Float emekli_maasi, Float evde_bakim_parasi, Float dul_maasi, Float issizlik_maasi, Float asker_maasi, Float kira_maasi, Float kaymakamlik, Float sosyal_hizmetler, Float buyuksehir, Float ozel_vakif, Float diger, Integer aktif, Date kayit_tarihi, Date guncelleme_tarihi) {
+    public TutanakGelir(Integer gelir_id, Float yaslilik, Float engelli, Float engelli_yakini, Float yetim_ayligi, Float emekli_maasi, Float evde_bakim_parasi, Float dul_maasi, Float issizlik_maasi, Float asker_maasi, Float kira_maasi, Float kaymakamlik, Float sosyal_hizmetler, Float buyuksehir, Float ozel_vakif, Float diger, Float diger_aciklama, Integer aktif, Date kayit_tarihi, Date guncelleme_tarihi) {
         this.gelir_id = gelir_id;
         this.yaslilik = yaslilik;
         this.engelli = engelli;
@@ -41,6 +42,7 @@ public class TutanakGelir {
         this.buyuksehir = buyuksehir;
         this.ozel_vakif = ozel_vakif;
         this.diger = diger;
+        this.diger = diger_aciklama;
         this.aktif = aktif;
         this.kayit_tarihi = kayit_tarihi;
         this.guncelleme_tarihi = guncelleme_tarihi;
@@ -49,7 +51,7 @@ public class TutanakGelir {
     public TutanakGelir() {
     }
 
-    public TutanakGelir(Float yaslilik, Float engelli, Float engelli_yakini, Float yetim_ayligi, Float emekli_maasi, Float evde_bakim_parasi, Float dul_maasi, Float issizlik_maasi, Float asker_maasi, Float kira_maasi, Float kaymakamlik, Float sosyal_hizmetler, Float buyuksehir, Float ozel_vakif, Float diger, Integer aktif) {
+    public TutanakGelir(Float yaslilik, Float engelli, Float engelli_yakini, Float yetim_ayligi, Float emekli_maasi, Float evde_bakim_parasi, Float dul_maasi, Float issizlik_maasi, Float asker_maasi, Float kira_maasi, Float kaymakamlik, Float sosyal_hizmetler, Float buyuksehir, Float ozel_vakif, Float diger, Float diger_aciklama, Integer aktif) {
         this.yaslilik = yaslilik;
         this.engelli = engelli;
         this.engelli_yakini = engelli_yakini;
@@ -65,6 +67,7 @@ public class TutanakGelir {
         this.buyuksehir = buyuksehir;
         this.ozel_vakif = ozel_vakif;
         this.diger = diger;
+        this.diger = diger_aciklama;
         this.aktif = aktif;
     }
 
@@ -219,4 +222,13 @@ public class TutanakGelir {
     public void setGuncelleme_tarihi(Date guncelleme_tarihi) {
         this.guncelleme_tarihi = guncelleme_tarihi;
     }
+
+    public Float getDiger_aciklama() {
+        return diger_aciklama;
+    }
+
+    public void setDiger_aciklama(Float diger_aciklama) {
+        this.diger_aciklama = diger_aciklama;
+    }
+    
 }
