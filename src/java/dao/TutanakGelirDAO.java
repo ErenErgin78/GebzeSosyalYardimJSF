@@ -20,7 +20,7 @@ public class TutanakGelirDAO extends DBConnection {
     public void TutanakGelirEkle(TutanakGelir tutanakGelir) {
         try {
             Connection conn = this.getDb();
-            String callQuery = "{call INSERT_TUTANAK_GELIR(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)}";
+            String callQuery = "{call INSERT_TUTANAK_GELIR(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
 
             cs.setFloat(1, tutanakGelir.getYaslilik());
@@ -38,16 +38,17 @@ public class TutanakGelirDAO extends DBConnection {
             cs.setFloat(13, tutanakGelir.getBuyuksehir());
             cs.setFloat(14, tutanakGelir.getOzel_vakif());
             cs.setFloat(15, tutanakGelir.getDiger());
-            cs.setFloat(15, tutanakGelir.getDiger_aciklama());
-            cs.setInt(16, tutanakGelir.getAktif());
-            cs.setDate(17, new java.sql.Date(tutanakGelir.getKayit_tarihi().getTime()));
-            cs.setDate(18, new java.sql.Date(tutanakGelir.getGuncelleme_tarihi().getTime()));
-
+            cs.setString(16, tutanakGelir.getDiger_aciklama());
+            cs.setInt(17, tutanakGelir.getAktif());
+            cs.registerOutParameter(18, java.sql.Types.INTEGER);
             cs.execute();
+            
+            tutanakGelir.setGelir_id(cs.getInt(18));
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (Exception ex) {
             DetectError(ex);
+            mesaj = ex.getMessage();
         }
     }
 
@@ -61,6 +62,7 @@ public class TutanakGelirDAO extends DBConnection {
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
             DetectError(ex);
+            mesaj = ex.getMessage();
         }
     }
 
@@ -81,7 +83,6 @@ public class TutanakGelirDAO extends DBConnection {
 
             while (rs.next()) {
                 tutanakGelirList.add(new TutanakGelir(
-                        rs.getInt("GELIR_ID"),
                         rs.getFloat("YASLILIK"),
                         rs.getFloat("ENGELLI"),
                         rs.getFloat("ENGELLI_YAKINI"),
@@ -97,17 +98,16 @@ public class TutanakGelirDAO extends DBConnection {
                         rs.getFloat("BUYUKSEHIR"),
                         rs.getFloat("OZEL_VAKIF"),
                         rs.getFloat("DIGER"),
-                        rs.getFloat("DIGER_ACIKLAMA"),
+                        rs.getString("DIGER_ACIKLAMA"),
                         rs.getInt("AKTIF"),
                         rs.getDate("KAYIT_TARIHI"),
                         rs.getDate("GUNCELLEME_TARIHI")
                 ));
             }
 
-            System.out.println("İşlem başarılı");
-
         } catch (Exception ex) {
-            ex.printStackTrace(); // Hata yönetimi için gerekli kod
+            DetectError(ex);
+            mesaj = ex.getMessage();
         }
         return tutanakGelirList;
     }
