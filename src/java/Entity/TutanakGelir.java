@@ -5,27 +5,27 @@ import java.util.Date;
 public class TutanakGelir {
 
     private Integer gelir_id;
-    private Float yaslilik;
-    private Float engelli;
-    private Float engelli_yakini;
-    private Float yetim_ayligi;
-    private Float emekli_maasi;
-    private Float evde_bakim_parasi;
-    private Float dul_maasi;
-    private Float issizlik_maasi;
-    private Float asker_maasi;
-    private Float kira_maasi;
-    private Float kaymakamlik;
-    private Float sosyal_hizmetler;
-    private Float buyuksehir;
-    private Float ozel_vakif;
-    private Float diger;
-    private Float diger_aciklama;
-    private Integer aktif;
+    private float yaslilik = 0;
+    private float engelli = 0;
+    private float engelli_yakini = 0;
+    private float yetim_ayligi = 0;
+    private float emekli_maasi = 0;
+    private float evde_bakim_parasi = 0;
+    private float dul_maasi = 0;
+    private float issizlik_maasi = 0;
+    private float asker_maasi = 0;
+    private float kira_maasi = 0;
+    private float kaymakamlik = 0;
+    private float sosyal_hizmetler = 0;
+    private float buyuksehir = 0;
+    private float ozel_vakif = 0;
+    private float diger = 0;
+    private String diger_aciklama = "";
+    private Integer aktif = 0;
     private Date kayit_tarihi;
     private Date guncelleme_tarihi;
 
-    public TutanakGelir(Integer gelir_id, Float yaslilik, Float engelli, Float engelli_yakini, Float yetim_ayligi, Float emekli_maasi, Float evde_bakim_parasi, Float dul_maasi, Float issizlik_maasi, Float asker_maasi, Float kira_maasi, Float kaymakamlik, Float sosyal_hizmetler, Float buyuksehir, Float ozel_vakif, Float diger, Float diger_aciklama, Integer aktif, Date kayit_tarihi, Date guncelleme_tarihi) {
+    public TutanakGelir(Integer gelir_id, float yaslilik, float engelli, float engelli_yakini, float yetim_ayligi, float emekli_maasi, float evde_bakim_parasi, float dul_maasi, float issizlik_maasi, float asker_maasi, float kira_maasi, float kaymakamlik, float sosyal_hizmetler, float buyuksehir, float ozel_vakif, float diger, String diger_aciklama, Integer aktif, Date kayit_tarihi, Date guncelleme_tarihi) {
         this.gelir_id = gelir_id;
         this.yaslilik = yaslilik;
         this.engelli = engelli;
@@ -42,7 +42,7 @@ public class TutanakGelir {
         this.buyuksehir = buyuksehir;
         this.ozel_vakif = ozel_vakif;
         this.diger = diger;
-        this.diger = diger_aciklama;
+        this.diger_aciklama = diger_aciklama;
         this.aktif = aktif;
         this.kayit_tarihi = kayit_tarihi;
         this.guncelleme_tarihi = guncelleme_tarihi;
@@ -51,7 +51,7 @@ public class TutanakGelir {
     public TutanakGelir() {
     }
 
-    public TutanakGelir(Float yaslilik, Float engelli, Float engelli_yakini, Float yetim_ayligi, Float emekli_maasi, Float evde_bakim_parasi, Float dul_maasi, Float issizlik_maasi, Float asker_maasi, Float kira_maasi, Float kaymakamlik, Float sosyal_hizmetler, Float buyuksehir, Float ozel_vakif, Float diger, Float diger_aciklama, Integer aktif) {
+    public TutanakGelir(float yaslilik, float engelli, float engelli_yakini, float yetim_ayligi, float emekli_maasi, float evde_bakim_parasi, float dul_maasi, float issizlik_maasi, float asker_maasi, float kira_maasi, float kaymakamlik, float sosyal_hizmetler, float buyuksehir, float ozel_vakif, float diger, String diger_aciklama, Integer aktif) {
         this.yaslilik = yaslilik;
         this.engelli = engelli;
         this.engelli_yakini = engelli_yakini;
@@ -67,7 +67,7 @@ public class TutanakGelir {
         this.buyuksehir = buyuksehir;
         this.ozel_vakif = ozel_vakif;
         this.diger = diger;
-        this.diger = diger_aciklama;
+        this.diger_aciklama = diger_aciklama;
         this.aktif = aktif;
     }
 
@@ -79,124 +79,132 @@ public class TutanakGelir {
         this.gelir_id = gelir_id;
     }
 
-    public Float getYaslilik() {
+    public float getYaslilik() {
         return yaslilik;
     }
 
-    public void setYaslilik(Float yaslilik) {
+    public void setYaslilik(float yaslilik) {
         this.yaslilik = yaslilik;
     }
 
-    public Float getEngelli() {
+    public float getEngelli() {
         return engelli;
     }
 
-    public void setEngelli(Float engelli) {
+    public void setEngelli(float engelli) {
         this.engelli = engelli;
     }
 
-    public Float getEngelli_yakini() {
+    public float getEngelli_yakini() {
         return engelli_yakini;
     }
 
-    public void setEngelli_yakini(Float engelli_yakini) {
+    public void setEngelli_yakini(float engelli_yakini) {
         this.engelli_yakini = engelli_yakini;
     }
 
-    public Float getYetim_ayligi() {
+    public float getYetim_ayligi() {
         return yetim_ayligi;
     }
 
-    public void setYetim_ayligi(Float yetim_ayligi) {
+    public void setYetim_ayligi(float yetim_ayligi) {
         this.yetim_ayligi = yetim_ayligi;
     }
 
-    public Float getEmekli_maasi() {
+    public float getEmekli_maasi() {
         return emekli_maasi;
     }
 
-    public void setEmekli_maasi(Float emekli_maasi) {
+    public void setEmekli_maasi(float emekli_maasi) {
         this.emekli_maasi = emekli_maasi;
     }
 
-    public Float getEvde_bakim_parasi() {
+    public float getEvde_bakim_parasi() {
         return evde_bakim_parasi;
     }
 
-    public void setEvde_bakim_parasi(Float evde_bakim_parasi) {
+    public void setEvde_bakim_parasi(float evde_bakim_parasi) {
         this.evde_bakim_parasi = evde_bakim_parasi;
     }
 
-    public Float getDul_maasi() {
+    public float getDul_maasi() {
         return dul_maasi;
     }
 
-    public void setDul_maasi(Float dul_maasi) {
+    public void setDul_maasi(float dul_maasi) {
         this.dul_maasi = dul_maasi;
     }
 
-    public Float getIssizlik_maasi() {
+    public float getIssizlik_maasi() {
         return issizlik_maasi;
     }
 
-    public void setIssizlik_maasi(Float issizlik_maasi) {
+    public void setIssizlik_maasi(float issizlik_maasi) {
         this.issizlik_maasi = issizlik_maasi;
     }
 
-    public Float getAsker_maasi() {
+    public float getAsker_maasi() {
         return asker_maasi;
     }
 
-    public void setAsker_maasi(Float asker_maasi) {
+    public void setAsker_maasi(float asker_maasi) {
         this.asker_maasi = asker_maasi;
     }
 
-    public Float getKira_maasi() {
+    public float getKira_maasi() {
         return kira_maasi;
     }
 
-    public void setKira_maasi(Float kira_maasi) {
+    public void setKira_maasi(float kira_maasi) {
         this.kira_maasi = kira_maasi;
     }
 
-    public Float getKaymakamlik() {
+    public float getKaymakamlik() {
         return kaymakamlik;
     }
 
-    public void setKaymakamlik(Float kaymakamlik) {
+    public void setKaymakamlik(float kaymakamlik) {
         this.kaymakamlik = kaymakamlik;
     }
 
-    public Float getSosyal_hizmetler() {
+    public float getSosyal_hizmetler() {
         return sosyal_hizmetler;
     }
 
-    public void setSosyal_hizmetler(Float sosyal_hizmetler) {
+    public void setSosyal_hizmetler(float sosyal_hizmetler) {
         this.sosyal_hizmetler = sosyal_hizmetler;
     }
 
-    public Float getBuyuksehir() {
+    public float getBuyuksehir() {
         return buyuksehir;
     }
 
-    public void setBuyuksehir(Float buyuksehir) {
+    public void setBuyuksehir(float buyuksehir) {
         this.buyuksehir = buyuksehir;
     }
 
-    public Float getOzel_vakif() {
+    public float getOzel_vakif() {
         return ozel_vakif;
     }
 
-    public void setOzel_vakif(Float ozel_vakif) {
+    public void setOzel_vakif(float ozel_vakif) {
         this.ozel_vakif = ozel_vakif;
     }
 
-    public Float getDiger() {
+    public float getDiger() {
         return diger;
     }
 
-    public void setDiger(Float diger) {
+    public void setDiger(float diger) {
         this.diger = diger;
+    }
+
+    public String getDiger_aciklama() {
+        return diger_aciklama;
+    }
+
+    public void setDiger_aciklama(String diger_aciklama) {
+        this.diger_aciklama = diger_aciklama;
     }
 
     public Integer getAktif() {
@@ -222,13 +230,4 @@ public class TutanakGelir {
     public void setGuncelleme_tarihi(Date guncelleme_tarihi) {
         this.guncelleme_tarihi = guncelleme_tarihi;
     }
-
-    public Float getDiger_aciklama() {
-        return diger_aciklama;
-    }
-
-    public void setDiger_aciklama(Float diger_aciklama) {
-        this.diger_aciklama = diger_aciklama;
-    }
-    
 }

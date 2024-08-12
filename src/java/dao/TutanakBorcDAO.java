@@ -41,14 +41,11 @@ public class TutanakBorcDAO extends DBConnection {
             csBorc.setFloat(4, borc.getKira());
             csBorc.setFloat(5, borc.getKredi_karti());
             csBorc.setFloat(6, borc.getDiger());
-
             csBorc.setString(7, borc.getDiger_aciklama());
-            csBorc.setDate(8, new java.sql.Date(borc.getGuncelleme_tarihi().getTime()));
-            csBorc.registerOutParameter(9, java.sql.Types.INTEGER);
+            csBorc.registerOutParameter(8, java.sql.Types.INTEGER);
             csBorc.execute();
 
-            int borcId = csBorc.getInt(9);
-            borc.setBorc_id(borcId);
+            borc.setBorc_id(csBorc.getInt(8));
 
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 

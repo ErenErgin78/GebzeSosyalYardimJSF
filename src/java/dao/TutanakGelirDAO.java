@@ -38,7 +38,7 @@ public class TutanakGelirDAO extends DBConnection {
             cs.setFloat(13, tutanakGelir.getBuyuksehir());
             cs.setFloat(14, tutanakGelir.getOzel_vakif());
             cs.setFloat(15, tutanakGelir.getDiger());
-            cs.setFloat(15, tutanakGelir.getDiger_aciklama());
+            cs.setString(15, tutanakGelir.getDiger_aciklama());
             cs.setInt(16, tutanakGelir.getAktif());
             cs.setDate(17, new java.sql.Date(tutanakGelir.getKayit_tarihi().getTime()));
             cs.setDate(18, new java.sql.Date(tutanakGelir.getGuncelleme_tarihi().getTime()));
@@ -97,7 +97,7 @@ public class TutanakGelirDAO extends DBConnection {
                         rs.getFloat("BUYUKSEHIR"),
                         rs.getFloat("OZEL_VAKIF"),
                         rs.getFloat("DIGER"),
-                        rs.getFloat("DIGER_ACIKLAMA"),
+                        rs.getString("DIGER_ACIKLAMA"),
                         rs.getInt("AKTIF"),
                         rs.getDate("KAYIT_TARIHI"),
                         rs.getDate("GUNCELLEME_TARIHI")
