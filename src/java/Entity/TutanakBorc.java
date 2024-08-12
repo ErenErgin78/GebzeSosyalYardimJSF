@@ -9,12 +9,12 @@ import java.util.Date;
 public class TutanakBorc {
 
     private Integer borc_id;
-    private Float elektrik;
-    private Float su;
-    private Float dogalgaz;
-    private Float kira;
-    private Float kredi_karti;
-    private Float diger;
+    private float elektrik;
+    private float su;
+    private float dogalgaz;
+    private float kira;
+    private float kredi_karti;
+    private float diger;
     private String diger_aciklama;
     private Date guncelleme_tarihi;
 
@@ -23,8 +23,8 @@ public class TutanakBorc {
     }
 
     // Tüm alanları alan constructor
-    public TutanakBorc(Integer borc_id, Float elektrik, Float su, Float dogalgaz, Float kira, 
-               Float kredi_karti, Float diger, String diger_aciklama, Date guncelleme_tarihi) {
+    public TutanakBorc(Integer borc_id, float elektrik, float su, float dogalgaz, float kira, 
+               float kredi_karti, float diger, String diger_aciklama, Date guncelleme_tarihi) {
         this.borc_id = borc_id;
         this.elektrik = elektrik;
         this.su = su;
@@ -37,8 +37,8 @@ public class TutanakBorc {
     }
 
     // ID'siz constructor
-    public TutanakBorc(Float elektrik, Float su, Float dogalgaz, Float kira, 
-                Float kredi_karti, Float diger, String diger_aciklama, Date guncelleme_tarihi) {
+    public TutanakBorc(float elektrik, float su, float dogalgaz, float kira, 
+                float kredi_karti, float diger, String diger_aciklama, Date guncelleme_tarihi) {
         this.elektrik = elektrik;
         this.su = su;
         this.dogalgaz = dogalgaz;
@@ -58,51 +58,51 @@ public class TutanakBorc {
         this.borc_id = borc_id;
     }
 
-    public Float getElektrik() {
+    public float getElektrik() {
         return elektrik;
     }
 
-    public void setElektrik(Float elektrik) {
+    public void setElektrik(float elektrik) {
         this.elektrik = elektrik;
     }
 
-    public Float getSu() {
+    public float getSu() {
         return su;
     }
 
-    public void setSu(Float su) {
+    public void setSu(float su) {
         this.su = su;
     }
 
-    public Float getDogalgaz() {
+    public float getDogalgaz() {
         return dogalgaz;
     }
 
-    public void setDogalgaz(Float dogalgaz) {
+    public void setDogalgaz(float dogalgaz) {
         this.dogalgaz = dogalgaz;
     }
 
-    public Float getKira() {
+    public float getKira() {
         return kira;
     }
 
-    public void setKira(Float kira) {
+    public void setKira(float kira) {
         this.kira = kira;
     }
 
-    public Float getKredi_karti() {
+    public float getKredi_karti() {
         return kredi_karti;
     }
 
-    public void setKredi_karti(Float kredi_karti) {
+    public void setKredi_karti(float kredi_karti) {
         this.kredi_karti = kredi_karti;
     }
 
-    public Float getDiger() {
+    public float getDiger() {
         return diger;
     }
 
-    public void setDiger(Float diger) {
+    public void setDiger(float diger) {
         this.diger = diger;
     }
 
