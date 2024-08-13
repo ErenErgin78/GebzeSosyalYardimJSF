@@ -41,7 +41,7 @@ public class MeslekDAO extends DBConnection {
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (Exception ex) {
-            DetectError(ex);
+            this.mesaj = DetectError(ex);
         }
     }
 
@@ -54,7 +54,7 @@ public class MeslekDAO extends DBConnection {
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
-            DetectError(ex);
+            this.mesaj = DetectError(ex);
         }
     }
 

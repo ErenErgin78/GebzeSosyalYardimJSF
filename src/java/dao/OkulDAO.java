@@ -36,7 +36,7 @@ public class OkulDAO extends DBConnection {
             mesaj = "işlem başarıyla gerçekleşmiştir";
 
         } catch (SQLException ex) {
-            DetectError(ex);
+            this.mesaj = DetectError(ex);
         }
 
     }
@@ -95,7 +95,7 @@ public class OkulDAO extends DBConnection {
 
             mesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
-            DetectError(ex);
+            this.mesaj = DetectError(ex);
         }
     }
 

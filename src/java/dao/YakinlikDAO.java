@@ -37,7 +37,7 @@ public class YakinlikDAO extends DBConnection {
             this.mesaj = "İşlem başarıyla gerçekleşmiştir";
 
         } catch (SQLException ex) {
-            DetectError(ex);
+            this.mesaj = DetectError(ex);
         }
     }
 
@@ -51,7 +51,7 @@ public class YakinlikDAO extends DBConnection {
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
-            DetectError(ex);
+            this.mesaj = DetectError(ex);
         }
     }
 
