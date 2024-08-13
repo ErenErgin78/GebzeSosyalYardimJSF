@@ -25,7 +25,6 @@ public class MahalleBean implements Serializable {
     private MahalleDAO dao;
     private List<Mahalle> list;
     private List<SelectItem> mahalleList;
-    private int selectedMahalleId;
 
     public void mahallekle() {
         this.getDao().MahalleEkle(getEntity());
@@ -34,7 +33,7 @@ public class MahalleBean implements Serializable {
 
     public void mahallesil(int MahalleID) {
         this.getDao().MahalleSil(MahalleID);
-        this.list = this.getDao().MahalleListesi(); // Silme işleminden sonra listeyi güncelle
+        this.list = this.getDao().MahalleListesi();
     }
 
     public List<SelectItem> mahallegetir() {
@@ -81,17 +80,10 @@ public class MahalleBean implements Serializable {
         this.mahalleList = mahalleList;
     }
 
-    public int getSelectedMahalleId() {
-        return selectedMahalleId;
-    }
-
-    public void setSelectedMahalleId(int selectedMahalleId) {
-        this.selectedMahalleId = selectedMahalleId;
-    }
-
     @PostConstruct
     public void init() {
         getDao().setIslemBasariliMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
+        mahalleList = mahallegetir();
     }
 
     public MahalleBean() {

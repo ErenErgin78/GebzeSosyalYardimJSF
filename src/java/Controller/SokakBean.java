@@ -18,7 +18,6 @@ public class SokakBean implements Serializable {
     private Sokak entity;
     private SokakDAO dao;
     private List<Sokak> list;
-    private List<SelectItem> mahalleList;
     private List<SelectItem> sokakList;
     private int selectedMahalleId;
 
@@ -38,7 +37,7 @@ public class SokakBean implements Serializable {
     public void sokakyukle(AjaxBehaviorEvent event) {
         sokakList = new ArrayList<>();
         if (selectedMahalleId != 0) {
-            sokakList = this.getDao().SokakGetir(selectedMahalleId);;
+            sokakList = this.getDao().SokakGetir(selectedMahalleId);
         }
     }
 
