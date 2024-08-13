@@ -21,13 +21,14 @@ public class TutanakSosyalGuvenceDAO extends DBConnection {
     public void TutanakSosyalGuvenceEkle(TutanakSosyalGuvence tutanakSosyalGuvence) {
         try {
             Connection conn = this.getDb();
-            String callQuery = "{call INSERT_TUTANAK_SOSYAL_GUVENCE(?, ?, ?, ?, ?, ?)}";
+            String callQuery = "{call INSERT_TUTANAK_SOSYAL_GUVENCE(?, ?, ?, ?, ?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
 
             cs.setInt(1, tutanakSosyalGuvence.getGuvence_var_mi());
             cs.setInt(2, tutanakSosyalGuvence.getGuvence_id());
             cs.setInt(3, tutanakSosyalGuvence.getBirim_id());
             cs.setString(4, tutanakSosyalGuvence.getBirim_aciklama());
+            cs.registerOutParameter(5, java.sql.Types.INTEGER);
 
             cs.execute();
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
@@ -58,8 +59,8 @@ public class TutanakSosyalGuvenceDAO extends DBConnection {
         try {
             StringBuilder queryBuilder = new StringBuilder();
             queryBuilder.append("SELECT SOSYAL_GUVENCE_ID, GUVENCE_VAR_MI, GUVENCE_ID, BIRIM_ID, BIRIM_ACIKLAMA, GUNCELLEME_TARIHI ")
-                        .append("FROM TUTANAK_SOSYAL_GUVENCE ")
-                        .append("WHERE 1=1 ");
+                    .append("FROM TUTANAK_SOSYAL_GUVENCE ")
+                    .append("WHERE 1=1 ");
 
             Statement statement = getDb().createStatement();
             ResultSet rs = statement.executeQuery(queryBuilder.toString());

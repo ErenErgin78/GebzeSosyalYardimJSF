@@ -8,7 +8,6 @@ import static Various.ErrorFinder.DetectError;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
 import java.io.Serializable;
 
 /**
@@ -31,10 +30,10 @@ public class TutanakGelirBorcBean implements Serializable {
     private TutanakBorcBean borcBean;
 
     public void GelirBorcEkle() {
-        mesaj = gelirBean.getDao().getMesaj();
         try {
             gelirBean.tutanakGelirEkle();
             borcBean.create();
+            mesaj = gelirBean.getDao().getMesaj();
         } catch (Exception ex) {
             mesaj = DetectError(ex);
         }

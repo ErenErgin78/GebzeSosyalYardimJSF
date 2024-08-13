@@ -2,6 +2,7 @@ package Controller;
 
 import Entity.TutanakYakacak;
 import dao.EgitimDurumDAO;
+import dao.TutanakEvTipDAO;
 import dao.TutanakYakacakDAO;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.model.SelectItem;
@@ -21,6 +22,7 @@ public class TutanakYakacakBean implements Serializable {
 
     @PostConstruct
     public void init() {
+        tutanakyakacaklist = tutanakYakacakGetir();
     }
 
     public TutanakYakacakBean() {
@@ -39,6 +41,9 @@ public class TutanakYakacakBean implements Serializable {
     }
 
     public TutanakYakacakDAO getDao() {
+        if (dao == null) {
+            dao = new TutanakYakacakDAO();
+        }
         return dao;
     }
 
