@@ -7,6 +7,7 @@ package Controller;
 import Entity.Mahalle;
 import dao.MahalleDAO;
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.model.SelectItem;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
@@ -23,6 +24,8 @@ public class MahalleBean implements Serializable {
     private Mahalle entity;
     private MahalleDAO dao;
     private List<Mahalle> list;
+    private List<SelectItem> mahalleList;
+    private int selectedMahalleId;
 
     public void mahallekle() {
         this.getDao().MahalleEkle(getEntity());
@@ -32,6 +35,10 @@ public class MahalleBean implements Serializable {
     public void mahallesil(int MahalleID) {
         this.getDao().MahalleSil(MahalleID);
         this.list = this.getDao().MahalleListesi(); // Silme işleminden sonra listeyi güncelle
+    }
+
+    public List<SelectItem> mahallegetir() {
+        return this.getDao().MahalleGetir();
     }
 
     public Mahalle getEntity() {
@@ -64,6 +71,22 @@ public class MahalleBean implements Serializable {
 
     public void setList(List<Mahalle> list) {
         this.list = list;
+    }
+
+    public List<SelectItem> getMahalleList() {
+        return mahalleList;
+    }
+
+    public void setMahalleList(List<SelectItem> mahalleList) {
+        this.mahalleList = mahalleList;
+    }
+
+    public int getSelectedMahalleId() {
+        return selectedMahalleId;
+    }
+
+    public void setSelectedMahalleId(int selectedMahalleId) {
+        this.selectedMahalleId = selectedMahalleId;
     }
 
     @PostConstruct

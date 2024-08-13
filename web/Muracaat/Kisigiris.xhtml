@@ -82,8 +82,9 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="aktif4" class="form-label">Eğitim Durumu:</label>
-                                            <h:selectOneMenu id="aktif4" value="#{egitimDurumBean.egitimlist}" class="form-control">
-                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="#{egitimDurumBean.egitimDurumGetir()}" />
+                                            <h:selectOneMenu id="aktif4" value="#{egitimDurumBean.entity.egitim_durum_id}" class="form-control">
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                                <f:selectItems value="#{egitimDurumBean.egitimlist}" />
                                                 <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div> 
@@ -111,15 +112,17 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-6 mb-3">
                                                     <label for="aktif1" class="form-label">Mahalle:</label>
-                                                    <h:selectOneMenu id="aktif1" value="#{kisiAdresBean.mahalleList}" class="form-control">
-                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="#{kisiAdresBean.mahallegetir()}" />                                             
+                                                    <h:selectOneMenu id="aktif1" value="#{mahalleBean.entity.mahalle_id}" class="form-control">
+                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />  
+                                                        <f:selectItems value="#{mahalleBean.mahalleList}" />
                                                         <f:ajax event="valueChange" render="KullaniciListesi" />
                                                     </h:selectOneMenu>
                                                 </div> 
                                                 <div class="form-group col-md-6 mb-3">
                                                     <label for="aktif" class="form-label">Cadde/Sokak:</label>
-                                                    <h:selectOneMenu id="aktif2" value="#{kisiAdresBean.sokakList}" class="form-control">
-                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="#{kisiAdresBean.sokakgetir()}" />                                                                    
+                                                    <h:selectOneMenu id="aktif2" value="#{sokakBean.entity.sokak_id}" class="form-control">
+                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                                        <f:selectItems value="#{sokakBean.sokakList}" />
                                                         <f:ajax event="valueChange" render="KullaniciListesi" />
                                                     </h:selectOneMenu>
                                                 </div>                                                         

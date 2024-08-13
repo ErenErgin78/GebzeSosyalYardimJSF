@@ -108,42 +108,6 @@ public class KisiAdresDAO extends DBConnection {
 
     }
 
-    public List<SelectItem> MahalleGetir() {
-        List<SelectItem> MahalleList = new ArrayList<>();
-
-        try {
-            Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT KISI_ADRES_MAHALLE_ID, MAHALLE FROM KISI_ADRES_MAHALLE";
-            ResultSet rs = statement.executeQuery(Selectquery);
-
-            while (rs.next()) {
-                MahalleList.add(new SelectItem(rs.getInt("KISI_ADRES_MAHALLE_ID"), rs.getString("MAHALLE")));
-            }
-        } catch (Exception ex) {
-            DetectError(ex);
-        }
-        return MahalleList;
-    }
-
-    public List<SelectItem> SokakGetir(int selectedmahalleid) {
-        List<SelectItem> MahalleList = new ArrayList<>();
-
-        try {
-            Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT SOKAK_ID, SOKAK_ISIM FROM KISI_MAHALLE_SOKAK WHERE MAHALLE_ID = " + selectedmahalleid;
-            ResultSet rs = statement.executeQuery(Selectquery);
-
-            while (rs.next()) {
-
-                MahalleList.add(new SelectItem(rs.getInt("SOKAK_ID"), rs.getString("SOKAK_ISIM")));
-            }
-
-        } catch (Exception ex) {
-            DetectError(ex);
-        }
-        return MahalleList;
-    }
-
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();
