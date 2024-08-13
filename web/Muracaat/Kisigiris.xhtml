@@ -82,8 +82,8 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="aktif4" class="form-label">Eğitim Durumu:</label>
-                                            <h:selectOneMenu id="aktif4" value="#{egitimDurumBean.egitimDurumGetir}" class="form-control">
-                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                            <h:selectOneMenu id="aktif4" value="#{egitimDurumBean.egitimlist}" class="form-control">
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="#{egitimDurumBean.egitimDurumGetir()}" />
                                                 <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div> 
@@ -111,15 +111,15 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-6 mb-3">
                                                     <label for="aktif1" class="form-label">Mahalle:</label>
-                                                    <h:selectOneMenu id="aktif1" value="#{kisiAdresBean.dao.mahalleGetir}" class="form-control">
-                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                                             
+                                                    <h:selectOneMenu id="aktif1" value="#{kisiAdresBean.mahalleList}" class="form-control">
+                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="#{kisiAdresBean.mahallegetir()}" />                                             
                                                         <f:ajax event="valueChange" render="KullaniciListesi" />
                                                     </h:selectOneMenu>
                                                 </div> 
                                                 <div class="form-group col-md-6 mb-3">
                                                     <label for="aktif" class="form-label">Cadde/Sokak:</label>
-                                                    <h:selectOneMenu id="aktif2" value="#{kisiAdresBean.dao.kisiAdresGetir}" class="form-control">
-                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                                                                    
+                                                    <h:selectOneMenu id="aktif2" value="#{kisiAdresBean.sokakList}" class="form-control">
+                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="#{kisiAdresBean.sokakgetir()}" />                                                                    
                                                         <f:ajax event="valueChange" render="KullaniciListesi" />
                                                     </h:selectOneMenu>
                                                 </div>                                                         
@@ -174,7 +174,7 @@
                             </div>
 
                             <div class="text-center mt-3">
-                                <h:commandButton value="Kaydet" action="#{userBean.create()}" class="btn btn-success">
+                                <h:commandButton value="Kaydet" action="#{kisiBean.ekle()}" class="btn btn-success">
                                     <f:ajax execute="@form" render="@form, mesaj" />
                                 </h:commandButton>                                  
                             </div>
