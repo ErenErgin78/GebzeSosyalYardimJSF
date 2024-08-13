@@ -1,27 +1,33 @@
 package dao;
 
+import Entity.GuvenceBirim;
 import static Various.ErrorFinder.DetectError;
 import jakarta.faces.model.SelectItem;
+import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import util.DBConnection;
 
-public class MedeniDurumDAO extends DBConnection{
-private Connection db;
-    
-     public List<SelectItem> MedeniDurumGetir() {
+public class GuvenceBirimDAO extends DBConnection {
+
+    private Connection db;
+
+    public List<SelectItem> GuvenceBirimGetir() {
         List<SelectItem> TipList = new ArrayList<>();
 
         try {
             Statement statement = getDb().createStatement();
-            String Selectquery = ("SELECT MEDENI_DURUM_ID, MEDENI_DURUM FROM KISI_MEDENI_DURUM");
+            String Selectquery = "SELECT GUVENCE_BIRIM_ID , GUVENCE_BIRIM FROM GUVENCE_BIRIM";
             ResultSet rs = statement.executeQuery(Selectquery);
 
             while (rs.next()) {
-                TipList.add(new SelectItem(rs.getInt("MEDENI_DURUM_ID"), rs.getString("MEDENI_DURUM")));
+                TipList.add(new SelectItem(rs.getInt("TUTANAK_YAKACAK_ID"), rs.getString("TUTANAK_YAKACAK")));
             }
         } catch (Exception ex) {
             DetectError(ex);
@@ -30,14 +36,12 @@ private Connection db;
 
     }
 
-     public Connection getDb() {
-        if (this.db == null) {
-            this.db = this.connect();
-        }
+    public Connection getDb() {
         return db;
     }
 
     public void setDb(Connection db) {
         this.db = db;
     }
+
 }
