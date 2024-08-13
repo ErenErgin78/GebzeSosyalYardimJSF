@@ -41,35 +41,39 @@ public class MuracaatBilgiDAO extends DBConnection {
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
             return muracaatBilgiId;
-            
+
         } catch (SQLException ex) {
             DetectError(ex);
             return null;
         }
     }
 
-    public List<MuracaatBilgi> GetList() {
-
-        List<MuracaatBilgi> UserList = new ArrayList<>();
+    public List<MuracaatBilgi> MuracaatBilgiListesi() {
+        List<MuracaatBilgi> muracaatBilgiList = new ArrayList<>();
 
         try {
+            StringBuilder queryBuilder = new StringBuilder();
+            queryBuilder.append("SELECT MURACAAT_BILGI_ID, ARSIV_DOSYA_NO, ACIKLAMA, MURACAAT_TARIHI, KAYIT_TARIHI, AKTIF, GUNCELLEME_TARIHI FROM MURACAAT_BILGI WHERE 1=1 ");
 
             Statement statement = getDb().createStatement();
-
-            String Selectquery = "SELECT \n"
-                    + "JOIN KULLANICI_DURUM D ON K.kullanici_durum_id = D.kullanici_durum_id\n"
-                    + "JOIN KULLANICI_UNVAN U ON K.kullanici_unvan_id = U.kullanici_unvan_id";
-
-            ResultSet rs = statement.executeQuery(Selectquery);
+            ResultSet rs = statement.executeQuery(queryBuilder.toString());
 
             while (rs.next()) {
-
+                muracaatBilgiList.add(new MuracaatBilgi(
+                        rs.getInt("ARSIV_DOSYA_NO"),
+                        rs.getString("ACIKLAMA"),
+                        rs.getDate("MURACAAT_TARIHI"),
+                        rs.getInt("AKTIF"),
+                        rs.getTimestamp("KAYIT_TARIHI"),
+                        rs.getTimestamp("GUNCELLEME_TARIHI")
+                ));
             }
+            mesaj = "İşlem başarılı";
 
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             DetectError(ex);
         }
-        return UserList;
+        return muracaatBilgiList;
     }
 
     public void Delete(int kullaniciId) {
@@ -105,6 +109,14 @@ public class MuracaatBilgiDAO extends DBConnection {
 
     public void setMuracaat_bilgi_id(Integer muracaat_bilgi_id) {
         this.muracaat_bilgi_id = muracaat_bilgi_id;
+    }
+
+    public String getMesaj() {
+        return mesaj;
+    }
+
+    public void setMesaj(String mesaj) {
+        this.mesaj = mesaj;
     }
 
 }

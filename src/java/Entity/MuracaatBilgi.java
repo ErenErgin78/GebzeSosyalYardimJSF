@@ -26,6 +26,16 @@ public class MuracaatBilgi {
         this.aktif = aktif;
     }
 
+    public MuracaatBilgi(Integer arsiv_dosya_no, String aciklama, Date muracaat_tarihi, Integer aktif, Date kayit_tarih, Date guncelleme_tarih) {
+        this.arsiv_dosya_no = arsiv_dosya_no;
+        this.aciklama = aciklama;
+        this.muracaat_tarihi = muracaat_tarihi;
+        this.aktif = aktif;
+        this.kayit_tarih = kayit_tarih;
+        this.guncelleme_tarih = guncelleme_tarih;
+    }
+    
+
     public Integer getMuracaat_bilgi_id() {
         return muracaat_bilgi_id;
     }

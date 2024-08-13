@@ -23,7 +23,7 @@ public class KisiAskerlikDAO extends DBConnection {
     private String islemBasariliMesaj;
 
 
-    public void Create(KisiAskerlik askerlik) {
+    public Integer Create(KisiAskerlik askerlik) {
         try {
             Connection conn = this.getDb();
 
@@ -41,11 +41,13 @@ public class KisiAskerlikDAO extends DBConnection {
 
             int askerlikId = csAskerlik.getInt(7);
             askerlik.setAskerlik_id(askerlikId);
-
+            
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+            return askerlikId;
 
         } catch (SQLException ex) {
             islemBasariliMesaj = DetectError(ex);
+            return null;
         }
     }
 
