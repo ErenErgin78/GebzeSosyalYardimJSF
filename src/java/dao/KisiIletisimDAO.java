@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,23 +18,25 @@ public class KisiIletisimDAO extends DBConnection {
     private Connection db;
     private String mesaj; // Başarı mesajı için değişken
 
-    public void KisiIletisimEkle(KisiIletisim kisiIletisim) {
+    public Integer KisiIletisimEkle(KisiIletisim kisiIletisim) {
         try {
             Connection conn = (Connection) this.getDb();
 
-            String callQuery = "{call INSERT_KISI_ILETISIM(?, ?, ?, ?, ?, ?, ?)}";
+            String callQuery = "{call INSERT_KISI_ILETISIM(?, ?, ?, ?, ?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
             cs.setInt(1, kisiIletisim.getKisi_iletisim_id());
             cs.setObject(2, kisiIletisim.getEv_telefon());
             cs.setObject(3, kisiIletisim.getCep_telefon());
             cs.setString(4, kisiIletisim.getEposta());
-            cs.setDate(5, (Date) kisiIletisim.getKayit_tarihi());
-            cs.setInt(6, kisiIletisim.getAktif());
-            cs.setDate(7, (Date) kisiIletisim.getGuncelleme_tarihi());
-
+            cs.registerOutParameter(5, java.sql.Types.INTEGER);
+            cs.execute();
+            
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
+            
+            return cs.getInt(5);
         } catch (Exception ex) {
             this.mesaj = DetectError(ex);
+            return null;
         }
 
     }

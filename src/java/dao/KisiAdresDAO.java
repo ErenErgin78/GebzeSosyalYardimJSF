@@ -19,7 +19,7 @@ public class KisiAdresDAO extends DBConnection {
     private Connection db;
     private String mesaj;
 
-    public Integer KisiEkle(KisiAdres kisiAdres) {
+    public Integer KisiAdresEkle(KisiAdres kisiAdres) {
         try {
             Connection conn = this.getDb();
 

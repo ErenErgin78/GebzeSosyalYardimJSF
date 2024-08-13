@@ -24,7 +24,7 @@ public class KisiMuracaatBean implements Serializable {
     private String mesaj;
 
     @Inject
-    private KisiBean kimlikBean;
+    private KisiBean kisiBean;
 
     @Inject
     private KisiIletisimBean iletisimBean;
@@ -37,10 +37,12 @@ public class KisiMuracaatBean implements Serializable {
 
     public void KisiMuracaatEkle() {
         try {
-            kimlikBean.ekle();
-            iletisimBean.ekle();
-            adresBean.ekle();
-            muracaatBilgiBean.ekle();
+
+            int iletisim_id = iletisimBean.ekle();
+            int adres_id = adresBean.ekle();
+            
+            int kisi_id = kisiBean.ekle();
+            int muracaat_bilgi_id = muracaatBilgiBean.ekle();
 
             mesaj = muracaatBilgiBean.getDao().getMesaj();
 
