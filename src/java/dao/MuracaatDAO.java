@@ -5,6 +5,7 @@
 package dao;
 
 import Entity.Muracaat;
+import static Various.ErrorFinder.DetectError;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import java.sql.CallableStatement;
@@ -26,38 +27,21 @@ public class MuracaatDAO extends DBConnection {
     private Integer muracaat_bilgi_id;
 
     private String mesaj;
-    
-    public void Create(Muracaat muracaat) {
+
+    public Integer MuracaatEkle(Muracaat muracaat, Integer KisiID) {
         try {
             Connection conn = this.getDb();
 
-            // MURACAAT_BILGI stored procedure çağırma
             String callQueryMuracaatBilgi = "{call INSERT_MURACAAT_BILGI(?, ?, ?, ?, ?)}";
             CallableStatement csMuracaatBilgi = conn.prepareCall(callQueryMuracaatBilgi);
             csMuracaatBilgi.setInt(1, muracaat.getArsiv_dosya_no());
-            csMuracaatBilgi.setInt(2, muracaat.getMuracaat_tip_id());
             csMuracaatBilgi.setString(3, muracaat.getAciklama());
             csMuracaatBilgi.setDate(4, new java.sql.Date(muracaat.getMuracaat_tarihi().getTime()));
             csMuracaatBilgi.registerOutParameter(5, java.sql.Types.INTEGER);
             csMuracaatBilgi.execute();
             int muracaatBilgiId = csMuracaatBilgi.getInt(5);
 
-            // KISI_TEMEL'den id almak
-            String selectQuery = "SELECT MAX(KISI_ID) ID FROM KISI_TEMEL";
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery(selectQuery);
-            if (rs.next()) {
-                muracaat.setKisi_temel_id(rs.getInt("ID"));
-
-                // MURACAAT stored procedure çağırma
-                String callQueryMuracaat = "{call INSERT_MURACAAT(?, ?)}";
-                CallableStatement csMuracaat = conn.prepareCall(callQueryMuracaat);
-                csMuracaat.setInt(1, muracaat.getKisi_temel_id());
-                csMuracaat.setInt(2, muracaatBilgiId);
-                csMuracaat.executeUpdate();
-
-                this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
-            }
+            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (SQLException ex) {
             DetectError(ex);
@@ -102,24 +86,6 @@ public class MuracaatDAO extends DBConnection {
         } catch (SQLException ex) {
             DetectError(ex);
         }
-    }
-
-    private void DetectError(Exception ex) {
-        //Hatayı yakalamak için
-        FacesContext context = FacesContext.getCurrentInstance();
-        StringBuilder errorMessage = new StringBuilder(ex.getMessage());
-        StackTraceElement[] stackTrace = ex.getStackTrace();
-
-        //Hatanın hangi satırda olduğunu görmek için
-        for (StackTraceElement element : stackTrace) {
-            if (element.getClassName().startsWith("dao")) {
-                errorMessage.append(" (at ").append(element.getFileName())
-                        .append(":").append(element.getLineNumber()).append(")");
-                break;
-            }
-        }
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage.toString(), null));
-
     }
 
     public Connection getDb() {
