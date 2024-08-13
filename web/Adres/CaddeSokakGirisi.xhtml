@@ -32,7 +32,13 @@
                                     Cadde/Sokak Giriş Bilgileri<br/>
                                 </div>
                                 <div class="card-body">
-                                  
+                                    <div class="form-group">
+                                        <label for="neighborhood">Mahalle:</label>
+                                        <h:selectOneMenu id="neighborhood" value="#{sokakBean.entity.mahalle_id}" class="form-control">
+                                            <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                            <f:selectItems value="#{mahalleBean.mahalleList}" />
+                                        </h:selectOneMenu>
+                                    </div>
                                     <div class="form-group">
                                         <label for="description">Cadde/Sokak Adı:</label>
                                         <h:inputTextarea id="description" class="form-control" value="#{sokakBean.entity.sokak}" rows="3" />
