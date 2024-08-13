@@ -4,6 +4,7 @@ import Entity.TutanakSosyalGuvence;
 import dao.TutanakSosyalGuvenceDAO;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.model.SelectItem;
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,17 +16,27 @@ public class TutanakSosyalGuvenceBean implements Serializable {
     private TutanakSosyalGuvenceDAO dao;
     private List<TutanakSosyalGuvence> list;
 
-    // Yeni bir TutanakSosyalGuvence ekleme metodu
+    private List<SelectItem> guvenceList;
+    private List<SelectItem> birimList;
+
+    public List<SelectItem> getGuvenceList() {
+        guvenceList = getDao().GuvenceGetir();
+        return guvenceList;
+    }
+
+    public List<SelectItem> getBirimList() {
+        birimList = getDao().BirimGetir();
+        return birimList;
+    }
+
     public void tutanakSosyalGuvenceEkle() {
         this.getDao().TutanakSosyalGuvenceEkle(getEntity());
     }
 
-    // Belirli bir TutanakSosyalGuvence'i silme metodu
     public void tutanakSosyalGuvenceSil(int tutanakSosyalGuvenceId) {
         this.getDao().TutanakSosyalGuvenceSil(tutanakSosyalGuvenceId);
     }
 
-    // TutanakSosyalGuvence verilerini listeleme metodu
     public List<TutanakSosyalGuvence> getList() {
         if (this.list == null) {
             this.list = this.getDao().TutanakSosyalGuvenceListesi();
@@ -33,12 +44,10 @@ public class TutanakSosyalGuvenceBean implements Serializable {
         return this.list;
     }
 
-    // Listeyi yenileme metodu
     public void listeYenile() {
         this.list = this.getDao().TutanakSosyalGuvenceListesi();
     }
 
-    // Entity getter ve setter
     public TutanakSosyalGuvence getEntity() {
         if (this.entity == null) {
             this.entity = new TutanakSosyalGuvence();
@@ -50,7 +59,6 @@ public class TutanakSosyalGuvenceBean implements Serializable {
         this.entity = entity;
     }
 
-    // DAO getter ve setter
     public TutanakSosyalGuvenceDAO getDao() {
         if (this.dao == null) {
             this.dao = new TutanakSosyalGuvenceDAO();
@@ -61,7 +69,7 @@ public class TutanakSosyalGuvenceBean implements Serializable {
     public void setDao(TutanakSosyalGuvenceDAO dao) {
         this.dao = dao;
     }
-    
+
     // Constructor
     public TutanakSosyalGuvenceBean() {
     }
