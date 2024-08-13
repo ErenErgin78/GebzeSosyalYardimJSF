@@ -19,6 +19,9 @@ JSF kullanımı ve website yapımı:
 Database ile ilgili kısımları geçebilirsiniz çünkü farklı bir database kullanıyor. Eğer database kurulumunda ve/veya kullanımında sorun yaşarsanız:
 [BTK Akademi](https://www.btkakademi.gov.tr/portal/course/sifirdan-ileri-seviye-oracle-sql-19567)
 
+SQL Developer kurduğunuzda butonlar çalışmıyorsa, eksikse ve uygulama penceresi bozuksa bu video ile halledebilirsiniz:
+[Oracle Çözüm](https://www.youtube.com/watch?v=xzBZ2eWss6k&t=1s)
+
 <hr>
 
 ## 3- Netbeans'den proje oluşturmak:
