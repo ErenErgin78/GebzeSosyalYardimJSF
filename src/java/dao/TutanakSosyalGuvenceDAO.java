@@ -28,7 +28,6 @@ public class TutanakSosyalGuvenceDAO extends DBConnection {
             cs.setInt(2, tutanakSosyalGuvence.getGuvence_id());
             cs.setInt(3, tutanakSosyalGuvence.getBirim_id());
             cs.setString(4, tutanakSosyalGuvence.getBirim_aciklama());
-            cs.setTimestamp(5, new java.sql.Timestamp(tutanakSosyalGuvence.getGuncelleme_tarihi().getTime()));
 
             cs.execute();
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
