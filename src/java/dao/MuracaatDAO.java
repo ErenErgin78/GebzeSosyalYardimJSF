@@ -141,4 +141,13 @@ public class MuracaatDAO extends DBConnection {
         this.muracaat_bilgi_id = muracaat_bilgi_id;
     }
 
+    public String getMesaj() {
+        return mesaj;
+    }
+
+    public void setMesaj(String mesaj) {
+        this.mesaj = mesaj;
+    }
+    
+
 }
