@@ -73,6 +73,7 @@ public class MahalleBean implements Serializable {
     }
 
     public List<SelectItem> getMahalleList() {
+        mahalleList = mahallegetir();
         return mahalleList;
     }
 
@@ -83,7 +84,6 @@ public class MahalleBean implements Serializable {
     @PostConstruct
     public void init() {
         getDao().setIslemBasariliMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
-        mahalleList = mahallegetir();
     }
 
     public MahalleBean() {

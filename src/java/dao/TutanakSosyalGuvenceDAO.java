@@ -2,6 +2,7 @@ package dao;
 
 import Entity.TutanakSosyalGuvence;
 import static Various.ErrorFinder.DetectError;
+import jakarta.faces.model.SelectItem;
 import util.DBConnection;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -17,7 +18,6 @@ public class TutanakSosyalGuvenceDAO extends DBConnection {
     private Connection db;
     private String mesaj;
 
-    // TutanakSosyalGuvence Ekleme Metodu
     public void TutanakSosyalGuvenceEkle(TutanakSosyalGuvence tutanakSosyalGuvence) {
         try {
             Connection conn = this.getDb();
@@ -38,7 +38,6 @@ public class TutanakSosyalGuvenceDAO extends DBConnection {
         }
     }
 
-    // TutanakSosyalGuvence Silme Metodu
     public void TutanakSosyalGuvenceSil(int tutanakSosyalGuvenceId) {
         String deleteQuery = "DELETE FROM TUTANAK_SOSYAL_GUVENCE WHERE SOSYAL_GUVENCE_ID = ?";
         try {
@@ -52,7 +51,6 @@ public class TutanakSosyalGuvenceDAO extends DBConnection {
         }
     }
 
-    // TutanakSosyalGuvence Listeleme Metodu
     public List<TutanakSosyalGuvence> TutanakSosyalGuvenceListesi() {
         List<TutanakSosyalGuvence> tutanakSosyalGuvenceList = new ArrayList<>();
 
@@ -76,15 +74,46 @@ public class TutanakSosyalGuvenceDAO extends DBConnection {
                 ));
             }
 
-            System.out.println("İşlem başarılı");
-
         } catch (Exception ex) {
-            ex.printStackTrace(); // Hata yönetimi için gerekli kod
+            mesaj = DetectError(ex);
         }
         return tutanakSosyalGuvenceList;
     }
 
-    // Veritabanı Bağlantısı Almak İçin Metod
+    public List<SelectItem> GuvenceGetir() {
+        List<SelectItem> GuvenceList = new ArrayList<>();
+
+        try {
+            Statement statement = getDb().createStatement();
+            String Selectquery = "SELECT GUVENCE_ID,  GUVENCE FROM GUVENCE";
+            ResultSet rs = statement.executeQuery(Selectquery);
+
+            while (rs.next()) {
+                GuvenceList.add(new SelectItem(rs.getInt("GUVENCE_ID"), rs.getString("GUVENCE")));
+            }
+        } catch (Exception ex) {
+            mesaj = DetectError(ex);
+        }
+        return GuvenceList;
+    }
+    
+    public List<SelectItem> BirimGetir() {
+        List<SelectItem> BirimList = new ArrayList<>();
+
+        try {
+            Statement statement = getDb().createStatement();
+            String Selectquery = "SELECT BIRIM_ID,  BIRIM_ISIM FROM GUVENCE_BIRIM";
+            ResultSet rs = statement.executeQuery(Selectquery);
+
+            while (rs.next()) {
+                BirimList.add(new SelectItem(rs.getInt("BIRIM_ID"), rs.getString("BIRIM_ISIM")));
+            }
+        } catch (Exception ex) {
+            mesaj = DetectError(ex);
+        }
+        return BirimList;
+    }
+
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();
