@@ -3,13 +3,13 @@ package Controller;
 import Entity.TutanakGelir;
 import dao.TutanakGelirDAO;
 import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
-import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
 
 @Named(value = "tutanakGelirBean")
-@ViewScoped
+@SessionScoped
 public class TutanakGelirBean implements Serializable {
 
     private TutanakGelir entity;

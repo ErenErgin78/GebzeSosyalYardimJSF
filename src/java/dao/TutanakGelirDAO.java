@@ -20,7 +20,7 @@ public class TutanakGelirDAO extends DBConnection {
     public void TutanakGelirEkle(TutanakGelir tutanakGelir) {
         try {
             Connection conn = this.getDb();
-            String callQuery = "{call INSERT_TUTANAK_GELIR(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            String callQuery = "{call INSERT_TUTANAK_GELIR(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
 
             cs.setFloat(1, tutanakGelir.getYaslilik());
@@ -41,14 +41,13 @@ public class TutanakGelirDAO extends DBConnection {
             cs.setString(16, tutanakGelir.getDiger_aciklama());
             cs.setInt(17, tutanakGelir.getAktif());
             cs.registerOutParameter(18, java.sql.Types.INTEGER);
+
             cs.execute();
             tutanakGelir.setGelir_id(cs.getInt(18));
-            
+
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
-
         } catch (Exception ex) {
-
-            this.mesaj =  DetectError(ex);
+            this.mesaj = DetectError(ex);
         }
     }
 
