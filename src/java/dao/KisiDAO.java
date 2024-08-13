@@ -23,7 +23,7 @@ public class KisiDAO extends DBConnection {
         try {
             Connection conn = this.getDb();
 
-            String callQuery = "{call INSERT_KISI_TEMEL(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            String callQuery = "{call INSERT_KISI_TEMEL(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
             cs.setObject(1, kisi.getKimlik_no());
             cs.setString(2, kisi.getIsim());

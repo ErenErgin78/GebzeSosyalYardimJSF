@@ -23,7 +23,7 @@ public class KisiAdresDAO extends DBConnection {
         try {
             Connection conn = this.getDb();
 
-            String callQuery = "{call INSERT_KISI_ADRES(?, ?, ?, ?, ?, ?, ?, ?,)}";
+            String callQuery = "{call INSERT_KISI_ADRES(?, ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
             cs.setString(1, kisiAdres.getTarif());
             cs.setString(2, kisiAdres.getSite());
