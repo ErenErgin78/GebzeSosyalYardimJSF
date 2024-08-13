@@ -20,14 +20,10 @@ public class KisiAdresBean implements Serializable {
     private KisiAdres entity;
     private KisiAdresDAO dao;
     private List<KisiAdres> list;
-    private List<SelectItem> mahalleList;
-    private List<SelectItem> sokakList;
-    private int selectedMahalleId;
 
     @PostConstruct
     public void init() {
         entity = new KisiAdres();
-        sokakList = new ArrayList<>();
     }
 
     public void ekle() {
@@ -40,21 +36,7 @@ public class KisiAdresBean implements Serializable {
         this.list = this.getDao().KisiAdresListesi(); // Silme işleminden sonra listeyi güncelle
     }
 
-    //Muracaat Girişte dinamik mahalle ve sokak değişimi için
-    public List<SelectItem> mahallegetir() {
-        return this.getDao().MahalleGetir();
-    }
 
-    public List<SelectItem> sokakgetir() {
-        return this.getDao().SokakGetir(selectedMahalleId);
-    }
-
-    public void sokakyukle(AjaxBehaviorEvent event) {
-        sokakList = new ArrayList<>();
-        if (selectedMahalleId != 0) {
-            sokakList = this.getDao().SokakGetir(selectedMahalleId);;
-        }
-    }
 
     public void edit(KisiAdres kisiAdres) {
         this.entity = kisiAdres;
@@ -82,30 +64,6 @@ public class KisiAdresBean implements Serializable {
 
     public void setList(List<KisiAdres> list) {
         this.list = list;
-    }
-
-    public List<SelectItem> getMahalleList() {
-        return mahalleList;
-    }
-
-    public void setMahalleList(List<SelectItem> mahalleList) {
-        this.mahalleList = mahalleList;
-    }
-
-    public List<SelectItem> getSokakList() {
-        return sokakList;
-    }
-
-    public void setSokakList(List<SelectItem> sokakList) {
-        this.sokakList = sokakList;
-    }
-
-    public int getSelectedMahalleId() {
-        return selectedMahalleId;
-    }
-
-    public void setSelectedMahalleId(int selectedMahalleId) {
-        this.selectedMahalleId = selectedMahalleId;
     }
 
     public KisiAdresBean() {
