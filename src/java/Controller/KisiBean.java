@@ -18,6 +18,7 @@ public class KisiBean implements Serializable {
     private Kisi entity;
     private KisiDAO dao;
     private List<Kisi> list;
+    private List<SelectItem> MedeniList;
 
     @PostConstruct
     public void init() {
@@ -69,6 +70,15 @@ public class KisiBean implements Serializable {
 
     public void setList(List<Kisi> list) {
         this.list = list;
+    }
+
+    public List<SelectItem> getMedeniList() {
+        MedeniList = getDao().kisiGetir();
+        return MedeniList;
+    }
+
+    public void setMedeniList(List<SelectItem> MedeniList) {
+        this.MedeniList = MedeniList;
     }
 
 }

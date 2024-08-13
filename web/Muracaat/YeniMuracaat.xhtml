@@ -79,23 +79,24 @@
                                             <label for="cinsiyetTekrar" class="form-label">Medeni Durum:</label>
                                             <h:selectOneMenu id="cinsiyetTekrar" value="#{kisiBean.entity.medeni_durum_id}" class="form-control">
                                                 <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                                <f:selectItems value="#{kisiBean.medeniList}" />
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="family_order_no">Aile Sıra No:</label>
-                                            <h:inputText id="family_order_no" value ="" class="form-control" />
+                                            <h:inputText id="family_order_no" value ="#{kisiBean.entity.aile_sira_no}" class="form-control" />
                                         </div>
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="order_no">Sıra No:</label>
-                                            <h:inputText id="order_no" value ="" class="form-control" />
+                                            <h:inputText id="order_no" value ="#{kisiBean.entity.sira_no}" class="form-control" />
                                         </div>
                                     </div>  
                                     <div class="form-row">
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="cilt_no">Cilt No:</label>
-                                            <h:inputText id="cilt_no" value ="" class="form-control" />
+                                            <h:inputText id="cilt_no" value ="#{kisiBean.entity.cilt_no}" class="form-control" />
                                         </div> 
                                     </div>
                                     <!-- İletişim Bilgileri Kartı -->

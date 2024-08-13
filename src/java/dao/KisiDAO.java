@@ -94,6 +94,23 @@ public class KisiDAO extends DBConnection {
         return kisiList;
     }
 
+    public List<SelectItem> kisiGetir() {
+        List<SelectItem> kisiList = new ArrayList<>();
+
+        try {
+            Statement statement = getDb().createStatement();
+            String Selectquery = "SELECT MEDENI_DURUM_ID,MEDENI_DURUM  FROM KISI_MEDENI_DURUM";
+            ResultSet rs = statement.executeQuery(Selectquery);
+
+            while (rs.next()) {
+                kisiList.add(new SelectItem(rs.getInt("MEDENI_DURUM_ID"), rs.getString("MEDENI_DURUM")));
+            }
+        } catch (Exception ex) {
+            DetectError(ex);
+        }
+        return kisiList;
+    }
+
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();
@@ -112,4 +129,5 @@ public class KisiDAO extends DBConnection {
     public void setMesaj(String mesaj) {
         this.mesaj = mesaj;
     }
+
 }
