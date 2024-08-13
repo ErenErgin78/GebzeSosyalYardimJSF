@@ -90,7 +90,9 @@
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="aktif3" class="form-label">Cinsiyet:</label>
                                             <h:selectOneMenu id="aktif3" value="#{kisiBean.entity.cinsiyet}" class="form-control">
-                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                             
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                                <f:selectItem itemLabel="Erkek" itemValue="E" /> 
+                                                <f:selectItem itemLabel="Kadın" itemValue="K" /> 
                                                 <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div>                                                         
