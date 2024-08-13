@@ -14,7 +14,7 @@ public class KisiAskerlik {
     private String aciklama;
     private Date baslangic_tarihi;
     private Date bitis_tarihi;
-    private Integer aktif;
+    private Integer aktif = 1;
     private Date kayit_tarihi;
     private Date guncelleme_tarihi;
 

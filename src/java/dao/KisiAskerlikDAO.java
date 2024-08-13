@@ -5,6 +5,7 @@
 package dao;
 
 import Entity.KisiAskerlik;
+import static Various.ErrorFinder.DetectError;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import java.sql.CallableStatement;
@@ -27,7 +28,7 @@ public class KisiAskerlikDAO extends DBConnection {
             Connection conn = this.getDb();
 
             // KISIASKERLIK stored procedure çağırma (Örnek, değiştirilebilir)
-            String callQueryAskerlik = "{call INSERT_KISI_ASKERLIK( ?, ?, ?, ?, ?, ?)}";
+            String callQueryAskerlik = "{call INSERT_KISI_ASKERLIK( ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement csAskerlik = conn.prepareCall(callQueryAskerlik);
             csAskerlik.setInt(1, askerlik.getAsker_hukumlu());
             csAskerlik.setInt(2, askerlik.getSure());
@@ -35,17 +36,16 @@ public class KisiAskerlikDAO extends DBConnection {
             csAskerlik.setDate(4, new java.sql.Date(askerlik.getBaslangic_tarihi().getTime()));
             csAskerlik.setDate(5, new java.sql.Date(askerlik.getBitis_tarihi().getTime()));
             csAskerlik.setInt(6, askerlik.getAktif());
-            csAskerlik.registerOutParameter(9, java.sql.Types.INTEGER);
+            csAskerlik.registerOutParameter(7, java.sql.Types.INTEGER);
             csAskerlik.execute();
 
-            int askerlikId = csAskerlik.getInt(9);
+            int askerlikId = csAskerlik.getInt(7);
             askerlik.setAskerlik_id(askerlikId);
 
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (SQLException ex) {
-            DetectError(ex);
-            this.islemBasariliMesaj = ex.getMessage();
+            islemBasariliMesaj = DetectError(ex);
         }
     }
 
@@ -77,7 +77,7 @@ public class KisiAskerlikDAO extends DBConnection {
             this.islemBasariliMesaj = "İşlem başarılı";
 
         } catch (SQLException ex) {
-            DetectError(ex);
+           islemBasariliMesaj = DetectError(ex);
         }
         return askerlikList;
     }
@@ -93,25 +93,9 @@ public class KisiAskerlikDAO extends DBConnection {
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (SQLException ex) {
-            DetectError(ex);
+          islemBasariliMesaj = DetectError(ex);
         }
     }
-
-    private void DetectError(Exception ex) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        StringBuilder errorMessage = new StringBuilder(ex.getMessage());
-        StackTraceElement[] stackTrace = ex.getStackTrace();
-
-        for (StackTraceElement element : stackTrace) {
-            if (element.getClassName().startsWith("dao")) {
-                errorMessage.append(" (at ").append(element.getFileName())
-                        .append(":").append(element.getLineNumber()).append(")");
-                break;
-            }
-        }
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage.toString(), null));
-    }
-
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();

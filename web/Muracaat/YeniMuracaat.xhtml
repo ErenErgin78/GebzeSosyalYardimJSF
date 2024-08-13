@@ -23,7 +23,7 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="dob">Doğum Tarihi</label>
-                                        <h:inputText id="dob" value="#{kisiBean.entity.dogum_tarihi}" class="form-control">
+                                        <h:inputText id="dob" value="#{kisiBean.entity.doğum_tarihi}" class="form-control">
                                             <f:convertDateTime pattern="yyyy-MM-dd" />
                                             <f:passThroughAttribute name="type" value="date" />
                                         </h:inputText>
@@ -31,7 +31,7 @@
                                     <div class="form-group col-md-6">
                                         <label for="tc_no">Kimlik Numarası</label>
                                         <h:inputText id="tc_no" class="form-control" value="#{kisiBean.entity.kimlik_no}"/>
-                                        <h:commandButton value="Sorgula" action="#{kisiBean.sorgula()}" class="btn btn-primary mt-2">
+                                        <h:commandButton value="Sorgula" class="btn btn-primary mt-2">
                                             <f:ajax execute="@form" render="@form" />
                                         </h:commandButton>
                                     </div>
@@ -45,17 +45,7 @@
                                         <label for="surname">Soyisim</label>
                                         <h:inputText id="surname" value ="#{kisiBean.entity.soyisim}" class="form-control"/>
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="father_name">Baba Adı</label>
-                                        <h:inputText id="father_name" value ="#{kisiBean.entity.baba_isim}" class="form-control"/>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="mother_name">Anne Adı</label>
-                                        <h:inputText id="mother_name" value ="#{kisiBean.entity.anne_isim}" class="form-control"/>
-                                    </div>
-                                </div>
+                                </div>       
                                 <div class="form-row">
                                     <label>Cinsiyet</label><br />
                                     <div class="custom-radio">
@@ -79,15 +69,7 @@
                                         <h:inputText id="spouse_name" value ="#{kisiBean.entity.cilt_no}" class="form-control" />
                                     </div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        <label for="cilt_no">Eş Adı</label>
-                                        <h:inputText id="cilt_no" value="#{kisiBean.entity.es_isim}" class="form-control" />
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="spouse_surname">Eş Soyadı</label>
-                                        <h:inputText id="spouse_surname" value="#{kisiBean.entity.es_soyisim}" class="form-control" />
-                                    </div>
+                                <div class="form-row">             
                                     <div class="form-group col-md-4">
                                         <label for="neighborhood">Medeni Durum</label>
                                         <h:selectOneMenu id="medenidurum" value="#{kisiBean.entity.medeni_durum_id}" class="form-control">
@@ -108,12 +90,12 @@
                                             <h:selectOneMenu id="neighborhood" value = "#{kisiBean.selectedMahalleId}" class="form-control">
                                                 <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
                                                 <f:selectItems value="#{kisiBean.mahalleList}" />
-                                                <f:ajax event="change" listener="#{kisiBean.sokakyukle}" render="street" />
+                                                <f:ajax event="change" listener="#{kisiAdresBean.selectedMahalleId}" render="street" />
                                             </h:selectOneMenu>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="street">Cadde/Sokak</label>
-                                            <h:selectOneMenu id="street" value="#{kisiBean.entity.mahalle_sokak_id}" class="form-control">
+                                            <h:selectOneMenu id="street" value="#{kisiAdresBean.sokakList}" class="form-control">
                                                 <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
                                                 <f:selectItems value="#{kisiBean.sokakList}" />
                                             </h:selectOneMenu>
@@ -121,35 +103,35 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="address_desc">Adres Tarif</label>
-                                        <h:inputTextarea id="address_desc" class="form-control" rows="3" value="#{kisiBean.entity.tarif}" />
+                                        <h:inputTextarea id="address_desc" class="form-control" rows="3" value="#{kisiAdresBean.entity.tarif}" />
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="apartment">Site</label>
-                                            <h:inputText id="apartment" class="form-control" value="#{kisiBean.entity.site}" />
+                                            <h:inputText id="apartment" class="form-control" value="#{kisiAdresBean.entity.site}" />
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="block_no">Kapı No</label>
-                                            <h:inputText id="block_no" class="form-control" value="#{kisiBean.entity.kapi_no}" />
+                                            <h:inputText id="block_no" class="form-control" value="#{kisiAdresBean.entity.kapi_no}" />
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="flat_no">Daire No</label>
-                                            <h:inputText id="flat_no" class="form-control" value="#{kisiBean.entity.daire_no}" />
+                                            <h:inputText id="flat_no" class="form-control" value="#{kisiAdresBean.entity.daire_no}" />
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="home_phone">Ev Telefon</label>
-                                            <h:inputText id="home_phone" class="form-control" value="#{kisiBean.entity.ev_telefon}" />
+                                            <h:inputText id="home_phone" class="form-control" value="#{kisiItelisimBean.entity.ev_telefon}" />
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="mobile_phone">Cep Telefon</label>
-                                            <h:inputText id="mobile_phone" class="form-control" value="#{kisiBean.entity.cep_telefon}" />
+                                            <h:inputText id="mobile_phone" class="form-control" value="#{kisiIletisimBean.entity.cep_telefon}" />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Eposta Adresi</label>
-                                        <h:inputText id="email" class="form-control" value="#{kisiBean.entity.eposta}">
+                                        <h:inputText id="email" class="form-control" value="#{kisiIletisimBean.entity.eposta}">
                                             <f:passThroughAttribute name="type" value="email" />
                                         </h:inputText>
                                     </div>

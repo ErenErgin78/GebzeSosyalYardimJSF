@@ -12,7 +12,7 @@
     <h:body>
         <h:form id="userForm">
             <h:messages globalOnly="true" layout="table"/>
-            <h:outputText id="mesaj" value="#{tutanakGelirBean.dao.mesaj}" />
+            <h:outputText id="mesaj" value="#{tutanakGelirBorcBean.mesaj}" />
             <div class="row align-items-center mb-3">
                 <div class="col-10">
                     <ol class="breadcrumb">
@@ -241,7 +241,7 @@
                                 <div class="card mt-3">
                                     <div class="card-body">
                                         <div class="text-center mt-3">
-                                            <h:commandButton value="Kaydet" action="#{tutanakGelirBean.tutanakGelirEkle()}" class="btn btn-success">
+                                            <h:commandButton value="Kaydet" action="#{tutanakGelirBorcBean.gelirBorcEkle}" class="btn btn-success">
                                                 <f:ajax execute="@form" render="@form, mesaj" />
                                             </h:commandButton>                                  
                                         </div>
