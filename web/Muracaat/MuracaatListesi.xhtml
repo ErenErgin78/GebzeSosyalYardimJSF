@@ -54,7 +54,7 @@
                                     <f:ajax event="keyup" render="KullaniciListesi" />
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="sicil" class="form-label">Tc Kimlik No::</label>
+                                    <label for="sicil" class="form-label">Tc Kimlik No:</label>
                                     <h:inputText id="sicil" value="#{userBean.dao.sicil}" class="form-control" />
                                     <f:ajax event="keyup" render="KullaniciListesi" />
                                 </div>
@@ -78,8 +78,7 @@
                                                     <th>Soyad</th>
                                                     <th>Tc</th>
                                                     <th>Arşiv Dosya No</th>
-                                                    <th>Müracaat Tarihi</th>
-                                                    <th>Müracaat Tip</th>
+                                                     <th>Müracaat Tarihi</th>
                                                     <th>Mahalle</th>
                                                     <th>Cadde/Sokak</th>
                                                     <th>Eylem</th>
@@ -90,7 +89,6 @@
                                                     <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
                                                         <td>#{user.kullanici_id}</td>
                                                         <td>#{user.kullanici_isim}</td>
-                                                        <td>#{user.kullanici_unvan}</td>
                                                         <td>#{user.kullanici_cinsiyet}</td>
                                                         <td>#{user.kullanici_telefon}</td>
                                                         <td>#{user.kullanici_durum}</td>
