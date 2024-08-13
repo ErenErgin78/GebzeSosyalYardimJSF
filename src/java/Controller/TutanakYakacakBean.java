@@ -1,10 +1,7 @@
 package Controller;
 
 import Entity.TutanakYakacak;
-import dao.EgitimDurumDAO;
-import dao.TutanakEvTipDAO;
 import dao.TutanakYakacakDAO;
-import jakarta.annotation.PostConstruct;
 import jakarta.faces.model.SelectItem;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
@@ -20,16 +17,8 @@ public class TutanakYakacakBean implements Serializable {
     private List<TutanakYakacak> list;
     private List<SelectItem> tutanakyakacaklist;
 
-    @PostConstruct
-    public void init() {
-        tutanakyakacaklist = tutanakYakacakGetir();
-    }
-
+   
     public TutanakYakacakBean() {
-    }
-
-    public List<SelectItem> tutanakYakacakGetir() {
-        return this.getDao().TutanakYakacakGetir();
     }
 
     public TutanakYakacak getEntity() {
@@ -60,6 +49,7 @@ public class TutanakYakacakBean implements Serializable {
     }
 
     public List<SelectItem> getTutanakyakacaklist() {
+        tutanakyakacaklist = getDao().TutanakYakacakGetir();
         return tutanakyakacaklist;
     }
 
