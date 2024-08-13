@@ -27,7 +27,10 @@ public class GuvenceBirimBean implements Serializable {
     }
 
     public GuvenceBirim getEntity() {
-        return entity;
+        if (this.entity == null) {
+            this.entity = new GuvenceBirim();
+        }
+        return this.entity;
     }
 
     public void setEntity(GuvenceBirim entity) {

@@ -26,7 +26,10 @@ public class GuvenceBean implements Serializable {
     }
 
     public Guvence getEntity() {
-        return entity;
+        if (this.entity == null) {
+            this.entity = new Guvence();
+        }
+        return this.entity;
     }
 
     public void setEntity(Guvence entity) {
@@ -34,7 +37,10 @@ public class GuvenceBean implements Serializable {
     }
 
     public GuvenceDAO getDao() {
-        return dao;
+        if (this.dao == null) {
+            this.dao = new GuvenceDAO();
+        }
+        return this.dao;
     }
 
     public void setDao(GuvenceDAO dao) {
