@@ -26,17 +26,25 @@ public class MedeniDurumBean implements Serializable {
     public MedeniDurumBean() {
     }
 
-    public MedeniDurum getEntity() {
-        return entity;
+     public MedeniDurum getEntity() {
+        if (this.entity == null) {
+            this.entity = new MedeniDurum();
+        }
+        return this.entity;
     }
+
 
     public void setEntity(MedeniDurum entity) {
         this.entity = entity;
     }
 
-    public MedeniDurumDAO getDao() {
-        return dao;
+     public MedeniDurumDAO getDao() {
+        if (this.dao == null) {
+            this.dao = new MedeniDurumDAO();
+        }
+        return this.dao;
     }
+
 
     public void setDao(MedeniDurumDAO dao) {
         this.dao = dao;
@@ -51,6 +59,7 @@ public class MedeniDurumBean implements Serializable {
     }
 
     public List<SelectItem> getMedenidurumlist() {
+        medenidurumlist = getDao().MedeniDurumGetir();
         return medenidurumlist;
     }
 
