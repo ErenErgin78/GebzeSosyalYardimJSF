@@ -98,7 +98,7 @@ public class KisiEngelDAO extends DBConnection {
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (SQLException ex) {
-            DetectError(ex);
+          islemBasariliMesaj = DetectError(ex);
         }
     }
 
