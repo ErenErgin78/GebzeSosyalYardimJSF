@@ -36,13 +36,13 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="email">Doğum Tarihi:</label>
-                                            <h:inputText class="form-control" value="#{userBean.entity.kullanici_isim}">
+                                            <h:inputText class="form-control" value="#{kisiBean.entity.doğum_tarihi}">
                                                 <f:passThroughAttribute name="type" value="date" />
                                             </h:inputText>                                         
                                         </div>
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="email">TC Kimlik No:</label>
-                                            <h:inputText class="form-control" value="#{userBean.entity.kullanici_unvan}">
+                                            <h:inputText class="form-control" value="#{kisiBean.entity.kimlik_no}">
                                                 <f:passThroughAttribute name="type" value="email" />
                                             </h:inputText>
                                         </div>
@@ -50,13 +50,13 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="email">Adı:</label>
-                                            <h:inputText class="form-control" value="#{userBean.entity.kullanici_kullanici_adi}">
+                                            <h:inputText class="form-control" value="#{kisiBean.entity.isim}">
                                                 <f:passThroughAttribute name="type" value="email" />
                                             </h:inputText>
                                         </div>
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="email">Soyadı:</label>
-                                            <h:inputText class="form-control" value="#{userBean.entity.kullannici_eposta}">
+                                            <h:inputText class="form-control" value="#{kisiBean.entity.soyisim}">
                                                 <f:passThroughAttribute name="type" value="email" />
                                             </h:inputText>
                                         </div>
@@ -64,7 +64,7 @@
                                     <div class="form-row"> 
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="email">Gelir:</label>
-                                            <h:inputText class="form-control" value="#{userBean.entity.sifre}">
+                                            <h:inputText class="form-control">
                                                 <f:passThroughAttribute name="type" value="email" />
                                             </h:inputText>
                                         </div>
@@ -72,13 +72,7 @@
                                             <label for="aktif" class="form-label">Eğitim Durumu:</label>
                                             <h:selectOneMenu id="ati" value="#{userBean.dao.aktif}" class="form-control">
                                                 <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
-                                                <f:selectItem itemLabel="İlkokul" itemValue="E" />
-                                                <f:selectItem itemLabel="Ortaokul" itemValue="K" />
-                                                <f:selectItem itemLabel="Lise" itemValue="E" />
-                                                <f:selectItem itemLabel="Önlisans" itemValue="K" />
-                                                <f:selectItem itemLabel="Lisans" itemValue="E" /> 
-                                                <f:selectItem itemLabel="Yüksek Lisans" itemValue="E" />
-                                                <f:selectItem itemLabel="Doktora" itemValue="E" />  
+                                                <f:selectItems value="#{egitimDurumBean.egitimlist} "/>
                                                 <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div> 
@@ -87,24 +81,16 @@
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="aktif" class="form-label">Yakınlık:</label>
                                             <h:selectOneMenu id="akti" value="#{userBean.dao.aktif}" class="form-control">
-                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
-                                                <f:selectItem itemLabel="Baba" itemValue="E" />
-                                                <f:selectItem itemLabel="Anne" itemValue="K" />
-                                                <f:selectItem itemLabel="Kardeş" itemValue="E" />
-                                                <f:selectItem itemLabel="Çocuk" itemValue="K" />
-                                                <f:selectItem itemLabel="Eş" itemValue="E" />                                                
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                                <f:selectItems value="#{yakinlikBean.yakinlikList}"/>
                                                 <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div>
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="aktif" class="form-label">Meslek:</label>
                                             <h:selectOneMenu id="akt" value="#{userBean.dao.aktif}" class="form-control">
-                                                <f:selectItem itemLabel="Çalışmıyor" itemValue="K" />
-                                                <f:selectItem itemLabel="Öğrenci" itemValue="K" />
-                                                <f:selectItem itemLabel="Serbest Çalışan" itemValue="K" />
-                                                <f:selectItem itemLabel="Emekli" itemValue="K" />
-                                                <f:selectItem itemLabel="Memur" itemValue="K" />
-                                                <f:selectItem itemLabel="İşçi" itemValue="K" /> 
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                                <f:selectItems value = "#{meslekBean.meslekList}"/>
                                                 <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div>                            

@@ -7,6 +7,7 @@ package dao;
 import java.sql.Connection;
 import Entity.Meslek;
 import static Various.ErrorFinder.DetectError;
+import jakarta.faces.model.SelectItem;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -92,6 +93,24 @@ public class MeslekDAO extends DBConnection {
         return meslekList;
     }
 
+    public List<SelectItem> MeslekGetir() {
+        List<SelectItem> MeslekList = new ArrayList<>();
+
+        try {
+            Statement statement = getDb().createStatement();
+            String Selectquery = "SELECT MESLEK_ID , MESLEK_ISIM FROM MESLEK";
+            ResultSet rs = statement.executeQuery(Selectquery);
+
+            while (rs.next()) {
+                MeslekList.add(new SelectItem(rs.getInt("MESLEK_ID"), rs.getString("MESLEK_ISIM")));
+            }
+        } catch (Exception ex) {
+            mesaj = DetectError(ex);
+        }
+        return MeslekList;
+
+    }
+    
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();
