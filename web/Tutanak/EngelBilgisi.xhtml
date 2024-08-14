@@ -43,7 +43,7 @@
                                             </div>
                                             <div class="form-group col-md-6 mb-3">
                                                 <label for="registration_status">Engelli Alt Tip/Grup:</label>
-                                                <h:selectOneMenu id="registration_status" value="#{mahalleBean.entity.mahalle_aktif}" class="form-control">
+                                                <h:selectOneMenu id="registration_status" value="#{kisiEngelBean.entity.engelli_alt_tip_id}" class="form-control">
                                                     <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="1" />
                                                 </h:selectOneMenu>
                                             </div>
@@ -53,51 +53,62 @@
                                             </div>                                                                                                                           
                                             <div class="form-group col-md-6 mb-3">
                                                 <label for="registration_status">Engelli Tip/Grup:</label>
-                                                <h:selectOneMenu id="registration_status" value="#{mahalleBean.entity.mahalle_aktif}" class="form-control">
+                                                <h:selectOneMenu id="registration_status" value="#{kisiEngelBean.entity.engelli_tip_id}" class="form-control">
                                                     <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="1" />
+                                                    <f:selectItems value="#{engelBean.engelTipList}"/>
                                                 </h:selectOneMenu>
                                             </div>
                                             <div class="form-group col-md-6 mb-3">
                                                 <label for="other_info2">Ad:</label>
-                                                <h:inputText id="other_info2" value="" class="form-control" />
+                                                <h:inputText id="other_info2" value="#{kisiBean.entity.isim}" class="form-control" />
                                             </div>
 
 
                                             <div class="form-group col-md-6 mb-3">
                                                 <label for="registration_status">Engel Başlangıç Zamanı:</label>
-                                                <h:selectOneMenu id="registration_status" value="#{mahalleBean.entity.mahalle_aktif}" class="form-control">
+                                                <h:selectOneMenu id="registration_status" value="#{kisiEngelBean.entity.engel_baslangic}" class="form-control">
                                                     <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="1" />
                                                 </h:selectOneMenu>
                                             </div>
                                             <div class="form-group col-md-6 mb-3">
                                                 <label for="other_info2">Soyad:</label>
-                                                <h:inputText id="other_info2" value="" class="form-control" />
+                                                <h:inputText id="other_info2" value="#{kisiBean.entity.soyisim}" class="form-control" />
                                             </div>
                                             <div class="form-group col-md-6 mb-3">
                                                 <label for="other_info2">Engel Derece:</label>
-                                                <h:inputText id="other_info2" value="" class="form-control" />
+                                                <h:inputText id="other_info2" value="#{kisiEngelBean.entity.derece}" class="form-control" />
                                             </div>
                                             <div class="form-group col-md-6 mb-3">
                                                 <label for="other_info2">Cinsiyet:</label>
-                                                <h:inputText id="other_info2" value="" class="form-control" />
+                                                <h:inputText id="other_info2" value="#{kisiBean.entity.cinsiyet}" class="form-control" />
                                             </div>
 
                                             <div class="form-group col-md-6 mb-3">
                                                 <label for="sicil2" class="form-label">Varsa hastalık adı:</label>
-                                                <h:inputText id="sicil2" value="#{userBean.dao.sicil}" class="form-control" />
+                                                <h:inputText id="sicil2" value="#{kisiEngelBean.entity.hastalik}" class="form-control" />
                                             </div>
                                             <div class="form-group col-md-6 mb-3">
                                                 <label for="other_info2">Doğum Tarihi:</label>
-                                                <h:inputText id="other_info2" value="" class="form-control" />
+                                                <h:inputText id="other_info2" value="#{kisiBean.entity.doğum_tarihi}" class="form-control" />
                                             </div>
 
                                             <div class="form-group col-md-6 mb-3">
                                                 <label for="address_desc">Genel Açıklama:</label>
-                                                <h:inputTextarea id="address_desc" class="form-control" rows="1" value="#{userBean.entity.kullanici_adres}" />
+                                                <h:inputTextarea id="address_desc" class="form-control" rows="1" value="#{muracaatBilgiBean.entity.aciklama}" />
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="altKurumAdi" class="form-label">Yönlendirilen Kurum Adı:</label>
+                                                <h:inputText id="altKurumAdi" value="#{kurumBean.dao.isim}" class="form-control" />
+                                                <f:ajax event="keyup" render="kurumAltPanel" />
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="altKurumAdi" class="form-label">Yönlendirilen Alt Kurum Adı:</label>
+                                                <h:inputText id="altKurumAdi" value="#{kurumAltBean.dao.isim}" class="form-control" />
+                                                <f:ajax event="keyup" render="kurumAltPanel" />
                                             </div>
                                         </div>
                                         <div class="text-center mt-3">
-                                            <h:commandButton value="Kaydet" action="#{userBean.create()}" class="btn btn-success">
+                                            <h:commandButton value="Kaydet" action="#{kisiEngelBean.ekle()}" class="btn btn-success">
                                                 <f:ajax execute="@form" render="@form, mesaj" />
                                             </h:commandButton>                                  
                                         </div>

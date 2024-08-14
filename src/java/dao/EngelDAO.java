@@ -6,6 +6,7 @@ package dao;
 
 import Entity.Engel;
 import static Various.ErrorFinder.DetectError;
+import jakarta.faces.model.SelectItem;
 import java.sql.Statement;
 import java.sql.Connection;
 import util.DBConnection;
@@ -82,6 +83,23 @@ public class EngelDAO extends DBConnection {
             DetectError(ex);
         }
         return engelList;
+    }
+     public List<SelectItem> EngelGetir() {
+        List<SelectItem> TipList = new ArrayList<>();
+
+        try {
+            Statement statement = getDb().createStatement();
+            String Selectquery = "SELECT TIP_ID , TIP_ISIM FROM ENGELLI_TIP";
+            ResultSet rs = statement.executeQuery(Selectquery);
+
+            while (rs.next()) {
+                TipList.add(new SelectItem(rs.getInt("TIP_ID"), rs.getString("TIP_ISIM")));
+            }
+        } catch (Exception ex) {
+            DetectError(ex);
+        }
+        return TipList;
+
     }
 
     public Connection getDb() {
