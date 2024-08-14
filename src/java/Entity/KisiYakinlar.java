@@ -13,26 +13,37 @@ import java.util.Date;
 public class KisiYakinlar {
     
     private Integer yakinlar_id;
-    private Integer yakinlar_sira_no;
     private Integer muracaat_id;
     private Integer kisi_id;
     private Integer ozel_statu_id;
-    private String yapilan_is;
     private Date olum_tarihi;
     private Date kayit_tarihi;
     private Date guncelleme_tarihi;
-    
-     public KisiYakinlar (Integer yakinlar_id, Integer yakinlar_sira_no, Integer muracaat_id, Integer kisi_id, Integer ozel_statu_id, String yapilan_is, Date olum_tarihi, Date kayit_tarihi, Date guncelleme_tarihi) {
+
+    public KisiYakinlar(Integer yakinlar_id, Integer muracaat_id, Integer kisi_id, Integer ozel_statu_id, Date olum_tarihi, Date kayit_tarihi, Date guncelleme_tarihi) {
         this.yakinlar_id = yakinlar_id;
-        this.yakinlar_sira_no = yakinlar_sira_no;
         this.muracaat_id = muracaat_id;
         this.kisi_id = kisi_id;
         this.ozel_statu_id = ozel_statu_id;
-        this.yapilan_is = yapilan_is;
         this.olum_tarihi = olum_tarihi;
         this.kayit_tarihi = kayit_tarihi;
         this.guncelleme_tarihi = guncelleme_tarihi;
     }
+
+    public KisiYakinlar(Integer muracaat_id, Integer kisi_id, Integer ozel_statu_id, Date olum_tarihi) {
+        this.muracaat_id = muracaat_id;
+        this.kisi_id = kisi_id;
+        this.ozel_statu_id = ozel_statu_id;
+        this.olum_tarihi = olum_tarihi;
+    }
+
+    public KisiYakinlar(Integer muracaat_id, Integer kisi_id, Integer ozel_statu_id) {
+        this.muracaat_id = muracaat_id;
+        this.kisi_id = kisi_id;
+        this.ozel_statu_id = ozel_statu_id;
+    }
+    
+ 
      public KisiYakinlar () {      
     }
 
@@ -42,14 +53,6 @@ public class KisiYakinlar {
 
     public void setYakinlar_id(Integer yakinlar_id) {
         this.yakinlar_id = yakinlar_id;
-    }
-
-    public Integer getYakinlar_sira_no() {
-        return yakinlar_sira_no;
-    }
-
-    public void setYakinlar_sira_no(Integer yakinlar_sira_no) {
-        this.yakinlar_sira_no = yakinlar_sira_no;
     }
 
     public Integer getMuracaat_id() {
@@ -74,14 +77,6 @@ public class KisiYakinlar {
 
     public void setOzel_statu_id(Integer ozel_statu_id) {
         this.ozel_statu_id = ozel_statu_id;
-    }
-
-    public String getYapilan_is() {
-        return yapilan_is;
-    }
-
-    public void setYapilan_is(String yapilan_is) {
-        this.yapilan_is = yapilan_is;
     }
 
     public Date getOlum_tarihi() {
