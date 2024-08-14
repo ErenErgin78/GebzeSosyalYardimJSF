@@ -37,22 +37,22 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="isim" class="form-label">Ad:</label>
-                                    <h:inputText id="isim" value="#{userBean.dao.isim}" class="form-control" />
+                                    <h:inputText id="isim" value="#{kisiBean.entity.isim}" class="form-control" />
                                     <f:ajax event="keyup" render="KullaniciListesi" />
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="kullaniciAdi" class="form-label">Soyad:</label>
-                                    <h:inputText id="kullaniciAdi" value="#{userBean.dao.kullanici}" class="form-control" />
+                                    <h:inputText id="kullaniciAdi" value="#{kisiBean.entity.soyisim}" class="form-control" />
                                     <f:ajax event="keyup" render="KullaniciListesi" />
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="sicil" class="form-label">Tc Kimlik No:</label>
-                                    <h:inputText id="sicil" value="#{userBean.dao.sicil}" class="form-control" />
+                                    <h:inputText id="sicil" value="#{kisiBean.entity.kimlik_no}" class="form-control" />
                                     <f:ajax event="keyup" render="KullaniciListesi" />
                                 </div>
                                 <div class="form-group col-md-6 mb-3">
                                     <label for="aktif" class="form-label">Yakınlık:</label>
-                                    <h:selectOneMenu id="aktif" value="#{userBean.dao.aktif}" class="form-control">
+                                    <h:selectOneMenu id="aktif" value="#{kisiYakinlarBean.entity.yakinlar_id}" class="form-control">
                                         <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
                                         <f:selectItem itemLabel="Baba" itemValue="E" />
                                         <f:selectItem itemLabel="Anne" itemValue="K" />
@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="form-group col-md-6 mb-3">
                                     <label for="aktif" class="form-label">Cinsiyet:</label>
-                                    <h:selectOneMenu id="aktif" value="#{userBean.dao.aktif}" class="form-control">
+                                    <h:selectOneMenu id="aktif" value="#{kisiBean.entity.cinsiyet}" class="form-control">
                                         <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
                                         <f:selectItem itemLabel="Erkek" itemValue="E" />
                                         <f:selectItem itemLabel="Kadın" itemValue="K" />                                 
