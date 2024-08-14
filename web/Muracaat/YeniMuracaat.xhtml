@@ -99,7 +99,14 @@
                                             <label for="cilt_no">Cilt No:</label>
                                             <h:inputText id="cilt_no" value ="#{kisiBean.entity.cilt_no}" class="form-control" />
                                         </div> 
-                                    </div>
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="egitim" class="form-label">Eğitim Durum:</label>
+                                            <h:selectOneMenu value="#{kisiBean.entity.medeni_durum_id}" class="form-control">
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                                <f:selectItems value="#{egitimDurumBean.egitimlist}" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div> 
                                     <!-- İletişim Bilgileri Kartı -->
                                     <div class="card mt-3">
                                         <div class="card-header">
@@ -169,7 +176,7 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-6 mb-3">
                                                     <label for="kapi_no">Arşiv Dosya No:</label>
-                                                    <h:inputText id="kapi_no" value ="#{muracaatBean.entity.arsiv_dosya_no}" class="form-control" />
+                                                    <h:inputText id="no" value ="#{muracaatBilgiBean.entity.arsiv_dosya_no}" class="form-control" />
                                                 </div>
                                                 <div class="form-group col-md-6 mb-3">
                                                     <label for="muracaat_tarihi">Müracaat Tarihi:</label>
@@ -178,16 +185,10 @@
                                                     </h:inputText>
                                                 </div>
                                             </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6 mb-3">
-                                                    <label for="muracaat" class="form-label">Müracaat Tipi:</label>
-                                                    <h:selectOneMenu id="muracaat" value="#{muracaatBean.entity.muracaat_tip_id}" class="form-control">
-                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
-                                                    </h:selectOneMenu>
-                                                </div>
+                                            <div class="form-row">                 
                                                 <div class="form-group col-md-6 mb-3">
                                                     <label for="aciklama">Açıklama:</label>
-                                                    <h:inputTextarea id="aciklama" class="form-control" value="#{muracaatBean.entity.aciklama}" rows="1" />
+                                                    <h:inputTextarea id="aciklama" class="form-control" value="#{muracaatBilgiBean.entity.aciklama}" rows="1" />
                                                 </div>
                                             </div>
                                         </div>
@@ -196,7 +197,7 @@
                                         <h:commandButton value="Kaydet" action="#{kisiMuracaatBean.kisiMuracaatEkle}" class="btn btn-success">
                                             <f:ajax execute="@form" render="@form, mesaj" />
                                         </h:commandButton>                                  
-                                    </div>                                                                                
+                                    </div>                                                                              
                                 </div>
                             </div>
                         </div>
