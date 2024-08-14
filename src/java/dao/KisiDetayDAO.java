@@ -22,7 +22,7 @@ public class KisiDetayDAO extends DBConnection {
             Connection conn = this.getDb();
 
             // KISIDETAY stored procedure çağırma (Örnek, değiştirilebilir)
-            String callQueryDetay = "{call INSERT_KISI_DETAY(?, ?, ?, ?, ?, ?, ?, ?)}";
+            String callQueryDetay = "{call INSERT_KISI_DETAY(?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement csDetay = conn.prepareCall(callQueryDetay);
             csDetay.setInt(1, detay.getKisi_iletisim_id());
             csDetay.setInt(2, detay.getKisi_adres_id());
@@ -31,7 +31,6 @@ public class KisiDetayDAO extends DBConnection {
             csDetay.setInt(5, detay.getMeslek_id());
             csDetay.setInt(6, detay.getAskerlik_id());
             csDetay.registerOutParameter(7, java.sql.Types.INTEGER);
-            csDetay.registerOutParameter(8, java.sql.Types.TIMESTAMP);
             csDetay.execute();
 
             int detayId = csDetay.getInt(7);
