@@ -56,6 +56,7 @@ public class GuvenceBean implements Serializable {
     }
 
     public List<SelectItem> getGuvencelist() {
+        guvencelist = getDao().GuvenceGetir();
         return guvencelist;
     }
 
