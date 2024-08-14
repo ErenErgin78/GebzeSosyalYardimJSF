@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tutanak İnceleme</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/list.css" />
+        <h:outputStylesheet name="CSS/styles.css"/>
+    </h:head>
+    <h:body>
+        <h:form id="userForm">
+            <div class="row align-items-center mb-3">
+                <div class="col-10">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">İşlemlerim</li>
+                        <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="Tutanak/MuracaatSecim.xhtml">Tutanak</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Tutanak İnceleme </li>
+                    </ol>
+                </div>
+            </div> 
+            <div class="container-fluid">               
+                <div class="row">                   
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h1>Tutanak İnceleme</h1>
+                            </div>
+                            <div class="card-body">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Tutanak İnceleme Bilgileri
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="address_desc1">Başvuru Beyanı:</label>
+                                                <h:inputTextarea id="address_desc1" class="form-control" rows="3" value="#{userBean.entity.kullanici_adres}" />
+                                            </div>
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="address_desc2">İnceleme Ekibi Görüş Kanaati:</label>
+                                                <h:inputTextarea id="address_desc2" class="form-control" rows="3" value="#{userBean.entity.kullanici_adres}" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="address_desc3">İnceleme Tarihi:</label>
+                                                <h:inputText id="address_desc3" class="form-control" value="#{userBean.entity.kullanici_adres}">
+                                                    <f:passThroughAttribute name="type" value="date" />
+                                                </h:inputText>
+                                            </div>
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="aktif">İnceleme Yapan:</label>
+                                                <div class="d-flex align-items-center">
+                                                    <h:selectOneMenu id="hkj1" value="#{userBean.dao.aktif}" class="form-control me-2">
+                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                                    </h:selectOneMenu>
+                                                    <span> - </span>
+                                                    <h:selectOneMenu id="hkj2" value="#{userBean.dao.aktif}" class="form-control ms-2">
+                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                                    </h:selectOneMenu>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-4 mb-3">
+                                                <label for="applicant_name">Başvuru Alan Kişinin Adı:</label>
+                                                <h:selectOneMenu id="applicant_name" value="#{userBean.dao.aktif}" class="form-control">
+                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                                </h:selectOneMenu>
+                                            </div>
+                                            <div class="form-group col-md-4 mb-3">
+                                                <label for="status">Durum:</label>
+                                                <h:selectOneMenu id="status" value="#{userBean.dao.aktif}" class="form-control">
+                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                                </h:selectOneMenu>
+                                            </div>
+                                            <div class="form-group col-md-4 mb-3">
+                                                <label for="drawer">Çekmece:</label>
+                                                <h:selectOneMenu id="drawer" value="#{userBean.dao.aktif}" class="form-control">
+                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center mt-3">
+                                        <h:commandButton value="Kaydet" action="#{userBean.create()}" class="btn btn-success">
+                                            <f:ajax execute="@form" render="@form, mesaj" />
+                                        </h:commandButton>                                  
+                                    </div>
+                                </div>
+
+                                <!-- Pagination Card -->
+                                <div class="card mt-3">
+                                    <div class="card-body">
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination justify-content-center mb-3">
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/MuracaatSecim.xhtml" data-toggle="tooltip" title="Müracaat Seçim">1</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/YakinlikBilgileri.xhtml" data-toggle="tooltip" title="Yakınlık Bilgileri">2</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/EngelBilgisi.xhtml" data-toggle="tooltip" title="Sağlık ve Engel Bilgisi">3</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/GelirBorc.xhtml" data-toggle="tooltip" title="Aile Gelir ve Borç Bilgileri">4</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/Mulkiyet.xhtml" data-toggle="tooltip" title="Mülkiyet Bilgileri">5</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/SosyalGuvence.xhtml" data-toggle="tooltip" title="Sosyal Güvence Bilgisi">6</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/TalepYardim.xhtml" data-toggle="tooltip" title="Talep Edilen Yardımlar">7</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-secondary" data-page="Tutanak/TutanakInceleme.xhtml" data-toggle="tooltip" title="Tutanak İnceleme">8</button>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+        <script>
+            function confirmDelete(button) {
+                return confirm("Bu kullanıcıyı gerçekten silmek istiyor musunuz?");
+            }
+        </script>
+    </h:body>
+</html>

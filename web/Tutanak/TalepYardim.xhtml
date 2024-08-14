@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Talep Yardım Bilgisi</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/list.css" />
+        <h:outputStylesheet name="CSS/styles.css"/>
+    </h:head>
+    <h:body>
+        <h:form id="userForm">
+            <div class="row align-items-center mb-3">
+                <div class="col-10">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">İşlemlerim</li>
+                        <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="Tutanak/MuracaatSecim.xhtml">Tutanak</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Talep Yardım</li>
+                    </ol>
+                </div>
+            </div> 
+            <div class="container-fluid">              
+                <div class="row">                   
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h1>Talep Yardım</h1>
+                            </div>
+                            <div class="card-body">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Talep Edilen Yardımlar
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row"> <!-- Başlangıç row -->
+                                            <div class="col-md-4"> <!-- Her checkbox için bir sütun oluştur -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox79" value="option7"/>
+                                                        <label class="form-check-label" for="inlineCheckbox7">Çocuk Bezi Yardımı</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4"> <!-- Diğer sütunlar -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox97" value="option9"/>
+                                                        <label class="form-check-label" for="inlineCheckbox9">Giyim Yardımı</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4"> <!-- Diğer sütunlar -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox86" value="option8"/>
+                                                        <label class="form-check-label" for="inlineCheckbox8">Gıda Yardımı</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> <!-- Bitiş row -->
+
+                                        <div class="row"> <!-- Başlangıç row -->
+                                            <div class="col-md-4"> <!-- Her checkbox için bir sütun oluştur -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox74" value="option7"/>
+                                                        <label class="form-check-label" for="inlineCheckbox7">Doğal Afet Yardımı</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4"> <!-- Diğer sütunlar -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox93" value="option9"/>
+                                                        <label class="form-check-label" for="inlineCheckbox9">Yakacak Yardımı</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4"> <!-- Diğer sütunlar -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox82" value="option8"/>
+                                                        <label class="form-check-label" for="inlineCheckbox8">Nakdi Yardım</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> <!-- Bitiş row -->
+
+                                        <div class="row"> <!-- Başlangıç row -->
+                                            <div class="col-md-4"> <!-- Her checkbox için bir sütun oluştur -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox71" value="option7"/>
+                                                        <label class="form-check-label" for="inlineCheckbox7">Okul Yardımı</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4"> <!-- Diğer sütunlar -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox98" value="option9"/>
+                                                        <label class="form-check-label" for="inlineCheckbox9">Süt Yardımı</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4"> <!-- Diğer sütunlar -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox85" value="option8"/>
+                                                        <label class="form-check-label" for="inlineCheckbox8">Hasta Yatağı Yardımı</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> <!-- Bitiş row -->
+
+                                        <div class="row"> <!-- Başlangıç row -->
+                                            <div class="col-md-4"> <!-- Her checkbox için bir sütun oluştur -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox33" value="option7"/>
+                                                        <label class="form-check-label" for="inlineCheckbox7">Ekmek Yardımı</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4"> <!-- Diğer sütunlar -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox44" value="option9"/>
+                                                        <label class="form-check-label" for="inlineCheckbox9">İlaç Yardımı</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4"> <!-- Diğer sütunlar -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="option8"/>
+                                                        <label class="form-check-label" for="inlineCheckbox8">Ev Eşyası Yardımı</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> <!-- Bitiş row -->
+
+                                    </div> <!-- card-body -->
+                                </div> <!-- card -->
+                            </div> <!-- card-body -->
+                        </div> <!-- card -->
+
+                        <div class="text-center mt-3">
+                            <h:commandButton value="Kaydet" action="#{userBean.create()}" class="btn btn-success">
+                                <f:ajax execute="@form" render="@form, mesaj" />
+                            </h:commandButton>                                  
+                        </div>
+                        <!-- Pagination Card -->
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center mb-3">
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button " data-page="Tutanak/MuracaatSecim.xhtml" data-toggle="tooltip" title="Müracaat Seçim">1</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/YakinlikBilgileri.xhtml" data-toggle="tooltip" title="Yakınlık Bilgileri">2</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/EngelBilgisi.xhtml" data-toggle="tooltip" title="Sağlık ve Engel Bilgisi">3</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/GelirBorc.xhtml" data-toggle="tooltip" title="Aile Gelir ve Borç Bilgileri">4</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/Mulkiyet.xhtml" data-toggle="tooltip" title="Mülkiyet Bilgileri">5</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/SosyalGuvence.xhtml" data-toggle="tooltip" title="Sosyal Güvence Bilgisi">6</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-secondary" data-page="Tutanak/TalepYardim.xhtml" data-toggle="tooltip" title="Talep Edilen Yardımlar">7</button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/TutanakInceleme.xhtml" data-toggle="tooltip" title="Tutanak İnceleme">8</button>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div> <!-- card-body -->
+                        </div> <!-- card -->
+                    </div> <!-- col-md-12 -->
+                </div> <!-- row -->
+            </div> <!-- container-fluid -->
+        </h:form>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+        <script>
+            function confirmDelete(button) {
+                return confirm("Bu kullanıcıyı gerçekten silmek istiyor musunuz?");
+            }
+        </script>
+    </h:body>
+</html>
