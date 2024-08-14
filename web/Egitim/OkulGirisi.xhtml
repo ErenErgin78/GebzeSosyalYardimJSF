@@ -36,8 +36,7 @@
                                             <label>Okul Türü:</label>
                                             <div class="custom-radio">
                                                 <h:selectOneRadio value="#{okulBean.entity.okul_tur_id}">
-                                                    <f:selectItem itemLabel="Devlet" itemValue="1" />
-                                                    <f:selectItem itemLabel="Özel" itemValue="2" />
+                                                <f:selectItems value="#{okulTurBean.okulTurList}" />
                                                 </h:selectOneRadio>
                                             </div>
 
@@ -56,14 +55,8 @@
                                         <div class="form-group">
                                             <label for="neighborhood">Okul Tipi:</label>
                                             <h:selectOneMenu id="medenidurum" value="#{okulBean.entity.okul_tip_id}" class="form-control">
-                                                <f:selectItem itemLabel="Anaokulu" itemValue="1" />
-                                                <f:selectItem itemLabel="İlkokul" itemValue="2" />
-                                                <f:selectItem itemLabel="Ortaokul" itemValue="3" />
-                                                <f:selectItem itemLabel="Lise" itemValue="4" />
-                                                <f:selectItem itemLabel="Ön Lisans" itemValue="6" />
-                                                <f:selectItem itemLabel="Lisans" itemValue="7" />
-                                                <f:selectItem itemLabel="Diğer" itemValue="8" />
-                                                <f:selectItem itemLabel="Yüksek Lisans" itemValue="5" />
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                                <f:selectItems value="#{okulTipBean.okulTipList}" />
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
