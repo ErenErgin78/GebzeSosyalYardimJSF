@@ -31,7 +31,7 @@ public class KisiEngelDAO extends DBConnection {
         try {
             Connection conn = this.getDb();
 
-            String callQueryEngel = "{call INSERT_KISI_ENGEL(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            String callQueryEngel = "{call INSERT_KISI_ENGEL(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement csEngel = conn.prepareCall(callQueryEngel);
             csEngel.setInt(1, engel.getEngelli_tip_id());
             csEngel.setInt(2, engel.getEngelli_alt_tip_id());
