@@ -6,6 +6,7 @@ package Controller;
 
 import Entity.Kurum;
 import dao.KurumDAO;
+import jakarta.faces.model.SelectItem;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
@@ -22,6 +23,7 @@ public class KurumBean implements Serializable {
     private Kurum entity;
     private KurumDAO dao;
     private List<Kurum> list;
+    private List<SelectItem> kurumList;
 
     public void kurumekle() {
         this.getDao().KurumEkle(getEntity());
@@ -69,4 +71,14 @@ public class KurumBean implements Serializable {
     public void setList(List<Kurum> list) {
         this.list = list;
     }
+
+    public List<SelectItem> getKurumList() {
+        kurumList = getDao().KurumGetir();
+        return kurumList;
+    }
+
+    public void setKurumList(List<SelectItem> kurumList) {
+        this.kurumList = kurumList;
+    }
+    
 }
