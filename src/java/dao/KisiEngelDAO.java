@@ -27,7 +27,7 @@ public class KisiEngelDAO extends DBConnection {
     private Integer id = 0;
     private String isim = "";
 
-    public void Create(KisiEngel engel) {
+    public Integer KisiEngelEkle(KisiEngel engel) {
         try {
             Connection conn = this.getDb();
 
@@ -39,18 +39,17 @@ public class KisiEngelDAO extends DBConnection {
             csEngel.setInt(4, engel.getAlt_kurum_id());
             csEngel.setFloat(5, engel.getDerece());
             csEngel.setString(6, engel.getEngel_baslangic());
-            csEngel.setDate(7, new java.sql.Date(engel.getKayit_tarihi().getTime()));
-            csEngel.setInt(8, engel.getAktif());
-            csEngel.setString(9, engel.getHastalik());
-            csEngel.setDate(10, new java.sql.Date(engel.getGuncelleme_tarihi().getTime()));
-            csEngel.registerOutParameter(11, java.sql.Types.INTEGER);
+            csEngel.setInt(7, engel.getAktif());
+            csEngel.setString(8, engel.getHastalik());
+            csEngel.registerOutParameter(9, java.sql.Types.INTEGER);
             csEngel.execute();
-            engel.setKisi_engel_id(csEngel.getInt(11));
-
+            
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+            return csEngel.getInt(9);
 
         } catch (SQLException ex) {
             this.islemBasariliMesaj = DetectError(ex);
+            return null;
         }
     }
 

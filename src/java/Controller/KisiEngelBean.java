@@ -19,13 +19,13 @@ public class KisiEngelBean implements Serializable {
     private KisiEngelDAO dao;
     private List<KisiEngel> list;
 
-    public void create() {
-        this.getDao().Create(getEntity());
+    public void ekle() {
+        this.getDao().KisiEngelEkle(getEntity());
     }
 
     public void delete(int kisiEngelID) {
         this.getDao().Delete(kisiEngelID);
-        this.list = this.getDao().GetList(); // Silme işleminden sonra listeyi yeniler
+        this.list = this.getDao().GetList();
     }
 
     public void edit(KisiEngel engel) {
