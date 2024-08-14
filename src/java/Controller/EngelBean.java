@@ -7,6 +7,7 @@ package Controller;
 import Entity.Engel;
 import dao.EngelDAO;
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.model.SelectItem;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import java.io.Serializable;
@@ -23,6 +24,7 @@ public class EngelBean implements Serializable {
     private Engel entity;
     private EngelDAO dao;
     private List<Engel> list;
+    private List<SelectItem> engelTipList;
 
     public void engelEkle() {
         this.getDao().EngelEkle(getEntity());
@@ -74,6 +76,15 @@ public class EngelBean implements Serializable {
 
     public EngelBean() {
 
+    }
+
+    public List<SelectItem> getEngelTipList() {
+        engelTipList = getDao().EngelGetir();
+        return engelTipList;
+    }
+
+    public void setEngelTipList(List<SelectItem> engelTipList) {
+        this.engelTipList = engelTipList;
     }
 
 }
