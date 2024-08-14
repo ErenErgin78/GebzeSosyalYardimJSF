@@ -64,7 +64,7 @@
                                     <div class="form-row"> 
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="email">Gelir:</label>
-                                            <h:inputText class="form-control">
+                                            <h:inputText class="form-control" value="">
                                                 <f:passThroughAttribute name="type" value="email" />
                                             </h:inputText>
                                         </div>
@@ -88,9 +88,6 @@
                                         </div>
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="aktif" class="form-label">Meslek:</label>
-                                            <h:selectOneMenu id="akt" value="#{userBean.dao.aktif}" class="form-control">
-                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
-                                                <f:selectItems value = "#{meslekBean.meslekList}"/>
                                                 <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div>                            
@@ -98,7 +95,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="aktif" class="form-label">Cinsiyet:</label>
-                                            <h:selectOneMenu id="aktif" value="#{userBean.dao.aktif}" class="form-control">
+                                            <h:selectOneMenu id="aktif" value="#{kisiBean.entity.cinsiyet}" class="form-control">
                                                 <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
                                                 <f:selectItem itemLabel="Erkek" itemValue="E" />
                                                 <f:selectItem itemLabel="Kadın" itemValue="K" />                                 
@@ -118,18 +115,14 @@
                                             <label for="medeni" class="form-label">Medeni Hali:</label>
                                             <h:selectOneMenu id="medeni" value="#{userBean.dao.aktif}" class="form-control">
                                                 <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
-                                                <f:selectItem itemLabel="Evli" itemValue="E" /> 
-                                                <f:selectItem itemLabel="Bekar" itemValue="E" /> 
-                                                <f:selectItem itemLabel="Dul" itemValue="E" /> 
-                                                <f:selectItem itemLabel="Boşanmış" itemValue="E" />
+                                                <f:selectItems value = "#{medeniDurumBean.medenidurumlist} "
                                                 <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div>
                                         <div class="form-group col-md-6 mb-3">
-                                            <label for="tarih">Ölüm Tarihi:</label>
-                                            <h:inputText class="form-control" value="#{userBean.entity.kullanici_isim}">
-                                                <f:passThroughAttribute name="type" value="date" />
-                                            </h:inputText>                                         
+                                            <h:selectOneMenu id="akt" value="#{userBean.dao.aktif}" class="form-control">
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                                <f:selectItems value = "#{meslekBean.meslekList}"/>
                                         </div>
                                     </div>
                                     <!-- Askerlik Bilgileri Kısmı -->
