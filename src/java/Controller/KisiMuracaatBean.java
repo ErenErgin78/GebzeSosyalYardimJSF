@@ -33,6 +33,9 @@ public class KisiMuracaatBean implements Serializable {
     private KisiAdresBean adresBean;
 
     @Inject
+    private KisiYakinlarBean kisiYakinlarBean;
+    
+    @Inject
     private MuracaatBilgiBean muracaatBilgiBean;
 
     public void KisiMuracaatEkle() {

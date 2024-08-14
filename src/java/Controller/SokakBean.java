@@ -75,6 +75,7 @@ public class SokakBean implements Serializable {
     }
 
     public List<SelectItem> getSokakList() {
+        sokakList = getDao().SokakGetir(selectedMahalleId);
         return sokakList;
     }
 

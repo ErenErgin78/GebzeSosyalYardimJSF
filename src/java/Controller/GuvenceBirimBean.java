@@ -57,6 +57,7 @@ public class GuvenceBirimBean implements Serializable {
     }
 
     public List<SelectItem> getGuvenceBirimlist() {
+        guvenceBirimlist = getDao().GuvenceBirimGetir();
         return guvenceBirimlist;
     }
 
