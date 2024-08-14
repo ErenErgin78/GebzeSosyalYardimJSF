@@ -71,8 +71,8 @@
                                             <label for="cinsiyet" class="form-label">Cinsiyet:</label>
                                             <h:selectOneMenu id="cinsiyet" value="#{kisiBean.entity.cinsiyet}" class="form-control">
                                                 <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
-                                                <f:selectItem itemLabel="Erkek" itemValue="Erkek" />
-                                                <f:selectItem itemLabel="Kadın" itemValue="Kadın" />                                 
+                                                <f:selectItem itemLabel="Erkek" itemValue="E" />
+                                                <f:selectItem itemLabel="Kadın" itemValue="K" />                                 
                                                 <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div>
@@ -118,12 +118,15 @@
                                                     <label for="mahalle" class="form-label">Mahalle:</label>
                                                     <h:selectOneMenu id="mahalle" value="#{kisiAdresBean.entity.kisi_adres_mahalle_id}" class="form-control">
                                                         <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                                        <f:selectItems value = "#{mahalleBean.mahalleList}" />
+                                                        <f:ajax event="change" listener="#{sokakBean.sokakyukle}" render="street" />
                                                     </h:selectOneMenu>
                                                 </div>
                                                 <div class="form-group col-md-6 mb-3">
-                                                    <label for="cadde_sokak" class="form-label">Cadde/Sokak:</label>
+                                                    <label for="street" class="form-label">Cadde/Sokak:</label>
                                                     <h:selectOneMenu id="cadde_sokak" value="#{kisiAdresBean.entity.kisi_mahalle_sokak_id}" class="form-control">
-                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                                        <f:selectItems value = "#{sokakBean.sokakList}" />
                                                     </h:selectOneMenu>
                                                 </div>
                                             </div>
