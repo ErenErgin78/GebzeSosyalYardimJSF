@@ -1,125 +1,99 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import Entity.Muracaat;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
-import java.sql.CallableStatement;
+import static Various.ErrorFinder.DetectError;
 import util.DBConnection;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Eren
- */
 public class MuracaatDAO extends DBConnection {
 
     private Connection db;
-    private Integer muracaat_bilgi_id;
-
     private String mesaj;
-    
-    public void Create(Muracaat muracaat) {
-        try {
-            Connection conn = this.getDb();
 
-            // MURACAAT_BILGI stored procedure çağırma
-            String callQueryMuracaatBilgi = "{call INSERT_MURACAAT_BILGI(?, ?, ?, ?, ?)}";
-            CallableStatement csMuracaatBilgi = conn.prepareCall(callQueryMuracaatBilgi);
-            csMuracaatBilgi.setInt(1, muracaat.getArsiv_dosya_no());
-            csMuracaatBilgi.setInt(2, muracaat.getMuracaat_tip_id());
-            csMuracaatBilgi.setString(3, muracaat.getAciklama());
-            csMuracaatBilgi.setDate(4, new java.sql.Date(muracaat.getMuracaat_tarihi().getTime()));
-            csMuracaatBilgi.registerOutParameter(5, java.sql.Types.INTEGER);
-            csMuracaatBilgi.execute();
-            int muracaatBilgiId = csMuracaatBilgi.getInt(5);
-
-            // KISI_TEMEL'den id almak
-            String selectQuery = "SELECT MAX(KISI_ID) ID FROM KISI_TEMEL";
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery(selectQuery);
-            if (rs.next()) {
-                muracaat.setKisi_temel_id(rs.getInt("ID"));
-
-                // MURACAAT stored procedure çağırma
-                String callQueryMuracaat = "{call INSERT_MURACAAT(?, ?)}";
-                CallableStatement csMuracaat = conn.prepareCall(callQueryMuracaat);
-                csMuracaat.setInt(1, muracaat.getKisi_temel_id());
-                csMuracaat.setInt(2, muracaatBilgiId);
-                csMuracaat.executeUpdate();
-
-                this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
-            }
-
-        } catch (SQLException ex) {
-            DetectError(ex);
-        }
-    }
-
-    public List<Muracaat> GetList() {
-
-        List<Muracaat> UserList = new ArrayList<>();
+    public void MuracaatEkle(Muracaat muracaat) {
+        String callQuery = "{call INSERT_MURACAAT(?, ?, ?)}";
 
         try {
+            CallableStatement cs = getDb().prepareCall(callQuery);
+            cs.setInt(1, muracaat.getKisi_temel_id());
+            cs.setInt(2, muracaat.getMuracaat_bilgi_id());
+            cs.setInt(3, muracaat.getAktif());
 
-            Statement statement = getDb().createStatement();
-
-            String Selectquery = "SELECT \n"
-                    + "JOIN KULLANICI_DURUM D ON K.kullanici_durum_id = D.kullanici_durum_id\n"
-                    + "JOIN KULLANICI_UNVAN U ON K.kullanici_unvan_id = U.kullanici_unvan_id";
-
-            ResultSet rs = statement.executeQuery(Selectquery);
-
-            while (rs.next()) {
-
-            }
-
-        } catch (Exception ex) {
-            DetectError(ex);
-        }
-        return UserList;
-    }
-
-    public void Delete(int kullaniciId) {
-        String deleteQuery = "DELETE FROM MURACAAT WHERE kullanici_id = " + kullaniciId;
-
-        try {
-            Statement statement = getDb().createStatement();
-
-            int rowsDeleted = statement.executeUpdate(deleteQuery);
-            System.out.println(rowsDeleted + " kisi silindi.");
+            cs.executeUpdate();
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (SQLException ex) {
-            DetectError(ex);
+            mesaj = DetectError(ex);
         }
     }
 
-    private void DetectError(Exception ex) {
-        //Hatayı yakalamak için
-        FacesContext context = FacesContext.getCurrentInstance();
-        StringBuilder errorMessage = new StringBuilder(ex.getMessage());
-        StackTraceElement[] stackTrace = ex.getStackTrace();
+    // Delete Method
+    public void Delete(int muracaatId) {
+        String deleteQuery = "DELETE FROM MURACAAT WHERE MURACAAT_ID = ?";
 
-        //Hatanın hangi satırda olduğunu görmek için
-        for (StackTraceElement element : stackTrace) {
-            if (element.getClassName().startsWith("dao")) {
-                errorMessage.append(" (at ").append(element.getFileName())
-                        .append(":").append(element.getLineNumber()).append(")");
-                break;
-            }
+        try (PreparedStatement ps = getDb().prepareStatement(deleteQuery)) {
+            ps.setInt(1, muracaatId);
+            int rowsDeleted = ps.executeUpdate();
+            System.out.println(rowsDeleted + " müracaat silindi.");
+            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
+        } catch (SQLException ex) {
+            mesaj = DetectError(ex);
         }
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage.toString(), null));
+    }
 
+    public List<Muracaat> MuracaatBilgiListesi() {
+        List<Muracaat> muracaatList = new ArrayList<>();
+        String query = "SELECT "
+                + "M.MURACAAT_ID, "
+                + "KT.KIMLIK_NO, "
+                + "KT.ISIM, "
+                + "KT.SOYISIM, "
+                + "MB.ARSIV_DOSYA_NO, "
+                + "MB.MURACAAT_TARIHI, "
+                + "KAM.MAHALLE, "
+                + "KMS.SOKAK_ISIM, "
+                + "M.KAYIT_TARIHI, "
+                + "M.AKTIF, "
+                + "M.GUNCELLEME_TARIHI "
+                + "FROM MURACAAT M "
+                + "JOIN MURACAAT_BILGI MB ON M.MURACAAT_BILGI_ID = MB.MURACAAT_BILGI_ID "
+                + "JOIN KISI_TEMEL KT ON M.KISI_TEMEL_ID = KT.KISI_ID "
+                + "JOIN KISI_DETAY KD ON KT.KISI_DETAY_ID = KD.DETAY_ID "
+                + "JOIN KISI_ADRES KA ON KD.KISI_ADRES_ID = KA.KISI_ADRES_ID "
+                + "JOIN KISI_ADRES_MAHALLE KAM ON KA.KISI_ADRES_MAHALLE_ID = KAM.KISI_ADRES_MAHALLE_ID "
+                + "JOIN KISI_MAHALLE_SOKAK KMS ON KA.KISI_MAHALLE_SOKAK_ID = KMS.SOKAK_ID";
+
+        try (PreparedStatement ps = getDb().prepareStatement(query)) {
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Muracaat muracaat = new Muracaat(
+                        rs.getDate("KAYIT_TARIHI"),
+                        rs.getInt("AKTIF"),
+                        rs.getDate("GUNCELLEME_TARIHI"),
+                        rs.getBigDecimal("KIMLIK_NO").toBigInteger(),
+                        rs.getString("ISIM"),
+                        rs.getString("SOYISIM"),
+                        rs.getInt("ARSIV_DOSYA_NO"),
+                        rs.getDate("MURACAAT_TARIHI"),
+                        rs.getString("MAHALLE"),
+                        rs.getString("SOKAK_ISIM")
+                );
+                muracaat.setMuracaat_id(rs.getInt("MURACAAT_ID"));
+                muracaatList.add(muracaat);
+            }
+            mesaj = "İşlem başarılı";
+        } catch (SQLException ex) {
+            mesaj = DetectError(ex);
+        }
+        return muracaatList;
     }
 
     public Connection getDb() {
@@ -133,12 +107,11 @@ public class MuracaatDAO extends DBConnection {
         this.db = db;
     }
 
-    public Integer getMuracaat_bilgi_id() {
-        return muracaat_bilgi_id;
+    public String getMesaj() {
+        return mesaj;
     }
 
-    public void setMuracaat_bilgi_id(Integer muracaat_bilgi_id) {
-        this.muracaat_bilgi_id = muracaat_bilgi_id;
+    public void setMesaj(String mesaj) {
+        this.mesaj = mesaj;
     }
-
 }

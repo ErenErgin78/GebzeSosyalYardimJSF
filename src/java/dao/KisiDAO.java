@@ -16,14 +16,14 @@ import java.util.List;
 public class KisiDAO extends DBConnection {
 
     private Connection db;
-    private String mesaj; // Başarı mesajı için değişken
+    private String mesaj;
 
     // Kisi ekleme metodu
-    public void KisiEkle(Kisi kisi) {
+    public Integer KisiEkle(Kisi kisi) {
         try {
             Connection conn = this.getDb();
 
-            String callQuery = "{call INSERT_KISI_TEMEL(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            String callQuery = "{call INSERT_KISI_TEMEL(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
             cs.setObject(1, kisi.getKimlik_no());
             cs.setString(2, kisi.getIsim());
@@ -35,12 +35,16 @@ public class KisiDAO extends DBConnection {
             cs.setInt(8, kisi.getDoğum_tarihi());
             cs.setInt(9, kisi.getMedeni_durum_id());
             cs.setInt(10, kisi.getAktif());
-
+            cs.registerOutParameter(11, java.sql.Types.INTEGER);
             cs.execute();
+            
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
+            return cs.getInt(11);
+            
         } catch (Exception ex) {
             this.mesaj = DetectError(ex);
+            return null;
         }
     }
 
@@ -94,6 +98,23 @@ public class KisiDAO extends DBConnection {
         return kisiList;
     }
 
+    public List<SelectItem> kisiGetir() {
+        List<SelectItem> kisiList = new ArrayList<>();
+
+        try {
+            Statement statement = getDb().createStatement();
+            String Selectquery = "SELECT MEDENI_DURUM_ID,MEDENI_DURUM  FROM KISI_MEDENI_DURUM";
+            ResultSet rs = statement.executeQuery(Selectquery);
+
+            while (rs.next()) {
+                kisiList.add(new SelectItem(rs.getInt("MEDENI_DURUM_ID"), rs.getString("MEDENI_DURUM")));
+            }
+        } catch (Exception ex) {
+            DetectError(ex);
+        }
+        return kisiList;
+    }
+
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();
@@ -112,4 +133,5 @@ public class KisiDAO extends DBConnection {
     public void setMesaj(String mesaj) {
         this.mesaj = mesaj;
     }
+
 }

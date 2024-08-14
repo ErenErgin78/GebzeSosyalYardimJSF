@@ -1,16 +1,11 @@
 package Controller;
 
-import Entity.Kisi;
 import Entity.KisiAdres;
 import dao.KisiAdresDAO;
-import dao.KisiDAO;
 import jakarta.annotation.PostConstruct;
-import jakarta.faces.event.AjaxBehaviorEvent;
-import jakarta.faces.model.SelectItem;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Named(value = "kisiAdresBean")
@@ -26,9 +21,9 @@ public class KisiAdresBean implements Serializable {
         entity = new KisiAdres();
     }
 
-    public void ekle() {
+    public Integer ekle() {
 
-        this.getDao().KisiEkle(getEntity());
+        return this.getDao().KisiAdresEkle(getEntity());
     }
 
     public void KisiAdresSil(int kisiID) {
@@ -36,13 +31,14 @@ public class KisiAdresBean implements Serializable {
         this.list = this.getDao().KisiAdresListesi(); // Silme işleminden sonra listeyi güncelle
     }
 
-
-
     public void edit(KisiAdres kisiAdres) {
         this.entity = kisiAdres;
     }
 
     public KisiAdres getEntity() {
+        if (entity == null) {
+            entity = new KisiAdres();
+        }
         return entity;
     }
 
@@ -51,6 +47,9 @@ public class KisiAdresBean implements Serializable {
     }
 
     public KisiAdresDAO getDao() {
+        if (dao == null) {
+            dao = new KisiAdresDAO();
+        }
         return dao;
     }
 
@@ -59,6 +58,7 @@ public class KisiAdresBean implements Serializable {
     }
 
     public List<KisiAdres> getList() {
+        list = getDao().KisiAdresListesi();
         return list;
     }
 

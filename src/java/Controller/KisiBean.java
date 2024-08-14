@@ -5,10 +5,8 @@ import dao.KisiDAO;
 import jakarta.annotation.PostConstruct;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
-import jakarta.faces.event.AjaxBehaviorEvent;
 import jakarta.faces.model.SelectItem;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Named(value = "kisiBean")
@@ -18,15 +16,16 @@ public class KisiBean implements Serializable {
     private Kisi entity;
     private KisiDAO dao;
     private List<Kisi> list;
+    private List<SelectItem> MedeniList;
 
     @PostConstruct
     public void init() {
         entity = new Kisi();
     }
 
-    public void ekle() {
+    public Integer ekle() {
 
-        this.getDao().KisiEkle(getEntity());
+       return this.getDao().KisiEkle(getEntity());
     }
 
     public void KisiSil(int kisiID) {
@@ -69,6 +68,15 @@ public class KisiBean implements Serializable {
 
     public void setList(List<Kisi> list) {
         this.list = list;
+    }
+
+    public List<SelectItem> getMedeniList() {
+        MedeniList = getDao().kisiGetir();
+        return MedeniList;
+    }
+
+    public void setMedeniList(List<SelectItem> MedeniList) {
+        this.MedeniList = MedeniList;
     }
 
 }

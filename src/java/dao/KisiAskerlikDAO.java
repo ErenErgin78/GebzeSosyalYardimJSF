@@ -6,8 +6,6 @@ package dao;
 
 import Entity.KisiAskerlik;
 import static Various.ErrorFinder.DetectError;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,7 +21,7 @@ public class KisiAskerlikDAO extends DBConnection {
     private String islemBasariliMesaj;
 
 
-    public void Create(KisiAskerlik askerlik) {
+    public Integer Create(KisiAskerlik askerlik) {
         try {
             Connection conn = this.getDb();
 
@@ -41,11 +39,13 @@ public class KisiAskerlikDAO extends DBConnection {
 
             int askerlikId = csAskerlik.getInt(7);
             askerlik.setAskerlik_id(askerlikId);
-
+            
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+            return askerlikId;
 
         } catch (SQLException ex) {
             islemBasariliMesaj = DetectError(ex);
+            return null;
         }
     }
 

@@ -24,9 +24,9 @@ public class KisiIletisimBean implements Serializable {
         entity = new KisiIletisim();
     }
 
-    public void ekle() {
+    public Integer ekle() {
 
-        this.getDao().KisiIletisimEkle(getEntity());
+        return this.getDao().KisiIletisimEkle(getEntity());
     }
 
     public void KisiIletisimSil(int kisiID) {

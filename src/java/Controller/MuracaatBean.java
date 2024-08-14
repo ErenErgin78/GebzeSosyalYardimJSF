@@ -15,13 +15,13 @@ public class MuracaatBean implements Serializable {
     private MuracaatDAO dao;
     private List<Muracaat> list;
 
-    public void create() {
-        this.getDao().Create(getEntity());
+    public void ekle() {
+       getDao().MuracaatEkle(getEntity());
     }
 
     public void delete(int MuracaatID) {
         this.getDao().Delete(MuracaatID);
-        this.list = this.getDao().GetList(); // Refresh the list after deletion
+        this.list = this.getDao().MuracaatBilgiListesi();
     }
 
     public void edit(Muracaat muracaat) {
@@ -52,7 +52,7 @@ public class MuracaatBean implements Serializable {
 
     public List<Muracaat> getList() {
         if (this.list == null) {
-            this.list = this.getDao().GetList();
+            this.list = this.getDao().MuracaatBilgiListesi();
         }
         return this.list;
     }

@@ -29,7 +29,7 @@
                                 <h1>Okul Girişi</h1>
                             </div>
                             <div class="card">
-                                <div class="card-header">Okul Giriş Bilgileri  #{okulBean.entity.okul_tur_id}</div>
+                                <div class="card-header">Okul Giriş Bilgileri</div>
                                 <div class="card-body">
                                     <div class="form-row">
                                         <div class="form-group full-width">
@@ -45,7 +45,7 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group">
-                                            <label for="application_type">Aktif: #{okulBean.entity.okul_aktif}</label>
+                                            <label for="application_type">Aktif:</label>
                                             <h:selectOneMenu id="application_type" value="#{okulBean.entity.okul_aktif}" class="form-control">
                                                 <f:selectItem itemLabel="Evet" itemValue="1" />
                                                 <f:selectItem itemLabel="Hayır" itemValue="0" />
@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group">
-                                            <label for="neighborhood">Okul Tipi: #{okulBean.entity.okul_tip_id}</label>
+                                            <label for="neighborhood">Okul Tipi:</label>
                                             <h:selectOneMenu id="medenidurum" value="#{okulBean.entity.okul_tip_id}" class="form-control">
                                                 <f:selectItem itemLabel="Anaokulu" itemValue="1" />
                                                 <f:selectItem itemLabel="İlkokul" itemValue="2" />
@@ -69,7 +69,7 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group">
-                                            <label for="name">Okul Adı:  #{okulBean.entity.okul_isim}</label>
+                                            <label for="name">Okul Adı:</label>
                                             <h:inputText id="name" value="#{okulBean.entity.okul_isim}" class="form-control" />
                                         </div>
                                     </div>

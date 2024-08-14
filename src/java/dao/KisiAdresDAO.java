@@ -17,13 +17,13 @@ import util.DBConnection;
 public class KisiAdresDAO extends DBConnection {
 
     private Connection db;
-    private String mesaj; // Başarı mesajı için değişken
+    private String mesaj;
 
-    public void KisiEkle(KisiAdres kisiAdres) {
+    public Integer KisiAdresEkle(KisiAdres kisiAdres) {
         try {
             Connection conn = this.getDb();
 
-            String callQuery = "{call INSERT_KISI_ADRES(?, ?, ?, ?, ?, ?, ?, ?)}";
+            String callQuery = "{call INSERT_KISI_ADRES(?, ?, ?, ?, ?, ?, ?, ?,?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
             cs.setString(1, kisiAdres.getTarif());
             cs.setString(2, kisiAdres.getSite());
@@ -35,10 +35,16 @@ public class KisiAdresDAO extends DBConnection {
             java.sql.Date kayitTarihiSql = new java.sql.Date(kayitTarihiUtil.getTime());
             cs.setDate(7, kayitTarihiSql);
             cs.setInt(8, kisiAdres.getAktif());
+            cs.registerOutParameter(9, java.sql.Types.INTEGER);
+
+            int kisiAdresId = cs.getInt(7);
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
+            return kisiAdresId;
+
         } catch (Exception ex) {
             this.mesaj = DetectError(ex);
+            return null;
         }
 
     }
@@ -118,4 +124,13 @@ public class KisiAdresDAO extends DBConnection {
     public void setDb(Connection db) {
         this.db = db;
     }
+
+    public String getMesaj() {
+        return mesaj;
+    }
+
+    public void setMesaj(String mesaj) {
+        this.mesaj = mesaj;
+    }
+
 }
