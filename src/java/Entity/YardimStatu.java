@@ -2,28 +2,28 @@ package Entity;
 
 import java.util.Date;
 
-public class Guvence {
+public class YardimStatu {
 
-    private Integer guvence_id;
-    private String guvence;
+    private Integer statu_id;
+    private String statu_isim;
     private Date kayit_tarihi;
     private Integer aktif;
     private Date guncelleme_tarihi;
 
-    public Integer getGuvence_id() {
-        return guvence_id;
+    public Integer getStatu_id() {
+        return statu_id;
     }
 
-    public void setGuvence_id(Integer guvence_id) {
-        this.guvence_id = guvence_id;
+    public void setStatu_id(Integer statu_id) {
+        this.statu_id = statu_id;
     }
 
-    public String getGuvence() {
-        return guvence;
+    public String getStatu_isim() {
+        return statu_isim;
     }
 
-    public void setGuvence(String guvence) {
-        this.guvence = guvence;
+    public void setStatu_isim(String statu_isim) {
+        this.statu_isim = statu_isim;
     }
 
     public Date getKayit_tarihi() {
@@ -50,14 +50,14 @@ public class Guvence {
         this.guncelleme_tarihi = guncelleme_tarihi;
     }
 
-    public Guvence(String guvence, Date kayit_tarihi, Integer aktif, Date guncelleme_tarihi) {
-        this.guvence = guvence;
+    public YardimStatu(String statu_isim, Date kayit_tarihi, Integer aktif, Date guncelleme_tarihi) {
+        this.statu_isim = statu_isim;
         this.kayit_tarihi = kayit_tarihi;
         this.aktif = aktif;
         this.guncelleme_tarihi = guncelleme_tarihi;
     }
 
-    public Guvence() {
+    public YardimStatu() {
     }
 
 }

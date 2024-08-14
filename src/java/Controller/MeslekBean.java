@@ -3,6 +3,7 @@ package Controller;
 import Entity.Meslek;
 import dao.MeslekDAO;
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.model.SelectItem;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ public class MeslekBean implements Serializable {
     private Meslek entity;
     private MeslekDAO dao;
     private List<Meslek> list;
+    private List<SelectItem> meslekList;
 
     public void meslekekle() {
         this.getDao().MeslekEkle(getEntity());
@@ -58,6 +60,15 @@ public class MeslekBean implements Serializable {
 
     public void setList(List<Meslek> list) {
         this.list = list;
+    }
+
+    public List<SelectItem> getMeslekList() {
+        meslekList = getDao().MeslekGetir();
+        return meslekList;
+    }
+
+    public void setMeslekList(List<SelectItem> meslekList) {
+        this.meslekList = meslekList;
     }
 
     @PostConstruct

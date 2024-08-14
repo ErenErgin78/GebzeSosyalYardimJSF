@@ -38,6 +38,9 @@ public class GuvenceBirimBean implements Serializable {
     }
 
     public GuvenceBirimDAO getDao() {
+        if(this.dao == null ){
+        dao = new GuvenceBirimDAO();
+        }
         return dao;
     }
 

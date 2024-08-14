@@ -3,6 +3,7 @@ package Controller;
 import Entity.Yakinlik;
 import dao.YakinlikDAO;
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.model.SelectItem;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ public class YakinlikBean implements Serializable {
     private Yakinlik entity;
     private YakinlikDAO dao;
     private List<Yakinlik> list;
+    private List<SelectItem> yakinlikList;
 
     public void yakinlikEkle() {
         this.getDao().YakinlikEkle(getEntity());
@@ -58,6 +60,15 @@ public class YakinlikBean implements Serializable {
 
     public void setList(List<Yakinlik> list) {
         this.list = list;
+    }
+
+    public List<SelectItem> getYakinlikList() {
+        yakinlikList = getDao().YakinlikGetir();
+        return yakinlikList;
+    }
+
+    public void setYakinlikList(List<SelectItem> yakinlikList) {
+        this.yakinlikList = yakinlikList;
     }
 
     @PostConstruct
