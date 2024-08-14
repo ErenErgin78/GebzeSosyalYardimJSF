@@ -96,8 +96,8 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="KurumAdi" class="form-label">Yönlendirilen Kurum Adı:</label>
-                                                <h:selectOneMenu id="KurumAdi" value="#{kurumBean.entity.kurum_id}" class="form-control">
-                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="1" />
+                                                <h:selectOneMenu id="KurumAdi" value="#{kurumAltBean.selectedKurumId}" class="form-control">
+                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
                                                     <f:selectItems value="#{kurumBean.kurumList}"/>
                                                     <f:ajax event="change" listener="#{kurumAltBean.kurumyukle}" render="altkurum" />
                                                 </h:selectOneMenu>
@@ -105,9 +105,9 @@
                                             <div class="form-group col-md-6">
                                                 <label for="altKurumAdi" class="form-label">Yönlendirilen Alt Kurum Adı:</label>
                                                 <h:selectOneMenu id="altKurum" value="#{kisiEngelBean.entity.alt_kurum_id}" class="form-control">
-                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
-                                                        <f:selectItems value = "#{kurumAltBean.tipList}" />
-                                                    </h:selectOneMenu>
+                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                                    <f:selectItems value = "#{kurumAltBean.tipList}" />
+                                                </h:selectOneMenu>
                                             </div>
                                         </div>
                                         <div class="text-center mt-3">
