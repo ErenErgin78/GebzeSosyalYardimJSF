@@ -22,6 +22,7 @@ public class KisiMuracaatBean implements Serializable {
     }
 
     private String mesaj;
+    private Integer egitim_id;
 
     @Inject
     private KisiBean kisiBean;
@@ -41,11 +42,11 @@ public class KisiMuracaatBean implements Serializable {
     public void KisiMuracaatEkle() {
         try {
 
-            int iletisim_id = iletisimBean.ekle();
-            int adres_id = adresBean.ekle();
+            Integer iletisim_id = iletisimBean.ekle();
+            Integer adres_id = adresBean.ekle();
             
-            int kisi_id = kisiBean.ekle();
-            int muracaat_bilgi_id = muracaatBilgiBean.ekle();
+            Integer kisi_id = kisiBean.ekle();
+            Integer muracaat_bilgi_id = muracaatBilgiBean.ekle();
 
             mesaj = muracaatBilgiBean.getDao().getMesaj();
 
@@ -62,4 +63,12 @@ public class KisiMuracaatBean implements Serializable {
         this.mesaj = mesaj;
     }
 
+    public Integer getEgitim_id() {
+        return egitim_id;
+    }
+
+    public void setEgitim_id(Integer egitim_id) {
+        this.egitim_id = egitim_id;
+    }
+    
 }
