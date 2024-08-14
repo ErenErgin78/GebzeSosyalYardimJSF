@@ -70,16 +70,15 @@
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="cinsiyet" class="form-label">Cinsiyet:</label>
                                             <h:selectOneMenu id="cinsiyet" value="#{kisiBean.entity.cinsiyet}" class="form-control">
-                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="B" />
                                                 <f:selectItem itemLabel="Erkek" itemValue="E" />
                                                 <f:selectItem itemLabel="Kadın" itemValue="K" />                                 
-                                                <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div>
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="cinsiyetTekrar" class="form-label">Medeni Durum:</label>
                                             <h:selectOneMenu id="cinsiyetTekrar" value="#{kisiBean.entity.medeni_durum_id}" class="form-control">
-                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
                                                 <f:selectItems value="#{kisiBean.medeniList}" />
                                             </h:selectOneMenu>
                                         </div>
@@ -102,7 +101,7 @@
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="egitim" class="form-label">Eğitim Durum:</label>
                                             <h:selectOneMenu value="#{kisiBean.entity.medeni_durum_id}" class="form-control">
-                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
                                                 <f:selectItems value="#{egitimDurumBean.egitimlist}" />
                                             </h:selectOneMenu>
                                         </div>
@@ -112,7 +111,6 @@
                                             <label for="aktif" class="form-label">Özel Statü:</label>
                                             <h:selectOneMenu id="ak" value="#{userBean.dao.aktif}" class="form-control">
                                                 <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                                                        
-                                                <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
@@ -125,8 +123,8 @@
                                             <div class="form-row"> 
                                                 <div class="form-group col-md-6 mb-3">
                                                     <label for="mahalle" class="form-label">Mahalle:</label>
-                                                    <h:selectOneMenu id="mahalle" value="#{kisiAdresBean.entity.kisi_adres_mahalle_id}" class="form-control">
-                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                                    <h:selectOneMenu id="mahalle" value="#{sokakBean.selectedMahalleId}" class="form-control">
+                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
                                                         <f:selectItems value = "#{mahalleBean.mahalleList}" />
                                                         <f:ajax event="change" listener="#{sokakBean.sokakyukle}" render="street" />
                                                     </h:selectOneMenu>
