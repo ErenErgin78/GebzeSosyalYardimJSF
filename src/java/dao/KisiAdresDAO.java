@@ -22,6 +22,13 @@ public class KisiAdresDAO extends DBConnection {
     public Integer KisiAdresEkle(KisiAdres kisiAdres) {
         try {
             Connection conn = this.getDb();
+            Statement statement = getDb().createStatement();
+            String mahallequery = "SELECT MAHALLE_ID FROM KISI_MAHALLE_SOKAK WHERE SOKAK_ID =" + kisiAdres.getKisi_mahalle_sokak_id();
+            ResultSet rs = statement.executeQuery(mahallequery);
+
+            while (rs.next()) {
+                kisiAdres.setKisi_adres_mahalle_id(rs.getInt("MAHALLE_ID"));
+            }
 
             String callQuery = "{call INSERT_KISI_ADRES(?, ?, ?, ?, ?, ?, ?, ?,?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
@@ -30,7 +37,7 @@ public class KisiAdresDAO extends DBConnection {
             cs.setInt(3, kisiAdres.getKapi_no());
             cs.setInt(4, kisiAdres.getDaire_no());
             cs.setString(5, kisiAdres.getKisi_adres_mahalle_isim());
-            cs.setString(6, kisiAdres.getKisi_mahalle_sokak_isim());
+            cs.setInt(6, kisiAdres.getKisi_mahalle_sokak_id());
             java.util.Date kayitTarihiUtil = kisiAdres.getKayit_tarihi();
             java.sql.Date kayitTarihiSql = new java.sql.Date(kayitTarihiUtil.getTime());
             cs.setDate(7, kayitTarihiSql);
