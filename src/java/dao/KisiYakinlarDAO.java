@@ -19,7 +19,7 @@ public class KisiYakinlarDAO extends DBConnection {
         try {
             Connection conn = this.getDb();
 
-            String callQuery = "{call INSERT_KISI_YAKINLIK(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            String callQuery = "{call INSERT_KISI_YAKINLIK(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
             cs.setInt(1, yakinlik.getYakinlar_id());
             cs.setInt(2, yakinlik.getYakinlar_sira_no());
@@ -30,8 +30,6 @@ public class KisiYakinlarDAO extends DBConnection {
             cs.setDate(7, new java.sql.Date(yakinlik.getOlum_tarihi().getTime()));
             cs.setDate(8, new java.sql.Date(yakinlik.getKayit_tarihi().getTime()));
             cs.registerOutParameter(9, java.sql.Types.INTEGER);
-            cs.registerOutParameter(10, java.sql.Types.TIMESTAMP);
-            cs.registerOutParameter(11, java.sql.Types.TIMESTAMP);
             cs.execute();
             
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
