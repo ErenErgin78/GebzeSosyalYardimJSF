@@ -36,7 +36,10 @@ public class GuvenceBirimDAO extends DBConnection {
 
     }
 
-    public Connection getDb() {
+   public Connection getDb() {
+        if (this.db == null) {
+            this.db = this.connect();
+        }
         return db;
     }
 
