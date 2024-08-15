@@ -21,7 +21,7 @@ public class TutanakGelirBorcBean implements Serializable {
     public TutanakGelirBorcBean() {
     }
 
-    private String mesaj = "2";
+    private String mesaj;
 
     @Inject
     private TutanakGelirBean gelirBean;
