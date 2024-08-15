@@ -53,7 +53,7 @@ public class KisiEngelDAO extends DBConnection {
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
             return csEngel.getInt(9);
 
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             this.islemBasariliMesaj = DetectError(ex);
             return null;
         }
@@ -104,7 +104,7 @@ public class KisiEngelDAO extends DBConnection {
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (SQLException ex) {
-          islemBasariliMesaj = DetectError(ex);
+          this.islemBasariliMesaj = DetectError(ex);
         }
     }
 

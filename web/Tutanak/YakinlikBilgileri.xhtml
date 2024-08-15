@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
     <h:head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Yakınlık Bilgileri</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="CSS/styles.css" />
-        <link rel="stylesheet" href="CSS/log.css" />
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>            
-            <li class="breadcrumb-item active" aria-current="page">İşlemlerim</li>
-            <li class="breadcrumb-item active"><a href="#" class="load-page-button" data-page="Tutanak/MuracaatSecim.xhtml">Tutanak</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Yakınlık Bilgileri</li>
-        </ol>
+        <link rel="stylesheet" href="CSS/list.css" />
+        <h:outputStylesheet name="CSS/styles.css"/>
     </h:head>
     <h:body>
-        <h:form>
-            <h:messages globalOnly="true" layout="table"/>
-            <h:outputText id="mesaj" value ="#{kisiAskerlikBean.dao.islemBasariliMesaj}"/>
+        <h:form id="userForm">
+            <div class="row align-items-center mb-3">
+                <div class="col-10">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">İşlemlerim</li>
+                        <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="Tutanak/MuracaatSecim.xhtml">Tutanak</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Yakınlık Bilgileri</li>
+                    </ol>
+                </div>
+            </div> 
             <div class="container-fluid">               
                 <div class="row">                   
                     <div class="col-md-12">
@@ -35,72 +36,64 @@
                                     <!-- Yakınlık Bilgileri Formu -->
                                     <div class="form-row">
                                         <div class="form-group col-md-6 mb-3">
-                                            <label for="email">Doğum Tarihi:</label>
-                                            <h:inputText class="form-control" value="#{kisiBean.entity.doğum_tarihi}">
+                                            <label for="dogum">Doğum Tarihi:</label>
+                                            <h:inputText id="dogum" class="form-control" value="#{kisiBean.entity.doğum_tarihi}">
                                                 <f:passThroughAttribute name="type" value="date" />
                                             </h:inputText>                                         
                                         </div>
                                         <div class="form-group col-md-6 mb-3">
-                                            <label for="email">TC Kimlik No:</label>
-                                            <h:inputText class="form-control" value="#{kisiBean.entity.kimlik_no}">
-                                            </h:inputText>
+                                            <label for="kimlik">TC Kimlik No:</label>
+                                            <h:inputText id="kimlik" class="form-control" value="#{kisiBean.entity.kimlik_no}"/>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6 mb-3">
-                                            <label for="email">Adı:</label>
-                                            <h:inputText class="form-control" value="#{kisiBean.entity.isim}">
-                                            </h:inputText>
+                                            <label for="ad">Adı:</label>
+                                            <h:inputText id="ad" class="form-control" value="#{kisiBean.entity.isim}"/>
                                         </div>
                                         <div class="form-group col-md-6 mb-3">
-                                            <label for="email">Soyadı:</label>
-                                            <h:inputText class="form-control" value="#{kisiBean.entity.soyisim}">
-                                            </h:inputText>
+                                            <label for="soyad">Soyadı:</label>
+                                            <h:inputText id="soyad" class="form-control" value="#{kisiBean.entity.soyisim}"/>
                                         </div>
                                     </div>                          
                                     <div class="form-row">      
                                         <div class="form-group col-md-6 mb-3">
-                                            <label for="aktif1" class="form-label">Eğitim Durumu:</label>
-                                            <h:selectOneMenu id="aktif1" value="#{egitimDurumBean.entity.egitim_durum_id}" class="form-control">
+                                            <label for="egitim" class="form-label">Eğitim Durumu:</label>
+                                            <h:selectOneMenu id="egitim" value="#{egitimDurumBean.entity.egitim_durum_id}" class="form-control">
                                                 <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
-                                                <f:selectItems value="#{egitimDurumBean.egitimlist} "/>
-                                                <f:ajax event="valueChange" render="KullaniciListesi" />
+                                                <f:selectItems value="#{egitimDurumBean.egitimlist} "/>                                      
                                             </h:selectOneMenu>
                                         </div> 
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6 mb-3">
-                                            <label for="aktif2" class="form-label">Yakınlık:</label>
-                                            <h:selectOneMenu id="aktif2" value="#{yakinlikBean.entity.yakinlik_id}" class="form-control">
+                                            <label for="yakinlik" class="form-label">Yakınlık:</label>
+                                            <h:selectOneMenu id="yakinlik" value="#{yakinlikBean.entity.yakinlik_id}" class="form-control">
                                                 <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
                                                 <f:selectItems value="#{yakinlikBean.yakinlikList}"/>
-                                                <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div>
                                         <div class="form-group col-md-6 mb-3">
-                                            <label for="aktif3" class="form-label">Meslek:</label>
-                                            <h:selectOneMenu id="aktif3" value="#{meslekBean.entity.meslek_id}" class="form-control">
+                                            <label for="meslek" class="form-label">Meslek:</label>
+                                            <h:selectOneMenu id="meslek" value="#{meslekBean.entity.meslek_id}" class="form-control">
                                                 <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
                                                 <f:selectItems value="#{meslekBean.meslekList}"/>
-                                                <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div>                            
                                     </div>  
                                     <div class="form-row">
                                         <div class="form-group col-md-6 mb-3">
-                                            <label for="aktif4" class="form-label">Cinsiyet:</label>
-                                            <h:selectOneMenu id="aktif4" value="#{kisiBean.entity.cinsiyet}" class="form-control">
+                                            <label for="cinsiyet" class="form-label">Cinsiyet:</label>
+                                            <h:selectOneMenu id="cinsiyet" value="#{kisiBean.entity.cinsiyet}" class="form-control">
                                                 <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
                                                 <f:selectItem itemLabel="Erkek" itemValue="E" />
                                                 <f:selectItem itemLabel="Kadın" itemValue="K" />                                 
-                                                <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="aktif5" class="form-label">Özel Statü:</label>
                                             <h:selectOneMenu id="aktif5" value="#{userBean.dao.aktif}" class="form-control">
                                                 <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                                                        
-                                                <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
@@ -110,7 +103,6 @@
                                             <h:selectOneMenu id="medeni" value="#{medeniDurumBean.entity.medeni_durum_id}" class="form-control">
                                                 <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
                                                 <f:selectItems value = "#{medeniDurumBean.medenidurumlist} "/>
-                                                <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div>                                     
                                     </div>
@@ -133,32 +125,32 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6 mb-3">
-                                                    <label for="askerlik_tarihi">Başlama Tarihi:</label>
-                                                    <h:inputText class="form-control" value="#{kisiAskerlikBean.entity.baslangic_tarihi}">
+                                                    <label for="askerlik_baslama">Başlama Tarihi:</label>
+                                                    <h:inputText id="askerlik_baslama" class="form-control" value="#{kisiAskerlikBean.entity.baslangic_tarihi}">
                                                         <f:passThroughAttribute name="type" value="date" />
                                                     </h:inputText>
                                                 </div>
                                                 <div class="form-group col-md-6 mb-3">
                                                     <label for="askerlik_tarihi">Bitiş Tarihi:</label>
-                                                    <h:inputText class="form-control" value="#{kisiAskerlikBean.entity.bitis_tarihi}">
+                                                    <h:inputText id="askerlik_bitis" class="form-control" value="#{kisiAskerlikBean.entity.bitis_tarihi}">
                                                         <f:passThroughAttribute name="type" value="date" />
                                                     </h:inputText>
                                                 </div>
                                                 <div class="form-group col-md-6 mb-3">
                                                     <label for="askerlik_suresi">Askerlik/Hükümlülük Süresi(Gün):</label>
-                                                    <h:inputText class="form-control" value="#{kisiAskerlikBean.entity.asker_hukumlu}">
-                                                    </h:inputText>
+                                                    <h:inputText id= "askerlik_suresi" class="form-control" value="#{kisiAskerlikBean.entity.asker_hukumlu}"/>
+
                                                 </div>
                                                 <div class="form-group col-md-6 mb-3">
-                                                    <label for="add">Açıklama:</label>
-                                                    <h:inputTextarea id="add" class="form-control" rows="1" value="#{kisiAskerlikBean.entity.aciklama}" />
+                                                    <label for="aciklama">Açıklama:</label>
+                                                    <h:inputTextarea id="aciklama" class="form-control" rows="1" value="#{kisiAskerlikBean.entity.aciklama}" />
                                                 </div>
                                             </div>
                                         </div>
                                     </div> 
                                     <div class="text-center mt-3">
                                         <h:commandButton value="Kaydet" action="#{kisiAskerlikBean.create()}" class="btn btn-success">
-                                            <f:ajax execute="@form" render="@form, mesaj" />
+                                            <f:ajax execute="@form" render="@form" />
                                         </h:commandButton>                                  
                                     </div>                                  
                                     <!-- Pagination Card -->
@@ -204,5 +196,10 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+        <script>
+            function confirmDelete(button) {
+                return confirm("Bu kullanıcıyı gerçekten silmek istiyor musunuz?");
+            }
+        </script>
     </h:body>
 </html>

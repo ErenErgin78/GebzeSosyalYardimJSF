@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Mülkiyet Bilgileri</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
@@ -222,7 +220,7 @@
 
                                         <div class="card-body">
                                             <div class="text-center mt-3">
-                                                <h:commandButton value="Kaydet" action="#{userBean.create()}" class="btn btn-success">
+                                                <h:commandButton value="Kaydet" action="#{tutanakMulkiyetBean.tutanakMulkiyetEkle()}" class="btn btn-success">
                                                     <f:ajax execute="@form" render="@form, mesaj" />
                                                 </h:commandButton>                                  
                                             </div>
