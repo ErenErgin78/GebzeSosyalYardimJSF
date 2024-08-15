@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 
+ *
  * @author Administrator
  */
 public class KisiEngelDAO extends DBConnection {
@@ -37,6 +37,15 @@ public class KisiEngelDAO extends DBConnection {
             while (rs.next()) {
                 engel.setKurum_id(rs.getInt("KURUM_ID"));
             }
+        
+            Statement statement2 = getDb().createStatement();
+            String engelAltQuery = "SELECT ENGELLI_TIP_ID FROM ENGELLI_ALT_TIP WHERE ALT_TIP_ID =" + engel.getEngelli_alt_tip_id();
+            ResultSet rs2 = statement2.executeQuery(engelAltQuery);
+
+            while (rs2.next()) {
+                engel.setEngelli_tip_id(rs.getInt("ENGELLI_TIP_ID"));
+            }
+
             String callQueryEngel = "{call INSERT_KISI_ENGEL(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement csEngel = conn.prepareCall(callQueryEngel);
             csEngel.setInt(1, engel.getEngelli_tip_id());
@@ -49,7 +58,7 @@ public class KisiEngelDAO extends DBConnection {
             csEngel.setString(8, engel.getHastalik());
             csEngel.registerOutParameter(9, java.sql.Types.INTEGER);
             csEngel.execute();
-            
+
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
             return csEngel.getInt(9);
 
