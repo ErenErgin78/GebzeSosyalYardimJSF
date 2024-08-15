@@ -18,11 +18,11 @@ public class KisiYakinlarStatuDAO extends DBConnection {
 
         try {
             Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT KISI_YAKINLAR_STATU_ID , KISI_YAKINLAR_STATU_ISIM FROM KISI_YAKINLAR_STATU";
+            String Selectquery = "SELECT OZEL_STATU_ID , OZEL_STATU FROM KISI_YAKINLAR_STATU";
             ResultSet rs = statement.executeQuery(Selectquery);
 
             while (rs.next()) {
-                TipList.add(new SelectItem(rs.getInt("KISI_YAKINLAR_STATU_ID"), rs.getString("KISI_YAKINLAR_STATU")));
+                TipList.add(new SelectItem(rs.getInt("OZEL_STATU_ID"), rs.getString("OZEL_STATU")));
             }
         } catch (Exception ex) {
             DetectError(ex);

@@ -18,7 +18,7 @@
     <h:body>
         <h:form>
             <h:messages globalOnly="true" layout="table"/>
-            <h:outputText id="mesaj" value =""/>
+            <h:outputText id="mesaj" value ="#{kisiMuracaatBean.mesaj}"/>
             <div class="container-fluid">               
                 <div class="row">                   
                     <div class="col-md-12">
@@ -107,7 +107,8 @@
                                         <div class="form-group col-md-3">
                                             <label for="aktif" class="form-label">Özel Statü:</label>
                                             <h:selectOneMenu id="ak" value="#{kisiYakinlarBean.entity.ozel_statu_id}" class="form-control">
-                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                                                        
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />     
+                                                <f:selectItems value ="#{kisiYakinlarStatuBean.kisiYakinlarStatulist}"/>
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
@@ -201,9 +202,9 @@
                                         </div>
                                     </div>
                                     <div class="text-center mt-3">
-                                        <h:commandButton value="Kaydet" action="#{kisiMuracaatBean.kisiMuracaatEkle}" class="btn btn-success">
-                                            <f:ajax execute="@form" render="@form, mesaj" />
-                                        </h:commandButton>                                  
+                                        <h:commandButton value="Kaydet" actionListener="#{kisiMuracaatBean.KisiMuracaatEkle}" class="btn btn-success" immediate="true">
+                                            <f:ajax execute="@form" render="@form mesaj" />
+                                        </h:commandButton>
                                     </div>                                                                              
                                 </div>
                             </div>

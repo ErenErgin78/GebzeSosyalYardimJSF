@@ -22,7 +22,6 @@ public class KisiAdresBean implements Serializable {
     }
 
     public Integer ekle() {
-
         return this.getDao().KisiAdresEkle(getEntity());
     }
 

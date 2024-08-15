@@ -5,7 +5,6 @@ import static Various.ErrorFinder.DetectError;
 import jakarta.faces.model.SelectItem;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -22,18 +21,18 @@ public class KisiIletisimDAO extends DBConnection {
         try {
             Connection conn = (Connection) this.getDb();
 
-            String callQuery = "{call INSERT_KISI_ILETISIM(?, ?, ?, ?, ?)}";
+            String callQuery = "{call INSERT_KISI_ILETISIM(?, ?, ?, ?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
-            cs.setInt(1, kisiIletisim.getKisi_iletisim_id());
-            cs.setObject(2, kisiIletisim.getEv_telefon());
-            cs.setObject(3, kisiIletisim.getCep_telefon());
-            cs.setString(4, kisiIletisim.getEposta());
-            cs.registerOutParameter(5, java.sql.Types.INTEGER);
+            cs.setObject(1, kisiIletisim.getEv_telefon());
+            cs.setObject(2, kisiIletisim.getCep_telefon());
+            cs.setString(3, kisiIletisim.getEposta());
+            cs.registerOutParameter(4, java.sql.Types.INTEGER);
             cs.execute();
             
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
             
-            return cs.getInt(5);
+            return cs.getInt(4);
+            
         } catch (Exception ex) {
             this.mesaj = DetectError(ex);
             return null;
@@ -112,4 +111,13 @@ public class KisiIletisimDAO extends DBConnection {
     public void setDb(java.sql.Connection db) {
         this.db = (Connection) db;
     }
+
+    public String getMesaj() {
+        return mesaj;
+    }
+
+    public void setMesaj(String mesaj) {
+        this.mesaj = mesaj;
+    }
+    
 }
