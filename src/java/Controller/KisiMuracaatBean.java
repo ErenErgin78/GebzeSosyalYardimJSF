@@ -21,9 +21,8 @@ public class KisiMuracaatBean implements Serializable {
     public KisiMuracaatBean() {
     }
 
-    private String mesaj = "1";
+    private String mesaj;
 
-    Integer a = 0;
     @Inject
     private KisiBean kisiBean;
 
@@ -96,10 +95,6 @@ public class KisiMuracaatBean implements Serializable {
     }
 
     public String getMesaj() {
-
-        a++;
-
-        mesaj = a.toString();
         return mesaj;
     }
 
