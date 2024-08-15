@@ -24,12 +24,12 @@ public class UserBean implements Serializable {
     private Date tarih;
 
     public void create() {
-        this.getDao().Create(getEntity());
+        this.getDao().UserEkle(getEntity());
     }
 
     public void delete(int UserID) {
-        this.getDao().Delete(UserID);
-        this.list = this.getDao().GetList();
+        this.getDao().UserSil(UserID);
+        this.list = this.getDao().UserListesi();
     }
 
     public void giris() {
@@ -84,7 +84,7 @@ public class UserBean implements Serializable {
     }
 
     public List<User> getList() {
-        this.list = this.getDao().GetList();
+        this.list = this.getDao().UserListesi();
         return list;
     }
 

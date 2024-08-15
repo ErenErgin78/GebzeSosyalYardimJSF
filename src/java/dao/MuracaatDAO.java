@@ -56,7 +56,7 @@ public class MuracaatDAO extends DBConnection {
     }
 
     // Delete Method
-    public void Delete(int muracaatId) {
+    public void MuracaatSil(int muracaatId) {
         String deleteQuery = "DELETE FROM MURACAAT WHERE MURACAAT_ID = ?";
 
         try (PreparedStatement ps = getDb().prepareStatement(deleteQuery)) {
@@ -99,7 +99,7 @@ public class MuracaatDAO extends DBConnection {
                         rs.getDate("KAYIT_TARIHI"),
                         rs.getInt("AKTIF"),
                         rs.getDate("GUNCELLEME_TARIHI"),
-                        rs.getBigDecimal("KIMLIK_NO").toBigInteger(),
+                        rs.getInt("KIMLIK_NO"),
                         rs.getString("ISIM"),
                         rs.getString("SOYISIM"),
                         rs.getInt("ARSIV_DOSYA_NO"),
