@@ -18,7 +18,7 @@
     <h:body>
         <h:form>
             <h:messages globalOnly="true" layout="table"/>
-            <h:outputText id="mesaj" value ="#{kisiMuracaatBean.mesaj}"/>
+                <h:outputText id="mesaj" value="#{tutanakGelirBorcBean.mesaj}" />
             <div class="container-fluid">               
                 <div class="row">                   
                     <div class="col-md-12">
@@ -141,7 +141,7 @@
                                                     <h:inputText id="site" value ="#{kisiAdresBean.entity.site}" class="form-control" />
                                                 </div>
                                                 <div class="form-group col-md-6 mb-3">
-                                                    <label for="address">Adres Tarifi:</label>
+                                                    <label for="address">Adres Tarifi: #{kisiAdresBean.entity.tarif}</label>
                                                     <h:inputTextarea id="address" class="form-control" value="#{kisiAdresBean.entity.tarif}" rows="1" />
                                                 </div>
                                             </div>
@@ -168,9 +168,7 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-6 mb-3">
                                                     <label for="email">E-Posta:</label>
-                                                    <h:inputText id="email" class="form-control" value="#{kisiIletisimBean.entity.eposta}">
-                                                        <f:passThroughAttribute name="type" value="email" />
-                                                    </h:inputText>
+                                                    <h:inputText id="email" class="form-control" value="#{kisiIletisimBean.entity.eposta}"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -202,9 +200,9 @@
                                         </div>
                                     </div>
                                     <div class="text-center mt-3">
-                                        <h:commandButton value="Kaydet" actionListener="#{kisiMuracaatBean.KisiMuracaatEkle}" class="btn btn-success" immediate="true">
-                                            <f:ajax execute="@form" render="@form mesaj" />
-                                        </h:commandButton>
+                                        <h:commandButton value="Kaydet" action="#{tutanakGelirBorcBean.GelirBorcEkle()}" class="btn btn-success">
+                                            <f:ajax execute="@form" render="@form" />
+                                        </h:commandButton>    
                                     </div>                                                                              
                                 </div>
                             </div>
