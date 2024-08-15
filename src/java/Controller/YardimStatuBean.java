@@ -34,16 +34,22 @@ public class YardimStatuBean implements Serializable {
     public YardimStatuBean() {
     }
 
-    public YardimStatu getEntity() {
-        return entity;
+   public YardimStatu getEntity() {
+        if (this.entity == null) {
+            this.entity = new YardimStatu();
+        }
+        return this.entity;
     }
 
     public void setEntity(YardimStatu entity) {
         this.entity = entity;
     }
 
-    public YardimStatuDAO getDao() {
-        return dao;
+   public YardimStatuDAO getDao() {
+        if (this.dao == null) {
+            this.dao = new YardimStatuDAO();
+        }
+        return this.dao;
     }
 
     public void setDao(YardimStatuDAO dao) {

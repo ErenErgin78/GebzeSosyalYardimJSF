@@ -17,7 +17,7 @@ import util.DBConnection;
 public class KisiAdresDAO extends DBConnection {
 
     private Connection db;
-    private String mesaj;
+    private String mesaj = "d";
 
     public Integer KisiAdresEkle(KisiAdres kisiAdres) {
         try {
@@ -36,13 +36,15 @@ public class KisiAdresDAO extends DBConnection {
             cs.setString(2, kisiAdres.getSite());
             cs.setInt(3, kisiAdres.getKapi_no());
             cs.setInt(4, kisiAdres.getDaire_no());
-            cs.setString(5, kisiAdres.getKisi_adres_mahalle_isim());
+            cs.setInt(5, kisiAdres.getKisi_adres_mahalle_id());
             cs.setInt(6, kisiAdres.getKisi_mahalle_sokak_id());
-            cs.setInt(7, kisiAdres.getAktif());
+            cs.setInt(7, 1);
             cs.registerOutParameter(8, java.sql.Types.INTEGER);
 
+            cs.execute();
+            
             int kisiAdresId = cs.getInt(8);
-
+            
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
             return kisiAdresId;
 
