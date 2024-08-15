@@ -64,4 +64,8 @@ public class KisiEngelBean implements Serializable {
     public void setList(List<KisiEngel> list) {
         this.list = list;
     }
+    // Sayfa yüklendiğinde yapılacak işlemler
+    
+    public KisiEngelBean() {
+    }
 }

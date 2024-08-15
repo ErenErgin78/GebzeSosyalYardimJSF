@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -13,6 +12,8 @@
     </h:head>
     <h:body>
         <h:form id="userForm">
+            <h:messages globalOnly="true" layout="table"/>
+            <h:outputText id="mesaj" value="#{kisiEngelBean.dao.islemBasariliMesaj}" />
             <div class="row align-items-center mb-3">
                 <div class="col-10">
                     <ol class="breadcrumb">
@@ -107,12 +108,12 @@
                                                 <f:ajax event="keyup" render="kurumAltPanel" />
                                             </div>
                                         </div>
-                                        <div class="text-center mt-3">
-                                            <h:commandButton value="Kaydet" action="#{kisiEngelBean.ekle()}" class="btn btn-success">
-                                                <f:ajax execute="@form" render="@form, mesaj" />
-                                            </h:commandButton>                                  
-                                        </div>
                                     </div>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <h:commandButton value="Kaydet" action="#{kisiEngelBean.ekle()}" class="btn btn-success">
+                                        <f:ajax execute="@form" render="@form, mesaj" />
+                                    </h:commandButton>                                  
                                 </div>
 
                                 <!-- Pagination Card -->
