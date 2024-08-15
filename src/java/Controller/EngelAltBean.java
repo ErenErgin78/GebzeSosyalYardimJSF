@@ -3,10 +3,12 @@ package Controller;
 import Entity.EngelAlt;
 import dao.EngelAltDAO;
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.event.AjaxBehaviorEvent;
 import jakarta.faces.model.SelectItem;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Named(value = "engelAltBean")
@@ -16,13 +18,13 @@ public class EngelAltBean implements Serializable {
     private EngelAlt entity;
     private EngelAltDAO dao;
     private List<EngelAlt> list;
-    private List<SelectItem> TipList;
+    private List<SelectItem> tipList;
+    private int selectedEngelId;
 
     @PostConstruct
     public void init() {
-        getDao().setIslemBasariliMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
-        TipList = engelliTipGetir();
-        entity = new EngelAlt();
+        getDao().setIslemBasariliMesaj(null); // Sayfa yüklendiğinde mesajı sıfırlar
+        entity = new EngelAlt(); // Yeni bir EngelAlt nesnesi oluşturur
     }
 
     public void engelAltEkle() {
@@ -33,8 +35,18 @@ public class EngelAltBean implements Serializable {
         this.getDao().EngelAltSil(engelAltId);
     }
 
-    public List<SelectItem> engelliTipGetir() {
-        return this.getDao().EngelliTipGetir();
+    // Engel alt tiplerini getiren metot
+    public List<SelectItem> engelTipGetir() {
+        return this.getDao().EngelAltGetir(selectedEngelId);
+    }
+
+    // Engel alt tiplerini yükleyen ve tipList'i güncelleyen metot
+    public void engelYukle(AjaxBehaviorEvent event) {
+        if (selectedEngelId != 0) {
+            tipList = this.getDao().EngelAltGetir(selectedEngelId);
+        } else {
+            tipList = new ArrayList<>();
+        }
     }
 
     public EngelAlt getEntity() {
@@ -51,7 +63,6 @@ public class EngelAltBean implements Serializable {
     public EngelAltDAO getDao() {
         if (this.dao == null) {
             this.dao = new EngelAltDAO();
-            dao.setIslemBasariliMesaj(null);
         }
         return this.dao;
     }
@@ -61,7 +72,9 @@ public class EngelAltBean implements Serializable {
     }
 
     public List<EngelAlt> getList() {
-        this.list = this.getDao().EngelAltListesi();
+        if (this.list == null) {
+            this.list = this.getDao().EngelAltListesi();
+        }
         return this.list;
     }
 
@@ -74,12 +87,22 @@ public class EngelAltBean implements Serializable {
     }
 
     public List<SelectItem> getTipList() {
-        TipList = engelliTipGetir();
-        return TipList;
+        if (tipList == null) {
+            tipList = engelTipGetir();
+        }
+        return tipList;
     }
 
-    public void setTipList(List<SelectItem> TipList) {
-        this.TipList = TipList;
+    public void setTipList(List<SelectItem> tipList) {
+        this.tipList = tipList;
+    }
+
+    public int getSelectedEngelId() {
+        return selectedEngelId;
+    }
+
+    public void setSelectedEngelId(int selectedEngelId) {
+        this.selectedEngelId = selectedEngelId;
     }
 
     public EngelAltBean() {
