@@ -24,7 +24,7 @@ public class KisiEngelBean implements Serializable {
     }
 
     public void delete(int kisiEngelID) {
-        this.getDao().Delete(kisiEngelID);
+        this.getDao().KisiEngelSil(kisiEngelID);
         this.list = this.getDao().GetList();
     }
 

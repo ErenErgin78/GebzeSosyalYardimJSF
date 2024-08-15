@@ -93,7 +93,7 @@ public class KisiEngelDAO extends DBConnection {
         return engelList;
     }
 
-    public void Delete(int kisiEngelId) {
+    public void KisiEngelSil(int kisiEngelId) {
         String deleteQuery = "DELETE FROM KISI_ENGEL WHERE KISI_ENGEL_ID = " + kisiEngelId;
 
         try {

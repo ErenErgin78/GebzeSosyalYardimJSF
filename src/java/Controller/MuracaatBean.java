@@ -20,7 +20,7 @@ public class MuracaatBean implements Serializable {
     }
 
     public void delete(int MuracaatID) {
-        this.getDao().Delete(MuracaatID);
+        this.getDao().MuracaatSil(MuracaatID);
         this.list = this.getDao().MuracaatBilgiListesi();
     }
 
