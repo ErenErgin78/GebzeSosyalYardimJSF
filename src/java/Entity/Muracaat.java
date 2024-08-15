@@ -4,7 +4,6 @@
  */
 package Entity;
 
-import java.math.BigInteger;
 import java.util.Date;
 
 /**
@@ -20,7 +19,7 @@ public class Muracaat {
     private Integer aktif;
     private Date guncelleme_tarihi;
 
-    private BigInteger kimlik_no;
+    private Integer kimlik_no;
     private String kisi_isim;
     private String kisi_soyisim;
 
@@ -36,7 +35,7 @@ public class Muracaat {
         this.aktif = aktif;
     }
 
-    public Muracaat(Date kayit_tarihi, Integer aktif, Date guncelleme_tarihi, BigInteger kimlik_no, String kisi_isim, String kisi_soyisim, Integer arsiv_dosya_no, Date muracaat_tarihi, String mahalle, String sokak) {
+    public Muracaat(Date kayit_tarihi, Integer aktif, Date guncelleme_tarihi, Integer kimlik_no, String kisi_isim, String kisi_soyisim, Integer arsiv_dosya_no, Date muracaat_tarihi, String mahalle, String sokak) {
         this.kayit_tarihi = kayit_tarihi;
         this.aktif = aktif;
         this.guncelleme_tarihi = guncelleme_tarihi;
@@ -100,11 +99,11 @@ public class Muracaat {
         this.guncelleme_tarihi = guncelleme_tarihi;
     }
 
-    public BigInteger getKimlik_no() {
+    public Integer getKimlik_no() {
         return kimlik_no;
     }
 
-    public void setKimlik_no(BigInteger kimlik_no) {
+    public void setKimlik_no(Integer kimlik_no) {
         this.kimlik_no = kimlik_no;
     }
 

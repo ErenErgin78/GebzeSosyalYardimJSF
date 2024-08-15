@@ -54,15 +54,19 @@
                                             <thead>
                                                 <tr>
                                                     <th>Müracaat NO</th>
-                                                    <th>İsim Soyisim</th>
+                                                    <th>Müracaat TC Kimlik NO</th>
+                                                    <th>İsim</th>
+                                                    <th>Soyisim</th>
                                                     <th>Eylem</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <ui:repeat value="#{userBean.list}" var="user" varStatus="loop">
+                                                <ui:repeat value="#{muracaatBean.list}" var="muracaat" varStatus="loop">
                                                     <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                        <td>#{user.kullanici_id}</td>
-                                                        <td>#{user.kullanici_isim}</td>
+                                                        <td>#{muracaat.muracaat_id}</td>
+                                                        <td>#{muracaat.kimlik_no}</td>
+                                                        <td>#{muracaat.kisi_isim}</td>
+                                                        <td>#{muracaat.kisi_soyisim}</td>
                                                         <td class="profil">
                                                             <div class="action-buttons">
                                                                 <h:commandButton value="İlerle" action="#{userBean.edit(user)}" styleClass="btn btn-primary ml-20">
