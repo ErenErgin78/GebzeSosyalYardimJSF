@@ -29,8 +29,8 @@ public class KisiDetayBean implements Serializable {
         return this.getDao().Create(getEntity());
     }
     
-        public Integer ekle(Integer iletisimId, Integer adresId) {
-        return this.getDao().Create(getEntity(), iletisimId, adresId);
+        public Integer ekleMuracaat(Integer iletisimId, Integer adresId) {
+        return this.getDao().CreateMuracaat(getEntity(), iletisimId, adresId);
     }
     
     public void KisiDetaySil(int detayId) {

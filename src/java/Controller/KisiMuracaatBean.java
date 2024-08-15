@@ -21,7 +21,7 @@ public class KisiMuracaatBean implements Serializable {
     public KisiMuracaatBean() {
     }
 
-    private String mesaj = "d";
+    private String mesaj;
 
     @Inject
     private KisiBean kisiBean;
@@ -45,13 +45,12 @@ public class KisiMuracaatBean implements Serializable {
     private MuracaatBean muracaatBean;
 
     public void KisiMuracaatEkle() {
-        mesaj = "AAAAAA";
         try {
             Integer adres_id = adresBean.ekle();
 
             Integer iletisim_id = iletisimBean.ekle();
 
-            Integer kisi_detay_id = kisiDetayBean.ekle(iletisim_id, adres_id);
+            Integer kisi_detay_id = kisiDetayBean.ekleMuracaat(iletisim_id, adres_id);
 
             Integer kisi_id = kisiBean.ekle(kisi_detay_id);
 
@@ -60,6 +59,8 @@ public class KisiMuracaatBean implements Serializable {
             Integer muracaat_id = muracaatBean.ekle(kisi_id, muracaat_bilgi_id);
 
             Integer yakinlar_id = kisiYakinlarBean.ekle(kisi_id);
+
+            mesaj = "İşlem Başarılı";
 
         } catch (Exception ex) {
             mesaj = DetectError(ex);
