@@ -30,7 +30,13 @@ public class KisiEngelDAO extends DBConnection {
     public Integer KisiEngelEkle(KisiEngel engel) {
         try {
             Connection conn = this.getDb();
+            Statement statement = getDb().createStatement();
+            String KurumAltquery = "SELECT KURUM_ID FROM KURUM_ALT WHERE ALT_KURUM_ID =" + engel.getAlt_kurum_id();
+            ResultSet rs = statement.executeQuery(KurumAltquery);
 
+            while (rs.next()) {
+                engel.setKurum_id(rs.getInt("KURUM_ID"));
+            }
             String callQueryEngel = "{call INSERT_KISI_ENGEL(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement csEngel = conn.prepareCall(callQueryEngel);
             csEngel.setInt(1, engel.getEngelli_tip_id());

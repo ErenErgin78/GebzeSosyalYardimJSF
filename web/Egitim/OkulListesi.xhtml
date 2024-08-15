@@ -41,14 +41,8 @@
                                         <div class="form-group">
                                             <label for="okul">Okul Tipi:</label>
                                             <h:selectOneMenu id="okul" value="#{okulBean.dao.tip}" class="form-control">
-                                                <f:selectItem itemValue="0" itemLabel="Hepsi" />
-                                                <f:selectItem itemValue="1" itemLabel="Anaokulu" />
-                                                <f:selectItem itemValue="2" itemLabel="İlkokul" />
-                                                <f:selectItem itemValue="3" itemLabel="Ortaokul" />
-                                                <f:selectItem itemValue="4" itemLabel="Lise" />
-                                                <f:selectItem itemValue="5" itemLabel="Üniversite" />
-                                                <f:selectItem itemValue="6" itemLabel="Diğer" />
-                                                <f:ajax event="change" render="okulListPanel"/>
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                                <f:selectItems value="#{okulTipBean.okulTipList}" />
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
@@ -57,9 +51,8 @@
                                         <div class="form-group">
                                             <label for="devletOzel">Okul Türü:</label>
                                             <h:selectOneMenu id="devletOzel" value="#{okulBean.dao.tur}" class="form-control">
-                                                <f:selectItem itemLabel="Hepsi" itemValue="0" />
-                                                <f:selectItem itemLabel="Devlet" itemValue="1" />
-                                                <f:selectItem itemLabel="Özel" itemValue="2" />
+                                               <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                                <f:selectItems value="#{okulTurBean.okulTurList}" />
                                                 <f:ajax event="change" render="okulListPanel"/>
                                             </h:selectOneMenu>
                                         </div>

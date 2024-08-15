@@ -9,6 +9,7 @@ import Entity.Mahalle;
 import static Various.ErrorFinder.DetectError;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
+import jakarta.faces.model.SelectItem;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -88,6 +89,24 @@ public class KurumDAO extends DBConnection {
         } catch (SQLException ex) {
             this.islemBasariliMesaj = DetectError(ex);
         }
+    }
+
+    public List<SelectItem> KurumGetir() {
+        List<SelectItem> TipList = new ArrayList<>();
+
+        try {
+            Statement statement = getDb().createStatement();
+            String Selectquery = "SELECT KURUM_ID , KURUM_ISIM FROM KURUM";
+            ResultSet rs = statement.executeQuery(Selectquery);
+
+            while (rs.next()) {
+                TipList.add(new SelectItem(rs.getInt("KURUM_ID"), rs.getString("KURUM_ISIM")));
+            }
+        } catch (Exception ex) {
+            DetectError(ex);
+        }
+        return TipList;
+
     }
 
     public void setDb(Connection db) {

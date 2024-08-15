@@ -3,10 +3,12 @@ package Controller;
 import Entity.KurumAlt;
 import dao.KurumAltDAO;
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.event.AjaxBehaviorEvent;
 import jakarta.faces.model.SelectItem;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Named(value = "kurumAltBean")
@@ -17,6 +19,7 @@ public class KurumAltBean implements Serializable {
     private KurumAltDAO dao;
     private List<KurumAlt> list;
     private List<SelectItem> TipList;
+     private int selectedKurumId;
 
     @PostConstruct
     public void init() {
@@ -34,7 +37,13 @@ public class KurumAltBean implements Serializable {
     }
 
     public List<SelectItem> kurumTipGetir() {
-        return this.getDao().KurumTipGetir();
+        return this.getDao().KurumAltGetir(selectedKurumId);
+    }
+     public void kurumyukle(AjaxBehaviorEvent event) {
+        TipList = new ArrayList<>();
+        if (selectedKurumId != 0) {
+            TipList = this.getDao().KurumAltGetir(selectedKurumId);
+        }
     }
 
     public KurumAlt getEntity() {
@@ -74,7 +83,7 @@ public class KurumAltBean implements Serializable {
     }
 
     public List<SelectItem> getTipList() {
-        TipList = kurumTipGetir();
+        TipList = getDao().KurumAltGetir(selectedKurumId);
         return TipList;
     }
 
@@ -84,5 +93,14 @@ public class KurumAltBean implements Serializable {
 
     public KurumAltBean() {
     }
+
+    public int getSelectedKurumId() {
+        return selectedKurumId;
+    }
+
+    public void setSelectedKurumId(int selectedKurumId) {
+        this.selectedKurumId = selectedKurumId;
+    }
+    
 
 }
