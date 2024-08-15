@@ -33,7 +33,7 @@ public class KisiDAO extends DBConnection {
             cs.setInt(5, kisi.getCilt_no());
             cs.setInt(6, kisi.getAile_sira_no());
             cs.setInt(7, kisi.getSira_no());
-            cs.setDate(8, (Date) kisi.getDogum_tarihi());
+           cs.setDate(8, new java.sql.Date(kisi.getDogum_tarihi().getTime()));
             cs.setInt(9, kisi.getMedeni_durum_id());
             cs.setInt(10, kisi.getAktif());
             cs.registerOutParameter(11, java.sql.Types.INTEGER);
