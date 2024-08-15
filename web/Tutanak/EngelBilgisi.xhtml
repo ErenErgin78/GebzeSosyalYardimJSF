@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -12,8 +13,6 @@
     </h:head>
     <h:body>
         <h:form id="userForm">
-            <h:messages globalOnly="true" layout="table"/>
-            <h:outputText id="mesaj" value="#{kisiEngelBean.dao.islemBasariliMesaj}" />
             <div class="row align-items-center mb-3">
                 <div class="col-10">
                     <ol class="breadcrumb">
@@ -43,16 +42,6 @@
                                                 <h:inputText id="isim2" value="#{kisiYakinlarBean.entity.kisi_id}" class="form-control" />                                               
                                             </div>
                                             <div class="form-group col-md-6 mb-3">
-                                                <label for="registration_status">Engelli Alt Tip/Grup:</label>
-                                                <h:selectOneMenu id="registration_status" value="#{kisiEngelBean.entity.engelli_alt_tip_id}" class="form-control">
-                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="1" />
-                                                </h:selectOneMenu>
-                                            </div>
-                                            <div class="form-group col-md-6 mb-3">
-                                                <label for="other_info1">TC Kimlik No:</label>
-                                                <h:inputText id="other_info1" value="" class="form-control" />
-                                            </div>                                                                                                                           
-                                            <div class="form-group col-md-6 mb-3">
                                                 <label for="registration_status">Engelli Tip/Grup:</label>
                                                 <h:selectOneMenu id="registration_status" value="#{kisiEngelBean.entity.engelli_tip_id}" class="form-control">
                                                     <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="1" />
@@ -60,11 +49,19 @@
                                                 </h:selectOneMenu>
                                             </div>
                                             <div class="form-group col-md-6 mb-3">
+                                                <label for="other_info1">TC Kimlik No:</label>
+                                                <h:inputText id="other_info1" value="" class="form-control" />
+                                            </div>   
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="registration_status">Engelli Alt Tip/Grup:</label>
+                                                <h:selectOneMenu id="registration_status" value="#{kisiEngelBean.entity.engelli_alt_tip_id}" class="form-control">
+                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="1" />
+                                                </h:selectOneMenu>
+                                            </div>
+                                            <div class="form-group col-md-6 mb-3">
                                                 <label for="other_info2">Ad:</label>
                                                 <h:inputText id="other_info2" value="#{kisiBean.entity.isim}" class="form-control" />
                                             </div>
-
-
                                             <div class="form-group col-md-6 mb-3">
                                                 <label for="registration_status">Engel Başlangıç Zamanı:</label>
                                                 <h:selectOneMenu id="registration_status" value="#{kisiEngelBean.entity.engel_baslangic}" class="form-control">
@@ -98,22 +95,27 @@
                                                 <h:inputTextarea id="address_desc" class="form-control" rows="1" value="#{muracaatBilgiBean.entity.aciklama}" />
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="altKurumAdi" class="form-label">Yönlendirilen Kurum Adı:</label>
-                                                <h:inputText id="altKurumAdi" value="#{kurumBean.dao.isim}" class="form-control" />
-                                                <f:ajax event="keyup" render="kurumAltPanel" />
+                                                <label for="KurumAdi" class="form-label">Yönlendirilen Kurum Adı:</label>
+                                                <h:selectOneMenu id="KurumAdi" value="#{kurumAltBean.selectedKurumId}" class="form-control">
+                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                                    <f:selectItems value="#{kurumBean.kurumList}"/>
+                                                    <f:ajax event="change" listener="#{kurumAltBean.kurumyukle}" render="altkurum" />
+                                                </h:selectOneMenu>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="altKurumAdi" class="form-label">Yönlendirilen Alt Kurum Adı:</label>
-                                                <h:inputText id="altKurumAdi" value="#{kurumAltBean.dao.isim}" class="form-control" />
-                                                <f:ajax event="keyup" render="kurumAltPanel" />
+                                                <h:selectOneMenu id="altKurum" value="#{kisiEngelBean.entity.alt_kurum_id}" class="form-control">
+                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                                    <f:selectItems value = "#{kurumAltBean.tipList}" />
+                                                </h:selectOneMenu>
                                             </div>
                                         </div>
+                                        <div class="text-center mt-3">
+                                            <h:commandButton value="Kaydet" action="#{kisiEngelBean.ekle()}" class="btn btn-success">
+                                                <f:ajax execute="@form" render="@form, mesaj" />
+                                            </h:commandButton>                                  
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="text-center mt-3">
-                                    <h:commandButton value="Kaydet" action="#{kisiEngelBean.ekle()}" class="btn btn-success">
-                                        <f:ajax execute="@form" render="@form, mesaj" />
-                                    </h:commandButton>                                  
                                 </div>
 
                                 <!-- Pagination Card -->
