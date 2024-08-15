@@ -18,31 +18,33 @@ public class KurumAltBean implements Serializable {
     private KurumAlt entity;
     private KurumAltDAO dao;
     private List<KurumAlt> list;
-    private List<SelectItem> TipList;
-     private int selectedKurumId;
+    private List<SelectItem> tipList;
+    private int selectedKurumId;
 
     @PostConstruct
     public void init() {
-        getDao().setIslemBasariliMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
-        TipList = kurumTipGetir();
-        entity = new KurumAlt();
+        this.getDao().setIslemBasariliMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
+        this.entity = new KurumAlt();
     }
 
     public void kurumAltEkle() {
         this.getDao().KurumAltEkle(getEntity());
+        this.list = this.getDao().KurumAltListesi(); // Listeyi güncelle
     }
 
     public void kurumAltSil(int kurumAltId) {
         this.getDao().KurumAltSil(kurumAltId);
+        this.list = this.getDao().KurumAltListesi(); // Listeyi güncelle
     }
 
     public List<SelectItem> kurumTipGetir() {
         return this.getDao().KurumAltGetir(selectedKurumId);
     }
-     public void kurumyukle(AjaxBehaviorEvent event) {
-        TipList = new ArrayList<>();
+
+    public void kurumyukle(AjaxBehaviorEvent event) {
+        tipList = new ArrayList<>();
         if (selectedKurumId != 0) {
-            TipList = this.getDao().KurumAltGetir(selectedKurumId);
+            tipList = this.getDao().KurumAltGetir(selectedKurumId);
         }
     }
 
@@ -60,7 +62,7 @@ public class KurumAltBean implements Serializable {
     public KurumAltDAO getDao() {
         if (this.dao == null) {
             this.dao = new KurumAltDAO();
-            dao.setIslemBasariliMesaj(null);
+            this.dao.setIslemBasariliMesaj(null);
         }
         return this.dao;
     }
@@ -70,12 +72,10 @@ public class KurumAltBean implements Serializable {
     }
 
     public List<KurumAlt> getList() {
-        this.list = this.getDao().KurumAltListesi();
+        if (this.list == null) {
+            this.list = this.getDao().KurumAltListesi();
+        }
         return this.list;
-    }
-
-    public void listeyenile() {
-        this.list = this.getDao().KurumAltListesi();
     }
 
     public void setList(List<KurumAlt> list) {
@@ -83,15 +83,17 @@ public class KurumAltBean implements Serializable {
     }
 
     public List<SelectItem> getTipList() {
-        TipList = getDao().KurumAltGetir(selectedKurumId);
-        return TipList;
+        if (tipList == null) {
+            tipList = new ArrayList<>();
+            if (selectedKurumId != 0) {
+                tipList = this.getDao().KurumAltGetir(selectedKurumId);
+            }
+        }
+        return tipList;
     }
 
-    public void setTipList(List<SelectItem> TipList) {
-        this.TipList = TipList;
-    }
-
-    public KurumAltBean() {
+    public void setTipList(List<SelectItem> tipList) {
+        this.tipList = tipList;
     }
 
     public int getSelectedKurumId() {
@@ -101,6 +103,4 @@ public class KurumAltBean implements Serializable {
     public void setSelectedKurumId(int selectedKurumId) {
         this.selectedKurumId = selectedKurumId;
     }
-    
-
 }
