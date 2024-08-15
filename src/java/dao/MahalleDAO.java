@@ -6,6 +6,7 @@ package dao;
 
 import Entity.Mahalle;
 import static Various.ErrorFinder.DetectError;
+import jakarta.faces.model.SelectItem;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,7 +42,7 @@ public class MahalleDAO extends DBConnection {
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (Exception ex) {
-            DetectError(ex);
+            this.islemBasariliMesaj = DetectError(ex);
         }
     }
 
@@ -60,7 +61,7 @@ public class MahalleDAO extends DBConnection {
 
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
-            DetectError(ex);
+            this.islemBasariliMesaj = DetectError(ex);
         }
     }
 
@@ -97,6 +98,23 @@ public class MahalleDAO extends DBConnection {
             DetectError(ex);
         }
         return mahalleList;
+    }
+
+    public List<SelectItem> MahalleGetir() {
+        List<SelectItem> MahalleList = new ArrayList<>();
+
+        try {
+            Statement statement = getDb().createStatement();
+            String Selectquery = "SELECT KISI_ADRES_MAHALLE_ID, MAHALLE FROM KISI_ADRES_MAHALLE";
+            ResultSet rs = statement.executeQuery(Selectquery);
+
+            while (rs.next()) {
+                MahalleList.add(new SelectItem(rs.getInt("KISI_ADRES_MAHALLE_ID"), rs.getString("MAHALLE")));
+            }
+        } catch (Exception ex) {
+            DetectError(ex);
+        }
+        return MahalleList;
     }
 
     public void setDb(Connection db) {

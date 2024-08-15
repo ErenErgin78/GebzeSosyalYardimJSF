@@ -1,14 +1,11 @@
 package Controller;
 
-import Entity.KisiAdres;
 import Entity.KisiIletisim;
-import dao.KisiAdresDAO;
 import dao.KisiIletisimDAO;
 import jakarta.annotation.PostConstruct;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Named(value = "kisiIletisimBean")
@@ -24,9 +21,9 @@ public class KisiIletisimBean implements Serializable {
         entity = new KisiIletisim();
     }
 
-    public void ekle() {
+    public Integer ekle() {
 
-        this.getDao().KisiIletisimEkle(getEntity());
+        return this.getDao().KisiIletisimEkle(getEntity());
     }
 
     public void KisiIletisimSil(int kisiID) {
@@ -35,6 +32,9 @@ public class KisiIletisimBean implements Serializable {
     }
 
     public KisiIletisim getEntity() {
+        if (entity == null) {
+            entity = new KisiIletisim();
+        }
         return entity;
     }
 
@@ -43,6 +43,9 @@ public class KisiIletisimBean implements Serializable {
     }
 
     public KisiIletisimDAO getDao() {
+        if (dao == null) {
+            dao = new KisiIletisimDAO();
+        }
         return dao;
     }
 

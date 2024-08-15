@@ -17,10 +17,10 @@ import java.util.List;
 public class KisiDAO extends DBConnection {
 
     private Connection db;
-    private String mesaj; // Başarı mesajı için değişken
+    private String mesaj;
 
     // Kisi ekleme metodu
-    public void KisiEkle(Kisi kisi) {
+    public Integer KisiEkle(Kisi kisi) {
         try {
             Connection conn = this.getDb();
 
@@ -36,14 +36,49 @@ public class KisiDAO extends DBConnection {
             cs.setDate(8, (Date) kisi.getDogum_tarihi());
             cs.setInt(9, kisi.getMedeni_durum_id());
             cs.setInt(10, kisi.getAktif());
-
+            cs.registerOutParameter(11, java.sql.Types.INTEGER);
             cs.execute();
+            
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
+            return cs.getInt(11);
+            
         } catch (Exception ex) {
-            DetectError(ex);
+            this.mesaj = DetectError(ex);
+            return null;
         }
     }
+    
+     public Integer KisiEkle(Kisi kisi, Integer detayId) {
+        try {
+            Connection conn = this.getDb();
+
+            String callQuery = "{call INSERT_KISI_TEMEL_2(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            CallableStatement cs = conn.prepareCall(callQuery);
+            cs.setObject(1, kisi.getKimlik_no());
+            cs.setString(2, kisi.getIsim());
+            cs.setString(3, kisi.getSoyisim());
+            cs.setString(4, kisi.getCinsiyet());
+            cs.setInt(5, kisi.getCilt_no());
+            cs.setInt(6, kisi.getAile_sira_no());
+            cs.setInt(7, kisi.getSira_no());
+            cs.setDate(8, (Date) kisi.getDogum_tarihi());
+            cs.setInt(9, kisi.getMedeni_durum_id());
+            cs.setInt(10, kisi.getAktif());
+            cs.setInt(11, detayId);
+            cs.registerOutParameter(12, java.sql.Types.INTEGER);
+            cs.execute();
+            
+            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
+
+            return cs.getInt(12);
+            
+        } catch (Exception ex) {
+            this.mesaj = DetectError(ex);
+            return null;
+        }
+    }
+
 
     // Kisi silme metodu
     public void KisiSil(int kisiId) {
@@ -55,7 +90,7 @@ public class KisiDAO extends DBConnection {
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
-            DetectError(ex);
+            this.mesaj = DetectError(ex);
         }
     }
 
@@ -95,6 +130,23 @@ public class KisiDAO extends DBConnection {
         return kisiList;
     }
 
+    public List<SelectItem> kisiGetir() {
+        List<SelectItem> kisiList = new ArrayList<>();
+
+        try {
+            Statement statement = getDb().createStatement();
+            String Selectquery = "SELECT MEDENI_DURUM_ID,MEDENI_DURUM  FROM KISI_MEDENI_DURUM";
+            ResultSet rs = statement.executeQuery(Selectquery);
+
+            while (rs.next()) {
+                kisiList.add(new SelectItem(rs.getInt("MEDENI_DURUM_ID"), rs.getString("MEDENI_DURUM")));
+            }
+        } catch (Exception ex) {
+            DetectError(ex);
+        }
+        return kisiList;
+    }
+
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();
@@ -113,4 +165,5 @@ public class KisiDAO extends DBConnection {
     public void setMesaj(String mesaj) {
         this.mesaj = mesaj;
     }
+
 }

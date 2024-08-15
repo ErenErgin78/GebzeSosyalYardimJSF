@@ -47,7 +47,7 @@
                                             <label for="neighborhood" class="form-label">Cadde Adı:</label>
                                             <h:selectOneMenu id="neighborhood" value="#{sokakBean.dao.mahalleid}" class="form-control">
                                                 <f:selectItem itemLabel="Hepsi" itemValue="0" />
-                                                <f:selectItems value="#{kisiBean.mahalleList}" />
+                                                <f:selectItems value="#{mahalleBean.mahalleList}" />
                                                 <f:ajax event="valueChange" render="sokakListPanel" />
                                             </h:selectOneMenu>
                                         </div>

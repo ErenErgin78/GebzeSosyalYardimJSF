@@ -39,6 +39,9 @@ public class EgitimDurumBean implements Serializable {
     }
 
     public EgitimDurum getEntity() {
+        if(entity == null){
+        entity = new EgitimDurum();
+        }
         return entity;
     }
 
@@ -47,6 +50,9 @@ public class EgitimDurumBean implements Serializable {
     }
 
     public EgitimDurumDAO getDao() {
+        if(dao == null){
+        dao = new EgitimDurumDAO();
+        }
         return dao;
     }
 
@@ -63,6 +69,7 @@ public class EgitimDurumBean implements Serializable {
     }
 
     public List<SelectItem> getEgitimlist() {
+        egitimlist = egitimDurumGetir();
         return egitimlist;
     }
 

@@ -5,10 +5,8 @@ import static Various.ErrorFinder.DetectError;
 import jakarta.faces.model.SelectItem;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,23 +17,25 @@ public class KisiIletisimDAO extends DBConnection {
     private Connection db;
     private String mesaj; // Başarı mesajı için değişken
 
-    public void KisiIletisimEkle(KisiIletisim kisiIletisim) {
+    public Integer KisiIletisimEkle(KisiIletisim kisiIletisim) {
         try {
             Connection conn = (Connection) this.getDb();
 
-            String callQuery = "{call INSERT_KISI_ILETISIM(?, ?, ?, ?, ?, ?, ?)}";
+            String callQuery = "{call INSERT_KISI_ILETISIM(?, ?, ?, ?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
-            cs.setInt(1, kisiIletisim.getKisi_iletisim_id());
-            cs.setObject(2, kisiIletisim.getEv_telefon());
-            cs.setObject(3, kisiIletisim.getCep_telefon());
-            cs.setString(4, kisiIletisim.getEposta());
-            cs.setDate(5, (Date) kisiIletisim.getKayit_tarihi());
-            cs.setInt(6, kisiIletisim.getAktif());
-            cs.setDate(7, (Date) kisiIletisim.getGuncelleme_tarihi());
-
+            cs.setObject(1, kisiIletisim.getEv_telefon());
+            cs.setObject(2, kisiIletisim.getCep_telefon());
+            cs.setString(3, kisiIletisim.getEposta());
+            cs.registerOutParameter(4, java.sql.Types.INTEGER);
+            cs.execute();
+            
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
+            
+            return cs.getInt(4);
+            
         } catch (Exception ex) {
-            DetectError(ex);
+            this.mesaj = DetectError(ex);
+            return null;
         }
 
     }
@@ -50,7 +50,7 @@ public class KisiIletisimDAO extends DBConnection {
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (Exception ex) {
-            DetectError(ex);
+            this.mesaj = DetectError(ex);
         }
     }
 
@@ -111,4 +111,13 @@ public class KisiIletisimDAO extends DBConnection {
     public void setDb(java.sql.Connection db) {
         this.db = (Connection) db;
     }
+
+    public String getMesaj() {
+        return mesaj;
+    }
+
+    public void setMesaj(String mesaj) {
+        this.mesaj = mesaj;
+    }
+    
 }

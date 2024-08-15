@@ -13,7 +13,7 @@ import jakarta.faces.context.FacesContext;
  */
 public class ErrorFinder {
 
-    public static void DetectError(Exception ex) {
+    public static String DetectError(Exception ex) {
         //Hatayı yakalamak için
         FacesContext context = FacesContext.getCurrentInstance();
         StringBuilder errorMessage = new StringBuilder(ex.getMessage());
@@ -25,6 +25,7 @@ public class ErrorFinder {
                     .append(":").append(element.getLineNumber()).append(")");
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage.toString(), null));
         }
+        return errorMessage.toString();
     }
 
 }

@@ -5,8 +5,7 @@
 package dao;
 
 import Entity.TutanakBorc;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
+import static Various.ErrorFinder.DetectError;
 import java.sql.CallableStatement;
 import util.DBConnection;
 import java.sql.Connection;
@@ -32,8 +31,7 @@ public class TutanakBorcDAO extends DBConnection {
         try {
             Connection conn = this.getDb();
 
-            // BORC stored procedure çağırma (Örnek, değiştirilebilir)
-            String callQueryBorc = "{call INSERT_BORC(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            String callQueryBorc = "{call INSERT_TUTANAK_BORC(?, ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement csBorc = conn.prepareCall(callQueryBorc);
             csBorc.setFloat(1, borc.getElektrik());
             csBorc.setFloat(2, borc.getSu());
@@ -41,21 +39,17 @@ public class TutanakBorcDAO extends DBConnection {
             csBorc.setFloat(4, borc.getKira());
             csBorc.setFloat(5, borc.getKredi_karti());
             csBorc.setFloat(6, borc.getDiger());
-
             csBorc.setString(7, borc.getDiger_aciklama());
-            csBorc.setDate(8, new java.sql.Date(borc.getGuncelleme_tarihi().getTime()));
-            csBorc.registerOutParameter(9, java.sql.Types.INTEGER);
+            csBorc.registerOutParameter(8, java.sql.Types.INTEGER);
             csBorc.execute();
-
-            int borcId = csBorc.getInt(9);
-            borc.setBorc_id(borcId);
+            borc.setBorc_id(csBorc.getInt(8));
 
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (SQLException ex) {
-            DetectError(ex);
-              this.islemBasariliMesaj = ex.getMessage();
-            
+
+            this.islemBasariliMesaj = DetectError(ex);
+
         }
     }
 
@@ -106,21 +100,6 @@ public class TutanakBorcDAO extends DBConnection {
         } catch (SQLException ex) {
             DetectError(ex);
         }
-    }
-
-    private void DetectError(Exception ex) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        StringBuilder errorMessage = new StringBuilder(ex.getMessage());
-        StackTraceElement[] stackTrace = ex.getStackTrace();
-
-        for (StackTraceElement element : stackTrace) {
-            if (element.getClassName().startsWith("dao")) {
-                errorMessage.append(" (at ").append(element.getFileName())
-                        .append(":").append(element.getLineNumber()).append(")");
-                break;
-            }
-        }
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage.toString(), null));
     }
 
     public Connection getDb() {

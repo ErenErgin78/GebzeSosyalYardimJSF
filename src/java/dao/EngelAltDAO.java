@@ -35,7 +35,7 @@ public class EngelAltDAO extends DBConnection {
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
             
         } catch (Exception ex) {
-            DetectError(ex);
+            this.islemBasariliMesaj = DetectError(ex);
         }
     }
     
@@ -49,7 +49,7 @@ public class EngelAltDAO extends DBConnection {
             
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
-            DetectError(ex);
+            this.islemBasariliMesaj = DetectError(ex);
         }
     }
     
@@ -105,7 +105,24 @@ public class EngelAltDAO extends DBConnection {
         }
         return TipList;
     }
-    
+    public List<SelectItem> EngelAltGetir(int selectedTipId) {
+    List<SelectItem> engelAltList = new ArrayList<>();
+
+    try {
+        Statement statement = getDb().createStatement();
+        String selectQuery = "SELECT ALT_TIP_ID, ALT_TIP_ISIM FROM ENGELLI_ALT_TIP WHERE ENGELLI_TIP_ID = " + selectedTipId;
+        ResultSet rs = statement.executeQuery(selectQuery);
+
+        while (rs.next()) {
+            engelAltList.add(new SelectItem(rs.getInt("ALT_TIP_ID"), rs.getString("ALT_TIP_ISIM")));
+        }
+
+    } catch (Exception ex) {
+        DetectError(ex);
+    }
+    return engelAltList;
+}
+
     public void setDb(Connection db) {
         this.db = db;
     }

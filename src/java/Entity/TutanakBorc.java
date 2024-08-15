@@ -9,13 +9,13 @@ import java.util.Date;
 public class TutanakBorc {
 
     private Integer borc_id;
-    private float elektrik;
-    private float su;
-    private float dogalgaz;
-    private float kira;
-    private float kredi_karti;
-    private float diger;
-    private String diger_aciklama;
+    private float elektrik = 0;
+    private float su = 0;
+    private float dogalgaz = 0;
+    private float kira = 0;
+    private float kredi_karti = 0;
+    private float diger = 0;
+    private String diger_aciklama = "";
     private Date guncelleme_tarihi;
 
     // Boş constructor

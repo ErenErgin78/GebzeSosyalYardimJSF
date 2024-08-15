@@ -17,28 +17,41 @@ import util.DBConnection;
 public class KisiAdresDAO extends DBConnection {
 
     private Connection db;
-    private String mesaj; // Başarı mesajı için değişken
+    private String mesaj;
 
-    public void KisiEkle(KisiAdres kisiAdres) {
+    public Integer KisiAdresEkle(KisiAdres kisiAdres) {
         try {
             Connection conn = this.getDb();
+            Statement statement = getDb().createStatement();
+            String mahallequery = "SELECT MAHALLE_ID FROM KISI_MAHALLE_SOKAK WHERE SOKAK_ID =" + kisiAdres.getKisi_mahalle_sokak_id();
+            ResultSet rs = statement.executeQuery(mahallequery);
 
-            String callQuery = "{call INSERT_KISI_ADRES(?, ?, ?, ?, ?, ?, ?, ?,)}";
+            while (rs.next()) {
+                kisiAdres.setKisi_adres_mahalle_id(rs.getInt("MAHALLE_ID"));
+            }
+
+            String callQuery = "{call INSERT_KISI_ADRES(?, ?, ?, ?, ?, ?, ?, ?,?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
             cs.setString(1, kisiAdres.getTarif());
             cs.setString(2, kisiAdres.getSite());
             cs.setInt(3, kisiAdres.getKapi_no());
             cs.setInt(4, kisiAdres.getDaire_no());
             cs.setString(5, kisiAdres.getKisi_adres_mahalle_isim());
-            cs.setString(6, kisiAdres.getKisi_mahalle_sokak_isim());
+            cs.setInt(6, kisiAdres.getKisi_mahalle_sokak_id());
             java.util.Date kayitTarihiUtil = kisiAdres.getKayit_tarihi();
             java.sql.Date kayitTarihiSql = new java.sql.Date(kayitTarihiUtil.getTime());
             cs.setDate(7, kayitTarihiSql);
             cs.setInt(8, kisiAdres.getAktif());
+            cs.registerOutParameter(9, java.sql.Types.INTEGER);
+
+            int kisiAdresId = cs.getInt(7);
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
+            return kisiAdresId;
+
         } catch (Exception ex) {
-            DetectError(ex);
+            this.mesaj = DetectError(ex);
+            return null;
         }
 
     }
@@ -53,7 +66,7 @@ public class KisiAdresDAO extends DBConnection {
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
-            DetectError(ex);
+            this.mesaj = DetectError(ex);
         }
     }
 
@@ -108,42 +121,6 @@ public class KisiAdresDAO extends DBConnection {
 
     }
 
-    public List<SelectItem> MahalleGetir() {
-        List<SelectItem> MahalleList = new ArrayList<>();
-
-        try {
-            Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT KISI_ADRES_MAHALLE_ID, MAHALLE FROM KISI_ADRES_MAHALLE";
-            ResultSet rs = statement.executeQuery(Selectquery);
-
-            while (rs.next()) {
-                MahalleList.add(new SelectItem(rs.getInt("KISI_ADRES_MAHALLE_ID"), rs.getString("MAHALLE")));
-            }
-        } catch (Exception ex) {
-            DetectError(ex);
-        }
-        return MahalleList;
-    }
-
-    public List<SelectItem> SokakGetir(int selectedmahalleid) {
-        List<SelectItem> MahalleList = new ArrayList<>();
-
-        try {
-            Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT SOKAK_ID, SOKAK_ISIM FROM KISI_MAHALLE_SOKAK WHERE MAHALLE_ID = " + selectedmahalleid;
-            ResultSet rs = statement.executeQuery(Selectquery);
-
-            while (rs.next()) {
-
-                MahalleList.add(new SelectItem(rs.getInt("SOKAK_ID"), rs.getString("SOKAK_ISIM")));
-            }
-
-        } catch (Exception ex) {
-            DetectError(ex);
-        }
-        return MahalleList;
-    }
-
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();
@@ -154,4 +131,13 @@ public class KisiAdresDAO extends DBConnection {
     public void setDb(Connection db) {
         this.db = db;
     }
+
+    public String getMesaj() {
+        return mesaj;
+    }
+
+    public void setMesaj(String mesaj) {
+        this.mesaj = mesaj;
+    }
+
 }

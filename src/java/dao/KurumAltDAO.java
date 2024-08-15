@@ -34,7 +34,7 @@ public class KurumAltDAO extends DBConnection {
 
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (Exception ex) {
-            DetectError(ex);
+            this.islemBasariliMesaj = DetectError(ex);
         }
     }
 
@@ -48,7 +48,7 @@ public class KurumAltDAO extends DBConnection {
 
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
-            DetectError(ex);
+            this.islemBasariliMesaj = DetectError(ex);
         }
     }
 
@@ -88,21 +88,23 @@ public class KurumAltDAO extends DBConnection {
         return kurumAltList;
     }
 
-    public List<SelectItem> KurumTipGetir() {
-        List<SelectItem> TipList = new ArrayList<>();
+   public List<SelectItem> KurumAltGetir(int selectedKurumid) {
+        List<SelectItem> KurumAltList = new ArrayList<>();
 
         try {
             Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT KURUM_ID, KURUM_ISIM FROM KURUM";
+            String Selectquery = "SELECT ALT_KURUM_ID, ALT_KURUM_ISIM FROM KURUM_ALT WHERE KURUM_ID = " + selectedKurumid;
             ResultSet rs = statement.executeQuery(Selectquery);
 
             while (rs.next()) {
-                TipList.add(new SelectItem(rs.getInt("KURUM_ID"), rs.getString("KURUM_ISIM")));
+
+                KurumAltList.add(new SelectItem(rs.getInt("ALT_KURUM_ID"), rs.getString("ALT_KURUM_ISIM")));
             }
+
         } catch (Exception ex) {
             DetectError(ex);
         }
-        return TipList;
+        return KurumAltList;
     }
 
     public void setDb(Connection db) {

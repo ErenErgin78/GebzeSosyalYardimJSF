@@ -6,6 +6,7 @@ package dao;
 
 import Entity.Yakinlik;
 import static Various.ErrorFinder.DetectError;
+import jakarta.faces.model.SelectItem;
 import util.DBConnection;
 import java.sql.Connection;
 import java.sql.CallableStatement;
@@ -37,7 +38,7 @@ public class YakinlikDAO extends DBConnection {
             this.mesaj = "İşlem başarıyla gerçekleşmiştir";
 
         } catch (SQLException ex) {
-            DetectError(ex);
+            this.mesaj = DetectError(ex);
         }
     }
 
@@ -51,7 +52,7 @@ public class YakinlikDAO extends DBConnection {
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
-            DetectError(ex);
+            this.mesaj = DetectError(ex);
         }
     }
 
@@ -88,6 +89,24 @@ public class YakinlikDAO extends DBConnection {
             DetectError(ex);
         }
         return YakinlikList;
+    }
+
+    public List<SelectItem> YakinlikGetir() {
+        List<SelectItem> YakinlikList = new ArrayList<>();
+
+        try {
+            Statement statement = getDb().createStatement();
+            String Selectquery = "SELECT YAKINLIK_ID , YAKINLIK_ISIM FROM YAKINLIK";
+            ResultSet rs = statement.executeQuery(Selectquery);
+
+            while (rs.next()) {
+                YakinlikList.add(new SelectItem(rs.getInt("YAKINLIK_ID"), rs.getString("YAKINLIK_ISIM")));
+            }
+        } catch (Exception ex) {
+            mesaj = DetectError(ex);
+        }
+        return YakinlikList;
+
     }
 
     public Connection getDb() {

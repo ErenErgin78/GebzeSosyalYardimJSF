@@ -8,6 +8,7 @@ import Entity.Sokak;
 import static Various.ErrorFinder.DetectError;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
+import jakarta.faces.model.SelectItem;
 import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -42,7 +43,7 @@ public class SokakDAO extends DBConnection {
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (Exception ex) {
-            DetectError(ex);
+            this.islemBasariliMesaj = DetectError(ex);
         }
     }
 
@@ -56,7 +57,7 @@ public class SokakDAO extends DBConnection {
 
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
-            DetectError(ex);
+            this.islemBasariliMesaj = DetectError(ex);
         }
     }
 
@@ -88,6 +89,25 @@ public class SokakDAO extends DBConnection {
             DetectError(ex);
         }
         return SokakList;
+    }
+
+    public List<SelectItem> SokakGetir(int selectedmahalleid) {
+        List<SelectItem> MahalleList = new ArrayList<>();
+
+        try {
+            Statement statement = getDb().createStatement();
+            String Selectquery = "SELECT SOKAK_ID, SOKAK_ISIM FROM KISI_MAHALLE_SOKAK WHERE MAHALLE_ID = " + selectedmahalleid;
+            ResultSet rs = statement.executeQuery(Selectquery);
+
+            while (rs.next()) {
+
+                MahalleList.add(new SelectItem(rs.getInt("SOKAK_ID"), rs.getString("SOKAK_ISIM")));
+            }
+
+        } catch (Exception ex) {
+            DetectError(ex);
+        }
+        return MahalleList;
     }
 
     public void setDb(Connection db) {
