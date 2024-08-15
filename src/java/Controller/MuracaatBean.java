@@ -16,16 +16,16 @@ public class MuracaatBean implements Serializable {
     private List<Muracaat> list;
 
     public void ekle() {
-       getDao().MuracaatEkle(getEntity());
+        getDao().MuracaatEkle(getEntity());
+    }
+
+    public Integer ekle(Integer kisiTemelId, Integer muracaatBilgiId) {
+        return getDao().MuracaatEkle(getEntity(), kisiTemelId, muracaatBilgiId);
     }
 
     public void delete(int MuracaatID) {
         this.getDao().Delete(MuracaatID);
         this.list = this.getDao().MuracaatBilgiListesi();
-    }
-
-    public void edit(Muracaat muracaat) {
-        this.entity = muracaat;
     }
 
     public Muracaat getEntity() {

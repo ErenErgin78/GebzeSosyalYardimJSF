@@ -23,6 +23,10 @@ public class KisiYakinlarBean implements Serializable {
         return this.getDao().KisiYakinlarEkle(getEntity());
     }
 
+        public Integer ekle(Integer kisiId) {
+        return this.getDao().KisiYakinlarEkle(getEntity(), kisiId);
+    }
+
     public void KisiYakinlarSil(int yakinlarID) {
         this.getDao().KisiYakinlarSil(yakinlarID);
      

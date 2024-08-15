@@ -25,7 +25,12 @@ public class KisiBean implements Serializable {
 
     public Integer ekle() {
 
-       return this.getDao().KisiEkle(getEntity());
+        return this.getDao().KisiEkle(getEntity());
+    }
+
+    public Integer ekle(Integer detayId) {
+
+        return this.getDao().KisiEkle(getEntity(), detayId);
     }
 
     public void KisiSil(int kisiID) {

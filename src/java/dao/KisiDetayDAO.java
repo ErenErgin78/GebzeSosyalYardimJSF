@@ -44,6 +44,34 @@ public class KisiDetayDAO extends DBConnection {
             return null;
         }
     }
+    
+     public Integer Create(KisiDetay detay, Integer iletisim_id, Integer adres_id ) {
+        try {
+            Connection conn = this.getDb();
+
+            // KISIDETAY stored procedure çağırma (Örnek, değiştirilebilir)
+            String callQueryDetay = "{call INSERT_KISI_DETAY(?, ?, ?, ?, ?, ?, ?)}";
+            CallableStatement csDetay = conn.prepareCall(callQueryDetay);
+            csDetay.setInt(1, iletisim_id);
+            csDetay.setInt(2, adres_id);
+            csDetay.setInt(3, detay.getKisi_egitim_id());
+            csDetay.setInt(4, detay.getKisi_engel_id());
+            csDetay.setInt(5, detay.getMeslek_id());
+            csDetay.setInt(6, detay.getAskerlik_id());
+            csDetay.registerOutParameter(7, java.sql.Types.INTEGER);
+            csDetay.execute();
+
+            int detayId = csDetay.getInt(7);
+            detay.setDetay_id(detayId);
+            
+            this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+            return detayId;
+
+        } catch (SQLException ex) {
+            islemBasariliMesaj = DetectError(ex);
+            return null;
+        }
+    }
 
     // KisiDetay listeleme metodu
     public List<KisiDetay> GetList() {

@@ -19,20 +19,43 @@ public class KisiYakinlarDAO extends DBConnection {
         try {
             Connection conn = this.getDb();
 
-            String callQuery = "{call INSERT_KISI_YAKINLIK(?, ?, ?, ?, ?, ?, ?)}";
+            String callQuery = "{call INSERT_KISI_YAKINLIK(?, ?, ?, ?, ?, ?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
-            cs.setInt(1, yakinlik.getYakinlar_id());
-            cs.setInt(2, yakinlik.getMuracaat_id());
-            cs.setInt(3, yakinlik.getKisi_id());
-            cs.setInt(4, yakinlik.getOzel_statu_id());
-            cs.setDate(5, new java.sql.Date(yakinlik.getOlum_tarihi().getTime()));
-            cs.setDate(6, new java.sql.Date(yakinlik.getKayit_tarihi().getTime()));
-            cs.registerOutParameter(7, java.sql.Types.INTEGER);
+            cs.setInt(1, yakinlik.getKisi_id());
+            cs.setInt(2, yakinlik.getOzel_statu_id());
+            cs.setDate(3, new java.sql.Date(yakinlik.getOlum_tarihi().getTime()));
+            cs.setInt(4, yakinlik.getYakin_id());
+            cs.setInt(5, yakinlik.getYakinlik_id());
+            cs.registerOutParameter(6, java.sql.Types.INTEGER);
             cs.execute();
             
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
-            return cs.getInt(7);
+            return cs.getInt(6);
+            
+        } catch (Exception ex) {
+            this.mesaj = DetectError(ex);
+            return null;
+        }
+    }
+    
+      public Integer KisiYakinlarEkle(KisiYakinlar yakinlik, Integer kisiId) {
+        try {
+            Connection conn = this.getDb();
+
+            String callQuery = "{call INSERT_KISI_YAKINLIK(?, ?, ?, ?, ?, ?)}";
+            CallableStatement cs = conn.prepareCall(callQuery);
+            cs.setInt(1, yakinlik.getKisi_id());
+            cs.setInt(2, yakinlik.getOzel_statu_id());
+            cs.setDate(3, new java.sql.Date(yakinlik.getOlum_tarihi().getTime()));
+            cs.setInt(4, yakinlik.getYakin_id());
+            cs.setInt(5, yakinlik.getYakinlik_id());
+            cs.registerOutParameter(6, java.sql.Types.INTEGER);
+            cs.execute();
+            
+            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
+
+            return cs.getInt(6);
             
         } catch (Exception ex) {
             this.mesaj = DetectError(ex);

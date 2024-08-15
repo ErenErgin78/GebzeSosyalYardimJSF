@@ -34,6 +34,27 @@ public class MuracaatDAO extends DBConnection {
         }
     }
 
+    public Integer MuracaatEkle(Muracaat muracaat, Integer kisiTemelId, Integer muracaatBilgiId) {
+        String callQuery = "{call INSERT_MURACAAT(?, ?, ?, ?)}";
+
+        try {
+            CallableStatement cs = getDb().prepareCall(callQuery);
+            cs.setInt(1, kisiTemelId);
+            cs.setInt(2, muracaatBilgiId);
+            cs.setInt(3, muracaat.getAktif());
+            cs.registerOutParameter(4, java.sql.Types.INTEGER);
+            cs.executeUpdate();
+
+            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
+
+            return cs.getInt(4);
+
+        } catch (SQLException ex) {
+            mesaj = DetectError(ex);
+            return null;
+        }
+    }
+
     // Delete Method
     public void Delete(int muracaatId) {
         String deleteQuery = "DELETE FROM MURACAAT WHERE MURACAAT_ID = ?";
