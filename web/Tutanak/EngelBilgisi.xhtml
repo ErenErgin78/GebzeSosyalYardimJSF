@@ -109,14 +109,16 @@
                                                     <f:selectItems value = "#{kurumAltBean.tipList}" />
                                                 </h:selectOneMenu>
                                             </div>
-                                        </div>
-                                        <div class="text-center mt-3">
-                                            <h:commandButton value="Kaydet" action="#{kisiEngelBean.ekle()}" class="btn btn-success">
-                                                <f:ajax execute="@form" render="@form, mesaj" />
-                                            </h:commandButton>                                  
-                                        </div>
+                                        </div>                           
                                     </div>
                                 </div>
+
+                                <div class="text-center mt-3">
+                                    <h:commandButton value="Kaydet" action="#{kisiEngelBean.ekle()}" class="btn btn-success">
+                                        <f:ajax execute="@form" render="@form, mesaj" />
+                                    </h:commandButton>                                  
+                                </div>
+
 
                                 <!-- Pagination Card -->
                                 <div class="card mt-3">
