@@ -56,7 +56,7 @@ public class MuracaatDAO extends DBConnection {
     }
 
     // Delete Method
-    public void Delete(int muracaatId) {
+    public void MuracaatSil(int muracaatId) {
         String deleteQuery = "DELETE FROM MURACAAT WHERE MURACAAT_ID = ?";
 
         try (PreparedStatement ps = getDb().prepareStatement(deleteQuery)) {

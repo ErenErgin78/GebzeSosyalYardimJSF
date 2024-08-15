@@ -18,7 +18,7 @@
     <h:body>
         <h:form>
             <h:messages globalOnly="true" layout="table"/>
-            <h:outputText id="mesaj" value =""/>
+            <h:outputText id="mesaj" value ="#{kisiEngelBean.dao.islemBasariliMesaj}"/>
             <div class="container-fluid">               
                 <div class="row">                   
                     <div class="col-md-12">
@@ -49,7 +49,7 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-6 mb-3">
                                                 <label for="tc">TC Kimlik No:</label>
-                                                <h:inputText id="tc" value="" class="form-control" />
+                                                <h:inputText id="tc" class="form-control" />
                                             </div>  
                                             <div class="form-group col-md-6 mb-3">
                                                 <label for="engelAlt">Engelli Alt Tip/Grup:</label>

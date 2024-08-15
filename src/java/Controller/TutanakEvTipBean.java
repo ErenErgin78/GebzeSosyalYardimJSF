@@ -30,8 +30,11 @@ public class TutanakEvTipBean implements Serializable {
         return this.getDao().TutanakEvTipGetir();
     }
 
-    public TutanakEvTip getEntity() {
-        return entity;
+   public TutanakEvTip getEntity() {
+        if (this.entity == null) {
+            this.entity = new TutanakEvTip();
+        }
+        return this.entity;
     }
 
     public void setEntity(TutanakEvTip entity) {
@@ -39,10 +42,10 @@ public class TutanakEvTipBean implements Serializable {
     }
 
     public TutanakEvTipDAO getDao() {
-        if (dao == null) {
-            dao = new TutanakEvTipDAO();
+        if (this.dao == null) {
+            this.dao = new TutanakEvTipDAO();
         }
-        return dao;
+        return this.dao;
     }
 
     public void setDao(TutanakEvTipDAO dao) {

@@ -39,7 +39,6 @@ public class TutanakGelirBorcBean implements Serializable {
         }
     }
 
-
     public String getMesaj() {
         return mesaj;
     }

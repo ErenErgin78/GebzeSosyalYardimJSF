@@ -14,7 +14,7 @@ public class KisiAdres {
     private Integer kisi_mahalle_sokak_id;
     private String kisi_mahalle_sokak_isim;
     private Date kayit_tarihi;
-    private Integer aktif;
+    private Integer aktif = 1;
 
     public Integer getKisi_adres_id() {
         return kisi_adres_id;
