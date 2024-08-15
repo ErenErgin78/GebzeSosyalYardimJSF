@@ -7,6 +7,7 @@ import util.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.CallableStatement;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -32,7 +33,7 @@ public class KisiDAO extends DBConnection {
             cs.setInt(5, kisi.getCilt_no());
             cs.setInt(6, kisi.getAile_sira_no());
             cs.setInt(7, kisi.getSira_no());
-            cs.setInt(8, kisi.getDoğum_tarihi());
+            cs.setDate(8, (Date) kisi.getDogum_tarihi());
             cs.setInt(9, kisi.getMedeni_durum_id());
             cs.setInt(10, kisi.getAktif());
             cs.registerOutParameter(11, java.sql.Types.INTEGER);
@@ -61,7 +62,7 @@ public class KisiDAO extends DBConnection {
             cs.setInt(5, kisi.getCilt_no());
             cs.setInt(6, kisi.getAile_sira_no());
             cs.setInt(7, kisi.getSira_no());
-            cs.setInt(8, kisi.getDoğum_tarihi());
+            cs.setDate(8, (Date) kisi.getDogum_tarihi());
             cs.setInt(9, kisi.getMedeni_durum_id());
             cs.setInt(10, kisi.getAktif());
             cs.setInt(11, detayId);
@@ -114,7 +115,7 @@ public class KisiDAO extends DBConnection {
                         rs.getInt("CILT_NO"),
                         rs.getInt("AILE_SIRA_NO"),
                         rs.getInt("SIRA_NO"),
-                        rs.getInt("DOGUM_TARIHI"),
+                        rs.getDate("DOGUM_TARIHI"),
                         rs.getString("MEDENI_DURUM_ISIM"),
                         rs.getDate("KAYIT_TARIHI"),
                         rs.getInt("AKTIF")

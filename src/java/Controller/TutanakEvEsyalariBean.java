@@ -26,15 +26,21 @@ public class TutanakEvEsyalariBean implements Serializable {
     }
 
     public TutanakEvEsyalari getEntity() {
-        return entity;
+        if (this.entity == null) {
+            this.entity = new TutanakEvEsyalari();
+        }
+        return this.entity;
     }
 
     public void setEntity(TutanakEvEsyalari entity) {
         this.entity = entity;
     }
 
-    public TutanakEvEsyalariDAO getDao() {
-        return dao;
+   public TutanakEvEsyalariDAO getDao() {
+        if (this.dao == null) {
+            this.dao = new TutanakEvEsyalariDAO();
+        }
+        return this.dao;
     }
 
     public void setDao(TutanakEvEsyalariDAO dao) {
