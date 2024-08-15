@@ -34,7 +34,7 @@ public class UsersDAO extends DBConnection {
     private String telefon = ""; // String olarak değiştirildi
     private String sicil = "";
 
-    public void Create(User user) {
+    public void UserEkle(User user) {
         try {
             String insertQuery = "INSERT INTO KULLANICI (kullanici_unvan, kullanici_durum_id, kullanici_kullanici_adi, kullanici_isim, kullanici_adres, kullanici_sicil_no, kullanici_telefon, kullanici_cinsiyet, sifre) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -62,7 +62,7 @@ public class UsersDAO extends DBConnection {
 
     }
 
-    public List<User> GetList() {
+    public List<User> UserListesi() {
         List<User> userList = new ArrayList<>();
         try {
             StringBuilder queryBuilder = new StringBuilder();
@@ -115,7 +115,7 @@ public class UsersDAO extends DBConnection {
         return userList;
     }
 
-    public void Delete(int kullaniciId) {
+    public void UserSil(int kullaniciId) {
         String deleteQuery = "DELETE FROM KULLANICI WHERE kullanici_id = ?";
 
         try {

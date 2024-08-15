@@ -20,12 +20,12 @@ public class KisiAskerlikBean implements Serializable {
     private List<KisiAskerlik> list;
 
     public void create() {
-        this.getDao().Create(getEntity());
+        this.getDao().AskerlikEkle(getEntity());
     }
 
     public void delete(int askerlikID) {
-        this.getDao().Delete(askerlikID);
-        this.list = this.getDao().GetList(); // Silme işleminden sonra listeyi yeniler
+        this.getDao().AskerlikSil(askerlikID);
+        this.list = this.getDao().KisiAskerlikListesi(); // Silme işleminden sonra listeyi yeniler
     }
 
     public void edit(KisiAskerlik askerlik) {
@@ -56,7 +56,7 @@ public class KisiAskerlikBean implements Serializable {
 
     public List<KisiAskerlik> getList() {
         if (this.list == null) {
-            this.list = this.getDao().GetList();
+            this.list = this.getDao().KisiAskerlikListesi();
         }
         return this.list;
     }
