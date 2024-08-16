@@ -5,10 +5,7 @@
 package dao;
 
 import Entity.Kurum;
-import Entity.Mahalle;
 import static Various.ErrorFinder.DetectError;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
 import jakarta.faces.model.SelectItem;
 import java.sql.CallableStatement;
 import java.sql.Connection;

@@ -1,6 +1,5 @@
 package dao;
 
-import Entity.Kisi;
 import Entity.KisiAdres;
 import static Various.ErrorFinder.DetectError;
 import jakarta.faces.model.SelectItem;
