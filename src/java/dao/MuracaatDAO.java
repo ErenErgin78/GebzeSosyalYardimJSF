@@ -19,6 +19,10 @@ public class MuracaatDAO extends DBConnection {
     public void MuracaatEkle(Muracaat muracaat) {
         String callQuery = "{call INSERT_MURACAAT(?, ?, ?)}";
 
+        if (muracaat.getAktif() == null) {
+            muracaat.setAktif(1);
+        }
+
         try {
             CallableStatement cs = getDb().prepareCall(callQuery);
             cs.setInt(1, muracaat.getKisi_temel_id());
@@ -36,6 +40,10 @@ public class MuracaatDAO extends DBConnection {
 
     public Integer MuracaatEkle(Muracaat muracaat, Integer kisiTemelId, Integer muracaatBilgiId) {
         String callQuery = "{call INSERT_MURACAAT(?, ?, ?, ?)}";
+
+        if (muracaat.getAktif() == null) {
+            muracaat.setAktif(1);
+        }
 
         try {
             CallableStatement cs = getDb().prepareCall(callQuery);
@@ -99,7 +107,7 @@ public class MuracaatDAO extends DBConnection {
                         rs.getDate("KAYIT_TARIHI"),
                         rs.getInt("AKTIF"),
                         rs.getDate("GUNCELLEME_TARIHI"),
-                        rs.getInt("KIMLIK_NO"),
+                        rs.getBigDecimal("KIMLIK_NO").toBigInteger(),
                         rs.getString("ISIM"),
                         rs.getString("SOYISIM"),
                         rs.getInt("ARSIV_DOSYA_NO"),

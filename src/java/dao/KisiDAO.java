@@ -30,55 +30,52 @@ public class KisiDAO extends DBConnection {
             cs.setString(2, kisi.getIsim());
             cs.setString(3, kisi.getSoyisim());
             cs.setString(4, kisi.getCinsiyet());
-            cs.setInt(5, kisi.getCilt_no());
-            cs.setInt(6, kisi.getAile_sira_no());
-            cs.setInt(7, kisi.getSira_no());
-           cs.setDate(8, new java.sql.Date(kisi.getDogum_tarihi().getTime()));
-            cs.setInt(9, kisi.getMedeni_durum_id());
-            cs.setInt(10, kisi.getAktif());
-            cs.registerOutParameter(11, java.sql.Types.INTEGER);
+            cs.setInt(5, kisi.getMedeni_durum_id());
+            cs.setInt(6, kisi.getCilt_no());
+            cs.setInt(7, kisi.getAile_sira_no());
+            cs.setInt(8, kisi.getSira_no());
+            cs.setDate(9, new java.sql.Date(kisi.getDogum_tarihi().getTime()));
+            cs.registerOutParameter(10, java.sql.Types.INTEGER);
             cs.execute();
-            
+
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
             return cs.getInt(11);
-            
+
         } catch (Exception ex) {
             this.mesaj = DetectError(ex);
             return null;
         }
     }
-    
-     public Integer KisiEkle(Kisi kisi, Integer detayId) {
+
+    public Integer KisiEkle(Kisi kisi, Integer detayId) {
         try {
             Connection conn = this.getDb();
 
-            String callQuery = "{call INSERT_KISI_TEMEL_2(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            String callQuery = "{call INSERT_KISI_TEMEL_2(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
             cs.setObject(1, kisi.getKimlik_no());
             cs.setString(2, kisi.getIsim());
             cs.setString(3, kisi.getSoyisim());
             cs.setString(4, kisi.getCinsiyet());
-            cs.setInt(5, kisi.getCilt_no());
-            cs.setInt(6, kisi.getAile_sira_no());
-            cs.setInt(7, kisi.getSira_no());
-            cs.setDate(8, (Date) kisi.getDogum_tarihi());
-            cs.setInt(9, kisi.getMedeni_durum_id());
-            cs.setInt(10, kisi.getAktif());
-            cs.setInt(11, detayId);
-            cs.registerOutParameter(12, java.sql.Types.INTEGER);
+            cs.setInt(5, kisi.getMedeni_durum_id());
+            cs.setInt(6, kisi.getCilt_no());
+            cs.setInt(7, kisi.getAile_sira_no());
+            cs.setInt(8, kisi.getSira_no());
+            cs.setDate(9, new java.sql.Date(kisi.getDogum_tarihi().getTime()));
+            cs.setInt(10, detayId);
+            cs.registerOutParameter(11, java.sql.Types.INTEGER);
             cs.execute();
-            
+
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
-            return cs.getInt(12);
-            
+            return cs.getInt(11);
+
         } catch (Exception ex) {
             this.mesaj = DetectError(ex);
             return null;
         }
     }
-
 
     // Kisi silme metodu
     public void KisiSil(int kisiId) {

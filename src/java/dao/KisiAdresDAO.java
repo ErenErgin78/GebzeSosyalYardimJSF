@@ -17,7 +17,7 @@ import util.DBConnection;
 public class KisiAdresDAO extends DBConnection {
 
     private Connection db;
-    private String mesaj = "d";
+    private String mesaj = "";
 
     public Integer KisiAdresEkle(KisiAdres kisiAdres) {
         try {

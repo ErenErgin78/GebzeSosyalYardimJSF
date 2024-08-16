@@ -21,7 +21,10 @@ public class KisiDetayDAO extends DBConnection {
         try {
             Connection conn = this.getDb();
 
-            // KISIDETAY stored procedure çağırma (Örnek, değiştirilebilir)
+            if (detay.getKisi_engel_id() == null) {
+                detay.setKisi_engel_id(0);
+            }
+            
             String callQueryDetay = "{call INSERT_KISI_DETAY(?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement csDetay = conn.prepareCall(callQueryDetay);
             csDetay.setInt(1, detay.getKisi_iletisim_id());
@@ -35,7 +38,31 @@ public class KisiDetayDAO extends DBConnection {
 
             int detayId = csDetay.getInt(7);
             detay.setDetay_id(detayId);
-            
+
+            this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+            return detayId;
+
+        } catch (SQLException ex) {
+            islemBasariliMesaj = DetectError(ex);
+            return null;
+        }
+    }
+
+    public Integer CreateMuracaat(KisiDetay detay, Integer iletisim_id, Integer adres_id) {
+        try {
+            Connection conn = this.getDb();
+
+            String callQueryDetay = "{call INSERT_KISI_DETAY_2(?, ?, ?, ?)}";
+            CallableStatement csDetay = conn.prepareCall(callQueryDetay);
+            csDetay.setInt(1, iletisim_id);
+            csDetay.setInt(2, adres_id);
+            csDetay.setInt(3, detay.getKisi_egitim_id());
+            csDetay.registerOutParameter(4, java.sql.Types.INTEGER);
+            csDetay.execute();
+
+            int detayId = csDetay.getInt(4);
+            detay.setDetay_id(detayId);
+
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
             return detayId;
 
@@ -45,11 +72,10 @@ public class KisiDetayDAO extends DBConnection {
         }
     }
     
-     public Integer Create(KisiDetay detay, Integer iletisim_id, Integer adres_id ) {
+    public Integer Create(KisiDetay detay, Integer iletisim_id, Integer adres_id) {
         try {
             Connection conn = this.getDb();
 
-            // KISIDETAY stored procedure çağırma (Örnek, değiştirilebilir)
             String callQueryDetay = "{call INSERT_KISI_DETAY(?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement csDetay = conn.prepareCall(callQueryDetay);
             csDetay.setInt(1, iletisim_id);
@@ -63,7 +89,7 @@ public class KisiDetayDAO extends DBConnection {
 
             int detayId = csDetay.getInt(7);
             detay.setDetay_id(detayId);
-            
+
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
             return detayId;
 

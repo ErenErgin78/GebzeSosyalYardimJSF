@@ -30,11 +30,16 @@ public class MuracaatBilgiDAO extends DBConnection {
         try {
             Connection conn = this.getDb();
 
+            if (muracaat.getAktif() == null) {
+                muracaat.setAktif(1);
+            }
+
             String callQueryMuracaatBilgi = "{call INSERT_MURACAAT_BILGI(?, ?, ?, ?, ?)}";
             CallableStatement csMuracaatBilgi = conn.prepareCall(callQueryMuracaatBilgi);
             csMuracaatBilgi.setInt(1, muracaat.getArsiv_dosya_no());
-            csMuracaatBilgi.setString(3, muracaat.getAciklama());
-            csMuracaatBilgi.setDate(4, new java.sql.Date(muracaat.getMuracaat_tarihi().getTime()));
+            csMuracaatBilgi.setString(2, muracaat.getAciklama());
+            csMuracaatBilgi.setDate(3, new java.sql.Date(muracaat.getMuracaat_tarihi().getTime()));
+            csMuracaatBilgi.setInt(4, 1);
             csMuracaatBilgi.registerOutParameter(5, java.sql.Types.INTEGER);
             csMuracaatBilgi.execute();
             int muracaatBilgiId = csMuracaatBilgi.getInt(5);
