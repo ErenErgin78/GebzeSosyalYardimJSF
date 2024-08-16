@@ -32,6 +32,10 @@ public class SokakDAO extends DBConnection {
 
         try {
             Connection conn = this.getDb();
+            
+            if(sokak.getAktif()==null){
+              sokak.setAktif(1);
+            }
 
             String callQueryAdres = "{call INSERT_ADRES_MAHALLE_SOKAK(?, ?, ?)}";
             CallableStatement csAdres = conn.prepareCall(callQueryAdres);

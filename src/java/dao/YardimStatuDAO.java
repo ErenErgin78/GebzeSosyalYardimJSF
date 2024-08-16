@@ -23,6 +23,10 @@ public class YardimStatuDAO extends DBConnection {
         try {
             Connection conn = (Connection) this.getDb();
 
+            if (yardimStatu.getAktif() == null) {
+                yardimStatu.setAktif(1);
+            }
+
             String callQuery = "{call INSERT_YARDIM_STATU(?, ?, ?, ?, ? )}";
             CallableStatement cs = conn.prepareCall(callQuery);
             cs.setInt(1, yardimStatu.getStatu_id());

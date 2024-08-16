@@ -35,6 +35,10 @@ public class KurumDAO extends DBConnection {
 
         try {
             Connection conn = this.getDb();
+            
+            if(kurum.getAktif()==null){
+               kurum.setAktif(1);
+            }
 
             String callQueryAdres = "{call INSERT_KURUM(?)}";
             CallableStatement csAdres = conn.prepareCall(callQueryAdres);

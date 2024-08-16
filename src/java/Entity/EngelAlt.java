@@ -14,6 +14,13 @@ public class EngelAlt {
     private Integer engelli_tip_id;
     private String alt_tip_isim;
     private String engelli_tip_isim;
+    private Integer aktif;
+
+    public EngelAlt(String alt_tip_isim, String engelli_tip_isim, Integer aktif) {
+        this.alt_tip_isim = alt_tip_isim;
+        this.engelli_tip_isim = engelli_tip_isim;
+        this.aktif = aktif;
+    }
 
     public EngelAlt(Integer alt_tip_id, String alt_tip_isim, String engelli_tip_isim) {
         this.alt_tip_id = alt_tip_id;
@@ -28,6 +35,14 @@ public class EngelAlt {
     }
 
     public EngelAlt() {
+    }
+
+    public Integer getAktif() {
+        return aktif;
+    }
+
+    public void setAktif(Integer aktif) {
+        this.aktif = aktif;
     }
 
     public Integer getAlt_tip_id() {

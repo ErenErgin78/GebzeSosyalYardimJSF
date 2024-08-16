@@ -31,6 +31,10 @@ public class CekmeceDAO extends DBConnection {
     public void CekmeceEkle(Cekmece cekmece) {
         try {
             Connection conn = this.getDb();
+            
+            if(cekmece.getAktif()==null){
+             cekmece.setAktif(1);
+            }
             String callQuery = "{call INSERT_CEKMECE(?, ?)}";
             CallableStatement csCekmece = conn.prepareCall(callQuery);
 

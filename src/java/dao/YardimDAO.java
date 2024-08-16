@@ -27,6 +27,9 @@ public class YardimDAO extends DBConnection {
     public void YardimEkle(Yardim yardim) {
         try {
             Connection conn = this.getDb();
+            if(yardim.getAktif()==null){
+              yardim.setAktif(1);
+            }
 
             String callQuery = "{call insert_yardim_tip(?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
