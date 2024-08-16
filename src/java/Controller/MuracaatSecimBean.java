@@ -16,9 +16,7 @@ import java.io.Serializable;
 @ViewScoped
 public class MuracaatSecimBean implements Serializable {
 
-    /**
-     * Creates a new instance of MuracaatSecimBean
-     */
+    
     public MuracaatSecimBean() {
     }
     
