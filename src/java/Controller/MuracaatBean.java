@@ -51,9 +51,8 @@ public class MuracaatBean implements Serializable {
     }
 
     public List<Muracaat> getList() {
-        if (this.list == null) {
-            this.list = this.getDao().MuracaatBilgiListesi();
-        }
+        
+        this.list = this.getDao().MuracaatBilgiListesi();
         return this.list;
     }
 
