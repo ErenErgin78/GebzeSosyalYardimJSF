@@ -22,12 +22,6 @@
                         <li class="breadcrumb-item active" aria-current="page">Müracaat Seçim</li>
                     </ol>
                 </div>
-                <div class="col-2 text-end">
-                    <button type="button" class="btn btn-outline-success load-page-button" data-page="Tutanak/PopUP.xhtml">PopUp</button>
-                </div>
-                  <div class="col-2 text-end">
-                    <button type="button" class="btn btn-outline-success load-page-button" data-page="Tutanak/RadioButtonHide.xhtml">RadioButton</button>
-                </div>
             </div> 
             <div class="container-fluid">               
                 <div class="row">                   
@@ -75,7 +69,10 @@
                                                         <td>#{muracaat.kisi_soyisim}</td>
                                                         <td class="profil">
                                                             <div class="action-buttons">
-                                                                <button type="button" Class="btn btn-primary ml-20 load-page-button" data-page="Tutanak/YakinlikBilgileri.xhtml">Seç</button>
+                                                                <h:commandButton value="Kaydet" action="#{kisiMuracaatBean.KisiMuracaatEkle()}" class="btn btn-success">
+                                                                    <f:ajax execute="@form" render="@form" />
+                                                                </h:commandButton>
+
                                                             </div>
                                                         </td>
                                                     </tr>

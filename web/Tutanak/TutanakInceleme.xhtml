@@ -44,11 +44,45 @@
                                                 <label for="address_desc2">İnceleme Ekibi Görüş Kanaati:</label>
                                                 <h:inputTextarea id="address_desc2" class="form-control" rows="3" value="#{userBean.entity.kullanici_adres}" />
                                             </div>
-                                        </div>  
+                                        </div>
+
                                         <div class="form-row">
-                                            <div class="form-group col-md-12 mb-3">
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="address_desc3">İnceleme Tarihi:</label>
+                                                <h:inputText id="address_desc3" class="form-control" value="#{userBean.entity.kullanici_adres}">
+                                                    <f:passThroughAttribute name="type" value="date" />
+                                                </h:inputText>
+                                            </div>
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="aktif">İnceleme Yapan:</label>
+                                                <div class="d-flex align-items-center">
+                                                    <h:selectOneMenu id="hkj1" value="#{userBean.dao.aktif}" class="form-control me-2">
+                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                                    </h:selectOneMenu>
+                                                    <span> - </span>
+                                                    <h:selectOneMenu id="hkj2" value="#{userBean.dao.aktif}" class="form-control ms-2">
+                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                                    </h:selectOneMenu>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-4 mb-3">
+                                                <label for="applicant_name">Başvuru Alan Kişinin Adı:</label>
+                                                <h:selectOneMenu id="applicant_name" value="#{userBean.dao.aktif}" class="form-control">
+                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                                </h:selectOneMenu>
+                                            </div>
+                                            <div class="form-group col-md-4 mb-3">
                                                 <label for="status">Durum:</label>
                                                 <h:selectOneMenu id="status" value="#{userBean.dao.aktif}" class="form-control">
+                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                                </h:selectOneMenu>
+                                            </div>
+                                            <div class="form-group col-md-4 mb-3">
+                                                <label for="drawer">Çekmece:</label>
+                                                <h:selectOneMenu id="drawer" value="#{userBean.dao.aktif}" class="form-control">
                                                     <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
                                                 </h:selectOneMenu>
                                             </div>
@@ -58,6 +92,40 @@
                                         <h:commandButton value="Kaydet" action="#{userBean.create()}" class="btn btn-success">
                                             <f:ajax execute="@form" render="@form, mesaj" />
                                         </h:commandButton>                                  
+                                    </div>
+                                </div>
+
+                                <!-- Pagination Card -->
+                                <div class="card mt-3">
+                                    <div class="card-body">
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination justify-content-center mb-3">
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/MuracaatSecim.xhtml" data-toggle="tooltip" title="Müracaat Seçim">1</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/YakinlikBilgileri.xhtml" data-toggle="tooltip" title="Yakınlık Bilgileri">2</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/EngelBilgisi.xhtml" data-toggle="tooltip" title="Sağlık ve Engel Bilgisi">3</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/GelirBorc.xhtml" data-toggle="tooltip" title="Aile Gelir ve Borç Bilgileri">4</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/Mulkiyet.xhtml" data-toggle="tooltip" title="Mülkiyet Bilgileri">5</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/SosyalGuvence.xhtml" data-toggle="tooltip" title="Sosyal Güvence Bilgisi">6</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/TalepYardim.xhtml" data-toggle="tooltip" title="Talep Edilen Yardımlar">7</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-secondary" data-page="Tutanak/TutanakInceleme.xhtml" data-toggle="tooltip" title="Tutanak İnceleme">8</button>
+                                                </li>
+                                            </ul>
+                                        </nav>
                                     </div>
                                 </div>
                             </div>
