@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Sağlık ve Engel Bilgisi</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/styles.css" />
+        <link rel="stylesheet" href="CSS/log.css" />
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+            <li class="breadcrumb-item active" aria-current="page">İşlemlerim</li>
+            <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="Tutanak/MuracaatSecim.xhtml">Tutanak</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Sağlık ve Engel </li>
+        </ol>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:messages globalOnly="true" layout="table"/>
+            <h:outputText id="mesaj" value ="#{kisiEngelBean.dao.islemBasariliMesaj}"/>
+            <div class="container-fluid">               
+                <div class="row">                   
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h1>Sağlık ve Engel </h1>
+                            </div>
+                            <div class="card-body">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Sağlık ve Engel Bilgileri
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="kim" class="form-label">Kim için:</label>
+                                                <h:inputText id="kim" value="#{kisiYakinlarBean.entity.kisi_id}" class="form-control" />                                               
+                                            </div>
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="engel_tip">Engelli Tip/Grup:</label>
+                                                <h:selectOneMenu id="engel_tip" value="#{engelAltBean.selectedEngelId}" class="form-control">
+                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="1" />
+                                                    <f:selectItems value="#{engelBean.engelTipList}"/>
+                                                    <f:ajax event="change" listener="#{engelAltBean.engelYukle}" render="engelAlt" />
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="tc">TC Kimlik No:</label>
+                                                <h:inputText id="tc" class="form-control" />
+                                            </div>  
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="engelAlt">Engelli Alt Tip/Grup:</label>
+                                                <h:selectOneMenu id="engelAlt" value="#{kisiEngelBean.entity.engelli_alt_tip_id}" class="form-control">
+                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="1" />
+                                                    <f:selectItems value="#{engelAltBean.tipList}" />
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="isim">Ad:</label>
+                                                <h:inputText id="isim" value="#{kisiBean.entity.isim}" class="form-control" />
+                                            </div>
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="engel_baslangic">Engel Başlangıç Zamanı:</label>
+                                                <h:selectOneMenu id="engel_baslangic" value="#{kisiEngelBean.entity.engel_baslangic}" class="form-control">
+                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="1" />
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="soyad">Soyad:</label>
+                                                <h:inputText id="soyad" value="#{kisiBean.entity.soyisim}" class="form-control" />
+                                            </div>
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="engel">Engel Derece:</label>
+                                                <h:inputText id="engel" value="#{kisiEngelBean.entity.derece}" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="cinsiyet">Cinsiyet:</label>
+                                                <h:inputText id="cinsiyet" value="#{kisiBean.entity.cinsiyet}" class="form-control" />
+                                            </div>
+
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="hastalik" class="form-label">Varsa hastalık adı:</label>
+                                                <h:inputText id="hastalik" value="#{kisiEngelBean.entity.hastalik}" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="other_info2">Doğum Tarihi:</label>
+                                                <h:inputText id="other_info2" value="#{kisiBean.entity.doğum_tarihi}" class="form-control" />
+                                            </div>
+
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="address_desc">Genel Açıklama:</label>
+                                                <h:inputTextarea id="address_desc" class="form-control" rows="1" value="#{muracaatBilgiBean.entity.aciklama}" />
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="KurumAdi" class="form-label">Yönlendirilen Kurum Adı:</label>
+                                                <h:selectOneMenu id="KurumAdi" value="#{kurumAltBean.selectedKurumId}" class="form-control">
+                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                                    <f:selectItems value="#{kurumBean.kurumList}" />
+                                                    <f:ajax event="change" listener="#{kurumAltBean.kurumyukle}" render="altKurum" />
+                                                </h:selectOneMenu>
+                                            </div>
+                                            <div class="form-group col-md-6 mb-3">
+                                                <label for="altKurumAdi" class="form-label">Yönlendirilen Alt Kurum Adı:</label>
+                                                <h:selectOneMenu id="altKurum" value="#{kisiEngelBean.entity.alt_kurum_id}" class="form-control">
+                                                    <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                                    <f:selectItems value="#{kurumAltBean.tipList}" />
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </div>
+                                        <div class="text-center mt-3">
+                                            <h:commandButton value="Kaydet" action="#{kisiEngelBean.ekle()}" class="btn btn-success">
+                                                <f:ajax execute="@form" render="@form, mesaj" />
+                                            </h:commandButton>                                  
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pagination Card -->
+                                <div class="card mt-3">
+                                    <div class="card-body">
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination justify-content-center mb-3">
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/MuracaatSecim.xhtml" data-toggle="tooltip" title="Müracaat Seçim">1</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/YakinlikBilgileri.xhtml" data-toggle="tooltip" title="Yakınlık Bilgileri">2</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-secondary" data-page="Tutanak/EngelBilgisi.xhtml" data-toggle="tooltip" title="Sağlık ve Engel Bilgisi">3</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/GelirBorc.xhtml" data-toggle="tooltip" title="Aile Gelir ve Borç Bilgileri">4</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/Mulkiyet.xhtml" data-toggle="tooltip" title="Mülkiyet Bilgileri">5</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/SosyalGuvence.xhtml" data-toggle="tooltip" title="Sosyal Güvence Bilgisi">6</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/TalepYardim.xhtml" data-toggle="tooltip" title="Talep Edilen Yardımlar">7</button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/TutanakInceleme.xhtml" data-toggle="tooltip" title="Tutanak İnceleme">8</button>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+        <script>
+            function confirmDelete(button) {
+                return confirm("Bu kullanıcıyı gerçekten silmek istiyor musunuz?");
+            }
+        </script>
+    </h:body>
+</html>
