@@ -78,6 +78,10 @@ public class TutanakEvEsyalariDAO extends DBConnection {
         return tutanakEvEsyalariList;
     }
 
+    public void TutanakEvEsyalariMesajTemizle() {
+        this.mesaj = null;
+    }
+
     public Connection getDb() {
         return db;
     }

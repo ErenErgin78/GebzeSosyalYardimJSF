@@ -31,6 +31,10 @@ public class EngelDAO extends DBConnection {
         try {
             Connection conn = this.getDb();
 
+            if (engel.getAktif() == null) {
+                engel.setAktif(1);
+            }
+
             String callQuery = "{call INSERT_ENGELLI_TIP(?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
 
@@ -41,7 +45,7 @@ public class EngelDAO extends DBConnection {
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (Exception ex) {
-           this.mesaj = DetectError(ex);
+            this.mesaj = DetectError(ex);
         }
 
     }
@@ -65,7 +69,7 @@ public class EngelDAO extends DBConnection {
         try {
             StringBuilder queryBuilder = new StringBuilder();
             queryBuilder.append("SELECT TIP_ID, TIP_ISIM FROM ENGELLI_TIP WHERE 1=1");
-            
+
             if (isim != null && !isim.isEmpty()) {
                 queryBuilder.append("AND TIP_ISIM LIKE '%").append(isim).append("%' ");
             }
@@ -84,7 +88,8 @@ public class EngelDAO extends DBConnection {
         }
         return engelList;
     }
-     public List<SelectItem> EngelGetir() {
+
+    public List<SelectItem> EngelGetir() {
         List<SelectItem> TipList = new ArrayList<>();
 
         try {

@@ -98,6 +98,10 @@ public class TutanakMulkiyetDAO extends DBConnection {
         return TutanakMulkiyetList;
     }
 
+    public void TutanakMulkiyetMesajTemizle() {
+        this.mesaj = null;
+    }
+
     // Veritabanı Bağlantısı Almak İçin Metod
     public Connection getDb() {
         if (this.db == null) {

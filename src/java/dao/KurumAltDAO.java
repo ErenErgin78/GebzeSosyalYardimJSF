@@ -21,15 +21,18 @@ public class KurumAltDAO extends DBConnection {
     private Integer id = 0;
     private String isim = "";
 
-    public void KurumAltEkle(KurumAlt yardimAlt) {
+    public void KurumAltEkle(KurumAlt kurumAlt) {
 
         try {
             Connection conn = this.getDb();
+            if(kurumAlt.getAktif()==null){
+                 kurumAlt.setAktif(1);           
+            }
 
             String callQueryAdres = "{call INSERT_KURUM_ALT_TIP(?, ?)}";
             CallableStatement csAdres = conn.prepareCall(callQueryAdres);
-            csAdres.setInt(1, yardimAlt.getTip_id());
-            csAdres.setString(2, yardimAlt.getAlt_tip());
+            csAdres.setInt(1, kurumAlt.getTip_id());
+            csAdres.setString(2, kurumAlt.getAlt_tip());
             csAdres.execute();
 
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";

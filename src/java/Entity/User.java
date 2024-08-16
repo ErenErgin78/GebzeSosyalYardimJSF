@@ -134,11 +134,11 @@ public class User {
         this.kullanici_id = kullanici_id;
     }
 
-    public int getKullanici_durum_id() {
+    public Integer getKullanici_durum_id() {
         return kullanici_durum_id;
     }
 
-    public void setKullanici_durum_id(int kullanici_durum_id) {
+    public void setKullanici_durum_id(Integer kullanici_durum_id) {
         this.kullanici_durum_id = kullanici_durum_id;
     }
 

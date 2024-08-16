@@ -31,9 +31,13 @@ public class OkulBean implements Serializable {
     public void okulsil(int okulid) {
         this.getDao().OkulSil(okulid);
     }
-    
-    public void temizle(){
-    entity = new Okul();
+
+    public void okulMesajTemizle() {
+        this.getDao().OkulMesajTemizle();
+    }
+
+    public void temizle() {
+        entity = new Okul();
     }
 
     public Okul getEntity() {

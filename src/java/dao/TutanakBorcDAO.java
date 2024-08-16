@@ -102,6 +102,10 @@ public class TutanakBorcDAO extends DBConnection {
         }
     }
 
+    public void TutanakBorcMesajTemizle() {
+        this.islemBasariliMesaj = null;
+    }
+
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();

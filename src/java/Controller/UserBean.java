@@ -32,6 +32,10 @@ public class UserBean implements Serializable {
         this.list = this.getDao().UserListesi();
     }
 
+    public void userMesajTemizle() {
+        this.getDao().UsersMesajTemizle();
+    }
+
     public void giris() {
         boolean basarili = this.getDao().KullaniciGiris(this.getDao().getKullanici_adi(), this.getDao().getSifre());
 
@@ -49,7 +53,7 @@ public class UserBean implements Serializable {
             context.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Kullanıcı adı veya şifre hatalıdır", null));
         }
-        
+
     }
 
     public String cikis() {

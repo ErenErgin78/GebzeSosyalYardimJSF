@@ -25,6 +25,10 @@ public class YardimAltDAO extends DBConnection {
         try {
             Connection conn = this.getDb();
 
+            if (yardimAlt.getAktif() == null) {
+                yardimAlt.setAktif(1);
+            }
+
             String callQueryAdres = "{call INSERT_YARDIM_ALT_TIP(?, ?)}";
             CallableStatement csAdres = conn.prepareCall(callQueryAdres);
             csAdres.setInt(1, yardimAlt.getTip_id());
@@ -34,7 +38,7 @@ public class YardimAltDAO extends DBConnection {
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (Exception ex) {
-           this.islemBasariliMesaj = DetectError(ex);
+            this.islemBasariliMesaj = DetectError(ex);
         }
     }
 
@@ -98,6 +102,10 @@ public class YardimAltDAO extends DBConnection {
 
     public void setDb(Connection db) {
         this.db = db;
+    }
+
+    public void YardimAltMesajTemizle() {
+        this.islemBasariliMesaj = null;
     }
 
     public Connection getDb() {

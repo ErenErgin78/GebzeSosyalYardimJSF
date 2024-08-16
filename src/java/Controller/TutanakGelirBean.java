@@ -26,6 +26,10 @@ public class TutanakGelirBean implements Serializable {
         this.getDao().TutanakGelirSil(tutanakGelirId);
     }
 
+    public void tutanakGelirMesajTemizle() {
+        this.getDao().TutanakGelirMesajTemizle();
+    }
+
     // TutanakGelir entity getter ve setter
     public TutanakGelir getEntity() {
         if (this.entity == null) {
