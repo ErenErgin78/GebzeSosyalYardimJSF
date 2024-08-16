@@ -94,13 +94,6 @@
                                     <!-- Yakınlık Bilgileri Formu -->
                                     <div class="form-row">
                                         <div class="form-group col-md-6 mb-3">
-                                            <label for="statu" class="form-label">Özel Statü:</label>
-                                            <h:selectOneMenu id="statu" value="#{userBean.dao.aktif}" class="form-control">
-                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                                                        
-                                                <f:ajax event="valueChange" render="KullaniciListesi" />
-                                            </h:selectOneMenu>
-                                        </div>
-                                        <div class="form-group col-md-6 mb-3">
                                             <label for="durum" class="form-label">Medeni Hali:</label>
                                             <h:selectOneMenu id="rum" value="#{kisiBean.entity.medeni_durum_id}"  class="form-control">
                                                 <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                                                        
@@ -109,46 +102,52 @@
 
                                         </div>
                                     </div>                      
-                                    <!-- Askerlik Bilgileri Kısmı -->
+                                    <!-- Engel Bilgileri Kısmı -->
                                     <div class="card">
                                         <div class="card-header">
-                                            Asker/Hükümlü Bilgileri
+                                            Sağlık/Engel Bilgileri
                                         </div>
                                         <div class="card-body">
                                             <div class="form-row">
                                                 <div class="form-group col-md-6 mb-3">
-                                                    <label for="durum">Asker/Hükümlü Hali:</label>
+                                                    <label for="durum">Hastalık Var mı?</label>
                                                     <div class="custom-radio">
                                                         <h:selectOneRadio id="durum" value="#{kisiAskerlikBean.entity.aktif}"  styleClass="radio-inline">
-                                                            <f:selectItem itemLabel="Asker" itemValue="1" />
-                                                            <f:selectItem itemLabel="Hükümlü" itemValue="2" />
+                                                            <f:selectItem itemLabel="Evet" itemValue="1" />
+                                                            <f:selectItem itemLabel="Hayır" itemValue="0" />
                                                         </h:selectOneRadio>
                                                     </div>
                                                 </div>
+                                                <div class="form-group col-md-6 mb-3">
+                                                    <label for="hasta" class="form-label">Hastalık:</label>
+                                                    <h:selectOneMenu id="hasta" value="#{kisiBean.entity.cinsiyet}" class="form-control">
+                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                                        <f:selectItem itemLabel="Zatürre" itemValue="E" />
+                                                        <f:selectItem itemLabel="Kanser" itemValue="K" />
+                                                        <f:selectItem itemLabel="Şeker Hastası" itemValue="K" />  
+                                                        <f:ajax event="valueChange" render="KullaniciListesi" />
+                                                    </h:selectOneMenu>
+                                                </div>
+
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6 mb-3">
-                                                    <label for="askerlik_tarihi">Başlama Tarihi:</label>
-                                                    <h:inputText class="form-control" value="#{kisiAskerlikBean.entity.baslangic_tarihi}">
-                                                        <f:passThroughAttribute name="type" value="date" />
-                                                    </h:inputText>
+                                                    <label for="engel">Engel Var mı?</label>
+                                                    <div class="custom-radio">
+                                                        <h:selectOneRadio id="engel" value="#{kisiAskerlikBean.entity.aktif}"  styleClass="radio-inline">
+                                                            <f:selectItem itemLabel="Evet" itemValue="1" />
+                                                            <f:selectItem itemLabel="Hayır" itemValue="0" />
+                                                        </h:selectOneRadio>
+                                                    </div>
                                                 </div>
                                                 <div class="form-group col-md-6 mb-3">
-                                                    <label for="askerlik_tarihi">Bitiş Tarihi:</label>
-                                                    <h:inputText class="form-control" value="#{kisiAskerlikBean.entity.bitis_tarihi}">
-                                                        <f:passThroughAttribute name="type" value="date" />
-                                                    </h:inputText>
+                                                    <label for="engelAlt">Engelli Alt Tip/Grup:</label>
+                                                    <h:selectOneMenu id="engelAlt" value="#{kisiEngelBean.entity.engelli_alt_tip_id}" class="form-control">
+                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="1" />
+                                                        <f:selectItems value="#{engelAltBean.tipList}" />
+                                                    </h:selectOneMenu>
                                                 </div>
-                                                <div class="form-group col-md-6 mb-3">
-                                                    <label for="askerlik_suresi">Askerlik/Hükümlülük Süresi(Gün):</label>
-                                                    <h:inputText class="form-control" value="#{kisiAskerlikBean.entity.asker_hukumlu}">
-                                                        <f:passThroughAttribute name="type" value="text" />
-                                                    </h:inputText>
-                                                </div>
-                                                <div class="form-group col-md-6 mb-3">
-                                                    <label for="add">Açıklama:</label>
-                                                    <h:inputTextarea id="add" class="form-control" rows="1" value="#{kisiAskerlikBean.entity.aciklama}" />
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div> 
@@ -156,40 +155,7 @@
                                         <h:commandButton value="Kaydet" action="#{kisiAskerlikBean.create()}" class="btn btn-success">
                                             <f:ajax execute="@form" render="@form, mesaj" />
                                         </h:commandButton>                                  
-                                    </div>                                  
-                                    <!-- Pagination Card -->
-                                    <div class="card mt-3">
-                                        <div class="card-body">
-                                            <nav aria-label="Page navigation example">
-                                                <ul class="pagination justify-content-center mb-3">
-                                                    <li class="page-item">
-                                                        <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/MuracaatSecim.xhtml" data-toggle="tooltip" title="Müracaat Seçim">1</button>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <button type="button" class="btn btn-secondary" data-page="Tutanak/YakinlikBilgileri.xhtml" data-toggle="tooltip" title="Yakınlık Bilgileri">2</button>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/EngelBilgisi.xhtml" data-toggle="tooltip" title="Sağlık ve Engel Bilgisi">3</button>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/GelirBorc.xhtml" data-toggle="tooltip" title="Aile Gelir ve Borç Bilgileri">4</button>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/Mulkiyet.xhtml" data-toggle="tooltip" title="Mülkiyet Bilgileri">5</button>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/SosyalGuvence.xhtml" data-toggle="tooltip" title="Sosyal Güvence Bilgisi">6</button>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/TalepYardim.xhtml" data-toggle="tooltip" title="Talep Edilen Yardımlar">7</button>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/TutanakInceleme.xhtml" data-toggle="tooltip" title="Tutanak İnceleme">8</button>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                        </div>
-                                    </div>                 
+                                    </div>                                                
                                 </div>
                             </div>
                         </div>
