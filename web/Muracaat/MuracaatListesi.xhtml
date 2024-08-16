@@ -92,11 +92,11 @@
                                                         <td>#{muracaat.kisi_isim}</td>
                                                         <td>#{muracaat.kisi_soyisim}</td>
                                                         <td>#{muracaat.kayit_tarihi}</td>                                             
-                                                        <td>#{muracaat.kisi_isim}</td>
-                                                        <td>#{muracaat.kisi_soyisim}</td>
+                                                        <td>#{muracaat.mahalle}</td>
+                                                        <td>#{muracaat.sokak}</td>
                                                         <td class="profil">
                                                             <div class="action-buttons">
-                                                                <h:commandButton value="SIL" action="#{userBean.delete(user.kullanici_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                                <h:commandButton value="SIL" action="#{muracaatBean.delete(muracaat.muracaat_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
                                                                     <f:ajax execute="@this" render="@form"/>
                                                                 </h:commandButton>
                                                                 <h:commandButton value="DUZENLE" action="#{userBean.edit(user)}" styleClass="btn btn-primary ml-20">

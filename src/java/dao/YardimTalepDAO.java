@@ -34,7 +34,7 @@ public class YardimTalepDAO extends DBConnection {
             this.mesaj = "İşlem başarıyla gerçekleşmiştir";
 
         } catch (SQLException ex) {
-           this.mesaj = DetectError(ex);
+            this.mesaj = DetectError(ex);
         }
     }
 
@@ -48,7 +48,7 @@ public class YardimTalepDAO extends DBConnection {
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (SQLException ex) {
-           this.mesaj = DetectError(ex);
+            this.mesaj = DetectError(ex);
         }
     }
 
