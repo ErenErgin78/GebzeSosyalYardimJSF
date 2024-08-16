@@ -22,6 +22,12 @@
                         <li class="breadcrumb-item active" aria-current="page">Müracaat Seçim</li>
                     </ol>
                 </div>
+                <div class="col-2 text-end">
+                    <button type="button" class="btn btn-outline-success load-page-button" data-page="Tutanak/PopUP.xhtml">PopUp</button>
+                </div>
+                  <div class="col-2 text-end">
+                    <button type="button" class="btn btn-outline-success load-page-button" data-page="Tutanak/RadioButtonHide.xhtml">RadioButton</button>
+                </div>
             </div> 
             <div class="container-fluid">               
                 <div class="row">                   
@@ -69,7 +75,7 @@
                                                         <td>#{muracaat.kisi_soyisim}</td>
                                                         <td class="profil">
                                                             <div class="action-buttons">
-                                                                <h:commandButton value="Kaydet" action="#{kisiMuracaatBean.KisiMuracaatEkle()}" class="btn btn-success"  onclick="submitAndRedirect()">
+                                                                <h:commandButton value="İlerle" action="#{kisiMuracaatBean.KisiMuracaatEkle()}" class="btn btn-outline-secondary load-page-button">
                                                                     <f:ajax execute="@form" render="@form" />
                                                                 </h:commandButton>
 
@@ -123,26 +129,6 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
-
-        <script type="text/javascript">
-            function submitAndRedirect() {
-                // Formu AJAX ile gönder
-                jsf.ajax.request(
-                        'userForm', // Formun ID'si
-                        null,
-                        {
-                            'javax.faces.behavior.event': 'action',
-                            'javax.faces.partial.execute': '@form',
-                            'javax.faces.partial.render': '@form',
-                            oncomplete: function (response) {
-                                // Yönlendirme işlemi
-                                window.location.href = "#{facesContext.externalContext.requestContextPath}/index.xhtml";
-                            }
-                        }
-                );
-                return false; // Doğrudan yönlendirmeyi engeller
-            }
-        </script>
         <script>
             function confirmDelete(button) {
                 return confirm("Bu kullanıcıyı gerçekten silmek istiyor musunuz?");
