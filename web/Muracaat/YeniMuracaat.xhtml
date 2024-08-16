@@ -198,7 +198,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-row">                 
-                                                <div class="form-group col-md-6 mb-3">
+                                                <div class="form-group col-md-12 mb-3">
                                                     <label for="aciklama">Açıklama:</label>
                                                     <h:inputTextarea id="aciklama" class="form-control" value="#{muracaatBilgiBean.entity.aciklama}" rows="1" />
                                                 </div>
@@ -207,7 +207,7 @@
                                     </div>
                                     <div class="text-center mt-3">
                                         <h:commandButton value="Kaydet" action="#{kisiMuracaatBean.KisiMuracaatEkle()}" class="btn btn-success">
-                                            <f:ajax execute="@form" render="@form" />
+                                            <f:ajax execute="@form" render="@form, mesaj" />
                                         </h:commandButton>    
                                     </div>                                                                              
                                 </div>

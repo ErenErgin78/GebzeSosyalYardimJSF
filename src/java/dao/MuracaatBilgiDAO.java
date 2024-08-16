@@ -48,7 +48,7 @@ public class MuracaatBilgiDAO extends DBConnection {
             return muracaatBilgiId;
 
         } catch (SQLException ex) {
-            DetectError(ex);
+            mesaj = DetectError(ex);
             return null;
         }
     }
