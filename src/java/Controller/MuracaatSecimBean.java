@@ -4,14 +4,8 @@
  */
 package Controller;
 
-import Entity.Kisi;
-import Entity.KisiAdres;
-import Entity.KisiIletisim;
-import Entity.KisiYakinlar;
-
 import jakarta.inject.Named;
-import jakarta.enterprise.context.SessionScoped;
-import jakarta.inject.Inject;
+import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
 
 /**
@@ -19,18 +13,12 @@ import java.io.Serializable;
  * @author Eren
  */
 @Named(value = "muracaatSecimBean")
-@SessionScoped
+@ViewScoped
 public class MuracaatSecimBean implements Serializable {
 
-    @Inject
-    private Kisi kisi;
-    
-    @Inject
-    private KisiAdres kisiAdres;
-    
-    @Inject
-     private KisiYakinlar kisiYakinlar;
-    
+    /**
+     * Creates a new instance of MuracaatSecimBean
+     */
     public MuracaatSecimBean() {
     }
     
