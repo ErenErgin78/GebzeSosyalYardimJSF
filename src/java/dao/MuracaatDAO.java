@@ -107,7 +107,7 @@ public class MuracaatDAO extends DBConnection {
                         rs.getDate("KAYIT_TARIHI"),
                         rs.getInt("AKTIF"),
                         rs.getDate("GUNCELLEME_TARIHI"),
-                        rs.getInt("KIMLIK_NO"),
+                        rs.getBigDecimal("KIMLIK_NO").toBigInteger(),
                         rs.getString("ISIM"),
                         rs.getString("SOYISIM"),
                         rs.getInt("ARSIV_DOSYA_NO"),
