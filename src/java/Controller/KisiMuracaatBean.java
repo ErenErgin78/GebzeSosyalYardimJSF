@@ -56,9 +56,9 @@ public class KisiMuracaatBean implements Serializable {
 
             Integer muracaat_bilgi_id = muracaatBilgiBean.ekle();
 
-            Integer muracaat_id = muracaatBean.ekle(kisi_id, muracaat_bilgi_id);
+            muracaatBean.ekle(kisi_id, muracaat_bilgi_id);
 
-            Integer yakinlar_id = kisiYakinlarBean.ekle(kisi_id);
+            Integer yakinlar_id = kisiYakinlarBean.ekleMuracaat(kisi_id);
 
             mesaj = "İşlem Başarılı";
 
