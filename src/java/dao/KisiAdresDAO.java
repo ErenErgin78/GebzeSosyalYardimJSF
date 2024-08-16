@@ -54,6 +54,7 @@ public class KisiAdresDAO extends DBConnection {
         }
 
     }
+    
 
     public void KisiAdresSil(int kisiAdresid) {
         String deleteQuery = "DELETE FROM KISI_ADRES WHERE KISI_ADRES_ID = ?";
