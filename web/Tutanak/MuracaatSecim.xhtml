@@ -69,9 +69,10 @@
                                                         <td>#{muracaat.kisi_soyisim}</td>
                                                         <td class="profil">
                                                             <div class="action-buttons">
-                                                                <h:commandButton value="İlerle" action="#{userBean.edit(user)}" styleClass="btn btn-primary ml-20">
-                                                                    <f:ajax execute="@this" render="@form"/>
+                                                                <h:commandButton value="Kaydet" action="#{kisiMuracaatBean.KisiMuracaatEkle()}" class="btn btn-success">
+                                                                    <f:ajax execute="@form" render="@form" />
                                                                 </h:commandButton>
+
                                                             </div>
                                                         </td>
                                                     </tr>
