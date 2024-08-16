@@ -34,6 +34,10 @@ public class YardimBean implements Serializable {
         this.list = this.getDao().YardimListesi(); // Silme işleminden sonra listeyi güncelle
     }
 
+    public void yardimMesajTemizle() {
+        this.getDao().YardimMesajTemizle();
+    }
+
     public Yardim getEntity() {
         if (this.entity == null) {
             this.entity = new Yardim();
@@ -72,6 +76,7 @@ public class YardimBean implements Serializable {
     public void init() {
         getDao().setMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
     }
+
     public YardimBean() {
 
     }

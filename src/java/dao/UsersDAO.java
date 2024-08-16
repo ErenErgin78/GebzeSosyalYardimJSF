@@ -175,6 +175,10 @@ public class UsersDAO extends DBConnection {
 
     }
 
+    public void UsersMesajTemizle() {
+        this.mesaj = null;
+    }
+
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();

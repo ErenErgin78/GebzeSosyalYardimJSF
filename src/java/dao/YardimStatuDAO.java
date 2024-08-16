@@ -100,6 +100,10 @@ public class YardimStatuDAO extends DBConnection {
 
     }
 
+    public void YardimStatuMesajTemizle() {
+        this.mesaj = null;
+    }
+
     public java.sql.Connection getDb() {
         if (this.db == null) {
             this.db = (Connection) this.connect();

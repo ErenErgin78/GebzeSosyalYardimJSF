@@ -78,6 +78,10 @@ public class YardimTalepDAO extends DBConnection {
         return YardimTalepList;
     }
     
+    public void YardimTalepMesajTemizle(){
+      this.mesaj=null;
+    }
+    
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();

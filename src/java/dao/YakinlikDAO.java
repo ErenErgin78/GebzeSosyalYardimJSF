@@ -114,6 +114,10 @@ public class YakinlikDAO extends DBConnection {
 
     }
 
+    public void YakinlikMesajTemizle() {
+        this.mesaj = null;
+    }
+
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();

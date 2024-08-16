@@ -96,7 +96,7 @@ public class TutanakSosyalGuvenceDAO extends DBConnection {
         }
         return GuvenceList;
     }
-    
+
     public List<SelectItem> BirimGetir() {
         List<SelectItem> BirimList = new ArrayList<>();
 
@@ -112,6 +112,10 @@ public class TutanakSosyalGuvenceDAO extends DBConnection {
             mesaj = DetectError(ex);
         }
         return BirimList;
+    }
+
+    public void TutanakSosyalGuvenceMesajTemizle() {
+        this.mesaj = null;
     }
 
     public Connection getDb() {

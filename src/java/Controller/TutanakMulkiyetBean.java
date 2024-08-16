@@ -25,6 +25,10 @@ public class TutanakMulkiyetBean implements Serializable {
         this.getDao().TutanakMulkiyetSil(tutanakMulkiyetId);
     }
 
+    public void tutanakMulkiyetMesajTemizle() {
+        this.getDao().TutanakMulkiyetMesajTemizle();
+    }
+
     // TutanakMulkiyet verilerini listeleme metodu
     public List<TutanakMulkiyet> getList() {
         if (this.list == null) {
@@ -61,7 +65,7 @@ public class TutanakMulkiyetBean implements Serializable {
     public void setDao(TutanakMulkiyetDAO dao) {
         this.dao = dao;
     }
-    
+
     // Constructor
     public TutanakMulkiyetBean() {
     }

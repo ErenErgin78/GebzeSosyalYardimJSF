@@ -104,6 +104,10 @@ public class OkulDAO extends DBConnection {
         }
     }
 
+    public void OkulMesajTemizle() {
+        this.mesaj = null;
+    }
+
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();

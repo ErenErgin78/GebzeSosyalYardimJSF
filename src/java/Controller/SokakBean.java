@@ -30,6 +30,10 @@ public class SokakBean implements Serializable {
         this.list = this.getDao().SokakListesi();
     }
 
+    public void sokakMesajTemizle() {
+        this.getDao().SokakMesajTemizle();
+    }
+
     public List<SelectItem> sokakgetir() {
         return this.getDao().SokakGetir(selectedMahalleId);
     }
