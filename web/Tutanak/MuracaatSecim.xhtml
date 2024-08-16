@@ -68,11 +68,10 @@
                                                         <td>#{muracaat.kisi_isim}</td>
                                                         <td>#{muracaat.kisi_soyisim}</td>
                                                         <td class="profil">
-                                                            <div class="action-buttons">
-                                                                <h:commandButton value="Kaydet" action="#{kisiMuracaatBean.KisiMuracaatEkle()}" class="btn btn-success">
-                                                                    <f:ajax execute="@form" render="@form" />
-                                                                </h:commandButton>
-
+                                                            <div class="col-2 text-end">
+                                                                <button type="button" class="btn btn-success load-page-button" data-page="Tutanak/TutanakInceleme.xhtml">Tutanak</button>
+                                                                <button type="button" class="btn btn-success load-page-button" data-page="Tutanak/YakinlikBilgileri.xhtml">Yakınlık</button>
+                                                                <button type="button" class="btn btn-success load-page-button" data-page="Tutanak/AileMaddiDurum.xhtml">Maddi Durum</button>
                                                             </div>
                                                         </td>
                                                     </tr>
