@@ -4,31 +4,243 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Mülkiyet Bilgileri</title>
+        <title>Aile Gelir ve Borç Bilgisi</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
         <link rel="stylesheet" href="CSS/list.css" />
         <h:outputStylesheet name="CSS/styles.css"/>
     </h:head>
     <h:body>
         <h:form id="userForm">
+            <h:messages globalOnly="true" layout="table"/>
+            <h:outputText id="mesaj" value="#{tutanakGelirBorcBean.mesaj}" />
             <div class="row align-items-center mb-3">
                 <div class="col-10">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
                         <li class="breadcrumb-item active" aria-current="page">İşlemlerim</li>
                         <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="Tutanak/MuracaatSecim.xhtml">Tutanak</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Mülkiyet Bilgileri</li>
+                        <li class="breadcrumb-item active" aria-current="page">Aile Gelir ve Borç Bilgileri</li>
                     </ol>
                 </div>
+                <div class="col-2 text-end">
+                <button type="button" class="btn btn-outline-success load-page-button" data-page="Tutanak/MuracaatSecim.xhtml">Müracaat Seçim</button>
+            </div>
             </div> 
             <div class="container-fluid">               
                 <div class="row">                   
                     <div class="col-md-12">
-                        <div class="card-header">
-                            <h1>Mülkiyet</h1>
-                        </div>
-                        <div class="card-body"> 
-                            <div class="card">
+                        <div class="card">
+                            <div class="card-header">
+                                <h1>Gelir ve Borç</h1>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Gelir Bilgileri
+                                            </div>
+                                            <div class="card-body">
+                                                <!-- Form Rows -->
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="yaslilik" class="form-label">Yaşlılık:</label>
+                                                            <h:inputText id="yaslilik" value="#{tutanakGelirBean.entity.yaslilik}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="engelli" class="form-label">Engelli:</label>
+                                                            <h:inputText id="engelli" value="#{tutanakGelirBean.entity.engelli}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="yakini" class="form-label">Engelli Yakını:</label>
+                                                            <h:inputText id="yakini" value="#{tutanakGelirBean.entity.engelli_yakini}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="yetimAyligi" class="form-label">Yetim Aylığı:</label>
+                                                            <h:inputText id="yetimAyligi" value="#{tutanakGelirBean.entity.yetim_ayligi}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="emekliMaasi" class="form-label">Emekli Maaşı:</label>
+                                                            <h:inputText id="emekliMaasi" value="#{tutanakGelirBean.entity.emekli_maasi}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="bakimParasi" class="form-label">Evde Bakım Parası:</label>
+                                                            <h:inputText id="bakimParasi" value="#{tutanakGelirBean.entity.evde_bakim_parasi}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="dulMaasi" class="form-label">Dul Maaşı:</label>
+                                                            <h:inputText id="dulMaasi" value="#{tutanakGelirBean.entity.dul_maasi}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="issizlikMaasi" class="form-label">İşsizlik Maaşı:</label>
+                                                            <h:inputText id="issizlikMaasi" value="#{tutanakGelirBean.entity.issizlik_maasi}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="askerMaasi" class="form-label">Asker Maaşı:</label>
+                                                            <h:inputText id="askerMaasi" value="#{tutanakGelirBean.entity.asker_maasi}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="kira" class="form-label">Kira Geliri:</label>
+                                                            <h:inputText id="kira" value="#{tutanakGelirBean.entity.kira_maasi}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="kaymakamlik" class="form-label">Kaymakamlık:</label>
+                                                            <h:inputText id="kaymakamlik" value="#{tutanakGelirBean.entity.kaymakamlik}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="sosyalHizmet" class="form-label">Sosyal Hizmetler:</label>
+                                                            <h:inputText id="sosyalHizmet" value="#{tutanakGelirBean.entity.sosyal_hizmetler}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="buyuksehir" class="form-label">Büyükşehir Belediyesi:</label>
+                                                            <h:inputText id="buyuksehir" value="#{tutanakGelirBean.entity.buyuksehir}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="vakif" class="form-label">Özel Vakıflar:</label>
+                                                            <h:inputText id="vakif" value="#{tutanakGelirBean.entity.ozel_vakif}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="diger" class="form-label">Diğer:</label>
+                                                            <h:inputText id="diger" value="#{tutanakGelirBean.entity.diger}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="aciklama">Diğer Açıklama:</label>
+                                                            <h:inputTextarea id="aciklama" class="form-control" rows="1" value="#{tutanakGelirBean.entity.diger_aciklama}" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Borç Bilgileri
+                                            </div>
+                                            <div class="card-body">
+                                                <!-- Form Rows -->
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="borcBilgisi" class="form-label">Elektrik:</label>
+                                                            <h:inputText id="borcBilgis" value="#{tutanakBorcBean.entity.elektrik}" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="borcBilgisi" class="form-label">Su:</label>
+                                                            <h:inputText id="borcBilgi" value="#{tutanakBorcBean.entity.su}" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="borcBilgisi" class="form-label">Doğal Gaz:</label>
+                                                            <h:inputText id="borcBilg" value="#{tutanakBorcBean.entity.dogalgaz}" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="borcBilgisi" class="form-label">Kira</label>
+                                                            <h:inputText id="borcBii" value="#{tutanakBorcBean.entity.kira}" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="borcBilgisi" class="form-label">Kredi Kartı:</label>
+                                                            <h:inputText id="boilgisi" value="#{tutanakBorcBean.entity.kredi_karti}" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="borcBilgisi" class="form-label">Diğer:</label>
+                                                            <h:inputText id="borcBisi" value="#{tutanakBorcBean.entity.diger}" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="address_desc">Diğer Açıklama:</label>
+                                                            <h:inputTextarea id="address_desc" class="form-control" rows="1" value="#{tutanakBorcBean.entity.diger_aciklama}" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                  
+                                </div>
+                                <div class="card">
                                 <div class="card-header">
                                     Mülkiyet Bilgileri
                                 </div>
@@ -107,6 +319,8 @@
                                         <h:inputTextarea id="gayrimenkulTuru" class="form-control" rows="1" value="#{tutanakMulkiyetBean.entity.gayrimenkul_tur}" />
                                     </div>
                                 </div>
+                            </div>
+                          
                                 <div class="card">
                                     <div class="card-header">
                                         Ev Eşyaları
@@ -227,6 +441,11 @@
                                         </div> 
                                     </div>
                                 </div> 
+                                <div class="text-center mt-3">
+                                    <h:commandButton value="Kaydet" action="#{tutanakGelirBorcBean.GelirBorcEkle()}" class="btn btn-success">
+                                        <f:ajax execute="@form" render="@form, mesaj" />
+                                    </h:commandButton>                                  
+                                </div>
                                 <!-- Pagination Card -->
                                 <div class="card mt-3">
                                     <div class="card-body">
@@ -242,10 +461,10 @@
                                                     <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/EngelBilgisi.xhtml" data-toggle="tooltip" title="Sağlık ve Engel Bilgisi">3</button>
                                                 </li>
                                                 <li class="page-item">
-                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/GelirBorc.xhtml" data-toggle="tooltip" title="Aile Gelir ve Borç Bilgileri">4</button>
+                                                    <button type="button" class="btn btn-secondary" data-page="Tutanak/GelirBorc.xhtml" data-toggle="tooltip" title="Aile Gelir ve Borç Bilgileri">4</button>
                                                 </li>
                                                 <li class="page-item">
-                                                    <button type="button" class="btn btn-secondary" data-page="Tutanak/Mulkiyet.xhtml" data-toggle="tooltip" title="Mülkiyet Bilgileri">5</button>
+                                                    <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/Mulkiyet.xhtml" data-toggle="tooltip" title="Mülkiyet Bilgileri">5</button>
                                                 </li>
                                                 <li class="page-item">
                                                     <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/SosyalGuvence.xhtml" data-toggle="tooltip" title="Sosyal Güvence Bilgisi">6</button>
@@ -259,7 +478,7 @@
                                             </ul>
                                         </nav>
                                     </div>
-                                </div>         
+                                </div>
                             </div>
                         </div>
                     </div>
