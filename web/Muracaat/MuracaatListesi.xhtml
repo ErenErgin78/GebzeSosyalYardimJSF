@@ -67,6 +67,16 @@
                                         <f:ajax event="valueChange" render="KullaniciListesi" />
                                     </h:selectOneMenu>
                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="durum" class="form-label">Müracaat Durumu:</label>
+                                    <h:selectOneMenu id="durum" value="#{kisiBean.entity.aktif}" class="form-control">
+                                        <f:selectItem itemLabel="Hepsi" itemValue="0" />
+                                        <f:selectItem itemLabel="İptal" itemValue="1" />
+                                        <f:selectItem itemLabel="Ulaşılamadı" itemValue="2" />
+                                        <f:selectItem itemLabel="Tahkikata Sevk" itemValue="3" />
+                                        <f:ajax event="valueChange" render="KullaniciListesi" />
+                                    </h:selectOneMenu>
+                                </div>
                             </div>
                             <h:panelGroup id="KullaniciListesi">
                                 <div class="table-container">
