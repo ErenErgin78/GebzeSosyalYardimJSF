@@ -158,8 +158,9 @@ Son satırdaki RETURNING INTO komutu --> Bize insert sonucunda otomatik olarak o
 Fark ettiğiniz gibi kayit_tarihi ve KISI_ID sütunlarını buraya yazmadık çünkü bunlar otomatik oluşturulacak.  
 
 <hr>
+##Backend:
 
-##Backend1 - Entity:  
+###Backend1 - Entity:  
 Örnek olması amacıyla kisiAdres dosyalarını oluşturalım ve kullanalım.
 
 İlk olarak kisiAdres.java dosyamızı entity klasöründe oluşturduk.  
@@ -180,7 +181,7 @@ sadece kullanıcıya gösterilecek değişkenleri barındıran bir yapıcı meth
  Entity klasörü bu kadar.
 
 
- ##Backend2 - DAO:
+ ###Backend2 - DAO:
  kisiAdresDAO.java dosyamızı oluşturuyoruz.
 
  İlk yapmamız gereken işlem public class ABC yazısından sonra extends DBConnection komutunu eklemektir.  
@@ -194,6 +195,179 @@ sadece kullanıcıya gösterilecek değişkenleri barındıran bir yapıcı meth
         return db;
     }
 ```
+Ekstra olarak mesaj isimli string bir değişken de ekleyin ve getter setter ekleyin.  
+
+Daha sonra gerekli metodları yazmaya başlayalım. İlk olarak KisiAdresEkle:
+
+~~~java
+ public Integer KisiAdresEkle(KisiAdres kisiAdres) {
+        try {
+            Connection conn = this.getDb();
+          
+            String callQuery = "{call INSERT_KISI_ADRES(?, ?, ?, ?, ?, ?, ?, ?)}";
+            CallableStatement cs = conn.prepareCall(callQuery);
+            cs.setString(1, kisiAdres.getTarif());
+            cs.setString(2, kisiAdres.getSite());
+            cs.setInt(3, kisiAdres.getKapi_no());
+            cs.setInt(4, kisiAdres.getDaire_no());
+            cs.setInt(5, kisiAdres.getKisi_adres_mahalle_id());
+            cs.setInt(6, kisiAdres.getKisi_mahalle_sokak_id());
+            cs.setInt(7, kisiAdres.getAktif());
+            cs.registerOutParameter(8, java.sql.Types.INTEGER);
+
+            cs.execute();
+            
+            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
+            return cs.getInt(8);
+
+        } catch (Exception ex) {
+            this.mesaj = DetectError(ex);
+            return null;
+        }
+
+    }
+~~~
+public Integer --> Bu methodu Integer değer döndürmesi için ayarladık çünkü işlem sonucunda oluşan ID'yi başka bir tabloda kullanmak için
+döndürüceğiz.
+
+Parametre olarak entity dosyamızı veriyoruz. Daha sonra bean dosyamızda yeni bir entity objesi oluşturarak parametreyi dolduracağız.  
+
+try - catch blokları --> kodlarımızı barındıran bu bloklarda eğer try bloğunun içinde bir hata olursa catch bloğuna geçer.
+Catch bloğunun parametresi olaran Exception ex ise hata hakkındaki detaylı bilgileri barındırır.
+
+try'dan sonra ilk yazdığımız kod ile veritabanına bağlanıyoruz.
+String callQuery ile veritabanından daha önceden yazdığımız saklı yordamı çağırıyoruz.
+Eğer saklı yordamımız olmasaydı ve Statement kullansaydık tüm insert komutunu buraya yazmamız gerekirdi. Bu tarz java kodununu içinde sql yazdığımız için profesyonelce olmazdı ve ayrıca kodlarımız method sayımıza göre yüzlerce satır artabilirdi.  
+String içindeki soru işaretleri saklı yordamın her bir parametresine denk geliyor. Parametre sırasını doğru ayarladığınızdan emin olun.
+Soru işareti sayısı toplam IN ve OUT kullanımı kadar olmalı.  
+Sondaki  "cs.registerOutParameter(8, java.sql.Types.INTEGER);" kodu ile OUT ile ayarladığımız ID'mizi elde ediyoruz ve return cs.getInt(8) diyerek döndürüyoruz.  
+
+
+catch methodunun içinde DetectError benim yazdığım bir hata detayı öğrenme fonksiyonu. Kullanmak isterseniz aşağıya ekliyorum:
+
+~~~java
+public class ErrorFinder {
+
+    public static String DetectError(Exception ex) {
+        //Hatayı yakalamak için
+        FacesContext context = FacesContext.getCurrentInstance();
+        StringBuilder errorMessage = new StringBuilder(ex.getMessage());
+        StackTraceElement[] stackTrace = ex.getStackTrace();
+
+        //Hatanın hangi satırda olduğunu görmek için
+        for (StackTraceElement element : stackTrace) {
+            errorMessage.append(" (at ").append(element.getFileName())
+                    .append(":").append(element.getLineNumber()).append(")");
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage.toString(), null));
+        }
+        return errorMessage.toString();
+    }
+
+}
+~~~
+Bu methodu statik yaptım. Bu sayede her dosyada "new" ile bu dosyadan bir obje üretmek zorunda olmuyorum.
+
+Silme methodu kısa olduğu için saklı yordam oluşturmadım ve direkt PreparedStatement kullandım:
+
+~~~java
+ public void KisiAdresSil(int kisiAdresid) {
+        String deleteQuery = "DELETE FROM KISI_ADRES WHERE KISI_ADRES_ID = ?";
+
+        try {
+            PreparedStatement ps = getDb().prepareStatement(deleteQuery);
+            ps.setInt(1, kisiAdresid);
+            int rowsDeleted = ps.executeUpdate();
+
+            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
+        } catch (SQLException ex) {
+            this.mesaj = DetectError(ex);
+        }
+    }
+~~~
+
+Kullanıcıya verileri bir liste halinde göstermek isterseniz her satır için bir obje üretip değişkenleri aktarıyoruz:
+
+~~~java
+ public List<KisiAdres> KisiAdresListesi() {
+        List<KisiAdres> kisiAdresList = new ArrayList<>();
+
+        try {
+           String query = "SELECT KA.KISI_ADRES_ID, KA.ILCE, KA.TARIF, KA.SITE, KA.KAPI_NO, KA.KISI_ADRES_MAHALLE_ID, " +
+               "KMS.SOKAK_ISIM, KA.KAYIT_TARIHI, KA.AKTIF " +
+               "FROM KISI_ADRES KA " +
+               "JOIN KISI_ADRES_MAHALLE M ON M.KISI_ADRES_MAHALLE_ID = KA.KISI_ADRES_MAHALLE_ID " +
+               "JOIN KISI_MAHALLE_SOKAK KMS ON KMS.MAHALLE_ID = M.KISI_ADRES_MAHALLE_ID";
+
+            Statement statement = getDb().createStatement();
+            ResultSet rs = statement.executeQuery(queryBuilder.toString());
+
+            while (rs.next()) {
+                kisiAdresList.add(new KisiAdres(
+                        rs.getString("TARIF"),
+                        rs.getString("SITE"),
+                        rs.getInt("DAIRE_NO"),
+                        rs.getInt("KAPI_NO"),
+                        rs.getString("KISI_ADRES_MAHALLE_ID"),
+                        rs.getString("KISI_MAHALLE_SOKAK_ID"),
+                        new java.util.Date(rs.getDate("KAYIT_TARIHI").getTime()),
+                        rs.getInt("AKTIF")
+                ));
+            }
+
+            this.mesaj = "işlem başarılı";
+
+        } catch (Exception ex) {
+            this.mesaj = DetectError(ex);
+        }
+        return kisiAdresList;
+    }
+~~~
+
+Bu kısım için saklı yordam oluşturmak daha mantıklı aslında ama alışkanlık olduğu için buraya yazdım. Belki ileride saklı yordamlara dönüştürürüm.
+Siz direkt olarak saklı yordam yazın en iyisi.
+
+Burada join işlemi yapıyoruz. Join işlemi, iki tabloyu da aynı olarak bulunan bir sütunu eşitleyerek tek bir büyük tablo gibi kullanmamızı sağlar.  
+Bu işlem ile entity'e ekstra olarak yazdığımız sokak_isim gibi değişkenleri alacağız.
+
+Burada String içindeki tüm yazıyı veritabanında bir SQL Worksheet'e yapıştırarak size ne getireceğini görebilirsiniz.
+("+" işaretlerini ve çift tırnakları silmeyi unutmayın.)
+
+Her tablodan sonra yazan KA, M, KMS gibi kelimeler bizim uydurduğumuz (tablonun ismindeki kelimelerin baş harfleri) kısaltmalar.
+Uyarı --> Eğer buradaki gibi bir tabloya kısaltma verdiyseniz artık o komutta tablonun tam ismi ile işlem yapamazsınız.
+
+rs.next() --> Bu komut veri olan tüm satırlar getirilene kadar true döndürür. Bu sayede while döngüsüne koyup tüm bilgileri alıyoruz.
+
+---
+Tüm DAO sayfalarında olmasa bile KisiAdresGetir gibi isimlendirilmiş methodlarımız da vardır.  
+Bu methodlar veritabanında sadece ID ve isimden oluşan tabloları xhtml sayfamızda seçenekler olarak kullanmamıza yararlar.
+Temel öğemiz "SelectItem"dir. Bu öğe kullanıcıya gösterilecek ve seçildiğinde döndürülecek olarak iki değer alır.
+Veritabanı komutu ile aldığımız ID ve isimleri Selectitem listeleri olarak tutarız ve kullanırız.
+Standard bir getir methodu:
+~~~java
+public List<SelectItem> KisiAdresGetir() {
+        List<SelectItem> TipList = new ArrayList<>();
+
+        try {
+            Statement statement = getDb().createStatement();
+            String Selectquery = "SELECT KISI_ADRES_ID, KISI_ADRES_ISIM FROM KISI_ADRES";
+
+            ResultSet rs = statement.executeQuery(Selectquery);
+            while (rs.next()) {
+                TipList.add(new SelectItem(rs.getInt("KISI_ADRES_ID"), rs.getString("KISI_ADRES_ISIM")));
+            }
+        } catch (Exception ex) {
+            DetectError(ex);
+        }
+        return TipList;
+    }
+~~~
+
+
+
+
+
+
+
 
 
 
