@@ -129,8 +129,7 @@ EKLEYEN_KISI_ID --> Bu ise o an siteyi giriş yapıp işlemleri gerçekleştiren
 ---  
 Prosedürler: 
 Procedures klasörünün altında bulunan saklı yordamların içinde insert yapan kodlar bulunuyor. Örnek bir saklı yordam:  
-
-******
+```sql
 create or replace PROCEDURE INSERT_KISI_TEMEL (
     p_KIMLIK_NO IN KISI_TEMEL.KIMLIK_NO%TYPE,
     p_ISIM IN KISI_TEMEL.ISIM%TYPE,
@@ -151,7 +150,7 @@ BEGIN
     )
     RETURNING KISI_ID INTO p_kisi_id;
 END;
-*******
+```
 
 Burada gördüğünüz gibi içinde IN kullanılan satırlar bizim yordama verdiğimiz parametreler.  
 sondaki OUT'u ise işlem sonucunda bize döndürülecek sayı olarak düşünebiliriz.  
@@ -187,14 +186,14 @@ sadece kullanıcıya gösterilecek değişkenleri barındıran bir yapıcı meth
  İlk yapmamız gereken işlem public class ABC yazısından sonra extends DBConnection komutunu eklemektir.  
  Daha sonra private Connection db; isimli bir değişken ekleyin. Bu veritabanı bağlantımız için önemli.  
  Getter ve setter metodlarını ekledikten sonra Getter methodu şuna benzemeli:  
- *****
+ ```java
      public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();
         }
         return db;
     }
-*****
+```
 
 
 
