@@ -67,6 +67,16 @@
                                         <f:ajax event="valueChange" render="KullaniciListesi" />
                                     </h:selectOneMenu>
                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="durum" class="form-label">Müracaat Durumu:</label>
+                                    <h:selectOneMenu id="durum" value="#{kisiBean.entity.aktif}" class="form-control">
+                                        <f:selectItem itemLabel="Hepsi" itemValue="0" />
+                                        <f:selectItem itemLabel="İptal" itemValue="1" />
+                                        <f:selectItem itemLabel="Ulaşılamadı" itemValue="2" />
+                                        <f:selectItem itemLabel="Tahkikata Sevk" itemValue="3" />
+                                        <f:ajax event="valueChange" render="KullaniciListesi" />
+                                    </h:selectOneMenu>
+                                </div>
                             </div>
                             <h:panelGroup id="KullaniciListesi">
                                 <div class="table-container">
@@ -92,11 +102,11 @@
                                                         <td>#{muracaat.kisi_isim}</td>
                                                         <td>#{muracaat.kisi_soyisim}</td>
                                                         <td>#{muracaat.kayit_tarihi}</td>                                             
-                                                        <td>#{muracaat.kisi_isim}</td>
-                                                        <td>#{muracaat.kisi_soyisim}</td>
+                                                        <td>#{muracaat.mahalle}</td>
+                                                        <td>#{muracaat.sokak}</td>
                                                         <td class="profil">
                                                             <div class="action-buttons">
-                                                                <h:commandButton value="SIL" action="#{userBean.delete(user.kullanici_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                                <h:commandButton value="SIL" action="#{muracaatBean.delete(muracaat.muracaat_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
                                                                     <f:ajax execute="@this" render="@form"/>
                                                                 </h:commandButton>
                                                                 <h:commandButton value="DUZENLE" action="#{userBean.edit(user)}" styleClass="btn btn-primary ml-20">
