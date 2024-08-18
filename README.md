@@ -67,9 +67,9 @@ kütüphaneleri buraya atın. Attıktan sonra NetBeans içinde Libraries klasör
 Öncelikle Source Packages kısmına 4 adet klasör oluşturun:
 
 util --> içinde sadece DBConnection isimli bir sınıf bulunan ve veritabanı bağlantımızı sağlayan klasörümüzdür.  
-Bu bir abstract sınıf olacak ve içinde sadece connect isimli bir method yazılacak(Connection return etmeli)  
+Bu bir abstract sınıf olacak ve içinde sadece connect isimli bir metod yazılacak(Connection return etmeli)  
 java.sql.Connection,  java.sql.DriverManager;  --> Bu iki kütüphaneyi import etmeyi unutmayın  
-Kaynak videosunda bu methodun nasıl yapılacağı anlatılıyor
+Kaynak videosunda bu metodun nasıl yapılacağı anlatılıyor
 
 --  
 Entity --> İçinde veritabanındaki ilgili tablonun değişkenlerini tutan java sınıflarını barındıracak  
@@ -174,9 +174,9 @@ Eğer tablonun içinde sokak_id gibi başka bir tabloya bağlanan bir sütun var
 Bunun sebebi kullanıcıya veritabanında tutulan sokağın numarasını değil ismini göstermemiz gerekmesi.  
 Daha sonra alt+insert ile tüm değişkenler için getter ve setter oluşturun.  
 Hemen ardından yine alt+insert yapın ve Constructor seçeneği ile yapıcı metodları oluşturun:  
-Boş bir yapıcı method,
-hepsi seçili bir yapıcı method,
-sadece kullanıcıya gösterilecek değişkenleri barındıran bir yapıcı method.
+Boş bir yapıcı ,
+hepsi seçili bir yapıcı ,
+sadece kullanıcıya gösterilecek değişkenleri barındıran bir yapıcı metod.
 
  Entity klasörü bu kadar.
 
@@ -186,7 +186,7 @@ sadece kullanıcıya gösterilecek değişkenleri barındıran bir yapıcı meth
 
  İlk yapmamız gereken işlem public class ABC yazısından sonra extends DBConnection komutunu eklemektir.  
  Daha sonra private Connection db; isimli bir değişken ekleyin. Bu veritabanı bağlantımız için önemli.  
- Getter ve setter metodlarını ekledikten sonra Getter methodu şuna benzemeli:  
+ Getter ve setter metodlarını ekledikten sonra Getter metodu şuna benzemeli:  
  ```java
      public Connection getDb() {
         if (this.db == null) {
@@ -227,23 +227,22 @@ Daha sonra gerekli metodları yazmaya başlayalım. İlk olarak KisiAdresEkle:
 
     }
 ~~~
-public Integer --> Bu methodu Integer değer döndürmesi için ayarladık çünkü işlem sonucunda oluşan ID'yi başka bir tabloda kullanmak için
-döndürüceğiz.
+public Integer --> Bu metodu Integer değer döndürmesi için ayarladık çünkü işlem sonucunda oluşan ID'yi başka bir tabloda kullanmak için döndürüceğiz.  
 
 Parametre olarak entity dosyamızı veriyoruz. Daha sonra bean dosyamızda yeni bir entity objesi oluşturarak parametreyi dolduracağız.  
 
-try - catch blokları --> kodlarımızı barındıran bu bloklarda eğer try bloğunun içinde bir hata olursa catch bloğuna geçer.
-Catch bloğunun parametresi olaran Exception ex ise hata hakkındaki detaylı bilgileri barındırır.
+try - catch blokları --> kodlarımızı barındıran bu bloklarda eğer try bloğunun içinde bir hata olursa catch bloğuna geçer.  
+Catch bloğunun parametresi olaran Exception ex ise hata hakkındaki detaylı bilgileri barındırır.  
 
-try'dan sonra ilk yazdığımız kod ile veritabanına bağlanıyoruz.
-String callQuery ile veritabanından daha önceden yazdığımız saklı yordamı çağırıyoruz.
-Eğer saklı yordamımız olmasaydı ve Statement kullansaydık tüm insert komutunu buraya yazmamız gerekirdi. Bu tarz java kodununu içinde sql yazdığımız için profesyonelce olmazdı ve ayrıca kodlarımız method sayımıza göre yüzlerce satır artabilirdi.  
-String içindeki soru işaretleri saklı yordamın her bir parametresine denk geliyor. Parametre sırasını doğru ayarladığınızdan emin olun.
+try'dan sonra ilk yazdığımız kod ile veritabanına bağlanıyoruz.  
+String callQuery ile veritabanından daha önceden yazdığımız saklı yordamı çağırıyoruz.  
+Eğer saklı yordamımız olmasaydı ve Statement kullansaydık tüm insert komutunu buraya yazmamız gerekirdi. Bu tarz java kodununu içinde sql yazdığımız için profesyonelce olmazdı ve ayrıca kodlarımız metod sayımıza göre yüzlerce satır artabilirdi.  
+String içindeki soru işaretleri saklı yordamın her bir parametresine denk geliyor. Parametre sırasını doğru ayarladığınızdan emin olun.  
 Soru işareti sayısı toplam IN ve OUT kullanımı kadar olmalı.  
 Sondaki  "cs.registerOutParameter(8, java.sql.Types.INTEGER);" kodu ile OUT ile ayarladığımız ID'mizi elde ediyoruz ve return cs.getInt(8) diyerek döndürüyoruz.  
 
 
-catch methodunun içinde DetectError benim yazdığım bir hata detayı öğrenme fonksiyonu. Kullanmak isterseniz aşağıya ekliyorum:
+catch metodunun içinde DetectError benim yazdığım bir hata detayı öğrenme fonksiyonu. Kullanmak isterseniz aşağıya ekliyorum:  
 
 ~~~java
 public class ErrorFinder {
@@ -265,9 +264,9 @@ public class ErrorFinder {
 
 }
 ~~~
-Bu methodu statik yaptım. Bu sayede her dosyada "new" ile bu dosyadan bir obje üretmek zorunda olmuyorum.
+Bu metodu statik yaptım. Bu sayede her dosyada "new" ile bu dosyadan bir obje üretmek zorunda olmuyorum.  
 
-Silme methodu kısa olduğu için saklı yordam oluşturmadım ve direkt PreparedStatement kullandım:
+Silme metodu kısa olduğu için saklı yordam oluşturmadım ve direkt PreparedStatement kullandım:  
 
 ~~~java
  public void KisiAdresSil(int kisiAdresid) {
@@ -285,7 +284,7 @@ Silme methodu kısa olduğu için saklı yordam oluşturmadım ve direkt Prepare
     }
 ~~~
 
-Kullanıcıya verileri bir liste halinde göstermek isterseniz her satır için bir obje üretip değişkenleri aktarıyoruz:
+Kullanıcıya verileri bir liste halinde göstermek isterseniz her satır için bir obje üretip değişkenleri aktarıyoruz:  
 
 ~~~java
  public List<KisiAdres> KisiAdresListesi() {
@@ -323,26 +322,26 @@ Kullanıcıya verileri bir liste halinde göstermek isterseniz her satır için 
     }
 ~~~
 
-Bu kısım için saklı yordam oluşturmak daha mantıklı aslında ama alışkanlık olduğu için buraya yazdım. Belki ileride saklı yordamlara dönüştürürüm.
-Siz direkt olarak saklı yordam yazın en iyisi.
+Bu kısım için saklı yordam oluşturmak daha mantıklı aslında ama alışkanlık olduğu için buraya yazdım. Belki ileride saklı yordamlara dönüştürürüm.  
+Siz direkt olarak saklı yordam yazın en iyisi.  
 
 Burada join işlemi yapıyoruz. Join işlemi, iki tabloyu da aynı olarak bulunan bir sütunu eşitleyerek tek bir büyük tablo gibi kullanmamızı sağlar.  
-Bu işlem ile entity'e ekstra olarak yazdığımız sokak_isim gibi değişkenleri alacağız.
+Bu işlem ile entity'e ekstra olarak yazdığımız sokak_isim gibi değişkenleri alacağız.  
 
-Burada String içindeki tüm yazıyı veritabanında bir SQL Worksheet'e yapıştırarak size ne getireceğini görebilirsiniz.
-("+" işaretlerini ve çift tırnakları silmeyi unutmayın.)
+Burada String içindeki tüm yazıyı veritabanında bir SQL Worksheet'e yapıştırarak size ne getireceğini görebilirsiniz.  
+("+" işaretlerini ve çift tırnakları silmeyi unutmayın.)  
 
-Her tablodan sonra yazan KA, M, KMS gibi kelimeler bizim uydurduğumuz (tablonun ismindeki kelimelerin baş harfleri) kısaltmalar.
-Uyarı --> Eğer buradaki gibi bir tabloya kısaltma verdiyseniz artık o komutta tablonun tam ismi ile işlem yapamazsınız.
+Her tablodan sonra yazan KA, M, KMS gibi kelimeler bizim uydurduğumuz (tablonun ismindeki kelimelerin baş harfleri) kısaltmalar.  
+Uyarı --> Eğer buradaki gibi bir tabloya kısaltma verdiyseniz artık o komutta tablonun tam ismi ile işlem yapamazsınız.  
 
 rs.next() --> Bu komut veri olan tüm satırlar getirilene kadar true döndürür. Bu sayede while döngüsüne koyup tüm bilgileri alıyoruz.
 
 ---
-Tüm DAO sayfalarında olmasa bile KisiAdresGetir gibi isimlendirilmiş methodlarımız da vardır.  
-Bu methodlar veritabanında sadece ID ve isimden oluşan tabloları xhtml sayfamızda seçenekler olarak kullanmamıza yararlar.
-Temel öğemiz "SelectItem"dir. Bu öğe kullanıcıya gösterilecek ve seçildiğinde döndürülecek olarak iki değer alır.
-Veritabanı komutu ile aldığımız ID ve isimleri Selectitem listeleri olarak tutarız ve kullanırız.
-Standard bir getir methodu:
+Tüm DAO sayfalarında olmasa bile KisiAdresGetir gibi isimlendirilmiş metodlarımız da vardır.  
+Bu metodlar veritabanında sadece ID ve isimden oluşan tabloları xhtml sayfamızda seçenekler olarak kullanmamıza yararlar.  
+Temel öğemiz "SelectItem"dir. Bu öğe kullanıcıya gösterilecek ve seçildiğinde döndürülecek olarak iki değer alır.  
+Veritabanı komutu ile aldığımız ID ve isimleri Selectitem listeleri olarak tutarız ve kullanırız.  
+Standard bir getir metodu:  
 ~~~java
 public List<SelectItem> KisiAdresGetir() {
         List<SelectItem> TipList = new ArrayList<>();
@@ -362,6 +361,100 @@ public List<SelectItem> KisiAdresGetir() {
     }
 ~~~
 
+Bunun dışında bir de filtreleme sistemimiz var. Bunun için fitreleme yapmak istediğimiz kısımları dao dosyamıza ayrı bir değişken olarak yazıyoruz.
+Filtreleme işlemi sadece liste metodumuzun içinde gerçekleşiyor ve SQL temelli bir filtre oluyor. 
+
+İlk önce String ile yazılmış komutu StringBuilder'e çeviriyoruz çünkü duruma göre string'e yeni string metinler bağlamak gerekecek. 
+Şu şekle benzemeli:
+~~~java
+    StringBuilder queryBuilder = new StringBuilder();
+            queryBuilder.append("SELECT KA.KISI_ADRES_ID, KA.ILCE, KA.TARIF, KA.SITE, KA.KAPI_NO, KA.KISI_ADRES_MAHALLE_ID, KMS.SOKAK_ISIM, KA.KAYIT_TARIHI, KA.AKTIF FROM");
+            queryBuilder.append("KISI_ADRES KA JOIN KISI_ADRES_MAHALLE M ON M.KISI_ADRES_MAHALLE_ID = KA.KISI_ADRES_MAHALLE_ID");
+            queryBuilder.append("JOIN KISI_MAHALLE_SOKAK KMS ON KMS.MAHALLE_ID = M.KISI_ADRES_MAHALLE_ID WHERE 1=1");
+~~~
+
+Daha sonra ise StringBuilder içindeki SQL methodumuzun sonuna WHERE 1 = 1 yazıyoruz. Bu sayede birden fazla filtremiz var ise hepsinde "AND" anahtar kelimesini kullanabiliriz.
+Daha sonra değişkenlerimize eğer bir filtre yoksa hangi değer olmaları gerektiğini belirleyin.  
+Benim için isim değerleri -> "", sayı değerleri -> 0 ve aktiflik filtresi için ->2. Bu değerleri değişkeni oluşturduğunuz yere default değer olarak ekleyin.
+
+Filte kısmımız ise şuna benzeyecek: 
+~~~java
+  if (aktif != 2) {
+      queryBuilder.append("AND AKTIFLIK = ").append(aktif).append(" ");
+  }
+
+  if (!isim.isEmpty()) {
+      queryBuilder.append("AND YAKINLIK_ISIM LIKE '%").append(isim).append("%' ");
+  }
+
+~~~
+(Bu kısım kisiAdres'e ait değil)  
+Buradaki "LIKE % isim %" ifadesi SQL'de içinde isim içindeki karakterler geçen kısımları filtreler.  
+Eğer burada ikinci % işaretini koymazsanız sadede isim değişkeni ile bitenleri,  
+ilk % işaretini koymazsanız ise sadece isim değişkeni ile başlayanları filtrelersiniz.
+
+###Backend3 - Bean:
+
+Burada bir java dosyası değil JSF CDI Bean dosyası oluşturuyoruz.  
+Oluştururken scope kısmını iyi belirleyin. Bu iki tanesi işinizi görür:
+SessionScoped --> Kullanıcı sitede gezindiği sürece bilgiler kaybolmaz, bean sıfırlanmaz ve yenisi oluşmaz.  
+BeanScoped --> Her sayfa değiştirildiğinde tüm bilgiler sıfırlanır.
+
+Bu dosya bizim xhtml sayfamız ile etkileşime geçen katmandır.  
+
+Entity'deki değişkenlerimizi ve DAO'daki metodlarımızı buradan ekstra bir adımla çağırarak kullanıyoruz.  
+Entity ve Dao dosyalarımızı şu şekilde yeni bir obje oluşturarak kullanabiliriz:  
+
+~~~Java
+private KisiAdres entity;
+private KisiAdresDAO dao;
+private List<KisiAdres> list;
+
+ public KisiAdres getEntity() {
+        if (entity == null) {
+            entity = new KisiAdres();
+        }
+        return entity;
+    }
+
+    public void setEntity(KisiAdres entity) {
+        this.entity = entity;
+    }
+
+    public KisiAdresDAO getDao() {
+        if (dao == null) {
+            dao = new KisiAdresDAO();
+        }
+        return dao;
+    }
+
+    public void setDao(KisiAdresDAO dao) {
+        this.dao = dao;
+    }
+
+    public List<KisiAdres> getList() {
+        list = getDao().KisiAdresListesi();
+        return list;
+    }
+
+    public void setList(List<KisiAdres> list) {
+        this.list = list;
+    }
+
+~~~
+
+Bu kodlarda fark ettiğiniz üzere getter metodları normalden farklı. Bunları kendi elimizle ayarlıyoruz.  
+Burada "Singleton Pattern" tasarım örüntüsünü kullanarak eğer bir nesne yoksa üretilmesini, var ise üretilen nesnenin kullanılmasını ve başka bir tane üretilmemesini sağlar.  
+Burada bulunan liste aslında zorunlu değil ama isteğe bağlı olarak bizim gibi ekleyebilirsiniz.  
+
+Sıra geldi DAO metodlarımızı çağırmaya. Metodları çağırmak için metodları çağıracak metodlar oluşturuyoruz.  
+Aslında oldukça basit ve hepsi aynı şekilde oluşturuluyor. Mesela insert içeren methodumuz:
+
+~~~java
+public Integer ekle() {
+        return this.getDao().KisiAdresEkle(getEntity());
+    }
+~~~
 
 
 
