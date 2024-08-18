@@ -130,7 +130,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     font-size: 14px; /* Etiket font boyutu */
     cursor: pointer; /* Tıklanabilir imleç */
     user-select: none; /* Seçimi engeller */
-     /* Butona yaklaşması için yazıya margin verildi */
+    /* Butona yaklaşması için yazıya margin verildi */
     margin-top: 10px;
 }
 
@@ -145,4 +145,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 .text-center {
     text-align: center;
+}
+
+.hidden {
+    display: none;
 }
