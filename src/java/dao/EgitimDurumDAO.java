@@ -17,11 +17,11 @@ import util.DBConnection;
  *
  * @author Eren
  */
-public class EgitimDurumDAO extends DBConnection{
-    
+public class EgitimDurumDAO extends DBConnection {
+
     private Connection db;
-    
-     public List<SelectItem> EgitimDurumGetir() {
+
+    public List<SelectItem> EgitimDurumGetir() {
         List<SelectItem> TipList = new ArrayList<>();
 
         try {
@@ -39,7 +39,7 @@ public class EgitimDurumDAO extends DBConnection{
 
     }
 
-     public Connection getDb() {
+    public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();
         }
@@ -49,5 +49,5 @@ public class EgitimDurumDAO extends DBConnection{
     public void setDb(Connection db) {
         this.db = db;
     }
-    
+
 }

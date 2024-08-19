@@ -28,11 +28,11 @@ public class KisiIletisimDAO extends DBConnection {
             cs.setString(3, kisiIletisim.getEposta());
             cs.registerOutParameter(4, java.sql.Types.INTEGER);
             cs.execute();
-            
+
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
-            
+
             return cs.getInt(4);
-            
+
         } catch (Exception ex) {
             this.mesaj = DetectError(ex);
             return null;
@@ -101,6 +101,10 @@ public class KisiIletisimDAO extends DBConnection {
 
     }
 
+    public void KisiIletisimTemizle() {
+        this.mesaj = null;
+    }
+
     public java.sql.Connection getDb() {
         if (this.db == null) {
             this.db = (Connection) this.connect();
@@ -119,5 +123,5 @@ public class KisiIletisimDAO extends DBConnection {
     public void setMesaj(String mesaj) {
         this.mesaj = mesaj;
     }
-    
+
 }
