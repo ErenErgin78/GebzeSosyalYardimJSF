@@ -39,7 +39,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="dogumTarihi">Doğum Tarihi:</label>
-                                            <h:inputText id="dogumTarihi" class="form-control" value="#{kisiBean.entity.dogum_tarihi}">
+                                            <h:inputText class="form-control" value="#{kisiBean.entity.dogum_tarihi}">
                                                 <f:passThroughAttribute name="type" value="date" />
                                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                                             </h:inputText>

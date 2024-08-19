@@ -13,7 +13,7 @@ public class Kisi {
     private Integer cilt_no;
     private Integer aile_sira_no;
     private Integer sira_no;
-    private Date dogum_tarihi;
+    private Date dogum_tarihi = new Date();
     private Integer medeni_durum_id;
     private String medeni_durum_isim;
     private Date kayit_tarihi;
