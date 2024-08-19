@@ -10,9 +10,9 @@ public class TutanakMulkiyet {
     private Float kira_miktar;
     private Integer yakacak_tip_id;
     private Integer kirada_ev_sayisi;
-    private Integer araba_var_mi;
+    private Integer araba_var_mi = 0;
     private String araba_model;
-    private Integer gayrimenkul_var_mi;
+    private Integer gayrimenkul_var_mi = 0;
     private String gayrimenkul_tur;
     private Integer ev_tip_id;
     private Date guncelleme_tarihi;
