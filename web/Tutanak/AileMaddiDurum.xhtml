@@ -118,7 +118,7 @@
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
                                                             <label for="kira" class="form-label">Kira Geliri:</label>
-                                                            <h:inputText id="kira" value="#{tutanakGelirBean.entity.kira_maasi}" class="form-control" />                                               
+                                                            <h:inputText id="kiraa" value="#{tutanakGelirBean.entity.kira_maasi}" class="form-control" />                                               
                                                         </div>
                                                     </div>
                                                 </div>
@@ -278,7 +278,7 @@
                                     <div class="form-group col-md-6 mb-3">
                                         <label for="kiradaEv">Kirada evi var mı:</label>
                                         <div class="custom-radio">
-                                            <h:selectOneRadio id="kiradaEv" value=""  styleClass="radio-inline">
+                                            <h:selectOneRadio id="kiradaEv" value="#{tutanakMulkiyetBean.entity.kirada_ev_var_mi}"  styleClass="radio-inline">
                                                 <f:selectItem itemLabel="Evet" itemValue="1" />
                                                 <f:selectItem itemLabel="Hayır" itemValue="0" />                                     
                                             </h:selectOneRadio>
