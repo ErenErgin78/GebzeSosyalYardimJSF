@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import util.DBConnection;
 
-public class MedeniDurumDAO extends DBConnection{
-private Connection db;
-    
-     public List<SelectItem> MedeniDurumGetir() {
+public class MedeniDurumDAO extends DBConnection {
+
+    private Connection db;
+
+    public List<SelectItem> MedeniDurumGetir() {
         List<SelectItem> TipList = new ArrayList<>();
 
         try {
@@ -30,7 +31,7 @@ private Connection db;
 
     }
 
-     public Connection getDb() {
+    public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();
         }

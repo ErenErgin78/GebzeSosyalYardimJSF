@@ -26,25 +26,23 @@ public class MedeniDurumBean implements Serializable {
     public MedeniDurumBean() {
     }
 
-     public MedeniDurum getEntity() {
+    public MedeniDurum getEntity() {
         if (this.entity == null) {
             this.entity = new MedeniDurum();
         }
         return this.entity;
     }
 
-
     public void setEntity(MedeniDurum entity) {
         this.entity = entity;
     }
 
-     public MedeniDurumDAO getDao() {
+    public MedeniDurumDAO getDao() {
         if (this.dao == null) {
             this.dao = new MedeniDurumDAO();
         }
         return this.dao;
     }
-
 
     public void setDao(MedeniDurumDAO dao) {
         this.dao = dao;

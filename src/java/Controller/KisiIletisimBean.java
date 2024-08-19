@@ -26,6 +26,10 @@ public class KisiIletisimBean implements Serializable {
         return this.getDao().KisiIletisimEkle(getEntity());
     }
 
+    public void kisiiletisimTemizle() {
+        this.getDao().KisiIletisimTemizle();
+    }
+
     public void KisiIletisimSil(int kisiID) {
         this.getDao().KisiIletisimSil(kisiID);
         this.list = this.getDao().KisiIletisimListesi(); // Silme işleminden sonra listeyi güncelle
