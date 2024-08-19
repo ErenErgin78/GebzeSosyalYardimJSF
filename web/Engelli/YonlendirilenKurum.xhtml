@@ -41,8 +41,15 @@
                                             <!-- Yönlendirilen Kurum Adı -->
                                             <div class="form-group col-md-6">
                                                 <label for="KurumAdi" class="form-label">Yönlendirilen Kurum Adı:</label>
-                                                <h:inputText id="KurumAdi" value="#{kurumBean.dao.isim}" class="form-control" />
-                                                <f:ajax event="keyup" render="kurumPanel" />
+                                                <div class="input-group">
+                                                    <h:inputText id="KurumAdi" value="#{kurumBean.dao.isim}" class="form-control" />
+                                                    <f:ajax event="keyup" render="kurumPanel" />
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">
+                                                            <i class="fas fa-search"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <!-- Ekle Butonu -->
                                         </div>
@@ -87,9 +94,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                function confirmDelete(button) {
-                     return confirm("Bu kurumu gerçekten silmek istiyor musunuz?");
-                }
+                                                                        function confirmDelete(button) {
+                                                                            return confirm("Bu kurumu gerçekten silmek istiyor musunuz?");
+                                                                        }
         </script>
     </h:body>
 </html>

@@ -41,7 +41,14 @@
                                     <!-- Yakınlık Adı ve Aktif Seçim Kutusu -->
                                     <div class="form-group col-md-6">
                                         <label for="yakinlikAdi" class="form-label">Yakınlık Adı:</label>
-                                        <h:inputText id="yakinlikAdi" value="#{yakinlikBean.dao.isim}" class="form-control" />
+                                        <div class="input-group">
+                                            <h:inputText id="yakinlikAdi" value="#{yakinlikBean.dao.isim}" class="form-control" />
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-search"></i>
+                                                </span>
+                                            </div>
+                                        </div>
                                         <f:ajax event="keyup" render="yakinlikPanel" />
                                     </div>
                                     <div class="form-group col-md-6">
