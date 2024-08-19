@@ -41,8 +41,9 @@
                                         <div class="form-group">
                                             <label for="okul">Okul Tipi:</label>
                                             <h:selectOneMenu id="okul" value="#{okulBean.dao.tip}" class="form-control">
-                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                                <f:selectItem itemLabel="Hepsi" itemValue="0" />
                                                 <f:selectItems value="#{okulTipBean.okulTipList}" />
+                                               <f:ajax event="change" render="okulListPanel"/>
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
@@ -51,7 +52,7 @@
                                         <div class="form-group">
                                             <label for="devletOzel">Okul Türü:</label>
                                             <h:selectOneMenu id="devletOzel" value="#{okulBean.dao.tur}" class="form-control">
-                                               <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                               <f:selectItem itemLabel="Hepsi" itemValue="0" />
                                                 <f:selectItems value="#{okulTurBean.okulTurList}" />
                                                 <f:ajax event="change" render="okulListPanel"/>
                                             </h:selectOneMenu>
