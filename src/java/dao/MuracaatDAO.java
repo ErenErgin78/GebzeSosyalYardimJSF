@@ -19,6 +19,10 @@ public class MuracaatDAO extends DBConnection {
     public void MuracaatEkle(Muracaat muracaat) {
         String callQuery = "{call INSERT_MURACAAT(?, ?, ?)}";
 
+        if (muracaat.getAktif() == null) {
+            muracaat.setAktif(1);
+        }
+
         try {
             CallableStatement cs = getDb().prepareCall(callQuery);
             cs.setInt(1, muracaat.getKisi_temel_id());
@@ -34,8 +38,33 @@ public class MuracaatDAO extends DBConnection {
         }
     }
 
+    public Integer MuracaatEkle(Muracaat muracaat, Integer kisiTemelId, Integer muracaatBilgiId) {
+        String callQuery = "{call INSERT_MURACAAT(?, ?, ?, ?)}";
+
+        if (muracaat.getAktif() == null) {
+            muracaat.setAktif(1);
+        }
+
+        try {
+            CallableStatement cs = getDb().prepareCall(callQuery);
+            cs.setInt(1, kisiTemelId);
+            cs.setInt(2, muracaatBilgiId);
+            cs.setInt(3, muracaat.getAktif());
+            cs.registerOutParameter(4, java.sql.Types.INTEGER);
+            cs.executeUpdate();
+
+            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
+
+            return cs.getInt(4);
+
+        } catch (SQLException ex) {
+            mesaj = DetectError(ex);
+            return null;
+        }
+    }
+
     // Delete Method
-    public void Delete(int muracaatId) {
+    public void MuracaatSil(int muracaatId) {
         String deleteQuery = "DELETE FROM MURACAAT WHERE MURACAAT_ID = ?";
 
         try (PreparedStatement ps = getDb().prepareStatement(deleteQuery)) {

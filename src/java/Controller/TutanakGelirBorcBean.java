@@ -21,7 +21,7 @@ public class TutanakGelirBorcBean implements Serializable {
     public TutanakGelirBorcBean() {
     }
 
-    private String mesaj = "2";
+    private String mesaj;
 
     @Inject
     private TutanakGelirBean gelirBean;
@@ -38,7 +38,6 @@ public class TutanakGelirBorcBean implements Serializable {
             mesaj = DetectError(ex);
         }
     }
-
 
     public String getMesaj() {
         return mesaj;

@@ -11,7 +11,7 @@ public class MuracaatBilgi {
     private Integer muracaat_bilgi_id;
     private Integer arsiv_dosya_no;
     private String aciklama;
-    private Date muracaat_tarihi;
+    private Date muracaat_tarihi = new Date();
     private Integer aktif;
     private Date kayit_tarih;
     private Date guncelleme_tarih;

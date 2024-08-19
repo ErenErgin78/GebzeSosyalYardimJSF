@@ -90,6 +90,10 @@ public class TutanakDurumDAO extends DBConnection {
         return tutanakList;
     }
 
+    public void TutanakDurumMesajTemizle() {
+        this.mesaj = null;
+    }
+
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();

@@ -23,25 +23,53 @@ public class KisiDAO extends DBConnection {
         try {
             Connection conn = this.getDb();
 
-            String callQuery = "{call INSERT_KISI_TEMEL(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            String callQuery = "{call INSERT_KISI_TEMEL(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
             cs.setObject(1, kisi.getKimlik_no());
             cs.setString(2, kisi.getIsim());
             cs.setString(3, kisi.getSoyisim());
             cs.setString(4, kisi.getCinsiyet());
-            cs.setInt(5, kisi.getCilt_no());
-            cs.setInt(6, kisi.getAile_sira_no());
-            cs.setInt(7, kisi.getSira_no());
-            cs.setInt(8, kisi.getDoğum_tarihi());
-            cs.setInt(9, kisi.getMedeni_durum_id());
-            cs.setInt(10, kisi.getAktif());
+            cs.setInt(5, kisi.getMedeni_durum_id());
+            cs.setInt(6, kisi.getCilt_no());
+            cs.setInt(7, kisi.getAile_sira_no());
+            cs.setInt(8, kisi.getSira_no());
+            cs.setDate(9, new java.sql.Date(kisi.getDogum_tarihi().getTime()));
+            cs.registerOutParameter(10, java.sql.Types.INTEGER);
+            cs.execute();
+
+            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
+
+            return cs.getInt(10);
+
+        } catch (Exception ex) {
+            this.mesaj = DetectError(ex);
+            return null;
+        }
+    }
+
+    public Integer KisiEkle(Kisi kisi, Integer detayId) {
+        try {
+            Connection conn = this.getDb();
+
+            String callQuery = "{call INSERT_KISI_TEMEL_2(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            CallableStatement cs = conn.prepareCall(callQuery);
+            cs.setObject(1, kisi.getKimlik_no());
+            cs.setString(2, kisi.getIsim());
+            cs.setString(3, kisi.getSoyisim());
+            cs.setString(4, kisi.getCinsiyet());
+            cs.setInt(5, kisi.getMedeni_durum_id());
+            cs.setInt(6, kisi.getCilt_no());
+            cs.setInt(7, kisi.getAile_sira_no());
+            cs.setInt(8, kisi.getSira_no());
+            cs.setDate(9, new java.sql.Date(kisi.getDogum_tarihi().getTime()));
+            cs.setInt(10, detayId);
             cs.registerOutParameter(11, java.sql.Types.INTEGER);
             cs.execute();
-            
+
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
             return cs.getInt(11);
-            
+
         } catch (Exception ex) {
             this.mesaj = DetectError(ex);
             return null;
@@ -83,7 +111,7 @@ public class KisiDAO extends DBConnection {
                         rs.getInt("CILT_NO"),
                         rs.getInt("AILE_SIRA_NO"),
                         rs.getInt("SIRA_NO"),
-                        rs.getInt("DOGUM_TARIHI"),
+                        rs.getDate("DOGUM_TARIHI"),
                         rs.getString("MEDENI_DURUM_ISIM"),
                         rs.getDate("KAYIT_TARIHI"),
                         rs.getInt("AKTIF")

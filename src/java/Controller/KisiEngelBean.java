@@ -24,7 +24,7 @@ public class KisiEngelBean implements Serializable {
     }
 
     public void delete(int kisiEngelID) {
-        this.getDao().Delete(kisiEngelID);
+        this.getDao().KisiEngelSil(kisiEngelID);
         this.list = this.getDao().GetList();
     }
 
@@ -63,5 +63,9 @@ public class KisiEngelBean implements Serializable {
 
     public void setList(List<KisiEngel> list) {
         this.list = list;
+    }
+    // Sayfa yüklendiğinde yapılacak işlemler
+    
+    public KisiEngelBean() {
     }
 }

@@ -22,7 +22,10 @@ public class TutanakYakacakBean implements Serializable {
     }
 
     public TutanakYakacak getEntity() {
-        return entity;
+        if (this.entity == null) {
+            this.entity = new TutanakYakacak();
+        }
+        return this.entity;
     }
 
     public void setEntity(TutanakYakacak entity) {

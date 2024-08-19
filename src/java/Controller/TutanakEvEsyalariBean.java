@@ -26,7 +26,10 @@ public class TutanakEvEsyalariBean implements Serializable {
     }
 
     public TutanakEvEsyalari getEntity() {
-        return entity;
+        if (this.entity == null) {
+            this.entity = new TutanakEvEsyalari();
+        }
+        return this.entity;
     }
 
     public void setEntity(TutanakEvEsyalari entity) {
@@ -34,7 +37,14 @@ public class TutanakEvEsyalariBean implements Serializable {
     }
 
     public TutanakEvEsyalariDAO getDao() {
-        return dao;
+        if (this.dao == null) {
+            this.dao = new TutanakEvEsyalariDAO();
+        }
+        return this.dao;
+    }
+
+    public void tutanakEvEsyalariMesajTemizle() {
+        this.getDao().TutanakEvEsyalariMesajTemizle();
     }
 
     public void setDao(TutanakEvEsyalariDAO dao) {

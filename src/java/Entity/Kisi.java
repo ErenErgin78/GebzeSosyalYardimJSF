@@ -13,7 +13,7 @@ public class Kisi {
     private Integer cilt_no;
     private Integer aile_sira_no;
     private Integer sira_no;
-    private Integer doğum_tarihi;
+    private Date dogum_tarihi;
     private Integer medeni_durum_id;
     private String medeni_durum_isim;
     private Date kayit_tarihi;
@@ -83,12 +83,12 @@ public class Kisi {
         this.sira_no = sira_no;
     }
 
-    public Integer getDoğum_tarihi() {
-        return doğum_tarihi;
+    public Date getDogum_tarihi() {
+        return dogum_tarihi;
     }
 
-    public void setDoğum_tarihi(Integer doğum_tarihi) {
-        this.doğum_tarihi = doğum_tarihi;
+    public void setDogum_tarihi(Date dogum_tarihi) {
+        this.dogum_tarihi = dogum_tarihi;
     }
 
     public Integer getMedeni_durum_id() {
@@ -123,7 +123,7 @@ public class Kisi {
         this.medeni_durum_isim = medeni_durum_isim;
     }
 
-    public Kisi(BigInteger kimlik_no, String isim, String soyisim, String cinsiyet, Integer cilt_no, Integer aile_sira_no, Integer sira_no, Integer doğum_tarihi, String medeni_durum_isim, Date kayit_tarihi, Integer aktif) {
+    public Kisi(BigInteger kimlik_no, String isim, String soyisim, String cinsiyet, Integer cilt_no, Integer aile_sira_no, Integer sira_no, Date dogum_tarihi, String medeni_durum_isim, Date kayit_tarihi, Integer aktif) {
         this.kimlik_no = kimlik_no;
         this.isim = isim;
         this.soyisim = soyisim;
@@ -131,7 +131,7 @@ public class Kisi {
         this.cilt_no = cilt_no;
         this.aile_sira_no = aile_sira_no;
         this.sira_no = sira_no;
-        this.doğum_tarihi = doğum_tarihi;
+        this.dogum_tarihi = dogum_tarihi;
         this.medeni_durum_isim = medeni_durum_isim;
         this.kayit_tarihi = kayit_tarihi;
         this.aktif = aktif;

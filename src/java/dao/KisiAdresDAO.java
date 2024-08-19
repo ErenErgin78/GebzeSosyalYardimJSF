@@ -1,6 +1,5 @@
 package dao;
 
-import Entity.Kisi;
 import Entity.KisiAdres;
 import static Various.ErrorFinder.DetectError;
 import jakarta.faces.model.SelectItem;
@@ -17,7 +16,7 @@ import util.DBConnection;
 public class KisiAdresDAO extends DBConnection {
 
     private Connection db;
-    private String mesaj;
+    private String mesaj = "";
 
     public Integer KisiAdresEkle(KisiAdres kisiAdres) {
         try {
@@ -30,22 +29,21 @@ public class KisiAdresDAO extends DBConnection {
                 kisiAdres.setKisi_adres_mahalle_id(rs.getInt("MAHALLE_ID"));
             }
 
-            String callQuery = "{call INSERT_KISI_ADRES(?, ?, ?, ?, ?, ?, ?, ?,?)}";
+            String callQuery = "{call INSERT_KISI_ADRES(?, ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
             cs.setString(1, kisiAdres.getTarif());
             cs.setString(2, kisiAdres.getSite());
             cs.setInt(3, kisiAdres.getKapi_no());
             cs.setInt(4, kisiAdres.getDaire_no());
-            cs.setString(5, kisiAdres.getKisi_adres_mahalle_isim());
+            cs.setInt(5, kisiAdres.getKisi_adres_mahalle_id());
             cs.setInt(6, kisiAdres.getKisi_mahalle_sokak_id());
-            java.util.Date kayitTarihiUtil = kisiAdres.getKayit_tarihi();
-            java.sql.Date kayitTarihiSql = new java.sql.Date(kayitTarihiUtil.getTime());
-            cs.setDate(7, kayitTarihiSql);
-            cs.setInt(8, kisiAdres.getAktif());
-            cs.registerOutParameter(9, java.sql.Types.INTEGER);
+            cs.setInt(7, 1);
+            cs.registerOutParameter(8, java.sql.Types.INTEGER);
 
-            int kisiAdresId = cs.getInt(7);
-
+            cs.execute();
+            
+            int kisiAdresId = cs.getInt(8);
+            
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
             return kisiAdresId;
 
@@ -55,6 +53,7 @@ public class KisiAdresDAO extends DBConnection {
         }
 
     }
+    
 
     public void KisiAdresSil(int kisiAdresid) {
         String deleteQuery = "DELETE FROM KISI_ADRES WHERE KISI_ADRES_ID = ?";

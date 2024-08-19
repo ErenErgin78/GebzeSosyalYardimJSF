@@ -32,6 +32,10 @@ public class MeslekDAO extends DBConnection {
     public void MeslekEkle(Meslek meslek) {
         try {
             Connection conn = this.getDb();
+            
+            if(meslek.getAktiflik()==null){
+              meslek.setAktiflik(1);
+            }
 
             String callQuery = "{call INSERT_MESLEK(?, ?)}";
             CallableStatement cs = conn.prepareCall(callQuery);

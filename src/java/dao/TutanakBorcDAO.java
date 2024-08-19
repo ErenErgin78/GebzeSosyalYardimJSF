@@ -27,7 +27,7 @@ public class TutanakBorcDAO extends DBConnection {
     private Integer id = 0;
     private String isim = "";
 
-    public void Create(TutanakBorc borc) {
+    public void TutanakBorcEkle(TutanakBorc borc) {
         try {
             Connection conn = this.getDb();
 
@@ -87,7 +87,7 @@ public class TutanakBorcDAO extends DBConnection {
         return BorcList;
     }
 
-    public void Delete(int borcId) {
+    public void TutanakBorcSil(int borcId) {
         String deleteQuery = "DELETE FROM BORC WHERE BORC_ID = " + borcId;
 
         try {
@@ -100,6 +100,10 @@ public class TutanakBorcDAO extends DBConnection {
         } catch (SQLException ex) {
             DetectError(ex);
         }
+    }
+
+    public void TutanakBorcMesajTemizle() {
+        this.islemBasariliMesaj = null;
     }
 
     public Connection getDb() {

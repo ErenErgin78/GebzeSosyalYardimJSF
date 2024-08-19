@@ -22,7 +22,7 @@ public class YardimAltBean implements Serializable {
     public void init() {
         getDao().setIslemBasariliMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
         TipList = yardimTipGetir();
-         entity = new YardimAlt();
+        entity = new YardimAlt();
     }
 
     public void yardimAltEkle() {
@@ -31,6 +31,10 @@ public class YardimAltBean implements Serializable {
 
     public void yardimAltSil(int yardimAltId) {
         this.getDao().YardimAltSil(yardimAltId);
+    }
+
+    public void yardimAltMesajTemizle() {
+        this.getDao().YardimAltMesajTemizle();
     }
 
     public List<SelectItem> yardimTipGetir() {

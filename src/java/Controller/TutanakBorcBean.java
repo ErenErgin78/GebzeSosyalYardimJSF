@@ -20,12 +20,16 @@ public class TutanakBorcBean implements Serializable {
     private List<TutanakBorc> list;
 
     public void create() {
-        this.getDao().Create(getEntity());
+        this.getDao().TutanakBorcEkle(getEntity());
     }
 
     public void delete(int borcID) {
-        this.getDao().Delete(borcID);
+        this.getDao().TutanakBorcSil(borcID);
         this.list = this.getDao().GetList(); // Silme işleminden sonra listeyi yeniler
+    }
+
+    public void tutanakBorcMesajTemizle() {
+        this.getDao().TutanakBorcMesajTemizle();
     }
 
     public void edit(TutanakBorc borc) {

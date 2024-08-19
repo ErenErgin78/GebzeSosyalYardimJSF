@@ -16,9 +16,9 @@
             <div class="row align-items-center mb-3">
                 <div class="col-10">
                     <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>            
-                    <li class="breadcrumb-item active" aria-current="page">İşlemlerim</li>
-                    <li class="breadcrumb-item active" aria-current="page">Müracaat Listesi</li>
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>            
+                        <li class="breadcrumb-item active" aria-current="page">İşlemlerim</li>
+                        <li class="breadcrumb-item active" aria-current="page">Müracaat Listesi</li>
                     </ol>
                 </div>
                 <div class="col-2 text-end">
@@ -67,6 +67,16 @@
                                         <f:ajax event="valueChange" render="KullaniciListesi" />
                                     </h:selectOneMenu>
                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="durum" class="form-label">Müracaat Durumu:</label>
+                                    <h:selectOneMenu id="durum" value="#{kisiBean.entity.aktif}" class="form-control">
+                                        <f:selectItem itemLabel="Hepsi" itemValue="0" />
+                                        <f:selectItem itemLabel="İptal" itemValue="1" />
+                                        <f:selectItem itemLabel="Ulaşılamadı" itemValue="2" />
+                                        <f:selectItem itemLabel="Tahkikata Sevk" itemValue="3" />
+                                        <f:ajax event="valueChange" render="KullaniciListesi" />
+                                    </h:selectOneMenu>
+                                </div>
                             </div>
                             <h:panelGroup id="KullaniciListesi">
                                 <div class="table-container">
@@ -74,10 +84,10 @@
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
+                                                    <th>Müracaat No</th>
+                                                    <th>TC Kimlik No</th>
                                                     <th>Ad</th>
                                                     <th>Soyad</th>
-                                                    <th>Tc</th>
-                                                    <th>Arşiv Dosya No</th>
                                                     <th>Müracaat Tarihi</th>
                                                     <th>Mahalle</th>
                                                     <th>Cadde/Sokak</th>
@@ -85,18 +95,18 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <ui:repeat value="#{userBean.list}" var="user" varStatus="loop">
+                                                <ui:repeat value="#{muracaatBean.list}" var="muracaat" varStatus="loop">
                                                     <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                        <td>#{user.kullanici_id}</td>
-                                                        <td>#{user.kullanici_isim}</td>
-                                                        <td>#{user.kullanici_cinsiyet}</td>
-                                                        <td>#{user.kullanici_telefon}</td>
-                                                        <td>#{user.kullanici_durum}</td>
-                                                        <td class="sicil">#{user.kullanici_sicil_no}</td>
-                                                        <td>#{user.kullanici_id}</td>
+                                                        <td>#{muracaat.muracaat_id}</td>
+                                                        <td>#{muracaat.kimlik_no}</td>
+                                                        <td>#{muracaat.kisi_isim}</td>
+                                                        <td>#{muracaat.kisi_soyisim}</td>
+                                                        <td>#{muracaat.kayit_tarihi}</td>                                             
+                                                        <td>#{muracaat.mahalle}</td>
+                                                        <td>#{muracaat.sokak}</td>
                                                         <td class="profil">
                                                             <div class="action-buttons">
-                                                                <h:commandButton value="SIL" action="#{userBean.delete(user.kullanici_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                                <h:commandButton value="SIL" action="#{muracaatBean.delete(muracaat.muracaat_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
                                                                     <f:ajax execute="@this" render="@form"/>
                                                                 </h:commandButton>
                                                                 <h:commandButton value="DUZENLE" action="#{userBean.edit(user)}" styleClass="btn btn-primary ml-20">

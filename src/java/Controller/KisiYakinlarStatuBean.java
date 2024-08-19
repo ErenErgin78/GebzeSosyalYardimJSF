@@ -24,7 +24,7 @@ public class KisiYakinlarStatuBean {
     public KisiYakinlarStatuBean() {
     }
 
-   public KisiYakinlarStatu getEntity() {
+    public KisiYakinlarStatu getEntity() {
         if (this.entity == null) {
             this.entity = new KisiYakinlarStatu();
         }
@@ -36,6 +36,9 @@ public class KisiYakinlarStatuBean {
     }
 
     public KisiYakinlarStatuDAO getDao() {
+        if (this.dao == null) {
+            this.dao = new KisiYakinlarStatuDAO();
+        }
         return dao;
     }
 
@@ -52,6 +55,7 @@ public class KisiYakinlarStatuBean {
     }
 
     public List<SelectItem> getKisiYakinlarStatulist() {
+        kisiYakinlarStatulist = getDao().KisiYakinlarStatuGetir();
         return kisiYakinlarStatulist;
     }
 

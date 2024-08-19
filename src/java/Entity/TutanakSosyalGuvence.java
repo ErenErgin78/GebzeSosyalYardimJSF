@@ -5,7 +5,7 @@ import java.util.Date;
 public class TutanakSosyalGuvence {
 
     private Integer sosyal_guvence_id;
-    private Integer guvence_var_mi;
+    private Integer guvence_var_mi = 0;
     private Integer guvence_id;
     private Integer birim_id;
     private String birim_aciklama;

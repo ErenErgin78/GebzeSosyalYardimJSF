@@ -26,15 +26,20 @@ public class MuracaatBilgiDAO extends DBConnection {
 
     private String mesaj;
 
-    public Integer MuracaatBilgiEkle(MuracaatBilgi muracaat) {
+    public Integer MuracaatBilgiEkle(MuracaatBilgi muracaatBilgi) {
         try {
             Connection conn = this.getDb();
 
+            if (muracaatBilgi.getAktif() == null) {
+                muracaatBilgi.setAktif(1);
+            }
+
             String callQueryMuracaatBilgi = "{call INSERT_MURACAAT_BILGI(?, ?, ?, ?, ?)}";
             CallableStatement csMuracaatBilgi = conn.prepareCall(callQueryMuracaatBilgi);
-            csMuracaatBilgi.setInt(1, muracaat.getArsiv_dosya_no());
-            csMuracaatBilgi.setString(3, muracaat.getAciklama());
-            csMuracaatBilgi.setDate(4, new java.sql.Date(muracaat.getMuracaat_tarihi().getTime()));
+            csMuracaatBilgi.setInt(1, muracaatBilgi.getArsiv_dosya_no());
+            csMuracaatBilgi.setString(2, muracaatBilgi.getAciklama());
+            csMuracaatBilgi.setDate(3, new java.sql.Date(muracaatBilgi.getMuracaat_tarihi().getTime()));
+            csMuracaatBilgi.setInt(4, 1);
             csMuracaatBilgi.registerOutParameter(5, java.sql.Types.INTEGER);
             csMuracaatBilgi.execute();
             int muracaatBilgiId = csMuracaatBilgi.getInt(5);
@@ -43,7 +48,7 @@ public class MuracaatBilgiDAO extends DBConnection {
             return muracaatBilgiId;
 
         } catch (SQLException ex) {
-            DetectError(ex);
+            mesaj = DetectError(ex);
             return null;
         }
     }

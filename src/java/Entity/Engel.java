@@ -12,6 +12,12 @@ public class Engel {
 
     private Integer engel_tip_id;
     private String engel_tip;
+    private Integer aktif;
+
+    public Engel(String engel_tip, Integer aktif) {
+        this.engel_tip = engel_tip;
+        this.aktif = aktif;
+    }
 
     public Engel(Integer engel_tip_id, String engel_tip) {
         this.engel_tip_id = engel_tip_id;
@@ -23,6 +29,14 @@ public class Engel {
     }
 
     public Engel() {
+    }
+
+    public Integer getAktif() {
+        return aktif;
+    }
+
+    public void setAktif(Integer aktif) {
+        this.aktif = aktif;
     }
 
     public Integer getEngel_tip_id() {

@@ -24,6 +24,11 @@ public class OkulDAO extends DBConnection {
     public void OkulEkle(Okul okul) {
         try {
             Connection conn = this.getDb();
+
+            if (okul.getOkul_aktif() == null) {
+                okul.setOkul_aktif(1);
+            }
+
             String callQuery = "{call INSERT_OKUL(?, ?, ?, ?)}";
             CallableStatement csOkul = conn.prepareCall(callQuery);
 
@@ -97,6 +102,10 @@ public class OkulDAO extends DBConnection {
         } catch (SQLException ex) {
             this.mesaj = DetectError(ex);
         }
+    }
+
+    public void OkulMesajTemizle() {
+        this.mesaj = null;
     }
 
     public Connection getDb() {

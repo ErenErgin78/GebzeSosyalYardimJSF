@@ -21,7 +21,7 @@ public class KisiAskerlikDAO extends DBConnection {
     private String islemBasariliMesaj;
 
 
-    public Integer Create(KisiAskerlik askerlik) {
+    public Integer AskerlikEkle(KisiAskerlik askerlik) {
         try {
             Connection conn = this.getDb();
 
@@ -49,7 +49,7 @@ public class KisiAskerlikDAO extends DBConnection {
         }
     }
 
-    public List<KisiAskerlik> GetList() {
+    public List<KisiAskerlik> KisiAskerlikListesi() {
 
         List<KisiAskerlik> askerlikList = new ArrayList<>();
 
@@ -82,7 +82,7 @@ public class KisiAskerlikDAO extends DBConnection {
         return askerlikList;
     }
 
-    public void Delete(int askerlikId) {
+    public void AskerlikSil(int askerlikId) {
         String deleteQuery = "DELETE FROM KISIASKERLIK WHERE ASKERLIK_ID = " + askerlikId;
 
         try {

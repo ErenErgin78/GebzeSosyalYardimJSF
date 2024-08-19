@@ -23,9 +23,17 @@ public class KisiYakinlarBean implements Serializable {
         return this.getDao().KisiYakinlarEkle(getEntity());
     }
 
+    public Integer ekle(Integer kisiId) {
+        return this.getDao().KisiYakinlarEkle(getEntity(), kisiId);
+    }
+
+    public Integer ekleMuracaat(Integer kisiId) {
+        return this.getDao().KisiYakinlarEkleMuracaat(getEntity(), kisiId);
+    }
+
     public void KisiYakinlarSil(int yakinlarID) {
         this.getDao().KisiYakinlarSil(yakinlarID);
-     
+
     }
 
     public void edit(KisiYakinlar yakinlik) {
@@ -54,5 +62,4 @@ public class KisiYakinlarBean implements Serializable {
         this.dao = dao;
     }
 
- 
 }

@@ -12,6 +12,13 @@ public class Yardim {
 
     private Integer yardim_tip_id;
     private String yardim_tip;
+    private Integer aktif;
+
+    public Yardim(Integer yardim_tip_id, String yardim_tip, Integer aktif) {
+        this.yardim_tip_id = yardim_tip_id;
+        this.yardim_tip = yardim_tip;
+        this.aktif = aktif;
+    }
 
     public Yardim(Integer yardim_tip_id, String yardim_tip) {
         this.yardim_tip_id = yardim_tip_id;
@@ -23,6 +30,14 @@ public class Yardim {
     }
 
     public Yardim() {
+    }
+
+    public Integer getAktif() {
+        return aktif;
+    }
+
+    public void setAktif(Integer aktif) {
+        this.aktif = aktif;
     }
 
     public Integer getYardim_tip_id() {

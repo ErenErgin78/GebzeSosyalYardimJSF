@@ -1,7 +1,6 @@
 package dao;
 
 import static Various.ErrorFinder.DetectError;
-import jakarta.annotation.PostConstruct;
 import jakarta.faces.model.SelectItem;
 import java.sql.Connection;
 import java.sql.ResultSet;

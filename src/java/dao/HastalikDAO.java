@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package dao;
 
 import static Various.ErrorFinder.DetectError;
@@ -9,20 +13,24 @@ import java.util.ArrayList;
 import java.util.List;
 import util.DBConnection;
 
-public class KisiYakinlarStatuDAO extends DBConnection {
+/**
+ *
+ * @author Hamza
+ */
+public class HastalikDAO extends DBConnection {
 
     private Connection db;
 
-    public List<SelectItem> KisiYakinlarStatuGetir() {
+    public List<SelectItem> HastalikGetir() {
         List<SelectItem> TipList = new ArrayList<>();
 
         try {
             Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT OZEL_STATU_ID , OZEL_STATU FROM KISI_YAKINLAR_STATU";
+            String Selectquery = "SELECT HASTALIK_ID , HASTALIK FROM HASTALIK";
             ResultSet rs = statement.executeQuery(Selectquery);
 
             while (rs.next()) {
-                TipList.add(new SelectItem(rs.getInt("OZEL_STATU_ID"), rs.getString("OZEL_STATU")));
+                TipList.add(new SelectItem(rs.getInt("HASTALIK_ID"), rs.getString("HASTALIK")));
             }
         } catch (Exception ex) {
             DetectError(ex);
@@ -31,14 +39,11 @@ public class KisiYakinlarStatuDAO extends DBConnection {
 
     }
 
-    public KisiYakinlarStatuDAO() {
-    }
-
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();
         }
-        return (Connection) db;
+        return db;
     }
 
     public void setDb(Connection db) {

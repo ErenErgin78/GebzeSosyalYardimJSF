@@ -111,6 +111,10 @@ public class TutanakGelirDAO extends DBConnection {
         return tutanakGelirList;
     }
 
+    public void TutanakGelirMesajTemizle() {
+        this.mesaj = null;
+    }
+
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();

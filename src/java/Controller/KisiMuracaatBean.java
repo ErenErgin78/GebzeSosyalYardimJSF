@@ -22,33 +22,45 @@ public class KisiMuracaatBean implements Serializable {
     }
 
     private String mesaj;
-    private Integer egitim_id;
 
     @Inject
     private KisiBean kisiBean;
 
     @Inject
-    private KisiIletisimBean iletisimBean;
-
-    @Inject
     private KisiAdresBean adresBean;
 
     @Inject
+    private KisiIletisimBean iletisimBean;
+
+    @Inject
     private KisiYakinlarBean kisiYakinlarBean;
-    
+
+    @Inject
+    private KisiDetayBean kisiDetayBean;
+
     @Inject
     private MuracaatBilgiBean muracaatBilgiBean;
 
+    @Inject
+    private MuracaatBean muracaatBean;
+
     public void KisiMuracaatEkle() {
         try {
+            Integer adres_id = adresBean.ekle();
 
             Integer iletisim_id = iletisimBean.ekle();
-            Integer adres_id = adresBean.ekle();
-            
-            Integer kisi_id = kisiBean.ekle();
+
+            Integer kisi_detay_id = kisiDetayBean.ekleMuracaat(iletisim_id, adres_id);
+
+            Integer kisi_id = kisiBean.ekle(kisi_detay_id);
+
             Integer muracaat_bilgi_id = muracaatBilgiBean.ekle();
 
-            mesaj = muracaatBilgiBean.getDao().getMesaj();
+            muracaatBean.ekle(kisi_id, muracaat_bilgi_id);
+
+            Integer yakinlar_id = kisiYakinlarBean.ekleMuracaat(kisi_id);
+
+            mesaj = "İşlem Başarılı";
 
         } catch (Exception ex) {
             mesaj = DetectError(ex);
@@ -63,12 +75,4 @@ public class KisiMuracaatBean implements Serializable {
         this.mesaj = mesaj;
     }
 
-    public Integer getEgitim_id() {
-        return egitim_id;
-    }
-
-    public void setEgitim_id(Integer egitim_id) {
-        this.egitim_id = egitim_id;
-    }
-    
 }

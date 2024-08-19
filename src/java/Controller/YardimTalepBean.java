@@ -31,6 +31,10 @@ public class YardimTalepBean implements Serializable {
         return this.entity;
     }
 
+    public void yardimTalepMesajTemizle() {
+        this.getDao().YardimTalepMesajTemizle();
+    }
+
     public void setEntity(YardimTalep entity) {
         this.entity = entity;
     }

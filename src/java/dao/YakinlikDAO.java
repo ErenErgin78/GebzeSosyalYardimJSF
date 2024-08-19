@@ -28,6 +28,11 @@ public class YakinlikDAO extends DBConnection {
     public void YakinlikEkle(Yakinlik yakinlik) {
         try {
             Connection conn = this.getDb();
+
+            if (yakinlik.getAktiflik() == null) {
+                yakinlik.setAktiflik(1);
+            }
+
             String callQuery = "{call INSERT_YAKINLIK(?, ?)}";
             CallableStatement csYakinlik = conn.prepareCall(callQuery);
 
@@ -107,6 +112,10 @@ public class YakinlikDAO extends DBConnection {
         }
         return YakinlikList;
 
+    }
+
+    public void YakinlikMesajTemizle() {
+        this.mesaj = null;
     }
 
     public Connection getDb() {
