@@ -26,6 +26,10 @@ public class YakinlikBean implements Serializable {
         this.getDao().YakinlikSil(yakinlikId);
     }
 
+    public void yakinlikMesajTemizle() {
+        this.getDao().YakinlikMesajTemizle();
+    }
+
     public Yakinlik getEntity() {
         if (this.entity == null) {
             this.entity = new Yakinlik();

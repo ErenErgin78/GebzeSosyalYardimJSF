@@ -34,7 +34,11 @@ public class YardimStatuBean implements Serializable {
     public YardimStatuBean() {
     }
 
-   public YardimStatu getEntity() {
+    public void yardimStatuMesajTemizle() {
+        this.getDao().YardimStatuMesajTemizle();
+    }
+
+    public YardimStatu getEntity() {
         if (this.entity == null) {
             this.entity = new YardimStatu();
         }
@@ -45,7 +49,7 @@ public class YardimStatuBean implements Serializable {
         this.entity = entity;
     }
 
-   public YardimStatuDAO getDao() {
+    public YardimStatuDAO getDao() {
         if (this.dao == null) {
             this.dao = new YardimStatuDAO();
         }

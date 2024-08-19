@@ -37,6 +37,10 @@ public class TutanakSosyalGuvenceBean implements Serializable {
         this.getDao().TutanakSosyalGuvenceSil(tutanakSosyalGuvenceId);
     }
 
+    public void tutanakSosyalGuvenceMesajTemizle() {
+        this.getDao().TutanakSosyalGuvenceMesajTemizle();
+    }
+
     public List<TutanakSosyalGuvence> getList() {
         if (this.list == null) {
             this.list = this.getDao().TutanakSosyalGuvenceListesi();

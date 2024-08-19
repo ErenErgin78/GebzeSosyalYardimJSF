@@ -33,6 +33,10 @@ public class SokakDAO extends DBConnection {
         try {
             Connection conn = this.getDb();
 
+            if (sokak.getAktif() == null) {
+                sokak.setAktif(1);
+            }
+
             String callQueryAdres = "{call INSERT_ADRES_MAHALLE_SOKAK(?, ?, ?)}";
             CallableStatement csAdres = conn.prepareCall(callQueryAdres);
             csAdres.setInt(1, sokak.getMahalle_id());
@@ -108,6 +112,10 @@ public class SokakDAO extends DBConnection {
             DetectError(ex);
         }
         return MahalleList;
+    }
+
+    public void SokakMesajTemizle() {
+        this.islemBasariliMesaj = null;
     }
 
     public void setDb(Connection db) {

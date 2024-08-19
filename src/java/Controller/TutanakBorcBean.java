@@ -28,6 +28,10 @@ public class TutanakBorcBean implements Serializable {
         this.list = this.getDao().GetList(); // Silme işleminden sonra listeyi yeniler
     }
 
+    public void tutanakBorcMesajTemizle() {
+        this.getDao().TutanakBorcMesajTemizle();
+    }
+
     public void edit(TutanakBorc borc) {
         this.entity = borc;
     }

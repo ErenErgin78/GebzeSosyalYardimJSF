@@ -24,6 +24,10 @@ public class TutanakDurumBean implements Serializable {
         this.getDao().TutanakSil(tutanakId);
     }
 
+    public void tutanakDurumMesajTemizle() {
+        this.getDao().TutanakDurumMesajTemizle();
+    }
+
     public TutanakDurum getEntity() {
         if (this.entity == null) {
             this.entity = new TutanakDurum();

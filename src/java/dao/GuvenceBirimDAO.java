@@ -1,14 +1,9 @@
 package dao;
 
-import Entity.GuvenceBirim;
 import static Various.ErrorFinder.DetectError;
 import jakarta.faces.model.SelectItem;
-import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;

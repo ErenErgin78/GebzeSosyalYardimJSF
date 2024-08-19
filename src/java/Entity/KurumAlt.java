@@ -14,6 +14,16 @@ public class KurumAlt {
     private Integer tip_id;
     private String alt_tip;
     private String tip_isim;
+    private Integer aktif;
+
+    public KurumAlt(Integer tip_id, String alt_tip, String tip_isim, Integer aktif) {
+        this.tip_id = tip_id;
+        this.alt_tip = alt_tip;
+        this.tip_isim = tip_isim;
+        this.aktif = aktif;
+    }
+    
+    
 
     public KurumAlt(Integer alt_tip_id, String alt_tip, String tip_isim) {
         this.alt_tip_id = alt_tip_id;
@@ -35,6 +45,16 @@ public class KurumAlt {
 
     public KurumAlt() {
     }
+
+    public Integer getAktif() {
+        return aktif;
+    }
+
+    public void setAktif(Integer aktif) {
+        this.aktif = aktif;
+    }
+    
+    
 
     public Integer getAlt_tip_id() {
         return alt_tip_id;

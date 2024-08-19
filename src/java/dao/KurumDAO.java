@@ -5,10 +5,7 @@
 package dao;
 
 import Entity.Kurum;
-import Entity.Mahalle;
 import static Various.ErrorFinder.DetectError;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
 import jakarta.faces.model.SelectItem;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -35,6 +32,10 @@ public class KurumDAO extends DBConnection {
 
         try {
             Connection conn = this.getDb();
+            
+            if(kurum.getAktif()==null){
+               kurum.setAktif(1);
+            }
 
             String callQueryAdres = "{call INSERT_KURUM(?)}";
             CallableStatement csAdres = conn.prepareCall(callQueryAdres);

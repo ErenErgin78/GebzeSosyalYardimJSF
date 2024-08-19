@@ -27,6 +27,9 @@ public class YardimDAO extends DBConnection {
     public void YardimEkle(Yardim yardim) {
         try {
             Connection conn = this.getDb();
+            if (yardim.getAktif() == null) {
+                yardim.setAktif(1);
+            }
 
             String callQuery = "{call insert_yardim_tip(?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
@@ -37,7 +40,7 @@ public class YardimDAO extends DBConnection {
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (Exception ex) {
-          this.mesaj =  DetectError(ex);
+            this.mesaj = DetectError(ex);
         }
 
     }
@@ -52,7 +55,7 @@ public class YardimDAO extends DBConnection {
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
         } catch (Exception ex) {
-           this.mesaj = DetectError(ex);
+            this.mesaj = DetectError(ex);
         }
     }
 
@@ -75,6 +78,10 @@ public class YardimDAO extends DBConnection {
             DetectError(ex);
         }
         return yardimList;
+    }
+
+    public void YardimMesajTemizle() {
+        this.mesaj = null;
     }
 
     public Connection getDb() {

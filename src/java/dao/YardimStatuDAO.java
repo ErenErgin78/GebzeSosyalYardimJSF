@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +21,10 @@ public class YardimStatuDAO extends DBConnection {
     public void YardimStatuEkle(YardimStatu yardimStatu) {
         try {
             Connection conn = (Connection) this.getDb();
+
+            if (yardimStatu.getAktif() == null) {
+                yardimStatu.setAktif(1);
+            }
 
             String callQuery = "{call INSERT_YARDIM_STATU(?, ?, ?, ?, ? )}";
             CallableStatement cs = conn.prepareCall(callQuery);
@@ -95,6 +98,10 @@ public class YardimStatuDAO extends DBConnection {
         }
         return TipList;
 
+    }
+
+    public void YardimStatuMesajTemizle() {
+        this.mesaj = null;
     }
 
     public java.sql.Connection getDb() {
