@@ -149,7 +149,7 @@
                                                 <div class="form-group col-md-6 mb-3">
                                                     <label for="durum">Hastalık Var mı?</label>
                                                     <div class="custom-radio">
-                                                        <h:selectOneRadio id="durum" value="#{kisiAskerlikBean.entity.aktif}"  styleClass="radio-inline">
+                                                        <h:selectOneRadio id="durum" value="#{kisiEngelBean.entity.aktif}"  styleClass="radio-inline">
                                                             <f:selectItem itemLabel="Evet" itemValue="1" />
                                                             <f:selectItem itemLabel="Hayır" itemValue="0" />
                                                         </h:selectOneRadio>
@@ -167,7 +167,7 @@
                                                 <div class="form-group col-md-6 mb-3">
                                                     <label for="engel">Engel Var mı?</label>
                                                     <div class="custom-radio">
-                                                        <h:selectOneRadio id="engel" value="#{kisiAskerlikBean.entity.aktif}"  styleClass="radio-inline">
+                                                        <h:selectOneRadio id="engel" value="#{kisiEngelBean.entity.aktif}"  styleClass="radio-inline">
                                                             <f:selectItem itemLabel="Evet" itemValue="1" />
                                                             <f:selectItem itemLabel="Hayır" itemValue="0" />
                                                         </h:selectOneRadio>
@@ -186,7 +186,7 @@
                                         </div>
                                     </div> 
                                     <div class="text-center mt-3">
-                                        <h:commandButton value="Kaydet" action="#{kisiAskerlikBean.create()}" class="btn btn-success">
+                                        <h:commandButton value="Kaydet" action="#{kisiEngelBean.ekle()}" class="btn btn-success">
                                             <f:ajax execute="@form" render="@form, mesaj" />
                                         </h:commandButton>                                  
                                     </div>                                                

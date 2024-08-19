@@ -9,27 +9,31 @@ public class TutanakMulkiyet {
     private Integer ev_durum_id;
     private Float kira_miktar;
     private Integer yakacak_tip_id;
+    private Integer kirada_ev_var_mi = 0;
     private Integer kirada_ev_sayisi;
-    private Integer araba_var_mi;
+    private Integer araba_var_mi = 0;
     private String araba_model;
-    private Integer gayrimenkul_var_mi;
+    private Integer gayrimenkul_var_mi = 0;
     private String gayrimenkul_tur;
     private Integer ev_tip_id;
     private Date guncelleme_tarihi;
 
-    public TutanakMulkiyet(Integer mulkiyet_id, Integer mulkiyet_sira_no, Integer ev_durum_id, Float kira_miktar, Integer yakacak_tip_id, Integer kirada_ev_sayisi, Integer araba_var_mi, String araba_model, Integer gayrimenkul_var_mi, String gayrimenkul_tur, Integer ev_tip_id, Date guncelleme_tarihi) {
-        this.mulkiyet_id = mulkiyet_id;
-        this.mulkiyet_sira_no = mulkiyet_sira_no;
-        this.ev_durum_id = ev_durum_id;
+    private String ev_durum_isim;
+    private String yakacak_tip_isim;
+    private String ev_tip_isim;
+
+    public TutanakMulkiyet(Float kira_miktar, Integer kirada_ev_var_mi, Integer kirada_ev_sayisi, Integer araba_var_mi, String araba_model, Integer gayrimenkul_var_mi, String gayrimenkul_tur, Date guncelleme_tarihi, String ev_durum_isim, String yakacak_tip_isim, String ev_tip_isim) {
         this.kira_miktar = kira_miktar;
-        this.yakacak_tip_id = yakacak_tip_id;
+        this.kirada_ev_var_mi = kirada_ev_var_mi;
         this.kirada_ev_sayisi = kirada_ev_sayisi;
         this.araba_var_mi = araba_var_mi;
         this.araba_model = araba_model;
         this.gayrimenkul_var_mi = gayrimenkul_var_mi;
         this.gayrimenkul_tur = gayrimenkul_tur;
-        this.ev_tip_id = ev_tip_id;
         this.guncelleme_tarihi = guncelleme_tarihi;
+        this.ev_durum_isim = ev_durum_isim;
+        this.yakacak_tip_isim = yakacak_tip_isim;
+        this.ev_tip_isim = ev_tip_isim;
     }
 
     public TutanakMulkiyet() {
@@ -73,6 +77,14 @@ public class TutanakMulkiyet {
 
     public void setYakacak_tip_id(Integer yakacak_tip_id) {
         this.yakacak_tip_id = yakacak_tip_id;
+    }
+
+    public Integer getKirada_ev_var_mi() {
+        return kirada_ev_var_mi;
+    }
+
+    public void setKirada_ev_var_mi(Integer kirada_ev_var_mi) {
+        this.kirada_ev_var_mi = kirada_ev_var_mi;
     }
 
     public Integer getKirada_ev_sayisi() {
@@ -130,4 +142,29 @@ public class TutanakMulkiyet {
     public void setGuncelleme_tarihi(Date guncelleme_tarihi) {
         this.guncelleme_tarihi = guncelleme_tarihi;
     }
+
+    public String getEv_durum_isim() {
+        return ev_durum_isim;
+    }
+
+    public void setEv_durum_isim(String ev_durum_isim) {
+        this.ev_durum_isim = ev_durum_isim;
+    }
+
+    public String getYakacak_tip_isim() {
+        return yakacak_tip_isim;
+    }
+
+    public void setYakacak_tip_isim(String yakacak_tip_isim) {
+        this.yakacak_tip_isim = yakacak_tip_isim;
+    }
+
+    public String getEv_tip_isim() {
+        return ev_tip_isim;
+    }
+
+    public void setEv_tip_isim(String ev_tip_isim) {
+        this.ev_tip_isim = ev_tip_isim;
+    }
+
 }
