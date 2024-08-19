@@ -29,6 +29,8 @@ public class Muracaat {
 
     private String mahalle;
     private String sokak;
+    
+    private Integer muracaat_durum_Id;
 
     public Muracaat(Integer kisi_temel_id, Integer muracaat_bilgi_id, Integer aktif) {
         this.kisi_temel_id = kisi_temel_id;
@@ -155,5 +157,14 @@ public class Muracaat {
     public void setSokak(String sokak) {
         this.sokak = sokak;
     }
+
+    public Integer getMuracaat_durum_Id() {
+        return muracaat_durum_Id;
+    }
+
+    public void setMuracaat_durum_Id(Integer muracaat_durum_Id) {
+        this.muracaat_durum_Id = muracaat_durum_Id;
+    }
+    
 
 }

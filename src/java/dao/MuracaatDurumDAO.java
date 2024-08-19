@@ -21,17 +21,18 @@ public class MuracaatDurumDAO extends DBConnection {
 
     private Connection db;
 
-    public List<SelectItem> MüraacatDurumGetir() {
+    public List<SelectItem> MuracaatDurumGetir() {
         List<SelectItem> TipList = new ArrayList<>();
         try {
             Statement statement;
             statement = getDb().createStatement();
-            String Selectquery = "SELECT DURUM_ID , _ISIM FROM Muraacat_Durum";
+            String Selectquery = "SELECT DURUM_ID , DURUM FROM MURACAAT_DURUM";
             ResultSet rs = statement.executeQuery(Selectquery);
 
             while (rs.next()) {
                 TipList.add(new SelectItem(rs.getInt("DURUM_ID"), rs.getString("DURUM")));
             }
+            return TipList;
         } catch (Exception ex) {
             DetectError(ex);
         }
@@ -50,8 +51,6 @@ public class MuracaatDurumDAO extends DBConnection {
         this.db = db;
     }
 
-    public List<SelectItem> MuracaatDurumGetir() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+ 
 
 }

@@ -4,7 +4,6 @@
  */
 package Controller;
 
-
 import Entity.MuracaatDurum;
 import dao.MuracaatDurumDAO;
 import jakarta.annotation.PostConstruct;
@@ -17,68 +16,58 @@ import java.util.List;
  *
  * @author emirh
  */
-@Named(value = "muraacaatDurumBean")
+@Named(value = "muracaatDurumBean")
 @Dependent
 public class MuracaatDurumBean {
-    
-    
+
     private MuracaatDurum entity;
-private MuracaatDurumDAO dao;
- private List<MuracaatDurum> list;
+    private MuracaatDurumDAO dao;
+    private List<MuracaatDurum> list;
     private List<SelectItem> MuracaatDurumList;
-    
-    
-    public MuracaatDurum getEntity(){
-        if(this.entity ==null){
-           this.entity = new MuracaatDurum();
+
+    public MuracaatDurum getEntity() {
+        if (this.entity == null) {
+            this.entity = new MuracaatDurum();
         }
         return this.entity;
     }
-    
+
     public void setEntity(MuracaatDurum entity) {
-           this.entity=entity;
+        this.entity = entity;
     }
-    
-    public MuracaatDurumDAO getDao(){
-        if(this.dao == null){
-           this.dao=new MuracaatDurumDAO();
+
+    public MuracaatDurumDAO getDao() {
+        if (this.dao == null) {
+            this.dao = new MuracaatDurumDAO();
         }
         return this.dao;
     }
-    
-    public void setDao(MuracaatDurumDAO dao){
-         this.dao=dao;
+
+    public void setDao(MuracaatDurumDAO dao) {
+        this.dao = dao;
     }
-    
-    public List<MuracaatDurum> getList(){
-        return list;     
+
+    public List<MuracaatDurum> getList() {
+        return list;
     }
-    
-    
-    public void setList(List<MuracaatDurum> list){
-        this.list=list;
+
+    public void setList(List<MuracaatDurum> list) {
+        this.list = list;
     }
-    
-    public List<SelectItem> getMuracaatDurumList(){
-        MuracaatDurumList=getDao().MuracaatDurumGetir();
+
+    public List<SelectItem> getMuracaatDurumList() {
+        MuracaatDurumList = getDao().MuracaatDurumGetir();
         return MuracaatDurumList;
     }
-    
-    public void setMuracaatDurumList(List <SelectItem> MuracaatDurumList){
-        this.MuracaatDurumList=MuracaatDurumList;
+
+    public void setMuracaatDurumList(List<SelectItem> MuracaatDurumList) {
+        this.MuracaatDurumList = MuracaatDurumList;
     }
-    
+
     @PostConstruct
-    public void init(){
-    }
-    
-    public MuracaatDurumBean(){
+    public void init() {
     }
 
-    /**
-     * Creates a new instance of MuraacaatDurumBean
-     */
-
+    public MuracaatDurumBean() {
     }
-    
-
+}

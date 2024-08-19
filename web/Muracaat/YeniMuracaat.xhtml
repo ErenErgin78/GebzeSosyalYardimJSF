@@ -171,8 +171,9 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-6 mb-3">
                                                     <label for="status">Müracaat Durumu:</label>
-                                                    <h:selectOneMenu id="status" value="#{userBean.dao.aktif}" class="form-control">
+                                                    <h:selectOneMenu id="status" value="#{muracaatBean.entity.muracaat_durum_Id}" class="form-control">
                                                         <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                                        <f:selectItems value="#{muracaatDurumBean.muracaatDurumList}" />
                                                     </h:selectOneMenu>
                                                 </div>
                                                 <div class="form-group col-md-6 mb-3">
