@@ -49,8 +49,9 @@
                                             <div class="input-group">
                                                 <h:inputText id="tc_no" class="form-control" value="#{kisiBean.entity.kimlik_no}"/>
                                                 <div class="input-group-append">
-                                                    <h:commandButton value="Sorgula" class="btn btn-primary">
+                                                    <h:commandButton value="Sorgula" class="btn btn-primary" action="#{kisiBean.KisiBul}">
                                                         <f:ajax execute="tc_no" render="@form" />
+                                                        
                                                     </h:commandButton>
                                                 </div>
                                             </div>
@@ -171,9 +172,8 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-6 mb-3">
                                                     <label for="status">Müracaat Durumu:</label>
-                                                    <h:selectOneMenu id="status" value="#{muracaatBean.entity.muracaat_durum_Id}" class="form-control">
+                                                    <h:selectOneMenu id="status" value="#{userBean.dao.aktif}" class="form-control">
                                                         <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
-                                                        <f:selectItems value="#{muracaatDurumBean.muracaatDurumList}" />
                                                     </h:selectOneMenu>
                                                 </div>
                                                 <div class="form-group col-md-6 mb-3">
