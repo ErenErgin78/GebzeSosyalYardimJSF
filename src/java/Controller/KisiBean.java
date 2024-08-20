@@ -1,6 +1,7 @@
 package Controller;
 
 import Entity.Kisi;
+import static Various.ErrorFinder.DetectError;
 import dao.KisiDAO;
 import jakarta.annotation.PostConstruct;
 import jakarta.inject.Named;
@@ -40,6 +41,29 @@ public class KisiBean implements Serializable {
 
     public void edit(Kisi kisi) {
         this.entity = kisi;
+    }
+    
+    public Kisi KisiBul() {
+        if (entity.getKimlik_no() == null) {
+            return null;
+        }
+        Kisi bulunanKisi = dao.KisiBul(entity.getKimlik_no());        
+        
+        entity.setIsim(bulunanKisi.getIsim());
+        entity.setSoyisim(bulunanKisi.getSoyisim());
+        entity.setCinsiyet(bulunanKisi.getCinsiyet());
+        entity.setCilt_no(bulunanKisi.getCilt_no());
+        entity.setAile_sira_no(bulunanKisi.getAile_sira_no());
+        entity.setSira_no(bulunanKisi.getSira_no());
+        entity.setDogum_tarihi(entity.getDogum_tarihi());
+        entity.setMedeni_durum_id(entity.getMedeni_durum_id());
+        entity.setMedeni_durum_isim(entity.getMedeni_durum_isim());
+        entity.setKayit_tarihi(entity.getKayit_tarihi());
+        entity.setAktif(entity.getAktif());
+        
+        
+        
+        return bulunanKisi;
     }
 
     public Kisi getEntity() {
