@@ -249,10 +249,8 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6 mb-3 ">
                                             <label for="ev" class="form-label">Ev Durumu:</label>
-                                            <h:selectOneMenu id="ev" value="#{tutanakMulkiyetBean.entity.ev_durum_id}" class="form-control">
-                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
-                                                <f:selectItem itemLabel="Kira" itemValue="E" />                                   
-                                                <f:selectItem itemLabel="Ev Sahibi" itemValue="K" />   
+                                            <h:selectOneMenu id="ev" value="#{tutanakMulkiyetBean.entity.ev_tip_id}" class="form-control">
+                                                <f:selectItems value="#{tutanakEvDurumBean.tutanakevdurumlist}" />
                                             </h:selectOneMenu>
                                         </div>
                                         <div class="form-group col-md-6 mb-3">
