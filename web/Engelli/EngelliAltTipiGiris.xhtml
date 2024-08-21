@@ -19,10 +19,7 @@
                         <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="Engelli/EngelliAltTipi.xhtml">Engelli Alt Tipi Tanımlama</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Engelli Alt Tipi Giriş</li>
                     </ol>
-                </div>
-                <div class="col-2 text-end">
-                    <button type="button" class="btn btn-outline-success load-page-button" data-page="Engelli/EngelliAltTipiGiris.xhtml">Engelli Alt Tipi Ekle</button>
-                </div>
+                </div>       
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -41,9 +38,9 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="engelliTipi" class="form-label">Engelli Tipi Adı:</label>
-                                    <h:selectOneMenu id="engelliTipi" value="#{engelAltBean.entity.engelli_tip_id}" class="form-control">
-                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
-                                        <f:selectItems value="#{engelAltBean.engelliTipGetir()}" />
+                                    <h:selectOneMenu id="engelliTipi" value="#{engelAltBean.entity.alt_tip_id}" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                        <f:selectItems value="#{engelAltBean.engelTipGetir()}" />
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="form-group">

@@ -42,7 +42,7 @@
                                         <label for="engelliTipi" class="form-label">Engelli Tipi Adı:</label>
                                         <h:selectOneMenu id="engelliTipi" value="#{engelAltBean.dao.id}" class="form-control">
                                             <f:selectItem itemLabel="Hepsi" itemValue="0" />
-                                            <f:selectItems value="#{engelAltBean.tipList}" />
+                                            <f:selectItems value="#{engelAltBean.engelTipGetir()}" />
                                             <f:ajax event="change" render="engelAltPanel"/>
                                         </h:selectOneMenu>
                                     </div>
