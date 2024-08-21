@@ -32,20 +32,21 @@ public class KurumDAO extends DBConnection {
 
         try {
             Connection conn = this.getDb();
-            
-            if(kurum.getAktif()==null){
-               kurum.setAktif(1);
+
+            if (kurum.getAktif() == null) {
+                kurum.setAktif(1);
             }
 
-            String callQueryAdres = "{call INSERT_KURUM(?)}";
-            CallableStatement csAdres = conn.prepareCall(callQueryAdres);
-            csAdres.setString(1, kurum.getKurum());
-            csAdres.execute();
+            String callQuery = "{call INSERT_KURUM(?)}";
+            CallableStatement cs = conn.prepareCall(callQuery);
+            cs.setString(1, kurum.getKurum());
+            cs.execute();
 
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (Exception ex) {
             this.islemBasariliMesaj = DetectError(ex);
+            ex.printStackTrace(); // Hata durumunda console'a yazdır.
         }
     }
 

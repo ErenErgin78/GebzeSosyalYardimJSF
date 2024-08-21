@@ -38,7 +38,7 @@
                                     <h:inputText id="yonlendirilenKurumAdi" value="#{kurumBean.entity.kurum}" class="form-control" style="width: 350px;" />
                                 </div>
                                 <div class="text-center mt-3">
-                                    <h:commandButton value="Kaydet" action="#{kurumBean.kurumekle()}" class="btn btn-success">
+                                    <h:commandButton value="Kaydet" action="#{kurumBean.kurumEkle()}" class="btn btn-success">
                                         <f:ajax execute="@form" render="@form, mesaj" />
                                     </h:commandButton>
                                 </div>

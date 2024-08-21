@@ -69,7 +69,7 @@
                                                             <td>#{kurum.kurum}</td>
                                                             <td>
                                                                 <div class="action-buttons">
-                                                                    <h:commandButton value="Sil" action="#{kurumBean.kurumsil(kurum.kurum_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
+                                                                    <h:commandButton value="Sil" action="#{kurumBean.kurumSil(kurum.kurum_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
                                                                         <f:ajax execute="@this" render="@form"/>
                                                                     </h:commandButton>
                                                                     <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-20">

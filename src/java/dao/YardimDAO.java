@@ -23,6 +23,9 @@ public class YardimDAO extends DBConnection {
 
     private Connection db;
     private String mesaj;
+    
+    private Integer aktif = 2;
+    private String yardim_tip = "";
 
     public void YardimEkle(Yardim yardim) {
         try {
@@ -65,7 +68,16 @@ public class YardimDAO extends DBConnection {
         List<Yardim> yardimList = new ArrayList<>();
         try {
             StringBuilder queryBuilder = new StringBuilder();
-            queryBuilder.append("SELECT YARDIM_TIP_ID, YARDIM_TIP FROM YARDIM_TIP");
+            queryBuilder.append("SELECT YARDIM_TIP_ID, YARDIM_TIP, AKTIF FROM YARDIM_TIP WHERE 1=1 "); // WHERE 1=1 ekleyerek koşullar eklenirken hata olmasını önleriz.
+
+            // Eğer filtreleme koşulları varsa ekleyin
+            if (aktif != 2) {
+                queryBuilder.append("AND AKTIF = ").append(aktif).append(" ");
+            }
+
+            if (!yardim_tip.isEmpty()) {
+                queryBuilder.append("AND YARDIM_TIP LIKE '%").append(yardim_tip.toUpperCase()).append("%' ");
+            }
 
             Statement statement = getDb().createStatement();
             ResultSet rs = statement.executeQuery(queryBuilder.toString());
@@ -73,7 +85,8 @@ public class YardimDAO extends DBConnection {
             while (rs.next()) {
                 yardimList.add(new Yardim(
                         rs.getInt("YARDIM_TIP_ID"),
-                        rs.getString("YARDIM_TIP")
+                        rs.getString("YARDIM_TIP"),
+                        rs.getInt("AKTIF")
                 ));
             }
         } catch (Exception ex) {
@@ -103,6 +116,14 @@ public class YardimDAO extends DBConnection {
 
     public void setMesaj(String mesaj) {
         this.mesaj = mesaj;
+    }
+
+    public String getYardim_tip() {
+        return yardim_tip;
+    }
+
+    public void setYardim_tip(String yardim_tip) {
+        this.yardim_tip = yardim_tip;
     }
 
 }
