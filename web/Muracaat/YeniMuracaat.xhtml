@@ -39,7 +39,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="dogumTarihi">Doğum Tarihi:</label>
-                                            <h:inputText id="dogumTarihi" class="form-control" value="#{kisiBean.entity.dogum_tarihi}">
+                                            <h:inputText class="form-control" value="#{kisiBean.entity.dogum_tarihi}">
                                                 <f:passThroughAttribute name="type" value="date" />
                                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                                             </h:inputText>
@@ -49,8 +49,9 @@
                                             <div class="input-group">
                                                 <h:inputText id="tc_no" class="form-control" value="#{kisiBean.entity.kimlik_no}"/>
                                                 <div class="input-group-append">
-                                                    <h:commandButton value="Sorgula" class="btn btn-primary">
-                                                        <f:ajax execute="@form" render="@form" />
+                                                    <h:commandButton value="Sorgula" class="btn btn-primary" action="#{kisiBean.KisiBul}">
+                                                        <f:ajax execute="tc_no" render="@form" />
+                                                        
                                                     </h:commandButton>
                                                 </div>
                                             </div>
@@ -171,8 +172,9 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-6 mb-3">
                                                     <label for="status">Müracaat Durumu:</label>
-                                                    <h:selectOneMenu id="status" value="#{userBean.dao.aktif}" class="form-control">
+                                                    <h:selectOneMenu id="status" value="#{muracaatDurumBean.entity.durum_Id}" class="form-control">
                                                         <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                                        <f:selectItems value = "#{muracaatDurumBean.muracaatDurumList}" />
                                                     </h:selectOneMenu>
                                                 </div>
                                                 <div class="form-group col-md-6 mb-3">
@@ -202,24 +204,24 @@
                                                     <div class="col-md-4"> <!-- Her checkbox için bir sütun oluştur -->
                                                         <div class="form-group">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox79" value="option7"/>
-                                                                <label class="form-check-label" for="inlineCheckbox7">Çocuk Bezi Yardımı</label>
+                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox79" value="#{muracaatYardimTalepBean.entity.talep_id}"/>
+                                                                <label class="form-check-label" for="inlineCheckbox7">Ramazan Yardımı(Ayni)</label>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4"> <!-- Diğer sütunlar -->
                                                         <div class="form-group">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox97" value="option9"/>
-                                                                <label class="form-check-label" for="inlineCheckbox9">Giyim Yardımı</label>
+                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox97" value="#{muracaatYardimTalepBean.entity.talep_id}"/>
+                                                                <label class="form-check-label" for="inlineCheckbox9">Kırtasiye Yardımı(Ayni)</label>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4"> <!-- Diğer sütunlar -->
                                                         <div class="form-group">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox86" value="option8"/>
-                                                                <label class="form-check-label" for="inlineCheckbox8">Gıda Yardımı</label>
+                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox86" value="#{muracaatYardimTalepBean.entity.talep_id}"/>
+                                                                <label class="form-check-label" for="inlineCheckbox8">Deprem Yardımı(Ayni)</label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -229,82 +231,28 @@
                                                     <div class="col-md-4"> <!-- Her checkbox için bir sütun oluştur -->
                                                         <div class="form-group">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox74" value="option7"/>
-                                                                <label class="form-check-label" for="inlineCheckbox7">Doğal Afet Yardımı</label>
+                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox74" value="#{muracaatYardimTalepBean.entity.talep_id}"/>
+                                                                <label class="form-check-label" for="inlineCheckbox7">Ramazan Yardımı(Nakdi)</label>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4"> <!-- Diğer sütunlar -->
                                                         <div class="form-group">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox93" value="option9"/>
-                                                                <label class="form-check-label" for="inlineCheckbox9">Yakacak Yardımı</label>
+                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox93" value="#{muracaatYardimTalepBean.entity.talep_id}"/>
+                                                                <label class="form-check-label" for="inlineCheckbox9">Kırtasiye Yardımı(Nakdi)</label>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4"> <!-- Diğer sütunlar -->
                                                         <div class="form-group">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox82" value="option8"/>
-                                                                <label class="form-check-label" for="inlineCheckbox8">Nakdi Yardım</label>
+                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox82" value="#{muracaatYardimTalepBean.entity.talep_id}"/>
+                                                                <label class="form-check-label" for="inlineCheckbox8">Deprem Yardımı(Nakdi)</label>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div> <!-- Bitiş row -->
-
-                                                <div class="row"> <!-- Başlangıç row -->
-                                                    <div class="col-md-4"> <!-- Her checkbox için bir sütun oluştur -->
-                                                        <div class="form-group">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox71" value="option7"/>
-                                                                <label class="form-check-label" for="inlineCheckbox7">Okul Yardımı</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4"> <!-- Diğer sütunlar -->
-                                                        <div class="form-group">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox98" value="option9"/>
-                                                                <label class="form-check-label" for="inlineCheckbox9">Süt Yardımı</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4"> <!-- Diğer sütunlar -->
-                                                        <div class="form-group">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox85" value="option8"/>
-                                                                <label class="form-check-label" for="inlineCheckbox8">Hasta Yatağı Yardımı</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> <!-- Bitiş row -->
-                                                <div class="row"> <!-- Başlangıç row -->
-                                                    <div class="col-md-4"> <!-- Her checkbox için bir sütun oluştur -->
-                                                        <div class="form-group">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox33" value="option7"/>
-                                                                <label class="form-check-label" for="inlineCheckbox7">Ekmek Yardımı</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4"> <!-- Diğer sütunlar -->
-                                                        <div class="form-group">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox44" value="option9"/>
-                                                                <label class="form-check-label" for="inlineCheckbox9">İlaç Yardımı</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4"> <!-- Diğer sütunlar -->
-                                                        <div class="form-group">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="option8"/>
-                                                                <label class="form-check-label" for="inlineCheckbox8">Ev Eşyası Yardımı</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> <!-- Bitiş row -->
-
+                                                </div> <!-- Bitiş row -->                                    
                                             </div> <!-- card-body -->
                                         </div> <!-- card -->
                                     </div> <!-- card-body -->

@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package dao;
 
 import static Various.ErrorFinder.DetectError;
@@ -9,20 +13,24 @@ import java.util.ArrayList;
 import java.util.List;
 import util.DBConnection;
 
-public class TutanakEvDurumDAO extends DBConnection {
+/**
+ *
+ * @author Hamza
+ */
+public class HastalikDAO extends DBConnection {
 
     private Connection db;
 
-    public List<SelectItem> TutanakEvDurumGetir() {
+    public List<SelectItem> HastalikGetir() {
         List<SelectItem> TipList = new ArrayList<>();
 
         try {
             Statement statement = getDb().createStatement();
-            String Selectquery = ("SELECT EV_DURUM_ID, DURUM FROM TUTANAK_EV_DURUM");
+            String Selectquery = "SELECT HASTALIK_ID , HASTALIK FROM HASTALIK";
             ResultSet rs = statement.executeQuery(Selectquery);
 
             while (rs.next()) {
-                TipList.add(new SelectItem(rs.getInt("TUTANAK_EV_DURUM_ID"), rs.getString("DURUM")));
+                TipList.add(new SelectItem(rs.getInt("HASTALIK_ID"), rs.getString("HASTALIK")));
             }
         } catch (Exception ex) {
             DetectError(ex);
@@ -41,4 +49,5 @@ public class TutanakEvDurumDAO extends DBConnection {
     public void setDb(Connection db) {
         this.db = db;
     }
+
 }

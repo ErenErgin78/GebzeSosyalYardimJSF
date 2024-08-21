@@ -64,10 +64,13 @@ public class TutanakMulkiyetDAO extends DBConnection {
 
         try {
             StringBuilder queryBuilder = new StringBuilder();
-            queryBuilder.append("SELECT MULKIYET_ID, MULKIYET_SIRA_NO, EV_DURUM_ID, KIRA_MIKTAR, YAKACAK_TIP_ID, ")
-                    .append("KIRADA_EV_SAYISI, ARABA_VAR_MI, ARABA_MODEL, GAYRIMENKUL_VAR_MI, GAYRIMENKUL_TUR, EV_TIP_ID, ")
-                    .append("GUNCELLEME_TARIHI ")
-                    .append("FROM MULKIYET ")
+            queryBuilder.append("SELECT m.MULKIYET_ID, m.KIRA_MIKTAR, m.KIRADA_EV_VAR_MI, m.KIRADA_EV_SAYISI, ")
+                    .append("m.ARABA_VAR_MI, m.ARABA_MODEL, m.GAYRIMENKUL_VAR_MI, m.GAYRIMENKUL_TUR, m.GUNCELLEME_TARIHI, ")
+                    .append("ted.DURUM AS EV_DURUM_ISIM, tyt.YAKACAK_TIP_ISIM, tet.EV_TIP_ISIM ")
+                    .append("FROM MULKIYET m ")
+                    .append("LEFT JOIN TUTANAK_EV_DURUM ted ON m.EV_DURUM_ID = ted.EV_DURUM_ID ")
+                    .append("LEFT JOIN TUTANAK_YAKACAK_TIP tyt ON m.YAKACAK_TIP_ID = tyt.YAKACAK_TIP_ID ")
+                    .append("LEFT JOIN TUTANAK_EV_TIP tet ON m.EV_TIP_ID = tet.EV_TIP_ID ")
                     .append("WHERE 1=1 ");
 
             Statement statement = getDb().createStatement();
@@ -75,25 +78,24 @@ public class TutanakMulkiyetDAO extends DBConnection {
 
             while (rs.next()) {
                 TutanakMulkiyetList.add(new TutanakMulkiyet(
-                        rs.getInt("MULKIYET_ID"),
-                        rs.getInt("MULKIYET_SIRA_NO"),
-                        rs.getInt("EV_DURUM_ID"),
                         rs.getFloat("KIRA_MIKTAR"),
-                        rs.getInt("YAKACAK_TIP_ID"),
+                        rs.getInt("KIRADA_EV_VAR_MI"),
                         rs.getInt("KIRADA_EV_SAYISI"),
                         rs.getInt("ARABA_VAR_MI"),
                         rs.getString("ARABA_MODEL"),
                         rs.getInt("GAYRIMENKUL_VAR_MI"),
                         rs.getString("GAYRIMENKUL_TUR"),
-                        rs.getInt("EV_TIP_ID"),
-                        rs.getTimestamp("GUNCELLEME_TARIHI")
+                        rs.getTimestamp("GUNCELLEME_TARIHI"),
+                        rs.getString("EV_DURUM_ISIM"),
+                        rs.getString("YAKACAK_TIP_ISIM"),
+                        rs.getString("EV_TIP_ISIM")
                 ));
             }
 
-            System.out.println("İşlem başarılı");
+            mesaj = "İşlem başarıyla gerçekleşmiştir";
 
         } catch (Exception ex) {
-            ex.printStackTrace(); // Hata yönetimi için gerekli kod
+            mesaj = DetectError(ex);
         }
         return TutanakMulkiyetList;
     }

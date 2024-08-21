@@ -1,5 +1,6 @@
 package dao;
 
+import Entity.MuracaatYardimTalep;
 import static Various.ErrorFinder.DetectError;
 import jakarta.faces.model.SelectItem;
 import java.sql.Connection;
@@ -9,26 +10,29 @@ import java.util.ArrayList;
 import java.util.List;
 import util.DBConnection;
 
-public class TutanakEvDurumDAO extends DBConnection {
+/**
+ *
+ * @author Eren
+ */
+public class MuracaatYardimTalepDAO extends DBConnection {
 
     private Connection db;
 
-    public List<SelectItem> TutanakEvDurumGetir() {
-        List<SelectItem> TipList = new ArrayList<>();
+    public List<SelectItem> MuracaatYardimTalepGetir() {
+        List<SelectItem> TalepList = new ArrayList<>();
 
         try {
             Statement statement = getDb().createStatement();
-            String Selectquery = ("SELECT EV_DURUM_ID, DURUM FROM TUTANAK_EV_DURUM");
+            String Selectquery = "SELECT MURACAAT_ID , YARDIM_TIP FROM MURACAAT_YARDIM_TALEP";
             ResultSet rs = statement.executeQuery(Selectquery);
 
             while (rs.next()) {
-                TipList.add(new SelectItem(rs.getInt("TUTANAK_EV_DURUM_ID"), rs.getString("DURUM")));
+                TalepList.add(new SelectItem(rs.getInt("MURACAAT_ID"), rs.getString("YARDIM_TIP")));
             }
         } catch (Exception ex) {
             DetectError(ex);
         }
-        return TipList;
-
+        return TalepList;
     }
 
     public Connection getDb() {

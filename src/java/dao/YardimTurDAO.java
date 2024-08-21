@@ -9,26 +9,25 @@ import java.util.ArrayList;
 import java.util.List;
 import util.DBConnection;
 
-public class TutanakEvDurumDAO extends DBConnection {
+public class YardimTurDAO extends DBConnection {
 
     private Connection db;
 
-    public List<SelectItem> TutanakEvDurumGetir() {
-        List<SelectItem> TipList = new ArrayList<>();
+    public List<SelectItem> YardimTurGetir() {
+        List<SelectItem> TurList = new ArrayList<>();
 
         try {
             Statement statement = getDb().createStatement();
-            String Selectquery = ("SELECT EV_DURUM_ID, DURUM FROM TUTANAK_EV_DURUM");
+            String Selectquery = "SELECT TUR_ID, TUR FROM YARDIM_TUR";
             ResultSet rs = statement.executeQuery(Selectquery);
 
             while (rs.next()) {
-                TipList.add(new SelectItem(rs.getInt("TUTANAK_EV_DURUM_ID"), rs.getString("DURUM")));
+                TurList.add(new SelectItem(rs.getInt("TUR_ID"), rs.getString("TUR")));
             }
         } catch (Exception ex) {
             DetectError(ex);
         }
-        return TipList;
-
+        return TurList;
     }
 
     public Connection getDb() {

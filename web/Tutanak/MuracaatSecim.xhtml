@@ -38,15 +38,30 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="isim" class="form-label">İsim Soyisim:</label>
-                                    <h:inputText id="isim" value="#{muracaatBean.entity.kisi_isim}" class="form-control" />
-                                    <f:ajax event="keyup" render="KullaniciListesi" />
+                                    <div class="input-group">
+                                        <h:inputText id="isim" value="#{muracaatBean.entity.kisi_isim}" class="form-control" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-search"></i>
+                                            </span>
+                                        </div>
+                                        <f:ajax event="keyup" render="KullaniciListesi" />
+                                    </div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="sicil" class="form-label">Müracaat No:</label>
-                                    <h:inputText id="sicil" value="#{muracaatBean.entity.muracaat_id}" class="form-control" />
-                                    <f:ajax event="keyup" render="KullaniciListesi" />
+                                    <div class="input-group">
+                                        <h:inputText id="sicil" value="#{muracaatBean.entity.muracaat_id}" class="form-control" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-search"></i>
+                                            </span>
+                                        </div>
+                                        <f:ajax event="keyup" render="KullaniciListesi" />
+                                    </div>
                                 </div>
                             </div>
+
                             <h:panelGroup id="KullaniciListesi">
                                 <div class="table-container">
                                     <div class="table-responsive">
@@ -69,9 +84,9 @@
                                                         <td>#{muracaat.kisi_soyisim}</td>
                                                         <td class="profil">
                                                             <div class="col-2 text-end">
-                                                                <button type="button" class="btn btn-success load-page-button" data-page="Tutanak/TutanakInceleme.xhtml">Tutanak</button>
-                                                                <button type="button" class="btn btn-success load-page-button" data-page="Tutanak/YakinlikBilgileri.xhtml">Yakınlık</button>
-                                                                <button type="button" class="btn btn-success load-page-button" data-page="Tutanak/AileMaddiDurum.xhtml">Maddi Durum</button>
+                                                                <button type="button" class="btn btn-primary load-page-button" data-page="Tutanak/TutanakInceleme.xhtml">Tutanak</button>
+                                                                <button type="button" class="btn btn-primary load-page-button" data-page="Tutanak/YakinlikBilgileri.xhtml">Yakınlık</button>
+                                                                <button type="button" class="btn btn-primary load-page-button" data-page="Tutanak/AileMaddiDurum.xhtml">Maddi Durum</button>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -80,29 +95,7 @@
                                         </table>
                                     </div>
                                 </div>
-                            </h:panelGroup>                           
-                            <!-- Pagination Card -->
-                            <div class="card mt-3">
-                                <div class="card-body">
-                                    <nav aria-label="Page navigation example">
-                                        <ul class="pagination justify-content-center mb-3">
-                                            <li class="page-item">
-                                                <button type="button" class="btn btn-secondary" data-page="Tutanak/MuracaatSecim.xhtml" data-toggle="tooltip" title="Müracaat Seçim">1</button>
-                                            </li>
-                                            <li class="page-item">
-                                                <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/YakinlikBilgileri.xhtml" data-toggle="tooltip" title="Yakınlık Bilgileri">2</button>
-                                            </li>                                          
-                                            <li class="page-item">
-                                                <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/AileMaddiDurum.xhtml" data-toggle="tooltip" title="Aile Maddi Durum Bilgileri">3</button>
-                                            </li>
-                                                                                                                          
-                                            <li class="page-item">
-                                                <button type="button" class="btn btn-outline-secondary load-page-button" data-page="Tutanak/TutanakInceleme.xhtml" data-toggle="tooltip" title="Tutanak İnceleme">4</button>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
+                            </h:panelGroup>        
                         </div>
                     </div>
                 </div>

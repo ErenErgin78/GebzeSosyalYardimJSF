@@ -3,6 +3,7 @@ package dao;
 import Entity.Kisi;
 import static Various.ErrorFinder.DetectError;
 import jakarta.faces.model.SelectItem;
+import java.math.BigDecimal;
 import util.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +24,7 @@ public class KisiDAO extends DBConnection {
         try {
             Connection conn = this.getDb();
 
-            String callQuery = "{call INSERT_KISI_TEMEL(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            String callQuery = "{call INSERT_KISI_TEMEL(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
             cs.setObject(1, kisi.getKimlik_no());
             cs.setString(2, kisi.getIsim());
@@ -39,7 +40,7 @@ public class KisiDAO extends DBConnection {
 
             this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
-            return cs.getInt(11);
+            return cs.getInt(10);
 
         } catch (Exception ex) {
             this.mesaj = DetectError(ex);
@@ -89,6 +90,42 @@ public class KisiDAO extends DBConnection {
             this.mesaj = DetectError(ex);
         }
     }
+    
+    public Kisi KisiBul(BigDecimal tcNumarasi) {
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT * FROM KISI_TEMEL KT");
+        query.append(" JOIN KISI_MEDENI_DURUM M ON M.MEDENI_DURUM_ID = KT.MEDENI_DURUM_ID");
+        query.append(" JOIN KISI_DETAY KD ON KT.KISI_DETAY_ID = KD.DETAY_ID");
+        query.append(" JOIN KISI_ILETISIM KI ON KD.KISI_ILETISIM_ID = KI.KISI_ILETISIM_ID");
+        
+        query.append(" WHERE KIMLIK_NO = ?");
+        try {
+            PreparedStatement ps = getDb().prepareStatement(query.toString());
+            ps.setBigDecimal(1, tcNumarasi);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Kisi(
+                        rs.getBigDecimal("KIMLIK_NO"), // BigDecimal kullanmak genellikle büyük kimlik numaraları için tercih edilir
+                        rs.getString("ISIM"),
+                        rs.getString("SOYISIM"),
+                        rs.getString("CINSIYET"),
+                        rs.getInt("CILT_NO"),
+                        rs.getInt("AILE_SIRA_NO"),
+                        rs.getInt("SIRA_NO"),
+                        rs.getDate("DOGUM_TARIHI"),
+                        rs.getString("MEDENI_DURUM"),
+                        rs.getDate("KAYIT_TARIHI"),
+                        rs.getInt("AKTIF")
+                );
+            }
+            // sonuç bulunamadı
+            
+        } catch (SQLException ex) {
+            this.mesaj = DetectError(ex);
+        }
+        return null;
+        
+    }
 
     // Kisi listesini çekme metodu
     public List<Kisi> KisiListesi() {
@@ -104,7 +141,7 @@ public class KisiDAO extends DBConnection {
 
             while (rs.next()) {
                 kisiList.add(new Kisi(
-                        rs.getBigDecimal("KIMLIK_NO").toBigInteger(), // BigDecimal kullanmak genellikle büyük kimlik numaraları için tercih edilir
+                        rs.getBigDecimal("KIMLIK_NO"), // BigDecimal kullanmak genellikle büyük kimlik numaraları için tercih edilir
                         rs.getString("ISIM"),
                         rs.getString("SOYISIM"),
                         rs.getString("CINSIYET"),

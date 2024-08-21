@@ -119,6 +119,7 @@ public class KisiAdresDAO extends DBConnection {
         return TipList;
 
     }
+    
 
     public Connection getDb() {
         if (this.db == null) {

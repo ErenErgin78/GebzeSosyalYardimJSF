@@ -1,19 +1,19 @@
 package Entity;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Kisi {
 
     private Integer kisi_id;
-    private BigInteger kimlik_no;
+    private BigDecimal kimlik_no;
     private String isim;
     private String soyisim;
     private String cinsiyet;
     private Integer cilt_no;
     private Integer aile_sira_no;
     private Integer sira_no;
-    private Date dogum_tarihi;
+    private Date dogum_tarihi = new Date();
     private Integer medeni_durum_id;
     private String medeni_durum_isim;
     private Date kayit_tarihi;
@@ -27,11 +27,11 @@ public class Kisi {
         this.kisi_id = kisi_id;
     }
 
-    public BigInteger getKimlik_no() {
+    public BigDecimal getKimlik_no() {
         return kimlik_no;
     }
 
-    public void setKimlik_no(BigInteger kimlik_no) {
+    public void setKimlik_no(BigDecimal kimlik_no) {
         this.kimlik_no = kimlik_no;
     }
 
@@ -123,7 +123,7 @@ public class Kisi {
         this.medeni_durum_isim = medeni_durum_isim;
     }
 
-    public Kisi(BigInteger kimlik_no, String isim, String soyisim, String cinsiyet, Integer cilt_no, Integer aile_sira_no, Integer sira_no, Date dogum_tarihi, String medeni_durum_isim, Date kayit_tarihi, Integer aktif) {
+    public Kisi(BigDecimal kimlik_no, String isim, String soyisim, String cinsiyet, Integer cilt_no, Integer aile_sira_no, Integer sira_no, Date dogum_tarihi, String medeni_durum_isim, Date kayit_tarihi, Integer aktif) {
         this.kimlik_no = kimlik_no;
         this.isim = isim;
         this.soyisim = soyisim;

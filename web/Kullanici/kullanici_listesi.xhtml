@@ -40,24 +40,56 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="isim" class="form-label">İsim:</label>
-                                    <h:inputText id="isim" value="#{userBean.dao.isim}" class="form-control" />
-                                    <f:ajax event="keyup" render="KullaniciListesi" />
+                                    <div class="input-group">
+                                        <h:inputText id="isim" value="#{userBean.dao.isim}" class="form-control" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-search"></i>
+                                            </span>
+                                        </div>
+                                        <f:ajax event="keyup" render="KullaniciListesi" />
+                                    </div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="kullaniciAdi" class="form-label">Kullanıcı Adı:</label>
-                                    <h:inputText id="kullaniciAdi" value="#{userBean.dao.kullanici}" class="form-control" />
+                                    <div class="input-group">
+                                        <h:inputText id="kullaniciAdi" value="#{userBean.dao.kullanici}" class="form-control" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-search"></i>
+                                            </span>
+                                        </div>
+                                    </div>
                                     <f:ajax event="keyup" render="KullaniciListesi" />
                                 </div>
+                            </div>
+                            <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="telefon" class="form-label">Telefon:</label>
-                                    <h:inputText id="telefon" value="#{userBean.dao.telefon}" class="form-control" />
+                                    <div class="input-group">
+                                        <h:inputText id="telefon" value="#{userBean.dao.telefon}" class="form-control" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-search"></i>
+                                            </span>
+                                        </div>
+                                    </div>
                                     <f:ajax event="keyup" render="KullaniciListesi" />
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="sicil" class="form-label">Sicil No:</label>
-                                    <h:inputText id="sicil" value="#{userBean.dao.sicil}" class="form-control" />
-                                    <f:ajax event="keyup" render="KullaniciListesi" />
+                                    <div class="input-group">
+                                        <h:inputText id="sicil" value="#{userBean.dao.sicil}" class="form-control" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-search"></i>
+                                            </span>
+                                        </div>
+                                        <f:ajax event="keyup" render="KullaniciListesi" />
+                                    </div>
                                 </div>
+                            </div>
+                            <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="aktif" class="form-label">Aktif:</label>
                                     <h:selectOneMenu id="aktif" value="#{userBean.dao.aktif}" class="form-control">

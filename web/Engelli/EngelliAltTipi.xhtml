@@ -49,8 +49,15 @@
                                     <!-- Engelli Alt Tipi Adı -->
                                     <div class="form-group col-md-6">
                                         <label for="engelliAltTipiAdi" class="form-label">Engelli Alt Tipi Adı:</label>
-                                        <h:inputText id="engelliAltTipiAdi" value="#{engelAltBean.dao.isim}" class="form-control" />
-                                        <f:ajax event="keyup" render="engelAltPanel" />
+                                        <div class="input-group">
+                                            <h:inputText id="engelliAltTipiAdi" value="#{engelAltBean.dao.isim}" class="form-control" />
+                                            <f:ajax event="keyup" render="engelAltPanel" />
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-search"></i>
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <h:panelGroup id="engelAltPanel">

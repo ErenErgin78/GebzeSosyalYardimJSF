@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package dao;
 
 import static Various.ErrorFinder.DetectError;
@@ -9,21 +13,26 @@ import java.util.ArrayList;
 import java.util.List;
 import util.DBConnection;
 
-public class TutanakEvDurumDAO extends DBConnection {
+/**
+ *
+ * @author emirh
+ */
+public class MuracaatDurumDAO extends DBConnection {
 
     private Connection db;
 
-    public List<SelectItem> TutanakEvDurumGetir() {
+    public List<SelectItem> MuracaatDurumGetir() {
         List<SelectItem> TipList = new ArrayList<>();
-
         try {
-            Statement statement = getDb().createStatement();
-            String Selectquery = ("SELECT EV_DURUM_ID, DURUM FROM TUTANAK_EV_DURUM");
+            Statement statement;
+            statement = getDb().createStatement();
+            String Selectquery = "SELECT DURUM_ID , DURUM FROM MURACAAT_DURUM";
             ResultSet rs = statement.executeQuery(Selectquery);
 
             while (rs.next()) {
-                TipList.add(new SelectItem(rs.getInt("TUTANAK_EV_DURUM_ID"), rs.getString("DURUM")));
+                TipList.add(new SelectItem(rs.getInt("DURUM_ID"), rs.getString("DURUM")));
             }
+            return TipList;
         } catch (Exception ex) {
             DetectError(ex);
         }
@@ -33,7 +42,7 @@ public class TutanakEvDurumDAO extends DBConnection {
 
     public Connection getDb() {
         if (this.db == null) {
-            this.db = this.connect();
+            this.db =  this.connect();
         }
         return db;
     }
@@ -41,4 +50,7 @@ public class TutanakEvDurumDAO extends DBConnection {
     public void setDb(Connection db) {
         this.db = db;
     }
+
+ 
+
 }
