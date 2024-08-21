@@ -15,7 +15,7 @@ public class Yardim {
     private Integer yardim_tur_id;
     private Integer aktif;
 
-    public Yardim(Integer yardim_tip_id, String yardim_tip, Integer aktif) {
+    public Yardim(int yardim_tip_id, String yardim_tip, int yardim_tur_id) {
         this.yardim_tip_id = yardim_tip_id;
         this.yardim_tip = yardim_tip;
         this.yardim_tur_id= yardim_tur_id;

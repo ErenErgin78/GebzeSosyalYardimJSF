@@ -28,6 +28,7 @@ public class YardimBean implements Serializable {
 
     public void yardimEkle() {
         this.getDao().YardimEkle(getEntity());
+        this.list = this.getDao().YardimListesi();
     }
 
     public void yardimSil(int yardimID) {
