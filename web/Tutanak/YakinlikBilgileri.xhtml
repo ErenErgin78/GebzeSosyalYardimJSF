@@ -136,7 +136,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-md-6 mb-3">
-                                                    <label for="sosyalGuvence" class="form-label">Sosyal Güvencesi:</label>
+                                                    <label for="sosyalGuvence" class="form-label hidden">Sosyal Güvencesi:</label>
                                                     <h:selectOneMenu id="sosyalGuvence" value="#{tutanakSosyalGuvenceBean.entity.guvence_id}" class="form-control hidden">
                                                         <f:selectItems value="#{tutanakSosyalGuvenceBean.guvenceList}" />                            
                                                         <f:ajax event="valueChange" render="KullaniciListesi" />
@@ -154,7 +154,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-md-6 mb-3">
-                                                    <label for="hasta" class="form-label">Hastalık Adı:</label>
+                                                    <label for="hasta" class="form-label hidden">Hastalık Adı:</label>
                                                     <h:selectOneMenu id="hasta" value="#{kisiBean.entity.cinsiyet}" class="form-control hidden">
                                                         <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="1" />
                                                         <f:selectItems value="#{hastalikBean.hastalikList}"/>
@@ -172,7 +172,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-md-6 mb-3">
-                                                    <label for="engelAlt">Engelli Alt Tip/Grup:</label>
+                                                    <label for="engelAlt" class="form-label hidden">Engelli Alt Tip/Grup:</label>
                                                     <h:selectOneMenu id="engelAlt" value="#{kisiEngelBean.entity.engelli_alt_tip_id}" class="form-control hidden">
                                                         <f:selectItems value="#{engelAltBean.tipList}" />
                                                     </h:selectOneMenu>
@@ -194,49 +194,54 @@
         </h:form>
 
         <script type="text/javascript">
-            function toggleInputText(radioId, inputTextId) {
-                var radioValue = document.querySelector("input[name='" + radioId + "']:checked").value;
-                var inputText = document.getElementById(inputTextId);
-
-                if (radioValue === "1") {
-                    inputText.classList.remove("hidden");
-                } else {
-                    inputText.classList.add("hidden");
-                }
-            }
+            window.onload = function () {
+                toggleGuvence();
+                toggleHastalik();
+                toggleEngel();
+            };
 
             function toggleGuvence() {
                 var radioValue = document.querySelector("input[name='userForm:guvence']:checked").value;
                 var selectOneMenu = document.getElementById("userForm:sosyalGuvence");
+                var label = document.querySelector("label[for='sosyalGuvence']");
 
                 if (radioValue === "1") {
                     selectOneMenu.classList.remove("hidden");
+                    label.classList.remove("hidden");
                 } else {
                     selectOneMenu.classList.add("hidden");
+                    label.classList.add("hidden");
                 }
             }
 
             function toggleHastalik() {
                 var radioValue = document.querySelector("input[name='userForm:durum']:checked").value;
                 var selectOneMenu = document.getElementById("userForm:hasta");
+                var label = document.querySelector("label[for='hasta']");
 
                 if (radioValue === "1") {
                     selectOneMenu.classList.remove("hidden");
+                    label.classList.remove("hidden");
                 } else {
                     selectOneMenu.classList.add("hidden");
+                    label.classList.add("hidden");
                 }
             }
 
             function toggleEngel() {
                 var radioValue = document.querySelector("input[name='userForm:engel']:checked").value;
                 var selectOneMenu = document.getElementById("userForm:engelAlt");
+                var label = document.querySelector("label[for='engelAlt']");
 
                 if (radioValue === "1") {
                     selectOneMenu.classList.remove("hidden");
+                    label.classList.remove("hidden");
                 } else {
                     selectOneMenu.classList.add("hidden");
+                    label.classList.add("hidden");
                 }
             }
+
         </script>
 
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
