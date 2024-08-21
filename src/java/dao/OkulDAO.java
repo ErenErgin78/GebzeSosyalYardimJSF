@@ -15,6 +15,7 @@ import java.util.List;
 public class OkulDAO extends DBConnection {
 
     private Connection db;
+    private String islemBasariliMesaj;
     private String mesaj;
 
     private Integer tip = 0;
@@ -38,10 +39,10 @@ public class OkulDAO extends DBConnection {
             csOkul.setInt(4, okul.getOkul_aktif());
 
             csOkul.execute();
-            mesaj = "işlem başarıyla gerçekleşmiştir";
+            this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
         } catch (SQLException ex) {
-            this.mesaj = DetectError(ex);
+            this.islemBasariliMesaj = DetectError(ex);
         }
 
     }
@@ -82,7 +83,7 @@ public class OkulDAO extends DBConnection {
                 ));
             }
 
-            mesaj = "işlem başarılı";
+            this.islemBasariliMesaj = "işlem başarılı";
 
         } catch (Exception ex) {
             DetectError(ex);
@@ -113,6 +114,14 @@ public class OkulDAO extends DBConnection {
             this.db = this.connect();
         }
         return db;
+    }
+
+    public String getIslemBasariliMesaj() {
+        return islemBasariliMesaj;
+    }
+
+    public void setIslemBasariliMesaj(String islemBasariliMesaj) {
+        this.islemBasariliMesaj = islemBasariliMesaj;
     }
 
     public void setDb(Connection db) {
