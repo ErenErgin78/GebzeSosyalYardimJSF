@@ -91,41 +91,44 @@ public class KisiDAO extends DBConnection {
         }
     }
     
-    public Kisi KisiBul(BigDecimal tcNumarasi) {
-        StringBuilder query = new StringBuilder();
-        query.append("SELECT * FROM KISI_TEMEL KT");
-        query.append(" JOIN KISI_MEDENI_DURUM M ON M.MEDENI_DURUM_ID = KT.MEDENI_DURUM_ID");
-        query.append(" JOIN KISI_DETAY KD ON KT.KISI_DETAY_ID = KD.DETAY_ID");
-        query.append(" JOIN KISI_ILETISIM KI ON KD.KISI_ILETISIM_ID = KI.KISI_ILETISIM_ID");
+  public Kisi KisiBul(BigDecimal tcNumarasi) {
+    StringBuilder query = new StringBuilder();
+    query.append("SELECT KT.KIMLIK_NO, KT.ISIM, KT.SOYISIM, KT.CINSIYET, KT.CILT_NO, ");
+    query.append("KT.AILE_SIRA_NO, KT.SIRA_NO, KT.DOGUM_TARIHI, M.MEDENI_DURUM, KT.KAYIT_TARIHI, ");
+    query.append("KT.AKTIF, KD.KISI_ILETISIM_ID ");
+    query.append("FROM KISI_TEMEL KT ");
+    query.append("JOIN KISI_MEDENI_DURUM M ON M.MEDENI_DURUM_ID = KT.MEDENI_DURUM_ID ");
+    query.append("JOIN KISI_DETAY KD ON KT.KISI_DETAY_ID = KD.DETAY_ID ");
+    query.append("JOIN KISI_ILETISIM KI ON KD.KISI_ILETISIM_ID = KI.KISI_ILETISIM_ID ");
+    query.append("WHERE KT.KIMLIK_NO = ?");
+    
+    try {
+        PreparedStatement ps = getDb().prepareStatement(query.toString());
+        ps.setBigDecimal(1, tcNumarasi);
+        ResultSet rs = ps.executeQuery();
         
-        query.append(" WHERE KIMLIK_NO = ?");
-        try {
-            PreparedStatement ps = getDb().prepareStatement(query.toString());
-            ps.setBigDecimal(1, tcNumarasi);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return new Kisi(
-                        rs.getBigDecimal("KIMLIK_NO"), // BigDecimal kullanmak genellikle büyük kimlik numaraları için tercih edilir
-                        rs.getString("ISIM"),
-                        rs.getString("SOYISIM"),
-                        rs.getString("CINSIYET"),
-                        rs.getInt("CILT_NO"),
-                        rs.getInt("AILE_SIRA_NO"),
-                        rs.getInt("SIRA_NO"),
-                        rs.getDate("DOGUM_TARIHI"),
-                        rs.getString("MEDENI_DURUM"),
-                        rs.getDate("KAYIT_TARIHI"),
-                        rs.getInt("AKTIF")
-                );
-            }
-            // sonuç bulunamadı
-            
-        } catch (SQLException ex) {
-            this.mesaj = DetectError(ex);
+        if (rs.next()) {
+            return new Kisi(
+                rs.getBigDecimal("KIMLIK_NO"),
+                rs.getString("ISIM"),
+                rs.getString("SOYISIM"),
+                rs.getString("CINSIYET"),
+                rs.getInt("CILT_NO"),
+                rs.getInt("AILE_SIRA_NO"),
+                rs.getInt("SIRA_NO"),
+                rs.getDate("DOGUM_TARIHI"),
+                rs.getString("MEDENI_DURUM"),
+                rs.getDate("KAYIT_TARIHI"),
+                rs.getInt("AKTIF")
+            );
         }
-        return null;
         
+    } catch (SQLException ex) {
+        this.mesaj = DetectError(ex);
     }
+    return null;
+}
+
 
     // Kisi listesini çekme metodu
     public List<Kisi> KisiListesi() {
