@@ -49,7 +49,7 @@
                                             <div class="input-group">
                                                 <h:inputText id="tc_no" class="form-control" value="#{kisiBean.entity.kimlik_no}"/>
                                                 <div class="input-group-append">
-                                                    <h:commandButton value="Sorgula" class="btn btn-primary" action="#{sorgulaBean.dao.SorgulaBul}">
+                                                    <h:commandButton value="Sorgula" class="btn btn-primary" action="#{kisiBean.KisiBul}">
                                                         <f:ajax execute="tc_no" render="@form" />
                                                         
                                                     </h:commandButton>
