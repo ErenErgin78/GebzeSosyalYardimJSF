@@ -172,8 +172,9 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-6 mb-3">
                                                     <label for="status">Müracaat Durumu:</label>
-                                                    <h:selectOneMenu id="status" value="#{userBean.dao.aktif}" class="form-control">
+                                                    <h:selectOneMenu id="status" value="#{muracaatDurumBean.entity.durum_Id}" class="form-control">
                                                         <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                                        <f:selectItems value = "#{muracaatDurumBean.muracaatDurumList}" />
                                                     </h:selectOneMenu>
                                                 </div>
                                                 <div class="form-group col-md-6 mb-3">
@@ -203,7 +204,7 @@
                                                     <div class="col-md-4"> <!-- Her checkbox için bir sütun oluştur -->
                                                         <div class="form-group">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox79" value="option7"/>
+                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox79" value="#{muracaatYardimTalepBean.entity.talep_id}"/>
                                                                 <label class="form-check-label" for="inlineCheckbox7">Ramazan Yardımı(Ayni)</label>
                                                             </div>
                                                         </div>
@@ -211,7 +212,7 @@
                                                     <div class="col-md-4"> <!-- Diğer sütunlar -->
                                                         <div class="form-group">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox97" value="option9"/>
+                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox97" value="#{muracaatYardimTalepBean.entity.talep_id}"/>
                                                                 <label class="form-check-label" for="inlineCheckbox9">Kırtasiye Yardımı(Ayni)</label>
                                                             </div>
                                                         </div>
@@ -219,7 +220,7 @@
                                                     <div class="col-md-4"> <!-- Diğer sütunlar -->
                                                         <div class="form-group">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox86" value="option8"/>
+                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox86" value="#{muracaatYardimTalepBean.entity.talep_id}"/>
                                                                 <label class="form-check-label" for="inlineCheckbox8">Deprem Yardımı(Ayni)</label>
                                                             </div>
                                                         </div>
@@ -230,7 +231,7 @@
                                                     <div class="col-md-4"> <!-- Her checkbox için bir sütun oluştur -->
                                                         <div class="form-group">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox74" value="option7"/>
+                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox74" value="#{muracaatYardimTalepBean.entity.talep_id}"/>
                                                                 <label class="form-check-label" for="inlineCheckbox7">Ramazan Yardımı(Nakdi)</label>
                                                             </div>
                                                         </div>
@@ -238,7 +239,7 @@
                                                     <div class="col-md-4"> <!-- Diğer sütunlar -->
                                                         <div class="form-group">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox93" value="option9"/>
+                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox93" value="#{muracaatYardimTalepBean.entity.talep_id}"/>
                                                                 <label class="form-check-label" for="inlineCheckbox9">Kırtasiye Yardımı(Nakdi)</label>
                                                             </div>
                                                         </div>
@@ -246,7 +247,7 @@
                                                     <div class="col-md-4"> <!-- Diğer sütunlar -->
                                                         <div class="form-group">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox82" value="option8"/>
+                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox82" value="#{muracaatYardimTalepBean.entity.talep_id}"/>
                                                                 <label class="form-check-label" for="inlineCheckbox8">Deprem Yardımı(Nakdi)</label>
                                                             </div>
                                                         </div>
