@@ -44,7 +44,7 @@ public class CekmeceDAO extends DBConnection {
             csCekmece.execute();
             this.mesaj = "İşlem başarıyla gerçekleşmiştir";
 
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             this.mesaj = DetectError(ex);
         }
     }
@@ -67,9 +67,7 @@ public class CekmeceDAO extends DBConnection {
         List<Cekmece> CekmeceList = new ArrayList<>();
         try {
             StringBuilder queryBuilder = new StringBuilder();
-            queryBuilder.append("SELECT TUTANAK_CEKMECE_ID, TUTANAK_CEKMECE_DURUM, CEKMECE_AKTIF ")
-                    .append("FROM TUTANAK_CEKMECE ")
-                    .append("WHERE 1=1 ");
+            queryBuilder.append("SELECT TUTANAK_CEKMECE_ID, TUTANAK_CEKMECE_DURUM, CEKMECE_AKTIF FROM TUTANAK_CEKMECE WHERE 1=1");
 
             if (aktif != 2) {
                 queryBuilder.append("AND CEKMECE_AKTIF = ").append(aktif).append(" ");

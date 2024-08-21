@@ -7,6 +7,7 @@ package Controller;
 import Entity.Yardim;
 import dao.YardimDAO;
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.model.SelectItem;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import java.io.Serializable;
@@ -23,10 +24,10 @@ public class YardimBean implements Serializable {
     private Yardim entity;
     private YardimDAO dao;
     private List<Yardim> list;
+    private List <SelectItem> yardimList;
 
     public void yardimEkle() {
         this.getDao().YardimEkle(getEntity());
-        this.list = this.getDao().YardimListesi();
     }
 
     public void yardimSil(int yardimID) {

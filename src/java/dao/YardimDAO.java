@@ -27,14 +27,17 @@ public class YardimDAO extends DBConnection {
     public void YardimEkle(Yardim yardim) {
         try {
             Connection conn = this.getDb();
+
             if (yardim.getAktif() == null) {
                 yardim.setAktif(1);
             }
 
-            String callQuery = "{call insert_yardim_tip(?)}";
-            CallableStatement cs = conn.prepareCall(callQuery);
+            Integer yardimTurId = yardim.getYardim_tur_id() != null ? yardim.getYardim_tur_id() : 0; // Default to 0 if null
 
+            String callQuery = "{call INSERT_YARDIM_TIP(?, ?)}";
+            CallableStatement cs = conn.prepareCall(callQuery);
             cs.setString(1, yardim.getYardim_tip());
+            cs.setInt(2, yardimTurId);
 
             cs.execute();
 
@@ -42,7 +45,6 @@ public class YardimDAO extends DBConnection {
         } catch (Exception ex) {
             this.mesaj = DetectError(ex);
         }
-
     }
 
     public void YardimSil(int yardimTipId) {
