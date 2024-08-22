@@ -25,19 +25,23 @@ public class EgitimDurumBean implements Serializable {
     private EgitimDurumDAO dao;
     private List<EgitimDurum> list;
     private List<SelectItem> egitimlist;
-
+    
+    // Bean başlatıldığında eğitim durumu listesini getirir
     @PostConstruct
     public void init() {
         egitimlist = egitimDurumGetir();
     }
 
+    // Constructor
     public EgitimDurumBean() {
     }
 
+    // Eğitim durumu listesini SelectItem olarak getirir
     public List<SelectItem> egitimDurumGetir() {
         return this.getDao().EgitimDurumGetir();
     }
 
+    // EgitimDurum nesnesini döndürür
     public EgitimDurum getEntity() {
         if(entity == null){
         entity = new EgitimDurum();
@@ -45,10 +49,12 @@ public class EgitimDurumBean implements Serializable {
         return entity;
     }
 
+    // EgitimDurum nesnesini ayarlar
     public void setEntity(EgitimDurum entity) {
         this.entity = entity;
     }
-
+    
+    // EgitimDurumDAO nesnesini döndürür
     public EgitimDurumDAO getDao() {
         if(dao == null){
         dao = new EgitimDurumDAO();
@@ -56,23 +62,28 @@ public class EgitimDurumBean implements Serializable {
         return dao;
     }
 
+    // EgitimDurumDAO nesnesini ayarlar
     public void setDao(EgitimDurumDAO dao) {
         this.dao = dao;
     }
 
+    // EgitimDurum listesini döndürür
     public List<EgitimDurum> getList() {
         return list;
     }
 
+    // EgitimDurum listesini ayarlar
     public void setList(List<EgitimDurum> list) {
         this.list = list;
     }
-
+    
+    // Eğitim durumu listesini döndürür
     public List<SelectItem> getEgitimlist() {
         egitimlist = egitimDurumGetir();
         return egitimlist;
     }
 
+    // Eğitim durumu listesini ayarlar
     public void setEgitimlist(List<SelectItem> egitimlist) {
         this.egitimlist = egitimlist;
     }

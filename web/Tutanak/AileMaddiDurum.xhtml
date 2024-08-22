@@ -16,6 +16,7 @@
     </h:head>
     <h:body>
         <h:form id="userForm">
+            <!-- Global mesajları gösterir -->
             <h:messages globalOnly="true" layout="table"/>
             <h:outputText id="mesaj" value="#{tutanakGelirBorcBean.mesaj}" />
             <div class="row align-items-center mb-3">
@@ -27,6 +28,7 @@
                         <li class="breadcrumb-item active" aria-current="page">Aile Gelir ve Borç Bilgileri</li>
                     </ol>
                 </div>
+                <!-- Müracaat seçim butonu -->
                 <div class="col-2 text-end">
                     <button type="button" class="btn btn-outline-success load-page-button" data-page="Tutanak/MuracaatSecim.xhtml">Müracaat Seçim</button>
                 </div>
@@ -46,7 +48,7 @@
                                                 Gelir Bilgileri
                                             </div>
                                             <div class="card-body" style="max-height: 300px; overflow-y: auto;">
-                                                <!-- Form Rows -->
+                                                <!-- Gelir Bilgileri Formu -->
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
@@ -184,7 +186,7 @@
                                                 Borç Bilgileri
                                             </div>
                                             <div class="card-body" style="max-height: 300px; overflow-y: auto;">
-                                                <!-- Form Rows -->
+                                                <!-- Borç Bilgileri Formu -->
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">

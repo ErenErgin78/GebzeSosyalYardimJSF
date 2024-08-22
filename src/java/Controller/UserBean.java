@@ -22,20 +22,24 @@ public class UserBean implements Serializable {
     private List<User> list;
 
     private Date tarih;
-
+    
+    // Yeni kullanıcı oluşturur
     public void create() {
         this.getDao().UserEkle(getEntity());
     }
 
+    // Kullanıcıyı siler
     public void delete(int UserID) {
         this.getDao().UserSil(UserID);
         this.list = this.getDao().UserListesi();
     }
 
+    // Kullanıcı mesajlarını temizler
     public void userMesajTemizle() {
         this.getDao().UsersMesajTemizle();
     }
 
+    // Kullanıcı girişini gerçekleştirir
     public void giris() {
         boolean basarili = this.getDao().KullaniciGiris(this.getDao().getKullanici_adi(), this.getDao().getSifre());
 
@@ -48,6 +52,7 @@ public class UserBean implements Serializable {
                 context.getExternalContext().redirect("index.xhtml");
                 context.addMessage(null, null);
             } catch (IOException e) {
+                // Yönlendirme hatası durumunda yakalar
             }
         } else {
             context.addMessage(null,
@@ -56,15 +61,18 @@ public class UserBean implements Serializable {
 
     }
 
+    // Kullanıcı oturumunu sonlandırır
     public String cikis() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "login?faces-redirect=true";
     }
 
+    // Kullanıcı düzenleme işlemi yapar
     public void edit(User user) {
         this.entity = user;
     }
 
+    // Kullanıcı varlık nesnesini getirir
     public User getEntity() {
         if (this.entity == null) {
             this.entity = new User();
@@ -72,10 +80,12 @@ public class UserBean implements Serializable {
         return entity;
     }
 
+    // Kullanıcı varlık nesnesini ayarlar
     public void setEntity(User entity) {
         this.entity = entity;
     }
 
+    // DAO nesnesini getirir
     public UsersDAO getDao() {
         if (this.dao == null) {
             this.dao = new UsersDAO();
@@ -83,27 +93,33 @@ public class UserBean implements Serializable {
         return dao;
     }
 
+    // DAO nesnesini ayarlar
     public void setDao(UsersDAO dao) {
         this.dao = dao;
     }
 
+    // Kullanıcı listesini getirir
     public List<User> getList() {
         this.list = this.getDao().UserListesi();
         return list;
     }
 
+    // Kullanıcı listesini ayarlar
     public void setList(List<User> list) {
         this.list = list;
     }
 
+    // Tarih değerini getirir
     public Date getTarih() {
         return tarih;
     }
 
+    // Tarih değerini ayarlar
     public void setTarih(Date tarih) {
         this.tarih = tarih;
     }
 
+    // Bean nesnesi yüklendiğinde çalışacak başlangıç işlemleri
     @PostConstruct
     public void init() {
         getDao().setMessage(null); // sayfa yüklendiğinde mesajı sıfırlar

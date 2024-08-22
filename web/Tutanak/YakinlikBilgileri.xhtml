@@ -6,6 +6,7 @@
     <h:head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Sosyal Güvence ve Yakınlık Bilgileri</title>
+        <!-- Bootstrap ve özel stilleri yükle -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
         <link rel="stylesheet" href="CSS/styles.css" />
         <link rel="stylesheet" href="CSS/log.css" />
@@ -20,6 +21,7 @@
         <h:form id="userForm">
             <div class="row align-items-center mb-3">
                 <div class="col-10">
+                    <!-- Breadcrumb ve geri dönüş butonu -->
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>            
                         <li class="breadcrumb-item active" aria-current="page">İşlemlerim</li>
@@ -31,6 +33,7 @@
                     <button type="button" class="btn btn-outline-success load-page-button" data-page="Tutanak/MuracaatSecim.xhtml">Müracaat Seçim</button>
                 </div>
             </div>
+            <!-- Global mesajlar ve işlem başarılı mesajı -->
             <h:messages globalOnly="true" layout="table"/>
             <h:outputText id="mesaj" value ="#{kisiAskerlikBean.dao.islemBasariliMesaj}"/>
             <div class="container-fluid">               
@@ -41,10 +44,12 @@
                         </div>
                         <div class="card-body">
                             <div class="card">
+                                <!-- Aile Yakınlık Başlığı ve Form Alanları -->
                                 <div class="card-header">
                                     Yakınlık Bilgileri
                                 </div>
                                 <div class="card-body">
+                                    <!-- Yakınlık bilgileri formu -->
                                     <div class="form-row">
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="dogum">Doğum Tarihi:</label>
@@ -180,26 +185,29 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>                    
+                                </div>
+                                <!-- Kaydet butonu -->
                                 <div class="text-center mt-3">
-                                    <h:commandButton value="Kaydet" action="#{kisiEngelBean.ekle()}" class="btn btn-success">
+                                    <h:commandButton value="Kaydet" action="#{kisiYakinlarBean.ekle()}" class="btn btn-success">
                                         <f:ajax execute="@form" render="@form, mesaj" />
                                     </h:commandButton>                                  
                                 </div>
                             </div> 
                         </div>
-                    </div>tu
+                    </div>
                 </div>
             </div>
         </h:form>
 
+
         <script type="text/javascript">
+
             window.onload = function () {
                 toggleGuvence();
                 toggleHastalik();
                 toggleEngel();
             };
-
+            // Sosyal Güvence menüsünü görünür/kapatılır yapmak için
             function toggleGuvence() {
                 var radioValue = document.querySelector("input[name='userForm:guvence']:checked").value;
                 var selectOneMenu = document.getElementById("userForm:sosyalGuvence");

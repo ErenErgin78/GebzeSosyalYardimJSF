@@ -7,8 +7,14 @@ package Entity;
 import java.math.BigInteger;
 import java.util.Date;
 
+/**
+ * Bu sınıf, kullanıcı bilgilerini temsil eden bir User varlığıdır. Kullanıcının
+ * ID'si, adı, adresi, telefon numarası, cinsiyeti, kayıt tarihi ve daha
+ * fazlasını içerir.
+ */
 public class User {
 
+    // Kullanıcının temel bilgilerini temsil eden alanlar
     private int kullanici_id;
     private Integer kullanici_durum_id;
     private String kullanici_isim;
@@ -21,13 +27,14 @@ public class User {
     private String kullannici_eposta;
     private String sifre;
 
+    // Kullanıcının ek bilgilerini temsil eden alanlar
     private String kullanici_profil;
     private String kullanici_unvan;
     private String kullanici_durum;
 
+    // Kullanıcının kullanıcı adını temsil eden alan
     private String kullanici_kullanici_adi;
 
-    
     public User(int kullanici_id, String kullanici_isim, String kullanici_adres, BigInteger kullanici_sicil_no, BigInteger kullanici_telefon, char kullanici_cinsiyet, Date kullanici_kayit_tarih, String kullanici_unvan, String kullanici_durum, String kullanici_kullanici_adi) {
         this.kullanici_id = kullanici_id;
         this.kullanici_isim = kullanici_isim;
@@ -67,6 +74,7 @@ public class User {
         this.kullanici_kullanici_adi = kullanici_kullanici_adi;
     }
 
+    // Getter ve setter metodları
     public String getSifre() {
         return sifre;
     }

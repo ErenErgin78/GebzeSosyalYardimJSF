@@ -17,22 +17,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * UsersDAO, kullanıcı veritabanı işlemlerini gerçekleştiren sınıftır. 
+ * Bu sınıf, kullanıcı ekleme, silme, listeleme ve giriş işlemlerini yönetir.
+ * Ayrıca, veritabanı bağlantısını yönetmek ve hata tespiti yapmak için yardımcı metodlar içerir.
+ * 
  * @author Eren
  */
+
 public class UsersDAO extends DBConnection {
 
+     // Veritabanı bağlantısı için kullanılacak Connection nesnesi.
     private Connection db;
 
+    // Kullanıcı adı, şifre ve diğer kullanıcı bilgileri
     private String kullanici_adi;
     private String sifre;
 
+    // İşlemler sırasında kullanılacak mesajlar ve durumlar.
     private String mesaj;
     private Integer aktif = 0;
     private String isim = "";
     private String kullanici = "";
     private String telefon = ""; // String olarak değiştirildi
     private String sicil = "";
+    
+    
+    /**
+     * UserEkle metodu, yeni bir kullanıcıyı veritabanına ekler.     
+     */
 
     public void UserEkle(User user) {
         try {
@@ -64,6 +76,10 @@ public class UsersDAO extends DBConnection {
 
     }
 
+     /**
+     * UserListesi metodu, veritabanındaki tüm kullanıcıları listeler.
+     */
+    
     public List<User> UserListesi() {
         List<User> userList = new ArrayList<>();
         try {
@@ -117,6 +133,12 @@ public class UsersDAO extends DBConnection {
         return userList;
     }
 
+      /**
+     * UserSil metodu, belirtilen kullanıcıyı veritabanından siler.
+     * 
+     * @param kullaniciId Silinecek kullanıcının ID'si.
+     */
+    
     public void UserSil(int kullaniciId) {
         String deleteQuery = "DELETE FROM KULLANICI WHERE kullanici_id = ?";
 
@@ -134,6 +156,7 @@ public class UsersDAO extends DBConnection {
         }
     }
 
+    
     public boolean KullaniciGiris(String kullaniciAdi, String sifre) {
         boolean Girisbasarili = false;
         try {
@@ -157,6 +180,12 @@ public class UsersDAO extends DBConnection {
         return Girisbasarili;
     }
 
+    /**
+     * DetectError metodu, yakalanan hataları tespit eder ve mesaj olarak kullanıcıya bildirir.
+     * 
+     * @param ex Yakalanan istisna.
+     */
+    
     private void DetectError(Exception ex) {
         //Hatayı yakalamak için
         FacesContext context = FacesContext.getCurrentInstance();
@@ -175,10 +204,18 @@ public class UsersDAO extends DBConnection {
 
     }
 
+     /**
+     * UsersMesajTemizle metodu, mesaj değişkenini sıfırlar.
+     */
     public void UsersMesajTemizle() {
         this.mesaj = null;
     }
 
+     /**
+     * Veritabanı bağlantısını sağlar.
+     * 
+     * @return Veritabanı bağlantısını döner.
+     */ 
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();

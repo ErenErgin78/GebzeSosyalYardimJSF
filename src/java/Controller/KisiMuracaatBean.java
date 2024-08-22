@@ -40,11 +40,11 @@ public class KisiMuracaatBean implements Serializable {
 
     @Inject
     private MuracaatBilgiBean muracaatBilgiBean;
-      
 
     @Inject
-    private MuracaatBean muracaatBean; 
+    private MuracaatBean muracaatBean;
 
+    // Kişi müracaatını ekler ve ilgili işlemleri yapar
     public void KisiMuracaatEkle() {
         try {
             Integer adres_id = adresBean.ekle();
@@ -56,12 +56,8 @@ public class KisiMuracaatBean implements Serializable {
             Integer kisi_id = kisiBean.ekle(kisi_detay_id);
 
             Integer muracaat_bilgi_id = muracaatBilgiBean.ekle();
-            
-            
 
             muracaatBean.ekle(kisi_id, muracaat_bilgi_id);
-                       
-            
 
             Integer yakinlar_id = kisiYakinlarBean.ekleMuracaat(kisi_id);
 
@@ -72,10 +68,12 @@ public class KisiMuracaatBean implements Serializable {
         }
     }
 
+    // Mesajı getirir
     public String getMesaj() {
         return mesaj;
     }
 
+    // Mesajı ayarlar
     public void setMesaj(String mesaj) {
         this.mesaj = mesaj;
     }
