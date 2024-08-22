@@ -43,28 +43,30 @@ public class KisiBean implements Serializable {
         this.entity = kisi;
     }
     
-    public Kisi KisiBul() {
-        if (entity.getKimlik_no() == null) {
-            return null;
-        }
-        Kisi bulunanKisi = dao.KisiBul(entity.getKimlik_no());        
-        
+public Kisi KisiBul() {
+    if (entity.getKimlik_no() == null) {
+        return null;
+    }
+    
+    Kisi bulunanKisi = dao.KisiBul(entity.getKimlik_no());  
+    
+    if (bulunanKisi != null) {
         entity.setIsim(bulunanKisi.getIsim());
         entity.setSoyisim(bulunanKisi.getSoyisim());
         entity.setCinsiyet(bulunanKisi.getCinsiyet());
         entity.setCilt_no(bulunanKisi.getCilt_no());
         entity.setAile_sira_no(bulunanKisi.getAile_sira_no());
         entity.setSira_no(bulunanKisi.getSira_no());
-        entity.setDogum_tarihi(entity.getDogum_tarihi());
-        entity.setMedeni_durum_id(entity.getMedeni_durum_id());
-        entity.setMedeni_durum_isim(entity.getMedeni_durum_isim());
-        entity.setKayit_tarihi(entity.getKayit_tarihi());
-        entity.setAktif(entity.getAktif());
-        
-        
-        
-        return bulunanKisi;
+        entity.setDogum_tarihi(bulunanKisi.getDogum_tarihi());
+        entity.setMedeni_durum_id(bulunanKisi.getMedeni_durum_id()); // bu alanın bulunanKisi'de olduğunu varsayarak
+        entity.setMedeni_durum_isim(bulunanKisi.getMedeni_durum_isim()); // Medeni durum ismi de set ediliyor
+        entity.setKayit_tarihi(bulunanKisi.getKayit_tarihi());
+        entity.setAktif(bulunanKisi.getAktif());
     }
+    
+    return bulunanKisi;
+}
+
 
     public Kisi getEntity() {
         if (this.entity == null) {
