@@ -1,33 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import Entity.Yardim;
 import static Various.ErrorFinder.DetectError;
+import jakarta.faces.model.SelectItem;
 import java.sql.Statement;
-import java.sql.Connection;
-import util.DBConnection;
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import util.DBConnection;
 
-/**
- *
- * @author Eren
- */
 public class YardimDAO extends DBConnection {
 
     private Connection db;
-    private String mesaj;
-    
-    private Integer aktif = 2;
-    private String yardim_tip = "";
+    private String islemBasariliMesaj;
 
     public void YardimEkle(Yardim yardim) {
+
         try {
             Connection conn = this.getDb();
 
@@ -35,18 +27,16 @@ public class YardimDAO extends DBConnection {
                 yardim.setAktif(1);
             }
 
-            Integer yardimTurId = yardim.getYardim_tur_id() != null ? yardim.getYardim_tur_id() : 0; // Default to 0 if null
-
             String callQuery = "{call INSERT_YARDIM_TIP(?, ?)}";
             CallableStatement cs = conn.prepareCall(callQuery);
             cs.setString(1, yardim.getYardim_tip());
-            cs.setInt(2, yardimTurId);
-
+            cs.setInt(2, yardim.getYardim_tur_id());
             cs.execute();
 
-            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
+            this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+
         } catch (Exception ex) {
-            this.mesaj = DetectError(ex);
+            this.islemBasariliMesaj = DetectError(ex);
         }
     }
 
@@ -58,35 +48,24 @@ public class YardimDAO extends DBConnection {
             ps.setInt(1, yardimTipId);
             int rowsDeleted = ps.executeUpdate();
 
-            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
-        } catch (Exception ex) {
-            this.mesaj = DetectError(ex);
+            this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+        } catch (SQLException ex) {
+            this.islemBasariliMesaj = DetectError(ex);
         }
     }
 
     public List<Yardim> YardimListesi() {
         List<Yardim> yardimList = new ArrayList<>();
         try {
-            StringBuilder queryBuilder = new StringBuilder();
-            queryBuilder.append("SELECT YARDIM_TIP_ID, YARDIM_TIP, AKTIF FROM YARDIM_TIP WHERE 1=1 "); // WHERE 1=1 ekleyerek koşullar eklenirken hata olmasını önleriz.
-
-            // Eğer filtreleme koşulları varsa ekleyin
-            if (aktif != 2) {
-                queryBuilder.append("AND AKTIF = ").append(aktif).append(" ");
-            }
-
-            if (!yardim_tip.isEmpty()) {
-                queryBuilder.append("AND YARDIM_TIP LIKE '%").append(yardim_tip.toUpperCase()).append("%' ");
-            }
-
+            String query = "SELECT YARDIM_TIP_ID, YARDIM_TIP, YARDIM_TUR_ID FROM YARDIM_TIP";
             Statement statement = getDb().createStatement();
-            ResultSet rs = statement.executeQuery(queryBuilder.toString());
+            ResultSet rs = statement.executeQuery(query);
 
             while (rs.next()) {
                 yardimList.add(new Yardim(
                         rs.getInt("YARDIM_TIP_ID"),
                         rs.getString("YARDIM_TIP"),
-                        rs.getInt("AKTIF")
+                        rs.getInt("YARDIM_TUR_ID")
                 ));
             }
         } catch (Exception ex) {
@@ -95,8 +74,29 @@ public class YardimDAO extends DBConnection {
         return yardimList;
     }
 
+    public List<SelectItem> YardimTurGetir() {
+        List<SelectItem> TurList = new ArrayList<>();
+
+        try {
+            Statement statement = getDb().createStatement();
+            String selectQuery = "SELECT YARDIM_TUR_ID, YARDIM_TUR FROM YARDIM_TUR";
+            ResultSet rs = statement.executeQuery(selectQuery);
+
+            while (rs.next()) {
+                TurList.add(new SelectItem(rs.getInt("YARDIM_TUR_ID"), rs.getString("YARDIM_TUR")));
+            }
+        } catch (Exception ex) {
+            DetectError(ex);
+        }
+        return TurList;
+    }
+
+    public void setDb(Connection db) {
+        this.db = db;
+    }
+
     public void YardimMesajTemizle() {
-        this.mesaj = null;
+        this.islemBasariliMesaj = null;
     }
 
     public Connection getDb() {
@@ -106,24 +106,11 @@ public class YardimDAO extends DBConnection {
         return db;
     }
 
-    public void setDb(Connection db) {
-        this.db = db;
+    public String getIslemBasariliMesaj() {
+        return islemBasariliMesaj;
     }
 
-    public String getMesaj() {
-        return mesaj;
+    public void setIslemBasariliMesaj(String islemBasariliMesaj) {
+        this.islemBasariliMesaj = islemBasariliMesaj;
     }
-
-    public void setMesaj(String mesaj) {
-        this.mesaj = mesaj;
-    }
-
-    public String getYardim_tip() {
-        return yardim_tip;
-    }
-
-    public void setYardim_tip(String yardim_tip) {
-        this.yardim_tip = yardim_tip;
-    }
-
 }

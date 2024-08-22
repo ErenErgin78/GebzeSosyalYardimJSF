@@ -44,7 +44,7 @@
                                     <div class="form-group col-md-6">
                                         <label for="yardimTipiAdi" class="form-label me-2" style="margin-right: 10px;">Yardım Tipi Adı:</label>
                                         <div class="input-group">
-                                            <h:inputText id="yardimTipiAdi" value="#{yardimBean.dao.yardim_tip}" class="form-control" style="width: 400px;" />
+                                            <h:inputText id="yardimTipiAdi" value="#{yardimBean.entity.yardim_tip}" class="form-control" style="width: 400px;" />
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-search"></i>
@@ -55,9 +55,9 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="devletOzel">Yardım Türü:</label>
-                                        <h:selectOneMenu id="yardimTur"  class="form-control">
+                                        <h:selectOneMenu id="yardimTur"  class="form-control" value="#{yardimBean.entity.yardim_tur_id}">
                                             <f:selectItem itemLabel="Hepsi" itemValue="0" />
-                                           
+                                            <f:selectItems value="#{yardimBean.yardimTurList}" />
                                             <f:ajax event="change" render="yardimListPanel"/>
                                         </h:selectOneMenu>
                                     </div>
@@ -103,9 +103,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                                        function confirmDelete(button) {
-                                                                            return confirm("Bu yardım tipini gerçekten silmek istiyor musunuz?");
-                                                                        }
+                                                                    function confirmDelete(button) {
+                                                                        return confirm("Bu yardım tipini gerçekten silmek istiyor musunuz?");
+                                                                    }
         </script>
 
     </h:body>

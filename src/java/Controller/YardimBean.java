@@ -1,22 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
- */
 package Controller;
 
 import Entity.Yardim;
 import dao.YardimDAO;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.model.SelectItem;
-import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- *
- * @author Eren
- */
 @Named(value = "yardimBean")
 @ViewScoped
 public class YardimBean implements Serializable {
@@ -24,20 +16,29 @@ public class YardimBean implements Serializable {
     private Yardim entity;
     private YardimDAO dao;
     private List<Yardim> list;
-    private List <SelectItem> yardimList;
+    private List<SelectItem> yardimTurList;
+
+    @PostConstruct
+    public void init() {
+        getDao().setIslemBasariliMesaj(null); // Sayfa yüklendiğinde mesajı sıfırlar
+        yardimTurList = yardimTurGetir();
+        entity = new Yardim();
+    }
 
     public void yardimEkle() {
         this.getDao().YardimEkle(getEntity());
-        this.list = this.getDao().YardimListesi();
     }
 
-    public void yardimSil(int yardimID) {
-        this.getDao().YardimSil(yardimID);
-        this.list = this.getDao().YardimListesi(); // Silme işleminden sonra listeyi güncelle
+    public void yardimSil(int yardimTipId) {
+        this.getDao().YardimSil(yardimTipId);
     }
 
     public void yardimMesajTemizle() {
         this.getDao().YardimMesajTemizle();
+    }
+
+    public List<SelectItem> yardimTurGetir() {
+        return this.getDao().YardimTurGetir();
     }
 
     public Yardim getEntity() {
@@ -54,6 +55,7 @@ public class YardimBean implements Serializable {
     public YardimDAO getDao() {
         if (this.dao == null) {
             this.dao = new YardimDAO();
+            dao.setIslemBasariliMesaj(null);
         }
         return this.dao;
     }
@@ -63,24 +65,27 @@ public class YardimBean implements Serializable {
     }
 
     public List<Yardim> getList() {
-        if (this.list == null) {
-            this.list = this.getDao().YardimListesi();
-        }
-        dao.setMesaj(null);
+        this.list = this.getDao().YardimListesi();
         return this.list;
+    }
+
+    public void listeyenile() {
+        this.list = this.getDao().YardimListesi();
     }
 
     public void setList(List<Yardim> list) {
         this.list = list;
     }
 
-    @PostConstruct
-    public void init() {
-        getDao().setMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
+    public List<SelectItem> getYardimTurList() {
+        yardimTurList = yardimTurGetir();
+        return yardimTurList;
+    }
+
+    public void setYardimTurList(List<SelectItem> yardimTurList) {
+        this.yardimTurList = yardimTurList;
     }
 
     public YardimBean() {
-
     }
-
 }
