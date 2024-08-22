@@ -75,8 +75,9 @@
                                     <div class="form-row"> 
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="graduate" class="form-label">Eğitim Durumu:</label>
-                                            <h:selectOneMenu id="graduate" value="#{userBean.dao.aktif}" class="form-control">
-                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />          
+                                            <h:selectOneMenu id="graduate" value="#{egitimDurumBean.entity.egitim_durum_id}" class="form-control">
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                                <f:selectItems value="#{egitimDurumBean.egitimlist}" />                                                
                                                 <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div>
@@ -84,6 +85,7 @@
                                             <label for="meslek" class="form-label">Meslek:</label>
                                             <h:selectOneMenu id="meslek" value="#{meslekBean.entity.meslek_id}" class="form-control">
                                                 <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="K" />
+                                                <f:selectItems value="#{meslekBean.meslekList}" />
                                                 <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div>           
