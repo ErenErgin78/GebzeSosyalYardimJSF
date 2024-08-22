@@ -1,109 +1,91 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
+import java.sql.Connection;
 import Entity.TutanakBorc;
 import static Various.ErrorFinder.DetectError;
 import java.sql.CallableStatement;
-import util.DBConnection;
-import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import util.DBConnection;
 
-/**
- *
- * @author Administrator
- */
 public class TutanakBorcDAO extends DBConnection {
 
     private Connection db;
-    private String islemBasariliMesaj;
+    private String mesaj;
 
-    private Integer id = 0;
     private String isim = "";
+    private Integer aktif = 2;
 
-    public void TutanakBorcEkle(TutanakBorc borc) {
+    public void TutanakEkle(TutanakBorc tutanak) {
         try {
             Connection conn = this.getDb();
 
-            String callQueryBorc = "{call INSERT_TUTANAK_BORC(?, ?, ?, ?, ?, ?, ?, ?)}";
-            CallableStatement csBorc = conn.prepareCall(callQueryBorc);
-            csBorc.setFloat(1, borc.getElektrik());
-            csBorc.setFloat(2, borc.getSu());
-            csBorc.setFloat(3, borc.getDogalgaz());
-            csBorc.setFloat(4, borc.getKira());
-            csBorc.setFloat(5, borc.getKredi_karti());
-            csBorc.setFloat(6, borc.getDiger());
-            csBorc.setString(7, borc.getDiger_aciklama());
-            csBorc.registerOutParameter(8, java.sql.Types.INTEGER);
-            csBorc.execute();
-            borc.setBorc_id(csBorc.getInt(8));
+            String callQuery = "{call INSERT_TUTANAK_BORC(?, ?)}";
+            CallableStatement cs = conn.prepareCall(callQuery);
+            cs.setString(1, tutanak.getTip());
+            cs.setInt(2, tutanak.getAktif());
 
-            this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+            cs.execute();
+            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
-        } catch (SQLException ex) {
-
-            this.islemBasariliMesaj = DetectError(ex);
-
+        } catch (Exception ex) {
+            this.mesaj = DetectError(ex);
         }
     }
 
-    public List<TutanakBorc> GetList() {
+    public void TutanakSil(int tutanakId) {
+        String deleteQuery = "DELETE FROM TUTANAK_BORC WHERE TIP_ID = ?";
+        try {
+            PreparedStatement ps = getDb().prepareStatement(deleteQuery);
+            ps.setInt(1, tutanakId);
+            int rowsDeleted = ps.executeUpdate();
 
-        List<TutanakBorc> BorcList = new ArrayList<>();
+            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
+        } catch (SQLException ex) {
+            this.mesaj = DetectError(ex);
+        }
+    }
+
+    public List<TutanakBorc> TutanakListesi() {
+        List<TutanakBorc> tutanakList = new ArrayList<>();
 
         try {
+            StringBuilder queryBuilder = new StringBuilder();
+            queryBuilder.append("SELECT TIP, AKTIF, KAYIT_TARIHI FROM TUTANAK_BORC");
+                    
+            if (!isim.isEmpty()) {
+                queryBuilder.append("AND TIP_ISIM LIKE '%").append(isim).append("%' ");
+            }
+
+            if (aktif != 2) {
+                queryBuilder.append("AND AKTIFLIK = ").append(aktif).append(" ");
+            }
+
             Statement statement = getDb().createStatement();
-
-            String Selectquery = "SELECT * FROM BORC";
-
-            ResultSet rs = statement.executeQuery(Selectquery);
+            ResultSet rs = statement.executeQuery(queryBuilder.toString());
 
             while (rs.next()) {
-                TutanakBorc borc = new TutanakBorc();
-                borc.setBorc_id(rs.getInt("BORC_ID"));
-                borc.setElektrik(rs.getFloat("ELEKTRIK"));
-                borc.setSu(rs.getFloat("SU"));
-                borc.setDogalgaz(rs.getFloat("DOGALGAZ"));
-                borc.setKira(rs.getFloat("KIRA"));
-                borc.setKredi_karti(rs.getFloat("KREDI_KARTI"));
-                borc.setDiger(rs.getFloat("DIGER"));
-
-                borc.setDiger_aciklama(rs.getString("DIGER_ACIKLAMA"));
-                borc.setGuncelleme_tarihi(rs.getDate("GUNCELLEME_TARIHI"));
-
-                BorcList.add(borc);
+                tutanakList.add(new TutanakBorc(
+                        rs.getString("TIP"),
+                        rs.getInt("AKTIFLIK"),
+                        rs.getDate("KAYIT_TARIHI")
+                ));
             }
-            this.islemBasariliMesaj = "işlem başarılı";
 
-        } catch (SQLException ex) {
+            mesaj = "işlem başarılı";
+
+        } catch (Exception ex) {
             DetectError(ex);
         }
-        return BorcList;
-    }
-
-    public void TutanakBorcSil(int borcId) {
-        String deleteQuery = "DELETE FROM BORC WHERE BORC_ID = " + borcId;
-
-        try {
-            Statement statement = getDb().createStatement();
-            int rowsDeleted = statement.executeUpdate(deleteQuery);
-            System.out.println(rowsDeleted + " borc kaydı silindi.");
-
-            this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
-
-        } catch (SQLException ex) {
-            DetectError(ex);
-        }
+        return tutanakList;
     }
 
     public void TutanakBorcMesajTemizle() {
-        this.islemBasariliMesaj = null;
+        this.mesaj = null;
     }
 
     public Connection getDb() {
@@ -113,16 +95,12 @@ public class TutanakBorcDAO extends DBConnection {
         return db;
     }
 
-    public void setDb(Connection db) {
-        this.db = db;
+    public String getMesaj() {
+        return mesaj;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public void setMesaj(String mesaj) {
+        this.mesaj = mesaj;
     }
 
     public String getIsim() {
@@ -133,12 +111,12 @@ public class TutanakBorcDAO extends DBConnection {
         this.isim = isim;
     }
 
-    public String getIslemBasariliMesaj() {
-        return islemBasariliMesaj;
+    public Integer getAktif() {
+        return aktif;
     }
 
-    public void setIslemBasariliMesaj(String islemBasariliMesaj) {
-        this.islemBasariliMesaj = islemBasariliMesaj;
+    public void setAktif(Integer aktif) {
+        this.aktif = aktif;
     }
 
 }

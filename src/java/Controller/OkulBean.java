@@ -79,7 +79,7 @@ public class OkulBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        getDao().setMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
+        getDao().setIslemBasariliMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
     }
 
     public OkulBean() {

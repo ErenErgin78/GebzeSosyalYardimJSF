@@ -1,36 +1,37 @@
 package Controller;
 
 import Entity.TutanakGelir;
+import dao.TutanakDurumDAO;
 import dao.TutanakGelirDAO;
 import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
 
 @Named(value = "tutanakGelirBean")
-@SessionScoped
+@ViewScoped
 public class TutanakGelirBean implements Serializable {
 
     private TutanakGelir entity;
     private TutanakGelirDAO dao;
     private List<TutanakGelir> list;
 
-    // TutanakGelir ekleme metodu
-    public void tutanakGelirEkle() {
-        this.getDao().TutanakGelirEkle(getEntity());
+    public void tutanakEkle() {
+        this.getDao().TutanakEkle(getEntity());
     }
 
-    // TutanakGelir silme metodu
-    public void tutanakGelirSil(int tutanakGelirId) {
-        this.getDao().TutanakGelirSil(tutanakGelirId);
+    public void tutanakSil(int tutanakId) {
+        this.getDao().TutanakSil(tutanakId);
     }
 
     public void tutanakGelirMesajTemizle() {
-        this.getDao().TutanakGelirMesajTemizle();
+        this.getDao().TutanakGelırMesajTemizle();
     }
 
-    // TutanakGelir entity getter ve setter
+    public TutanakGelirBean() {
+    }
+
     public TutanakGelir getEntity() {
         if (this.entity == null) {
             this.entity = new TutanakGelir();
@@ -42,7 +43,6 @@ public class TutanakGelirBean implements Serializable {
         this.entity = entity;
     }
 
-    // TutanakGelirDAO getter ve setter
     public TutanakGelirDAO getDao() {
         if (this.dao == null) {
             this.dao = new TutanakGelirDAO();
@@ -55,28 +55,22 @@ public class TutanakGelirBean implements Serializable {
         this.dao = dao;
     }
 
-    // TutanakGelir listeleme metodu
     public List<TutanakGelir> getList() {
-        this.list = this.getDao().TutanakGelirListesi();
+        this.list = this.getDao().TutanakListesi();
         return this.list;
     }
 
-    // Listeyi yenileme metodu
     public void listeYenile() {
-        this.list = this.getDao().TutanakGelirListesi();
+        this.list = this.getDao().TutanakListesi();
     }
 
     public void setList(List<TutanakGelir> list) {
         this.list = list;
     }
 
-    // Sayfa yüklendiğinde yapılacak işlemler
     @PostConstruct
     public void init() {
         getDao().setMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
     }
 
-    // Constructor
-    public TutanakGelirBean() {
-    }
 }

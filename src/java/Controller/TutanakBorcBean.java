@@ -1,39 +1,34 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controller;
 
 import Entity.TutanakBorc;
 import dao.TutanakBorcDAO;
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.annotation.PostConstruct;
 import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
 
 @Named(value = "tutanakBorcBean")
-@SessionScoped
+@ViewScoped
 public class TutanakBorcBean implements Serializable {
 
     private TutanakBorc entity;
     private TutanakBorcDAO dao;
     private List<TutanakBorc> list;
 
-    public void create() {
-        this.getDao().TutanakBorcEkle(getEntity());
+    public void tutanakEkle() {
+        this.getDao().TutanakEkle(getEntity());
     }
 
-    public void delete(int borcID) {
-        this.getDao().TutanakBorcSil(borcID);
-        this.list = this.getDao().GetList(); // Silme işleminden sonra listeyi yeniler
+    public void tutanakSil(int tutanakId) {
+        this.getDao().TutanakSil(tutanakId);
     }
 
     public void tutanakBorcMesajTemizle() {
         this.getDao().TutanakBorcMesajTemizle();
     }
 
-    public void edit(TutanakBorc borc) {
-        this.entity = borc;
+    public TutanakBorcBean() {
     }
 
     public TutanakBorc getEntity() {
@@ -50,6 +45,7 @@ public class TutanakBorcBean implements Serializable {
     public TutanakBorcDAO getDao() {
         if (this.dao == null) {
             this.dao = new TutanakBorcDAO();
+            dao.setMesaj(null);
         }
         return this.dao;
     }
@@ -59,13 +55,21 @@ public class TutanakBorcBean implements Serializable {
     }
 
     public List<TutanakBorc> getList() {
-        if (this.list == null) {
-            this.list = this.getDao().GetList();
-        }
+        this.list = this.getDao().TutanakListesi();
         return this.list;
+    }
+
+    public void listeYenile() {
+        this.list = this.getDao().TutanakListesi();
     }
 
     public void setList(List<TutanakBorc> list) {
         this.list = list;
     }
+
+    @PostConstruct
+    public void init() {
+        getDao().setMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
+    }
+
 }
