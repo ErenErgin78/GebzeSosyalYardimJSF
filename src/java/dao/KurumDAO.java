@@ -46,7 +46,6 @@ public class KurumDAO extends DBConnection {
 
         } catch (Exception ex) {
             this.islemBasariliMesaj = DetectError(ex);
-            ex.printStackTrace(); // Hata durumunda console'a yazdır.
         }
     }
 
