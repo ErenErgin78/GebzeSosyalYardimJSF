@@ -70,7 +70,6 @@
                                                 <tr>
                                                     <th style="width: 150px;">Yardım Tipi Kodu</th>
                                                     <th style="width: 300px;">Yardım Tipi Adı</th>
-                                                    <th style="width: 150px;">Yardım Türü</th>
                                                     <th style="width: 200px;">Eylem</th>
                                                 </tr>
                                             </thead>
@@ -79,7 +78,6 @@
                                                     <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
                                                         <td>#{yardim.yardim_tip_id}</td>
                                                         <td>#{yardim.yardim_tip}</td>
-                                                        <td>#{yardim.yardım_tur_id}</td>
                                                         <td>
                                                             <div class="action-buttons">
                                                                 <h:commandButton value="Sil" action="#{yardimBean.yardimSil(yardim.yardim_tip_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
