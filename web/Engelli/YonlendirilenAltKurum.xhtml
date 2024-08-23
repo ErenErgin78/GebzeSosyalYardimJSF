@@ -43,7 +43,7 @@
                                                 <label for="kurumSecim" class="form-label">Yönlendirilen Kurum Adı:</label>
                                                 <h:selectOneMenu id="kurumSecim" value="#{kurumAltBean.selectedKurumId}" class="form-control">
                                                     <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
-                                                    <f:selectItems value="#{kurumBean.kurumList}" />
+                                                    <f:selectItems value="#{kurumBean.kurumTipList}" />
                                                     <f:ajax event="change" listener="#{kurumAltBean.kurumyukle}" render="altKurum"/>
                                                 </h:selectOneMenu>
                                             </div>
