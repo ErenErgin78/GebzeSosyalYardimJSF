@@ -94,7 +94,8 @@
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="yakinlik" class="form-label">Yakınlık:</label>
                                             <h:selectOneMenu id="yakinlik" value="#{kisiYakinlarBean.entity.yakinlar_id}" class="form-control">
-                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                                             
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" /> 
+                                                <f:selectItems value="#{yakinlikBean.yakinlikList}" />
                                                 <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div>
@@ -112,16 +113,17 @@
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="rum" class="form-label">Medeni Hali:</label>
                                             <h:selectOneMenu id="rum" value="#{kisiBean.entity.medeni_durum_id}"  class="form-control">
-                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />                                                        
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                                <f:selectItems value="#{kisiBean.medeniList}" />
                                                 <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div>
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="statu" class="form-label">Özel Statü:</label>
                                             <h:selectOneMenu id="statu" value="#{kisiYakinlarBean.entity.ozel_statu_id}"  class="form-control">
-                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
-                                                <f:selectItem itemLabel="Asker" itemValue="E" />  
-                                                <f:selectItem itemLabel="Hükümlü" itemValue="H" />  
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                                <f:selectItem itemLabel="Asker" itemValue="1" />  
+                                                <f:selectItem itemLabel="Hükümlü" itemValue="2" />  
                                                 <f:ajax event="valueChange" render="KullaniciListesi" />
                                             </h:selectOneMenu>
                                         </div>
