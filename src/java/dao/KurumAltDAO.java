@@ -55,41 +55,56 @@ public class KurumAltDAO extends DBConnection {
         }
     }
 
-    public List<KurumAlt> KurumAltListesi() {
-        List<KurumAlt> kurumAltList = new ArrayList<>();
+ public List<KurumAlt> KurumAltListesi() {
+    List<KurumAlt> kurumAltList = new ArrayList<>();
+    try {
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("SELECT YA.ALT_KURUM_ID, YA.ALT_KURUM_ISIM, YA.KURUM_ID , Y.KURUM_ISIM ")
+                .append("FROM KURUM_ALT YA ")
+                .append("JOIN KURUM Y ON YA.KURUM_ID = Y.KURUM_ID ")
+                .append("WHERE 1=1 ");
 
-        try {
-            StringBuilder queryBuilder = new StringBuilder();
-            queryBuilder.append("SELECT YA.ALT_KURUM_ID, YA.ALT_KURUM_ISIM, YA.KURUM_ID , Y.KURUM_ISIM ")
-                    .append("FROM KURUM_ALT YA ")
-                    .append("JOIN KURUM Y ON YA.KURUM_ID = Y.KURUM_ID ");
-
-            if (id != 0) {
-                queryBuilder.append("AND YA.KURUM_ID  = ").append(id).append(" ");
-            }
-
-            if (!isim.isEmpty()) {
-                queryBuilder.append("AND YA.ALT_KURUM_ISIM LIKE '%").append(isim).append("%' ");
-            }
-
-            Statement statement = getDb().createStatement();
-            ResultSet rs = statement.executeQuery(queryBuilder.toString());
-
-            while (rs.next()) {
-                kurumAltList.add(new KurumAlt(
-                        rs.getInt("ALT_KURUM_ID"),
-                        rs.getString("ALT_KURUM_ISIM"),
-                        rs.getString("KURUM_ISIM")
-                ));
-            }
-
-            this.islemBasariliMesaj = "işlem başarılı";
-
-        } catch (Exception ex) {
-            DetectError(ex);
+        // ID'ye göre filtreleme
+        if (id != 0) {
+            queryBuilder.append("AND YA.KURUM_ID  = ? ");
         }
-        return kurumAltList;
+
+        // İsim'e göre filtreleme, null kontrolü
+        if (isim != null && !isim.isEmpty()) {
+            queryBuilder.append("AND YA.ALT_KURUM_ISIM LIKE ? ");
+        }
+
+        PreparedStatement statement = getDb().prepareStatement(queryBuilder.toString());
+        int parameterIndex = 1;
+
+        // ID parametresi ekle
+        if (id != 0) {
+            statement.setInt(parameterIndex++, id);
+        }
+
+        // İsim parametresi ekle
+        if (isim != null && !isim.isEmpty()) {
+            statement.setString(parameterIndex++, "%" + isim + "%");
+        }
+
+        ResultSet rs = statement.executeQuery();
+
+        while (rs.next()) {
+            kurumAltList.add(new KurumAlt(
+                    rs.getInt("ALT_KURUM_ID"),
+                    rs.getString("ALT_KURUM_ISIM"),
+                    rs.getString("KURUM_ISIM")
+            ));
+        }
+
+        this.islemBasariliMesaj = "İşlem başarılı";
+
+    } catch (Exception ex) {
+        DetectError(ex);
     }
+    return kurumAltList;
+}
+
 
    public List<SelectItem> KurumAltGetir(int selectedKurumid) {
         List<SelectItem> KurumAltList = new ArrayList<>();

@@ -20,6 +20,7 @@ public class KurumAltBean implements Serializable {
     private List<KurumAlt> list;
     private List<SelectItem> tipList;
     private int selectedKurumId;
+    private String altKurumIsim;
 
     @PostConstruct
     public void init() {
@@ -29,23 +30,18 @@ public class KurumAltBean implements Serializable {
 
     public void kurumAltEkle() {
         this.getDao().KurumAltEkle(getEntity());
-        this.list = this.getDao().KurumAltListesi(); // Listeyi güncelle
+        filtreUygula(); // Listeyi güncelle
     }
 
     public void kurumAltSil(int kurumAltId) {
         this.getDao().KurumAltSil(kurumAltId);
-        this.list = this.getDao().KurumAltListesi(); // Listeyi güncelle
+        filtreUygula(); // Listeyi güncelle
     }
 
-    public List<SelectItem> kurumTipGetir() {
-        return this.getDao().KurumAltGetir(selectedKurumId);
-    }
-
-    public void kurumyukle(AjaxBehaviorEvent event) {
-        tipList = new ArrayList<>();
-        if (selectedKurumId != 0) {
-            tipList = this.getDao().KurumAltGetir(selectedKurumId);
-        }
+    public void filtreUygula() {
+        this.getDao().setId(selectedKurumId);
+        this.getDao().setIsim(altKurumIsim);
+        this.list = this.getDao().KurumAltListesi();
     }
 
     public KurumAlt getEntity() {
@@ -73,7 +69,7 @@ public class KurumAltBean implements Serializable {
 
     public List<KurumAlt> getList() {
         if (this.list == null) {
-            this.list = this.getDao().KurumAltListesi();
+            filtreUygula();
         }
         return this.list;
     }
@@ -102,5 +98,13 @@ public class KurumAltBean implements Serializable {
 
     public void setSelectedKurumId(int selectedKurumId) {
         this.selectedKurumId = selectedKurumId;
+    }
+
+    public String getAltKurumIsim() {
+        return altKurumIsim;
+    }
+
+    public void setAltKurumIsim(String altKurumIsim) {
+        this.altKurumIsim = altKurumIsim;
     }
 }
