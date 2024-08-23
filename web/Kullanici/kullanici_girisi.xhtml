@@ -12,8 +12,8 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:messages globalOnly="true" layout="table"/>
-            <h:outputText id="mesaj" />
+            <h:messages for="KullaniciEkle" globalOnly="true" layout="table"/>
+            <h:outputText id="mesaj" value="#{userBean.dao.mesaj}" />
             <div class="row align-items-center mb-3">
                 <div class="col-10">
                     <ol class="breadcrumb">

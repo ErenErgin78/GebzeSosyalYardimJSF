@@ -22,7 +22,7 @@ public class UserBean implements Serializable {
     private List<User> list;
 
     private Date tarih;
-    
+
     // Yeni kullanıcı oluşturur
     public void create() {
         this.getDao().UserEkle(getEntity());
@@ -89,8 +89,9 @@ public class UserBean implements Serializable {
     public UsersDAO getDao() {
         if (this.dao == null) {
             this.dao = new UsersDAO();
+            this.dao.setMesaj(null);
         }
-        return dao;
+        return this.dao;
     }
 
     // DAO nesnesini ayarlar
@@ -122,7 +123,10 @@ public class UserBean implements Serializable {
     // Bean nesnesi yüklendiğinde çalışacak başlangıç işlemleri
     @PostConstruct
     public void init() {
-        getDao().setMessage(null); // sayfa yüklendiğinde mesajı sıfırlar
+        getDao().setMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
         tarih = new Date();
+    }
+
+    public UserBean() {
     }
 }
