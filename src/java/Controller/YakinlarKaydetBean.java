@@ -14,19 +14,33 @@ import java.io.Serializable;
  *
  * @author Administrator
  */
-
 @Named(value = "yakinlarKaydetBean")
 @SessionScoped
-public class YakinlarKaydetBean implements Serializable{
-    
+public class YakinlarKaydetBean implements Serializable {
+
     public YakinlarKaydetBean() {
     }
-    
+
     private String mesaj;
-    
-    
+
     @Inject
     private KisiBean kisiBean;
 
+    @Inject
+    private KisiYakinlarBean kisiYakinlarBean;
+
+    @Inject
+    private KisiDetayBean kisiDetayBean;
+
+    @Inject
+    private EgitimDurumBean egitimDurumBean;
     
+    @Inject
+    private TutanakSosyalGuvenceBean tutanakSosyalGuvenceBean;
+    
+    @Inject
+    private KisiEngelBean kisiEngelBean;
+    
+    @Inject
+    private MeslekBean meslekBean;
 }
