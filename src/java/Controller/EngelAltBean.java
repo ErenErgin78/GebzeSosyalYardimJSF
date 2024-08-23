@@ -29,6 +29,7 @@ public class EngelAltBean implements Serializable {
 
     public void engelAltEkle() {
         this.getDao().EngelAltEkle(getEntity());
+        this.list = this.getDao().EngelAltListesi();
     }
 
     public void engelAltSil(int engelAltId) {
