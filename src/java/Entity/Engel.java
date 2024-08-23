@@ -4,10 +4,6 @@
  */
 package Entity;
 
-/**
- *
- * @author Eren
- */
 public class Engel {
 
     private Integer engel_tip_id;

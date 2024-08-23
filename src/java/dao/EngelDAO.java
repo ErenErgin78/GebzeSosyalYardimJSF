@@ -16,10 +16,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Eren
- */
 public class EngelDAO extends DBConnection {
 
     private Connection db;

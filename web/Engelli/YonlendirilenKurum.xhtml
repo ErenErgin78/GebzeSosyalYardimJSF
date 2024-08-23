@@ -36,7 +36,7 @@
                         <div class="card-body">
                             <div class="table-container">
                                 <div class="table-responsive">
-                                    <h:form id="engelliTipiForm">
+                                    <h:form id="kurumForm">
                                         <div class="row mb-3">
                                             <!-- Yönlendirilen Kurum Adı -->
                                             <div class="form-group col-md-6">
@@ -66,7 +66,7 @@
                                                     <ui:repeat value="#{kurumBean.list}" var="kurum" varStatus="loop">
                                                         <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
                                                             <td>#{kurum.kurum_id}</td>
-                                                            <td>#{kurum.kurum}</td>
+                                                            <td>#{kurum.kurum_isim}</td>
                                                             <td>
                                                                 <div class="action-buttons">
                                                                     <h:commandButton value="Sil" action="#{kurumBean.kurumSil(kurum.kurum_id)}" styleClass="btn btn-danger ml-2 delete-button" onclick="return confirmDelete(this)">
@@ -94,9 +94,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                                        function confirmDelete(button) {
-                                                                            return confirm("Bu kurumu gerçekten silmek istiyor musunuz?");
-                                                                        }
+            function confirmDelete(button) {
+                return confirm("Bu kurumu gerçekten silmek istiyor musunuz?");
+            }
         </script>
     </h:body>
 </html>
