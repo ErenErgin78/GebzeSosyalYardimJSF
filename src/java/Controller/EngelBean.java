@@ -13,10 +13,6 @@ import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- *
- * @author Eren
- */
 @Named(value = "engelBean")
 @ViewScoped
 public class EngelBean implements Serializable {

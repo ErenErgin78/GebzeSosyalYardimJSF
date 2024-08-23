@@ -4,24 +4,34 @@
  */
 package Entity;
 
-/**
- *
- * @author korog
- */
 public class Kurum {
 
     private Integer kurum_id;
-    private String kurum;
+    private String kurum_isim;
     private Integer aktif;
 
-    public Kurum(Integer kurum_id, String kurum, Integer aktif) {
-        this.kurum_id = kurum_id;
-        this.kurum = kurum;
+    public Kurum(String kurum_isim, Integer aktif) {
+        this.kurum_isim = kurum_isim;
         this.aktif = aktif;
     }
 
-    public Kurum(String kurum, Integer aktif) {
-        this.kurum = kurum;
+    public Kurum(Integer kurum_id, String kurum_isim) {
+        this.kurum_id = kurum_id;
+        this.kurum_isim = kurum_isim;
+    }
+
+    public Kurum(String kurum_isim) {
+        this.kurum_isim = kurum_isim;
+    }
+
+    public Kurum() {
+    }
+
+    public Integer getAktif() {
+        return aktif;
+    }
+
+    public void setAktif(Integer aktif) {
         this.aktif = aktif;
     }
 
@@ -33,28 +43,12 @@ public class Kurum {
         this.kurum_id = kurum_id;
     }
 
-    public String getKurum() {
-        return kurum;
+    public String getKurum_isim() {
+        return kurum_isim;
     }
 
-    public void setKurum(String kurum) {
-        this.kurum = kurum;
-    }
-
-    public Kurum(Integer kurum_id, String kurum) {
-        this.kurum_id = kurum_id;
-        this.kurum = kurum;
-    }
-
-    public Integer getAktif() {
-        return aktif;
-    }
-
-    public void setAktif(Integer aktif) {
-        this.aktif = aktif;
-    }
-
-    public Kurum() {
+    public void setKurum_isim(String kurum_isim) {
+        this.kurum_isim = kurum_isim;
     }
 
 }
