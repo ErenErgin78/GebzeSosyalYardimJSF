@@ -9,7 +9,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Engelli Alt Tipi Tanımlama</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="CSS/styles.css" />
         <link rel="stylesheet" href="CSS/list.css" />
         <h:outputStylesheet name="CSS/styles.css"/>
     </h:head>
@@ -28,12 +27,16 @@
         </div>
         <div class="container-fluid">
             <div class="row">
+                 <!-- Ana Başlık Kartı -->
                 <div class="col-md-12">
                     <div class="card-header">
                         <h1>Engelli Alt Tipi Tanımlama</h1>
                     </div>
+                    <!-- Engelli Tipi Bilgileri Kartı -->
                     <div class="card">
-                        <div class="card-header">Engelli Alt Tipi Bilgileri</div>
+                        <div class="card-header">
+                            Engelli Alt Tipi Bilgileri
+                        </div>
                         <div class="card-body">
                             <h:form id="engelliAltTipiForm">
                                 <div class="row mb-3">
@@ -43,7 +46,7 @@
                                         <h:selectOneMenu id="engelliTipi" value="#{engelAltBean.selectedEngelId}" class="form-control">
                                             <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
                                             <f:selectItems value="#{engelAltBean.tipList}" />
-                                            <f:ajax event="keyup" render="engelAltPanel"/>
+                                            <f:ajax event="change" render="engelAltPanel"/>
                                         </h:selectOneMenu>
                                     </div>
                                     <!-- Engelli Alt Tipi Adı -->

@@ -21,27 +21,30 @@ public class EngelAltBean implements Serializable {
     private List<SelectItem> tipList;
     private int selectedEngelId;
 
+    // Sayfa yüklendiğinde mesajı sıfırlar ve yeni bir EngelAlt nesnesi oluşturur
     @PostConstruct
     public void init() {
-        getDao().setIslemBasariliMesaj(null); // Sayfa yüklendiğinde mesajı sıfırlar
-        entity = new EngelAlt(); // Yeni bir EngelAlt nesnesi oluşturur
+        getDao().setIslemBasariliMesaj(null);
+        entity = new EngelAlt();
     }
 
+    // Yeni bir EngelAlt ekler ve listeyi günceller
     public void engelAltEkle() {
         this.getDao().EngelAltEkle(getEntity());
         this.list = this.getDao().EngelAltListesi();
     }
 
+    // Belirtilen EngelAlt'ı siler
     public void engelAltSil(int engelAltId) {
         this.getDao().EngelAltSil(engelAltId);
     }
 
-    // Engel alt tiplerini getiren metot
-    public List<SelectItem> engelTipGetir() {
-        return this.getDao().EngelAltGetir(selectedEngelId);
+    // Seçilen Engel tipine göre alt tipleri getirir
+    public List<SelectItem> engelliTipGetir() {
+        return this.getDao().EngelliTipGetir();
     }
 
-    // Engel alt tiplerini yükleyen ve tipList'i güncelleyen metot
+    // Seçilen Engel tipine göre tipList'i günceller
     public void engelYukle(AjaxBehaviorEvent event) {
         if (selectedEngelId != 0) {
             tipList = this.getDao().EngelAltGetir(selectedEngelId);
@@ -50,6 +53,7 @@ public class EngelAltBean implements Serializable {
         }
     }
 
+    // EngelAlt entity'sini döndürür, eğer null ise yeni bir EngelAlt oluşturur
     public EngelAlt getEntity() {
         if (this.entity == null) {
             this.entity = new EngelAlt();
@@ -61,6 +65,7 @@ public class EngelAltBean implements Serializable {
         this.entity = entity;
     }
 
+    // DAO nesnesini döndürür, eğer null ise yeni bir EngelAltDAO oluşturur
     public EngelAltDAO getDao() {
         if (this.dao == null) {
             this.dao = new EngelAltDAO();
@@ -72,6 +77,7 @@ public class EngelAltBean implements Serializable {
         this.dao = dao;
     }
 
+    // EngelAlt listesini döndürür, eğer null ise DAO'dan listeyi getirir
     public List<EngelAlt> getList() {
         if (this.list == null) {
             this.list = this.getDao().EngelAltListesi();
@@ -79,6 +85,7 @@ public class EngelAltBean implements Serializable {
         return this.list;
     }
 
+    // Listeyi yeniden yükler
     public void listeyenile() {
         this.list = this.getDao().EngelAltListesi();
     }
@@ -87,9 +94,10 @@ public class EngelAltBean implements Serializable {
         this.list = list;
     }
 
+    // Tip listesini döndürür, eğer null ise engelTipGetir() ile listeyi doldurur
     public List<SelectItem> getTipList() {
         if (tipList == null) {
-            tipList = engelTipGetir();
+            tipList = engelliTipGetir();
         }
         return tipList;
     }
@@ -98,6 +106,7 @@ public class EngelAltBean implements Serializable {
         this.tipList = tipList;
     }
 
+    // Seçilen Engel ID'sini döndürür ve ayarlar
     public int getSelectedEngelId() {
         return selectedEngelId;
     }

@@ -18,6 +18,8 @@ public class KisiDAO extends DBConnection {
 
     private Connection db;
     private String mesaj;
+    
+    private String isim = "";
 
     // Kisi ekleme metodu
     public Integer KisiEkle(Kisi kisi) {
@@ -201,5 +203,14 @@ public class KisiDAO extends DBConnection {
     public void setMesaj(String mesaj) {
         this.mesaj = mesaj;
     }
+    
+      public String getIsim() {
+        return isim;
+    }
+
+    public void setIsim(String isim) {
+        this.isim = isim;
+    }
+
 
 }
