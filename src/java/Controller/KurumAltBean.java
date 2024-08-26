@@ -30,18 +30,24 @@ public class KurumAltBean implements Serializable {
 
     public void kurumAltEkle() {
         this.getDao().KurumAltEkle(getEntity());
-        filtreUygula(); // Listeyi güncelle
+        this.list = this.getDao().KurumAltListesi(); // Listeyi güncelle
     }
 
     public void kurumAltSil(int kurumAltId) {
         this.getDao().KurumAltSil(kurumAltId);
-        filtreUygula(); // Listeyi güncelle
+        this.list = this.getDao().KurumAltListesi(); // Listeyi güncelle
     }
 
-    public void filtreUygula() {
-        this.getDao().setId(selectedKurumId);
-        this.getDao().setIsim(altKurumIsim);
-        this.list = this.getDao().KurumAltListesi();
+    public List<SelectItem> kurumTipGetir() {
+        return this.getDao().KurumAltGetir(selectedKurumId);
+    }
+
+    public void kurumyukle(AjaxBehaviorEvent event) {
+        tipList = new ArrayList<>();
+        if (selectedKurumId != 0) {
+            tipList = this.getDao().KurumAltGetir(selectedKurumId);
+        }
+
     }
 
     public KurumAlt getEntity() {
@@ -69,7 +75,7 @@ public class KurumAltBean implements Serializable {
 
     public List<KurumAlt> getList() {
         if (this.list == null) {
-            filtreUygula();
+            this.list = this.getDao().KurumAltListesi();
         }
         return this.list;
     }

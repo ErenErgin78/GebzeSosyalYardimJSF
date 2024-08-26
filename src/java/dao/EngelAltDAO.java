@@ -19,7 +19,7 @@ public class EngelAltDAO extends DBConnection {
     private String islemBasariliMesaj;
 
     private Integer id = 0;
-    private String isim ="";
+    private String isim = "";
 
     public void EngelAltEkle(EngelAlt engelAlt) {
 
@@ -30,11 +30,11 @@ public class EngelAltDAO extends DBConnection {
                 engelAlt.setAktif(1);
             }
 
-            String callQueryAdres = "{call INSERT_ENGEL_ALT_TIP(?, ?)}";
-            CallableStatement csAdres = conn.prepareCall(callQueryAdres);
-            csAdres.setInt(1, engelAlt.getEngelli_tip_id());
-            csAdres.setString(2, engelAlt.getAlt_tip_isim());
-            csAdres.execute();
+            String callQuery = "{call INSERT_ENGEL_ALT_TIP(?, ?)}";
+            CallableStatement cs = conn.prepareCall(callQuery);
+            cs.setInt(1, engelAlt.getEngelli_tip_id());
+            cs.setString(2, engelAlt.getAlt_tip_isim());
+            cs.execute();
 
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
@@ -87,7 +87,7 @@ public class EngelAltDAO extends DBConnection {
             this.islemBasariliMesaj = "işlem başarılı";
 
         } catch (Exception ex) {
-            DetectError(ex);
+             DetectError(ex);
         }
         return engelAltList;
     }
@@ -127,15 +127,15 @@ public class EngelAltDAO extends DBConnection {
         return engelAltList;
     }
 
-    public void setDb(Connection db) {
-        this.db = db;
-    }
-
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();
         }
         return db;
+    }
+
+    public void setDb(Connection db) {
+        this.db = db;
     }
 
     public String getIslemBasariliMesaj() {

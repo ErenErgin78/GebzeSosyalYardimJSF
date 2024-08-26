@@ -21,25 +21,29 @@ public class KurumAltDAO extends DBConnection {
     private Integer id = 0;
     private String isim = "";
 
-    public void KurumAltEkle(KurumAlt kurumAlt) {
-
-        try {
-            Connection conn = this.getDb();
-            if(kurumAlt.getAktif()==null){
-                 kurumAlt.setAktif(1);           
-            }
-
-            String callQueryAdres = "{call INSERT_KURUM_ALT_TIP(?, ?)}";
-            CallableStatement csAdres = conn.prepareCall(callQueryAdres);
-            csAdres.setInt(1, kurumAlt.getTip_id());
-            csAdres.setString(2, kurumAlt.getAlt_tip());
-            csAdres.execute();
-
-            this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
-        } catch (Exception ex) {
-            this.islemBasariliMesaj = DetectError(ex);
+public void KurumAltEkle(KurumAlt kurumAlt) {
+    try {
+        Connection conn = this.getDb();
+        
+        // Eğer 'aktif' değeri null ise, varsayılan olarak 1 atıyoruz
+        if (kurumAlt.getAktif() == null) {
+            kurumAlt.setAktif(1);
         }
+
+        // Veritabanı prosedürünü çağırıyoruz
+        String callQueryKurumAlt = "{call INSERT_KURUM_ALT_TIP(?, ?)}";
+        CallableStatement csKurumAlt = conn.prepareCall(callQueryKurumAlt);
+        csKurumAlt.setInt(1, kurumAlt.getTip_id());
+        csKurumAlt.setString(2, kurumAlt.getAlt_tip());
+        csKurumAlt.execute();
+
+        this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+
+    } catch (Exception ex) {
+        this.islemBasariliMesaj = DetectError(ex);
     }
+}
+
 
     public void KurumAltSil(int yardimAltid) {
         String deleteQuery = "DELETE FROM KURUM_ALT WHERE ALT_KURUM_ID = ?";

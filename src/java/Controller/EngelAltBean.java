@@ -37,6 +37,7 @@ public class EngelAltBean implements Serializable {
     // Belirtilen EngelAlt'ı siler
     public void engelAltSil(int engelAltId) {
         this.getDao().EngelAltSil(engelAltId);
+        this.list = this.getDao().EngelAltListesi();
     }
 
     // Seçilen Engel tipine göre alt tipleri getirir

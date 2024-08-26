@@ -27,7 +27,7 @@
         </div>
         <div class="container-fluid">
             <div class="row">
-                 <!-- Ana Başlık Kartı -->
+                <!-- Ana Başlık Kartı -->
                 <div class="col-md-12">
                     <div class="card-header">
                         <h1>Engelli Alt Tipi Tanımlama</h1>
@@ -43,8 +43,8 @@
                                     <!-- Engelli Tipi Adı -->
                                     <div class="form-group col-md-6">
                                         <label for="engelliTipi" class="form-label">Engelli Tipi Adı:</label>
-                                        <h:selectOneMenu id="engelliTipi" value="#{engelAltBean.selectedEngelId}" class="form-control">
-                                            <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                        <h:selectOneMenu id="engelliTipi" value="#{engelAltBean.dao.id}" class="form-control">
+                                            <f:selectItem itemLabel="Hepsi" itemValue="0" />
                                             <f:selectItems value="#{engelAltBean.tipList}" />
                                             <f:ajax event="change" render="engelAltPanel"/>
                                         </h:selectOneMenu>
@@ -54,17 +54,17 @@
                                         <label for="engelliAltTipiAdi" class="form-label">Engelli Alt Tipi Adı:</label>
                                         <div class="input-group">
                                             <h:inputText id="engelliAltTipiAdi" value="#{engelAltBean.dao.isim}" class="form-control" />
+                                            <f:ajax event="keyup" render="engelAltPanel" />
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-search"></i>
                                                 </span>
                                             </div>
-                                        </div>
-                                        <f:ajax event="keyup" render="engelAltPanel" />
+                                        </div>                                   
                                     </div>
                                 </div>
-                                <h:panelGroup id="engelAltPanel">
-                                    <div class="table-responsive">
+                                <div class="table-responsive">
+                                    <h:panelGroup id="engelAltPanel">
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
@@ -75,7 +75,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <ui:repeat value="#{engelAltBean.list}" var="alt" varStatus="loop">
+                                                <ui:repeat var="alt" value="#{engelAltBean.list}"  varStatus="loop">
                                                     <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
                                                         <td>#{alt.alt_tip_id}</td>
                                                         <td>#{alt.alt_tip_isim}</td>
@@ -94,8 +94,8 @@
                                                 </ui:repeat>
                                             </tbody>
                                         </table>
-                                    </div>
-                                </h:panelGroup>
+                                    </h:panelGroup>
+                                </div>                               
                             </h:form>
                         </div>
                     </div>
