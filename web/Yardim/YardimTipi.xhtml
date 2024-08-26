@@ -55,11 +55,11 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="yardimTur">Yardım Türü:</label>
-                                        <h:selectOneMenu id="yardimTur" class="form-control" value="#{yardimBean.entity.yardim_tur_id}">
-                                        <f:selectItem itemLabel="Hepsi" itemValue="" />
-                                        <f:selectItems value="#{yardimTurBean.yardimTurList}" var="tur" itemLabel="#{tur.label}" itemValue="#{tur.value}" />
-                                        <f:ajax event="change" render="yardimListPanel"/>
-                                    </h:selectOneMenu>
+                                        <h:selectOneMenu id="yardimTur" class="form-control" value="#{yardimBean.yardimTurId}">
+                                            <f:selectItem itemLabel="Hepsi" itemValue="" />
+                                            <f:selectItems value="#{yardimTurBean.yardimTurList}" var="tur" itemLabel="#{tur.label}" itemValue="#{tur.value}" />
+                                            <f:ajax event="change" listener="#{yardimBean.listeyenile}" render="yardimListPanel"/>
+                                        </h:selectOneMenu>
                                     </div>
                                 </div>
                                 <h:panelGroup id="yardimListPanel">
