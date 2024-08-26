@@ -39,11 +39,9 @@ public class YardimBean implements Serializable {
         this.yardimTurId = yardimTurId;
     }
 
- public void listeyenile() {
-    yardimTurList = yardimTurGetir(); // Yardım türü listesini yeniden yükle
-    this.list = this.getDao().YardimListesi(this.yardimTipiAdi, this.yardimTurId);
-}
-
+    public void listeyenile() {
+        this.list = this.getDao().YardimListesi(this.yardimTipiAdi, this.yardimTurId);
+    }
 
     @PostConstruct
     public void init() {
@@ -97,11 +95,10 @@ public class YardimBean implements Serializable {
         this.dao = dao;
     }
 
-   public List<Yardim> getList() {
-    this.list = this.getDao().YardimListesi(this.yardimTipiAdi, this.yardimTurId); // Parametrelerle birlikte çağırıyoruz
-    return this.list;
-}
-
+    public List<Yardim> getList() {
+        this.list = this.getDao().YardimListesi(this.yardimTipiAdi, this.yardimTurId); // Parametrelerle birlikte çağırıyoruz
+        return this.list;
+    }
 
     public YardimTurBean getYardimTurBean() {
         return yardimTurBean;
@@ -110,8 +107,6 @@ public class YardimBean implements Serializable {
     public void setYardimTurBean(YardimTurBean yardimTurBean) {
         this.yardimTurBean = yardimTurBean;
     }
-    
-
 
     public void setList(List<Yardim> list) {
         this.list = list;
