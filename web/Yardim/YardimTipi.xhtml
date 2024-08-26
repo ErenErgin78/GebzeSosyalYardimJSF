@@ -45,7 +45,8 @@
                                         <label for="yardimTipiAdi" class="form-label me-2" style="margin-right: 10px;">Yardım Tipi Adı:</label>
                                         <div class="input-group">
                                             <h:inputText id="yardimTipiAdi" value="#{yardimBean.yardimTipiAdi}" class="form-control" style="width: 400px;" />
-                                            <f:ajax event="keyup" render="yardimListPanel" listener="#{yardimBean.listeyenile}"/>                                            <div class="input-group-append">
+                                            <f:ajax event="keyup" render="yardimListPanel" listener="#{yardimBean.listeyenile}"/>                                            
+                                            <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-search"></i>
                                                 </span>
@@ -56,10 +57,10 @@
                                     <div class="form-group col-md-6">
                                         <label for="yardimTur">Yardım Türü:</label>
                                         <h:selectOneMenu id="yardimTur" class="form-control" value="#{yardimBean.entity.yardim_tur_id}">
-                                        <f:selectItem itemLabel="Hepsi" itemValue="" />
-                                        <f:selectItems value="#{yardimTurBean.yardimTurList}" var="tur" itemLabel="#{tur.label}" itemValue="#{tur.value}" />
-                                        <f:ajax event="change" render="yardimListPanel"/>
-                                    </h:selectOneMenu>
+                                            <f:selectItem itemLabel="Hepsi" itemValue="0" />
+                                            <f:selectItems value="#{yardimTurBean.yardimTurList}" var="tur" itemLabel="#{tur.label}" itemValue="#{tur.value}" />
+                                            <f:ajax event="change" listener="#{yardimBean.listeyenile}" render="yardimListPanel"/>
+                                        </h:selectOneMenu>
                                     </div>
                                 </div>
                                 <h:panelGroup id="yardimListPanel">
