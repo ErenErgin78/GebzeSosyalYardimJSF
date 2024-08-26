@@ -96,11 +96,11 @@ public List<SelectItem> yardimTurGetir() {
 
     try {
         Statement statement = getDb().createStatement();
-        String selectQuery = "SELECT YARDIM_TUR_ID, YARDIM_TUR FROM YARDIM_TUR";
+        String selectQuery = "SELECT TUR_ID, TUR FROM YARDIM_TUR";
         ResultSet rs = statement.executeQuery(selectQuery);
 
         while (rs.next()) {
-            TurList.add(new SelectItem(rs.getInt("YARDIM_TUR_ID"), rs.getString("YARDIM_TUR")));
+            TurList.add(new SelectItem(rs.getInt("TUR_ID"), rs.getString("TUR")));
         }
     } catch (Exception ex) {
         DetectError(ex);
