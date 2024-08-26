@@ -6,6 +6,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.faces.model.SelectItem;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,6 +18,30 @@ public class YardimBean implements Serializable {
     private YardimDAO dao;
     private List<Yardim> list;
     private List<SelectItem> yardimTurList;
+
+    private String yardimTipiAdi; // Yardım tipi adı için filtreleme alanı
+    private Integer yardimTurId; // Yardım türü için filtreleme alanı
+
+// Getter ve Setter metodları
+    public String getYardimTipiAdi() {
+        return yardimTipiAdi;
+    }
+
+    public void setYardimTipiAdi(String yardimTipiAdi) {
+        this.yardimTipiAdi = yardimTipiAdi;
+    }
+
+    public Integer getYardimTurId() {
+        return yardimTurId;
+    }
+
+    public void setYardimTurId(Integer yardimTurId) {
+        this.yardimTurId = yardimTurId;
+    }
+
+    public void listeyenile() {
+        this.list = this.getDao().YardimListesi(this.yardimTipiAdi, this.yardimTurId);
+    }
 
     @PostConstruct
     public void init() {
@@ -38,7 +63,13 @@ public class YardimBean implements Serializable {
     }
 
     public List<SelectItem> yardimTurGetir() {
-        return this.getDao().YardimTurGetir();
+        return this.getDao().yardimTurGetir();
+    }
+    @Inject
+    private YardimTurBean yardimTurBean;
+
+    public String getYardimTurById(int turId) {
+        return yardimTurBean.getDao().getTurById(turId);
     }
 
     public Yardim getEntity() {
@@ -65,12 +96,16 @@ public class YardimBean implements Serializable {
     }
 
     public List<Yardim> getList() {
-        this.list = this.getDao().YardimListesi();
+        this.list = this.getDao().YardimListesi(this.yardimTipiAdi, this.yardimTurId); // Parametrelerle birlikte çağırıyoruz
         return this.list;
     }
 
-    public void listeyenile() {
-        this.list = this.getDao().YardimListesi();
+    public YardimTurBean getYardimTurBean() {
+        return yardimTurBean;
+    }
+
+    public void setYardimTurBean(YardimTurBean yardimTurBean) {
+        this.yardimTurBean = yardimTurBean;
     }
 
     public void setList(List<Yardim> list) {

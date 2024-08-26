@@ -44,8 +44,8 @@
                                     <div class="form-group col-md-6">
                                         <label for="yardimTipiAdi" class="form-label me-2" style="margin-right: 10px;">Yardım Tipi Adı:</label>
                                         <div class="input-group">
-                                            <h:inputText id="yardimTipiAdi" value="#{yardimBean.entity.yardim_tip}" class="form-control" style="width: 400px;" />
-                                            <div class="input-group-append">
+                                            <h:inputText id="yardimTipiAdi" value="#{yardimBean.yardimTipiAdi}" class="form-control" style="width: 400px;" />
+                                            <f:ajax event="keyup" render="yardimListPanel" listener="#{yardimBean.listeyenile}"/>                                            <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-search"></i>
                                                 </span>
@@ -54,12 +54,11 @@
                                         <f:ajax event="keyup" render="yardimListPanel" />
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="devletOzel">Yardım Türü:</label>
-                                        <h:selectOneMenu id="yardimTur"  class="form-control" value="#{yardimBean.entity.yardim_tur_id}">
-                                            <f:selectItem itemLabel="Hepsi" itemValue="0" />
-                                            <f:selectItem itemLabel="Ayni" itemValue="2" />
-                                            <f:selectItem itemLabel="Nakti" itemValue="1" />
-                                            <f:ajax event="change" render="yardimListPanel"/>
+                                        <label for="yardimTur">Yardım Türü:</label>
+                                        <h:selectOneMenu id="yardimTur" class="form-control" value="#{yardimBean.yardimTurId}">
+                                            <f:selectItem itemLabel="Hepsi" itemValue="" />
+                                            <f:selectItems value="#{yardimTurBean.yardimTurList}" var="tur" itemLabel="#{tur.label}" itemValue="#{tur.value}" />
+                                            <f:ajax event="change" listener="#{yardimBean.listeyenile}" render="yardimListPanel"/>
                                         </h:selectOneMenu>
                                     </div>
                                 </div>
@@ -70,6 +69,7 @@
                                                 <tr>
                                                     <th style="width: 150px;">Yardım Tipi Kodu</th>
                                                     <th style="width: 300px;">Yardım Tipi Adı</th>
+                                                    <th style="width: 300px;">Yardım Türü</th>
                                                     <th style="width: 200px;">Eylem</th>
                                                 </tr>
                                             </thead>
@@ -78,6 +78,8 @@
                                                     <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
                                                         <td>#{yardim.yardim_tip_id}</td>
                                                         <td>#{yardim.yardim_tip}</td>
+                                                        <td>#{yardimBean.getYardimTurById(yardim.yardim_tur_id)}</td>
+
                                                         <td>
                                                             <div class="action-buttons">
                                                                 <h:commandButton value="Sil" action="#{yardimBean.yardimSil(yardim.yardim_tip_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
