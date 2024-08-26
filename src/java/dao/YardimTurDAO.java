@@ -29,6 +29,21 @@ public class YardimTurDAO extends DBConnection {
         }
         return TurList;
     }
+public String getTurById(int turId) {
+    String tur = null;
+    try {
+        Statement statement = getDb().createStatement();
+        String query = "SELECT TUR FROM YARDIM_TUR WHERE TUR_ID = " + turId;
+        ResultSet rs = statement.executeQuery(query);
+        if (rs.next()) {
+            tur = rs.getString("TUR");
+        }
+    } catch (Exception ex) {
+        DetectError(ex);
+    }
+    return tur;
+}
+
 
     public Connection getDb() {
         if (this.db == null) {

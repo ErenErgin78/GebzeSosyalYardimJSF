@@ -54,12 +54,29 @@ public class YardimDAO extends DBConnection {
         }
     }
 
-    public List<Yardim> YardimListesi() {
+    public List<Yardim> YardimListesi(String yardimTipiAdi, Integer yardimTurId) {
         List<Yardim> yardimList = new ArrayList<>();
         try {
-            String query = "SELECT YARDIM_TIP_ID, YARDIM_TIP, YARDIM_TUR_ID FROM YARDIM_TIP";
-            Statement statement = getDb().createStatement();
-            ResultSet rs = statement.executeQuery(query);
+            StringBuilder query = new StringBuilder("SELECT YARDIM_TIP_ID, YARDIM_TIP, YARDIM_TUR_ID FROM YARDIM_TIP WHERE 1=1");
+
+            if (yardimTipiAdi != null && !yardimTipiAdi.isEmpty()) {
+                query.append(" AND YARDIM_TIP LIKE ?"); // Yardım tipi adı kriteri
+            }
+            if (yardimTurId != null) {
+                query.append(" AND YARDIM_TUR_ID = ?"); // Yardım türü kriteri
+            }
+
+            PreparedStatement ps = getDb().prepareStatement(query.toString());
+
+            int index = 1;
+            if (yardimTipiAdi != null && !yardimTipiAdi.isEmpty()) {
+                ps.setString(index++, "%" + yardimTipiAdi + "%");
+            }
+            if (yardimTurId != null) {
+                ps.setInt(index++, yardimTurId);
+            }
+
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 yardimList.add(new Yardim(
@@ -74,22 +91,25 @@ public class YardimDAO extends DBConnection {
         return yardimList;
     }
 
-    public List<SelectItem> YardimTurGetir() {
-        List<SelectItem> TurList = new ArrayList<>();
+public List<SelectItem> yardimTurGetir() {
+    List<SelectItem> TurList = new ArrayList<>();
 
-        try {
-            Statement statement = getDb().createStatement();
-            String selectQuery = "SELECT YARDIM_TUR_ID, YARDIM_TUR FROM YARDIM_TUR";
-            ResultSet rs = statement.executeQuery(selectQuery);
+    try {
+        Statement statement = getDb().createStatement();
+        String selectQuery = "SELECT YARDIM_TUR_ID, YARDIM_TUR FROM YARDIM_TUR";
+        ResultSet rs = statement.executeQuery(selectQuery);
 
-            while (rs.next()) {
-                TurList.add(new SelectItem(rs.getInt("YARDIM_TUR_ID"), rs.getString("YARDIM_TUR")));
-            }
-        } catch (Exception ex) {
-            DetectError(ex);
+        while (rs.next()) {
+            TurList.add(new SelectItem(rs.getInt("YARDIM_TUR_ID"), rs.getString("YARDIM_TUR")));
         }
-        return TurList;
+    } catch (Exception ex) {
+        DetectError(ex);
     }
+    return TurList;
+}
+
+
+    
 
     public void setDb(Connection db) {
         this.db = db;
