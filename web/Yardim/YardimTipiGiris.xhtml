@@ -38,9 +38,9 @@
                                 </div> 
                                 <div class="form-group">
                                     <label for="devletOzel">Yardım Türü:</label>
-                                    <h:selectOneMenu id="devletOzel"  class="form-control" value="#{yardimBean.entity.yardim_tur_id}">
-                                        <f:selectItem itemLabel="Hepsi" itemValue="0" />
-                                        <f:selectItems  value="#{yardimBean.yardimTurList}" />
+                                    <h:selectOneMenu id="yardimTur" class="form-control" value="#{yardimBean.entity.yardim_tur_id}">
+                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                        <f:selectItems value="#{yardimTurBean.yardimTurList}" var="tur" itemLabel="#{tur.label}" itemValue="#{tur.value}" />
                                         <f:ajax event="change" render="yardimListPanel"/>
                                     </h:selectOneMenu>
                                 </div>
