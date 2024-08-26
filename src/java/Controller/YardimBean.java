@@ -6,6 +6,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.faces.model.SelectItem;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import java.io.Serializable;
 import java.util.List;
 
@@ -39,6 +40,12 @@ public class YardimBean implements Serializable {
 
     public List<SelectItem> yardimTurGetir() {
         return this.getDao().YardimTurGetir();
+    }
+    @Inject
+    private YardimTurBean yardimTurBean;
+
+    public String getYardimTurById(int turId) {
+        return yardimTurBean.getDao().getTurById(turId);
     }
 
     public Yardim getEntity() {

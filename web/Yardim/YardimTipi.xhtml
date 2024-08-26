@@ -79,7 +79,8 @@
                                                     <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
                                                         <td>#{yardim.yardim_tip_id}</td>
                                                         <td>#{yardim.yardim_tip}</td>
-                                                        <td>#{yardim.yardim_tur_id}</td>
+                                                        <td>#{yardimBean.getYardimTurById(yardim.yardim_tur_id)}</td>
+
                                                         <td>
                                                             <div class="action-buttons">
                                                                 <h:commandButton value="Sil" action="#{yardimBean.yardimSil(yardim.yardim_tip_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
