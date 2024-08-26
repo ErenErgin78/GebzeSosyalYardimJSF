@@ -79,7 +79,7 @@ public class YardimDAO extends DBConnection {
 
         try {
             Statement statement = getDb().createStatement();
-            String selectQuery = "SELECT YARDIM_TUR_ID, YARDIM_TUR FROM YARDIM_TUR";
+            String selectQuery = "SELECT TUR_ID, TUR FROM YARDIM_TUR";
             ResultSet rs = statement.executeQuery(selectQuery);
 
             while (rs.next()) {
