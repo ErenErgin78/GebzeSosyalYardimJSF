@@ -19,7 +19,7 @@ public class EngelAltDAO extends DBConnection {
     private String islemBasariliMesaj;
 
     private Integer id = 0;
-    private String isim ="";
+    private String isim = "";
 
     public void EngelAltEkle(EngelAlt engelAlt) {
 
