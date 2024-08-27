@@ -50,15 +50,16 @@
                                         <div class="form-group col-md-6">
                                             <label for="yardimTipiAdi" class="form-label me-2" style="margin-right: 10px;">Yardım Alt Tipi Adı:</label>
                                             <div class="input-group">
-                                                <h:inputText id="yardimTipiAdi"  class="form-control" style="width: 400px;" />
-                                                <f:ajax event="keyup" render="yardimPanel"/>                                            <div class="input-group-append">
+                                                <h:inputText id="yardimTipiAdi" value="#{yardimAltBean.yardimAltTipiAdi}" class="form-control" style="width: 400px;" />
+                                                <f:ajax event="keyup" render="yardimPanel" listener="#{yardimAltBean.listeyenile}"/>
+                                                <div class="input-group-append">
                                                     <span class="input-group-text">
                                                         <i class="fas fa-search"></i>
                                                     </span>
                                                 </div>
                                             </div>
-                                            <f:ajax event="keyup" render="yardimPanel" />
                                         </div>
+
                                     </div>
                                     <div class="table-responsive">
                                         <h:panelGroup id="yardimPanel">
