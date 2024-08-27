@@ -43,7 +43,7 @@
                                         <h:selectOneMenu id="engelliTipi" value="#{engelAltBean.selectedEngelId}" class="form-control">
                                             <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
                                             <f:selectItems value="#{engelAltBean.tipList}" />
-                                            <f:ajax event="keyup" render="engelAltPanel"/>
+                                             <f:ajax event="valueChange" render="engelAltPanel" />
                                         </h:selectOneMenu>
                                     </div>
                                     <!-- Engelli Alt Tipi Adı -->
@@ -57,7 +57,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <f:ajax event="keyup" render="engelAltPanel" />
+                                         <f:ajax event="keyup" render="engelAltPanel" listener="#{engelAltBean.listeyenile}" />
                                     </div>
                                 </div>
                                 <h:panelGroup id="engelAltPanel">

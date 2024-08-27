@@ -36,7 +36,7 @@ public class EngelAltBean implements Serializable {
         this.getDao().EngelAltSil(engelAltId);
     }
 
-   public List<SelectItem> engelTipGetir() {
+    public List<SelectItem> engelTipGetir() {
         return this.getDao().EngelliTipGetir();
     }
 
@@ -79,15 +79,15 @@ public class EngelAltBean implements Serializable {
         return this.list;
     }
 
- public void listeyenile() {
-    this.list = this.getDao().EngelAltListesi();
-}
+    public void listeyenile() {
+        this.list = this.getDao().EngelAltListesi();
+    }
 
     public void setList(List<EngelAlt> list) {
         this.list = list;
     }
 
-   public List<SelectItem> getTipList() {
+    public List<SelectItem> getTipList() {
         if (tipList == null) {
             tipList = engelTipGetir();
         }
@@ -108,9 +108,5 @@ public class EngelAltBean implements Serializable {
 
     public EngelAltBean() {
     }
-
- 
-
-  
 
 }
