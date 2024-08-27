@@ -65,6 +65,7 @@ public class EngelAltDAO extends DBConnection {
             queryBuilder.append("SELECT EA.ALT_TIP_ID, EA.ENGELLI_TIP_ID, EA.ALT_TIP_ISIM, E.TIP_ISIM ")
                     .append("FROM ENGELLI_ALT_TIP EA ")
                     .append("JOIN ENGELLI_TIP E ON EA.ENGELLI_TIP_ID = E.TIP_ID ");
+
             if (id != 0) {
                 queryBuilder.append("AND EA.ENGELLI_TIP_ID = ").append(id).append(" ");
             }

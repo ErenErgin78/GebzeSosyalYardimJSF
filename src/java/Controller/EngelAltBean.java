@@ -63,6 +63,7 @@ public class EngelAltBean implements Serializable {
     public EngelAltDAO getDao() {
         if (this.dao == null) {
             this.dao = new EngelAltDAO();
+            dao.setIslemBasariliMesaj(null);
         }
         return this.dao;
     }
@@ -78,9 +79,9 @@ public class EngelAltBean implements Serializable {
         return this.list;
     }
 
-    public void listeyenile() {
-        this.list = this.getDao().EngelAltListesi();
-    }
+ public void listeyenile() {
+    this.list = this.getDao().EngelAltListesi();
+}
 
     public void setList(List<EngelAlt> list) {
         this.list = list;
