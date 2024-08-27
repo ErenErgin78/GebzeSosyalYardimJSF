@@ -56,32 +56,43 @@ public class YardimAltDAO extends DBConnection {
         }
     }
 
-    public List<YardimAlt> YardimAltListesi() {
-        List<YardimAlt> yardimAltList = new ArrayList<>();
-        try {
-            StringBuilder queryBuilder = new StringBuilder();
-            queryBuilder.append("SELECT YA.YARDIM_ALT_TIP_ID, YA.YARDIM_TIP_ID, YA.YARDIM_ALT_TIP, Y.YARDIM_TIP ")
-                    .append("FROM YARDIM_ALT_TIP YA ")
-                    .append("JOIN YARDIM_TIP Y ON YA.YARDIM_TIP_ID = Y.YARDIM_TIP_ID ");
+public List<YardimAlt> YardimAltListesi(String yardimAltTipiAdi) {
+    List<YardimAlt> yardimAltList = new ArrayList<>();
+    try {
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("SELECT YA.YARDIM_ALT_TIP_ID, YA.YARDIM_TIP_ID, YA.YARDIM_ALT_TIP, Y.YARDIM_TIP ")
+                .append("FROM YARDIM_ALT_TIP YA ")
+                .append("JOIN YARDIM_TIP Y ON YA.YARDIM_TIP_ID = Y.YARDIM_TIP_ID ");
 
-            if (id != 0) {
-                queryBuilder.append("AND YA.YARDIM_TIP_ID = ").append(id).append(" ");
-            }
-            Statement statement = getDb().createStatement();
-            ResultSet rs = statement.executeQuery(queryBuilder.toString());
-
-            while (rs.next()) {
-                yardimAltList.add(new YardimAlt(
-                        rs.getInt("YARDIM_ALT_TIP_ID"),
-                        rs.getString("YARDIM_ALT_TIP"),
-                        rs.getString("YARDIM_TIP")
-                ));
-            }
-        } catch (Exception ex) {
-            DetectError(ex);
+        if (id != 0) {
+            queryBuilder.append("AND YA.YARDIM_TIP_ID = ").append(id).append(" ");
         }
-        return yardimAltList;
+        if (yardimAltTipiAdi != null && !yardimAltTipiAdi.isEmpty()) {
+            queryBuilder.append("AND YA.YARDIM_ALT_TIP LIKE ? ");
+        }
+
+        PreparedStatement ps = getDb().prepareStatement(queryBuilder.toString());
+
+        int index = 1;
+        if (yardimAltTipiAdi != null && !yardimAltTipiAdi.isEmpty()) {
+            ps.setString(index++, "%" + yardimAltTipiAdi + "%");
+        }
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            yardimAltList.add(new YardimAlt(
+                    rs.getInt("YARDIM_ALT_TIP_ID"),
+                    rs.getString("YARDIM_ALT_TIP"),
+                    rs.getString("YARDIM_TIP")
+            ));
+        }
+    } catch (Exception ex) {
+        DetectError(ex);
     }
+    return yardimAltList;
+}
+
 
     public List<SelectItem> YardimTipGetir() {
         List<SelectItem> TipList = new ArrayList<>();
