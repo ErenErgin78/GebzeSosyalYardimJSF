@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Sosyal Güvence ve Yakınlık Bilgileri</title>
+        <!-- Bootstrap ve özel stilleri yükle -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/styles.css" />
+        <link rel="stylesheet" href="CSS/log.css" />
+        <style>
+            .hidden {
+                display: none;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <!-- Yakınlık Bilgileri Formu -->
+        <h:form id="userForm">
+            <div class="row align-items-center mb-3">
+                <div class="col-10">
+                    <!-- Breadcrumb ve geri dönüş butonu -->
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>            
+                        <li class="breadcrumb-item active" aria-current="page">İşlemlerim</li>
+                        <li class="breadcrumb-item active"><a href="#" class="load-page-button" data-page="Tutanak/MuracaatSecim.xhtml">Tutanak</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Yakınlık Bilgileri</li>
+                    </ol>
+                </div>
+                <div class="col-2 text-end">
+                    <button type="button" class="btn btn-outline-success load-page-button" data-page="Tutanak/MuracaatSecim.xhtml">Müracaat Seçim</button>
+                </div>
+            </div>
+            <!-- Global mesajlar ve işlem başarılı mesajı -->
+            <h:messages globalOnly="true" layout="table"/>
+            <h:outputText id="mesaj" value ="#{kisiAskerlikBean.dao.islemBasariliMesaj}"/>
+            <div class="container-fluid">               
+                <div class="row">                   
+                    <div class="col-md-12">
+                        <div class="card-header">
+                            <h1>Aile Yakınlık</h1>
+                        </div>
+                        <div class="card-body">
+                            <div class="card">
+                                <!-- Aile Yakınlık Başlığı ve Form Alanları -->
+                                <div class="card-header">
+                                    Yakınlık Bilgileri
+                                </div>
+                                <div class="card-body">
+                                    <!-- Yakınlık bilgileri formu -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="dogum">Doğum Tarihi:</label>
+                                            <h:inputText class="form-control" value="#{kisiBean.entity.dogum_tarihi}">
+                                                <f:passThroughAttribute name="type" value="date" />
+                                            </h:inputText>                                         
+                                        </div>
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="tc">TC Kimlik No:</label>
+                                            <h:inputText class="form-control" value="#{kisiBean.entity.kimlik_no}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="ad">Adı:</label>
+                                            <h:inputText class="form-control" value="#{kisiBean.entity.isim}"/>
+                                        </div>
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="soyad">Soyadı:</label>
+                                            <h:inputText class="form-control" value="#{kisiBean.entity.soyisim}"/>
+                                        </div>
+                                    </div>        
+                                    <div class="form-row"> 
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="graduate" class="form-label">Eğitim Durumu:</label>
+                                            <h:selectOneMenu id="graduate" value="#{egitimDurumBean.entity.egitim_durum_id}" class="form-control">
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                                <f:selectItems value="#{egitimDurumBean.egitimlist}" />                                                
+                                                <f:ajax event="valueChange" render="KullaniciListesi" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="meslek" class="form-label">Meslek:</label>
+                                            <h:selectOneMenu id="meslek" value="#{meslekBean.entity.meslek_id}" class="form-control">
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="K" />
+                                                <f:selectItems value="#{meslekBean.meslekList}" />
+                                                <f:ajax event="valueChange" render="KullaniciListesi" />
+                                            </h:selectOneMenu>
+                                        </div>           
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="yakinlik" class="form-label">Yakınlık:</label>
+                                            <h:selectOneMenu id="yakinlik" value="#{kisiYakinlarBean.entity.yakinlar_id}" class="form-control">
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" /> 
+                                                <f:selectItems value="#{yakinlikBean.yakinlikList}" />
+                                                <f:ajax event="valueChange" render="KullaniciListesi" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="aktif" class="form-label">Cinsiyet:</label>
+                                            <h:selectOneMenu id="aktif" value="#{kisiBean.entity.cinsiyet}" class="form-control">
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                                <f:selectItem itemLabel="Erkek" itemValue="E" />
+                                                <f:selectItem itemLabel="Kadın" itemValue="K" />                                 
+                                                <f:ajax event="valueChange" render="KullaniciListesi" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>  
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="rum" class="form-label">Medeni Hali:</label>
+                                            <h:selectOneMenu id="rum" value="#{kisiBean.entity.medeni_durum_id}"  class="form-control">
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                                <f:selectItems value="#{kisiBean.medeniList}" />
+                                                <f:ajax event="valueChange" render="KullaniciListesi" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="statu" class="form-label">Özel Statü:</label>
+                                            <h:selectOneMenu id="statu" value="#{kisiYakinlarBean.entity.ozel_statu_id}"  class="form-control">
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                                <f:selectItem itemLabel="Asker" itemValue="1" />  
+                                                <f:selectItem itemLabel="Hükümlü" itemValue="2" />  
+                                                <f:ajax event="valueChange" render="KullaniciListesi" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>                      
+                                    <!-- Engel Bilgileri Kısmı -->
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Sağlık/Engel Bilgileri
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-row"> 
+                                                <div class="form-group col-md-6 mb-3">
+                                                    <label for="guvence">Sosyal Güvencesi Var mı?</label>
+                                                    <div class="custom-radio">
+                                                        <h:selectOneRadio id="guvence"  value="#{tutanakSosyalGuvenceBean.entity.guvence_var_mi}" styleClass="radio-inline" onchange="toggleGuvence()">
+                                                            <f:selectItem itemLabel="Evet" itemValue="1" />
+                                                            <f:selectItem itemLabel="Hayır" itemValue="0" />
+                                                        </h:selectOneRadio>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6 mb-3">
+                                                    <label for="sosyalGuvence" class="form-label hidden">Sosyal Güvencesi:</label>
+                                                    <h:selectOneMenu id="sosyalGuvence" value="#{tutanakSosyalGuvenceBean.entity.guvence_id}" class="form-control hidden">
+                                                        <f:selectItems value="#{tutanakSosyalGuvenceBean.guvenceList}" />                            
+                                                        <f:ajax event="valueChange" render="KullaniciListesi" />
+                                                    </h:selectOneMenu>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6 mb-3">
+                                                    <label for="durum">Hastalık Var mı?</label>
+                                                    <div class="custom-radio">
+                                                        <h:selectOneRadio id="durum" value="#{kisiEngelBean.entity.aktif}"  styleClass="radio-inline" onchange="toggleHastalik()">
+                                                            <f:selectItem itemLabel="Evet" itemValue="1" />
+                                                            <f:selectItem itemLabel="Hayır" itemValue="0" />
+                                                        </h:selectOneRadio>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6 mb-3">
+                                                    <label for="hasta" class="form-label hidden">Hastalık Adı:</label>
+                                                    <h:selectOneMenu id="hasta" value="#{kisiBean.entity.cinsiyet}" class="form-control hidden">
+                                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="1" />
+                                                        <f:selectItems value="#{hastalikBean.hastalikList}"/>
+                                                    </h:selectOneMenu>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6 mb-3">
+                                                    <label for="engel">Engel Var mı?</label>
+                                                    <div class="custom-radio">
+                                                        <h:selectOneRadio id="engel" value="#{kisiEngelBean.entity.aktif}"  styleClass="radio-inline" onchange="toggleEngel()">
+                                                            <f:selectItem itemLabel="Evet" itemValue="1" />
+                                                            <f:selectItem itemLabel="Hayır" itemValue="0" />
+                                                        </h:selectOneRadio>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6 mb-3">
+                                                    <label for="engelAlt" class="form-label hidden">Engelli Alt Tip/Grup:</label>
+                                                    <h:selectOneMenu id="engelAlt" value="#{kisiEngelBean.entity.engelli_alt_tip_id}" class="form-control hidden">
+                                                        <f:selectItems value="#{engelAltBean.tipList}" />
+                                                    </h:selectOneMenu>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Kaydet butonu -->
+                                <div class="text-center mt-3">
+                                    <h:commandButton value="Kaydet" action="#{kisiYakinlarBean.ekle()}" class="btn btn-success">
+                                        <f:ajax execute="@form" render="@form, mesaj" />
+                                    </h:commandButton>                                  
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+
+        <script type="text/javascript">
+
+            window.onload = function () {
+                toggleGuvence();
+                toggleHastalik();
+                toggleEngel();
+            };
+            // Sosyal Güvence menüsünü görünür/kapatılır yapmak için
+            function toggleGuvence() {
+                var radioValue = document.querySelector("input[name='userForm:guvence']:checked").value;
+                var selectOneMenu = document.getElementById("userForm:sosyalGuvence");
+                var label = document.querySelector("label[for='sosyalGuvence']");
+
+                if (radioValue === "1") {
+                    selectOneMenu.classList.remove("hidden");
+                    label.classList.remove("hidden");
+                } else {
+                    selectOneMenu.classList.add("hidden");
+                    label.classList.add("hidden");
+                }
+            }
+
+            function toggleHastalik() {
+                var radioValue = document.querySelector("input[name='userForm:durum']:checked").value;
+                var selectOneMenu = document.getElementById("userForm:hasta");
+                var label = document.querySelector("label[for='hasta']");
+
+                if (radioValue === "1") {
+                    selectOneMenu.classList.remove("hidden");
+                    label.classList.remove("hidden");
+                } else {
+                    selectOneMenu.classList.add("hidden");
+                    label.classList.add("hidden");
+                }
+            }
+
+            function toggleEngel() {
+                var radioValue = document.querySelector("input[name='userForm:engel']:checked").value;
+                var selectOneMenu = document.getElementById("userForm:engelAlt");
+                var label = document.querySelector("label[for='engelAlt']");
+
+                if (radioValue === "1") {
+                    selectOneMenu.classList.remove("hidden");
+                    label.classList.remove("hidden");
+                } else {
+                    selectOneMenu.classList.add("hidden");
+                    label.classList.add("hidden");
+                }
+            }
+
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+    </h:body>
+</html>
