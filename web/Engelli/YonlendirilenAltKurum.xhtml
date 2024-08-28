@@ -62,8 +62,8 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Kurum Kodu</th>
-                                                        <th>Yönlendirilen Kurum Adı</th>
                                                         <th>Yönlendirilen Alt Kurum Adı</th>
+                                                        <th>Yönlendirilen Kurum Adı</th>
                                                         <th>Eylem</th>
                                                     </tr>
                                                 </thead>
@@ -76,7 +76,7 @@
                                                             
                                                             <td>
                                                                 <div class="action-buttons">
-                                                                    <h:commandButton value="Sil" action="#{kurumAltBean.kurumAltSil(altKurum.alt_tip_id)}" styleClass="btn btn-danger delete-button me-2" onclick="return confirmDelete(this)">
+                                                                    <h:commandButton value="Sil" action="#{kurumAltBean.kurumAltSil(altKurum.alt_kurum_id)}" styleClass="btn btn-danger delete-button me-2" onclick="return confirmDelete(this)">
                                                                         <f:ajax execute="@this" render="@form"/>
                                                                     </h:commandButton>
                                                                     <h:commandButton value="Düzenle" styleClass="btn btn-primary ms-2">
