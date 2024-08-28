@@ -95,17 +95,5 @@ public class EngelAltBean implements Serializable {
     public void setTipList(List<SelectItem> tipList) {
         this.tipList = tipList;
     }
-   
 
     }
-
-    public String getEngelAltTipiAdi() {
-        return engelAltTipiAdi;
-    }
-
-    public void setEngelAltTipiAdi(String engelAltTipiAdi) {
-        this.engelAltTipiAdi = engelAltTipiAdi;
-    }
-     
-}
-     public EngelAltBean() {

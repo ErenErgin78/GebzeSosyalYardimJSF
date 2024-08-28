@@ -125,9 +125,6 @@ public class EngelAltDAO extends DBConnection {
         return db;
     }
 
-    public void setDb(Connection db) {
-        this.db = db;
-    }
 
     public String getIslemBasariliMesaj() {
         return islemBasariliMesaj;
