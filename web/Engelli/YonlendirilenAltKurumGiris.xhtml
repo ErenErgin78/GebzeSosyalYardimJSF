@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gebze Belediyesi Dashboard</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/styles.css" />
+        <link rel="stylesheet" href="CSS/log.css" />
+    </h:head>
+    <h:body>
+        <div class="container-fluid">
+            <div class="row align-items-center mb-3">
+                <div class="col-10">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Yönetici İşlemleri</li>
+                        <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="Engelli/YonlendirilenAltKurum.xhtml">Yönlendirilen Alt Kurum</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Yönlendirilen Alt Kurum Giriş</li>
+                    </ol>
+                </div>
+                <div class="col-2 text-end">
+                    <button type="button" class="btn btn-outline-success load-page-button" data-page="Engelli/YonlendirilenAltKurumGiris.xhtml">Yönlendirilen Alt Kurum Ekle</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h:form>
+                        <h:messages globalOnly="true" layout="table"/>
+                        <h:outputText id="mesaj" value="#{kurumAltBean.dao.islemBasariliMesaj}" />
+                        <div class="card">
+                            <div class="card-header">
+                                <h1>Yönlendirilen Alt Kurum Girişi</h1>
+                            </div>
+                            <div class="card-header">Yönlendirilen Alt Kurum Giriş Bilgileri</div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="kurumSecim" class="form-label">Yönlendirilen Kurum Adı:</label>
+                                    <h:selectOneMenu id="kurumSecim" value="#{kurumAltBean.entity.tip_id}" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                        <f:selectItems value="#{kurumAltBean.tipList}" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group">
+                                    <label for="altKurumAdi" class="form-label">Yönlendirilen Alt Kurum Adı:</label>
+                                    <h:inputText id="altKurumAdi" value="#{kurumAltBean.entity.alt_tip}" class="form-control" />
+                                </div>
+                                <div class="text-center mt-3">
+                                    <h:commandButton value="Kaydet" action="#{kurumAltBean.kurumAltEkle()}" class="btn btn-success">
+                                        <f:ajax execute="@form" render="@form, mesaj" />
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+    </h:body>
+</html>

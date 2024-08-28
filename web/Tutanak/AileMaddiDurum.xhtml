@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Aile Gelir ve Borç Bilgisi</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/list.css" />
+        <h:outputStylesheet name="CSS/styles.css"/>
+        <style>
+            .hidden {
+                display: none;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form id="userForm">
+            <h:messages globalOnly="true" layout="table"/>
+            <h:outputText id="mesaj" value="#{tutanakGelirBorcBean.mesaj}" />
+            <div class="row align-items-center mb-3">
+                <div class="col-10">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">İşlemlerim</li>
+                        <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="Tutanak/MuracaatSecim.xhtml">Tutanak</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Aile Gelir ve Borç Bilgileri</li>
+                    </ol>
+                </div>
+                <div class="col-2 text-end">
+                    <button type="button" class="btn btn-outline-success load-page-button" data-page="Tutanak/MuracaatSecim.xhtml">Müracaat Seçim</button>
+                </div>
+            </div> 
+            <div class="container-fluid">               
+                <div class="row">                   
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h1>Gelir ve Borç</h1>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Gelir Bilgileri
+                                            </div>
+                                            <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+                                                <!-- Form Rows -->
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="yaslilik" class="form-label">Yaşlılık:</label>
+                                                            <h:inputText id="yaslilik" value="#{tutanakGelirBean.entity.yaslilik}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="engelli" class="form-label">Engelli:</label>
+                                                            <h:inputText id="engelli" value="#{tutanakGelirBean.entity.engelli}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="yakini" class="form-label">Engelli Yakını:</label>
+                                                            <h:inputText id="yakini" value="#{tutanakGelirBean.entity.engelli_yakini}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="yetimAyligi" class="form-label">Yetim Aylığı:</label>
+                                                            <h:inputText id="yetimAyligi" value="#{tutanakGelirBean.entity.yetim_ayligi}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="emekliMaasi" class="form-label">Emekli Maaşı:</label>
+                                                            <h:inputText id="emekliMaasi" value="#{tutanakGelirBean.entity.emekli_maasi}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="bakimParasi" class="form-label">Evde Bakım Parası:</label>
+                                                            <h:inputText id="bakimParasi" value="#{tutanakGelirBean.entity.evde_bakim_parasi}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="dulMaasi" class="form-label">Dul Maaşı:</label>
+                                                            <h:inputText id="dulMaasi" value="#{tutanakGelirBean.entity.dul_maasi}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="issizlikMaasi" class="form-label">İşsizlik Maaşı:</label>
+                                                            <h:inputText id="issizlikMaasi" value="#{tutanakGelirBean.entity.issizlik_maasi}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="askerMaasi" class="form-label">Asker Maaşı:</label>
+                                                            <h:inputText id="askerMaasi" value="#{tutanakGelirBean.entity.asker_maasi}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="kira" class="form-label">Kira Geliri:</label>
+                                                            <h:inputText id="kiraa" value="#{tutanakGelirBean.entity.kira_maasi}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="kaymakamlik" class="form-label">Kaymakamlık:</label>
+                                                            <h:inputText id="kaymakamlik" value="#{tutanakGelirBean.entity.kaymakamlik}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="sosyalHizmet" class="form-label">Sosyal Hizmetler:</label>
+                                                            <h:inputText id="sosyalHizmet" value="#{tutanakGelirBean.entity.sosyal_hizmetler}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="buyuksehir" class="form-label">Büyükşehir Belediyesi:</label>
+                                                            <h:inputText id="buyuksehir" value="#{tutanakGelirBean.entity.buyuksehir}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="vakif" class="form-label">Özel Vakıflar:</label>
+                                                            <h:inputText id="vakif" value="#{tutanakGelirBean.entity.ozel_vakif}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="diger" class="form-label">Diğer:</label>
+                                                            <h:inputText id="diger" value="#{tutanakGelirBean.entity.diger}" class="form-control" />                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="aciklama">Diğer Açıklama:</label>
+                                                            <h:inputTextarea id="aciklama" class="form-control" rows="1" value="#{tutanakGelirBean.entity.diger_aciklama}" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Borç Bilgileri
+                                            </div>
+                                            <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+                                                <!-- Form Rows -->
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="borcBilgisi" class="form-label">Elektrik:</label>
+                                                            <h:inputText id="borcBilgis" value="#{tutanakBorcBean.entity.elektrik}" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="borcBilgisi" class="form-label">Su:</label>
+                                                            <h:inputText id="borcBilgi" value="#{tutanakBorcBean.entity.su}" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="borcBilgisi" class="form-label">Doğal Gaz:</label>
+                                                            <h:inputText id="borcBilg" value="#{tutanakBorcBean.entity.dogalgaz}" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="borcBilgisi" class="form-label">Kira</label>
+                                                            <h:inputText id="borcBii" value="#{tutanakBorcBean.entity.kira}" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="borcBilgisi" class="form-label">Kredi Kartı:</label>
+                                                            <h:inputText id="boilgisi" value="#{tutanakBorcBean.entity.kredi_karti}" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="borcBilgisi" class="form-label">Diğer:</label>
+                                                            <h:inputText id="borcBisi" value="#{tutanakBorcBean.entity.diger}" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="address_desc">Diğer Açıklama:</label>
+                                                            <h:inputTextarea id="address_desc" class="form-control" rows="1" value="#{tutanakBorcBean.entity.diger_aciklama}" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                  
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">
+                                        Mülkiyet Bilgileri
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6 mb-3 ">
+                                            <label for="ev" class="form-label">Ev Durumu:</label>
+                                            <h:selectOneMenu id="ev" value="#{tutanakMulkiyetBean.entity.ev_tip_id}" class="form-control">
+                                                <f:selectItems value="#{tutanakEvDurumBean.tutanakevdurumlist}" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="yakacak" class="form-label">Yakacak Tipi:</label>
+                                            <h:selectOneMenu id="yakacak" value="#{tutanakMulkiyetBean.entity.yakacak_tip_id}" class="form-control">
+                                                <f:selectItems value="#{tutanakYakacakBean.tutanakyakacaklist}" />  
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="kira" class="form-label">Kira Geliri/Gideri:</label>
+                                            <h:inputText id="kira" value="#{tutanakMulkiyetBean.entity.kira_miktar}" class="form-control" />
+                                        </div>
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="evTipi" class="form-label">Ev Tipi:</label>
+                                            <h:selectOneMenu id="evTipi" value="#{tutanakMulkiyetBean.entity.ev_tip_id}" class="form-control">
+                                                <f:selectItems value="#{tutanakEvTipBean.tutanakEvTipList}" />     
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="kiradaEv">Kirada evi var mı:</label>
+                                            <div class="custom-radio">
+                                                <h:selectOneRadio id="kiradaEv" value="#{tutanakMulkiyetBean.entity.kirada_ev_var_mi}" styleClass="radio-inline" onchange="toggleInputText('kiradaEv', 'evMiktarı')">
+                                                    <f:selectItem itemLabel="Evet" itemValue="1" />
+                                                    <f:selectItem itemLabel="Hayır" itemValue="0" />                                     
+                                                </h:selectOneRadio>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="evMiktarı" class="form-label hidden">Kaç evi var:</label>
+                                            <h:inputText id="evMiktarı" value="#{tutanakMulkiyetBean.entity.kirada_ev_sayisi}" class="form-control hidden" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="araba">Arabası var mı:</label>
+                                            <div class="custom-radio">
+                                                <h:selectOneRadio id="araba" value="#{tutanakMulkiyetBean.entity.araba_var_mi}" styleClass="radio-inline" onchange="toggleInputTextarea('araba', 'model')">
+                                                    <f:selectItem itemLabel="Evet" itemValue="1" />
+                                                    <f:selectItem itemLabel="Hayır" itemValue="0" />                                     
+                                                </h:selectOneRadio>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="model" class="form-label hidden">Araba Marka/Model:</label>
+                                            <h:inputTextarea id="model" class="form-control hidden" rows="1" value="#{tutanakMulkiyetBean.entity.araba_model}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="gayrimenkul">Gayrimenkul var mı:</label>
+                                            <div class="custom-radio">
+                                                <h:selectOneRadio id="gayrimenkul" value="#{tutanakMulkiyetBean.entity.gayrimenkul_var_mi}" styleClass="radio-inline" onchange="toggleInputTextarea('gayrimenkul', 'gayrimenkulTuru')">
+                                                    <f:selectItem itemLabel="Evet" itemValue="1" />
+                                                    <f:selectItem itemLabel="Hayır" itemValue="0" />                                     
+                                                </h:selectOneRadio>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="gayrimenkulTuru" class="form-label hidden">Gayrimenkul Türü:</label>
+                                            <h:inputTextarea id="gayrimenkulTuru" class="form-control hidden" rows="1" value="#{tutanakMulkiyetBean.entity.gayrimenkul_tur}" />
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        Ev Eşyaları
+                                    </div>
+                                    <div class="card-body">                                     
+                                        <div class="row"> <!-- Başlangıç row -->
+                                            <div class="col-md-4"> <!-- Her checkbox için bir sütun oluştur -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox79" value="option7"/>
+                                                        <label class="form-check-label" for="inlineCheckbox79">Bilgisayar</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4"> <!-- Diğer sütunlar -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox78" value="option9"/>
+                                                        <label class="form-check-label" for="inlineCheckbox78">Cep Telefonu</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4"> <!-- Diğer sütunlar -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox77" value="option8"/>
+                                                        <label class="form-check-label" for="inlineCheckbox77">Fırınlı Ocak</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> <!-- Bitiş row -->
+
+                                        <div class="row"> <!-- Başlangıç row -->
+                                            <div class="col-md-4"> <!-- Her checkbox için bir sütun oluştur -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox76" value="option7"/>
+                                                        <label class="form-check-label" for="inlineCheckbox76">Şofben</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4"> <!-- Diğer sütunlar -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox75" value="option9"/>
+                                                        <label class="form-check-label" for="inlineCheckbox75">Bulaşık Mak</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4"> <!-- Diğer sütunlar -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox74" value="option8"/>
+                                                        <label class="form-check-label" for="inlineCheckbox74">Çamaşır Mak</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> <!-- Bitiş row -->
+                                        <div class="row"> <!-- Başlangıç row -->
+                                            <div class="col-md-4"> <!-- Her checkbox için bir sütun oluştur -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox73" value="option7"/>
+                                                        <label class="form-check-label" for="inlineCheckbox73">İnternet</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4"> <!-- Diğer sütunlar -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox72" value="option9"/>
+                                                        <label class="form-check-label" for="inlineCheckbox72">Telefon</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4"> <!-- Diğer sütunlar -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox71" value="option8"/>
+                                                        <label class="form-check-label" for="inlineCheckbox71">Buzdolabı</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> <!-- Bitiş row -->
+                                        <div class="row"> <!-- Başlangıç row -->
+                                            <div class="col-md-4"> <!-- Her checkbox için bir sütun oluştur -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox70" value="option7"/>
+                                                        <label class="form-check-label" for="inlineCheckbox70">Elektrikli Süp</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4"> <!-- Diğer sütunlar -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox69" value="option9"/>
+                                                        <label class="form-check-label" for="inlineCheckbox69">Koltuk Takımı</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4"> <!-- Diğer sütunlar -->
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox68" value="option8"/>
+                                                        <label class="form-check-label" for="inlineCheckbox68">Televizyon</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div> 
+                                <div class="text-center mt-3">
+                                    <h:commandButton value="Kaydet" action="#{tutanakGelirBorcBean.GelirBorcEkle()}" class="btn btn-success">
+                                        <f:ajax execute="@form" render="@form, mesaj" />
+                                    </h:commandButton>                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        <script type="text/javascript">
+            window.onload = function () {
+                toggleEvMiktari();
+                toggleArabaModel();
+                toggleGayrimenkulTuru();
+            };
+
+            function toggleEvMiktari() {
+                var radioValue = document.querySelector("input[name='userForm:kiradaEv']:checked").value;
+                var inputText = document.getElementById("userForm:evMiktarı");
+                var label = document.querySelector("label[for='evMiktarı']");
+
+                if (radioValue === "1") {
+                    inputText.classList.remove("hidden");
+                    label.classList.remove("hidden");
+                } else {
+                    inputText.classList.add("hidden");
+                    label.classList.add("hidden");
+                }
+            }
+
+            function toggleArabaModel() {
+                var radioValue = document.querySelector("input[name='userForm:araba']:checked").value;
+                var textarea = document.getElementById("userForm:model");
+                var label = document.querySelector("label[for='model']");
+
+                if (radioValue === "1") {
+                    textarea.classList.remove("hidden");
+                    label.classList.remove("hidden");
+                } else {
+                    textarea.classList.add("hidden");
+                    label.classList.add("hidden");
+                }
+            }
+
+            function toggleGayrimenkulTuru() {
+                var radioValue = document.querySelector("input[name='userForm:gayrimenkul']:checked").value;
+                var textarea = document.getElementById("userForm:gayrimenkulTuru");
+                var label = document.querySelector("label[for='gayrimenkulTuru']");
+
+                if (radioValue === "1") {
+                    textarea.classList.remove("hidden");
+                    label.classList.remove("hidden");
+                } else {
+                    textarea.classList.add("hidden");
+                    label.classList.add("hidden");
+                }
+            }
+
+// Aşağıdaki iki fonksiyon, radyo butonları değiştiğinde tetiklenecek.
+            function toggleInputText(radioId, divId) {
+                toggleEvMiktari();
+            }
+
+            function toggleInputTextarea(radioId, divId) {
+                if (radioId === 'araba') {
+                    toggleArabaModel();
+                } else if (radioId === 'gayrimenkul') {
+                    toggleGayrimenkulTuru();
+                }
+            }
+
+        </script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+        <script>
+            function confirmDelete(button) {
+                return confirm("Bu kullanıcıyı gerçekten silmek istiyor musunuz?");
+            }
+        </script>
+    </h:body>
+</html>

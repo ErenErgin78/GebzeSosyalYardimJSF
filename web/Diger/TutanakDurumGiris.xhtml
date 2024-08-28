@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gebze Belediyesi Dashboard</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/styles.css" />
+        <link rel="stylesheet" href="CSS/log.css" />
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Yönetici İşlemleri</li>
+            <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="Diger/TutanakTanimlama.xhtml">Tutanak Durum Tanımlama</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Tutanak Durum Giriş</li>
+        </ol>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:messages globalOnly="true" layout="table"/>
+            <h:outputText id="mesaj" value="#{tutanakBean.dao.mesaj}" />
+            <div class="container-fluid">               
+                <div class="row">                   
+                    <div class="col-md-12">
+                        <div class="card-header">
+                            <h1>Tutanak Durum Girişi</h1>
+                        </div>
+                        <div class="card">                           
+                            <div class="card-header" style="font-weight: bold;" >Tutanak Durum Bilgileri</div>
+                            <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="email">Durum Adı:</label>
+                                        <h:inputText class="form-control" value="#{tutanakBean.entity.tutanak_isim}">
+                                            <f:passThroughAttribute name="type" value="email" />
+                                        </h:inputText>
+                                    </div>
+                                <div class="form-group">
+                                    <label for="registration_status">Aktif:</label>
+                                    <h:selectOneMenu id="registration_status" value="#{tutanakBean.entity.aktiflik}" class="form-control">
+                                        <f:selectItem itemLabel="Evet" itemValue="1" />
+                                        <f:selectItem itemLabel="Hayır" itemValue="0" />
+                                    </h:selectOneMenu>
+                                </div>                           
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <h:commandButton value="Kaydet" action="#{tutanakBean.tutanakEkle()}" class="btn btn-success">
+                                <f:ajax execute="@form" render="@form, mesaj" />
+                            </h:commandButton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+    </h:body>
+</html>
