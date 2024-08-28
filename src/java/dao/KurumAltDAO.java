@@ -45,12 +45,12 @@ public void KurumAltEkle(KurumAlt kurumAlt) {
 }
 
 
-    public void KurumAltSil(int yardimAltid) {
+    public void KurumAltSil(int kurumAltid) {
         String deleteQuery = "DELETE FROM KURUM_ALT WHERE ALT_KURUM_ID = ?";
 
         try {
             PreparedStatement ps = getDb().prepareStatement(deleteQuery);
-            ps.setInt(1, yardimAltid);
+            ps.setInt(1, kurumAltid);
             int rowsDeleted = ps.executeUpdate();
 
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
@@ -63,19 +63,19 @@ public void KurumAltEkle(KurumAlt kurumAlt) {
     List<KurumAlt> kurumAltList = new ArrayList<>();
     try {
         StringBuilder queryBuilder = new StringBuilder();
-        queryBuilder.append("SELECT YA.ALT_KURUM_ID, YA.ALT_KURUM_ISIM, YA.KURUM_ID , Y.KURUM_ISIM ")
-                .append("FROM KURUM_ALT YA ")
-                .append("JOIN KURUM Y ON YA.KURUM_ID = Y.KURUM_ID ")
+        queryBuilder.append("SELECT KA.ALT_KURUM_ID, KA.ALT_KURUM_ISIM, KA.KURUM_ID , K.KURUM_ISIM ")
+                .append("FROM KURUM_ALT KA ")
+                .append("JOIN KURUM K ON KA.KURUM_ID = K.KURUM_ID ")
                 .append("WHERE 1=1 ");
 
         // ID'ye göre filtreleme
         if (id != 0) {
-            queryBuilder.append("AND YA.KURUM_ID  = ? ");
+            queryBuilder.append("AND KA.KURUM_ID  = ? ");
         }
 
         // İsim'e göre filtreleme, null kontrolü
         if (isim != null && !isim.isEmpty()) {
-            queryBuilder.append("AND YA.ALT_KURUM_ISIM LIKE ? ");
+            queryBuilder.append("AND KA.ALT_KURUM_ISIM LIKE ? ");
         }
 
         PreparedStatement statement = getDb().prepareStatement(queryBuilder.toString());
