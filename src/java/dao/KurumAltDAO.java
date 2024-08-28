@@ -56,48 +56,56 @@ public class KurumAltDAO extends DBConnection {
         }
     }
 
-    public List<KurumAlt> KurumAltListesi(String kurumAltTipiAdi) {
-        List<KurumAlt> kurumAltList = new ArrayList<>();
-        try {
-            StringBuilder queryBuilder = new StringBuilder();
-            queryBuilder.append("SELECT YA.ALT_KURUM_ID, YA.KURUM_ID, YA.ALT_KURUM_ISIM , Y.KURUM_ISIM")
-                    .append(" FROM KURUM_ALT YA ")
-                    .append(" JOIN KURUM Y ON YA.KURUM_ID = Y.KURUM_ID");
+   public List<KurumAlt> KurumAltListesi(String kurumAltTipiAdi) {
+    List<KurumAlt> kurumAltList = new ArrayList<>();
+    try {
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("SELECT YA.ALT_KURUM_ID, YA.KURUM_ID, YA.ALT_KURUM_ISIM, Y.KURUM_ISIM ")
+                    .append("FROM KURUM_ALT YA ")
+                    .append("JOIN KURUM Y ON YA.KURUM_ID = Y.KURUM_ID WHERE 1=1 ");
 
-            // ID'ye göre filtreleme
-            if (id != 0) {
-                queryBuilder.append("AND YA.KURUM_ID  = ? ").append(id).append(" ");
-            }
-
-            if (kurumAltTipiAdi != null && !kurumAltTipiAdi.isEmpty()) {
-                queryBuilder.append("AND YA.YARDIM_ALT_TIP LIKE ? ");
-            }
-
-            PreparedStatement ps = getDb().prepareStatement(queryBuilder.toString());
-
-            int index = 1;
-
-            if (kurumAltTipiAdi != null && !kurumAltTipiAdi.isEmpty()) {
-                ps.setString(index++, "%" + kurumAltTipiAdi + "%");
-            }
-
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                kurumAltList.add(new KurumAlt(
-                        rs.getInt("ALT_KURUM_ID"),
-                        rs.getString("ALT_KURUM_ISIM"),
-                        rs.getString("KURUM_ISIM")
-                ));
-            }
-
-            this.islemBasariliMesaj = "İşlem başarılı";
-
-        } catch (Exception ex) {
-            DetectError(ex);
+        // ID'ye göre filtreleme
+        if (id != 0) {
+            queryBuilder.append("AND YA.KURUM_ID = ? ");
         }
-        return kurumAltList;
+
+        // Kurum Alt Tipi Adına göre filtreleme
+        if (kurumAltTipiAdi != null && !kurumAltTipiAdi.isEmpty()) {
+            queryBuilder.append("AND YA.ALT_KURUM_ISIM LIKE ? ");
+        }
+
+        PreparedStatement ps = getDb().prepareStatement(queryBuilder.toString());
+        
+        int index = 1;
+
+        // Eğer ID filtresi varsa, PreparedStatement için ekle
+        if (id != 0) {
+            ps.setInt(index++, id);
+        }
+
+        // Eğer kurumAltTipiAdi filtresi varsa, PreparedStatement için ekle
+        if (kurumAltTipiAdi != null && !kurumAltTipiAdi.isEmpty()) {
+            ps.setString(index++, "%" + kurumAltTipiAdi + "%");
+        }
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            kurumAltList.add(new KurumAlt(
+                rs.getInt("ALT_KURUM_ID"),
+                rs.getString("ALT_KURUM_ISIM"),
+                rs.getString("KURUM_ISIM")
+            ));
+        }
+
+        this.islemBasariliMesaj = "İşlem başarılı";
+
+    } catch (Exception ex) {
+        DetectError(ex);
     }
+    return kurumAltList;
+}
+
 
     public List<SelectItem> KurumTipGetir() {
         List<SelectItem> TipList = new ArrayList<>();
