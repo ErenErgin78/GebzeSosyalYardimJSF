@@ -19,14 +19,14 @@ public class KurumAltDAO extends DBConnection {
     private String islemBasariliMesaj;
 
     private Integer id = 0;
-    private String isim = "";
 
     public void KurumAltEkle(KurumAlt kurumAlt) {
 
         try {
             Connection conn = this.getDb();
-            if(kurumAlt.getAktif()==null){
-                 kurumAlt.setAktif(1);           
+
+            if (kurumAlt.getAktif() == null) {
+                kurumAlt.setAktif(1);
             }
 
             String callQueryAdres = "{call INSERT_KURUM_ALT_TIP(?, ?)}";
@@ -36,6 +36,7 @@ public class KurumAltDAO extends DBConnection {
             csAdres.execute();
 
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
+
         } catch (Exception ex) {
             this.islemBasariliMesaj = DetectError(ex);
         }
@@ -55,78 +56,74 @@ public class KurumAltDAO extends DBConnection {
         }
     }
 
- public List<KurumAlt> KurumAltListesi() {
-    List<KurumAlt> kurumAltList = new ArrayList<>();
-    try {
-        StringBuilder queryBuilder = new StringBuilder();
-        queryBuilder.append("SELECT YA.ALT_KURUM_ID, YA.ALT_KURUM_ISIM, YA.KURUM_ID , Y.KURUM_ISIM ")
-                .append("FROM KURUM_ALT YA ")
-                .append("JOIN KURUM Y ON YA.KURUM_ID = Y.KURUM_ID ")
-                .append("WHERE 1=1 ");
+    public List<KurumAlt> KurumAltListesi(String kurumAltTipiAdi) {
+        List<KurumAlt> kurumAltList = new ArrayList<>();
+        try {
+            StringBuilder queryBuilder = new StringBuilder();
+            queryBuilder.append("SELECT YA.ALT_KURUM_ID, YA.KURUM_ID, YA.ALT_KURUM_ISIM , Y.KURUM_ISIM")
+                    .append(" FROM KURUM_ALT YA ")
+                    .append(" JOIN KURUM Y ON YA.KURUM_ID = Y.KURUM_ID");
 
-        // ID'ye göre filtreleme
-        if (id != 0) {
-            queryBuilder.append("AND YA.KURUM_ID  = ? ");
+            // ID'ye göre filtreleme
+            if (id != 0) {
+                queryBuilder.append("AND YA.KURUM_ID  = ? ").append(id).append(" ");
+            }
+
+            if (kurumAltTipiAdi != null && !kurumAltTipiAdi.isEmpty()) {
+                queryBuilder.append("AND YA.YARDIM_ALT_TIP LIKE ? ");
+            }
+
+            PreparedStatement ps = getDb().prepareStatement(queryBuilder.toString());
+
+            int index = 1;
+
+            if (kurumAltTipiAdi != null && !kurumAltTipiAdi.isEmpty()) {
+                ps.setString(index++, "%" + kurumAltTipiAdi + "%");
+            }
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                kurumAltList.add(new KurumAlt(
+                        rs.getInt("ALT_KURUM_ID"),
+                        rs.getString("ALT_KURUM_ISIM"),
+                        rs.getString("KURUM_ISIM")
+                ));
+            }
+
+            this.islemBasariliMesaj = "İşlem başarılı";
+
+        } catch (Exception ex) {
+            DetectError(ex);
         }
-
-        // İsim'e göre filtreleme, null kontrolü
-        if (isim != null && !isim.isEmpty()) {
-            queryBuilder.append("AND YA.ALT_KURUM_ISIM LIKE ? ");
-        }
-
-        PreparedStatement statement = getDb().prepareStatement(queryBuilder.toString());
-        int parameterIndex = 1;
-
-        // ID parametresi ekle
-        if (id != 0) {
-            statement.setInt(parameterIndex++, id);
-        }
-
-        // İsim parametresi ekle
-        if (isim != null && !isim.isEmpty()) {
-            statement.setString(parameterIndex++, "%" + isim + "%");
-        }
-
-        ResultSet rs = statement.executeQuery();
-
-        while (rs.next()) {
-            kurumAltList.add(new KurumAlt(
-                    rs.getInt("ALT_KURUM_ID"),
-                    rs.getString("ALT_KURUM_ISIM"),
-                    rs.getString("KURUM_ISIM")
-            ));
-        }
-
-        this.islemBasariliMesaj = "İşlem başarılı";
-
-    } catch (Exception ex) {
-        DetectError(ex);
+        return kurumAltList;
     }
-    return kurumAltList;
-}
 
-
-   public List<SelectItem> KurumAltGetir(int selectedKurumid) {
-        List<SelectItem> KurumAltList = new ArrayList<>();
+    public List<SelectItem> KurumTipGetir() {
+        List<SelectItem> TipList = new ArrayList<>();
 
         try {
             Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT ALT_KURUM_ID, ALT_KURUM_ISIM FROM KURUM_ALT WHERE KURUM_ID = " + selectedKurumid;
+            String Selectquery = "SELECT KURUM_ID, KURUM_ISIM FROM KURUM ";
             ResultSet rs = statement.executeQuery(Selectquery);
 
             while (rs.next()) {
 
-                KurumAltList.add(new SelectItem(rs.getInt("ALT_KURUM_ID"), rs.getString("ALT_KURUM_ISIM")));
+                TipList.add(new SelectItem(rs.getInt("KURUM_ID"), rs.getString("KURUM_ISIM")));
             }
 
         } catch (Exception ex) {
             DetectError(ex);
         }
-        return KurumAltList;
+        return TipList;
     }
 
     public void setDb(Connection db) {
         this.db = db;
+    }
+
+    public void KurumAltMesajTemizle() {
+        this.islemBasariliMesaj = null;
     }
 
     public Connection getDb() {
@@ -150,14 +147,6 @@ public class KurumAltDAO extends DBConnection {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getIsim() {
-        return isim;
-    }
-
-    public void setIsim(String isim) {
-        this.isim = isim;
     }
 
 }
