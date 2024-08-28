@@ -97,8 +97,8 @@ public class KisiDAO extends DBConnection {
         StringBuilder query = new StringBuilder();
         query.append("SELECT ");
         query.append("kt.KIMLIK_NO, kt.DOGUM_TARIHI, kt.ISIM, kt.SOYISIM, kt.CINSIYET, kt.MEDENI_DURUM_ID,kt.KAYIT_TARIHI,kt.AKTIF, ");
-        query.append("kt.AILE_SIRA_NO, kt.SIRA_NO, kt.CILT_NO, kam.mahalle, ");
-        query.append("kms.sokak_ısım, ka.ILCE, ka.SITE, ka.TARIF, ka.KAPI_NO, ka.DAIRE_NO, ");
+        query.append("kt.AILE_SIRA_NO, kt.SIRA_NO, kt.CILT_NO, kam.mahalle, kam.KISI_ADRES_MAHALLE_ID, ");
+        query.append("kms.SOKAK_ID, ka.ILCE, ka.SITE, ka.TARIF, ka.KAPI_NO, ka.DAIRE_NO, ");
         query.append("ki.EV_TELEFON, ki.CEP_TELEFON, ki.EPOSTA ");
         query.append("FROM KISI_TEMEL kt ");
         query.append("JOIN KISI_DETAY kd ON kt.KISI_ID = kd.KISI_ID ");
@@ -124,7 +124,8 @@ public class KisiDAO extends DBConnection {
                         rs.getInt("SIRA_NO"),
                         rs.getDate("DOGUM_TARIHI"),
                         rs.getInt("MEDENI_DURUM_ID"),
-                        rs.getString("MAHALLE"),
+                        rs.getInt("KISI_ADRES_MAHALLE_ID"),
+                        rs.getInt("SOKAK_ID"),
                         rs.getString("ILCE"),
                         rs.getString("SITE"),
                         rs.getString("TARIF"),
@@ -170,8 +171,17 @@ public class KisiDAO extends DBConnection {
                         rs.getInt("SIRA_NO"),
                         rs.getDate("DOGUM_TARIHI"),
                         rs.getInt("MEDENI_DURUM_ID"),
-                        rs.getString("MAHALLE"), rs.getString("ILCE"), rs.getString("SITE"), rs.getString("ADRES_TARIFI"),
-                        rs.getInt("DAIRE_NO"), rs.getInt("DAIRE_NO"), rs.getString("EV_TELEFON"), rs.getString("CEP_TELEFON"), rs.getString("EPOSTA"), rs.getDate("KAYIT_TARIHI")
+                        rs.getInt("KISI_ADRES_MAHALLE_ID"),
+                        rs.getInt("SOKAK_ID"),
+                        rs.getString("ILCE"),
+                        rs.getString("SITE"),
+                        rs.getString("ADRES_TARIFI"),
+                        rs.getInt("DAIRE_NO"),
+                        rs.getInt("DAIRE_NO"),
+                        rs.getString("EV_TELEFON"),
+                        rs.getString("CEP_TELEFON"),
+                        rs.getString("EPOSTA"),
+                        rs.getDate("KAYIT_TARIHI")
                 ));
             }
 

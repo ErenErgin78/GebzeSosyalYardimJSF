@@ -17,6 +17,7 @@ public class KisiBean implements Serializable {
     private KisiDAO dao;
     private List<Kisi> list;
     private List<SelectItem> MedeniList;
+    
 
     @PostConstruct
     public void init() {
@@ -65,8 +66,8 @@ public class KisiBean implements Serializable {
             entity.setSira_no(bulunanKisi.getSira_no());
             entity.setDogum_tarihi(bulunanKisi.getDogum_tarihi());
             entity.setMedeni_durum_id(bulunanKisi.getMedeni_durum_id()); // bu alanın bulunanKisi'de olduğunu varsayarak
-            entity.setMahalle_isim(bulunanKisi.getMahalle_isim());
-            entity.setCadde_sokak(bulunanKisi.getCadde_sokak());
+            entity.setMahalle_id(bulunanKisi.getMahalle_id());
+            entity.setSokak_id(bulunanKisi.getSokak_id());
             entity.setSite(bulunanKisi.getSite());
             entity.setAdres_tarifi(bulunanKisi.getAdres_tarifi());
             entity.setKapi_no(bulunanKisi.getKapi_no());

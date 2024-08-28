@@ -15,8 +15,8 @@ public class Kisi {
     private Integer sira_no;
     private Date dogum_tarihi;
     private Integer medeni_durum_id;
-    private String mahalle_isim;
-    private String cadde_sokak;
+    private Integer mahalle_id;
+    private Integer sokak_id;
     private String site;
     private String adres_tarifi;
     private Integer kapi_no;
@@ -107,20 +107,21 @@ public class Kisi {
         this.medeni_durum_id = medeni_durum_id;
     }
 
-    public String getMahalle_isim() {
-        return mahalle_isim;
+
+    public Integer getMahalle_id() {
+        return mahalle_id;
     }
 
-    public void setMahalle_isim(String mahalle_isim) {
-        this.mahalle_isim = mahalle_isim;
+    public void setMahalle_id(Integer mahalle_id) {
+        this.mahalle_id = mahalle_id;
     }
 
-    public String getCadde_sokak() {
-        return cadde_sokak;
+    public Integer getSokak_id() {
+        return sokak_id;
     }
 
-    public void setCadde_sokak(String cadde_sokak) {
-        this.cadde_sokak = cadde_sokak;
+    public void setSokak_id(Integer sokak_id) {
+        this.sokak_id = sokak_id;
     }
 
     public String getSite() {
@@ -199,7 +200,7 @@ public class Kisi {
 
    
 
-    public Kisi(BigDecimal kimlik_no, String isim, String soyisim, String cinsiyet, int sira_no, int cilt_no, int aile_sira_no, Date dogum_tarihi, int medeni_durum_id, String mahalle_isim, String cadde_sokak, String site, String adres_tarifi, int kapi_no, int daire_no, String ev_telefon, String cep_telefon, String eposta, Date kayit_tarihi) {
+    public Kisi(BigDecimal kimlik_no, String isim, String soyisim, String cinsiyet, int cilt_no, int aile_sira_no, int sira_no, Date dogum_tarihi, int medeni_durum_id, int mahalle_id, int sokak_id, String ilce, String site, String adres_tarifi, int daire_no, int kapi_no, String ev_telefon, String cep_telefon, String eposta, Date kayit_tarihi) {
         this.kisi_id = kisi_id;
         this.kimlik_no = kimlik_no;
         this.isim = isim;
@@ -210,8 +211,8 @@ public class Kisi {
         this.sira_no = sira_no;
         this.dogum_tarihi = dogum_tarihi;
         this.medeni_durum_id = medeni_durum_id;
-        this.mahalle_isim = mahalle_isim;
-        this.cadde_sokak = cadde_sokak;
+        this.mahalle_id=mahalle_id;
+        this.sokak_id = sokak_id;
         this.site = site;
         this.adres_tarifi = adres_tarifi;
         this.kapi_no = kapi_no;

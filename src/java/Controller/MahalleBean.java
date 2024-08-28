@@ -28,7 +28,6 @@ public class MahalleBean implements Serializable {
 
     public void mahallekle() {
         this.getDao().MahalleEkle(getEntity());
-        this.list = this.getDao().MahalleListesi();
     }
 
     public void mahallesil(int MahalleID) {
@@ -54,6 +53,7 @@ public class MahalleBean implements Serializable {
     public MahalleDAO getDao() {
         if (this.dao == null) {
             this.dao = new MahalleDAO();
+            this.dao.setIslemBasariliMesaj(null);
         }
         return this.dao;
     }
