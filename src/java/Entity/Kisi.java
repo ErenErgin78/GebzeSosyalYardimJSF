@@ -13,7 +13,7 @@ public class Kisi {
     private Integer cilt_no;
     private Integer aile_sira_no;
     private Integer sira_no;
-    private Date dogum_tarihi = new Date();
+    private Date dogum_tarihi;
     private Integer medeni_durum_id;
     private String medeni_durum_isim;
     private String mahalle_isim;
@@ -206,8 +206,9 @@ public class Kisi {
         this.medeni_durum_isim = medeni_durum_isim;
     }
 
-    public Kisi(BigDecimal kimlik_no, String isim, String soyisim, String cinsiyet, int aInt, int cilt_no, int aile_sira_no, Date kayit_tarihi, String medeni_durum_isim, String mahalle_isim, String cadde_sokak, String site, String adres_tarifi, int sira_no, int aInt3, String ev_telefon, String cep_telefon, String eposta, Date date1, int kapi_no) {
+    public Kisi(BigDecimal kimlik_no, String isim, String soyisim, String cinsiyet, int aInt, int cilt_no, int aile_sira_no, Date dogum_tarihi, String medeni_durum_isim, String mahalle_isim, String cadde_sokak, String site, String adres_tarifi, int sira_no, int daire_no, String ev_telefon, String cep_telefon, String eposta, Date kayit_tarihi, int kapi_no) {
         this.kisi_id = kisi_id;
+        this.dogum_tarihi=dogum_tarihi;
         this.kimlik_no = kimlik_no;
         this.isim = isim;
         this.soyisim = soyisim;
