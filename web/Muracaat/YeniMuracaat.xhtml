@@ -94,7 +94,10 @@
                                             <label for="cinsiyetTekrar" class="form-label">Medeni Durum:</label>
                                             <h:selectOneMenu id="cinsiyetTekrar" value="#{kisiBean.entity.medeni_durum_id}" class="form-control">
                                                 <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
-                                                <f:selectItems value="#{kisiBean.medeniList}" />
+                                                <f:selectItem itemLabel="Evli" itemValue="1" />
+                                                <f:selectItem itemLabel="Bekar" itemValue="2" />  
+                                                <f:selectItem itemLabel="Dul" itemValue="3" />
+                                                <f:selectItem itemLabel="Boşanmış" itemValue="4" />  
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
@@ -126,7 +129,7 @@
                                             <div class="form-row"> 
                                                 <div class="form-group col-md-6 mb-3">
                                                     <label for="mahalle" class="form-label">Mahalle:</label>
-                                                    <h:selectOneMenu id="mahalle" value="#{sokakBean.selectedMahalleId}" class="form-control">
+                                                    <h:selectOneMenu id="mahalle" value="#{kisiBean.entity.mahalle_isim}" class="form-control">
                                                         <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="A" />
                                                         <f:selectItems value = "#{mahalleBean.mahalleList}" />
                                                         <f:ajax event="change" listener="#{sokakBean.sokakyukle}" render="cadde_sokak" />

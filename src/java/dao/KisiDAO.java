@@ -123,18 +123,17 @@ public class KisiDAO extends DBConnection {
                         rs.getInt("AILE_SIRA_NO"),
                         rs.getInt("SIRA_NO"),
                         rs.getDate("DOGUM_TARIHI"),
-                        rs.getString("MEDENI_DURUM_ID"),
+                        rs.getInt("MEDENI_DURUM_ID"),
                         rs.getString("MAHALLE"),
                         rs.getString("ILCE"),
                         rs.getString("SITE"),
                         rs.getString("TARIF"),
-                        rs.getInt("KAPI_NO"),
                         rs.getInt("DAIRE_NO"),
+                        rs.getInt("KAPI_NO"),
                         rs.getString("EV_TELEFON"),
                         rs.getString("CEP_TELEFON"),
                         rs.getString("EPOSTA"),
-                        rs.getDate("KAYIT_TARIHI"),
-                        rs.getInt("AKTIF")
+                        rs.getDate("KAYIT_TARIHI")
                 );
             }
 
@@ -170,9 +169,9 @@ public class KisiDAO extends DBConnection {
                         rs.getInt("AILE_SIRA_NO"),
                         rs.getInt("SIRA_NO"),
                         rs.getDate("DOGUM_TARIHI"),
-                        rs.getString("MEDENI_DURUM_ISIM"),
+                        rs.getInt("MEDENI_DURUM_ID"),
                         rs.getString("MAHALLE"), rs.getString("ILCE"), rs.getString("SITE"), rs.getString("ADRES_TARIFI"),
-                        rs.getInt("AKTIF"), rs.getInt("DAIRE_NO"), rs.getString("EV_TELEFON"), rs.getString("CEP_TELEFON"), rs.getString("EPOSTA"), rs.getDate("KAYIT_TARIHI"), rs.getInt("AKTIF")
+                        rs.getInt("DAIRE_NO"), rs.getInt("DAIRE_NO"), rs.getString("EV_TELEFON"), rs.getString("CEP_TELEFON"), rs.getString("EPOSTA"), rs.getDate("KAYIT_TARIHI")
                 ));
             }
 

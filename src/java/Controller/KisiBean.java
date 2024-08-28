@@ -65,7 +65,6 @@ public class KisiBean implements Serializable {
             entity.setSira_no(bulunanKisi.getSira_no());
             entity.setDogum_tarihi(bulunanKisi.getDogum_tarihi());
             entity.setMedeni_durum_id(bulunanKisi.getMedeni_durum_id()); // bu alanın bulunanKisi'de olduğunu varsayarak
-            entity.setMedeni_durum_isim(bulunanKisi.getMedeni_durum_isim()); // Medeni durum ismi de set ediliyor
             entity.setMahalle_isim(bulunanKisi.getMahalle_isim());
             entity.setCadde_sokak(bulunanKisi.getCadde_sokak());
             entity.setSite(bulunanKisi.getSite());

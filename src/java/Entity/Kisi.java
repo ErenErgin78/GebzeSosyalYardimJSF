@@ -15,7 +15,6 @@ public class Kisi {
     private Integer sira_no;
     private Date dogum_tarihi;
     private Integer medeni_durum_id;
-    private String medeni_durum_isim;
     private String mahalle_isim;
     private String cadde_sokak;
     private String site;
@@ -198,17 +197,10 @@ public class Kisi {
         this.aktif = aktif;
     }
 
-    public String getMedeni_durum_isim() {
-        return medeni_durum_isim;
-    }
+   
 
-    public void setMedeni_durum_isim(String medeni_durum_isim) {
-        this.medeni_durum_isim = medeni_durum_isim;
-    }
-
-    public Kisi(BigDecimal kimlik_no, String isim, String soyisim, String cinsiyet, int aInt, int cilt_no, int aile_sira_no, Date dogum_tarihi, String medeni_durum_isim, String mahalle_isim, String cadde_sokak, String site, String adres_tarifi, int sira_no, int daire_no, String ev_telefon, String cep_telefon, String eposta, Date kayit_tarihi, int kapi_no) {
+    public Kisi(BigDecimal kimlik_no, String isim, String soyisim, String cinsiyet, int sira_no, int cilt_no, int aile_sira_no, Date dogum_tarihi, int medeni_durum_id, String mahalle_isim, String cadde_sokak, String site, String adres_tarifi, int kapi_no, int daire_no, String ev_telefon, String cep_telefon, String eposta, Date kayit_tarihi) {
         this.kisi_id = kisi_id;
-        this.dogum_tarihi=dogum_tarihi;
         this.kimlik_no = kimlik_no;
         this.isim = isim;
         this.soyisim = soyisim;
@@ -216,8 +208,8 @@ public class Kisi {
         this.cilt_no = cilt_no;
         this.aile_sira_no = aile_sira_no;
         this.sira_no = sira_no;
+        this.dogum_tarihi = dogum_tarihi;
         this.medeni_durum_id = medeni_durum_id;
-        this.medeni_durum_isim = medeni_durum_isim;
         this.mahalle_isim = mahalle_isim;
         this.cadde_sokak = cadde_sokak;
         this.site = site;
@@ -230,6 +222,10 @@ public class Kisi {
         this.kayit_tarihi = kayit_tarihi;
         this.aktif = aktif;
     }
+
+    
+
+    
 
     
 
