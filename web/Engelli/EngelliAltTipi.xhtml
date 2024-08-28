@@ -9,6 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Engelli Alt Tipi Tanımlama</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/styles.css" />
         <link rel="stylesheet" href="CSS/list.css" />
         <h:outputStylesheet name="CSS/styles.css"/>
     </h:head>
@@ -68,21 +69,6 @@
                                                         <th>Engelli Alt Tipi Adı</th>
                                                         <th>Eylem</th>
                                                     </tr>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
-        <script>
-                                                                        function confirmDelete(button) {
-                                                                            return confirm("Bu engelli alt tipini gerçekten silmek istiyor musunuz?");
-                                                                        }
-        </script>
-    </h:body>
-</html>
                                                 </thead>
                                                 <tbody>
                                                     <ui:repeat value="#{engelAltBean.list}" var="alt" varStatus="loop">
@@ -108,9 +94,18 @@
                                     </div>
                                 </h:form>
                             </div>
-                                                </ui:repeat>
-                                            </tbody>
-                                        </table>                              
-                                    </div> 
-                                </h:panelGroup>
-                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+        <script>
+                                                                        function confirmDelete(button) {
+                                                                            return confirm("Bu engelli alt tipini gerçekten silmek istiyor musunuz?");
+                                                                        }
+        </script>
+    </h:body>
+</html>
