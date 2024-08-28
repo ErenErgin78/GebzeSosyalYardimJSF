@@ -72,7 +72,7 @@ public class YardimAltBean implements Serializable {
 }
 
  
-    public void listeyenile() {
+   public void listeyenile() {
     this.list = this.getDao().YardimAltListesi(this.yardimAltTipiAdi);
 }
 

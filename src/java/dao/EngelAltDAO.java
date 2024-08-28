@@ -19,7 +19,6 @@ public class EngelAltDAO extends DBConnection {
     private String islemBasariliMesaj;
 
     private Integer id = 0;
-    private String isim = "";
 
     public void EngelAltEkle(EngelAlt engelAlt) {
 
@@ -57,9 +56,8 @@ public class EngelAltDAO extends DBConnection {
         }
     }
 
-    public List<EngelAlt> EngelAltListesi() {
+    public List<EngelAlt> EngelAltListesi(String engelAltTipiAdi) {
         List<EngelAlt> engelAltList = new ArrayList<>();
-
         try {
             StringBuilder queryBuilder = new StringBuilder();
             queryBuilder.append("SELECT EA.ALT_TIP_ID, EA.ENGELLI_TIP_ID, EA.ALT_TIP_ISIM, E.TIP_ISIM ")
@@ -69,13 +67,18 @@ public class EngelAltDAO extends DBConnection {
             if (id != 0) {
                 queryBuilder.append("AND EA.ENGELLI_TIP_ID = ").append(id).append(" ");
             }
-
-            if (!isim.isEmpty()) {
-                queryBuilder.append("AND EA.ALT_TIP_ISIM LIKE '%").append(isim).append("%' ");
+            if (engelAltTipiAdi != null && !engelAltTipiAdi.isEmpty()) {
+                queryBuilder.append("AND EA.ALT_TIP_ISIM LIKE ?");
             }
 
-            Statement statement = getDb().createStatement();
-            ResultSet rs = statement.executeQuery(queryBuilder.toString());
+            PreparedStatement ps = getDb().prepareStatement(queryBuilder.toString());
+
+            int index = 1;
+            if (engelAltTipiAdi != null && !engelAltTipiAdi.isEmpty()) {
+                ps.setString(index++, "%" + engelAltTipiAdi + "%");
+            }
+
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 engelAltList.add(new EngelAlt(
@@ -84,9 +87,6 @@ public class EngelAltDAO extends DBConnection {
                         rs.getString("TIP_ISIM")
                 ));
             }
-
-            this.islemBasariliMesaj = "işlem başarılı";
-
         } catch (Exception ex) {
              DetectError(ex);
         }
@@ -110,22 +110,12 @@ public class EngelAltDAO extends DBConnection {
         return TipList;
     }
 
-    public List<SelectItem> EngelAltGetir(int selectedTipId) {
-        List<SelectItem> engelAltList = new ArrayList<>();
+    public void setDb(Connection db) {
+        this.db = db;
+    }
 
-        try {
-            Statement statement = getDb().createStatement();
-            String selectQuery = "SELECT ALT_TIP_ID, ALT_TIP_ISIM FROM ENGELLI_ALT_TIP WHERE ENGELLI_TIP_ID = " + selectedTipId;
-            ResultSet rs = statement.executeQuery(selectQuery);
-
-            while (rs.next()) {
-                engelAltList.add(new SelectItem(rs.getInt("ALT_TIP_ID"), rs.getString("ALT_TIP_ISIM")));
-            }
-
-        } catch (Exception ex) {
-            DetectError(ex);
-        }
-        return engelAltList;
+    public void EngelAltMesajTemizle() {
+        this.islemBasariliMesaj = null;
     }
 
     public Connection getDb() {
@@ -153,14 +143,6 @@ public class EngelAltDAO extends DBConnection {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getIsim() {
-        return isim;
-    }
-
-    public void setIsim(String isim) {
-        this.isim = isim;
     }
 
 }
