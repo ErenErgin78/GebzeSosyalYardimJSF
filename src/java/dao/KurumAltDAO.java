@@ -19,23 +19,21 @@ public class KurumAltDAO extends DBConnection {
     private String islemBasariliMesaj;
 
     private Integer id = 0;
-    private String isim = "";
 
     public void KurumAltEkle(KurumAlt kurumAlt) {
+
         try {
             Connection conn = this.getDb();
 
-            // Eğer 'aktif' değeri null ise, varsayılan olarak 1 atıyoruz
             if (kurumAlt.getAktif() == null) {
                 kurumAlt.setAktif(1);
             }
 
-            // Veritabanı prosedürünü çağırıyoruz
-            String callQueryKurumAlt = "{call INSERT_KURUM_ALT_TIP(?, ?)}";
-            CallableStatement csKurumAlt = conn.prepareCall(callQueryKurumAlt);
-            csKurumAlt.setInt(1, kurumAlt.getTip_id());
-            csKurumAlt.setString(2, kurumAlt.getAlt_tip());
-            csKurumAlt.execute();
+            String callQueryAdres = "{call INSERT_KURUM_ALT_TIP(?, ?)}";
+            CallableStatement csAdres = conn.prepareCall(callQueryAdres);
+            csAdres.setInt(1, kurumAlt.getTip_id());
+            csAdres.setString(2, kurumAlt.getAlt_tip());
+            csAdres.execute();
 
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
 
@@ -44,12 +42,12 @@ public class KurumAltDAO extends DBConnection {
         }
     }
 
-    public void KurumAltSil(int kurumAltid) {
+    public void KurumAltSil(int yardimAltid) {
         String deleteQuery = "DELETE FROM KURUM_ALT WHERE ALT_KURUM_ID = ?";
 
         try {
             PreparedStatement ps = getDb().prepareStatement(deleteQuery);
-            ps.setInt(1, kurumAltid);
+            ps.setInt(1, yardimAltid);
             int rowsDeleted = ps.executeUpdate();
 
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
@@ -58,42 +56,32 @@ public class KurumAltDAO extends DBConnection {
         }
     }
 
-    public List<KurumAlt> KurumAltListesi() {
+    public List<KurumAlt> KurumAltListesi(String kurumAltTipiAdi) {
         List<KurumAlt> kurumAltList = new ArrayList<>();
         try {
             StringBuilder queryBuilder = new StringBuilder();
-            queryBuilder.append("SELECT KA.ALT_KURUM_ID, KA.ALT_KURUM_ISIM, KA.KURUM_ID , K.KURUM_ISIM ")
-                    .append("FROM KURUM_ALT KA ")
-                    .append("JOIN KURUM K ON KA.KURUM_ID = K.KURUM_ID ")
-                    .append("WHERE 1=1 ");
-
-            List<Object> parameters = new ArrayList<>();
+            queryBuilder.append("SELECT YA.ALT_KURUM_ID, YA.KURUM_ID, YA.ALT_KURUM_ISIM , Y.KURUM_ISIM")
+                    .append(" FROM KURUM_ALT YA ")
+                    .append(" JOIN KURUM Y ON YA.KURUM_ID = Y.KURUM_ID");
 
             // ID'ye göre filtreleme
             if (id != 0) {
-                queryBuilder.append("AND KA.KURUM_ID = ? ");
-                parameters.add(id);
+                queryBuilder.append("AND YA.KURUM_ID  = ? ").append(id).append(" ");
             }
 
-            // İsim'e göre filtreleme, null kontrolü
-            if (isim != null && !isim.isEmpty()) {
-                queryBuilder.append("AND KA.ALT_KURUM_ISIM LIKE ? ");
-                parameters.add("%" + isim + "%");
+            if (kurumAltTipiAdi != null && !kurumAltTipiAdi.isEmpty()) {
+                queryBuilder.append("AND YA.YARDIM_ALT_TIP LIKE ? ");
             }
 
-            PreparedStatement statement = getDb().prepareStatement(queryBuilder.toString());
+            PreparedStatement ps = getDb().prepareStatement(queryBuilder.toString());
 
-            // Set the parameters
-            int parameterIndex = 1;
-            for (Object param : parameters) {
-                if (param instanceof Integer) {
-                    statement.setInt(parameterIndex++, (Integer) param);
-                } else if (param instanceof String) {
-                    statement.setString(parameterIndex++, (String) param);
-                }
+            int index = 1;
+
+            if (kurumAltTipiAdi != null && !kurumAltTipiAdi.isEmpty()) {
+                ps.setString(index++, "%" + kurumAltTipiAdi + "%");
             }
 
-            ResultSet rs = statement.executeQuery();
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 kurumAltList.add(new KurumAlt(
@@ -111,27 +99,31 @@ public class KurumAltDAO extends DBConnection {
         return kurumAltList;
     }
 
-    public List<SelectItem> KurumAltGetir(int selectedKurumid) {
-        List<SelectItem> KurumAltList = new ArrayList<>();
+    public List<SelectItem> KurumTipGetir() {
+        List<SelectItem> TipList = new ArrayList<>();
 
         try {
             Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT ALT_KURUM_ID, ALT_KURUM_ISIM FROM KURUM_ALT WHERE KURUM_ID = " + selectedKurumid;
+            String Selectquery = "SELECT KURUM_ID, KURUM_ISIM FROM KURUM ";
             ResultSet rs = statement.executeQuery(Selectquery);
 
             while (rs.next()) {
 
-                KurumAltList.add(new SelectItem(rs.getInt("ALT_KURUM_ID"), rs.getString("ALT_KURUM_ISIM")));
+                TipList.add(new SelectItem(rs.getInt("KURUM_ID"), rs.getString("KURUM_ISIM")));
             }
 
         } catch (Exception ex) {
             DetectError(ex);
         }
-        return KurumAltList;
+        return TipList;
     }
 
     public void setDb(Connection db) {
         this.db = db;
+    }
+
+    public void KurumAltMesajTemizle() {
+        this.islemBasariliMesaj = null;
     }
 
     public Connection getDb() {
@@ -155,14 +147,6 @@ public class KurumAltDAO extends DBConnection {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getIsim() {
-        return isim;
-    }
-
-    public void setIsim(String isim) {
-        this.isim = isim;
     }
 
 }

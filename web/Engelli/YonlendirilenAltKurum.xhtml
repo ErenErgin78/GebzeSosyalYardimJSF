@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -13,18 +14,6 @@
         <h:outputStylesheet name="CSS/styles.css"/>
     </h:head>
     <h:body>
-        <div class="row align-items-center mb-3">
-            <div class="col-10">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Yönetici İşlemleri</li>                  
-                    <li class="breadcrumb-item active" aria-current="page">Yönlendirilen Alt Kurum</li>
-                </ol>
-            </div>
-            <div class="col-2 text-end">
-                <button type="button" class="btn btn-outline-success load-page-button" data-page="Engelli/YonlendirilenAltKurumGiris.xhtml">Yönlendirilen Alt Kurum Ekle</button>
-            </div>
-        </div>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -57,7 +46,9 @@
                                                 </h:selectOneMenu>
                                             </div>
                                         </div>
-                                        <h:panelGroup id="kurumAltPanel">
+                                    </div>
+                                    <div class="table-responsive">
+                                        <h:panelGroup id="altKurum">
                                             <table class="table table-bordered">
                                                 <thead>
                                                     <tr>
@@ -70,10 +61,10 @@
                                                 <tbody>
                                                     <ui:repeat value="#{kurumAltBean.list}" var="alt" varStatus="loop">
                                                         <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                            <td>#{alt.alt_kurum_id}</td>
-                                                            <td>#{alt.alt_kurum_isim}</td>
-                                                            <td>#{alt.kurum_isim}</td>
-                                                            
+                                                            <td>#{altKurum.alt_tip_id}</td>
+                                                            <td>#{altKurum.tip_isim}</td>
+                                                            <td>#{altKurum.alt_tip}</td>
+
                                                             <td>
                                                                 <div class="action-buttons">
                                                                     <h:commandButton value="Sil" action="#{kurumAltBean.kurumAltSil(altKurum.alt_kurum_id)}" styleClass="btn btn-danger delete-button me-2" onclick="return confirmDelete(this)">
@@ -89,8 +80,8 @@
                                                 </tbody>
                                             </table>
                                         </h:panelGroup>
-                                    </h:form>
-                                </div>
+                                    </div>
+                                </h:form>
                             </div>
                         </div>
                     </div>
@@ -101,9 +92,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
         <script>
-                                                                        function confirmDelete(button) {
-                                                                            return confirm("Bu alt kurumu gerçekten silmek istiyor musunuz?");
-                                                                        }
+                                                                    function confirmDelete(button) {
+                                                                        return confirm("Bu alt kurumu gerçekten silmek istiyor musunuz?");
+                                                                    }
         </script>
     </h:body>
 </html>
