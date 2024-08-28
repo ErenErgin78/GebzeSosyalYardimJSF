@@ -68,7 +68,7 @@ public class EngelAltDAO extends DBConnection {
                 queryBuilder.append("AND EA.ENGELLI_TIP_ID = ").append(id).append(" ");
             }
             if (engelAltTipiAdi != null && !engelAltTipiAdi.isEmpty()) {
-                queryBuilder.append("AND EA.ALT_TIP_ISIM LIKE '%");
+                queryBuilder.append("AND EA.ALT_TIP_ISIM LIKE ?");
             }
 
             PreparedStatement ps = getDb().prepareStatement(queryBuilder.toString());

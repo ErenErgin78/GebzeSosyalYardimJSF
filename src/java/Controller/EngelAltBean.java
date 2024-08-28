@@ -17,7 +17,6 @@ public class EngelAltBean implements Serializable {
     private EngelAltDAO dao;
     private List<EngelAlt> list;
     private List<SelectItem> tipList;
-    private int selectedEngelId;
 
     private String engelAltTipiAdi;
 
@@ -70,8 +69,7 @@ public class EngelAltBean implements Serializable {
    
 
     public List<EngelAlt> getList() {
-            this.list = this.getDao().EngelAltListesi(this.engelAltTipiAdi);
-        
+        this.list = this.getDao().EngelAltListesi(this.engelAltTipiAdi);        
         return this.list;
     }
 
