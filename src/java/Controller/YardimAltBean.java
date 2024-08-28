@@ -17,6 +17,8 @@ public class YardimAltBean implements Serializable {
     private YardimAltDAO dao;
     private List<YardimAlt> list;
     private List<SelectItem> TipList;
+    
+     private String yardimAltTipiAdi;
 
     @PostConstruct
     public void init() {
@@ -64,14 +66,16 @@ public class YardimAltBean implements Serializable {
         this.dao = dao;
     }
 
-    public List<YardimAlt> getList() {
-        this.list = this.getDao().YardimAltListesi();
-        return this.list;
-    }
+   public List<YardimAlt> getList() {
+    this.list = this.getDao().YardimAltListesi(this.yardimAltTipiAdi);
+    return this.list;
+}
 
+ 
     public void listeyenile() {
-        this.list = this.getDao().YardimAltListesi();
-    }
+    this.list = this.getDao().YardimAltListesi(this.yardimAltTipiAdi);
+}
+
 
     public void setList(List<YardimAlt> list) {
         this.list = list;
@@ -87,5 +91,12 @@ public class YardimAltBean implements Serializable {
     }
 
     public YardimAltBean() {
+    }
+     public String getYardimAltTipiAdi() {
+        return yardimAltTipiAdi;
+    }
+
+    public void setYardimAltTipiAdi(String yardimAltTipiAdi) {
+        this.yardimAltTipiAdi = yardimAltTipiAdi;
     }
 }

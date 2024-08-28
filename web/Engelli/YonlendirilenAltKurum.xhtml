@@ -41,18 +41,19 @@
                                             <!-- Yönlendirilen Kurum Adı -->
                                             <div class="form-group col-md-6">
                                                 <label for="kurumSecim" class="form-label">Yönlendirilen Kurum Adı:</label>
-                                                <h:selectOneMenu id="kurumSecim" value="#{kurumAltBean.selectedKurumId}" class="form-control">
+                                                <h:selectOneMenu id="kurumSecim" value="#{kurumAltBean.entity.tip_id}" class="form-control">
                                                     <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
                                                     <f:selectItems value="#{kurumBean.kurumTipList}" />
-                                                    <f:ajax event="change"  render="altKurum"/>
+                                                    <f:ajax event="change"  render="kurumAltPanel"/>
                                                 </h:selectOneMenu>
                                             </div>
                                             <!-- Yönlendirilen Alt Kurum Adı -->
                                             <div class="form-group col-md-6">
                                                 <label for="altKurumAdi" class="form-label">Yönlendirilen Alt Kurum Adı:</label>
-                                                <h:selectOneMenu id="altKurum" value="#{kisiEngelBean.entity.alt_kurum_id}" class="form-control" >
+                                                <h:selectOneMenu id="altKurum" value="#{kurumAltBean.entity.alt_tip_id}" class="form-control" >
                                                     <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
-                                                    <f:selectItems value="#{kurumAltBean.tipList}" />                                                        
+                                                    <f:selectItems value="#{kurumAltBean.tipList}" />
+                                                    <f:ajax event="change"  render="kurumAltPanel"/>
                                                 </h:selectOneMenu>
                                             </div>
                                         </div>
@@ -67,11 +68,11 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <ui:repeat value="#{kurumAltBean.list}" var="altKurum" varStatus="loop">
+                                                    <ui:repeat value="#{kurumAltBean.list}" var="alt" varStatus="loop">
                                                         <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
-                                                            <td>#{altKurum.alt_tip_id}</td>
-                                                            <td>#{altKurum.tip_isim}</td>
-                                                            <td>#{altKurum.alt_tip}</td>
+                                                            <td>#{alt.alt_kurum_id}</td>
+                                                            <td>#{alt.alt_kurum_isim}</td>
+                                                            <td>#{alt.kurum_isim}</td>
                                                             
                                                             <td>
                                                                 <div class="action-buttons">
