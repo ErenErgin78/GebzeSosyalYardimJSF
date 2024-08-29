@@ -45,7 +45,8 @@
                                         <label for="yardimTipiAdi" class="form-label me-2" style="margin-right: 10px;">Yardım Tipi Adı:</label>
                                         <div class="input-group">
                                             <h:inputText id="yardimTipiAdi" value="#{yardimBean.yardimTipiAdi}" class="form-control" style="width: 400px;" />
-                                            <f:ajax event="keyup" render="yardimListPanel" listener="#{yardimBean.listeyenile}"/>                                            <div class="input-group-append">
+                                            <f:ajax event="keyup" render="yardimListPanel" listener="#{yardimBean.listeyenile}"/>                                            
+                                            <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-search"></i>
                                                 </span>
