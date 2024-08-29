@@ -19,6 +19,8 @@ public class KisiDAO extends DBConnection {
     private Connection db;
     private String mesaj;
 
+    private String isim = "";
+
     // Kisi ekleme metodu
     public Integer KisiEkle(Kisi kisi) {
         try {
@@ -90,61 +92,30 @@ public class KisiDAO extends DBConnection {
             this.mesaj = DetectError(ex);
         }
     }
-    
-  public Kisi KisiBul(BigDecimal tcNumarasi) {
-    StringBuilder query = new StringBuilder();
-    query.append("SELECT KT.KIMLIK_NO, KT.ISIM, KT.SOYISIM, KT.CINSIYET, KT.CILT_NO, ");
-    query.append("KT.AILE_SIRA_NO, KT.SIRA_NO, KT.DOGUM_TARIHI, M.MEDENI_DURUM, KT.KAYIT_TARIHI, ");
-    query.append("KT.AKTIF, KD.KISI_ILETISIM_ID ");
-    query.append("FROM KISI_TEMEL KT ");
-    query.append("JOIN KISI_MEDENI_DURUM M ON M.MEDENI_DURUM_ID = KT.MEDENI_DURUM_ID ");
-    query.append("JOIN KISI_DETAY KD ON KT.KISI_DETAY_ID = KD.DETAY_ID ");
-    query.append("JOIN KISI_ILETISIM KI ON KD.KISI_ILETISIM_ID = KI.KISI_ILETISIM_ID ");
-    query.append("WHERE KT.KIMLIK_NO = ?");
-    
-    try {
-        PreparedStatement ps = getDb().prepareStatement(query.toString());
-        ps.setBigDecimal(1, tcNumarasi);
-        ResultSet rs = ps.executeQuery();
-        
-        if (rs.next()) {
-            return new Kisi(
-                rs.getBigDecimal("KIMLIK_NO"),
-                rs.getString("ISIM"),
-                rs.getString("SOYISIM"),
-                rs.getString("CINSIYET"),
-                rs.getInt("CILT_NO"),
-                rs.getInt("AILE_SIRA_NO"),
-                rs.getInt("SIRA_NO"),
-                rs.getDate("DOGUM_TARIHI"),
-                rs.getString("MEDENI_DURUM"),
-                rs.getDate("KAYIT_TARIHI"),
-                rs.getInt("AKTIF")
-            );
-        }
-        
-    } catch (SQLException ex) {
-        this.mesaj = DetectError(ex);
-    }
-    return null;
-}
 
-
-    // Kisi listesini çekme metodu
-    public List<Kisi> KisiListesi() {
-        List<Kisi> kisiList = new ArrayList<>();
+    public Kisi KisiBul(BigDecimal tcNumarasi) {
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT ");
+        query.append("kt.KIMLIK_NO, kt.DOGUM_TARIHI, kt.ISIM, kt.SOYISIM, kt.CINSIYET, kt.MEDENI_DURUM_ID,kt.KAYIT_TARIHI,kt.AKTIF, ");
+        query.append("kt.AILE_SIRA_NO, kt.SIRA_NO, kt.CILT_NO, kam.mahalle, kam.KISI_ADRES_MAHALLE_ID, ");
+        query.append("kms.SOKAK_ID, ka.ILCE, ka.SITE, ka.TARIF, ka.KAPI_NO, ka.DAIRE_NO, ");
+        query.append("ki.EV_TELEFON, ki.CEP_TELEFON, ki.EPOSTA ");
+        query.append("FROM KISI_TEMEL kt ");
+        query.append("JOIN KISI_DETAY kd ON kt.KISI_ID = kd.KISI_ID ");
+        query.append("JOIN KISI_ILETISIM ki ON kd.KISI_ILETISIM_ID = ki.KISI_ILETISIM_ID ");
+        query.append("JOIN KISI_ADRES ka ON kd.KISI_ADRES_ID = ka.KISI_ADRES_ID ");
+        query.append("JOIN KISI_ADRES_MAHALLE kam ON kam.KISI_ADRES_MAHALLE_ID = kd.KISI_ADRES_ID ");
+        query.append("JOIN KISI_MAHALLE_SOKAK kms ON kms.sokak_ıd = ka.KISI_MAHALLE_SOKAK_ID ");
+        query.append("WHERE kt.KIMLIK_NO = ?");
 
         try {
-            StringBuilder queryBuilder = new StringBuilder();
-            queryBuilder.append("SELECT KISI_ID, KIMLIK_NO, ISIM, SOYISIM, CINSIYET, CILT_NO, AILE_SIRA_NO, SIRA_NO, DOGUM_TARIHI, MEDENI_DURUM_ID, KAYIT_TARIHI, AKTIF FROM KISI_TEMEL KT ");
-            queryBuilder.append("JOIN KISI_MEDENI_DURUM M ON M.MEDENI_DURUM_ID = KT.MEDENI_DURUM_ID WHERE 1=1");
+            PreparedStatement ps = getDb().prepareStatement(query.toString());
+            ps.setBigDecimal(1, tcNumarasi);
+            ResultSet rs = ps.executeQuery();
 
-            Statement statement = getDb().createStatement();
-            ResultSet rs = statement.executeQuery(queryBuilder.toString());
-
-            while (rs.next()) {
-                kisiList.add(new Kisi(
-                        rs.getBigDecimal("KIMLIK_NO"), // BigDecimal kullanmak genellikle büyük kimlik numaraları için tercih edilir
+            if (rs.next()) {
+                return new Kisi(
+                        rs.getBigDecimal("KIMLIK_NO"),
                         rs.getString("ISIM"),
                         rs.getString("SOYISIM"),
                         rs.getString("CINSIYET"),
@@ -152,16 +123,72 @@ public class KisiDAO extends DBConnection {
                         rs.getInt("AILE_SIRA_NO"),
                         rs.getInt("SIRA_NO"),
                         rs.getDate("DOGUM_TARIHI"),
-                        rs.getString("MEDENI_DURUM_ISIM"),
-                        rs.getDate("KAYIT_TARIHI"),
-                        rs.getInt("AKTIF")
+                        rs.getInt("MEDENI_DURUM_ID"),
+                        rs.getInt("KISI_ADRES_MAHALLE_ID"),
+                        rs.getInt("SOKAK_ID"),
+                        rs.getString("ILCE"),
+                        rs.getString("SITE"),
+                        rs.getString("TARIF"),
+                        rs.getInt("DAIRE_NO"),
+                        rs.getInt("KAPI_NO"),
+                        rs.getString("EV_TELEFON"),
+                        rs.getString("CEP_TELEFON"),
+                        rs.getString("EPOSTA"),
+                        rs.getDate("KAYIT_TARIHI")
+                );
+            }
+
+        } catch (SQLException ex) {
+            this.mesaj = DetectError(ex);
+        }
+        return null;
+    }
+
+    // Kisi listesini çekme metodu
+    public List<Kisi> KisiListesi() {
+        List<Kisi> kisiList = new ArrayList<>();
+
+        try {
+            StringBuilder queryBuilder = new StringBuilder();
+            queryBuilder.append("SELECT KT.KISI_ID, KT.KIMLIK_NO, KT.ISIM, KT.SOYISIM, KT.CINSIYET, ");
+            queryBuilder.append("KT.CILT_NO, KT.AILE_SIRA_NO, KT.SIRA_NO, KT.DOGUM_TARIHI, ");
+            queryBuilder.append("MD.MEDENI_DURUM_ISIM, KT.KAYIT_TARIHI, KT.AKTIF ");
+            queryBuilder.append("FROM KISI_TEMEL KT ");
+            queryBuilder.append("JOIN KISI_MEDENI_DURUM MD ON KT.MEDENI_DURUM_ID = MD.MEDENI_DURUM_ID ");
+            queryBuilder.append("WHERE 1=1");
+
+            Statement statement = getDb().createStatement();
+            ResultSet rs = statement.executeQuery(queryBuilder.toString());
+
+            while (rs.next()) {
+                kisiList.add(new Kisi(
+                        rs.getBigDecimal("KIMLIK_NO"),
+                        rs.getString("ISIM"),
+                        rs.getString("SOYISIM"),
+                        rs.getString("CINSIYET"),
+                        rs.getInt("CILT_NO"),
+                        rs.getInt("AILE_SIRA_NO"),
+                        rs.getInt("SIRA_NO"),
+                        rs.getDate("DOGUM_TARIHI"),
+                        rs.getInt("MEDENI_DURUM_ID"),
+                        rs.getInt("KISI_ADRES_MAHALLE_ID"),
+                        rs.getInt("SOKAK_ID"),
+                        rs.getString("ILCE"),
+                        rs.getString("SITE"),
+                        rs.getString("ADRES_TARIFI"),
+                        rs.getInt("DAIRE_NO"),
+                        rs.getInt("DAIRE_NO"),
+                        rs.getString("EV_TELEFON"),
+                        rs.getString("CEP_TELEFON"),
+                        rs.getString("EPOSTA"),
+                        rs.getDate("KAYIT_TARIHI")
                 ));
             }
 
-            mesaj = "İşlem başarılı";
+            mesaj = "İşlem başarılı"; // Operation successful
 
         } catch (Exception ex) {
-            DetectError(ex);
+            DetectError(ex); // Error handling
         }
         return kisiList;
     }
@@ -200,6 +227,14 @@ public class KisiDAO extends DBConnection {
 
     public void setMesaj(String mesaj) {
         this.mesaj = mesaj;
+    }
+
+    public String getIsim() {
+        return isim;
+    }
+
+    public void setIsim(String isim) {
+        this.isim = isim;
     }
 
 }

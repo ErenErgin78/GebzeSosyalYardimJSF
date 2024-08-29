@@ -95,12 +95,12 @@ public class SokakDAO extends DBConnection {
         return SokakList;
     }
 
-    public List<SelectItem> SokakGetir(int selectedmahalleid) {
+    public List<SelectItem> SokakGetir(int selectedMahalleId) {
         List<SelectItem> MahalleList = new ArrayList<>();
 
         try {
             Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT SOKAK_ID, SOKAK_ISIM FROM KISI_MAHALLE_SOKAK WHERE MAHALLE_ID = " + selectedmahalleid;
+            String Selectquery = "SELECT SOKAK_ID, SOKAK_ISIM FROM KISI_MAHALLE_SOKAK WHERE MAHALLE_ID = " + selectedMahalleId;
             ResultSet rs = statement.executeQuery(Selectquery);
 
             while (rs.next()) {

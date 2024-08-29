@@ -52,7 +52,7 @@ public class MuracaatBean implements Serializable {
 
     public List<Muracaat> getList() {
         
-        this.list = this.getDao().MuracaatBilgiListesi();
+        this.list = this.getDao().MuracaatBilgiListesi(); 
         return this.list;
     }
 

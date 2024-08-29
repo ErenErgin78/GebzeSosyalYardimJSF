@@ -20,6 +20,7 @@ public class EngelAltBean implements Serializable {
 
     private String engelAltTipiAdi;
 
+    // Sayfa yüklendiğinde mesajı sıfırlar ve yeni bir EngelAlt nesnesi oluşturur
     @PostConstruct
     public void init() {
         getDao().setIslemBasariliMesaj(null); // Sayfa yüklendiğinde mesajı sıfırlar
@@ -27,10 +28,12 @@ public class EngelAltBean implements Serializable {
         entity = new EngelAlt(); // Yeni bir EngelAlt nesnesi oluşturur
     }
 
+    // Yeni bir EngelAlt ekler ve listeyi günceller
     public void engelAltEkle() {
         this.getDao().EngelAltEkle(getEntity());
     }
 
+    // Belirtilen EngelAlt'ı siler
     public void engelAltSil(int engelAltId) {
         this.getDao().EngelAltSil(engelAltId);
     }
@@ -43,6 +46,7 @@ public class EngelAltBean implements Serializable {
         return this.getDao().EngelliTipGetir();
     }
 
+    // EngelAlt entity'sini döndürür, eğer null ise yeni bir EngelAlt oluşturur
     public EngelAlt getEntity() {
         if (this.entity == null) {
             this.entity = new EngelAlt();
@@ -54,6 +58,7 @@ public class EngelAltBean implements Serializable {
         this.entity = entity;
     }
 
+    // DAO nesnesini döndürür, eğer null ise yeni bir EngelAltDAO oluşturur
     public EngelAltDAO getDao() {
         if (this.dao == null) {
             this.dao = new EngelAltDAO();
