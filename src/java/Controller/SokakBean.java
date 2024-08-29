@@ -24,6 +24,7 @@ public class SokakBean implements Serializable {
     public void sokakekle() {
         this.getDao().SokakEkle(getEntity());
     }
+    
 
     public void sokaksil(int SokakId) {
         this.getDao().SokakSil(SokakId);

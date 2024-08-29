@@ -43,6 +43,7 @@ public class EngelAltBean implements Serializable {
         return this.getDao().EngelliTipGetir();
     }
 
+    // EngelAlt entity'sini döndürür, eğer null ise yeni bir EngelAlt oluşturur
     public EngelAlt getEntity() {
         if (this.entity == null) {
             this.entity = new EngelAlt();
