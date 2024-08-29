@@ -1,0 +1,52 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 4 Ağu 2024, 11:24:10
+    Author     : Eren
+*/
+
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: auto; /* Enable scrolling */
+}
+.container-fluid {
+    padding: 0 12px; /* Add some padding */
+    width: 100%; /* Set width to 100% */
+    overflow: auto; /* Enable scrolling */
+}
+.row {
+    margin: 0; /* Remove margin */
+    width: 100%; /* Set width to 100% */
+}
+.col-md-12 {
+    padding: 0; /* Remove padding */
+    width: 100%; /* Set width to 100% */
+
+}
+.table {
+    width: 100%;
+    margin-bottom: 0;
+    table-layout: auto; /* Let the table decide column widths based on content */
+}
+.table td {
+    white-space: nowrap; /* Prevent text wrapping */
+    padding: 10px; /* Add padding for readability */
+    text-align: left; /* Align text to the left */
+}
+.table th {
+    font-size: 1.25rem; /* Tablo başlık font boyutu */
+    font-weight: 600; /* Tablo başlık font ağırlığı */
+}
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+.delete-button {
+    margin-right: 10px;
+}
+.table-container {
+    margin-top: 20px; /* Add space between header and table */
+}
