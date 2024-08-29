@@ -120,15 +120,15 @@ public class MahalleDAO extends DBConnection {
         return MahalleList;
     }
 
-    public void setDb(Connection db) {
-        this.db = db;
-    }
-
     public Connection getDb() {
         if (this.db == null) {
             this.db = this.connect();
         }
         return db;
+    }
+
+    public void setDb(Connection db) {
+        this.db = db;
     }
 
     public String getIslemBasariliMesaj() {
