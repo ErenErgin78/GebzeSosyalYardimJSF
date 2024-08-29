@@ -36,8 +36,22 @@
                         </div>
                         <div class="card-body">
                             <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="isim" class="form-label">İsim Soyisim:</label>
+                                <!-- Müracaat No -->
+                                <div class="form-group col-md-4">
+                                    <label for="muracaatNo" class="form-label">Müracaat No:</label>
+                                    <div class="input-group">
+                                        <h:inputText id="muracaatNo" value="#{muracaatBean.entity.muracaat_id}" class="form-control" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-search"></i>
+                                            </span>
+                                        </div>
+                                        <f:ajax event="keyup" render="KullaniciListesi" />
+                                    </div>
+                                </div>
+                                <!-- İsim -->
+                                <div class="form-group col-md-4">
+                                    <label for="isim" class="form-label">İsim:</label>
                                     <div class="input-group">
                                         <h:inputText id="isim" value="#{muracaatBean.entity.kisi_isim}" class="form-control" />
                                         <div class="input-group-append">
@@ -48,10 +62,11 @@
                                         <f:ajax event="keyup" render="KullaniciListesi" />
                                     </div>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label for="sicil" class="form-label">Müracaat No:</label>
+                                <!-- Soyisim -->
+                                <div class="form-group col-md-4">
+                                    <label for="soyisim" class="form-label">Soyisim:</label>
                                     <div class="input-group">
-                                        <h:inputText id="sicil" value="#{muracaatBean.entity.muracaat_id}" class="form-control" />
+                                        <h:inputText id="soyisim" value="#{muracaatBean.entity.kisi_soyisim}" class="form-control" />
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fas fa-search"></i>
