@@ -61,6 +61,7 @@
                                                 <div class="input-group-append">
                                                     <h:commandButton value="Sorgula" class="btn btn-primary" action="#{kisiBean.KisiBul}">
                                                         <f:ajax execute="tc_no" render="@form" />
+
                                                     </h:commandButton>
                                                 </div>
                                             </div>
@@ -152,7 +153,7 @@
                                                     <h:inputTextarea id="address" class="form-control" value="#{kisiBean.entity.adres_tarifi}" rows="1" />
                                                 </div>
                                             </div>
-                                            <!-- Site, Adres Tarifi, Kapı No ve Daire No -->
+                                             <!-- Site, Adres Tarifi, Kapı No ve Daire No -->
                                             <div class="form-row">
                                                 <div class="form-group col-md-6 mb-3">
                                                     <label for="kapi_no">Kapı No:</label>
@@ -218,32 +219,59 @@
                                                 Talep Edilen Yardımlar
                                             </div>
                                             <div class="card-body">
-                                                <div class="form-row"> <!-- Başlangıç row -->
-                                                    <div class="form-group col-md-4 mb-3">
-                                                        <label for="yardim1">Ramazan Yardımı:</label>
-                                                        <h:selectOneMenu id="yardim1" value="#{muracaatYardimTalepBean.entity.talep_id}" class="form-control">
-                                                            <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
-                                                            <f:selectItem itemLabel="Nakti" itemValue="1" />
-                                                            <f:selectItem itemLabel="Ayni" itemValue="2" />
-                                                        </h:selectOneMenu>
+                                                <div class="row"> <!-- Başlangıç row -->
+                                                    <div class="col-md-4"> <!-- Her checkbox için bir sütun oluştur -->
+                                                        <div class="form-group">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="ayn1" value="2" />
+                                                                <label class="form-check-label" for="ayn1">Ramazan Yardımı (Ayni)</label>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group col-md-4 mb-3">
-                                                        <label for="yardim2">Kırtasiye Yardımı:</label>
-                                                        <h:selectOneMenu id="yardim2" value="#{muracaatYardimTalepBean.entity.talep_id}" class="form-control">
-                                                            <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
-                                                            <f:selectItem itemLabel="Nakti" itemValue="1" />
-                                                            <f:selectItem itemLabel="Ayni" itemValue="2" />
-                                                        </h:selectOneMenu>
+                                                    <div class="col-md-4"> <!-- Diğer sütunlar -->
+                                                        <div class="form-group">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="ayn2" value="2" />
+                                                                <label class="form-check-label" for="ayn2">Kırtasiye Yardımı (Ayni)</label>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                   <div class="form-group col-md-4 mb-3">
-                                                        <label for="yardim3">Deprem Yardımı:</label>
-                                                        <h:selectOneMenu id="yardim3" value="#{muracaatYardimTalepBean.entity.talep_id}" class="form-control">
-                                                            <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
-                                                            <f:selectItem itemLabel="Nakti" itemValue="1" />
-                                                            <f:selectItem itemLabel="Ayni" itemValue="2" />
-                                                        </h:selectOneMenu>
+                                                    <div class="col-md-4"> <!-- Diğer sütunlar -->
+                                                        <div class="form-group">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="ayn3" value="2"/>
+                                                                <label class="form-check-label" for="ayn3">Deprem Yardımı(Ayni)</label>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div> <!-- Bitiş row -->                                                                     
+                                                </div> <!-- Bitiş row -->
+
+                                                <div class="row"> <!-- Başlangıç row -->
+                                                    <div class="col-md-4"> <!-- Her checkbox için bir sütun oluştur -->
+                                                        <div class="form-group">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="nakt1" value="1"/>
+                                                                <label class="form-check-label" for="nakt1">Ramazan Yardımı(Nakdi)</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4"> <!-- Diğer sütunlar -->
+                                                        <div class="form-group">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="nakt2" value="1"/>
+                                                                <label class="form-check-label" for="nakt2">Kırtasiye Yardımı(Nakdi)</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4"> <!-- Diğer sütunlar -->
+                                                        <div class="form-group">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="nakt3" value="1"/>
+                                                                <label class="form-check-label" for="nakt3">Deprem Yardımı(Nakdi)</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> <!-- Bitiş row -->                                    
                                             </div> <!-- card-body -->
                                         </div> <!-- card -->
                                     </div> <!-- card-body -->
