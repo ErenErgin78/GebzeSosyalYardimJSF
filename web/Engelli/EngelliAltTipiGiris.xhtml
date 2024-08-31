@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gebze Belediyesi Dashboard</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/styles.css" />
+        <link rel="stylesheet" href="CSS/log.css" />
+    </h:head>
+    <h:body>
+        <div class="container-fluid">
+            <div class="row align-items-center mb-3">
+                <div class="col-10">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Yönetici İşlemleri</li>
+                        <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="Engelli/EngelliAltTipi.xhtml">Engelli Alt Tipi Tanımlama</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Engelli Alt Tipi Giriş</li>
+                    </ol>
+                </div>       
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h:form>
+                        <h:messages globalOnly="true" layout="table"/>
+                        <h:outputText id="mesaj" value="#{engelAltBean.dao.islemBasariliMesaj}" />
+                        <div class="card">
+                            <div class="card-header">
+                                <h1>Engelli Alt Tipi Girişi</h1>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    Engelli Alt Tipi Giriş Bilgileri
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="engelliTipi" class="form-label">Engelli Tipi Adı:</label>
+                                    <h:selectOneMenu id="engelliTipi" value="#{engelAltBean.entity.engelli_tip_id}" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                        <f:selectItems value="#{engelAltBean.tipList}" />
+                                    </h:selectOneMenu>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="engelliAltTipiAdi" class="form-label">Engelli Alt Tipi Adı:</label>
+                                    <h:inputText id="engelliAltTipiAdi" value="#{engelAltBean.entity.alt_tip_isim}" class="form-control" />
+                                </div>
+                                <div class="text-center mt-3">
+                                    <h:commandButton value="Kaydet" action="#{engelAltBean.engelAltEkle()}" class="btn btn-success">
+                                        <f:ajax execute="@form" render="@form, mesaj" />
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+    </h:body>
+</html>

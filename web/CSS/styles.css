@@ -1,0 +1,329 @@
+/* Custom styles */
+body {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden; /* yatay scroll bar hidden */
+    font-family: 'Arial' , sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+#content {
+    overflow-x: auto;
+    padding: 0;
+    margin: 0;
+
+}
+
+
+@media (max-width: 768px) { /* responsive özelliği eklendi */
+    #sidebar {
+        background-color: #1680FF;
+        color: white;
+        height: auto;
+        position: relative;
+        width: 100%;
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+}
+.welcome-container {
+    background-color: #f1f1f1; /* Arka plan rengi */
+    border-bottom: 1px solid #ddd; /* Alt kenarlık */
+    padding: 10px; /* İç kenar boşluğu */
+    font-weight: bold; /* Yazı tipi kalın */
+    margin-bottom: 20px; /* Alt kenar boşluğu */
+}
+
+.nav-link {
+    color: #ffffff;
+    font-weight: bold;
+    margin: 5px 0;
+    padding: 10px;
+}
+.breadcrumb {
+    background-color: #f8f9fa;
+    margin-bottom: 1rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+    color: #6c757d;
+}
+
+
+.nav-link:hover {
+    background-color: #3f51b5;
+}
+
+.submenu {
+    display: none;
+    padding-left: 15px;
+}
+
+.submenu a {
+    color: white;
+}
+
+.submenu a:hover {
+    text-decoration: underline;
+}
+
+.nav-item img {
+    margin: 10px 0;
+    border: none;
+}
+
+.nav-item:first-child .nav-link {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.container-fluid {
+    padding: 20px;
+}
+
+
+
+.table-container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.sidebar .nav-item .btn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse; /* Hücre sınırlarını birleştirir */
+}
+
+th, td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+    text-align: left;
+}
+
+button {
+    font-size: 12px;
+    padding: 6px 10px;
+    margin: 3px;
+}
+
+.table-row-odd {
+    background-color: #f9f9f9;
+}
+
+.table-row-even {
+    background-color: #ffffff;
+}
+
+.ml-20 {
+    margin-left: 20px;
+}
+
+.action-buttons {
+    margin-right: 10px; /* Butonların satır içinde taşmasını önler */
+}
+
+.delete-button {
+    margin-right: 10px; /* Sil butonu ile Düzenle butonu arasına boşluk ekler */
+}
+
+.small-button {
+    width: auto;
+    max-width: 100px;
+    padding: 5px 10px;
+}
+
+/* Özel genişlik ayarları */
+.kayit-tarih {
+    width: 150px; /* Kayıt tarih hücresi için özel genişlik */
+}
+
+.profil {
+    width: 230px; /* Profil hücresi için özel genişlik */
+}
+
+.form-background {
+    background-color: #f8f9fa; /* Arka plan rengini buradan ayarlayın */
+    padding: 20px; /* Formun iç boşluğunu artırır */
+}
+
+.card-background {
+    background-color: #e9ecef; /* Kartların arka plan rengini buradan ayarlayın */
+}
+
+/* Yazı yazılamayan alanlar */
+.readonly-input {
+    background-color: #e9ecef; /* Light gray background */
+    cursor: not-allowed; /* Not-allowed cursor icon */
+    color: #6c757d; /* Gray text color */
+}
+
+/* Add margin and padding adjustments */
+.small-input {
+    padding: 0.5rem; /* Adjust padding as needed */
+}
+
+.form-group {
+    margin-bottom: 5px;
+}
+
+.form-row .form-group {
+    padding-right: 15px; /* Space between columns */
+}
+
+#email, #username {
+    margin-bottom: 10px; /* Adjust spacing as needed */
+}
+
+/* Custom Radio Button Styles */
+.custom-radio {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.custom-radio input[type="radio"] {
+    display: none;
+}
+
+.custom-radio label {
+    position: relative;
+    padding-left: 25px;
+    margin-right: 15px;
+    cursor: pointer;
+    font-size: 14px;
+    user-select: none;
+}
+
+.custom-radio label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #303f9f;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+}
+
+.custom-radio input[type="radio"]:checked + label::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #303f9f;
+}
+
+.card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    width: 100%;
+    background-color: #f8f9fa;
+}
+
+.card-body {
+    flex: 1;
+    overflow: auto;
+}
+
+.card-header {
+    background-color: #f1f1f1; /* Arka plan rengi */
+    border-bottom: 1px solid #ddd; /* Alt kenarlık */
+    padding: 10px; /* İç kenar boşluğu */
+    font-weight: bold; /* Yazı tipi kalın */
+    margin-bottom: 5px; /* Alt kenar boşluğu */
+}
+
+.card-header h1 {
+    margin-top: 20px; /* Üst kenar boşluğu (ihtiyacınıza göre ayarlayın) */
+    font-weight: bold; /* Yazı tipi kalın (HTML'den CSS'e taşıdık) */
+    text-align: center; /* Metni ortaladık (HTML'den CSS'e taşıdık) */
+}
+
+.info-message {
+    color: #bbb; /* Daha soluk bir metin rengi */
+    font-size: 14px; /* Metin boyutunu belirleyin */
+    margin-top: 5px; /* Üst marjin ekleyin */
+    display: block; /* Blok görüntüsü */
+}
+
+.card-footer {
+    background-color: #f1f1f1;
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    text-align: right;
+}
+
+label {
+    display: block;
+    margin-bottom: 1px;
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.btn-success {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-success:hover {
+    background-color: #4cae4c;
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}
+
+.custom-margin {
+    margin-bottom: 1px !important; /* Boşluğu azaltmak için özel sınıf */
+}

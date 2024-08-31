@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gebze Belediyesi Dashboard</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/styles.css" />
+        <link rel="stylesheet" href="CSS/log.css" />
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>            
+            <li class="breadcrumb-item active" aria-current="page">Yönetici İşlemleri</li>
+            <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="Egitim/OkulListesi.xhtml">Okul Listesi</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Okul Girişi</li>
+        </ol>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:messages for="okulekle" globalOnly="true" layout="table"/>
+            <h:outputText id="mesaj" value="#{okulBean.dao.islemBasariliMesaj}" />
+            <div class="container-fluid">               
+                <div class="row">            
+                    <div class="container-fluid">
+                        <div class="col-md-12">
+                            <div class="card-header">
+                                <h1>Okul Girişi</h1>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">Okul Giriş Bilgileri</div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group full-width">
+                                            <label>Okul Türü:</label>
+                                            <div class="custom-radio">
+                                                <h:selectOneRadio value="#{okulBean.entity.okul_tur_id}">
+                                                <f:selectItems value="#{okulTurBean.okulTurList}" />
+                                                </h:selectOneRadio>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="application_type">Aktif:</label>
+                                            <h:selectOneMenu id="application_type" value="#{okulBean.entity.okul_aktif}" class="form-control">
+                                                <f:selectItem itemLabel="Evet" itemValue="1" />
+                                                <f:selectItem itemLabel="Hayır" itemValue="0" />
+                                            </h:selectOneMenu>
+                                        </div> 
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="neighborhood">Okul Tipi:</label>
+                                            <h:selectOneMenu id="medenidurum" value="#{okulBean.entity.okul_tip_id}" class="form-control">
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                                <f:selectItems value="#{okulTipBean.okulTipList}" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="name">Okul Adı:</label>
+                                            <h:inputText id="name" value="#{okulBean.entity.okul_isim}" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-3">
+                                <h:commandButton value="Kaydet" action="#{okulBean.okulekle()}" class="btn btn-success">
+                                    <f:ajax execute="@form" render="@form, mesaj" />
+                                </h:commandButton>
+                                <h:commandButton value="Temizle" action="#{okulBean.temizle()}" class="btn btn-success" style="margin-left: 10px; background-color: #f8f9fa; color: black;">
+                                    <f:ajax execute="@form" render="@form" />
+                                </h:commandButton>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+    </h:body>
+</html>
