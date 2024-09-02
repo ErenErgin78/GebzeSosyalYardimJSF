@@ -4,7 +4,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Yakınlık Bilgileri</title>
+        <title>Yeni Müracaat Bilgileri</title>
         <!-- Bootstrap ve özel stil dosyaları yükleniyor -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
         <link rel="stylesheet" href="CSS/list.css" />
@@ -21,16 +21,16 @@
             <div class="row align-items-center mb-3">
                 <div class="col-10">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>            
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
                         <li class="breadcrumb-item active" aria-current="page">İşlemlerim</li>
                         <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="Muracaat/MuracaatListesi.xhtml">Müracaat Listesi</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Müracaat Girişi</li>
                     </ol>
                 </div>
-            </div> 
+            </div>
             <!-- İçerik bölümü -->
-            <div class="container-fluid">               
-                <div class="row">                   
+            <div class="container-fluid">
+                <div class="row">
                     <div class="col-md-12">
                         <!-- Başlık kartı -->
                         <div class="card-header">
@@ -86,7 +86,7 @@
                                             <h:selectOneMenu id="cinsiyet" value="#{kisiBean.entity.cinsiyet}" class="form-control">
                                                 <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="B" />
                                                 <f:selectItem itemLabel="Erkek" itemValue="E" />
-                                                <f:selectItem itemLabel="Kadın" itemValue="K" />                                 
+                                                <f:selectItem itemLabel="Kadın" itemValue="K" />
                                             </h:selectOneMenu>
                                         </div>
                                         <div class="form-group col-md-6 mb-3">
@@ -94,9 +94,9 @@
                                             <h:selectOneMenu id="cinsiyetTekrar" value="#{kisiBean.entity.medeni_durum_id}" class="form-control">
                                                 <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
                                                 <f:selectItem itemLabel="Evli" itemValue="1" />
-                                                <f:selectItem itemLabel="Bekar" itemValue="2" />  
+                                                <f:selectItem itemLabel="Bekar" itemValue="2" />
                                                 <f:selectItem itemLabel="Dul" itemValue="3" />
-                                                <f:selectItem itemLabel="Boşanmış" itemValue="4" />  
+                                                <f:selectItem itemLabel="Boşanmış" itemValue="4" />
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
@@ -208,7 +208,6 @@
                                                     <label for="aciklama">Açıklama:</label>
                                                     <h:inputTextarea id="aciklama" class="form-control" value="#{muracaatBilgiBean.entity.aciklama}" rows="3" />
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -243,15 +242,15 @@
                                                             <f:selectItem itemLabel="Ayni" itemValue="2" />
                                                         </h:selectOneMenu>
                                                     </div>
-                                                </div> <!-- Bitiş row -->                                                                     
+                                                </div> <!-- Bitiş row -->                   
                                             </div> <!-- card-body -->
-                                        </div>
+                                        </div> <!-- card -->
                                     </div> <!-- card-body -->
                                     <div class="text-center mt-3">
                                         <h:commandButton value="Kaydet" action="#{kisiMuracaatBean.KisiMuracaatEkle()}" class="btn btn-success">
                                             <f:ajax execute="@form" render="@form" />
                                         </h:commandButton>    
-                                    </div>                                                                              
+                                    </div>
                                 </div>
                             </div>
                         </div>
