@@ -33,13 +33,13 @@ public class KisiMuracaatBean implements Serializable {
     private KisiIletisimBean iletisimBean;
 
     @Inject
-    private KisiYakinlarBean kisiYakinlarBean;
-
-    @Inject
     private KisiDetayBean kisiDetayBean;
 
     @Inject
     private MuracaatBilgiBean muracaatBilgiBean;
+    
+     @Inject
+    private MuracaatDurumBean muracaatDurumBean;
 
     @Inject
     private MuracaatBean muracaatBean;
@@ -56,10 +56,10 @@ public class KisiMuracaatBean implements Serializable {
             Integer kisi_id = kisiBean.ekle(kisi_detay_id);
 
             Integer muracaat_bilgi_id = muracaatBilgiBean.ekle();
+            
+            muracaatDurumBean.ekle();
 
             muracaatBean.ekle(kisi_id, muracaat_bilgi_id);
-
-            Integer yakinlar_id = kisiYakinlarBean.ekleMuracaat(kisi_id);
 
             mesaj = "İşlem Başarılı";
 
