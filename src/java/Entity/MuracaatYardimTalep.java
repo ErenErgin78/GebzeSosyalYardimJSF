@@ -11,6 +11,7 @@ public class MuracaatYardimTalep {
     private Integer talep_id;
     private Integer muracaat_id;
     private Integer yardim_tip;
+    private Integer yardim_tur_id;
     private Date guncelleme_tarihi;
 
     // Parametresiz Constructor
@@ -18,9 +19,10 @@ public class MuracaatYardimTalep {
     }
 
     // Parametreli Constructor
-    public MuracaatYardimTalep(Integer muracaat_id, Integer yardim_tip, Date guncelleme_tarihi) {
+    public MuracaatYardimTalep(Integer muracaat_id, Integer yardim_tip, Integer yardim_tur_id ,Date guncelleme_tarihi) {
         this.muracaat_id = muracaat_id;
         this.yardim_tip = yardim_tip;
+        this.yardim_tur_id=yardim_tur_id;
         this.guncelleme_tarihi = guncelleme_tarihi;
     }
 
@@ -32,6 +34,16 @@ public class MuracaatYardimTalep {
     public void setTalep_id(Integer talep_id) {
         this.talep_id = talep_id;
     }
+
+    public Integer getYardim_tur_id() {
+        return yardim_tur_id;
+    }
+
+    public void setYardim_tur_id(Integer yardim_tur_id) {
+        this.yardim_tur_id = yardim_tur_id;
+    }
+    
+    
 
     public Integer getMuracaat_id() {
         return muracaat_id;
