@@ -15,7 +15,7 @@
         <h:form id="userForm">
             <!-- Global mesajlar (hata, başarı vb.) -->
             <h:messages globalOnly="true" layout="table"/>
-            <h:outputText id="mesaj" value="#{kisiMuracaatBean.mesaj}" />
+            <h:outputText id="mesaj" value="#{kisiBean.dao.mesaj}" />
 
             <!-- Breadcrumb navigasyonu -->
             <div class="row align-items-center mb-3">
@@ -248,7 +248,7 @@
                                         </div> <!-- card -->
                                     </div> <!-- card-body -->
                                     <div class="text-center mt-3">
-                                        <h:commandButton value="Kaydet" action="#{kisiMuracaatBean.kisiMuracaatEkle}" class="btn btn-success">
+                                        <h:commandButton value="Kaydet" action="#{kisiBean.ekle()}" class="btn btn-success">
                                             <f:ajax execute="@form" render="@form" />
                                         </h:commandButton>    
                                     </div>

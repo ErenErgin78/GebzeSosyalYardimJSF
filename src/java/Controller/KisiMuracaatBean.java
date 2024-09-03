@@ -27,25 +27,22 @@ public class KisiMuracaatBean implements Serializable {
     private KisiBean kisiBean;
 
     @Inject
-    private KisiDetayBean kisiDetayBean;
+    private KisiAdresBean adresBean;
 
     @Inject
     private KisiIletisimBean iletisimBean;
 
     @Inject
-    private KisiAdresBean adresBean;
+    private KisiYakinlarBean kisiYakinlarBean;
 
     @Inject
-    private MuracaatBean muracaatBean;
-
-    @Inject
-    private MuracaatDurumBean muracaatDurumBean;
+    private KisiDetayBean kisiDetayBean;
 
     @Inject
     private MuracaatBilgiBean muracaatBilgiBean;
 
     @Inject
-    private MuracaatYardimTalepBean muracaatYardimTalepBean;
+    private MuracaatBean muracaatBean;
 
     // Kişi müracaatını ekler ve ilgili işlemleri yapar
     public void KisiMuracaatEkle() {
@@ -59,12 +56,10 @@ public class KisiMuracaatBean implements Serializable {
             Integer kisi_id = kisiBean.ekle(kisi_detay_id);
 
             Integer muracaat_bilgi_id = muracaatBilgiBean.ekle();
-            
-            Integer muracaat_durum_id= muracaatDurumBean.ekle();
 
             muracaatBean.ekle(kisi_id, muracaat_bilgi_id);
-            
-            
+
+            Integer yakinlar_id = kisiYakinlarBean.ekleMuracaat(kisi_id);
 
             mesaj = "İşlem Başarılı";
 
