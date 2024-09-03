@@ -29,6 +29,8 @@ public class MuracaatYardimTalepBean implements Serializable {
         return this.entity;
     }
     
+   
+    
     public void setEntity(MuracaatYardimTalep entity) {
         this.entity = entity;
     }
