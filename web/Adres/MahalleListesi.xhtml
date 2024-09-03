@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mahalle Listesi</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/styles.css" />
+        <link rel="stylesheet" href="CSS/list.css" />
+        <h:outputStylesheet name="CSS/styles.css"/>
+        <h:outputStylesheet name="CSS/list.css"/>
+
+    </h:head>
+    <h:body>  
+        <h:form id="mahalleForm">
+            <div class="row align-items-center mb-3">
+                <div class="col-10">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Yönetici İşlemleri</li>
+                        <li class="breadcrumb-item active" aria-current="page">Mahalle Listesi</li>
+                    </ol>
+                </div>
+                <div class="col-2 text-end">
+                    <button type="button" class="btn btn-outline-success load-page-button" data-page="Adres/MahalleGiris.xhtml">Mahalle Ekle</button>
+                </div>
+            </div> 
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-header">
+                            <h1>Mahalle Listesi</h1>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                Mahalle Bilgileri
+                            </div>                           
+                        </div>
+                        <div class="card">
+                            <div class="table-responsive">
+                                <div class="row mb-3">
+                                    <div class="form-group col-md-6">
+                                        <label for="MahalleAdi" class="form-label">Mahalle Adı:</label>
+                                        <div class="input-group">
+                                            <h:inputText id="MahalleAdi" value="#{mahalleBean.dao.isim}" class="form-control">
+                                                <f:ajax event="keyup" render="MahalleListesi" />
+                                            </h:inputText>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-search"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="Aktif" class="form-label">Aktif:</label>
+                                        <h:selectOneMenu id="Aktif" value="#{mahalleBean.dao.id}" class="form-control">
+                                            <f:selectItem itemLabel="Hepsi" itemValue="2" />
+                                            <f:selectItem itemLabel="Evet" itemValue="1" />
+                                            <f:selectItem itemLabel="Hayır" itemValue="0" />
+                                            <f:ajax event="valueChange" render="MahalleListesi" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <h:panelGroup id="MahalleListesi">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Mahalle Kodu</th>
+                                                <th>Mahalle Adı</th>
+                                                <th>Aktif</th>
+                                                <th>Eylem</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <ui:repeat value="#{mahalleBean.list}" var="mahalle" varStatus="loop">
+                                                <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                                    <td>#{mahalle.mahalle_id}</td>
+                                                    <td>#{mahalle.mahalle}</td>
+                                                    <td>#{mahalle.mahalle_aktif == 1 ? 'Evet' : 'Hayır'}</td>
+                                                    <td>
+                                                        <div class="action-buttons">
+                                                            <h:commandButton value="Sil" action="#{mahalleBean.mahallesil(mahalle.mahalle_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                                <f:ajax execute="@this" render="@form"/>
+                                                            </h:commandButton>
+                                                            <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-2">
+                                                                <f:ajax execute="@this" render="@form"/>
+                                                            </h:commandButton>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </ui:repeat>
+                                        </tbody>
+                                    </table>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+        <script>
+                                                                function confirmDelete(button) {
+                                                                    return confirm("Bu mahalleyi gerçekten silmek istiyor musunuz?");
+                                                                }
+        </script>
+    </h:body>
+</html>

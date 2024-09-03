@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cadde/Sokak Listesi</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
+        <h:outputStylesheet name="CSS/styles.css"/>
+        <link rel="stylesheet" href="CSS/log.css" />
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>            
+            <li class="breadcrumb-item active" aria-current="page">Yönetici İşlemleri</li>
+            <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="Adres/CaddeSokakListesi.xhtml">Cadde/Sokak Listesi</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Cadde/Sokak Giriş</li>
+        </ol>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:messages for="sokakekle" globalOnly="true" layout="table"/>
+            <h:outputText id="mesaj" value="#{sokakBean.dao.islemBasariliMesaj}" />
+            <div class="container-fluid">
+                <div class="row">                   
+                    <div class="container-fluid">
+                        <div class="col-md-12">
+                            <div class="card-header">
+                                <h1 style="font-weight: bold; text-align: center;">Yeni Cadde/Sokak Girişi</h1>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    Cadde/Sokak Giriş Bilgileri<br/>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="neighborhood">Mahalle:</label>
+                                        <h:selectOneMenu id="neighborhood" value="#{sokakBean.entity.mahalle_id}" class="form-control">
+                                            <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                            <f:selectItems value="#{mahalleBean.mahallegetir()}" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Cadde/Sokak Adı:</label>
+                                        <h:inputTextarea id="description" class="form-control" value="#{sokakBean.entity.sokak}" rows="3" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="registration_status">Aktif:</label>
+                                        <h:selectOneMenu id="registration_status" value="#{sokakBean.entity.aktif}" class="form-control">
+                                            <f:selectItem itemLabel="Evet" itemValue="1" />
+                                            <f:selectItem itemLabel="Hayır" itemValue="0" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-3">
+                                <h:commandButton id="sokakekle" value="Kaydet" action="#{sokakBean.sokakekle()}" class="btn btn-success">
+                                    <f:ajax execute="@form" render="@form, mesaj" />
+                                </h:commandButton>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+        <script>
+            function confirmDelete(button) {
+                return confirm("Bu cadde/sokağı gerçekten silmek istiyor musunuz?");
+            }
+        </script>
+    </h:body>
+</html>
