@@ -90,15 +90,16 @@
                                             </h:selectOneMenu>
                                         </div>
                                         <div class="form-group col-md-6 mb-3">
-                                            <label for="cinsiyetTekrar" class="form-label">Medeni Durum:</label>
-                                            <h:selectOneMenu id="cinsiyetTekrar" value="#{kisiBean.entity.medeni_durum_id}" class="form-control">
-                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                            <label for="medeniDurum" class="form-label">Medeni Durum:</label>
+                                            <h:selectOneMenu id="medeniDurum" value="#{kisiBean.entity.medeni_durum_id}" class="form-control">
+                                                <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="#{null}" />
                                                 <f:selectItem itemLabel="Evli" itemValue="1" />
                                                 <f:selectItem itemLabel="Bekar" itemValue="2" />
                                                 <f:selectItem itemLabel="Dul" itemValue="3" />
                                                 <f:selectItem itemLabel="Boşanmış" itemValue="4" />
                                             </h:selectOneMenu>
                                         </div>
+
                                     </div>
                                     <!-- Aile Sıra No ve Sıra No -->
                                     <div class="form-row">
@@ -228,13 +229,13 @@
                                                     </div>
                                                     <div class="form-group col-md-4 mb-3">
                                                         <label for="yardim2">Kırtasiye Yardımı:</label>
-                                                        <h:selectOneMenu id="yardim2" value="#{muracaatYardimTalepBean.entity.talep_id}" class="form-control">
+                                                        <h:selectOneMenu id="yardim2" value="#{muracaatYardimTalepBean.entity.yardim_tur_id}" class="form-control">
                                                             <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
                                                             <f:selectItem itemLabel="Nakti" itemValue="1" />
                                                             <f:selectItem itemLabel="Ayni" itemValue="2" />
                                                         </h:selectOneMenu>
                                                     </div>
-                                                   <div class="form-group col-md-4 mb-3">
+                                                    <div class="form-group col-md-4 mb-3">
                                                         <label for="yardim3">Deprem Yardımı:</label>
                                                         <h:selectOneMenu id="yardim3" value="#{muracaatYardimTalepBean.entity.talep_id}" class="form-control">
                                                             <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
@@ -242,14 +243,14 @@
                                                             <f:selectItem itemLabel="Ayni" itemValue="2" />
                                                         </h:selectOneMenu>
                                                     </div>
-                                                </div> <!-- Bitiş row -->
+                                                </div> <!-- Bitiş row -->                   
                                             </div> <!-- card-body -->
                                         </div> <!-- card -->
                                     </div> <!-- card-body -->
                                     <div class="text-center mt-3">
-                                        <h:commandButton value="Kaydet" action="#{kisiMuracaatBean.KisiMuracaatEkle()}" class="btn btn-success">
+                                        <h:commandButton value="Kaydet" action="#{kisiBean.ekle()}" class="btn btn-success">
                                             <f:ajax execute="@form" render="@form" />
-                                        </h:commandButton>
+                                        </h:commandButton>    
                                     </div>
                                 </div>
                             </div>
