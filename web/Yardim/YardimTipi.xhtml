@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Genel Yardım Tipi Tanımlama</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/styles.css" />
+        <link rel="stylesheet" href="CSS/list.css" />
+        <h:outputStylesheet name="CSS/styles.css"/>
+    </h:head>
+    <h:body>
+        <h:form id="yardimTipiForm">
+            <div class="row align-items-center mb-3">
+                <div class="col-10">             
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Yönetici İşlemleri</li>                 
+                        <li class="breadcrumb-item active" aria-current="page">Yardım Tipi</li>
+                    </ol>
+                </div>
+                <div class="col-2 text-end">
+                    <button type="button" class="btn btn-outline-success load-page-button" data-page="Yardim/YardimTipiGiris.xhtml">Yardım Tipi Giriş</button>
+                </div>
+            </div> 
+            <div class="container-fluid">               
+                <div class="row">                   
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <h1 class="font-weight-bold">Yardım Tipi Tanımlama</h1>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    Yardım Tipi Tanımlama Bilgileri
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="yardimTipiAdi" class="form-label me-2" style="margin-right: 10px;">Yardım Tipi Adı:</label>
+                                        <div class="input-group">
+                                            <h:inputText id="yardimTipiAdi" value="#{yardimBean.yardimTipiAdi}" class="form-control" style="width: 400px;" />
+                                            <f:ajax event="keyup" render="yardimListPanel" listener="#{yardimBean.listeyenile}"/>                                            
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-search"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <f:ajax event="keyup" render="yardimListPanel" />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="yardimTur">Yardım Türü:</label>
+                                        <h:selectOneMenu id="yardimTur" class="form-control" value="#{yardimBean.yardimTurId}">
+                                            <f:selectItem itemLabel="Hepsi" itemValue="" />
+                                            <f:selectItems value="#{yardimTurBean.yardimTurList}" var="tur" itemLabel="#{tur.label}" itemValue="#{tur.value}" />
+                                            <f:ajax event="change" listener="#{yardimBean.listeyenile}" render="yardimListPanel"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <h:panelGroup id="yardimListPanel">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 150px;">Yardım Tipi Kodu</th>
+                                                    <th style="width: 300px;">Yardım Tipi Adı</th>
+                                                    <th style="width: 300px;">Yardım Türü</th>
+                                                    <th style="width: 200px;">Eylem</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <ui:repeat value="#{yardimBean.list}" var="yardim" varStatus="loop">
+                                                    <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                                        <td>#{yardim.yardim_tip_id}</td>
+                                                        <td>#{yardim.yardim_tip}</td>
+                                                        <td>#{yardimBean.getYardimTurById(yardim.yardim_tur_id)}</td>
+
+                                                        <td>
+                                                            <div class="action-buttons">
+                                                                <h:commandButton value="Sil" action="#{yardimBean.yardimSil(yardim.yardim_tip_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                                    <f:ajax execute="@this" render="@form"/>
+                                                                </h:commandButton>
+                                                                <h:commandButton value="Düzenle" styleClass="btn btn-primary ml-20">
+                                                                    <f:ajax execute="@this" render="@form"/>
+                                                                </h:commandButton>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </ui:repeat>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+        <script>
+                                                                    function confirmDelete(button) {
+                                                                        return confirm("Bu yardım tipini gerçekten silmek istiyor musunuz?");
+                                                                    }
+        </script>
+
+    </h:body>
+</html>

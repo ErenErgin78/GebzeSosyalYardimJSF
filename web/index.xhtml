@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <!-- Sayfanın karakter seti ve viewport ayarları -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        
+        <!-- Sayfa başlığı -->
+        <title>Gebze Belediyesi Dashboard</title>
+        
+        <!-- Bootstrap, FontAwesome ve özel CSS dosyalarının dahil edilmesi -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+        <link rel="stylesheet" href="CSS/styles.css" />
+        <link rel="stylesheet" href="CSS/index.css"/>
+    </head>
+    <style>
+        /* Navbar'daki hamburger menüsü için beyaz border ve ikon renkleri ayarı */
+        .navbar-toggler {
+            border: 1px solid white !important; /* Beyaz border rengi */
+        }
+        /* Hamburger menüsündeki çizgileri beyaz yapmak için */
+        .navbar-toggler-icon {
+            background-image: url('data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"%3e%3cpath stroke="%23fff" stroke-width="3" d="M5 7h20M5 15h20M5 23h20"/%3e%3c/svg%3e');
+        }
+    </style>
+    <body>
+        
+        <!-- Navbar başlangıcı -->
+        <nav class="navbar navbar-expand-lg" style="background-color: #08215c;">  <!-- Navbar rengi -->
+            
+            <!-- Gebze Belediyesi logosu ve ana sayfaya yönlendirme -->
+            <a class="navbar-brand" href="#">
+                <h:form>
+                    <h:commandLink action="index.xhtml">
+                        <img src="Assets/GebzeLogo123.jpeg" alt="Gebze Belediyesi Logo" class="img-fluid"/>
+                    </h:commandLink>
+                </h:form>
+            </a>
+            <!-- Hamburger menüsü (Mobil görünümde açılır menü) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleDemo01">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Navbar içeriği -->
+            <div class="collapse navbar-collapse" id="navbarToggleDemo01">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <!-- "İşlemlerim" menüsü -->
+                    <li class="nav-item dropdown">
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false"> İşlemlerim </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-submenu">
+                                <!-- Alt menü öğeleri -->
+                                <a class="dropdown-item" href="#" data-page="Muracaat/GenelTakip.xhtml">Genel Takip</a>
+                                <a class="dropdown-item" href="#" data-page="Muracaat/MuracaatListesi.xhtml">Müracaat</a>
+
+                                <a class="dropdown-item" href="#" data-page="Tutanak/MuracaatSecim.xhtml">Tutanak</a>
+
+                                <a class="dropdown-item" href="#" data-page="G.xhtml">Yardım Kararı Listesi</a>
+                                <a class="dropdown-item" href="#" data-page="H.xhtml">Yardım Karar Özel</a>                               
+
+                                <a class="dropdown-item" href="#" data-page="Tutanak/EngelliBilgisiListesi.xhtml">Engelli</a>                             
+
+                                <a class="dropdown-item" href="#" data-page="AileYakinlik/AileYakinlikListesi.xhtml">Aile Yakınlık</a>
+                            </div>                           
+                        </div>
+                    </li>
+                    <!-- "Raporlar" menüsü -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Raporlar
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                            <a class="dropdown-item" href="#" data-page="Raporlar/MuracaatRaporu.xhtml">Müracaat Raporu</a>
+                            <a class="dropdown-item" href="#" data-page="Raporlar/TutanakRaporu.xhtml">Tutanak Raporu</a>
+                            <a class="dropdown-item" href="#" data-page="Raporlar/YardimKararRaporu.xhtml">Yardım Karar Raporu</a>
+                            <a class="dropdown-item" href="#" data-page="Raporlar/YardimKararYillikRaporu.xhtml">Yardım Karar Yıllık Raporu</a>
+                        </div>
+                    </li>
+                    <!-- "Yönetici İşlemleri" menüsü -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Yönetici İşlemleri
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                            <a class="dropdown-item" href="#" data-page="Kullanici/kullanici_listesi.xhtml">Kullanıcılar</a>
+                            <a class="dropdown-item" href="#" data-page="Adres/MahalleListesi.xhtml">Mahalleler</a>
+                            <a class="dropdown-item" href="#" data-page="Adres/CaddeSokakListesi.xhtml">Cadde/Sokak</a>
+                            <a class="dropdown-item" href="#" data-page="Egitim/OkulListesi.xhtml">Eğitim</a>
+
+                            <a class="dropdown-item" href="#" data-page="Diger/CekmeceTanimlama.xhtml">Çekmece</a>
+                            <a class="dropdown-item" href="#" data-page="Diger/MeslekTanimlama.xhtml">Meslek</a>
+                            <a class="dropdown-item" href="#" data-page="Diger/YakinlikTanimlama.xhtml">Yakınlık</a>
+                            <a class="dropdown-item" href="#" data-page="Diger/TutanakTanimlama.xhtml">Tutanak Durum</a>
+
+                            <a class="dropdown-item" href="#" data-page="Yardim/YardimTipi.xhtml">Yardım Tipi</a>
+                            <a class="dropdown-item" href="#" data-page="Yardim/YardimAltTipi.xhtml">Yardım Alt Tipi</a>
+
+                            <a class="dropdown-item" href="#" data-page="Engelli/EngelliTipi.xhtml">Engelli Tipi</a>
+                            <a class="dropdown-item" href="#" data-page="Engelli/EngelliAltTipi.xhtml">Engelli Alt Tipi</a>
+                            <a class="dropdown-item" href="#" data-page="Engelli/YonlendirilenKurum.xhtml">Yönlendirilen Kurum</a>
+                            <a class="dropdown-item" href="#" data-page="Engelli/YonlendirilenAltKurum.xhtml">Yönlendirilen Alt Kurum</a>
+                        </div>
+                    </li>
+                </ul>
+                <!-- Çıkış butonu -->
+                <h:form>
+                    <h:commandButton value="Çıkış" action="#{userBean.cikis}" class="btn btn-danger" />
+                </h:form>
+            </div>
+        </nav>
+        <!-- Navbar bitişi -->
+
+        <!-- Ana içerik alanı -->
+        <main class="container-fluid">
+            <div id="content">
+                <div class="welcome-message">
+                    <!-- Hoş geldiniz mesajı ve tarih, saat bilgisi -->
+                    <h3>Hoş Geldiniz #{userBean.dao.kullanici_adi}!</h3>
+                    <h:outputText value="Tarih:‎ " />
+                    <h:outputText value="#{userBean.tarih}">
+                        <f:convertDateTime pattern="dd-MM-yyyy" timeZone="Europe/Istanbul"/>
+                    </h:outputText>
+                    <h:outputText value="‎ ‎ ‎ ‎‎ ‎  "> </h:outputText>
+                    <h:outputText value="Saat:‎ " />
+                    <h:outputText value="#{userBean.tarih}">
+                        <f:convertDateTime pattern="HH:mm:ss" timeZone="Europe/Istanbul"/>
+                    </h:outputText>
+                </div>
+            </div>
+        </main>
+        <!-- JavaScript kütüphanelerinin dahil edilmesi -->
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="ContentPage.js"></script>
+    </body>
+</html>
