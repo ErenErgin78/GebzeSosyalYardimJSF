@@ -69,3 +69,4 @@ public class MuracaatYardimTalepBean implements Serializable {
     public MuracaatYardimTalepBean() {      
     }
 }
+

@@ -1,48 +1,40 @@
 package dao;
 
 import Entity.MuracaatYardimTalep;
-import static Various.ErrorFinder.DetectError;
-import jakarta.faces.model.SelectItem;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import util.DBConnection;
+import jakarta.faces.model.SelectItem;
 
-/**
- *
- * @author Eren
- */
-public class MuracaatYardimTalepDAO extends DBConnection {
-
-    private Connection db;
-
+public class MuracaatYardimTalepDAO {
+    
+    private Connection conn;
+    
     public List<SelectItem> MuracaatYardimTalepGetir() {
-        List<SelectItem> TalepList = new ArrayList<>();
-
+        List<SelectItem> list = new ArrayList<>();
         try {
-            Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT MURACAAT_ID , YARDIM_TIP FROM MURACAAT_YARDIM_TALEP";
-            ResultSet rs = statement.executeQuery(Selectquery);
+            String sql = "SELECT kt.KISI_ID, m.MURACAAT_ID, myt.TALEP_ID, yt.YARDIM_TIP_ID, yt.YARDIM_TIP, ytur.TUR_ID, ytur.TUR " +
+                         "FROM KISI_TEMEL kt " +
+                         "JOIN MURACAAT m ON kt.KISI_ID = m.KISI_TEMEL_ID " +
+                         "JOIN MURACAAT_YARDIM_TALEP myt ON m.MURACAAT_ID = myt.MURACAAT_ID " +
+                         "JOIN YARDIM_TIP yt ON myt.YARDIM_TIP = yt.YARDIM_TIP_ID " +
+                         "JOIN YARDIM_TUR ytur ON yt.YARDIM_TUR_ID = ytur.TUR_ID " +
+                         "WHERE m.MURACAAT_ID = ?";
+
+            PreparedStatement pst = this.conn.prepareStatement(sql);
+            pst.setInt(1, 1); // MURACAAT_ID yerine dinamik bir değer atanabilir.
+            ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                TalepList.add(new SelectItem(rs.getInt("MURACAAT_ID"), rs.getString("YARDIM_TIP")));
+                SelectItem item = new SelectItem(rs.getInt("TUR_ID"), rs.getString("TUR"));
+                list.add(item);
             }
-        } catch (Exception ex) {
-            DetectError(ex);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return TalepList;
-    }
-
-    public Connection getDb() {
-        if (this.db == null) {
-            this.db = this.connect();
-        }
-        return db;
-    }
-
-    public void setDb(Connection db) {
-        this.db = db;
+        return list;
     }
 }
