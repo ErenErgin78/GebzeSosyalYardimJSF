@@ -225,13 +225,6 @@ public class Kisi {
     }
 
     
-
-    
-
-    
-
-    
-
     public Kisi() {
     }
     
