@@ -1,6 +1,8 @@
 package dao;
 
+import Entity.MuracaatDurum;
 import Entity.MuracaatYardimTalep;
+import static Various.ErrorFinder.DetectError;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,10 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import util.DBConnection;
 import jakarta.faces.model.SelectItem;
+import java.sql.CallableStatement;
+import java.sql.SQLException;
 
 public class MuracaatYardimTalepDAO {
     
     private Connection conn;
+    private String mesaj;
     
     public List<SelectItem> MuracaatYardimTalepGetir() {
         List<SelectItem> list = new ArrayList<>();
@@ -36,5 +41,25 @@ public class MuracaatYardimTalepDAO {
             e.printStackTrace();
         }
         return list;
+    }
+    
+    public Integer MuracaatDurumEkle(MuracaatDurum muracaatDurum) {
+        try {
+
+            String callQueryMuracaatDurum = "{call INSERT_MURACAAT_DURUM(?, ?, ?)}";
+            CallableStatement csMuracaatDurum = conn.prepareCall(callQueryMuracaatDurum);
+            csMuracaatDurum.setString(1, muracaatDurum.getDurum());
+            csMuracaatDurum.setInt(2, muracaatDurum.getAktif());
+            csMuracaatDurum.registerOutParameter(3, java.sql.Types.INTEGER);
+            csMuracaatDurum.execute();
+
+            int muracaatDurumId = csMuracaatDurum.getInt(3);
+            this.mesaj = "Durum başarıyla eklenmiştir.";
+            return muracaatDurumId;
+
+        } catch (SQLException ex) {
+            mesaj = DetectError(ex);
+            return null;
+        }
     }
 }

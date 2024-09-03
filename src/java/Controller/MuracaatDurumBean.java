@@ -28,8 +28,6 @@ public class MuracaatDurumBean {
      public Integer ekle() {
         return this.getDao().MuracaatDurumEkle(getEntity());
     }
-
-
     public MuracaatDurum getEntity() {
         if (this.entity == null) {
             this.entity = new MuracaatDurum();
