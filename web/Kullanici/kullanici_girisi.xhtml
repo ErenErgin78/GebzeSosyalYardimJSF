@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gebze Belediyesi Dashboard</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/styles.css" />
+        <link rel="stylesheet" href="CSS/log.css" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:messages for="KullaniciEkle" globalOnly="true" layout="table"/>
+            <h:outputText id="mesaj" value="#{userBean.dao.mesaj}" />
+            <div class="row align-items-center mb-3">
+                <div class="col-10">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>            
+                        <li class="breadcrumb-item active" aria-current="page">Yönetici İşlemleri</li>
+                        <li class="breadcrumb-item"><a href="#" class="load-page-button" data-page="Kullanici/kullanici_listesi.xhtml">Kullanıcı Listesi</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Kullanıcı Girişi</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="container-fluid">               
+                <div class="row">                   
+                    <div class="col-md-12">
+                        <div class="card-header">
+                            <h1>Kullanıcı Girişi</h1>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                Kullanıcı Giriş Bilgileri
+                            </div>
+                        </div>
+                        <div class="card">  
+                            <div class="info-message">Lütfen iletişim bilgilerini eksiksiz giriniz</div>                              
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="email">Ad:</label>
+                                        <h:inputText class="form-control" value="#{userBean.entity.kullanici_isim}">
+                                            <f:passThroughAttribute name="type" value="email" />
+                                        </h:inputText>                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Ünvan:</label>
+                                        <h:inputText class="form-control" value="#{userBean.entity.kullanici_unvan}">
+                                            <f:passThroughAttribute name="type" value="email" />
+                                        </h:inputText>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="email">Kullanıcı Adı:</label>
+                                        <h:inputText class="form-control" value="#{userBean.entity.kullanici_kullanici_adi}">
+                                            <f:passThroughAttribute name="type" value="email" />
+                                        </h:inputText>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Şifre:</label>
+                                        <h:inputText class="form-control" value="#{userBean.entity.sifre}">
+                                            <f:passThroughAttribute name="type" value="email" />
+                                        </h:inputText>
+                                    </div>                                                                 
+                                </div>                          
+                                <div class="form-row">                        
+                                    <div class="form-group">
+                                        <label for="email">E-Posta:</label>
+                                        <h:inputText class="form-control" value="#{userBean.entity.kullannici_eposta}">
+                                            <f:passThroughAttribute name="type" value="email" />
+                                        </h:inputText>
+                                    </div>         
+                                    <div class="form-group">
+                                        <label for="email">Sicil No:</label>
+                                        <h:inputText class="form-control" value="#{userBean.entity.kullanici_sicil_no}">
+                                            <f:passThroughAttribute name="type" value="email" />
+                                        </h:inputText>
+                                    </div>
+                                </div>  
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="cinsiyet">Cinsiyet:</label><br />
+                                        <div class="custom-radio">
+                                            <h:selectOneRadio id="cinsiyet" value="#{userBean.entity.kullanici_cinsiyet}" layout="pageDirection" styleClass="radio-inline">
+                                                <f:selectItem itemLabel="Erkek" itemValue="E" />
+                                                <f:selectItem itemLabel="Kadın" itemValue="K" />
+                                            </h:selectOneRadio>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="durum">Durum:</label><br />
+                                        <div class="custom-radio">
+                                            <h:selectOneRadio id="durum" value="#{userBean.entity.kullanici_durum}" layout="pageDirection" styleClass="radio-inline">
+                                                <f:selectItem itemLabel="Aktif" itemValue="1" />
+                                                <f:selectItem itemLabel="Pasif" itemValue="2" />
+                                            </h:selectOneRadio>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="email">Telefon:</label>
+                                        <h:inputText id="email" class="form-control" value="#{userBean.entity.kullanici_telefon}">
+                                            <f:passThroughAttribute name="type" value="email" />
+                                        </h:inputText>                                                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address_desc">Adres:</label>
+                                        <h:inputTextarea id="address_desc" class="form-control" rows="1" value="#{userBean.entity.kullanici_adres}" />
+                                    </div>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <h:commandButton value="Kaydet" action="#{userBean.create()}" class="btn btn-success">
+                                        <f:ajax execute="@form" render="@form, mesaj" />
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+    </h:body>
+</html>

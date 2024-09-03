@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Sosyal Güvence Bilgileri</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/styles.css" />
+        <link rel="stylesheet" href="CSS/log.css" />
+
+        <style>
+            /* CSS kodları */
+            .hidden {
+                display: none;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form id="myForm">
+            <div class="form-group col-md-6 mb-3">
+                <label for="guvence">Sosyal Güvencesi var mı?:</label>
+                <div class="custom-radio">
+                    <h:selectOneRadio id="guvence" value="#{tutanakSosyalGuvenceBean.entity.guvence_var_mi}" styleClass="radio-inline" onchange="toggleInputText()">
+                        <f:selectItem itemLabel="Evet" itemValue="1" />
+                        <f:selectItem itemLabel="Hayır" itemValue="0" />
+                    </h:selectOneRadio>
+                </div>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label for="birimAciklama">Yönlendiren Birim Açıklaması:</label>
+                <h:inputText id="birimAciklama" value="#{tutanakSosyalGuvenceBean.entity.birim_aciklama}" class="form-control hidden" />
+            </div>
+        </h:form>
+
+        <script type="text/javascript">
+            function toggleInputText() {
+                var radioValue = document.querySelector("input[name='myForm:guvence']:checked").value;
+                var inputText = document.getElementById("myForm:birimAciklama");
+
+                if (radioValue === "1") {
+                    inputText.classList.remove("hidden");
+                } else {
+                    inputText.classList.add("hidden");
+                }
+            }
+        </script>
+
+        <!-- jQuery (Bootstrap JS için gerekli) -->
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+        <!-- Popper.js (Bootstrap 5.3.3 ile uyumlu) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.9/umd/popper.min.js"></script>
+
+        <!-- Bootstrap 5.3.3 JS -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+    </h:body>
+
+</html>
