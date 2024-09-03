@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gebze Belediyesi Dashboard</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/styles.css" />
+        <style>
+            /* Genel stil */
+            body {
+                background-color: #f8f9fa;
+                color: #333;
+            }
+
+            /* Menü ve buton renkleri */
+            .navbar-nav .nav-link {
+                color: #f2f2f2;
+            }
+
+            .navbar-nav .nav-link:hover {
+                background-color: #575757;
+                color: #fff;
+            }
+
+            .dropdown-menu {
+                background-color: #333;
+            }
+
+            .dropdown-menu .dropdown-item {
+                color: #f2f2f2;
+            }
+
+            .dropdown-menu .dropdown-item:hover {
+                background-color: #575757;
+            }
+
+            .card-header {
+                background-color: #575757;
+                color: #fff;
+            }
+
+            .btn-success {
+                background-color: #28a745;
+                color: #fff;
+            }
+
+            .btn-success:hover {
+                background-color: #218838;
+                color: #fff;
+            }
+
+            .btn-light {
+                background-color: #f8f9fa;
+                color: #000;
+            }
+
+            .btn-light:hover {
+                background-color: #e2e6ea;
+                color: #000;
+            }
+
+            /* Form arka plan */
+            .form-background {
+                background-color: #f5f5f5;
+            }
+
+            /* Radio button ve checkbox stilleri */
+            .no-border .form-check-input {
+                border: none;
+            }
+
+            .inline-radio {
+                display: inline-block;
+            }
+
+            .no-border-radio .form-check-input {
+                border: none;
+                margin-right: 10px;
+            }
+
+            .no-border-radio .form-check {
+                padding: 0;
+                margin: 0 10px 0 0;
+            }
+
+            .no-border-radio .form-check-label {
+                margin: 0;
+            }
+
+        </style>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:messages globalOnly="true" layout="table"/>
+            <div class="container-fluid mt-20">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <h2 style="font-weight: bold;">Müracaat Listesi</h2>
+                        <div class="card">
+                            <div class="card">Müracaat Liste Kriterleri</div>
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="tc_no">Müracaat No:</label>
+                                        <h:inputText id="tc_no" class="form-control" value="#{kisiBean.entity.kimlik_no}"/>
+
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="tc_no">Tc Kimlik No:</label>
+                                        <h:inputText id="tc_no" class="form-control" value="#{kisiBean.entity.kimlik_no}"/>
+
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="name">İsim</label>
+                                        <h:inputText id="name" value ="#{kisiBean.entity.isim}" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="surname">Soyisim</label>
+                                        <h:inputText id="surname" value ="#{kisiBean.entity.soyisim}" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="city">İlçe</label>
+                                        <h:selectOneMenu id="city" value = "#{kisiBean.entity.ilce}" class="form-control">
+                                            <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
+                                            <f:selectItem itemLabel="GEBZE" itemValue="gebze" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="neighborhood">Mahalle</label>
+                                        <h:selectOneMenu id="neighborhood" value = "#{kisiBean.selectedMahalleId}" class="form-control">
+                                            <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                            <f:selectItems value="#{kisiBean.mahalleList}" />
+                                            <f:ajax event="change" listener="#{kisiBean.sokakyukle}" render="street" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="street">Cadde/Sokak</label>
+                                        <h:selectOneMenu id="street" value="#{kisiBean.entity.mahalle_sokak_id}" class="form-control">
+                                            <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="" />
+                                            <f:selectItems value="#{kisiBean.sokakList}" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="registration_status">Müracaat Durumu</label>
+                                        <h:selectOneMenu id="registration_status" class="form-control">
+                                            <f:selectItem itemLabel="Lütfen seçiniz" itemValue="" />
+                                            <f:selectItem itemLabel="Durum Değişikliği" itemValue="DurumDegişikligi" />
+                                            <f:selectItem itemLabel="Eski Kayıt" itemValue="EskiKayit" />
+                                            <f:selectItem itemLabel="Yeni Kayıt" itemValue="YeniKayit" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="archive_file_no">Arşiv Dosya No</label>
+                                        <h:inputText id="archive_file_no" class="form-control" value="#{muracaatBean.entity.arsiv_dosya_no}" />
+                                    </div>  
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="dob-start">Doğum Tarih Aralığı:</label>
+                                        <input type="date" id="dob-start" name="dob-start" class="form-control" />
+                                        <input type="date" id="dob-end" name="dob-end" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="dob-start">Müracaat Tarih Aralığı:</label>
+                                        <input type="date" id="dob-start" name="dob-start" class="form-control" />
+                                        <input type="date" id="dob-end" name="dob-end" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="dob-start">Talep Edilen Yardımlar:</label>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <h:commandButton value="Sorgula"  class="btn btn-success">
+                                <f:ajax execute="@form" render="@form" />
+                            </h:commandButton>
+                            <h:commandButton value="Temizle" action="#{okulBean.temizle()}" class="btn btn-success" style="margin-left: 10px; background-color: #f8f9fa; color: black;">
+                                <f:ajax execute="@form" render="@form" />
+                            </h:commandButton>
+                        </div>
+                    </div>
+                </div>
+                <h:panelGroup id="okulListPanel">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Mahalle</th>
+                                <th>Cadde/Sokak</th>
+                                <th>Ev Tel</th>
+                                <th>Cep Tel</th>
+                                <th>İş Tel</th>
+                                <th>Müracaat Durumu</th>
+                                <th>Talep Edilen Yardımlar</th>
+                                <th>İtiraz Dilekçe Ref No</th>
+                                <th>Açıklama</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ui:repeat value="#{okulBean.list}" var="okul" varStatus="loop">
+
+                            </ui:repeat>
+                        </tbody>
+                    </table>
+                </h:panelGroup>
+            </div>
+        </h:form>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </h:body>
+</html>

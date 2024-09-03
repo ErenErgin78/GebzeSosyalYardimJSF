@@ -1,0 +1,152 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 5 Ağu 2024, 09:21:55
+    Author     : Administrator
+*//* Navbar */
+.navbar-nav .nav-link {
+    color: #f2f2f2; /* Linklerin rengi */
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: #575757 !important; /* Üzerine gelindiğinde arka plan rengi */
+    color: #fff; /* Üzerine gelindiğinde yazı rengi */
+}
+
+.dropdown-menu {
+    background-color: #333; /* Dropdown menünün arka plan rengi */
+}
+
+.dropdown-menu .dropdown-item {
+    color: #f2f2f2; /* Dropdown item'ların yazı rengi */
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #575757; /* Üzerine gelindiğinde arka plan rengi */
+}
+
+/* Form alanlarının ve etiketlerinin stilleri */
+.form-group {
+    margin-bottom: 5px; /* Form gruplarının altındaki boşluk */
+    padding-right: 15px;
+    padding-left: 5px;
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.form-label {
+    margin-bottom: .3rem; /* Form etiketlerinin altındaki boşluk */
+    font-weight: 600; /* Form etiketlerinin font ağırlığı */
+}
+
+.form-control {
+    display: inline-block;
+    width: 100%; /* Form kontrollerinin genişliği */
+    vertical-align: middle; /* Dikey hizalama */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+.full-width {
+    width: 100%;
+}
+
+/* Buton kapsayıcı stilleri */
+.btn-container {
+    display: flex; /* Flexbox düzeni */
+    align-items: center; /* Dikey ortalama */
+    gap: 1rem; /* Butonlar arasındaki boşluk */
+}
+
+/* Kart düzenleme stilleri */
+.card-container {
+    display: flex; /* Flexbox düzeni */
+    justify-content: center; /* Ortalamak için */
+}
+
+.card-wrapper {
+    width: 100%;
+    max-width: 900px; /* Kartın maksimum genişliği */
+}
+
+.card-header {
+    font-size: 1.25rem; /* Kart başlık font boyutu */
+    font-weight: 600; /* Kart başlık font ağırlığı */
+    width: 100%;
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+.container-fluid {
+    width: 100%; /* Set width to 100% */
+    overflow: auto; /* Enable scrolling */
+    margin-bottom: 0; /* Reset bottom margin */
+}
+
+
+/* Tablo satır renkleri */
+.table-row-even {
+    background-color: #f9f9f9; /* Çift satır arka plan rengi */
+}
+
+.table-row-odd {
+    background-color: #ffffff; /* Tek satır arka plan rengi */
+}
+
+/* Tablo ortalama */
+.center-table {
+    margin: auto; /* Tabloyu ortalamak için */
+}
+
+/* Daha geniş sütun stilleri */
+.wider-column {
+    width: 200px; /* Genişletilmiş sütun genişliği */
+}
+
+/* Radyo düğmeleri için özel stil */
+.custom-radio {
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-radio div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px; /* Radyo düğmeleri arasına boşluk ekler */
+}
+
+.custom-radio input {
+    margin-right: 10px; /* Radyo düğmesi ile etiket arasında boşluk bırakır */
+}
+
+.custom-radio label {
+    font-size: 14px; /* Etiket font boyutu */
+    cursor: pointer; /* Tıklanabilir imleç */
+    user-select: none; /* Seçimi engeller */
+    /* Butona yaklaşması için yazıya margin verildi */
+    margin-top: 10px;
+}
+
+.radio-inline {
+    display: flex;
+    flex-direction: row;
+}
+
+.table td, .table th {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}

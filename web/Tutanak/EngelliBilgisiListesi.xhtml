@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Müracaat Listesi</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/list.css" />
+        <h:outputStylesheet name="CSS/styles.css"/>
+    </h:head>
+    <h:body>
+        <h:form id="userForm">
+            <div class="row align-items-center mb-3">
+                <div class="col-10">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>            
+                        <li class="breadcrumb-item active" aria-current="page">İşlemlerim</li>
+                        <li class="breadcrumb-item active" aria-current="page">Engelli Bilgisi Listesi</li>
+                    </ol>
+                </div>               
+            </div> 
+            <div class="container-fluid">               
+                <div class="row">                   
+                    <div class="col-md-12">
+                        <div class="card-header">
+                            <h1>Engelli Bilgisi Listesi</h1>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                Engelli Bilgileri
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="isim" class="form-label">Ad:</label>
+                                    <h:inputText id="isim" value="#{kisiBean.entity.isim}" class="form-control" />
+                                    <f:ajax event="keyup" render="KullaniciListesi" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="kullaniciAdi" class="form-label">Soyad:</label>
+                                    <h:inputText id="kullaniciAdi" value="#{kisiBean.entity.soyisim}" class="form-control" />
+                                    <f:ajax event="keyup" render="KullaniciListesi" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="sicil" class="form-label">Tc Kimlik No:</label>
+                                    <h:inputText id="sicil" value="#{kisiBean.entity.kimlik_no}" class="form-control" />
+                                    <f:ajax event="keyup" render="KullaniciListesi" />
+                                </div>
+                                <div class="form-group col-md-6 mb-3">
+                                    <label for="aktif" class="form-label">Cinsiyet:</label>
+                                    <h:selectOneMenu id="aktif" value="#{kisiBean.entity.cinsiyet}" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                        <f:selectItem itemLabel="Erkek" itemValue="E" />
+                                        <f:selectItem itemLabel="Kadın" itemValue="K" />                                 
+                                        <f:ajax event="valueChange" render="KullaniciListesi" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group col-md-6 mb-3">
+                                    <label for="aktif" class="form-label">Engelli Tip/Grup:</label>
+                                    <h:selectOneMenu id="aktif" value="#{kisiEngelBean.entity.engelli_tip_id}" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                        <f:selectItems value="#{engelBean.engelTipList}" />
+                                           
+                                        <f:ajax event="valueChange" render="KullaniciListesi" />
+                                    </h:selectOneMenu>
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
+                                    <label for="aktif" class="form-label">Engelli Alt Tip/Grup:</label>
+                                    <h:selectOneMenu id="aktif" value="#{kisiEngelBean.entity.engelli_alt_tip_id}" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                        <f:selectItems value="#{engelAltBean.tipList}" />
+                      
+                                        <f:ajax event="valueChange" render="KullaniciListesi" />
+                                    </h:selectOneMenu>
+                                </div>
+
+                            </div>
+                            <h:panelGroup id="KullaniciListesi">
+                                <div class="table-container">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>İsim</th>
+                                                    <th>Soyad</th>
+                                                    <th>TC</th>
+                                                    <th>Cinsiyet</th>
+                                                    <th>Engelli Tip</th>
+                                                    <th>Engelli Alt Tip</th>
+                                                    <th>Eylem</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <ui:repeat value="#{userBean.list}" var="user" varStatus="loop">
+                                                    <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                                        <td>#{user.kullanici_id}</td>
+                                                        <td>#{user.kullanici_isim}</td>
+                                                        <td>#{user.kullanici_cinsiyet}</td>
+                                                        <td>#{user.kullanici_telefon}</td>
+                                                        <td class="sicil">#{user.kullanici_sicil_no}</td>
+                                                        <td class="sicil">#{user.kullanici_sicil_no}</td>
+                                                        <td>#{user.kullanici_id}</td>
+                                                        <td class="profil">
+                                                            <div class="action-buttons">
+                                                                <h:commandButton value="SIL" action="#{userBean.delete(user.kullanici_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                                    <f:ajax execute="@this" render="@form"/>
+                                                                </h:commandButton>
+                                                                <h:commandButton value="DUZENLE" action="#{userBean.edit(user)}" styleClass="btn btn-primary ml-20">
+                                                                    <f:ajax execute="@this" render="@form"/>
+                                                                </h:commandButton>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </ui:repeat>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+        <script>
+                                                                    function confirmDelete(button) {
+                                                                        return confirm("Bu kullanıcıyı gerçekten silmek istiyor musunuz?");
+                                                                    }
+        </script>
+    </h:body>
+</html>
