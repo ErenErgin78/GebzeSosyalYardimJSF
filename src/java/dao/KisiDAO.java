@@ -79,6 +79,45 @@ public class KisiDAO extends DBConnection {
         }
     }
 
+    public Integer KisiMuracaatEkle(Kisi kisi, Integer detayId) {
+        try {
+            Connection conn = this.getDb();
+
+            String callQuery = "{call INSERT_MURACAAT(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            CallableStatement cs = conn.prepareCall(callQuery);
+            cs.setObject(1, kisi.getKimlik_no());
+            cs.setString(2, kisi.getIsim());
+            cs.setString(3, kisi.getSoyisim());
+            cs.setString(4, kisi.getCinsiyet());
+            cs.setInt(5, kisi.getMedeni_durum_id());
+            cs.setInt(6, kisi.getCilt_no());
+            cs.setInt(7, kisi.getAile_sira_no());
+            cs.setInt(8, kisi.getSira_no());
+            cs.setDate(9, new java.sql.Date(kisi.getDogum_tarihi().getTime()));
+            cs.setInt(10, kisi.getMahalle_id());
+            cs.setInt(11, kisi.getSokak_id());
+            cs.setString(12, kisi.getSite());
+            cs.setString(13, kisi.getAdres_tarifi());
+            cs.setInt(14, kisi.getKapi_no());
+            cs.setInt(15, kisi.getDaire_no());
+            cs.setString(16, kisi.getEv_telefon());
+            cs.setString(17, kisi.getCep_telefon());
+            cs.setString(18, kisi.getEposta());
+            cs.setDate(19, new java.sql.Date(kisi.getKayit_tarihi().getTime()));
+            cs.setInt(20, detayId);  // "p_aktif" parametresini doğru şekilde ayarladık
+            cs.registerOutParameter(21, java.sql.Types.INTEGER);  // Çıkış parametresi "p_muracaat_id"
+            cs.execute();
+
+            this.mesaj = "İşlemler başarıyla gerçekleşmiştir.";
+
+            return cs.getInt(21);  // Çıkış parametresini doğru şekilde alıyoruz
+
+        } catch (Exception ex) {
+            this.mesaj = DetectError(ex);
+            return null;
+        }
+    }
+
     // Kisi silme metodu
     public void KisiSil(int kisiId) {
         String deleteQuery = "DELETE FROM KISI_TEMEL WHERE KISI_ID = ?";
