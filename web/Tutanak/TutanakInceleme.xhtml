@@ -45,12 +45,12 @@
                                             </div>
                                             <div class="form-group col-md-6 mb-3">
                                                 <label for="address_desc2">İnceleme Ekibi Görüş Kanaati:</label>
-                                                <h:inputTextarea id="address_desc2" class="form-control" rows="10" value="#{userBean.entity.kullanici_adres}" />
+                                                <h:inputTextarea id="address_desc2" class="form-control" rows="10" value="#{tutanakİncelemeBean.entity.tutanak_inceleme}" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="text-center mt-3">
-                                        <h:commandButton value="Kaydet" action="#{userBean.create()}" class="btn btn-success">
+                                        <h:commandButton value="Kaydet" action="#{tutanakİncelemeBean.dao.TutanakİncelemeEkle(tutanakinceleme)}" class="btn btn-success">
                                             <f:ajax execute="@form" render="@form, mesaj" />
                                         </h:commandButton>                                  
                                     </div>
