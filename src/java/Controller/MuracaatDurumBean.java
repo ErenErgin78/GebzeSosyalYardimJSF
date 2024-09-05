@@ -24,7 +24,10 @@ public class MuracaatDurumBean {
     private MuracaatDurumDAO dao;
     private List<MuracaatDurum> list;
     private List<SelectItem> MuracaatDurumList;
-
+    
+     public Integer ekle() {
+        return this.getDao().MuracaatDurumEkle(getEntity());
+    }
     public MuracaatDurum getEntity() {
         if (this.entity == null) {
             this.entity = new MuracaatDurum();

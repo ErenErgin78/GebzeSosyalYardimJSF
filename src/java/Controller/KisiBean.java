@@ -30,6 +30,11 @@ public class KisiBean implements Serializable {
 
         return this.getDao().KisiEkle(getEntity());
     }
+    
+    public Integer kisiMuracaatEkle() {
+
+        return this.getDao().KisiMuracaatEkle(entity, Integer.BYTES);
+    }
 
     // Belirtilen detay ID ile yeni bir kişi ekler ve ID'yi döner
     public Integer ekle(Integer detayId) {

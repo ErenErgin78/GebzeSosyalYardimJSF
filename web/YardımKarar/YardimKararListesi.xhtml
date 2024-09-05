@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Yardım Karar Listesi</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="CSS/list.css" />
+        <h:outputStylesheet name="CSS/styles.css"/>
+        <style>
+            .hidden {
+                display: none;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form id="userForm">
+            <div class="row align-items-center mb-3">
+                <div class="col-10">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.xhtml">Ana Sayfa</a></li>            
+                        <li class="breadcrumb-item active" aria-current="page">İşlemlerim</li>
+                        <li class="breadcrumb-item active" aria-current="page">Yardım Kararı Listesi</li>
+                    </ol>
+                </div>
+            </div> 
+            <div class="container-fluid">               
+                <div class="row">                   
+                    <div class="col-md-12">
+                        <div class="card-header">
+                            <h1>Yardım Kararı Listesi</h1>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                Yardım Kararı Listeleme Kriterleri
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="muracaat" class="form-label">Müracaat No:</label>
+                                    <h:inputText id="muracaat" value="#{kisiBean.entity.kimlik_no}" class="form-control" />
+                                    <f:ajax event="keyup" render="KullaniciListesi" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="muracaat_tarihi">Müracaat Tarihi:</label>
+                                    <h:inputText class="form-control" value="#{muracaatBilgiBean.entity.muracaat_tarihi}">
+                                        <f:passThroughAttribute name="type" value="date" />
+                                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                                    </h:inputText>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="isim" class="form-label">Ad:</label>
+                                    <h:inputText id="isim" value="#{kisiBean.entity.isim}" class="form-control" />
+                                    <f:ajax event="keyup" render="KullaniciListesi" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="soyad" class="form-label">Soyad:</label>
+                                    <h:inputText id="soyad" value="#{kisiBean.entity.soyisim}" class="form-control" />
+                                    <f:ajax event="keyup" render="KullaniciListesi" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="sicil" class="form-label">Tc Kimlik No:</label>
+                                    <h:inputText id="sicil" value="#{kisiBean.entity.kimlik_no}" class="form-control" />
+                                    <f:ajax event="keyup" render="KullaniciListesi" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="tespit" class="form-label">Tespit No:</label>
+                                    <h:inputText id="tespit" value="#{kisiBean.entity.kimlik_no}" class="form-control" />
+                                    <f:ajax event="keyup" render="KullaniciListesi" />
+                                </div>
+                                <div class="form-group col-md-6 mb-3">
+                                    <label for="mahalle" class="form-label">Mahalle:</label>
+                                    <h:selectOneMenu id="mahalle" value="#{sokakBean.selectedMahalleId}" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="A" />
+                                        <f:selectItems value = "#{mahalleBean.mahalleList}" />
+                                        <f:ajax event="change" listener="#{sokakBean.sokakyukle}" render="cadde_sokak" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group col-md-6 mb-3">
+                                    <label for="street" class="form-label">Cadde/Sokak:</label>
+                                    <h:selectOneMenu id="cadde_sokak" value="#{kisiAdresBean.entity.kisi_mahalle_sokak_id}" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="A" />
+                                        <f:selectItems value = "#{sokakBean.sokakList}" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group col-md-6 mb-3">
+                                    <label for="status">Müracaat Durumu:</label>
+                                    <h:selectOneMenu id="status" value="#{muracaatDurumBean.entity.durum_Id}" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                        <f:selectItems value = "#{muracaatDurumBean.muracaatDurumList}" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group col-md-6 mb-3">
+                                    <label for="kurum">Yönlendiren Kurum:</label>
+                                    <h:selectOneMenu id="kurum" value="#{kurumBean.dao.isim}" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="E" />
+                                        <f:selectItems value="#{kurumBean.kurumTipList}" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group col-md-6 mb-3">
+                                    <label for="tur">Yardım Statü:</label>
+                                    <h:selectOneMenu id="tur" value="#{muracaatDurumBean.entity.durum_Id}" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group col-md-6 mb-3">
+                                    <label for="yardimtip">Yardım Tipi:</label>
+                                    <h:selectOneMenu id="yardimtip" value="#{muracaatDurumBean.entity.durum_Id}" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group col-md-6 mb-3">
+                                    <label for="yardimalt">Yardım Alt Tipi:</label>
+                                    <h:selectOneMenu id="yardimalt" value="#{muracaatDurumBean.entity.durum_Id}" class="form-control">
+                                        <f:selectItem itemLabel="Lütfen Seçiniz" itemValue="0" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="tutar" class="form-label">Toplam Tutar:</label>
+                                    <h:inputText id="tutar" value="#{kisiBean.entity.kimlik_no}" class="form-control" />
+                                    <f:ajax event="keyup" render="KullaniciListesi" />
+                                </div>
+                                <div class="form-group col-md-6 mb-3">
+                                    <label for="engel">İtiraz mı?</label>
+                                    <div class="custom-radio">
+                                        <h:selectOneRadio id="engel" value="#{kisiEngelBean.entity.aktif}"  styleClass="radio-inline" onchange="toggleEngel()">
+                                            <f:selectItem itemLabel="Evet" itemValue="1" />
+                                            <f:selectItem itemLabel="Hayır" itemValue="0" />
+                                        </h:selectOneRadio>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 mb-3">
+                                    <label for="engelAlt" class="form-label hidden">İtiraz Nedeni:</label>
+                                    <h:selectOneMenu id="engelAlt" value="#{kisiEngelBean.entity.engelli_alt_tip_id}" class="form-control hidden">
+                                        <f:selectItems value="#{engelAltBean.tipList}" />
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+                            <h:panelGroup id="KullaniciListesi">
+                                <div class="table-container">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Müracaat No</th>
+                                                    <th>TC Kimlik No</th>
+                                                    <th>Ad</th>
+                                                    <th>Soyad</th>
+                                                    <th>Müracaat Tarihi</th>
+                                                    <th>Mahalle</th>
+                                                    <th>Cadde/Sokak</th>
+                                                    <th>Eylem</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <ui:repeat value="#{muracaatBean.list}" var="muracaat" varStatus="loop">
+                                                    <tr class="#{loop.index % 2 == 0 ? 'table-row-even' : 'table-row-odd'}">
+                                                        <td>#{muracaat.muracaat_id}</td>
+                                                        <td>#{muracaat.kimlik_no}</td>
+                                                        <td>#{muracaat.kisi_isim}</td>
+                                                        <td>#{muracaat.kisi_soyisim}</td>
+                                                        <td>#{muracaat.kayit_tarihi}</td>                                  
+                                                        <td>#{muracaat.mahalle}</td>
+                                                        <td>#{muracaat.sokak}</td>
+                                                        <td class="profil">
+                                                            <div class="action-buttons">
+                                                                <h:commandButton value="SIL" action="#{muracaatBean.delete(muracaat.muracaat_id)}" styleClass="btn btn-danger delete-button" onclick="return confirmDelete(this)">
+                                                                    <f:ajax execute="@this" render="@form"/>
+                                                                </h:commandButton>
+                                                                <h:commandButton value="DUZENLE" action="#{userBean.edit(user)}" styleClass="btn btn-primary ml-20">
+                                                                    <f:ajax execute="@this" render="@form"/>
+                                                                </h:commandButton>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </ui:repeat>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+                                                                    window.onload = function () {
+                                                                        toggleEngel();
+                                                                    };
+                                                                    function confirmDelete(button) {
+                                                                        return confirm("Bu kullanıcıyı gerçekten silmek istiyor musunuz?");
+                                                                    }
+                                                                    function toggleEngel() {
+                                                                        var radioValue = document.querySelector("input[name='userForm:engel']:checked").value;
+                                                                        var selectOneMenu = document.getElementById("userForm:engelAlt");
+                                                                        var label = document.querySelector("label[for='engelAlt']");
+
+                                                                        if (radioValue === "1") {
+                                                                            selectOneMenu.classList.remove("hidden");
+                                                                            label.classList.remove("hidden");
+                                                                        } else {
+                                                                            selectOneMenu.classList.add("hidden");
+                                                                            label.classList.add("hidden");
+                                                                        }
+                                                                    }
+        </script>
+    </h:body>
+</html>

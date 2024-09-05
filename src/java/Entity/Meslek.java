@@ -13,7 +13,6 @@ public class Meslek {
     private Integer meslek_id;
     private String meslek_isim;
     private Integer aktiflik;
-       
 
     public Meslek(Integer meslek_id, String meslek_isim, Integer aktiflik) {
         this.meslek_id = meslek_id;
