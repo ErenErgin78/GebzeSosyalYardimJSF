@@ -143,7 +143,7 @@ public class KisiDAO extends DBConnection {
         query.append("JOIN KISI_DETAY kd ON kt.KISI_ID = kd.KISI_ID ");
         query.append("JOIN KISI_ILETISIM ki ON kd.KISI_ILETISIM_ID = ki.KISI_ILETISIM_ID ");
         query.append("JOIN KISI_ADRES ka ON kd.KISI_ADRES_ID = ka.KISI_ADRES_ID ");
-        query.append("JOIN KISI_ADRES_MAHALLE kam ON kam.KISI_ADRES_MAHALLE_ID = kd.KISI_ADRES_ID ");
+        query.append("JOIN KISI_ADRES_MAHALLE kam ON kam.KISI_ADRES_MAHALLE_ID = ka.KISI_ADRES_MAHALLE_ID ");
         query.append("JOIN KISI_MAHALLE_SOKAK kms ON kms.sokak_ıd = ka.KISI_MAHALLE_SOKAK_ID ");
         query.append("WHERE kt.KIMLIK_NO = ?");
 
