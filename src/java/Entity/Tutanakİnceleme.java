@@ -12,16 +12,9 @@ package Entity;
 public class Tutanakİnceleme {
     
     
-    private Integer inceleme_beyan_id;
     private String tutanak_inceleme;
+    private String tutanak_basvuru;
 
-    public Integer getInceleme_beyan_id() {
-        return inceleme_beyan_id;
-    }
-
-    public void setInceleme_beyan_id(Integer inceleme_beyan_id) {
-        this.inceleme_beyan_id = inceleme_beyan_id;
-    }
 
     public String getTutanak_inceleme() {
         return tutanak_inceleme;
@@ -31,10 +24,20 @@ public class Tutanakİnceleme {
         this.tutanak_inceleme = tutanak_inceleme;
     }
 
-    public Tutanakİnceleme(Integer inceleme_beyan_id, String tutanak_inceleme) {
-        this.inceleme_beyan_id = inceleme_beyan_id;
-        this.tutanak_inceleme = tutanak_inceleme;
+    public String getTutanak_basvuru() {
+        return tutanak_basvuru;
     }
+
+    public void setTutanak_basvuru(String tutanak_basvuru) {
+        this.tutanak_basvuru = tutanak_basvuru;
+    }
+
+    public Tutanakİnceleme(String tutanak_inceleme, String tutanak_basvuru) {
+        this.tutanak_inceleme = tutanak_inceleme;
+        this.tutanak_basvuru = tutanak_basvuru;
+    }
+
+    
 
     public Tutanakİnceleme() {
     }

@@ -1,36 +1,38 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
- */
 package Controller;
 
 import jakarta.inject.Named;
 import Entity.Tutanakİnceleme;
+import jakarta.annotation.PostConstruct;
 import dao.TutanakİncelemeDAO;
-import jakarta.faces.model.SelectItem;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
-import java.util.List;
 
-/**
- *
- * @author emirh
- */
 @Named(value = "tutanakİncelemeBean")
 @ViewScoped
 public class TutanakİncelemeBean implements Serializable {
 
     private Tutanakİnceleme entity;
     private TutanakİncelemeDAO dao;
-    private List<Tutanakİnceleme> list;
-    private List<SelectItem> TutanakİncelemeList;
-    
+
+    public void tutanakİncelemeEkle() {
+        try {
+            this.getDao().TutanakİncelemeEkle(getEntity());
+
+            // Başarılı mesaj
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Başarılı", "Tutanak inceleme başarıyla kaydedildi."));
+        } catch (Exception e) {
+            // Hata mesajı
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hata", "Tutanak kaydedilirken bir hata oluştu."));
+        }
+    }
 
     public Tutanakİnceleme getEntity() {
-         if(this.entity ==null){
-           this.entity = new Tutanakİnceleme();
+        if (this.entity == null) {
+            this.entity = new Tutanakİnceleme();
         }
-        return entity;
+        return this.entity;
     }
 
     public void setEntity(Tutanakİnceleme entity) {
@@ -38,36 +40,23 @@ public class TutanakİncelemeBean implements Serializable {
     }
 
     public TutanakİncelemeDAO getDao() {
-        if(this.dao == null){
-           this.dao=new TutanakİncelemeDAO();
+        if (this.dao == null) {
+            this.dao = new TutanakİncelemeDAO();
         }
-        
-        return dao;
+
+        return this.dao;
     }
 
     public void setDao(TutanakİncelemeDAO dao) {
         this.dao = dao;
     }
 
-    public List<Tutanakİnceleme> getList() {
-        return list;
-    }
-
-    public void setList(List<Tutanakİnceleme> list) {
-        this.list = list;
-    }
-
-    public List<SelectItem> getTutanakİncelemeList() {
-        return TutanakİncelemeList;
-    }
-
-    public void setTutanakİncelemeList(List<SelectItem> TutanakİncelemeList) {
-        this.TutanakİncelemeList = TutanakİncelemeList;
-    }
-
     public TutanakİncelemeBean() {
     }
-    
-    
+
+    @PostConstruct
+    public void init() {
+        getDao().setIslemBasariliMesaj(null); // sayfa yüklendiğinde mesajı sıfırlar
+    }
 
 }

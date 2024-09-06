@@ -1,69 +1,72 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import Entity.Tutanakİnceleme;
 import static Various.ErrorFinder.DetectError;
-import jakarta.faces.model.SelectItem;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import util.DBConnection;
 
-/**
- *
- * @author emirh
- */
 public class TutanakİncelemeDAO extends DBConnection {
 
     private Connection db;
     private String islemBasariliMesaj;
-    private String mesaj;
 
-    private final String isim = "";
-
-    public void TutanakİncelemeEkle(Tutanakİnceleme tutanakinceleme) {
+    public void TutanakİncelemeEkle(Tutanakİnceleme tutanakinceleme) throws SQLException {
+        Connection conn = null;
+        CallableStatement csTutanakİnceleme = null;
         try {
-            Connection conn = this.getDb();
-
+            conn = this.getDb(); // Bağlantıyı aç
             String callQuery = "{call INSERT_TUTANAK_INCELEME(?,?)}";
-            CallableStatement csTutanakİnceleme = conn.prepareCall(callQuery);
-            csTutanakİnceleme.setInt(1, tutanakinceleme.getInceleme_beyan_id());
+            csTutanakİnceleme = conn.prepareCall(callQuery);
+
+            csTutanakİnceleme.setString(1, tutanakinceleme.getTutanak_basvuru());
             csTutanakİnceleme.setString(2, tutanakinceleme.getTutanak_inceleme());
 
             csTutanakİnceleme.execute();
             this.islemBasariliMesaj = "İşlemler başarıyla gerçekleşmiştir.";
-
         } catch (SQLException ex) {
             this.islemBasariliMesaj = DetectError(ex);
-        }
-    }
-
-    public List<SelectItem> TutanakİncelemeGetir() {
-        List<SelectItem> TutanakİncelemeList = new ArrayList<>();
-
-        try {
-            Statement statement = getDb().createStatement();
-            String Selectquery = "SELECT TUTANAK_İNCELEME, TUTANAK_İNCELEME_ISIM FROM  TUTANAK_İNCELEME";
-            ResultSet rs = statement.executeQuery(Selectquery);
-
-            while (rs.next()) {
-                TutanakİncelemeList.add(new SelectItem(rs.getInt("TUTANAK_İNCELEME_ID"), rs.getString("TUTANAKü_İNCELEME_ISIM")));
+            throw ex;
+        } finally {
+            // Bağlantıyı kapatma işlemini burada manuel olarak yap
+            if (csTutanakİnceleme != null) {
+                try {
+                    csTutanakİnceleme.close(); // CallableStatement kapat
+                } catch (SQLException ex) {
+                    this.islemBasariliMesaj = DetectError(ex);
+                }
             }
-        } catch (Exception ex) {
-            mesaj = DetectError(ex);
+            if (conn != null) {
+                try {
+                    conn.close(); // Bağlantıyı kapat
+                } catch (SQLException ex) {
+                    this.islemBasariliMesaj = DetectError(ex);
+                }
+            }
         }
-        return TutanakİncelemeList;
-
     }
 
-    private Connection getDb() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Connection getDb() {
+        if (this.db == null || isConnectionClosed(db)) {
+            this.db = this.connect();
+        }
+        return db;
+    }
+
+    private boolean isConnectionClosed(Connection conn) {
+        try {
+            return conn == null || conn.isClosed();
+        } catch (SQLException e) {
+            return true; // Eğer bir hata olursa bağlantıyı kapalı kabul et
+        }
+    }
+
+    public String getIslemBasariliMesaj() {
+        return islemBasariliMesaj;
+    }
+
+    public void setIslemBasariliMesaj(String islemBasariliMesaj) {
+        this.islemBasariliMesaj = islemBasariliMesaj;
     }
 }

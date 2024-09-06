@@ -41,7 +41,7 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-6 mb-3">
                                                 <label for="address_desc1">Başvuru Beyanı:</label>
-                                                <h:inputTextarea id="address_desc1" class="form-control" rows="10" value="#{userBean.entity.kullanici_adres}" />
+                                                <h:inputTextarea id="address_desc1" class="form-control" rows="10" value="#{tutanakİncelemeBean.entity.tutanak_basvuru}" />
                                             </div>
                                             <div class="form-group col-md-6 mb-3">
                                                 <label for="address_desc2">İnceleme Ekibi Görüş Kanaati:</label>
@@ -50,10 +50,12 @@
                                         </div>
                                     </div>
                                     <div class="text-center mt-3">
-                                        <h:commandButton value="Kaydet" action="#{tutanakİncelemeBean.dao.TutanakİncelemeEkle(tutanakinceleme)}" class="btn btn-success">
-                                            <f:ajax execute="@form" render="@form, mesaj" />
-                                        </h:commandButton>                                  
+                                        <h:commandButton value="Kaydet" action="#{tutanakİncelemeBean.tutanakİncelemeEkle}" class="btn btn-success">
+                                            <f:ajax execute="@form" render="@form" />
+                                        </h:commandButton> 
                                     </div>
+                                    <!-- Başarı veya hata mesajlarını göstermek için -->
+                                    <h:messages globalOnly="true" />
                                 </div>
                             </div>
                         </div>
