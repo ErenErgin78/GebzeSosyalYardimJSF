@@ -7,6 +7,7 @@ import jakarta.faces.event.AjaxBehaviorEvent;
 import jakarta.faces.model.SelectItem;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,9 @@ public class SokakBean implements Serializable {
     private SokakDAO dao;
     private List<Sokak> list;
     private List<SelectItem> sokakList;
-    private int selectedMahalleId;
+    
+    @Inject
+    private KisiBean kisiBean;
 
     public void sokakekle() {
         this.getDao().SokakEkle(getEntity());
@@ -36,13 +39,13 @@ public class SokakBean implements Serializable {
     }
 
     public List<SelectItem> sokakgetir() {
-        return this.getDao().SokakGetir(selectedMahalleId);
+        return this.getDao().SokakGetir(kisiBean.getEntity().getMahalle_id());
     }
 
     public void sokakyukle(AjaxBehaviorEvent event) {
         sokakList = new ArrayList<>();
-        if (selectedMahalleId != 0) {
-            sokakList = this.getDao().SokakGetir(selectedMahalleId);
+        if (kisiBean.getEntity().getMahalle_id() != 0) {
+            sokakList = this.getDao().SokakGetir(kisiBean.getEntity().getMahalle_id());
         }
     }
 
@@ -80,7 +83,9 @@ public class SokakBean implements Serializable {
     }
 
     public List<SelectItem> getSokakList() {
-        sokakList = getDao().SokakGetir(selectedMahalleId);
+        if (kisiBean.getEntity().getMahalle_id() != 0) {
+            sokakList = this.getDao().SokakGetir(kisiBean.getEntity().getMahalle_id());
+        }
         return sokakList;
     }
 
@@ -88,13 +93,6 @@ public class SokakBean implements Serializable {
         this.sokakList = sokakList;
     }
 
-    public int getSelectedMahalleId() {
-        return selectedMahalleId;
-    }
-
-    public void setSelectedMahalleId(int selectedMahalleId) {
-        this.selectedMahalleId = selectedMahalleId;
-    }
 
     @PostConstruct
     public void init() {
