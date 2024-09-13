@@ -54,7 +54,7 @@ public class Sokak {
     public Integer getAktif() {
         return aktif;
     }
-
+ 
     public void setAktif(Integer aktif) {
         this.aktif = aktif;
     }

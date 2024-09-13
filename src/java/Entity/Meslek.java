@@ -52,4 +52,4 @@ public class Meslek {
         this.aktiflik = aktiflik;
     }
 
-}
+} 
