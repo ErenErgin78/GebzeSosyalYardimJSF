@@ -64,7 +64,7 @@ public class KisiDAO extends DBConnection {
             cs.setInt(6, kisi.getCilt_no());
             cs.setInt(7, kisi.getAile_sira_no());
             cs.setInt(8, kisi.getSira_no());
-            cs.setDate(9, new java.sql.Date(kisi.getDogum_tarihi().getTime()));
+            cs.setDate(9, kisi.getDogum_tarihi() != null ? new java.sql.Date(kisi.getDogum_tarihi().getTime()) : null);
             cs.setInt(10, detayId);
             cs.registerOutParameter(11, java.sql.Types.INTEGER);
             cs.execute();
@@ -93,7 +93,7 @@ public class KisiDAO extends DBConnection {
             cs.setInt(6, kisi.getCilt_no());
             cs.setInt(7, kisi.getAile_sira_no());
             cs.setInt(8, kisi.getSira_no());
-            cs.setDate(9, new java.sql.Date(kisi.getDogum_tarihi().getTime()));
+            cs.setDate(9, kisi.getDogum_tarihi() != null ? new java.sql.Date(kisi.getDogum_tarihi().getTime()) : null);
             cs.setInt(10, kisi.getMahalle_id());
             cs.setInt(11, kisi.getSokak_id());
             cs.setString(12, kisi.getSite());
@@ -215,7 +215,7 @@ public class KisiDAO extends DBConnection {
                         rs.getString("ILCE"),
                         rs.getString("SITE"),
                         rs.getString("ADRES_TARIFI"),
-                        rs.getInt("DAIRE_NO"),
+                        rs.getInt("KAPI_NO"),
                         rs.getInt("DAIRE_NO"),
                         rs.getString("EV_TELEFON"),
                         rs.getString("CEP_TELEFON"),
@@ -274,6 +274,26 @@ public class KisiDAO extends DBConnection {
 
     public void setIsim(String isim) {
         this.isim = isim;
+    }
+
+    public List<SelectItem> SokakGetir(Integer mahalle_id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void SokakMesajTemizle() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public List<Kisi> SokakListesi() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void SokakSil(int SokakId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void SokakEkle(Kisi entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

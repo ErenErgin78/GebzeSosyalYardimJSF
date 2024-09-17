@@ -1,12 +1,15 @@
- package Controller;
+package Controller;
 
 import Entity.Kisi;
 import dao.KisiDAO;
 import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.model.SelectItem;
+import jakarta.faces.event.AjaxBehaviorEvent;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Named(value = "kisiBean")
@@ -17,7 +20,10 @@ public class KisiBean implements Serializable {
     private KisiDAO dao;
     private List<Kisi> list;
     private List<SelectItem> MedeniList;
-    
+    private List<SelectItem> sokakList;
+
+    @Inject
+    private KisiBean kisiBean;
 
     @PostConstruct
     public void init() {
@@ -27,18 +33,15 @@ public class KisiBean implements Serializable {
 
     // Yeni bir kişi ekler ve ID'yi döner
     public Integer ekle() {
-
         return this.getDao().KisiEkle(getEntity());
     }
-    
-    public Integer kisiMuracaatEkle() {
 
-        return this.getDao().KisiMuracaatEkle(entity, Integer.BYTES);
+    public Integer kisiMuracaatEkle() {
+         return this.getDao().KisiMuracaatEkle(entity, 1);  // 1 örnek olarak verildi, uygun bir `ekleyenKullaniciId` ile değiştirin
     }
 
     // Belirtilen detay ID ile yeni bir kişi ekler ve ID'yi döner
     public Integer ekle(Integer detayId) {
-
         return this.getDao().KisiEkle(getEntity(), detayId);
     }
 
@@ -52,9 +55,8 @@ public class KisiBean implements Serializable {
     public void edit(Kisi kisi) {
         this.entity = kisi;
     }
-    
-    // Kimlik numarasına göre kişi bulur ve varlık alanlarını doldurur
 
+    // Kimlik numarasına göre kişi bulur ve varlık alanlarını doldurur
     public Kisi KisiBul() {
         if (entity.getKimlik_no() == null) {
             return null;
@@ -70,7 +72,7 @@ public class KisiBean implements Serializable {
             entity.setAile_sira_no(bulunanKisi.getAile_sira_no());
             entity.setSira_no(bulunanKisi.getSira_no());
             entity.setDogum_tarihi(bulunanKisi.getDogum_tarihi());
-            entity.setMedeni_durum_id(bulunanKisi.getMedeni_durum_id()); // bu alanın bulunanKisi'de olduğunu varsayarak
+            entity.setMedeni_durum_id(bulunanKisi.getMedeni_durum_id());
             entity.setMahalle_id(bulunanKisi.getMahalle_id());
             entity.setSokak_id(bulunanKisi.getSokak_id());
             entity.setSite(bulunanKisi.getSite());
@@ -85,6 +87,35 @@ public class KisiBean implements Serializable {
         }
 
         return bulunanKisi;
+    }
+
+    // Sokak ekleme işlemi
+    public void sokakekle() {
+        this.getDao().SokakEkle(getEntity());
+    }
+
+    // Sokak silme işlemi
+    public void sokaksil(int SokakId) {
+        this.getDao().SokakSil(SokakId);
+        this.list = this.getDao().SokakListesi();
+    }
+
+    // Sokak mesaj temizleme işlemi
+    public void sokakMesajTemizle() {
+        this.getDao().SokakMesajTemizle();
+    }
+
+    // Sokak listesi getir
+    public List<SelectItem> sokakgetir() {
+        return this.getDao().SokakGetir(kisiBean.getEntity().getMahalle_id());
+    }
+
+    // Sokak yükleme işlemi
+    public void sokakyukle(AjaxBehaviorEvent event) {
+        sokakList = new ArrayList<>();
+        if (kisiBean.getEntity().getMahalle_id() != 0) {
+            sokakList = this.getDao().SokakGetir(kisiBean.getEntity().getMahalle_id());
+        }
     }
 
     // Varlık nesnesini getirir
@@ -120,7 +151,7 @@ public class KisiBean implements Serializable {
         }
         return this.list;
     }
-    
+
     // Kişi listesini ayarlar
     public void setList(List<Kisi> list) {
         this.list = list;
@@ -137,4 +168,13 @@ public class KisiBean implements Serializable {
         this.MedeniList = MedeniList;
     }
 
+    // Sokak listesi getirir
+    public List<SelectItem> getSokakList() {
+        return sokakList;
+    }
+
+    // Sokak listesini ayarlar
+    public void setSokakList(List<SelectItem> sokakList) {
+        this.sokakList = sokakList;
+    }
 }
